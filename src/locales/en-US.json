@@ -1,0 +1,843 @@
+{
+  "__i18n_ease__": "true",
+  "account.apple_store_purchase.title": {
+    "defaultMessage": "Subscribe 1 Year Cloud Pro",
+    "content": "Subscribe 1 Year Cloud Pro"
+  },
+  "account.copy.success": {
+    "defaultMessage": "Account ID copied to clipboard",
+    "content": "Account ID copied to clipboard"
+  },
+  "account.delete": {
+    "defaultMessage": "Delete Account",
+    "content": "Delete Account"
+  },
+  "account.delete.button": {
+    "defaultMessage": "Delete Account",
+    "content": "Delete Account"
+  },
+  "account.delete.confirm": {
+    "defaultMessage": "Are you sure you want to delete your account? This action cannot be undone and will permanently delete all your data.",
+    "content": "Are you sure you want to delete your account? This action cannot be undone and will permanently delete all your data."
+  },
+  "account.delete.title": {
+    "defaultMessage": "Delete Account",
+    "content": "Delete Account"
+  },
+  "account.email": {
+    "defaultMessage": "Email",
+    "content": "Email"
+  },
+  "account.error.deleteFailed": {
+    "defaultMessage": "Failed to delete account. Please try again.",
+    "content": "Failed to delete account. Please try again."
+  },
+  "account.error.logoutFailed": {
+    "defaultMessage": "Failed to logout. Please try again.",
+    "content": "Failed to logout. Please try again."
+  },
+  "account.error.title": {
+    "defaultMessage": "Error",
+    "content": "Error"
+  },
+  "account.expiry": {
+    "defaultMessage": "Pro Expires",
+    "content": "Pro Expires"
+  },
+  "account.id": {
+    "defaultMessage": "ID",
+    "content": "ID"
+  },
+  "account.logout": {
+    "defaultMessage": "Log out",
+    "content": "Log out"
+  },
+  "account.logout.button": {
+    "defaultMessage": "Logout",
+    "content": "Logout"
+  },
+  "account.logout.confirm": {
+    "defaultMessage": "Are you sure you want to logout?",
+    "content": "Are you sure you want to logout?"
+  },
+  "account.logout.title": {
+    "defaultMessage": "Logout",
+    "content": "Logout"
+  },
+  "account.pro.title": {
+    "defaultMessage": "Subscribe 1 Year Cloud Pro",
+    "content": "Subscribe 1 Year Cloud Pro"
+  },
+  "account.purchase.success": {
+    "defaultMessage": "Purchase successful",
+    "content": "Purchase successful"
+  },
+  "account.title": {
+    "defaultMessage": "Account",
+    "content": "Account"
+  },
+  "account.vip.title": {
+    "defaultMessage": "Buy VIP",
+    "content": "Buy VIP"
+  },
+  "area.create_project": {
+    "defaultMessage": "Add Project",
+    "content": "Add Project"
+  },
+  "area.edit_title": {
+    "defaultMessage": "Edit Title",
+    "content": "Edit Title"
+  },
+  "area.new_project": {
+    "defaultMessage": "New Project",
+    "content": "New Project"
+  },
+  "area.title_placeholder": {
+    "defaultMessage": "New Area",
+    "content": "New Area"
+  },
+  "area.untitled": {
+    "defaultMessage": "New Area",
+    "content": "New Area"
+  },
+  "cancel": {
+    "defaultMessage": "Cancel",
+    "content": "Cancel"
+  },
+  "common.cancel": {
+    "defaultMessage": "Cancel",
+    "content": "Cancel"
+  },
+  "common.loading": {
+    "defaultMessage": "Loading...",
+    "content": "Loading..."
+  },
+  "common.ok": {
+    "defaultMessage": "OK",
+    "content": "OK"
+  },
+  "completed_tasks.noCompletedTasks": {
+    "defaultMessage": "No completed tasks or projects yet",
+    "content": "No completed tasks or projects yet"
+  },
+  "completed_tasks.title": {
+    "defaultMessage": "Completed",
+    "content": "Completed"
+  },
+  "confirm": {
+    "defaultMessage": "Confirm",
+    "content": "Confirm"
+  },
+  "create_popup.create_area": {
+    "defaultMessage": "Create Area",
+    "content": "Create Area"
+  },
+  "create_popup.create_project": {
+    "defaultMessage": "Create Project",
+    "content": "Create Project"
+  },
+  "create_popup.create_task": {
+    "defaultMessage": "Create Task",
+    "content": "Create Task"
+  },
+  "create_sask_action_sheet.task_notes_placeholder": {
+    "defaultMessage": "Add Notes...",
+    "content": "Add Notes..."
+  },
+  "create_sask_action_sheet.task_title_placeholder": {
+    "defaultMessage": "Task Title",
+    "content": "Task Title"
+  },
+  "create_task_page.cancel": {
+    "defaultMessage": "Cancel",
+    "content": "Cancel"
+  },
+  "create_task_page.confirm": {
+    "defaultMessage": "Confirm",
+    "content": "Confirm"
+  },
+  "create_task_page.due_date": {
+    "defaultMessage": "Due Date",
+    "content": "Due Date"
+  },
+  "create_task_page.title": {
+    "defaultMessage": "Create Task",
+    "content": "Create Task"
+  },
+  "database_not_found": {
+    "defaultMessage": "Database not found",
+    "content": "Database not found"
+  },
+  "database.account_logged_out": {
+    "defaultMessage": "Account logged out",
+    "content": "Account logged out"
+  },
+  "database.clearData": {
+    "defaultMessage": "Clear Data",
+    "content": "Clear Data"
+  },
+  "database.clearData.confirm": {
+    "defaultMessage": "Are you sure you want to clear all data? This action cannot be undone.",
+    "content": "Are you sure you want to clear all data? This action cannot be undone."
+  },
+  "database.database_deleted": {
+    "defaultMessage": "Database was deleted in cloud",
+    "content": "Database was deleted in cloud"
+  },
+  "database.databaseName": {
+    "defaultMessage": "Database Name",
+    "content": "Database Name"
+  },
+  "database.databaseSize": {
+    "defaultMessage": "Database Size",
+    "content": "Database Size"
+  },
+  "database.delete": {
+    "defaultMessage": "Delete Database",
+    "content": "Delete Database"
+  },
+  "database.delete.confirm": {
+    "defaultMessage": "Please enter database password to confirm. This action cannot be undone.",
+    "content": "Please enter database password to confirm. This action cannot be undone."
+  },
+  "database.delete.error.emptyPassword": {
+    "defaultMessage": "Please enter password",
+    "content": "Please enter password"
+  },
+  "database.delete.offline.confirm": {
+    "defaultMessage": "Are you sure you want to delete this offline database? This action cannot be undone.",
+    "content": "Are you sure you want to delete this offline database? This action cannot be undone."
+  },
+  "database.isOffline": {
+    "defaultMessage": "Database is Offline",
+    "content": "Database is Offline"
+  },
+  "database.lastUpdated": {
+    "defaultMessage": "Last Updated",
+    "content": "Last Updated"
+  },
+  "database.notFound": {
+    "defaultMessage": "Database not found",
+    "content": "Database not found"
+  },
+  "database.offline.reason": {
+    "defaultMessage": "Reason",
+    "content": "Reason"
+  },
+  "database.other_account": {
+    "defaultMessage": "This database does not belong to this account",
+    "content": "This database does not belong to this account"
+  },
+  "database.other_reason": {
+    "defaultMessage": "Load cloud database error",
+    "content": "Load cloud database error"
+  },
+  "database.password": {
+    "defaultMessage": "Password",
+    "content": "Password"
+  },
+  "database.switch": {
+    "defaultMessage": "Switch to Database",
+    "content": "Switch to Database"
+  },
+  "database.switch.confirm": {
+    "defaultMessage": "Switch",
+    "content": "Switch"
+  },
+  "database.switch.desc": {
+    "defaultMessage": "Enter your password to switch to this database",
+    "content": "Enter your password to switch to this database"
+  },
+  "database.switch.error.emptyPassword": {
+    "defaultMessage": "Please enter password",
+    "content": "Please enter password"
+  },
+  "database.sync": {
+    "defaultMessage": "Sync",
+    "content": "Sync"
+  },
+  "database.sync.success": {
+    "defaultMessage": "Sync successfully",
+    "content": "Sync successfully"
+  },
+  "databaseNotFound": {
+    "defaultMessage": "Database not found",
+    "content": "Database not found"
+  },
+  "date_picker.friday": {
+    "defaultMessage": "Fri",
+    "content": "Fri"
+  },
+  "date_picker.monday": {
+    "defaultMessage": "Mon",
+    "content": "Mon"
+  },
+  "date_picker.saturday": {
+    "defaultMessage": "Sat",
+    "content": "Sat"
+  },
+  "date_picker.sunday": {
+    "defaultMessage": "Sun",
+    "content": "Sun"
+  },
+  "date_picker.thursday": {
+    "defaultMessage": "Thu",
+    "content": "Thu"
+  },
+  "date_picker.today": {
+    "defaultMessage": "Today",
+    "content": "Today"
+  },
+  "date_picker.tuesday": {
+    "defaultMessage": "Tue",
+    "content": "Tue"
+  },
+  "date_picker.wednesday": {
+    "defaultMessage": "Wed",
+    "content": "Wed"
+  },
+  "date.today": {
+    "defaultMessage": "Today",
+    "content": "Today"
+  },
+  "daysAgo": {
+    "defaultMessage": "{0} days ago",
+    "content": "{0} days ago"
+  },
+  "daysLeft": {
+    "defaultMessage": "{0} days left",
+    "content": "{0} days left"
+  },
+  "deleteDatabase.error.limit": {
+    "defaultMessage": "You can only create 3 databases",
+    "content": "You can only create 3 databases"
+  },
+  "deleteDatabase.error.wrongPassword": {
+    "defaultMessage": "Wrong password",
+    "content": "Wrong password"
+  },
+  "edit_task_item.task_notes_placeholder": {
+    "defaultMessage": "Add Notes...",
+    "content": "Add Notes..."
+  },
+  "errorCreatingDirectory": {
+    "defaultMessage": "Error creating directory:",
+    "content": "Error creating directory:"
+  },
+  "errorDeletingDatabase": {
+    "defaultMessage": "Error deleting database:",
+    "content": "Error deleting database:"
+  },
+  "errorEnsuringBaseDir": {
+    "defaultMessage": "Error ensuring base directory:",
+    "content": "Error ensuring base directory:"
+  },
+  "errorListingDatabases": {
+    "defaultMessage": "Error listing databases:",
+    "content": "Error listing databases:"
+  },
+  "errorReadingMetadata": {
+    "defaultMessage": "Error reading metadata for {0}:",
+    "content": "Error reading metadata for {0}:"
+  },
+  "futureProjects": {
+    "defaultMessage": "Future Projects",
+    "content": "Future Projects"
+  },
+  "home.futureProjects": {
+    "defaultMessage": "Future Projects",
+    "content": "Future Projects"
+  },
+  "home.title": {
+    "defaultMessage": "Home",
+    "content": "Home"
+  },
+  "inbox": {
+    "defaultMessage": "Inbox",
+    "content": "Inbox"
+  },
+  "inbox.completed_range.all": {
+    "defaultMessage": "All",
+    "content": "All"
+  },
+  "inbox.completed_range.all.description": {
+    "defaultMessage": "Show all completed tasks",
+    "content": "Show all completed tasks"
+  },
+  "inbox.completed_range.all.short": {
+    "defaultMessage": "All",
+    "content": "All"
+  },
+  "inbox.completed_range.day": {
+    "defaultMessage": "Past Day",
+    "content": "Past Day"
+  },
+  "inbox.completed_range.day.description": {
+    "defaultMessage": "Show tasks completed since start of yesterday",
+    "content": "Show tasks completed since start of yesterday"
+  },
+  "inbox.completed_range.day.short": {
+    "defaultMessage": "Past day",
+    "content": "Past day"
+  },
+  "inbox.completed_range.month": {
+    "defaultMessage": "Past Month",
+    "content": "Past Month"
+  },
+  "inbox.completed_range.month.description": {
+    "defaultMessage": "Show tasks completed since start of last month",
+    "content": "Show tasks completed since start of last month"
+  },
+  "inbox.completed_range.month.short": {
+    "defaultMessage": "Past month",
+    "content": "Past month"
+  },
+  "inbox.completed_range.today": {
+    "defaultMessage": "Today",
+    "content": "Today"
+  },
+  "inbox.completed_range.today.description": {
+    "defaultMessage": "Show tasks completed since start of today",
+    "content": "Show tasks completed since start of today"
+  },
+  "inbox.completed_range.today.short": {
+    "defaultMessage": "Today",
+    "content": "Today"
+  },
+  "inbox.completed_range.week": {
+    "defaultMessage": "Past Week",
+    "content": "Past Week"
+  },
+  "inbox.completed_range.week.description": {
+    "defaultMessage": "Show tasks completed since start of last week",
+    "content": "Show tasks completed since start of last week"
+  },
+  "inbox.completed_range.week.short": {
+    "defaultMessage": "Past week",
+    "content": "Past week"
+  },
+  "inbox.completed_tasks_range": {
+    "defaultMessage": "Completed Tasks Range",
+    "content": "Completed Tasks Range"
+  },
+  "inbox.hoverMessage": {
+    "defaultMessage": "Create Task",
+    "content": "Create Task"
+  },
+  "inbox.show_completed_tasks": {
+    "defaultMessage": "Show Completed Tasks",
+    "content": "Show Completed Tasks"
+  },
+  "inbox.show_future_tasks": {
+    "defaultMessage": "Show Future Tasks",
+    "content": "Show Future Tasks"
+  },
+  "indexedDBStorageInvalidParams": {
+    "defaultMessage": "dbName and storeName are required",
+    "content": "dbName and storeName are required"
+  },
+  "keyNotFound": {
+    "defaultMessage": "Key not found",
+    "content": "Key not found"
+  },
+  "listItemsError": {
+    "defaultMessage": "Error listing items from IndexedDB:",
+    "content": "Error listing items from IndexedDB:"
+  },
+  "localDatabaseName": {
+    "defaultMessage": "本地数据库",
+    "content": "本地数据库"
+  },
+  "login.account.placeholder": {
+    "defaultMessage": "Enter your email",
+    "content": "Enter your email"
+  },
+  "login.error.accountExists": {
+    "defaultMessage": "Account already exists",
+    "content": "Account already exists"
+  },
+  "login.error.accountFormat": {
+    "defaultMessage": "Please enter a valid email format.",
+    "content": "Please enter a valid email format."
+  },
+  "login.error.passwordMismatch": {
+    "defaultMessage": "Confirm password should be the same as password",
+    "content": "Confirm password should be the same as password"
+  },
+  "login.error.termsRequired": {
+    "defaultMessage": "You must agree to the terms",
+    "content": "You must agree to the terms"
+  },
+  "login.password.placeholder": {
+    "defaultMessage": "Enter your password",
+    "content": "Enter your password"
+  },
+  "login.submit": {
+    "defaultMessage": "Sign In",
+    "content": "Sign In"
+  },
+  "login.tab.register": {
+    "defaultMessage": "Register",
+    "content": "Register"
+  },
+  "login.tab.signin": {
+    "defaultMessage": "Sign In",
+    "content": "Sign In"
+  },
+  "login.title": {
+    "defaultMessage": "Login & Register",
+    "content": "Login & Register"
+  },
+  "logs.thisWeek": {
+    "defaultMessage": "This Week",
+    "content": "This Week"
+  },
+  "move_success": {
+    "defaultMessage": "Moved successfully",
+    "content": "Moved successfully"
+  },
+  "not_login": {
+    "defaultMessage": "Account is logged out",
+    "content": "Account is logged out"
+  },
+  "otherError": {
+    "defaultMessage": "An error occurred",
+    "content": "An error occurred"
+  },
+  "project_area_selector.search": {
+    "defaultMessage": "Search projects and areas...",
+    "content": "Search projects and areas..."
+  },
+  "project_heading.convert": {
+    "defaultMessage": "Convert",
+    "content": "Convert"
+  },
+  "project_heading.convert_to_project": {
+    "defaultMessage": "Convert to Project",
+    "content": "Convert to Project"
+  },
+  "project_heading.convert_to_project_description": {
+    "defaultMessage": "Are you sure you want to convert this heading to a project?",
+    "content": "Are you sure you want to convert this heading to a project?"
+  },
+  "project_heading.delete": {
+    "defaultMessage": "Delete",
+    "content": "Delete"
+  },
+  "project_heading.delete_heading": {
+    "defaultMessage": "Delete Heading",
+    "content": "Delete Heading"
+  },
+  "project_heading.delete_heading_description": {
+    "defaultMessage": "Are you sure you want to delete this heading?",
+    "content": "Are you sure you want to delete this heading?"
+  },
+  "project_heading.edit_title": {
+    "defaultMessage": "Edit Title",
+    "content": "Edit Title"
+  },
+  "project_heading.move": {
+    "defaultMessage": "Move",
+    "content": "Move"
+  },
+  "project.add_heading": {
+    "defaultMessage": "Add Heading",
+    "content": "Add Heading"
+  },
+  "project.delete": {
+    "defaultMessage": "Delete",
+    "content": "Delete"
+  },
+  "project.delete_project": {
+    "defaultMessage": "Delete Project",
+    "content": "Delete Project"
+  },
+  "project.delete_project_description": {
+    "defaultMessage": "Are you sure you want to delete this project?",
+    "content": "Are you sure you want to delete this project?"
+  },
+  "project.edit_due_date": {
+    "defaultMessage": "Edit Due Date",
+    "content": "Edit Due Date"
+  },
+  "project.edit_start_date": {
+    "defaultMessage": "Edit Start Date",
+    "content": "Edit Start Date"
+  },
+  "project.edit_tags": {
+    "defaultMessage": "Edit Tags",
+    "content": "Edit Tags"
+  },
+  "project.edit_title": {
+    "defaultMessage": "Edit Title",
+    "content": "Edit Title"
+  },
+  "project.headerPlaceholder": {
+    "defaultMessage": "New Project",
+    "content": "New Project"
+  },
+  "project.mark_as_canceled": {
+    "defaultMessage": "Mark as Canceled",
+    "content": "Mark as Canceled"
+  },
+  "project.mark_as_completed": {
+    "defaultMessage": "Mark as Completed",
+    "content": "Mark as Completed"
+  },
+  "project.mark_as_created": {
+    "defaultMessage": "Mark as Created",
+    "content": "Mark as Created"
+  },
+  "project.notes": {
+    "defaultMessage": "Notes",
+    "content": "Notes"
+  },
+  "project.notFound": {
+    "defaultMessage": "Project not found",
+    "content": "Project not found"
+  },
+  "project.toggle_status_description": {
+    "defaultMessage": "There are {0} tasks left, what do you want to do?",
+    "content": "There are {0} tasks left, what do you want to do?"
+  },
+  "project.untitled": {
+    "defaultMessage": "New Project",
+    "content": "New Project"
+  },
+  "register.agree": {
+    "defaultMessage": "I agree to",
+    "content": "I agree to"
+  },
+  "register.and": {
+    "defaultMessage": "and",
+    "content": "and"
+  },
+  "register.confirmPassword.placeholder": {
+    "defaultMessage": "Enter your password again",
+    "content": "Enter your password again"
+  },
+  "register.eula": {
+    "defaultMessage": "EULA",
+    "content": "EULA"
+  },
+  "register.privacyPolicy": {
+    "defaultMessage": "Privacy Policy",
+    "content": "Privacy Policy"
+  },
+  "register.submit": {
+    "defaultMessage": "Register",
+    "content": "Register"
+  },
+  "schedule": {
+    "defaultMessage": "Schedule",
+    "content": "Schedule"
+  },
+  "scheduled.title": {
+    "defaultMessage": "Scheduled",
+    "content": "Scheduled"
+  },
+  "scheduled.tomorrow": {
+    "defaultMessage": "Tomorrow",
+    "content": "Tomorrow"
+  },
+  "settings.account.management": {
+    "defaultMessage": "Account Management",
+    "content": "Account Management"
+  },
+  "settings.cloud": {
+    "defaultMessage": "Cloud",
+    "content": "Cloud"
+  },
+  "settings.cloud.chinaServer": {
+    "defaultMessage": "Use China Server",
+    "content": "Use China Server"
+  },
+  "settings.cloud.createDatabase": {
+    "defaultMessage": "Create CloudDatabase",
+    "content": "Create CloudDatabase"
+  },
+  "settings.cloud.currentDatabase": {
+    "defaultMessage": "Current Database",
+    "content": "Current Database"
+  },
+  "settings.cloud.database": {
+    "defaultMessage": "Database",
+    "content": "Database"
+  },
+  "settings.cloud.error": {
+    "defaultMessage": "Failed to load databases",
+    "content": "Failed to load databases"
+  },
+  "settings.cloud.loading": {
+    "defaultMessage": "Loading...",
+    "content": "Loading..."
+  },
+  "settings.createDatabase.createAndUse": {
+    "defaultMessage": "Create and Use",
+    "content": "Create and Use"
+  },
+  "settings.createDatabase.databaseName": {
+    "defaultMessage": "Database",
+    "content": "Database"
+  },
+  "settings.createDatabase.password": {
+    "defaultMessage": "Password",
+    "content": "Password"
+  },
+  "settings.createDatabase.passwordReadOnly": {
+    "defaultMessage": "Password cannot be modified. Data will be permanently lost if forgotten.",
+    "content": "Password cannot be modified. Data will be permanently lost if forgotten."
+  },
+  "settings.createDatabase.passwordRepeat": {
+    "defaultMessage": "Password Repeat",
+    "content": "Password Repeat"
+  },
+  "settings.createDatabase.title": {
+    "defaultMessage": "Create Cloud Database",
+    "content": "Create Cloud Database"
+  },
+  "settings.database.detail": {
+    "defaultMessage": "Database Details",
+    "content": "Database Details"
+  },
+  "settings.export": {
+    "defaultMessage": "Export",
+    "content": "Export"
+  },
+  "settings.export.description": {
+    "defaultMessage": "Export your database to back up your data or transfer it to another device.",
+    "content": "Export your database to back up your data or transfer it to another device."
+  },
+  "settings.import": {
+    "defaultMessage": "Import",
+    "content": "Import"
+  },
+  "settings.import.description": {
+    "defaultMessage": "Import your tasks from a backup file",
+    "content": "Import your tasks from a backup file"
+  },
+  "settings.import.fileReadingFailed": {
+    "defaultMessage": "File reading failed",
+    "content": "File reading failed"
+  },
+  "settings.import.importedSuccessfully": {
+    "defaultMessage": "Imported successfully",
+    "content": "Imported successfully"
+  },
+  "settings.import.invalidFileFormat": {
+    "defaultMessage": "Invalid file format",
+    "content": "Invalid file format"
+  },
+  "settings.language": {
+    "defaultMessage": "Language",
+    "content": "Language"
+  },
+  "settings.language.chinese": {
+    "defaultMessage": "简体中文",
+    "content": "简体中文"
+  },
+  "settings.language.english": {
+    "defaultMessage": "English",
+    "content": "English"
+  },
+  "settings.local.database": {
+    "defaultMessage": "Local Database",
+    "content": "Local Database"
+  },
+  "settings.about": {
+    "defaultMessage": "About",
+    "content": "About"
+  },
+  "settings.theme": {
+    "defaultMessage": "Theme",
+    "content": "Theme"
+  },
+  "settings.theme.auto": {
+    "defaultMessage": "Auto (System)",
+    "content": "Auto (System)"
+  },
+  "settings.theme.dark": {
+    "defaultMessage": "Dark",
+    "content": "Dark"
+  },
+  "settings.theme.light": {
+    "defaultMessage": "Light",
+    "content": "Light"
+  },
+  "settings.title": {
+    "defaultMessage": "Settings",
+    "content": "Settings"
+  },
+  "subtask.placeholder": {
+    "defaultMessage": "Add subtask...",
+    "content": "Add subtask..."
+  },
+  "tag_editor.create_new_tag": {
+    "defaultMessage": "Create tag \"#{0}\"",
+    "content": "Create tag \"#{0}\""
+  },
+  "tag_editor.input_placeholder": {
+    "defaultMessage": "Add or search tags...",
+    "content": "Add or search tags..."
+  },
+  "task.convert": {
+    "defaultMessage": "Convert",
+    "content": "Convert"
+  },
+  "task.convert_to_project": {
+    "defaultMessage": "Convert to Project",
+    "content": "Convert to Project"
+  },
+  "task.convert_to_project_description": {
+    "defaultMessage": "Are you sure you want to convert this task to a project?",
+    "content": "Are you sure you want to convert this task to a project?"
+  },
+  "task.delete": {
+    "defaultMessage": "Delete",
+    "content": "Delete"
+  },
+  "task.delete_task": {
+    "defaultMessage": "Delete Task",
+    "content": "Delete Task"
+  },
+  "task.delete_task_description": {
+    "defaultMessage": "Are you sure you want to delete this task?",
+    "content": "Are you sure you want to delete this task?"
+  },
+  "task.move": {
+    "defaultMessage": "Move",
+    "content": "Move"
+  },
+  "tasks.daysAgo": {
+    "defaultMessage": "{0}d ago",
+    "content": "{0}d ago"
+  },
+  "tasks.daysLeft": {
+    "defaultMessage": "{0} days left",
+    "content": "{0} days left"
+  },
+  "tasks.mark_as_canceled": {
+    "defaultMessage": "Mark as Canceled",
+    "content": "Mark as Canceled"
+  },
+  "tasks.mark_as_completed": {
+    "defaultMessage": "Mark as Completed",
+    "content": "Mark as Completed"
+  },
+  "tasks.mark_as_created": {
+    "defaultMessage": "Mark as Created",
+    "content": "Mark as Created"
+  },
+  "tasks.today": {
+    "defaultMessage": "Today",
+    "content": "Today"
+  },
+  "tasks.untitled": {
+    "defaultMessage": "New Task",
+    "content": "New Task"
+  },
+  "today": {
+    "defaultMessage": "Today",
+    "content": "Today"
+  }
+}

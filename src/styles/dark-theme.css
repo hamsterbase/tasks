@@ -1,0 +1,45 @@
+[data-theme='dark'] {
+  /* Background colors */
+  --color-bg1: #17171a;
+  --color-bg2: #0d0d0e;
+  --color-bg3: #000000;
+
+  /* Text colors */
+  --color-t1: #e7e9eb;
+  --color-t2: #a2a7ae;
+  --color-t3: #757a81;
+  --color-t4: #46494d;
+  --color-text-white: #ffffff;
+  --color-text-link: #1fa1a6;
+  --color-text-notice: #e19c2c;
+
+  /* Line colors */
+  --color-line-light: #232527;
+  --color-line-regular: #2f3134;
+  --color-line-bold: #46494d;
+
+  /* Float background colors */
+  --color-bg1-float: #242628;
+  --color-bg2-float: #202123;
+  --color-bg3-float: #1a1b1d;
+
+  /* Graph background colors */
+  --color-graph-bg-thin-float: #2b2c2f;
+  --color-graph-bg-regular-float: #2f3134;
+  --color-graph-white: #ffffff;
+  --color-graph-bg-white: #2f3134;
+  --color-graph-bg-thin: #1e2022;
+  --color-graph-bg-regular: #232527;
+  --color-graph-bg-thick: #2f3134;
+
+  /* Graph colors */
+  --color-graph-weak: #46494d;
+  --color-graph-medium: #757a81;
+  --color-graph-icon: #a2a7ae;
+
+  /* Status colors */
+  --color-stress-red: #d1403e;
+  --color-success-green: #1fa251;
+
+  --color-toast-bg: #2f3238;
+}

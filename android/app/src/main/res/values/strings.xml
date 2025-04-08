@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">HamsterBase Tasks</string>
+    <string name="title_activity_main">Tasks</string>
+    <string name="package_name">com.hamsterbase.tasks</string>
+    <string name="custom_url_scheme">com.hamsterbase.tasks</string>
+</resources>

@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": false,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true,
+    "preserveConstEnums": true,
+    "paths": {
+      "@/*": ["./src/*"],
+      "vscf/*": ["./src/packages/vscf/*"],
+      "vs/*": ["./src/packages/vscf/internal/*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["src/packages/vscf/**/*.ts"]
+}

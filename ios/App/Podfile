@@ -1,0 +1,31 @@
+require_relative '../../node_modules/.pnpm/@capacitor+ios@7.1.0_@capacitor+core@7.1.0/node_modules/@capacitor/ios/scripts/pods_helpers'
+
+platform :ios, '14.0'
+use_frameworks!
+
+# workaround to avoid Xcode caching of Pods that requires
+# Product -> Clean Build Folder after new Cordova plugins installed
+# Requires CocoaPods 1.6 or newer
+install! 'cocoapods', :disable_input_output_paths => true
+
+def capacitor_pods
+  pod 'Capacitor', :path => '../../node_modules/.pnpm/@capacitor+ios@7.1.0_@capacitor+core@7.1.0/node_modules/@capacitor/ios'
+  pod 'CapacitorCordova', :path => '../../node_modules/.pnpm/@capacitor+ios@7.1.0_@capacitor+core@7.1.0/node_modules/@capacitor/ios'
+  pod 'CapacitorApp', :path => '../../node_modules/.pnpm/@capacitor+app@7.0.0_@capacitor+core@7.1.0/node_modules/@capacitor/app'
+  pod 'CapacitorFilesystem', :path => '../../node_modules/.pnpm/@capacitor+filesystem@7.0.0_@capacitor+core@7.1.0/node_modules/@capacitor/filesystem'
+  pod 'CapacitorKeyboard', :path => '../../node_modules/.pnpm/@capacitor+keyboard@7.0.0_@capacitor+core@7.1.0/node_modules/@capacitor/keyboard'
+  pod 'CapacitorPreferences', :path => '../../node_modules/.pnpm/@capacitor+preferences@7.0.0_@capacitor+core@7.1.0/node_modules/@capacitor/preferences'
+  pod 'CapacitorShare', :path => '../../node_modules/.pnpm/@capacitor+share@7.0.0_@capacitor+core@7.1.0/node_modules/@capacitor/share'
+  pod 'CapacitorStatusBar', :path => '../../node_modules/.pnpm/@capacitor+status-bar@7.0.0_@capacitor+core@7.1.0/node_modules/@capacitor/status-bar'
+  pod 'CapacitorPluginSafeArea', :path => '../../node_modules/.pnpm/capacitor-plugin-safe-area@4.0.0_@capacitor+core@7.1.0/node_modules/capacitor-plugin-safe-area'
+  pod 'RevenuecatPurchasesCapacitor', :path => '../../node_modules/.pnpm/@revenuecat+purchases-capacitor@10.2.1_@capacitor+core@7.1.0/node_modules/@revenuecat/purchases-capacitor'
+end
+
+target 'App' do
+  capacitor_pods
+  # Add your Pods here
+end
+
+post_install do |installer|
+  assertDeploymentTarget(installer)
+end

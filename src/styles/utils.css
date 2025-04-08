@@ -1,0 +1,21 @@
+.safe-bottom {
+  padding-bottom: var(--safe-area-inset-bottom);
+}
+
+.safe-top {
+  padding-top: var(--safe-area-inset-top);
+}
+
+.polyfill-min-h-dvh {
+  min-height: 100vh;
+  min-height: calc(var(--1dvh, 1vh) * 100);
+  min-height: 100dvh;
+}
+
+.shadow-border {
+  box-shadow: 0 0 0 1px black !important;
+}
+
+.half-top {
+  top: calc(var(--1dvh, 1vh) * 50);
+}

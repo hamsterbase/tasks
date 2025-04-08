@@ -1,0 +1,81 @@
+PODS:
+  - Capacitor (7.1.0):
+    - CapacitorCordova
+  - CapacitorApp (7.0.0):
+    - Capacitor
+  - CapacitorCordova (7.1.0)
+  - CapacitorFilesystem (7.0.0):
+    - Capacitor
+  - CapacitorKeyboard (7.0.0):
+    - Capacitor
+  - CapacitorPluginSafeArea (4.0.0):
+    - Capacitor
+  - CapacitorPreferences (7.0.0):
+    - Capacitor
+  - CapacitorShare (7.0.0):
+    - Capacitor
+  - CapacitorStatusBar (7.0.0):
+    - Capacitor
+  - PurchasesHybridCommon (13.25.0):
+    - RevenueCat (= 5.19.0)
+  - RevenueCat (5.19.0)
+  - RevenuecatPurchasesCapacitor (10.2.1):
+    - Capacitor
+    - PurchasesHybridCommon (= 13.25.0)
+
+DEPENDENCIES:
+  - "Capacitor (from `../../node_modules/.pnpm/@capacitor+ios@7.1.0_@capacitor+core@7.1.0/node_modules/@capacitor/ios`)"
+  - "CapacitorApp (from `../../node_modules/.pnpm/@capacitor+app@7.0.0_@capacitor+core@7.1.0/node_modules/@capacitor/app`)"
+  - "CapacitorCordova (from `../../node_modules/.pnpm/@capacitor+ios@7.1.0_@capacitor+core@7.1.0/node_modules/@capacitor/ios`)"
+  - "CapacitorFilesystem (from `../../node_modules/.pnpm/@capacitor+filesystem@7.0.0_@capacitor+core@7.1.0/node_modules/@capacitor/filesystem`)"
+  - "CapacitorKeyboard (from `../../node_modules/.pnpm/@capacitor+keyboard@7.0.0_@capacitor+core@7.1.0/node_modules/@capacitor/keyboard`)"
+  - "CapacitorPluginSafeArea (from `../../node_modules/.pnpm/capacitor-plugin-safe-area@4.0.0_@capacitor+core@7.1.0/node_modules/capacitor-plugin-safe-area`)"
+  - "CapacitorPreferences (from `../../node_modules/.pnpm/@capacitor+preferences@7.0.0_@capacitor+core@7.1.0/node_modules/@capacitor/preferences`)"
+  - "CapacitorShare (from `../../node_modules/.pnpm/@capacitor+share@7.0.0_@capacitor+core@7.1.0/node_modules/@capacitor/share`)"
+  - "CapacitorStatusBar (from `../../node_modules/.pnpm/@capacitor+status-bar@7.0.0_@capacitor+core@7.1.0/node_modules/@capacitor/status-bar`)"
+  - "RevenuecatPurchasesCapacitor (from `../../node_modules/.pnpm/@revenuecat+purchases-capacitor@10.2.1_@capacitor+core@7.1.0/node_modules/@revenuecat/purchases-capacitor`)"
+
+SPEC REPOS:
+  trunk:
+    - PurchasesHybridCommon
+    - RevenueCat
+
+EXTERNAL SOURCES:
+  Capacitor:
+    :path: "../../node_modules/.pnpm/@capacitor+ios@7.1.0_@capacitor+core@7.1.0/node_modules/@capacitor/ios"
+  CapacitorApp:
+    :path: "../../node_modules/.pnpm/@capacitor+app@7.0.0_@capacitor+core@7.1.0/node_modules/@capacitor/app"
+  CapacitorCordova:
+    :path: "../../node_modules/.pnpm/@capacitor+ios@7.1.0_@capacitor+core@7.1.0/node_modules/@capacitor/ios"
+  CapacitorFilesystem:
+    :path: "../../node_modules/.pnpm/@capacitor+filesystem@7.0.0_@capacitor+core@7.1.0/node_modules/@capacitor/filesystem"
+  CapacitorKeyboard:
+    :path: "../../node_modules/.pnpm/@capacitor+keyboard@7.0.0_@capacitor+core@7.1.0/node_modules/@capacitor/keyboard"
+  CapacitorPluginSafeArea:
+    :path: "../../node_modules/.pnpm/capacitor-plugin-safe-area@4.0.0_@capacitor+core@7.1.0/node_modules/capacitor-plugin-safe-area"
+  CapacitorPreferences:
+    :path: "../../node_modules/.pnpm/@capacitor+preferences@7.0.0_@capacitor+core@7.1.0/node_modules/@capacitor/preferences"
+  CapacitorShare:
+    :path: "../../node_modules/.pnpm/@capacitor+share@7.0.0_@capacitor+core@7.1.0/node_modules/@capacitor/share"
+  CapacitorStatusBar:
+    :path: "../../node_modules/.pnpm/@capacitor+status-bar@7.0.0_@capacitor+core@7.1.0/node_modules/@capacitor/status-bar"
+  RevenuecatPurchasesCapacitor:
+    :path: "../../node_modules/.pnpm/@revenuecat+purchases-capacitor@10.2.1_@capacitor+core@7.1.0/node_modules/@revenuecat/purchases-capacitor"
+
+SPEC CHECKSUMS:
+  Capacitor: bceb785fb78f5e81e4a9e37843bc1c24bd9c7194
+  CapacitorApp: 9cb31064a6c6bb2b1438583733a7bf45557fc1da
+  CapacitorCordova: 866217f32c1d25b326c568a10ea3ed0c36b13e29
+  CapacitorFilesystem: 59a2b7b56a897c6a3de4d04c5718e1d80de9d2f5
+  CapacitorKeyboard: 4db71e694e7afb5d7c0be09b05495c19f7d6c914
+  CapacitorPluginSafeArea: 22031c3436269ca80fac90ec2c94bc7c1e59a81d
+  CapacitorPreferences: 8e4bef1f937fc991a19d7ea99330c36a62edd24b
+  CapacitorShare: d94c53d7656f1ce8f6712ae8d19ab0c18a69259f
+  CapacitorStatusBar: a8c4c83ed2e973bdafb979e80e4b00d027832cb7
+  PurchasesHybridCommon: f27e7fe57a9934319373b10c260db5d6c10bbb64
+  RevenueCat: 4be87c151dff652d2a5b7af46073db11f01ad93f
+  RevenuecatPurchasesCapacitor: 85b6f9412913f2688169e0baebf42b773be5d119
+
+PODFILE CHECKSUM: 04e909db6305eef9c945638882134cb9ee17a94d
+
+COCOAPODS: 1.16.2

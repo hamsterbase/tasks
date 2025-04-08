@@ -1,0 +1,25 @@
+.task-item-container {
+  position: relative;
+}
+.task-item-container::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: var(--task-item-left);
+  width: 100vw;
+  height: var(--task-item-bottom);
+  background-color: red;
+  opacity: 0;
+  z-index: 200;
+}
+.task-item-container::after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: var(--task-item-left);
+  width: 100vw;
+  height: var(--task-item-top);
+  background-color: red;
+  opacity: 0;
+  z-index: 200;
+}
