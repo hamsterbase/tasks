@@ -2,6 +2,10 @@
 
 A local-first and privacy first task manager. It is designed to be simple and easy to use.
 
+## Online Demo
+
+[Web version](https://tasks-app.hamsterbase.com/)
+
 ## Features
 
 - **Blazing Fast:** Built for speed with 50ms interactions and real-time sync. Experience a task manager that never slows you down.
