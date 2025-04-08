@@ -8,13 +8,19 @@ A local-first and privacy first task manager. It is designed to be simple and ea
 
 ## Features
 
-- **Blazing Fast:** Built for speed with 50ms interactions and real-time sync. Experience a task manager that never slows you down.
+- **No Spinners: Instant Access** - HamsterBase Tasks ensures data is stored on your device, letting you work immediately without waiting for server responses.
 
-- **Local-First:** Your data stays on your device. No service outages, account issues, or connectivity problems. Your tasks are always yours.
+- **Multi-Device Sync: Access Anywhere** - It syncs your data across devices like phones and laptops, so your work is available everywhere.
 
-- **Security:** End-to-end encryption ensures your data remains private. Even developers cannot access your decrypted data.
+- **Offline Ready: Network Optional** - You can use the app offline, with data stored locally and syncing later when connected, perfect for areas with poor internet.
 
-- **Privacy:** No telemetry or usage analytics. We believe great software doesn't need to spy on users.
+- **Long-Term Access: Data Lasts** - Ensures your data remains accessible over time by using durable formats and running on local devices indefinitely.
+
+- **Privacy First: Secure by Default** - End-to-end encryption ensures your data remains private. Even developers cannot access your decrypted data.
+
+- **Full Control: You Own Your Data** - You have complete control over your data, stored on your device, allowing free backups and modifications without restrictions.
+
+- **Open Source: Community Driven** - HamsterBase Tasks is open source, allowing the community to contribute, inspect, and improve the codebase, ensuring transparency and continuous development.
 
 ## Download
 
