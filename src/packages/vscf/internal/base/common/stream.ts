@@ -18,7 +18,7 @@ export interface ReadableStreamEvents<T> {
    * relinquishing ownership of a chunk of data to a consumer.
    *
    * NOTE: PLEASE UNDERSTAND THAT ADDING A DATA LISTENER CAN
-   * TURN THE STREAM INTO FLOWING MODE. IT IS THEREFOR THE
+   * TURN THE STREAM INTO FLOWING MODE. IT IS THEREFORE THE
    * LAST LISTENER THAT SHOULD BE ADDED AND NOT THE FIRST
    *
    * Use `listenStream` as a helper method to listen to
