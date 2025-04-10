@@ -1,0 +1,1 @@
+Local-first task manager with offline sync and end-to-end encryption

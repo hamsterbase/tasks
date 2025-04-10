@@ -1,0 +1,36 @@
+<h1>HamsterBase Tasks</h1>
+<p>HamsterBase Tasks is a powerful, privacy-focused task management application that puts you in control of your
+    data. Built with a local-first approach, it ensures your tasks are always accessible, even without an internet
+    connection.</p>
+
+<h2>Key Features:</h2>
+<ul class="feature-list">
+    <li>Instant Access: No waiting for server responses - all your data is stored locally on your device for
+        immediate access.</li>
+    <li>Seamless Multi-Device Sync: Access your tasks from any device - your phone, tablet, or laptop. Your work
+        follows you everywhere.</li>
+    <li>Offline-First Design: Work without internet? No problem! All data is stored locally and syncs automatically
+        when you're back online.</li>
+    <li>Long-Term Data Preservation: Your data stays accessible indefinitely, using durable formats and running on
+        your local devices.</li>
+    <li>End-to-End Encryption: Your data remains private and secure. Even the developers cannot access your
+        decrypted information.</li>
+    <li>Complete Data Control: You own your data. Store it on your device, create backups freely, and modify it
+        without restrictions.</li>
+    <li>Open Source: Built with transparency and community involvement. The codebase is open for inspection and
+        improvement.</li>
+</ul>
+
+<div class="perfect-for">
+    <h2>Perfect for:</h2>
+    <ul>
+        <li>Privacy-conscious users who want to keep their data secure</li>
+        <li>People who need offline access to their tasks</li>
+        <li>Users who want full control over their data</li>
+        <li>Those who work across multiple devices</li>
+        <li>Anyone who values speed and reliability in their task management</li>
+    </ul>
+</div>
+
+<p class="closing">Experience task management that puts you first - with HamsterBase Tasks, your data stays with
+    you, and you're always in control.</p>
