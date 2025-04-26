@@ -1,3 +1,5 @@
+import './styles/main.css';
+
 function loadDesktop() {
   if (location.href.includes('desktop')) {
     return true;

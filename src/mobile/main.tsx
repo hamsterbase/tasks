@@ -22,7 +22,6 @@ import {
 } from '../services/overlay/common/WorkbenchOverlayService.ts';
 import { WorkbenchTodoService } from '../services/todo/browser/workbenchTodoService.ts';
 import { App } from './App.tsx';
-import '../styles/main.css';
 import { Directory } from '@capacitor/filesystem';
 import { ISwitchService, SwitchService } from '@/services/switchService/common/switchService.ts';
 
