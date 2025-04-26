@@ -26,11 +26,10 @@ import '../styles/main.css';
 import { Directory } from '@capacitor/filesystem';
 import { ISwitchService, SwitchService } from '@/services/switchService/common/switchService.ts';
 
-initializeTheme();
-watchThemeChange();
-initKeyboardListeners();
-
 const run = async () => {
+  initializeTheme();
+  watchThemeChange();
+  initKeyboardListeners();
   const serviceCollection = new ServiceCollection();
   serviceCollection.set(IWorkbenchOverlayService, new SyncDescriptor(WorkbenchOverlayService));
   serviceCollection.set(ITodoService, new SyncDescriptor(WorkbenchTodoService));

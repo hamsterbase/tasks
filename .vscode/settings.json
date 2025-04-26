@@ -1,4 +1,5 @@
 {
+  "editor.formatOnSave": true,
   "files.associations": {
     "*.css": "tailwindcss"
   },
@@ -11,5 +12,4 @@
   "i18nease.locale_other": ["zh-CN"],
   "i18nease.exclude_dir": ["src/packages/vscf/**"],
   "i18nease.openai_model": "gpt-4o-mini",
-  "liveServer.settings.port": 5501
 }
