@@ -2,4 +2,10 @@ import { DesktopThemeDefinition } from './types';
 
 export const baseDesktopStyles: DesktopThemeDefinition = {
   sidebarBackground: 'bg-bg2',
+  sidebarLinkActive: 'bg-brand text-white',
+  sidebarLinkInactive: 'hover:bg-bg3',
+  sidebarIconSize: 'size-4 flex items-center justify-center',
+  sidebarItemHeight: 'h-4',
+  sidebarItemTextStyle: 'font-medium text-base',
+  sidebarItemContainerStyle: 'block px-2 py-1.5 rounded-lg cursor-pointer',
 };

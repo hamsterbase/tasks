@@ -28,13 +28,19 @@ export const SidebarLayout = () => {
                     <li key={index}>
                       <Link
                         to={link.to}
-                        className={classNames('block px-2 py-1.5 rounded cursor-pointer', {
-                          'font-medium bg-brand text-white': isActive,
-                          'hover:bg-bg3': !isActive,
+                        className={classNames(desktopStyles.sidebarItemContainerStyle, {
+                          [desktopStyles.sidebarLinkActive]: isActive,
+                          [desktopStyles.sidebarLinkInactive]: !isActive,
                         })}
                       >
-                        <div className={classNames('flex items-center gap-2 h-4.5')}>
-                          <div className="size-4 flex items-center justify-center text-sm">{link.icon}</div>
+                        <div
+                          className={classNames(
+                            desktopStyles.sidebarItemHeight,
+                            desktopStyles.sidebarItemTextStyle,
+                            'flex items-center gap-2'
+                          )}
+                        >
+                          <div className={desktopStyles.sidebarIconSize}>{link.icon}</div>
                           {link.text}
                         </div>
                       </Link>
