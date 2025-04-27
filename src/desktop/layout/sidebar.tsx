@@ -19,9 +19,9 @@ export const SidebarLayout = () => {
     <div className="h-screen w-screen">
       <Allotment>
         <Allotment.Pane minSize={200} maxSize={300}>
-          <div className={classNames(desktopStyles.sidebarBackground, 'w-full h-full p-4')}>
+          <div className={classNames(desktopStyles.sidebarBackground, desktopStyles.sidebarContainerStyle)}>
             <nav>
-              <ul className="space-y-0.5">
+              <ul className={desktopStyles.sidebarItemGap}>
                 {links.map((link, index) => {
                   const isActive = location.pathname === link.to;
                   return (

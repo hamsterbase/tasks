@@ -1,9 +1,11 @@
 export interface DesktopThemeDefinition {
+  sidebarContainerStyle: string;
   sidebarBackground: string;
   sidebarLinkActive: string;
   sidebarLinkInactive: string;
   sidebarIconSize: string;
   sidebarItemHeight: string;
+  sidebarItemGap: string;
   sidebarItemTextStyle: string;
   sidebarItemContainerStyle: string;
 }
