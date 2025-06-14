@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import topLevelAwait from 'vite-plugin-top-level-await';
 import wasm from 'vite-plugin-wasm';
-import { defineConfig } from 'vitest/config';
+import { defineConfig } from 'vite';
 import IstanbulPlugin from './src/packages/vite-plugin-istanbul/index';
 
 export default defineConfig({

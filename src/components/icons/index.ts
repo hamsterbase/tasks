@@ -18,7 +18,7 @@ import {
   Inbox,
   Layers,
   Logs,
-  MoreHorizontal,
+  MoreVerticalIcon,
   PenLine,
   Plus,
   SendToBack,
@@ -38,7 +38,7 @@ export const DueIcon = Target;
 export const HomeIcon = Home;
 export const InboxIcon = Inbox;
 export const LogIcon = CircleCheck;
-export const MenuIcon = MoreHorizontal;
+export const MenuIcon = MoreVerticalIcon;
 export const NoteIcon = FileText;
 export const ScheduledIcon = CalendarDays;
 export const RightArrowIcon = ArrowRight;

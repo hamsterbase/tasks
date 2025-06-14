@@ -1,15 +1,15 @@
 {
+  "editor.formatOnSave": true,
   "files.associations": {
     "*.css": "tailwindcss"
   },
   "editor.quickSuggestions": {
     "strings": "on"
   },
-  "cSpell.words": ["eink", "hamsterbase", "instrumenter", "Loro"],
+  "cSpell.words": ["crdt", "eink", "hamsterbase", "instrumenter", "Loro"],
   "i18nease.locale_path": "src/locales",
   "i18nease.locale_default": "en-US",
   "i18nease.locale_other": ["zh-CN"],
   "i18nease.exclude_dir": ["src/packages/vscf/**"],
-  "i18nease.openai_model": "gpt-4o-mini",
-  "liveServer.settings.port": 5501
+  "i18nease.openai_model": "gpt-4o-mini"
 }

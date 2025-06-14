@@ -1,8 +1,9 @@
 {
   "files": [],
   "compilerOptions": {
+    "skipLibCheck": true,
     "experimentalDecorators": true
   },
   "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }],
-  "exclude": ["src/packages/vscf/**/*.ts"]
+  "exclude": ["src/packages/vscf/**/*.ts","node_modules"]
 }
