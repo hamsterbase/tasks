@@ -44,7 +44,6 @@ export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task, onUpdate }
           onChange={(e) => setTitle(e.target.value)}
           onBlur={handleTitleSave}
           className="flex-1 text-xl font-medium bg-red outline-none"
-          autoFocus
         />
         <div className="flex items-center gap-2">
           <button className="p-1.5 hover:bg-bg3 rounded-md transition-colors" title={localize('common.close', 'Close')}>

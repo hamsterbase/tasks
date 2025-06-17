@@ -1,9 +1,6 @@
 import { InboxIcon, LogIcon, ScheduledIcon, TodayIcon } from '@/components/icons';
-import { useService } from '@/hooks/use-service';
-import { useWatchEvent } from '@/hooks/use-watch-event';
 import { localize } from '@/nls';
 import { SelectionPanel } from '@/selection/SelectionPanel';
-import { ISelectionService } from '@/services/selection/common/selectionService';
 import { Allotment } from 'allotment';
 import classNames from 'classnames';
 import React from 'react';
@@ -12,9 +9,6 @@ import { desktopStyles } from '../theme/main';
 
 export const SidebarLayout = () => {
   const location = useLocation();
-  const selectionService = useService(ISelectionService);
-
-  useWatchEvent(selectionService.onSelectionChanged);
 
   const links = [
     { to: '/desktop/inbox', text: localize('inbox', 'Inbox'), icon: <InboxIcon /> },
@@ -23,13 +17,10 @@ export const SidebarLayout = () => {
     { to: '/desktop/completed', text: localize('completed', 'Completed'), icon: <LogIcon /> },
   ];
 
-
-
-
   return (
     <div className="h-screen w-screen relative">
       <Allotment>
-        <Allotment.Pane minSize={200} maxSize={300} snap>
+        <Allotment.Pane minSize={180} maxSize={250} snap>
           <div className={classNames(desktopStyles.sidebarBackground, desktopStyles.sidebarContainerStyle)}>
             <nav>
               <ul className={desktopStyles.sidebarItemGap}>
@@ -67,7 +58,7 @@ export const SidebarLayout = () => {
             <Allotment.Pane>
               <Outlet />
             </Allotment.Pane>
-            <Allotment.Pane minSize={300} preferredSize={400}>
+            <Allotment.Pane minSize={200} maxSize={350}>
               <SelectionPanel />
             </Allotment.Pane>
           </Allotment>

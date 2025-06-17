@@ -1,8 +1,9 @@
 import { useTaskItemActions } from '@/base/hooks/useTaskItemActions';
+import { ITaskList } from '@/components/taskList/type.ts';
 import { TaskInfo } from '@/core/state/type';
-import { useService } from '@/hooks/use-service';
+import { useRegisterEvent } from '@/hooks/useRegisterEvent.ts';
+import { useWatchEvent } from '@/hooks/use-watch-event';
 import { localize } from '@/nls';
-import { ITodoService } from '@/services/todo/common/todoService';
 import classNames from 'classnames';
 import React, { useEffect, useRef, useState } from 'react';
 import { TaskItemDueDate } from './TaskItemDueDate';
@@ -12,14 +13,18 @@ import { TaskStatusBox } from './TaskStatusBox';
 export interface TaskListItemProps {
   task: TaskInfo;
   willDisappear: boolean;
-  onClick: () => void;
+  taskList: ITaskList;
 }
 
-export const TaskListItem: React.FC<TaskListItemProps> = ({ task, willDisappear, onClick }) => {
+export const TaskListItem: React.FC<TaskListItemProps> = ({ task, willDisappear, taskList }) => {
   const isCompleted = task.status === 'completed';
-  const todoService = useService(ITodoService);
   const [editValue, setEditValue] = useState(task.title || '');
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useWatchEvent(taskList.onListStateChange);
+
+  const isSelected = taskList.selectedIds.includes(task.id);
+  const isFocused = taskList.isFocused;
 
   const taskItemActions = useTaskItemActions(task);
 
@@ -31,21 +36,46 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({ task, willDisappear,
     setEditValue(e.target.value);
   };
 
-  const handleTitleBlur = () => {
-    if (editValue.trim() !== task.title) {
-      todoService.updateTask(task.id, {
-        title: editValue.trim(),
-      });
+  const handleInputSelect = (e: React.SyntheticEvent<HTMLInputElement>) => {
+    const target = e.currentTarget;
+    if (!target) {
+      return;
     }
+    taskList.updateCursor(target.selectionStart ?? 0);
   };
+
+  useRegisterEvent(taskList.onFocusItem, (e) => {
+    const inputElement = inputRef.current;
+    if (e.id !== task.id || !inputElement) {
+      return;
+    }
+    inputElement.focus({ preventScroll: true });
+    inputElement.setSelectionRange(e.offset, e.offset);
+  });
 
   return (
     <div
       className={classNames('flex items-center gap-2 px-3 py-2 rounded-md cursor-pointer transition-all', {
         'hover:bg-bg2': true,
         'opacity-50': willDisappear,
+        'bg-bg3': isFocused && isSelected,
+        'bg-bg2': !isFocused && isSelected,
       })}
-      onClickCapture={onClick}
+      onClickCapture={(e) => {
+        e.stopPropagation();
+        const taskId = task.id;
+        if (e.metaKey) {
+          taskList.select(taskId, {
+            offset: null,
+            multipleMode: true,
+          });
+        } else {
+          taskList.select(taskId, {
+            offset: null,
+            multipleMode: false,
+          });
+        }
+      }}
     >
       <button
         onClick={(e) => {
@@ -68,7 +98,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({ task, willDisappear,
           ref={inputRef}
           value={editValue}
           onChange={handleTitleChange}
-          onBlur={handleTitleBlur}
+          onSelect={handleInputSelect}
           className={classNames('text-sm font-medium w-full bg-transparent border-none outline-none text-ellipsis', {
             'text-t1': true,
           })}

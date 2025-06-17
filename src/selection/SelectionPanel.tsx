@@ -2,7 +2,7 @@ import { getTaskInfo } from '@/core/state/getTaskInfo';
 import { UpdateTaskSchema } from '@/core/type';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
-import { ISelectionService } from '@/services/selection/common/selectionService';
+import { IListService } from '@/services/list/common/listService';
 import { ITodoService } from '@/services/todo/common/todoService';
 import React from 'react';
 import { EmptyPanel } from './EmptyPanel';
@@ -10,25 +10,23 @@ import { MultipleSelectionView } from './MultipleSelectionView';
 import { TaskDetailView } from './TaskDetailView';
 
 export const SelectionPanel: React.FC = () => {
-  const selectionService = useService(ISelectionService);
   const todoService = useService(ITodoService);
-
-  useWatchEvent(selectionService.onSelectionChanged);
   useWatchEvent(todoService.onStateChange);
 
-  const selectedItems = selectionService.selectedItems;
+  const listService = useService(IListService);
+  useWatchEvent(listService.onMainListChange);
+  useWatchEvent(listService.mainList?.onListStateChange);
 
-  // If no selection, don't render anything
+  const selectedItems = listService.mainList?.selectedIds || [];
+
   if (selectedItems.length === 0) {
     return <EmptyPanel />;
   }
 
-  // If multiple items selected
   if (selectedItems.length > 1) {
     return <MultipleSelectionView selectedCount={selectedItems.length} />;
   }
 
-  // Single item selected
   const selectedItemId = selectedItems[0];
   const taskObject = todoService.modelState.taskObjectMap.get(selectedItemId);
 
@@ -36,7 +34,6 @@ export const SelectionPanel: React.FC = () => {
     return <EmptyPanel />;
   }
 
-  // Only show task details for now
   if (taskObject.type === 'task') {
     const taskInfo = getTaskInfo(todoService.modelState, selectedItemId);
     return (
@@ -49,6 +46,5 @@ export const SelectionPanel: React.FC = () => {
     );
   }
 
-  // For other types (project, area, etc), return null for now
   return <EmptyPanel />;
 };
