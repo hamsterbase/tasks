@@ -1,6 +1,6 @@
 import { checkPlatform } from '@/base/browser/checkPlatform';
 import { switchKeys, SwitchKeyType } from './switch/main';
-import { createDecorator } from '@/packages/vscf/platform/instantiation/common';
+import { createDecorator } from 'vscf/platform/instantiation/common';
 
 export interface ISwitchService {
   readonly _serviceBrand: undefined;

@@ -1,11 +1,13 @@
 import { useTaskItemActions } from '@/base/hooks/useTaskItemActions';
+import { EditableInput } from '@/components/edit/EditableInput';
+import { taskTitleInputKey } from '@/components/edit/inputKeys';
 import { ITaskList } from '@/components/taskList/type.ts';
 import { TaskInfo } from '@/core/state/type';
-import { useRegisterEvent } from '@/hooks/useRegisterEvent.ts';
 import { useWatchEvent } from '@/hooks/use-watch-event';
+import { useRegisterEvent } from '@/hooks/useRegisterEvent.ts';
 import { localize } from '@/nls';
 import classNames from 'classnames';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { TaskItemDueDate } from './TaskItemDueDate';
 import { TaskItemIcons } from './TaskItemIcons';
 import { TaskStatusBox } from './TaskStatusBox';
@@ -18,7 +20,6 @@ export interface TaskListItemProps {
 
 export const TaskListItem: React.FC<TaskListItemProps> = ({ task, willDisappear, taskList }) => {
   const isCompleted = task.status === 'completed';
-  const [editValue, setEditValue] = useState(task.title || '');
   const inputRef = useRef<HTMLInputElement>(null);
 
   useWatchEvent(taskList.onListStateChange);
@@ -28,20 +29,13 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({ task, willDisappear,
 
   const taskItemActions = useTaskItemActions(task);
 
-  useEffect(() => {
-    setEditValue(task.title || '');
-  }, [task.title]);
-
-  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEditValue(e.target.value);
-  };
-
   const handleInputSelect = (e: React.SyntheticEvent<HTMLInputElement>) => {
     const target = e.currentTarget;
     if (!target) {
       return;
     }
     taskList.updateCursor(target.selectionStart ?? 0);
+    taskList.updateInputValue(target.value);
   };
 
   useRegisterEvent(taskList.onFocusItem, (e) => {
@@ -82,7 +76,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({ task, willDisappear,
           e.stopPropagation();
           taskItemActions.toggleTask();
         }}
-        className="flex-shrink-0 size-5"
+        className="flex-shrink-0 size-5 outline-none"
       >
         <TaskStatusBox
           status={task.status}
@@ -94,22 +88,22 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({ task, willDisappear,
       </button>
 
       <div className="flex-1 min-w-0" onClick={(e) => e.stopPropagation()}>
-        <input
+        <EditableInput
+          inputKey={taskTitleInputKey(task.id)}
           ref={inputRef}
-          value={editValue}
-          onChange={handleTitleChange}
+          defaultValue={task.title}
+          onChange={(e) => {
+            taskList.updateInputValue(e.target.value);
+          }}
           onSelect={handleInputSelect}
-          className={classNames('text-sm font-medium w-full bg-transparent border-none outline-none text-ellipsis', {
-            'text-t1': true,
-          })}
+          onSave={(value) => {
+            taskItemActions.updateTaskTitle(value);
+          }}
+          className={'text-sm font-medium w-full bg-transparent border-none outline-none text-ellipsis text-t1'}
           placeholder={localize('tasks.untitled', 'New Task')}
         />
         {task.projectTitle && (
-          <p
-            className={classNames('text-xs mt-0.5 overflow-hidden text-ellipsis whitespace-nowrap', {
-              'text-t3': true,
-            })}
-          >
+          <p className={'text-xs mt-0.5 overflow-hidden text-ellipsis whitespace-nowrap text-t3 opacity-50'}>
             {task.projectTitle}
           </p>
         )}

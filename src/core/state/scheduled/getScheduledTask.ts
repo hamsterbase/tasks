@@ -1,7 +1,7 @@
 import { ModelTypes } from '@/core/enum';
 import { getDateFromUTCTimeStamp } from '@/core/time/getDateFromUTCTimeStamp';
 import { TaskObjectSchema } from '@/core/type';
-import { localize } from '@/packages/vscf/internal/nls';
+import { localize } from 'vscf/internal/nls';
 import {
   addDays,
   differenceInCalendarMonths,

@@ -1,5 +1,5 @@
 import { useService } from '@/hooks/use-service';
-import { IInstantiationService } from '@/packages/vscf/platform/instantiation/common';
+import { IInstantiationService } from 'vscf/platform/instantiation/common';
 import { ProjectAreaSelectorController, ProjectAreaSelectorOptions } from './ProjectAreaSelectorController';
 
 export const useProjectAreaSelector = () => {

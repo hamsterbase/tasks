@@ -1,9 +1,11 @@
+import { useInputFocused } from '@/hooks/global/useInputFocused';
 import React from 'react';
-import { useRoutes, Navigate } from 'react-router';
+import { Navigate, useRoutes } from 'react-router';
 import { SidebarLayout } from './layout/sidebar.tsx';
 import { Inbox } from './pages/inbox';
 
 export const App = () => {
+  useInputFocused();
   const element = useRoutes([
     {
       path: '/desktop',

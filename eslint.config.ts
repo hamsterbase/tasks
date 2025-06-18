@@ -40,6 +40,7 @@ export default tseslint.config(
         {
           packages: [
             'lucide-react',
+            { name: '@/packages/vscf', alternative: 'vscf' },
             { name: 'node:test', alternative: 'vitest' },
             { name: '@/vscf/internal/nls', alternative: '@/nls' },
           ],

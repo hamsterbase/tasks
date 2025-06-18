@@ -1,14 +1,16 @@
 import { initializeTheme, watchThemeChange } from '@/base/browser/initializeTheme';
 import { initKeyboardListeners } from '@/base/browser/initKeyboardListeners';
+import '@/base/commands/desktop';
 import { GlobalContext } from '@/components/GlobalContext/GlobalContext';
-import { ICommandService } from '@/packages/vscf/platform/commands/common';
-import { InstantiationService, ServiceCollection, SyncDescriptor } from '@/packages/vscf/platform/instantiation/common';
+import { ICommandService } from 'vscf/platform/commands/common';
+import { InstantiationService, ServiceCollection, SyncDescriptor } from 'vscf/platform/instantiation/common';
 import { CloudService, ICloudService } from '@/services/cloud/common/cloudService';
 import { StandaloneCommandService } from '@/services/command/common/standaloneCommandService';
 import { LocalStorageConfigStore } from '@/services/config/browser/localStorageConfigStore';
 import { IConfigService, WorkbenchConfig } from '@/services/config/configService';
 import { IndexdbDatabaseService } from '@/services/database/browser/indexdbDatabaseService';
 import { IDatabaseService } from '@/services/database/common/database';
+import { EditService, IEditService } from '@/services/edit/common/editService';
 import { StandaloneKeybindingService } from '@/services/keybinding/browser/standaloneKeybindingService';
 import { IListService, ListService } from '@/services/list/common/listService';
 import { INavigationService, NavigationService } from '@/services/navigationService/common/navigationService';
@@ -41,7 +43,7 @@ export async function start() {
   serviceCollection.set(ICommandService, new SyncDescriptor(StandaloneCommandService));
   serviceCollection.set(IKeybindingService, new SyncDescriptor(StandaloneKeybindingService, [document.body]));
   serviceCollection.set(IListService, new SyncDescriptor(ListService));
-
+  serviceCollection.set(IEditService, new SyncDescriptor(EditService));
   const instantiationService = new InstantiationService(serviceCollection, true);
   await instantiationService.invokeFunction(async (dss) => {
     await dss.get(IConfigService).init();

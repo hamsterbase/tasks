@@ -1,5 +1,5 @@
-import { ILogService } from '@/packages/vscf/internal/platform/log/common/log';
-import type { INotificationService } from '@/packages/vscf/internal/platform/notification/common/notification';
+import { ILogService } from 'vscf/internal/platform/log/common/log';
+import type { INotificationService } from 'vscf/internal/platform/notification/common/notification';
 import * as dom from 'vscf/base/browser/dom';
 import { IKeyboardEvent, StandardKeyboardEvent } from 'vscf/base/browser/keyboardEvent';
 import { KeyCodeChord, Keybinding, ResolvedKeybinding, decodeKeybinding } from 'vscf/base/common/keybindings';

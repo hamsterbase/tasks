@@ -1,3 +1,5 @@
+import { EditableTextArea } from '@/components/edit/EditableTextArea';
+import { taskNotesInputKey, taskTitleInputKey } from '@/components/edit/inputKeys';
 import { DueIcon, NoteIcon, ScheduledIcon, SubtaskIcon, TagIcon } from '@/components/icons';
 import { MenuIcon } from '@/components/icons/index.ts';
 import { TaskInfo } from '@/core/state/type';
@@ -8,7 +10,7 @@ import { localize } from '@/nls';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
 import TextArea from 'rc-textarea';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 interface TaskDetailViewProps {
   task: TaskInfo;
@@ -16,34 +18,23 @@ interface TaskDetailViewProps {
 }
 
 export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task, onUpdate }) => {
-  const [title, setTitle] = useState(task.title);
-  const [notes, setNotes] = useState(task.notes || '');
-
-  useEffect(() => {
-    setTitle(task.title);
-    setNotes(task.notes || '');
-  }, [task.id, task.title, task.notes]);
-
-  const handleTitleSave = () => {
-    if (title !== task.title) {
-      onUpdate({ title });
-    }
+  const handleTitleSave = (value: string) => {
+    onUpdate({ title: value });
   };
 
-  const handleNotesSave = () => {
-    if (notes !== task.notes) {
-      onUpdate({ notes });
-    }
+  const handleNotesSave = (value: string) => {
+    onUpdate({ notes: value });
   };
   return (
     <div className="h-full flex flex-col bg-bg1">
       <div className="flex items-center justify-between px-6 py-4 border-b border-line-light">
-        <TextArea
-          value={title}
+        <EditableTextArea
+          inputKey={taskTitleInputKey(task.id)}
+          defaultValue={task.title}
+          placeholder={localize('tasks.title_placeholder', 'Add title...')}
+          onSave={handleTitleSave}
+          className="flex-1 text-xl font-medium outline-none"
           autoSize={{ minRows: 1 }}
-          onChange={(e) => setTitle(e.target.value)}
-          onBlur={handleTitleSave}
-          className="flex-1 text-xl font-medium bg-red outline-none"
         />
         <div className="flex items-center gap-2">
           <button className="p-1.5 hover:bg-bg3 rounded-md transition-colors" title={localize('common.close', 'Close')}>
@@ -59,10 +50,10 @@ export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task, onUpdate }
               <NoteIcon className="size-4" />
               <span className="text-sm font-medium">{localize('tasks.notes', 'Notes')}</span>
             </div>
-            <TextArea
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
-              onBlur={handleNotesSave}
+            <EditableTextArea
+              inputKey={taskNotesInputKey(task.id)}
+              defaultValue={task.notes || ''}
+              onSave={handleNotesSave}
               className="w-full p-3 bg-bg2 rounded-md outline-none resize-none"
               placeholder={localize('tasks.notes_placeholder', 'Add notes...')}
               autoSize={{ minRows: 1 }}

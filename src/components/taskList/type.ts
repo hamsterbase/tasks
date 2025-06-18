@@ -1,4 +1,4 @@
-import { Event } from '@/packages/vscf/base/common/event';
+import { Event } from 'vscf/base/common/event';
 import { TreeID } from 'loro-crdt';
 
 export interface ISelectionOption {
@@ -14,7 +14,21 @@ export interface IEditItemState {
   offset: number;
 }
 
+export type ListOperation = {
+  type: 'delete_item';
+  id: TreeID;
+  focusItem: TreeID | null;
+};
+
 export interface ITaskList {
+  onListStateChange: Event<void>;
+
+  onFocusItem: Event<IEditItemState>;
+
+  onCreateNewOne: Event<{ afterId: TreeID }>;
+
+  onListOperation: Event<ListOperation>;
+
   readonly name: string;
 
   readonly items: string[];
@@ -27,15 +41,19 @@ export interface ITaskList {
 
   readonly isFocused: boolean;
 
-  onListStateChange: Event<void>;
-
-  onFocusItem: Event<IEditItemState>;
+  readonly isInputValueEmpty: boolean;
 
   setFocus(isFocused: boolean): void;
+
+  createNewOne(): void;
 
   select(id: string, option: ISelectionOption): void;
 
   updateCursor(offset: number): void;
+
+  updateInputValue(value: string): void;
+
+  deleteCurrentItem(): void;
 
   moveCursorDown(): void;
 

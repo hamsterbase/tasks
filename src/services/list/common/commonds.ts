@@ -1,8 +1,13 @@
-import { KeyCode } from '@/packages/vscf/internal/base/common/keyCodes';
-import { ContextKeyExpr } from '@/packages/vscf/platform/contextkey/common';
-import { KeybindingsRegistry, KeybindingWeight } from '@/packages/vscf/platform/keybinding/common';
+import { KeyCode } from 'vscf/internal/base/common/keyCodes';
+import { ContextKeyExpr } from 'vscf/platform/contextkey/common';
+import { KeybindingsRegistry, KeybindingWeight } from 'vscf/platform/keybinding/common';
 import { IListService } from '@/services/list/common/listService';
-import { MainListCursorHasNextItem, MainListCursorHasPreviousItem, MainListFocus } from './contextKey';
+import {
+  MainListCursorHasNextItem,
+  MainListCursorHasPreviousItem,
+  MainListFocus,
+  MainListIsInputValueEmpty,
+} from './contextKey';
 
 KeybindingsRegistry.registerCommandAndKeybindingRule({
   id: 'MainListSelectNext',
@@ -26,6 +31,32 @@ KeybindingsRegistry.registerCommandAndKeybindingRule({
     const currentList = acc.get(IListService).mainList;
     if (currentList) {
       currentList.selectPrevious();
+    }
+  },
+});
+
+KeybindingsRegistry.registerCommandAndKeybindingRule({
+  id: 'MainListSelectCreateNewOne',
+  weight: KeybindingWeight.WorkbenchContrib + 5,
+  when: ContextKeyExpr.and(MainListFocus),
+  primary: KeyCode.Enter,
+  handler: (acc) => {
+    const currentList = acc.get(IListService).mainList;
+    if (currentList) {
+      currentList.createNewOne();
+    }
+  },
+});
+
+KeybindingsRegistry.registerCommandAndKeybindingRule({
+  id: 'MainListSelectDeleteSelected',
+  weight: KeybindingWeight.WorkbenchContrib + 5,
+  when: ContextKeyExpr.and(MainListFocus, MainListIsInputValueEmpty),
+  primary: KeyCode.Backspace,
+  handler: (acc) => {
+    const currentList = acc.get(IListService).mainList;
+    if (currentList) {
+      currentList.deleteCurrentItem();
     }
   },
 });

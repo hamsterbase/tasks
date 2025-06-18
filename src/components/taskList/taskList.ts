@@ -1,6 +1,6 @@
-import { Emitter } from '@/packages/vscf/base/common/event';
+import { Emitter } from 'vscf/base/common/event';
 import { TreeID } from 'loro-crdt';
-import { IEditItemState, ISelectionOption, ITaskList } from './type.ts';
+import { IEditItemState, ISelectionOption, ITaskList, ListOperation } from './type.ts';
 
 export class TaskList implements ITaskList {
   private _isFocused = false;
@@ -34,6 +34,15 @@ export class TaskList implements ITaskList {
 
   private _onFocusItem = new Emitter<IEditItemState>();
   public onFocusItem = this._onFocusItem.event;
+
+  private _onCreateNewOne = new Emitter<{ afterId: TreeID }>();
+  public onCreateNewOne = this._onCreateNewOne.event;
+
+  private _inputValue: string = '';
+
+  public get isInputValueEmpty() {
+    return this._inputValue === '';
+  }
 
   constructor(
     public name: string,
@@ -71,6 +80,11 @@ export class TaskList implements ITaskList {
     this._cursorOffset = offset;
   }
 
+  updateInputValue(value: string): void {
+    this._inputValue = value;
+    this._onListStateChange.fire();
+  }
+
   moveCursorDown(): void {}
 
   moveCursorUp(): void {}
@@ -92,6 +106,15 @@ export class TaskList implements ITaskList {
       offset: this.cursorOffset ?? 0,
       fireEditEvent: true,
     });
+  }
+
+  createNewOne(): void {
+    const lastSelectedIndex = this._items.findIndex((item) => this.selectedIds.includes(item));
+    if (lastSelectedIndex === -1) {
+      return;
+    }
+    const newItem = this._items[lastSelectedIndex];
+    this._onCreateNewOne.fire({ afterId: newItem });
   }
 
   selectPrevious(): void {
@@ -123,5 +146,33 @@ export class TaskList implements ITaskList {
     }
     const cursorIndex = this._items.indexOf(this._cursorId);
     return cursorIndex !== -1 && cursorIndex > 0;
+  }
+
+  private _onListOperation = new Emitter<ListOperation>();
+  public onListOperation = this._onListOperation.event;
+
+  public deleteCurrentItem(): void {
+    if (!this.cursorId) {
+      return;
+    }
+    const index = this._items.indexOf(this.cursorId);
+    if (index === -1) {
+      return;
+    }
+
+    let previousItem: TreeID | null = null;
+
+    if (index > 0) {
+      previousItem = this._items[index - 1];
+    } else {
+      if (this._items.length > 1) {
+        previousItem = this._items[0];
+      }
+    }
+    this._onListOperation.fire({
+      type: 'delete_item',
+      id: this.cursorId,
+      focusItem: previousItem,
+    });
   }
 }

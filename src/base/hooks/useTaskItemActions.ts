@@ -16,5 +16,12 @@ export const useTaskItemActions = (taskInfo: TaskInfo | null) => {
     }
   };
 
-  return { toggleTask };
+  const updateTaskTitle = (title: string) => {
+    if (!taskInfo) {
+      return;
+    }
+    todoService.updateTask(taskInfo.id, { title });
+  };
+
+  return { toggleTask, updateTaskTitle };
 };
