@@ -1,3 +1,8 @@
+import '@/locales/browser/config.ts';
+import 'large-small-dynamic-viewport-units-polyfill';
+
+import { startDesktop } from './desktop/main';
+import { startMobile } from './mobile/main';
 import './styles/main.css';
 
 function loadDesktop() {
@@ -8,9 +13,7 @@ function loadDesktop() {
 }
 
 if (loadDesktop()) {
-  import('./desktop/main').then((module) => {
-    module.start();
-  });
+  startDesktop();
 } else {
-  import('./mobile/main');
+  startMobile();
 }

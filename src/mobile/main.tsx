@@ -1,6 +1,3 @@
-import 'large-small-dynamic-viewport-units-polyfill';
-import '@/locales/browser/config.ts';
-
 import { checkPlatform } from '@/base/browser/checkPlatform.ts';
 import { initializeTheme, watchThemeChange } from '@/base/browser/initializeTheme.ts';
 import { initKeyboardListeners } from '@/base/browser/initKeyboardListeners.ts';
@@ -26,11 +23,10 @@ import '../styles/main.css';
 import { Directory } from '@capacitor/filesystem';
 import { ISwitchService, SwitchService } from '@/services/switchService/common/switchService.ts';
 
-initializeTheme();
-watchThemeChange();
-initKeyboardListeners();
-
-const run = async () => {
+export const startMobile = async () => {
+  initializeTheme();
+  watchThemeChange();
+  initKeyboardListeners();
   const serviceCollection = new ServiceCollection();
   serviceCollection.set(IWorkbenchOverlayService, new SyncDescriptor(WorkbenchOverlayService));
   serviceCollection.set(ITodoService, new SyncDescriptor(WorkbenchTodoService));
@@ -69,5 +65,3 @@ const run = async () => {
     </StrictMode>
   );
 };
-
-run();

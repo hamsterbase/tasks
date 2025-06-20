@@ -2,8 +2,6 @@ import { initializeTheme, watchThemeChange } from '@/base/browser/initializeThem
 import { initKeyboardListeners } from '@/base/browser/initKeyboardListeners';
 import '@/base/commands/desktop';
 import { GlobalContext } from '@/components/GlobalContext/GlobalContext';
-import { ICommandService } from 'vscf/platform/commands/common';
-import { InstantiationService, ServiceCollection, SyncDescriptor } from 'vscf/platform/instantiation/common';
 import { CloudService, ICloudService } from '@/services/cloud/common/cloudService';
 import { StandaloneCommandService } from '@/services/command/common/standaloneCommandService';
 import { LocalStorageConfigStore } from '@/services/config/browser/localStorageConfigStore';
@@ -22,12 +20,14 @@ import 'allotment/dist/style.css';
 import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router';
+import { ICommandService } from 'vscf/platform/commands/common';
 import { ContextKeyService } from 'vscf/platform/contextkey/browser';
 import { IContextKeyService } from 'vscf/platform/contextkey/common';
+import { InstantiationService, ServiceCollection, SyncDescriptor } from 'vscf/platform/instantiation/common';
 import { IKeybindingService } from 'vscf/platform/keybinding/common';
 import { App } from './app';
 
-export async function start() {
+export async function startDesktop() {
   initializeTheme();
   watchThemeChange();
   initKeyboardListeners();
