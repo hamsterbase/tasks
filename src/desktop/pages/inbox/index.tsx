@@ -1,5 +1,5 @@
 import { getTodayTimestampInUtc } from '@/base/common/time';
-import { InboxIcon } from '@/components/icons';
+import { InboxIcon, TaskDisplaySettingsIcon } from '@/components/icons';
 import { TaskList } from '@/components/taskList/taskList.ts';
 import { getInboxTasks } from '@/core/state/inbox/getInboxTasks';
 import { TaskListItem } from '@/desktop/components/taskListItem/TaskListItem';
@@ -7,6 +7,7 @@ import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { useRegisterEvent } from '@/hooks/useRegisterEvent';
 import { useTaskDisplaySettings } from '@/hooks/useTaskDisplaySettings';
+import { useDesktopTaskDisplaySettings } from '@/hooks/useDesktopTaskDisplaySettings';
 import { localize } from '@/nls';
 import { IListService } from '@/services/list/common/listService';
 import { ITodoService } from '@/services/todo/common/todoService';
@@ -19,6 +20,7 @@ export const Inbox = () => {
   useWatchEvent(listService.onMainListChange);
   useWatchEvent(todoService.onStateChange);
   const { showFutureTasks, showCompletedTasks, completedAfter } = useTaskDisplaySettings('inbox');
+  const { openTaskDisplaySettings } = useDesktopTaskDisplaySettings('inbox');
 
   const { inboxTasks, willDisappearObjectIdSet } = getInboxTasks(todoService.modelState, {
     currentDate: getTodayTimestampInUtc(),
@@ -98,6 +100,15 @@ export const Inbox = () => {
             <InboxIcon className="size-5 text-t2" />
             <h1 className="text-lg font-medium text-t1">{localize('inbox', 'Inbox')}</h1>
           </div>
+          <button
+            className="flex items-center gap-1 px-3 py-1.5 text-sm text-t2 hover:text-t1 hover:bg-bg2 rounded-md transition-colors"
+            onClick={(e) => {
+              const rect = e.currentTarget.getBoundingClientRect();
+              openTaskDisplaySettings(rect.right, rect.bottom + 4);
+            }}
+          >
+            <TaskDisplaySettingsIcon className="size-4" />
+          </button>
         </div>
 
         <div className="flex-1 overflow-y-auto">

@@ -3,7 +3,7 @@ import { Emitter, Event } from 'vscf/base/common/event';
 import { generateUuid } from 'vscf/base/common/uuid';
 import { createDecorator } from 'vscf/platform/instantiation/common';
 
-export type OverlayType = 'action-sheet' | 'dialog' | 'toast';
+export type OverlayType = 'action-sheet' | 'dialog' | 'toast' | 'menu';
 
 export type OverlayInitOptions = {
   type: OverlayType;
@@ -74,6 +74,9 @@ export class WorkbenchOverlayService implements IWorkbenchOverlayService {
       }
       case 'toast': {
         return index + 1500;
+      }
+      case 'menu': {
+        return index + 2000;
       }
     }
   }

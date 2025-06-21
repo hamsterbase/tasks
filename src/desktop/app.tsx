@@ -3,6 +3,7 @@ import React from 'react';
 import { Navigate, useRoutes } from 'react-router';
 import { SidebarLayout } from './layout/sidebar.tsx';
 import { Inbox } from './pages/inbox';
+import { DesktopMenu } from '@/desktop/overlay/desktopMenu/DesktopMenu.tsx';
 
 export const App = () => {
   useInputFocused();
@@ -35,5 +36,10 @@ export const App = () => {
     },
   ]);
 
-  return <div>{element}</div>;
+  return (
+    <div>
+      {element}
+      <DesktopMenu />
+    </div>
+  );
 };
