@@ -1,4 +1,4 @@
-import { localize } from '@/nls';
+import { localize } from '@/nls.ts';
 import React from 'react';
 
 interface MultipleSelectionViewProps {

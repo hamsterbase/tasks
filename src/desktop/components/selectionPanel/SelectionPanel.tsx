@@ -1,13 +1,13 @@
-import { getTaskInfo } from '@/core/state/getTaskInfo';
-import { UpdateTaskSchema } from '@/core/type';
-import { useService } from '@/hooks/use-service';
-import { useWatchEvent } from '@/hooks/use-watch-event';
-import { IListService } from '@/services/list/common/listService';
-import { ITodoService } from '@/services/todo/common/todoService';
+import { getTaskInfo } from '@/core/state/getTaskInfo.ts';
+import { UpdateTaskSchema } from '@/core/type.ts';
+import { useService } from '@/hooks/use-service.ts';
+import { useWatchEvent } from '@/hooks/use-watch-event.ts';
+import { IListService } from '@/services/list/common/listService.ts';
+import { ITodoService } from '@/services/todo/common/todoService.ts';
 import React from 'react';
-import { EmptyPanel } from './EmptyPanel';
-import { MultipleSelectionView } from './MultipleSelectionView';
-import { TaskDetailView } from './TaskDetailView';
+import { EmptyPanel } from './EmptyPanel.tsx';
+import { MultipleSelectionView } from './MultipleSelectionView.tsx';
+import { TaskDetailView } from './TaskDetailView.tsx';
 
 export const SelectionPanel: React.FC = () => {
   const todoService = useService(ITodoService);

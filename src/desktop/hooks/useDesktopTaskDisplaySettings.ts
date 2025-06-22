@@ -1,14 +1,14 @@
-import { getTimeAfter, TimeAfterEnum } from '@/core/time/getTimeAfter';
+import { getTimeAfter, TimeAfterEnum } from '@/core/time/getTimeAfter.ts';
 import { DesktopMenuController, IMenuConfig } from '@/desktop/overlay/desktopMenu/DesktopMenuController.ts';
 import {
   completedTasksRangeConfigKey,
   showCompletedTasksConfigKey,
   showFutureTasksConfigKey,
-} from '@/services/config/config';
-import { localize } from '@/nls';
-import { IInstantiationService } from 'vscf/platform/instantiation/common';
-import { useService } from './use-service';
-import { useConfig } from './useConfig';
+} from '@/services/config/config.ts';
+import { localize } from '@/nls.ts';
+import { IInstantiationService } from 'vscf/platform/instantiation/common.ts';
+import { useService } from '@/hooks/use-service.ts';
+import { useConfig } from '@/hooks/useConfig.ts';
 
 interface UseDesktopTaskDisplaySettingsOption {
   hideShowFutureTasks?: boolean;

@@ -1,6 +1,6 @@
 import { InboxIcon, LogIcon, ScheduledIcon, TodayIcon } from '@/components/icons';
 import { localize } from '@/nls';
-import { SelectionPanel } from '@/selection/SelectionPanel';
+import { SelectionPanel } from '@/desktop/components/selectionPanel/SelectionPanel';
 import { Allotment } from 'allotment';
 import classNames from 'classnames';
 import React from 'react';

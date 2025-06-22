@@ -7,7 +7,7 @@ import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { useRegisterEvent } from '@/hooks/useRegisterEvent';
 import { useTaskDisplaySettings } from '@/hooks/useTaskDisplaySettings';
-import { useDesktopTaskDisplaySettings } from '@/hooks/useDesktopTaskDisplaySettings';
+import { useDesktopTaskDisplaySettings } from '@/desktop/hooks/useDesktopTaskDisplaySettings.ts';
 import { localize } from '@/nls';
 import { IListService } from '@/services/list/common/listService';
 import { ITodoService } from '@/services/todo/common/todoService';
