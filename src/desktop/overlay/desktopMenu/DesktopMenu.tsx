@@ -75,7 +75,7 @@ const DesktopMenuContent: React.FC<IDesktopMenuContentProps> = ({ controller }) 
 export const DesktopMenu: React.FC = () => {
   const workbenchOverlayService = useService(IWorkbenchOverlayService);
   useWatchEvent(workbenchOverlayService.onOverlayChange);
-  const controller: DesktopMenuController | null = workbenchOverlayService.getOverlay(OverlayEnum.taskDisplaySettings);
+  const controller: DesktopMenuController | null = workbenchOverlayService.getOverlay(OverlayEnum.desktopMenu);
   if (!controller || !controller.menuConfig) return null;
   return <DesktopMenuContent controller={controller} />;
 };

@@ -1,9 +1,10 @@
+import { DatePickerOverlay } from '@/desktop/overlay/datePicker/DatePickerOverlay';
+import { DesktopMenu } from '@/desktop/overlay/desktopMenu/DesktopMenu.tsx';
 import { useInputFocused } from '@/hooks/global/useInputFocused';
 import React from 'react';
 import { Navigate, useRoutes } from 'react-router';
 import { SidebarLayout } from './layout/sidebar.tsx';
 import { Inbox } from './pages/inbox';
-import { DesktopMenu } from '@/desktop/overlay/desktopMenu/DesktopMenu.tsx';
 
 export const App = () => {
   useInputFocused();
@@ -40,6 +41,7 @@ export const App = () => {
     <div>
       {element}
       <DesktopMenu />
+      <DatePickerOverlay />
     </div>
   );
 };

@@ -1,5 +1,4 @@
-import { getCurrentDateStr } from '@/base/common/time';
-import dayjs from 'dayjs';
+import { isToday } from '@/base/common/time';
 import { styles } from '@/mobile/theme';
 import { localize } from '@/nls';
 import classNames from 'classnames';
@@ -16,7 +15,7 @@ interface DayButtonProps {
 }
 
 export const DayButton: React.FC<DayButtonProps> = ({ day, onSelect }) => {
-  const isToday = getCurrentDateStr() === dayjs(day.date).format('YYYY-MM-DD');
+  const isTodayValue = isToday(day.date);
 
   return (
     <button
@@ -24,11 +23,11 @@ export const DayButton: React.FC<DayButtonProps> = ({ day, onSelect }) => {
       className={classNames(`${styles.datePickerDayButtonHeight} ${styles.datePickerDayButtonRound} text-sm relative`, {
         [`${styles.datePickerDaySelectedBackground} ${styles.datePickerDaySelectedTextColor}`]: day.isSelected,
         'opacity-0': !day.isCurrentMonth,
-        [styles.datePickerTodayTextColor]: isToday,
+        [styles.datePickerTodayTextColor]: isTodayValue,
       })}
       disabled={!day.value}
     >
-      {isToday && (
+      {isTodayValue && (
         <span className="absolute top-0 left-0 w-full h-full flex items-start justify-center text-xs pt-1">
           {localize('date_picker.today', 'Today')}
         </span>

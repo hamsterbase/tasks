@@ -29,6 +29,8 @@ import {
   Target,
   User,
   X,
+  CircleSmall,
+  ChevronLeft,
 } from 'lucide-react';
 
 export const AreaExpandedIcon = ChevronRight;
@@ -64,3 +66,6 @@ export const ChevronRightIcon = ChevronRight;
 export const TaskDisplaySettingsIcon = SlidersHorizontal;
 export const CalendarRangeIcon = CalendarRange;
 export const MoveIcon = SendToBack;
+export const CircleSmallIcon = CircleSmall;
+export const LeftIcon = ChevronLeft;
+export const RightIcon = ChevronRight;

@@ -26,6 +26,10 @@ A local-first and privacy first task manager. It is designed to be simple and ea
 
 To download the latest version of HamsterBase Tasks, visit the [official page](https://tasks.hamsterbase.com/).
 
+## Contributing
+
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details on how to get started.
+
 ## License
 
 This project is licensed under the GNU Affero General Public License v3.0 - see the [LICENSE](LICENSE) file for details.

@@ -35,6 +35,7 @@ export default tseslint.config(
       ...reactHooks.configs.recommended.rules,
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       'custom/no-duplicate-localization': 'error',
+      'custom/no-chinese-in-localization-value': 'error',
       'custom/no-restricted-packages': [
         'error',
         {

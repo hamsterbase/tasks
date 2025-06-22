@@ -1,7 +1,7 @@
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { IEditService } from '@/services/edit/common/editService';
-import TextArea from 'rc-textarea';
+import TextArea, { TextAreaRef } from 'rc-textarea';
 import React, { forwardRef, useCallback, useEffect } from 'react';
 
 interface EditableTextAreaProps {
@@ -15,8 +15,8 @@ interface EditableTextAreaProps {
   autoSize?: { minRows: number };
 }
 
-export const EditableTextArea = forwardRef<typeof TextArea, EditableTextAreaProps>(
-  ({ inputKey, defaultValue, onChange, onBlur, placeholder, onSave, className, autoSize }) => {
+export const EditableTextArea = forwardRef<TextAreaRef, EditableTextAreaProps>(
+  ({ inputKey, defaultValue, onChange, onBlur, placeholder, onSave, className, autoSize }, ref) => {
     const editService = useService(IEditService);
     useWatchEvent(editService.onInputChange, (e) => {
       return e.inputKey === inputKey;
@@ -42,6 +42,7 @@ export const EditableTextArea = forwardRef<typeof TextArea, EditableTextAreaProp
 
     return (
       <TextArea
+        ref={ref}
         value={inputValue}
         onChange={handleInputChange}
         onBlur={handleInputBlur}

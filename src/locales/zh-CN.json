@@ -1,5 +1,21 @@
 {
   "__i18n_ease__": "true",
+  "account.apple_store_purchase_fetch.error": {
+    "defaultMessage": "Failed to get product",
+    "content": "获取产品失败"
+  },
+  "account.apple_store_purchase.fetching": {
+    "defaultMessage": "Loading Purchase Info...",
+    "content": "加载购买信息..."
+  },
+  "account.apple_store_purchase.purchasing": {
+    "defaultMessage": "Purchasing...",
+    "content": "购买中..."
+  },
+  "account.apple_store_purchase.success": {
+    "defaultMessage": "Purchase successful",
+    "content": "购买成功"
+  },
   "account.apple_store_purchase.title": {
     "defaultMessage": "Subscribe 1 Year Cloud Pro",
     "content": "订阅 1 年云会员"
@@ -68,6 +84,10 @@
     "defaultMessage": "Subscribe 1 Year Cloud Pro",
     "content": "订阅 1 年云会员"
   },
+  "account.purchase.error": {
+    "defaultMessage": "Failed to complete purchase {0}",
+    "content": "购买失败 {0}"
+  },
   "account.purchase.success": {
     "defaultMessage": "Purchase successful",
     "content": "购买成功"
@@ -108,6 +128,10 @@
     "defaultMessage": "Cancel",
     "content": "取消"
   },
+  "common.close": {
+    "defaultMessage": "Close",
+    "content": "关闭"
+  },
   "common.loading": {
     "defaultMessage": "Loading...",
     "content": "加载中..."
@@ -115,6 +139,10 @@
   "common.ok": {
     "defaultMessage": "OK",
     "content": "确定"
+  },
+  "completed": {
+    "defaultMessage": "Completed",
+    "content": "已完成"
   },
   "completed_tasks.noCompletedTasks": {
     "defaultMessage": "No completed tasks or projects yet",
@@ -267,6 +295,10 @@
   "date_picker.friday": {
     "defaultMessage": "Fri",
     "content": "周五"
+  },
+  "date_picker.go_to_today": {
+    "defaultMessage": "Go to today",
+    "content": "前往今天"
   },
   "date_picker.monday": {
     "defaultMessage": "Mon",
@@ -442,10 +474,10 @@
   },
   "listItemsError": {
     "defaultMessage": "Error listing items from IndexedDB:",
-    "content": "从IndexedDB列出项目时出错："
+    "content": "从 IndexedDB 列出项目时出错："
   },
   "localDatabaseName": {
-    "defaultMessage": "本地数据库",
+    "defaultMessage": "Local Database",
     "content": "本地数据库"
   },
   "login.account.placeholder": {
@@ -640,6 +672,10 @@
     "defaultMessage": "Tomorrow",
     "content": "明天"
   },
+  "settings.about": {
+    "defaultMessage": "About",
+    "content": "关于"
+  },
   "settings.account.management": {
     "defaultMessage": "Account Management",
     "content": "账户管理"
@@ -741,7 +777,7 @@
     "content": "English"
   },
   "settings.local.database": {
-    "defaultMessage": "本地数据库",
+    "defaultMessage": "Local Database",
     "content": "本地数据库"
   },
   "settings.theme": {
@@ -756,6 +792,10 @@
     "defaultMessage": "Dark",
     "content": "深色主题"
   },
+  "settings.theme.eink": {
+    "defaultMessage": "E-Ink",
+    "content": "E-Ink 主题"
+  },
   "settings.theme.light": {
     "defaultMessage": "Light",
     "content": "浅色主题"
@@ -763,10 +803,6 @@
   "settings.title": {
     "defaultMessage": "Settings",
     "content": "设置"
-  },
-  "settings.about": {
-    "defaultMessage": "关于",
-    "content": "关于"
   },
   "subtask.placeholder": {
     "defaultMessage": "Add subtask...",
@@ -808,6 +844,10 @@
     "defaultMessage": "Move",
     "content": "移动"
   },
+  "tasks.clear_date": {
+    "defaultMessage": "Clear date",
+    "content": "清除日期"
+  },
   "tasks.daysAgo": {
     "defaultMessage": "{0}d ago",
     "content": "{0}天前"
@@ -815,6 +855,10 @@
   "tasks.daysLeft": {
     "defaultMessage": "{0} days left",
     "content": "还有 {0} 天"
+  },
+  "tasks.due_date": {
+    "defaultMessage": "Due Date",
+    "content": "截止日期"
   },
   "tasks.mark_as_canceled": {
     "defaultMessage": "Mark as Canceled",
@@ -827,6 +871,42 @@
   "tasks.mark_as_created": {
     "defaultMessage": "Mark as Created",
     "content": "标记为已创建"
+  },
+  "tasks.notes": {
+    "defaultMessage": "Notes",
+    "content": "笔记"
+  },
+  "tasks.notes_placeholder": {
+    "defaultMessage": "Add notes...",
+    "content": "添加笔记..."
+  },
+  "tasks.select_task": {
+    "defaultMessage": "Select a task to view details",
+    "content": "选择一个任务以查看详情"
+  },
+  "tasks.selected_count": {
+    "defaultMessage": "Selected {0} items",
+    "content": "已选择 {0} 个项目"
+  },
+  "tasks.set_date": {
+    "defaultMessage": "Set date",
+    "content": "设置日期"
+  },
+  "tasks.start_date": {
+    "defaultMessage": "Start Date",
+    "content": "开始日期"
+  },
+  "tasks.subtasks": {
+    "defaultMessage": "Subtasks",
+    "content": "子任务"
+  },
+  "tasks.tags": {
+    "defaultMessage": "Tags",
+    "content": "标签"
+  },
+  "tasks.title_placeholder": {
+    "defaultMessage": "Add title...",
+    "content": "添加标题..."
   },
   "tasks.today": {
     "defaultMessage": "Today",

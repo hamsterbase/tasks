@@ -48,6 +48,10 @@ export function getCurrentDateStr() {
   return `${date.getFullYear()}-${month}-${day}`;
 }
 
+export function isToday(date: Date) {
+  return getCurrentDateStr() === dayjs(date).format('YYYY-MM-DD');
+}
+
 /**
  * 检查给定的时间戳（秒）是否为 UTC 日期的开始，
  * 即该时间戳经过转换后，其时、分、秒、毫秒全部为 0

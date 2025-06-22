@@ -23,5 +23,40 @@ export const useTaskItemActions = (taskInfo: TaskInfo | null) => {
     todoService.updateTask(taskInfo.id, { title });
   };
 
-  return { toggleTask, updateTaskTitle };
+  const updateTaskNotes = (notes: string) => {
+    if (!taskInfo) {
+      return;
+    }
+    todoService.updateTask(taskInfo.id, { notes });
+  };
+
+  const clearStartDate = () => {
+    if (!taskInfo) {
+      return;
+    }
+    todoService.updateTask(taskInfo.id, { startDate: null });
+  };
+
+  const clearDueDate = () => {
+    if (!taskInfo) {
+      return;
+    }
+    todoService.updateTask(taskInfo.id, { dueDate: null });
+  };
+
+  const updateStartDate = (startDate: number) => {
+    if (!taskInfo) {
+      return;
+    }
+    todoService.updateTask(taskInfo.id, { startDate });
+  };
+
+  const updateDueDate = (dueDate: number) => {
+    if (!taskInfo) {
+      return;
+    }
+    todoService.updateTask(taskInfo.id, { dueDate });
+  };
+
+  return { toggleTask, updateTaskTitle, updateTaskNotes, clearStartDate, clearDueDate, updateStartDate, updateDueDate };
 };

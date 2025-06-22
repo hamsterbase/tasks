@@ -34,7 +34,7 @@ export const LanguageSettings = () => {
             onClick: () => changeLanguage('en'),
           },
           {
-            title: localize('settings.language.chinese', '简体中文'),
+            title: '简体中文',
             mode: {
               type: 'check',
               checked: currentLanguage === 'zh-CN',

@@ -19,7 +19,7 @@ KeybindingsRegistry.registerCommandAndKeybindingRule({
   primary: KeyCode.DownArrow,
   handler: (acc) => {
     const overlayService = acc.get(IWorkbenchOverlayService);
-    const controller = overlayService.getOverlay(OverlayEnum.taskDisplaySettings) as DesktopMenuController;
+    const controller = overlayService.getOverlay(OverlayEnum.desktopMenu) as DesktopMenuController;
     if (controller) {
       controller.moveDown();
     }
@@ -33,7 +33,7 @@ KeybindingsRegistry.registerCommandAndKeybindingRule({
   primary: KeyCode.UpArrow,
   handler: (acc) => {
     const overlayService = acc.get(IWorkbenchOverlayService);
-    const controller = overlayService.getOverlay(OverlayEnum.taskDisplaySettings) as DesktopMenuController;
+    const controller = overlayService.getOverlay(OverlayEnum.desktopMenu) as DesktopMenuController;
     if (controller) {
       controller.moveUp();
     }
@@ -47,7 +47,7 @@ KeybindingsRegistry.registerCommandAndKeybindingRule({
   primary: KeyCode.RightArrow,
   handler: (acc) => {
     const overlayService = acc.get(IWorkbenchOverlayService);
-    const controller = overlayService.getOverlay(OverlayEnum.taskDisplaySettings) as DesktopMenuController;
+    const controller = overlayService.getOverlay(OverlayEnum.desktopMenu) as DesktopMenuController;
     if (controller) {
       controller.openSubmenu();
     }
@@ -61,7 +61,7 @@ KeybindingsRegistry.registerCommandAndKeybindingRule({
   primary: KeyCode.LeftArrow,
   handler: (acc) => {
     const overlayService = acc.get(IWorkbenchOverlayService);
-    const controller = overlayService.getOverlay(OverlayEnum.taskDisplaySettings) as DesktopMenuController;
+    const controller = overlayService.getOverlay(OverlayEnum.desktopMenu) as DesktopMenuController;
     if (controller) {
       controller.closeSubmenu();
     }
@@ -75,7 +75,7 @@ KeybindingsRegistry.registerCommandAndKeybindingRule({
   primary: KeyCode.Enter,
   handler: (acc) => {
     const overlayService = acc.get(IWorkbenchOverlayService);
-    const controller = overlayService.getOverlay(OverlayEnum.taskDisplaySettings) as DesktopMenuController;
+    const controller = overlayService.getOverlay(OverlayEnum.desktopMenu) as DesktopMenuController;
     if (controller) {
       controller.selectCurrent();
     }
@@ -89,7 +89,7 @@ KeybindingsRegistry.registerCommandAndKeybindingRule({
   primary: KeyCode.Escape,
   handler: (acc) => {
     const overlayService = acc.get(IWorkbenchOverlayService);
-    const controller = overlayService.getOverlay(OverlayEnum.taskDisplaySettings) as DesktopMenuController;
+    const controller = overlayService.getOverlay(OverlayEnum.desktopMenu) as DesktopMenuController;
     if (controller) {
       controller.dispose();
     }

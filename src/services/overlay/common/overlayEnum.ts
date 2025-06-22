@@ -7,4 +7,5 @@ export enum OverlayEnum {
   taskDisplaySettings = 'taskDisplaySettings',
   projectAreaSelector = 'projectAreaSelector',
   desktopMenu = 'desktopMenu',
+  desktopDatePicker = 'desktopDatePicker',
 }

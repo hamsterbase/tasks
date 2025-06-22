@@ -1,5 +1,4 @@
 import { getTaskInfo } from '@/core/state/getTaskInfo.ts';
-import { UpdateTaskSchema } from '@/core/type.ts';
 import { useService } from '@/hooks/use-service.ts';
 import { useWatchEvent } from '@/hooks/use-watch-event.ts';
 import { IListService } from '@/services/list/common/listService.ts';
@@ -36,14 +35,7 @@ export const SelectionPanel: React.FC = () => {
 
   if (taskObject.type === 'task') {
     const taskInfo = getTaskInfo(todoService.modelState, selectedItemId);
-    return (
-      <TaskDetailView
-        task={taskInfo}
-        onUpdate={(updates: UpdateTaskSchema) => {
-          todoService.updateTask(selectedItemId, updates);
-        }}
-      />
-    );
+    return <TaskDetailView task={taskInfo} />;
   }
 
   return <EmptyPanel />;
