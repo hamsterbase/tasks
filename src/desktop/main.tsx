@@ -9,6 +9,7 @@ import { IConfigService, WorkbenchConfig } from '@/services/config/configService
 import { IndexdbDatabaseService } from '@/services/database/browser/indexdbDatabaseService';
 import { IDatabaseService } from '@/services/database/common/database';
 import { EditService, IEditService } from '@/services/edit/common/editService';
+import { IWorkbenchInstanceService, WorkbenchInstanceService } from '@/services/instance/common/instanceService';
 import { StandaloneKeybindingService } from '@/services/keybinding/browser/standaloneKeybindingService';
 import { IListService, ListService } from '@/services/list/common/listService';
 import { INavigationService, NavigationService } from '@/services/navigationService/common/navigationService';
@@ -44,6 +45,7 @@ export async function startDesktop() {
   serviceCollection.set(IKeybindingService, new SyncDescriptor(StandaloneKeybindingService, [document.body]));
   serviceCollection.set(IListService, new SyncDescriptor(ListService));
   serviceCollection.set(IEditService, new SyncDescriptor(EditService));
+  serviceCollection.set(IWorkbenchInstanceService, new SyncDescriptor(WorkbenchInstanceService));
   const instantiationService = new InstantiationService(serviceCollection, true);
   await instantiationService.invokeFunction(async (dss) => {
     await dss.get(IConfigService).init();
