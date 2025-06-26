@@ -35,7 +35,7 @@ export class TaskList implements ITaskList {
   private _onFocusItem = new Emitter<IEditItemState>();
   public onFocusItem = this._onFocusItem.event;
 
-  private _onCreateNewOne = new Emitter<{ afterId: TreeID }>();
+  private _onCreateNewOne = new Emitter<{ afterId: TreeID | null }>();
   public onCreateNewOne = this._onCreateNewOne.event;
 
   private _inputValue: string = '';
@@ -109,6 +109,10 @@ export class TaskList implements ITaskList {
   }
 
   createNewOne(): void {
+    if (this._selectedIds.length === 0) {
+      this._onCreateNewOne.fire({ afterId: null });
+      return;
+    }
     const lastSelectedIndex = this._items.findIndex((item) => this.selectedIds.includes(item));
     if (lastSelectedIndex === -1) {
       return;
@@ -174,5 +178,6 @@ export class TaskList implements ITaskList {
       id: this.cursorId,
       focusItem: previousItem,
     });
+    this._selectedIds = this._selectedIds.filter((item) => item !== this.cursorId);
   }
 }

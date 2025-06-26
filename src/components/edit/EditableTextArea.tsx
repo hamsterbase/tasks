@@ -25,12 +25,12 @@ export const EditableTextArea = forwardRef<TextAreaRef, EditableTextAreaProps>(
       editService.setInputValue(inputKey, defaultValue);
     }, [defaultValue, editService, inputKey]);
 
-    const inputValue = editService.getInputValue(inputKey);
+    const inputValue = editService.getInputValue(inputKey, defaultValue);
 
     const handleInputBlur = useCallback(() => {
-      onSave(editService.getInputValue(inputKey));
+      onSave(inputValue);
       onBlur?.();
-    }, [onSave, onBlur, inputKey, editService]);
+    }, [onSave, onBlur, inputValue]);
 
     const handleInputChange = useCallback(
       (e: React.ChangeEvent<HTMLTextAreaElement>) => {

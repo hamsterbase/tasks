@@ -2,6 +2,7 @@ import { getTodayTimestampInUtc } from '@/base/common/time';
 import { InboxIcon, TaskDisplaySettingsIcon } from '@/components/icons';
 import { TaskList } from '@/components/taskList/taskList.ts';
 import { getInboxTasks } from '@/core/state/inbox/getInboxTasks';
+import { DragOverlayItem } from '@/desktop/components/drag/DragOverlayItem';
 import { InboxTaskInput } from '@/desktop/components/inboxTaskInput/InboxTaskInput';
 import { CreateTaskEvent } from '@/desktop/components/inboxTaskInput/InboxTaskInputController';
 import { TaskListItem } from '@/desktop/components/taskListItem/TaskListItem';
@@ -13,6 +14,17 @@ import { useTaskDisplaySettings } from '@/hooks/useTaskDisplaySettings';
 import { localize } from '@/nls';
 import { IListService } from '@/services/list/common/listService';
 import { ITodoService } from '@/services/todo/common/todoService';
+import {
+  closestCenter,
+  DndContext,
+  DragEndEvent,
+  MouseSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import type { TreeID } from 'loro-crdt';
 import React, { useCallback } from 'react';
 import { flushSync } from 'react-dom';
 
@@ -23,6 +35,19 @@ export const Inbox = () => {
   useWatchEvent(todoService.onStateChange);
   const { showFutureTasks, showCompletedTasks, completedAfter } = useTaskDisplaySettings('inbox');
   const { openTaskDisplaySettings } = useDesktopTaskDisplaySettings('inbox');
+
+  const mouseSensor = useSensor(MouseSensor, {
+    activationConstraint: {
+      distance: 3,
+    },
+  });
+  const touchSensor = useSensor(TouchSensor, {
+    activationConstraint: {
+      delay: 100,
+      tolerance: 5,
+    },
+  });
+  const sensors = useSensors(mouseSensor, touchSensor);
 
   const { inboxTasks, willDisappearObjectIdSet } = getInboxTasks(todoService.modelState, {
     currentDate: getTodayTimestampInUtc(),
@@ -73,12 +98,16 @@ export const Inbox = () => {
   });
 
   useRegisterEvent(listService.mainList?.onCreateNewOne, (event) => {
+    const afterId = event.afterId;
+    if (!afterId) {
+      return;
+    }
     const newTaskId = flushSync(() => {
       return todoService.addTask({
         title: '',
         position: {
           type: 'afterElement',
-          previousElementId: event.afterId,
+          previousElementId: afterId,
         },
       });
     });
@@ -88,6 +117,35 @@ export const Inbox = () => {
       fireEditEvent: true,
     });
   });
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+
+    if (active.id !== over?.id) {
+      const oldIndex = inboxTasks.findIndex((task) => task.id === active.id);
+      const newIndex = inboxTasks.findIndex((task) => task.id === over?.id);
+
+      if (oldIndex !== -1 && newIndex !== -1) {
+        const targetTaskId = inboxTasks[newIndex].id;
+        let position;
+        if (newIndex > oldIndex) {
+          position = {
+            type: 'afterElement' as const,
+            previousElementId: targetTaskId,
+          };
+        } else {
+          position = {
+            type: 'beforeElement' as const,
+            nextElementId: targetTaskId,
+          };
+        }
+
+        todoService.updateTask(active.id as TreeID, {
+          position,
+        });
+      }
+    }
+  };
 
   const mainList = listService.mainList;
   if (!mainList) {
@@ -114,27 +172,32 @@ export const Inbox = () => {
         </div>
 
         <div className="flex-1 overflow-y-auto">
-         <div className="p-2">
-           <InboxTaskInput
-             onCreateTask={(event: CreateTaskEvent) => {
-               todoService.addTask({
-                 title: event.title,
-                 position: {
-                   type: 'firstElement',
-                 },
-               });
-             }}
-           />
-         </div>
-          <div className="p-2 outline-none" tabIndex={1} onFocus={setFocus} onBlur={clearFocus}>
-            {inboxTasks.map((task) => (
-              <TaskListItem
-                taskList={mainList}
-                key={task.id}
-                task={task}
-                willDisappear={willDisappearObjectIdSet.has(task.id)}
-              />
-            ))}
+          <div className="p-4">
+            <InboxTaskInput
+              onCreateTask={(event: CreateTaskEvent) => {
+                todoService.addTask({
+                  title: event.title,
+                  position: {
+                    type: 'firstElement',
+                  },
+                });
+              }}
+            />
+          </div>
+          <div className="p-4 outline-none" tabIndex={1} onFocus={setFocus} onBlur={clearFocus}>
+            <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+              <SortableContext items={inboxTasks.map((task) => task.id)} strategy={verticalListSortingStrategy}>
+                {inboxTasks.map((task) => (
+                  <TaskListItem
+                    taskList={mainList}
+                    key={task.id}
+                    task={task}
+                    willDisappear={willDisappearObjectIdSet.has(task.id)}
+                  />
+                ))}
+              </SortableContext>
+              <DragOverlayItem />
+            </DndContext>
           </div>
         </div>
       </div>

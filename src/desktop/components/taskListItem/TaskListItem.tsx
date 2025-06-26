@@ -12,6 +12,9 @@ import { TaskItemDueDate } from './TaskItemDueDate';
 import { TaskItemIcons } from './TaskItemIcons';
 import { TaskStatusBox } from './TaskStatusBox';
 
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+
 export interface TaskListItemProps {
   task: TaskInfo;
   willDisappear: boolean;
@@ -21,6 +24,16 @@ export interface TaskListItemProps {
 export const TaskListItem: React.FC<TaskListItemProps> = ({ task, willDisappear, taskList }) => {
   const isCompleted = task.status === 'completed';
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const { attributes, listeners, setNodeRef, transform, isDragging } = useSortable({
+    id: task.id,
+  });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    opacity: isDragging ? 0.6 : 1,
+    pointerEvents: (isDragging ? 'none' : 'auto') as React.CSSProperties['pointerEvents'],
+  };
 
   useWatchEvent(taskList.onListStateChange);
 
@@ -49,14 +62,17 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({ task, willDisappear,
 
   return (
     <div
-      className={classNames('flex items-center gap-2 px-3 py-2 rounded-md cursor-pointer transition-all', {
-        'hover:bg-bg2': true,
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
+      className={classNames('group relative flex items-center gap-2 px-3 py-2 rounded-md', {
         'opacity-50': willDisappear,
-        'bg-bg3': isFocused && isSelected,
-        'bg-bg2': !isFocused && isSelected,
+        'bg-bg3': isFocused && isSelected && !isDragging,
+        'bg-bg2': !isFocused && isSelected && !isDragging,
+        'hover:bg-bg2': !isDragging,
       })}
       onClickCapture={(e) => {
-        e.stopPropagation();
         const taskId = task.id;
         if (e.metaKey) {
           taskList.select(taskId, {
@@ -76,6 +92,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({ task, willDisappear,
           e.stopPropagation();
           taskItemActions.toggleTask();
         }}
+        onPointerDown={(e) => e.stopPropagation()}
         className="flex-shrink-0 size-5 outline-none"
       >
         <TaskStatusBox
@@ -87,7 +104,11 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({ task, willDisappear,
         />
       </button>
 
-      <div className="flex-1 min-w-0" onClick={(e) => e.stopPropagation()}>
+      <div
+        className="flex-1 min-w-0"
+        onClick={(e) => e.stopPropagation()}
+        onPointerDown={(e) => e.stopPropagation()}
+      >
         <EditableInput
           inputKey={taskTitleInputKey(task.id)}
           ref={inputRef}
@@ -109,7 +130,10 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({ task, willDisappear,
         )}
       </div>
 
-      <div className="flex items-center gap-1.5 flex-shrink-0">
+      <div
+        className="flex items-center gap-1.5 flex-shrink-0"
+        onPointerDown={(e) => e.stopPropagation()}
+      >
         <TaskItemDueDate dueDate={task.dueDate} />
         <TaskItemIcons tags={task.tags} notes={task.notes} subtasks={task.children} navIcon={false} />
       </div>

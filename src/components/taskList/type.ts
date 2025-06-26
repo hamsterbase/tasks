@@ -25,7 +25,7 @@ export interface ITaskList {
 
   onFocusItem: Event<IEditItemState>;
 
-  onCreateNewOne: Event<{ afterId: TreeID }>;
+  onCreateNewOne: Event<{ afterId: TreeID | null }>;
 
   onListOperation: Event<ListOperation>;
 
@@ -67,5 +67,5 @@ export interface ITaskList {
 
   cursorHasPreviousItem(): boolean;
 
-  updateItems(items: string[]): void;
+  updateItems(items: TreeID[]): void;
 }

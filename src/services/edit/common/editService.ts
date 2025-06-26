@@ -7,7 +7,7 @@ export interface IEditEvent {
 }
 
 export interface IEditService {
-  getInputValue(inputKey: string): string;
+  getInputValue(inputKey: string, defaultValue: string): string;
   setInputValue(inputKey: string, value: string): void;
   onInputChange: Event<IEditEvent>;
 }
@@ -19,8 +19,11 @@ export class EditService implements IEditService {
   private _inputValueMap = new Map<string, string>();
   constructor() {}
 
-  getInputValue(inputKey: string): string {
-    return this._inputValueMap.get(inputKey) ?? '';
+  getInputValue(inputKey: string, defaultValue: string): string {
+    if (this._inputValueMap.has(inputKey)) {
+      return this._inputValueMap.get(inputKey) ?? '';
+    }
+    return defaultValue;
   }
 
   setInputValue(inputKey: string, value: string): void {

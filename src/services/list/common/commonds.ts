@@ -7,8 +7,13 @@ import {
   MainListCursorHasPreviousItem,
   MainListFocus,
   MainListIsInputValueEmpty,
+  SubListCursorHasNextItem,
+  SubListCursorHasPreviousItem,
+  SubListFocus,
+  SubListIsInputValueEmpty,
 } from './contextKey';
 
+// Main List Commands
 KeybindingsRegistry.registerCommandAndKeybindingRule({
   id: 'MainListSelectNext',
   weight: KeybindingWeight.WorkbenchContrib + 5,
@@ -55,6 +60,59 @@ KeybindingsRegistry.registerCommandAndKeybindingRule({
   primary: KeyCode.Backspace,
   handler: (acc) => {
     const currentList = acc.get(IListService).mainList;
+    if (currentList) {
+      currentList.deleteCurrentItem();
+    }
+  },
+});
+
+KeybindingsRegistry.registerCommandAndKeybindingRule({
+  id: 'SubListSelectNext',
+  weight: KeybindingWeight.WorkbenchContrib + 5,
+  when: ContextKeyExpr.and(SubListFocus, SubListCursorHasNextItem),
+  primary: KeyCode.DownArrow,
+  handler: (acc) => {
+    const currentList = acc.get(IListService).subList;
+    if (currentList) {
+      currentList.selectNext();
+    }
+  },
+});
+
+KeybindingsRegistry.registerCommandAndKeybindingRule({
+  id: 'SubListSelectPrevious',
+  weight: KeybindingWeight.WorkbenchContrib + 5,
+  when: ContextKeyExpr.and(SubListFocus, SubListCursorHasPreviousItem),
+  primary: KeyCode.UpArrow,
+  handler: (acc) => {
+    const currentList = acc.get(IListService).subList;
+    if (currentList) {
+      currentList.selectPrevious();
+    }
+  },
+});
+
+KeybindingsRegistry.registerCommandAndKeybindingRule({
+  id: 'SubListSelectCreateNewOne',
+  weight: KeybindingWeight.WorkbenchContrib + 5,
+  when: ContextKeyExpr.and(SubListFocus),
+  primary: KeyCode.Enter,
+  handler: (acc) => {
+    console.log('SubListSelectCreateNewOne');
+    const currentList = acc.get(IListService).subList;
+    if (currentList) {
+      currentList.createNewOne();
+    }
+  },
+});
+
+KeybindingsRegistry.registerCommandAndKeybindingRule({
+  id: 'SubListSelectDeleteSelected',
+  weight: KeybindingWeight.WorkbenchContrib + 5,
+  when: ContextKeyExpr.and(SubListFocus, SubListIsInputValueEmpty),
+  primary: KeyCode.Backspace,
+  handler: (acc) => {
+    const currentList = acc.get(IListService).subList;
     if (currentList) {
       currentList.deleteCurrentItem();
     }

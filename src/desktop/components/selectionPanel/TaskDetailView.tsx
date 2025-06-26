@@ -1,17 +1,16 @@
 import { useTaskItemActions } from '@/base/hooks/useTaskItemActions';
 import { EditableTextArea } from '@/components/edit/EditableTextArea.tsx';
 import { taskNotesInputKey, taskTitleInputKey } from '@/components/edit/inputKeys.ts';
-import { DueIcon, MenuIcon, NoteIcon, ScheduledIcon, SubtaskIcon, TagIcon } from '@/components/icons';
+import { DueIcon, MenuIcon, NoteIcon, ScheduledIcon, TagIcon } from '@/components/icons';
 import { TaskInfo } from '@/core/state/type.ts';
 import { formatDate } from '@/core/time/formatDate';
 import { formatRemainingDays } from '@/core/time/formatRemainingDays';
 import { isPastOrToday } from '@/core/time/isPast';
 import { useDatepicker } from '@/desktop/overlay/datePicker/useDatepicker';
-import { TaskStatusBox } from '@/mobile/components/taskItem/TaskStatusBox.tsx';
 import { localize } from '@/nls.ts';
 import classNames from 'classnames';
-import TextArea from 'rc-textarea';
 import React from 'react';
+import { SubtaskList } from './SubtaskList';
 
 interface TaskDetailViewProps {
   task: TaskInfo;
@@ -196,33 +195,7 @@ export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task }) => {
                 )}
               </div>
             </div>
-            {task.children && task.children.length > 0 && (
-              <div>
-                <div className="flex items-center gap-2 text-t2 mb-2">
-                  <SubtaskIcon className="size-4" />
-                  <span className="text-sm">{localize('tasks.subtasks', 'Subtasks')}</span>
-                  <span className="text-xs text-t3">({task.children.length})</span>
-                </div>
-                <div className="space-y-1">
-                  {task.children.map((subtask) => (
-                    <div key={subtask.id} className="flex items-center gap-2 rounded-md hover:bg-bg3 px-1">
-                      <div className="size-4">
-                        <TaskStatusBox status={subtask.status} className="text-t3" />
-                      </div>
-                      <TextArea
-                        value={subtask.title}
-                        placeholder={localize('tasks.untitled', 'New Task')}
-                        className={classNames('text-sm bg-transparent outline-none flex-1', {
-                          'line-through': subtask.status === 'canceled',
-                          'text-t3': subtask.status === 'completed',
-                        })}
-                        autoSize={{ minRows: 1 }}
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
+            <SubtaskList task={task} />
           </div>
         </div>
       </div>
