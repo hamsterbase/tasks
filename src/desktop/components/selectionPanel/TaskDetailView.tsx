@@ -7,7 +7,8 @@ import { formatDate } from '@/core/time/formatDate';
 import { formatRemainingDays } from '@/core/time/formatRemainingDays';
 import { isPastOrToday } from '@/core/time/isPast';
 import { useDatepicker } from '@/desktop/overlay/datePicker/useDatepicker';
-import { localize } from '@/nls.ts';
+import { useTaskMenu } from '@/desktop/hooks/useTaskMenu.ts';
+import { localize } from '@/nls';
 import classNames from 'classnames';
 import React from 'react';
 import { SubtaskList } from './SubtaskList';
@@ -19,6 +20,7 @@ interface TaskDetailViewProps {
 export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task }) => {
   const showDatePicker = useDatepicker();
   const taskItemActions = useTaskItemActions(task);
+  const { openTaskMenu } = useTaskMenu(task.id);
 
   const handleTitleSave = (value: string) => {
     taskItemActions.updateTaskTitle(value);
@@ -67,6 +69,12 @@ export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task }) => {
     e.stopPropagation();
     taskItemActions.clearDueDate();
   };
+
+  const handleMenuClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    openTaskMenu(rect.right, rect.bottom);
+  };
+
   return (
     <div className="h-full flex flex-col bg-bg1">
       <div className="flex items-center justify-between px-6 py-4 border-b border-line-light">
@@ -79,7 +87,7 @@ export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task }) => {
           autoSize={{ minRows: 1 }}
         />
         <div className="flex items-center gap-2">
-          <button className="p-1.5 hover:bg-bg3 rounded-md transition-colors" title={localize('common.close', 'Close')}>
+          <button onClick={handleMenuClick} className="p-1.5 hover:bg-bg3 rounded-md transition-colors">
             <MenuIcon className="size-4 text-t2" />
           </button>
         </div>
