@@ -149,7 +149,7 @@ export const SubtaskList: React.FC<SubtaskListProps> = ({ task }) => {
               <SubtaskItem key={subtask.id} subtask={subtask} subList={listService.subList!} />
             ))}
           </SortableContext>
-          <DragOverlayItem isSubtask />
+          <DragOverlayItem />
         </DndContext>
       </div>
     </div>

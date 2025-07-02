@@ -5,6 +5,9 @@ import React from 'react';
 import { Navigate, useRoutes } from 'react-router';
 import { SidebarLayout } from './layout/sidebar.tsx';
 import { Inbox } from './pages/inbox';
+import { AreaPage } from './pages/area';
+import { ProjectPage } from './pages/project';
+import { FutureProjects } from './pages/futureProjects';
 
 export const App = () => {
   useInputFocused();
@@ -32,6 +35,18 @@ export const App = () => {
         {
           path: 'completed',
           element: <div>Completed</div>,
+        },
+        {
+          path: 'future_projects',
+          element: <FutureProjects />,
+        },
+        {
+          path: 'area/:areaUid',
+          element: <AreaPage />,
+        },
+        {
+          path: 'project/:projectUid',
+          element: <ProjectPage />,
         },
       ],
     },

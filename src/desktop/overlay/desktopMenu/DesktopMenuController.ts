@@ -27,10 +27,25 @@ export interface IMenuSubmenuConfig {
   disabled?: boolean;
 }
 
+export type MenuPlacement =
+  | 'top'
+  | 'bottom'
+  | 'left'
+  | 'right'
+  | 'top-start'
+  | 'top-end'
+  | 'bottom-start'
+  | 'bottom-end'
+  | 'left-start'
+  | 'left-end'
+  | 'right-start'
+  | 'right-end';
+
 export interface DesktopMenuOptions {
   menuConfig: IMenuConfig[];
   x: number;
   y: number;
+  placement?: MenuPlacement;
 }
 
 function validateMenuConfig(config: IMenuConfig[]): IMenuConfig[] {
@@ -77,13 +92,72 @@ export class DesktopMenuController implements IDisposable {
   }
 
   get menuStyle() {
+    const placement = this.initOptions.placement || 'bottom-end';
+    let left: number;
+    let top: number;
+
+    switch (placement) {
+      case 'top':
+        left = this.x - menuWidth / 2;
+        top = this.y - this.menuConfig.length * menuItemHeight;
+        break;
+      case 'bottom':
+        left = this.x - menuWidth / 2;
+        top = this.y;
+        break;
+      case 'left':
+        left = this.x - menuWidth;
+        top = this.y - (this.menuConfig.length * menuItemHeight) / 2;
+        break;
+      case 'right':
+        left = this.x;
+        top = this.y - (this.menuConfig.length * menuItemHeight) / 2;
+        break;
+      case 'top-start':
+        left = this.x;
+        top = this.y - this.menuConfig.length * menuItemHeight;
+        break;
+      case 'top-end':
+        left = this.x - menuWidth;
+        top = this.y - this.menuConfig.length * menuItemHeight;
+        break;
+      case 'bottom-start':
+        left = this.x;
+        top = this.y;
+        break;
+      case 'bottom-end':
+        left = this.x - menuWidth;
+        top = this.y;
+        break;
+      case 'left-start':
+        left = this.x - menuWidth;
+        top = this.y;
+        break;
+      case 'left-end':
+        left = this.x - menuWidth;
+        top = this.y - this.menuConfig.length * menuItemHeight;
+        break;
+      case 'right-start':
+        left = this.x;
+        top = this.y;
+        break;
+      case 'right-end':
+        left = this.x;
+        top = this.y - this.menuConfig.length * menuItemHeight;
+        break;
+      default:
+        left = this.x - menuWidth;
+        top = this.y;
+    }
+
     return {
       width: menuWidth,
-      left: this.x - menuWidth,
-      top: this.y,
+      left,
+      top,
       zIndex: this.zIndex,
     };
   }
+
   get submenuStyle() {
     return {
       left: this.x + menuItemOffset,

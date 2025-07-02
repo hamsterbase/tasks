@@ -1,12 +1,15 @@
 import { TaskList } from '@/components/taskList/taskList';
+import { getArea } from '@/core/state/getAreaState.ts';
+import { getProject } from '@/core/state/getProject.ts';
 import { getTaskInfo } from '@/core/state/getTaskInfo.ts';
 import { useService } from '@/hooks/use-service.ts';
 import { useWatchEvent } from '@/hooks/use-watch-event.ts';
 import { ITodoService } from '@/services/todo/common/todoService.ts';
 import { DragOverlay, useDndContext } from '@dnd-kit/core';
-import classNames from 'classnames';
 import type { TreeID } from 'loro-crdt';
 import React, { useMemo } from 'react';
+import { SidebarAreaItem } from '../sidebar/SidebarAreaItem';
+import { SidebarProjectItem } from '../sidebar/SidebarProjectItem';
 import { SubtaskItem } from '../taskListItem/SubtaskItem';
 import { TaskListItem } from '../taskListItem/TaskListItem';
 
@@ -41,10 +44,14 @@ export const DragOverlayItem: React.FC<DragOverlayItemProps> = ({ isSubtask }) =
       }
       case 'projectHeading':
         return null;
-      case 'area':
-        return null;
-      case 'project':
-        return null;
+      case 'area': {
+        const areaInfo = getArea(modelState, activeId as TreeID);
+        return areaInfo ? <SidebarAreaItem areaInfo={areaInfo} /> : null;
+      }
+      case 'project': {
+        const projectInfo = getProject(modelState, activeId as string);
+        return <SidebarProjectItem projectInfo={projectInfo} />;
+      }
       default:
         return null;
     }
@@ -52,7 +59,7 @@ export const DragOverlayItem: React.FC<DragOverlayItemProps> = ({ isSubtask }) =
 
   return (
     <DragOverlay>
-      <div className={classNames('inset-shadow-sm shadow-sm bg-bg1')}>{overlayContent}</div>
+      <div>{overlayContent}</div>
     </DragOverlay>
   );
 };

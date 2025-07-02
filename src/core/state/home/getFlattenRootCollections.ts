@@ -6,6 +6,7 @@ import { FlattenedItem, flattenedItemsToResult, FlattenedResult } from './flatte
 interface GetFlattenedRootCollectionsConfig {
   currentDate: number;
   colspanAreaList: string[];
+  disableCreate?: boolean;
 }
 
 export function flattenRootCollections(
@@ -60,16 +61,18 @@ export function flattenRootCollections(
       index++;
     });
   });
-  flattenedItems.push({
-    type: 'special',
-    id: DragDropElements.lastPlacement,
-    index,
-  });
-  index++;
-  flattenedItems.push({
-    type: 'special',
-    id: DragDropElements.create,
-    index,
-  });
+  if (!config.disableCreate) {
+    flattenedItems.push({
+      type: 'special',
+      id: DragDropElements.lastPlacement,
+      index,
+    });
+    index++;
+    flattenedItems.push({
+      type: 'special',
+      id: DragDropElements.create,
+      index,
+    });
+  }
   return flattenedItemsToResult<AreaInfoState, ProjectInfoState>(flattenedItems, skipFirstHeader, undefined);
 }
