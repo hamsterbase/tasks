@@ -3,24 +3,24 @@ import { EditableTextArea } from '@/components/edit/EditableTextArea.tsx';
 import { taskNotesInputKey, taskTitleInputKey } from '@/components/edit/inputKeys.ts';
 import { DueIcon, MenuIcon, NoteIcon, ScheduledIcon, TagIcon } from '@/components/icons';
 import { TaskInfo } from '@/core/state/type.ts';
-import { formatDate } from '@/core/time/formatDate';
-import { formatRemainingDays } from '@/core/time/formatRemainingDays';
-import { isPastOrToday } from '@/core/time/isPast';
-import { useDatepicker } from '@/desktop/overlay/datePicker/useDatepicker';
 import { useTaskMenu } from '@/desktop/hooks/useTaskMenu.ts';
 import { localize } from '@/nls';
-import classNames from 'classnames';
 import React from 'react';
+import { ClearSelectionButton } from './ClearSelectionButton';
 import { SubtaskList } from './SubtaskList';
+import { TaskDateField } from './components/TaskDateField';
+import { useDatePickerHandlers } from './hooks/useDatePickerHandlers';
 
 interface TaskDetailViewProps {
   task: TaskInfo;
+  onClearSelection?: () => void;
 }
 
-export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task }) => {
-  const showDatePicker = useDatepicker();
+export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task, onClearSelection }) => {
   const taskItemActions = useTaskItemActions(task);
   const { openTaskMenu } = useTaskMenu(task.id);
+  const { handleStartDateClick, handleDueDateClick, handleClearStartDate, handleClearDueDate } = 
+    useDatePickerHandlers({ task });
 
   const handleTitleSave = (value: string) => {
     taskItemActions.updateTaskTitle(value);
@@ -28,46 +28,6 @@ export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task }) => {
 
   const handleNotesSave = (value: string) => {
     taskItemActions.updateTaskNotes(value);
-  };
-
-  const handleStartDateClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const position = {
-      x: rect.left - 280 - 10, // 280px is the width of datepicker, 10px gap
-      y: rect.top,
-    };
-    showDatePicker(
-      task.startDate,
-      (selectedDate) => {
-        taskItemActions.updateStartDate(selectedDate);
-      },
-      position
-    );
-  };
-
-  const handleDueDateClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const position = {
-      x: rect.left - 280 - 10, // 280px is the width of datepicker, 10px gap
-      y: rect.top,
-    };
-    showDatePicker(
-      task.dueDate,
-      (selectedDate) => {
-        taskItemActions.updateDueDate(selectedDate);
-      },
-      position
-    );
-  };
-
-  const handleClearStartDate = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    taskItemActions.clearStartDate();
-  };
-
-  const handleClearDueDate = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    taskItemActions.clearDueDate();
   };
 
   const handleMenuClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -111,80 +71,22 @@ export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task }) => {
           </div>
 
           <div>
-            <div className="flex items-center justify-between py-2">
-              <div className="flex items-center gap-2 text-t2">
-                <ScheduledIcon className="size-4" />
-                <span className="text-sm">{localize('tasks.start_date', 'Start Date')}</span>
-              </div>
-              <div className="flex items-center gap-1">
-                {task.startDate ? (
-                  <div className="flex items-baseline gap-2">
-                    <button
-                      onClick={handleStartDateClick}
-                      className="text-sm text-t1 hover:bg-bg2 px-2 py-1 rounded transition-colors"
-                    >
-                      {formatDate(task.startDate)}
-                    </button>
-                    <span className="text-xs text-t2">{formatRemainingDays(task.startDate)}</span>
-                  </div>
-                ) : (
-                  <button
-                    onClick={handleStartDateClick}
-                    className="text-sm text-t1 hover:bg-bg2 px-2 py-1 rounded transition-colors"
-                  >
-                    {localize('tasks.set_date', 'Set date')}
-                  </button>
-                )}
-                {task.startDate && (
-                  <button
-                    onClick={handleClearStartDate}
-                    className="text-xs text-t3 hover:text-t1 px-1 transition-colors"
-                    title={localize('tasks.clear_date', 'Clear date')}
-                  >
-                    ✕
-                  </button>
-                )}
-              </div>
-            </div>
+            <TaskDateField
+              label={localize('tasks.start_date', 'Start Date')}
+              icon={<ScheduledIcon className="size-4" />}
+              date={task.startDate}
+              onDateClick={handleStartDateClick}
+              onClearDate={handleClearStartDate}
+            />
 
-            <div className="flex items-center justify-between py-2">
-              <div className="flex items-center gap-2 text-t2">
-                <DueIcon className="size-4" />
-                <span className="text-sm">{localize('tasks.due_date', 'Due Date')}</span>
-              </div>
-              <div className="flex items-center gap-1">
-                {task.dueDate ? (
-                  <div className="flex items-baseline gap-2">
-                    <button
-                      onClick={handleDueDateClick}
-                      className={classNames('text-sm hover:bg-bg2 px-2 py-1 rounded transition-colors', {
-                        'text-stress-red': isPastOrToday(task.dueDate),
-                        'text-t1': !isPastOrToday(task.dueDate),
-                      })}
-                    >
-                      {formatDate(task.dueDate)}
-                    </button>
-                    <span className="text-xs text-t2">{formatRemainingDays(task.dueDate)}</span>
-                  </div>
-                ) : (
-                  <button
-                    onClick={handleDueDateClick}
-                    className="text-sm text-t1 hover:bg-bg2 px-2 py-1 rounded transition-colors"
-                  >
-                    {localize('tasks.set_date', 'Set date')}
-                  </button>
-                )}
-                {task.dueDate && (
-                  <button
-                    onClick={handleClearDueDate}
-                    className="text-xs text-t3 hover:text-t1 px-1 transition-colors"
-                    title={localize('tasks.clear_date', 'Clear date')}
-                  >
-                    ✕
-                  </button>
-                )}
-              </div>
-            </div>
+            <TaskDateField
+              label={localize('tasks.due_date', 'Due Date')}
+              icon={<DueIcon className="size-4" />}
+              date={task.dueDate}
+              onDateClick={handleDueDateClick}
+              onClearDate={handleClearDueDate}
+              isDue={true}
+            />
 
             <div className="flex items-center justify-between py-2 gap-3">
               <div className="flex items-center gap-2 text-t2">
@@ -207,6 +109,8 @@ export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task }) => {
           </div>
         </div>
       </div>
+      
+      {onClearSelection && <ClearSelectionButton onClearSelection={onClearSelection} />}
     </div>
   );
 };

@@ -173,11 +173,17 @@ export class TaskList implements ITaskList {
         previousItem = this._items[0];
       }
     }
+
+    this._selectedIds = this._selectedIds.filter((item) => item !== this.cursorId);
     this._onListOperation.fire({
       type: 'delete_item',
       id: this.cursorId,
       focusItem: previousItem,
     });
-    this._selectedIds = this._selectedIds.filter((item) => item !== this.cursorId);
+  }
+
+  clearSelection(): void {
+    this._selectedIds = [];
+    this._onListStateChange.fire();
   }
 }

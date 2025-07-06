@@ -126,12 +126,16 @@ export const ProjectPage = () => {
       </PageLayout>
     );
   }
-  const { flattenedItemsResult, willDisappearObjectIdSet } = flattenProjectTaskNew(todoService.modelState, project.id, {
-    showCompletedTasks,
-    showFutureTasks,
-    completedAfter,
-    currentDate: getTodayTimestampInUtc(),
-    recentChangedTaskSet: new Set<TreeID>(todoService.keepAliveElements as TreeID[]),
+  const { flattenedItemsResult, willDisappearObjectIdSet } = flattenProjectTaskNew({
+    modelData: todoService.modelState,
+    projectId: project.id,
+    option: {
+      showCompletedTasks,
+      showFutureTasks,
+      completedAfter,
+      currentDate: getTodayTimestampInUtc(),
+      recentChangedTaskSet: new Set<TreeID>(todoService.keepAliveElements as TreeID[]),
+    },
   });
   const { flattenedItems } = flattenedItemsResult;
   const handleDragEnd = (event: DragEndEvent) => {

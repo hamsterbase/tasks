@@ -16,6 +16,10 @@ export const SelectionPanel: React.FC = () => {
   useWatchEvent(listService.onMainListChange);
   useWatchEvent(listService.mainList?.onListStateChange);
 
+  const handleClearSelection = () => {
+    listService.mainList?.clearSelection();
+  };
+
   const selectedItems = listService.mainList?.selectedIds || [];
 
   if (selectedItems.length === 0) {
@@ -23,7 +27,7 @@ export const SelectionPanel: React.FC = () => {
   }
 
   if (selectedItems.length > 1) {
-    return <MultipleSelectionView selectedCount={selectedItems.length} />;
+    return <MultipleSelectionView selectedCount={selectedItems.length} onClearSelection={handleClearSelection} />;
   }
 
   const selectedItemId = selectedItems[0];
@@ -35,7 +39,7 @@ export const SelectionPanel: React.FC = () => {
 
   if (taskObject.type === 'task') {
     const taskInfo = getTaskInfo(todoService.modelState, selectedItemId);
-    return <TaskDetailView task={taskInfo} />;
+    return <TaskDetailView task={taskInfo} onClearSelection={handleClearSelection} />;
   }
 
   return <EmptyPanel />;

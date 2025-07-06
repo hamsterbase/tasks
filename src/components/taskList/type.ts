@@ -68,4 +68,6 @@ export interface ITaskList {
   cursorHasPreviousItem(): boolean;
 
   updateItems(items: TreeID[]): void;
+
+  clearSelection(): void;
 }

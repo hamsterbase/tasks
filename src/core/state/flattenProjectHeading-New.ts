@@ -5,11 +5,17 @@ import { FlattenedItem, flattenedItemsToResult, FlattenedResult } from './home/f
 import { ITaskModelData, ProjectHeadingInfo, TaskInfo } from './type';
 import { FilterOption, isTaskVisible } from '../time/filterProjectAndTask';
 
-export function flattenProjectTaskNew(
-  modelData: ITaskModelData,
-  projectId: TreeID,
-  option?: FilterOption
-): {
+export function flattenProjectTaskNew({
+  modelData,
+  projectId,
+  option,
+  disableCreateTask = false,
+}: {
+  modelData: ITaskModelData;
+  projectId: TreeID;
+  disableCreateTask?: boolean;
+  option?: FilterOption;
+}): {
   flattenedItemsResult: FlattenedResult<ProjectHeadingInfo, TaskInfo>;
   willDisappearObjectIdSet: Set<TreeID>;
 } {
@@ -64,9 +70,11 @@ export function flattenProjectTaskNew(
       index++;
     });
   });
-  flattenedItems.push({ type: 'special', id: DragDropElements.lastPlacement, index });
-  index++;
-  flattenedItems.push({ type: 'special', id: DragDropElements.create, index });
+  if (!disableCreateTask) {
+    flattenedItems.push({ type: 'special', id: DragDropElements.lastPlacement, index });
+    index++;
+    flattenedItems.push({ type: 'special', id: DragDropElements.create, index });
+  }
   return {
     flattenedItemsResult: flattenedItemsToResult(flattenedItems, false, projectId),
     willDisappearObjectIdSet,

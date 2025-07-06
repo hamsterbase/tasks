@@ -1,6 +1,7 @@
 import { TaskList } from '@/components/taskList/taskList';
 import { getArea } from '@/core/state/getAreaState.ts';
 import { getProject } from '@/core/state/getProject.ts';
+import { getProjectHeadingInfo } from '@/core/state/getProjectHeadingInfo.ts';
 import { getTaskInfo } from '@/core/state/getTaskInfo.ts';
 import { useService } from '@/hooks/use-service.ts';
 import { useWatchEvent } from '@/hooks/use-watch-event.ts';
@@ -12,6 +13,7 @@ import { SidebarAreaItem } from '../sidebar/SidebarAreaItem';
 import { SidebarProjectItem } from '../sidebar/SidebarProjectItem';
 import { SubtaskItem } from '../taskListItem/SubtaskItem';
 import { TaskListItem } from '../taskListItem/TaskListItem';
+import { DesktopProjectHeadingItem } from '../todo/ProjectHeadingItem';
 
 export interface DragOverlayItemProps {
   isSubtask?: boolean;
@@ -42,8 +44,10 @@ export const DragOverlayItem: React.FC<DragOverlayItemProps> = ({ isSubtask }) =
           return <TaskListItem task={taskInfo} willDisappear={false} taskList={emptyTaskList} />;
         }
       }
-      case 'projectHeading':
-        return null;
+      case 'projectHeading': {
+        const projectHeadingInfo = getProjectHeadingInfo(modelState, activeId as TreeID);
+        return <DesktopProjectHeadingItem projectHeadingInfo={projectHeadingInfo} />;
+      }
       case 'area': {
         const areaInfo = getArea(modelState, activeId as TreeID);
         return areaInfo ? <SidebarAreaItem areaInfo={areaInfo} /> : null;
