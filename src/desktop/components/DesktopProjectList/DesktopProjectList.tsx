@@ -1,26 +1,23 @@
 import { useDesktopDndSensors } from '@/base/hooks/useDesktopDndSensors';
-import { ProjectInfoState } from '@/core/state/type';
 import { calculateDragPosition } from '@/core/dnd/calculateDragPosition';
+import { ProjectInfoState } from '@/core/state/type';
 import { useService } from '@/hooks/use-service';
-import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService';
 import { DndContext, DragEndEvent } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { TreeID } from 'loro-crdt';
 import React from 'react';
-import { DragOverlayItem } from '../../../components/drag/DragOverlayItem';
-import { EmptyState } from '../../../components/EmptyState';
-import { DesktopProjectListItem } from '../../../components/todo/DesktopProjectListItem';
+import { DragOverlayItem } from '../drag/DragOverlayItem';
+import { EmptyState } from '../EmptyState';
+import { DesktopProjectListItem } from '../todo/DesktopProjectListItem';
 
-interface AreaProjectListProps {
+interface DesktopProjectListProps {
   projects: ProjectInfoState[];
-  emptyStateLabel?: string;
+  emptyStateLabel: string;
+  useDateAssignedMove?: boolean;
 }
 
-export const AreaProjectList: React.FC<AreaProjectListProps> = ({
-  projects,
-  emptyStateLabel = localize('area.noProjects', 'No projects in this area'),
-}) => {
+export const DesktopProjectList: React.FC<DesktopProjectListProps> = ({ projects, emptyStateLabel, useDateAssignedMove = false }) => {
   const todoService = useService(ITodoService);
   const sensors = useDesktopDndSensors();
 
@@ -33,9 +30,13 @@ export const AreaProjectList: React.FC<AreaProjectListProps> = ({
       projects.map((p) => p.id)
     );
     if (position) {
-      todoService.updateProject(active.id as TreeID, {
-        position,
-      });
+      if (useDateAssignedMove) {
+        todoService.moveDateAssignedList(active.id as TreeID, position);
+      } else {
+        todoService.updateProject(active.id as TreeID, {
+          position,
+        });
+      }
     }
   };
 

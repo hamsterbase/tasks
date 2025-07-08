@@ -8,6 +8,9 @@ import { Inbox } from './pages/inbox';
 import { AreaPage } from './pages/area';
 import { ProjectPage } from './pages/project';
 import { FutureProjects } from './pages/futureProjects';
+import { Today } from './pages/today';
+import { Schedule } from './pages/schedule';
+import { Completed } from './pages/completed';
 
 export const App = () => {
   useInputFocused();
@@ -26,15 +29,15 @@ export const App = () => {
         },
         {
           path: 'today',
-          element: <div>Today</div>,
+          element: <Today />,
         },
         {
           path: 'schedule',
-          element: <div>Schedule</div>,
+          element: <Schedule />,
         },
         {
           path: 'completed',
-          element: <div>Completed</div>,
+          element: <Completed />,
         },
         {
           path: 'future_projects',

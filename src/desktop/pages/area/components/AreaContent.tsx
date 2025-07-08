@@ -1,8 +1,8 @@
 import { getAreaDetail } from '@/core/state/getArea';
 import { ProjectInfoState, TaskInfo } from '@/core/state/type';
+import { DesktopProjectList } from '@/desktop/components/DesktopProjectList/DesktopProjectList';
 import { InboxTaskInput } from '@/desktop/components/inboxTaskInput/InboxTaskInput';
 import { CreateTaskEvent } from '@/desktop/components/inboxTaskInput/InboxTaskInputController';
-import { AreaProjectList } from '@/desktop/pages/area/components/AreaProjectList';
 import { useService } from '@/hooks/use-service';
 import { useArea } from '@/hooks/useArea';
 import { localize } from '@/nls';
@@ -38,14 +38,16 @@ export const AreaContent: React.FC<AreaContentProps> = ({ area, projects, tasks,
           <h2 className="text-sm font-medium text-t2 uppercase tracking-wide">
             {localize('area.projects', 'Projects')}
           </h2>
-          <AreaProjectList projects={projects} />
+          <DesktopProjectList
+            projects={projects}
+            emptyStateLabel={localize('area.noProjects', 'No projects in this area')}
+          />
         </div>
 
         <div className="space-y-3">
           <h2 className="text-sm font-medium text-t2 uppercase tracking-wide">{localize('area.tasks', 'Tasks')}</h2>
 
           <InboxTaskInput onCreateTask={handleCreateTask} />
-
           <TaskListSection tasks={tasks} willDisappearObjectIdSet={willDisappearObjectIdSet} areaId={area.id} />
         </div>
       </div>

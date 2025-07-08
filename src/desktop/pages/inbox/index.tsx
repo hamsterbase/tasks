@@ -1,8 +1,8 @@
 import { getTodayTimestampInUtc } from '@/base/common/time';
 import { InboxIcon, TaskDisplaySettingsIcon } from '@/components/icons';
 import { TaskList } from '@/components/taskList/taskList.ts';
-import { getInboxTasks } from '@/core/state/inbox/getInboxTasks';
 import { calculateDragPosition } from '@/core/dnd/calculateDragPosition';
+import { getInboxTasks } from '@/core/state/inbox/getInboxTasks';
 import { DragOverlayItem } from '@/desktop/components/drag/DragOverlayItem';
 import { InboxTaskInput } from '@/desktop/components/inboxTaskInput/InboxTaskInput';
 import { CreateTaskEvent } from '@/desktop/components/inboxTaskInput/InboxTaskInputController';
@@ -64,15 +64,7 @@ export const Inbox = () => {
     if (listService.mainList && listService.mainList.name === 'Inbox') {
       listService.mainList.updateItems(inboxTaskIds);
     } else {
-      listService.setMainList(
-        new TaskList(
-          'Inbox',
-          inboxTaskIds,
-          [],
-          null,
-          null
-        )
-      );
+      listService.setMainList(new TaskList('Inbox', inboxTaskIds, [], null, null));
     }
   }, [listService, inboxTaskIds]);
 
@@ -131,7 +123,7 @@ export const Inbox = () => {
     const position = calculateDragPosition(
       active.id as string,
       over.id as string,
-      inboxTasks.map(task => task.id)
+      inboxTasks.map((task) => task.id)
     );
 
     if (position) {
