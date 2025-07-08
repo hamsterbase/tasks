@@ -104,11 +104,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({ task, willDisappear,
         />
       </button>
 
-      <div
-        className="flex-1 min-w-0"
-        onClick={(e) => e.stopPropagation()}
-        onPointerDown={(e) => e.stopPropagation()}
-      >
+      <div className="flex-1 min-w-0" onClick={(e) => e.stopPropagation()} onPointerDown={(e) => e.stopPropagation()}>
         <EditableInput
           inputKey={taskTitleInputKey(task.id)}
           ref={inputRef}
@@ -130,10 +126,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({ task, willDisappear,
         )}
       </div>
 
-      <div
-        className="flex items-center gap-1.5 flex-shrink-0"
-        onPointerDown={(e) => e.stopPropagation()}
-      >
+      <div className="flex items-center gap-1.5 flex-shrink-0" onPointerDown={(e) => e.stopPropagation()}>
         <TaskItemDueDate dueDate={task.dueDate} />
         <TaskItemIcons tags={task.tags} notes={task.notes} subtasks={task.children} navIcon={false} />
       </div>

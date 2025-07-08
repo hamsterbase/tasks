@@ -13,14 +13,24 @@ interface EditableTextAreaProps {
   onSave: (value: string) => void;
   className?: string;
   autoSize?: { minRows: number };
+  inputId?: string;
 }
 
 export const EditableTextArea = forwardRef<TextAreaRef, EditableTextAreaProps>(
-  ({ inputKey, defaultValue, onChange, onBlur, placeholder, onSave, className, autoSize }, ref) => {
+  ({ inputKey, defaultValue, onChange, onBlur, placeholder, onSave, className, autoSize, inputId }, ref) => {
     const editService = useService(IEditService);
     useWatchEvent(editService.onInputChange, (e) => {
       return e.inputKey === inputKey;
     });
+
+    useWatchEvent(editService.onFocusInput, (e) => {
+      if (inputId && e.inputId === inputId && ref && 'current' in ref && ref.current) {
+        ref.current.focus();
+        ref.current.resizableTextArea?.textArea?.select();
+      }
+      return inputId === e.inputId;
+    });
+
     useEffect(() => {
       editService.setInputValue(inputKey, defaultValue);
     }, [defaultValue, editService, inputKey]);

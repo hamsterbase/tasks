@@ -9,7 +9,7 @@ import { localize } from '@/nls';
 import { IListService } from '@/services/list/common/listService';
 import { ITodoService } from '@/services/todo/common/todoService';
 import type { TreeID } from 'loro-crdt';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ProjectHeader } from './components/ProjectHeader';
 import { ProjectTaskArea } from './components/ProjectTaskArea';
 import { useProjectDragAndDrop } from './hooks/useProjectDragAndDrop';
@@ -49,11 +49,13 @@ const ProjectContent: React.FC<ProjectContentProps> = ({ project, projectId }) =
     .filter((item) => item.type === 'item' || item.type === 'header')
     .map((item) => item.id);
 
-  if (listService.mainList && listService.mainList.name === `Project-${project.id}`) {
-    listService.mainList.updateItems(projectTasks);
-  } else {
-    listService.setMainList(new TaskList(`Project-${project.id}`, projectTasks, [], null, null));
-  }
+  useEffect(() => {
+    if (listService.mainList && listService.mainList.name === `Project-${project.id}`) {
+      listService.mainList.updateItems(projectTasks);
+    } else {
+      listService.setMainList(new TaskList(`Project-${project.id}`, projectTasks, [], null, null));
+    }
+  }, [listService, project.id, projectTasks]);
 
   const { handleDragEnd } = useProjectDragAndDrop({ flattenedItemsResult });
   useProjectEvents();

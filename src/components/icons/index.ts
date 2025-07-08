@@ -6,8 +6,11 @@ import {
   CalendarDays,
   CalendarRange,
   Check,
+  ChevronLeft,
   ChevronRight,
+  Circle,
   CircleCheck,
+  CircleSmall,
   Cloud,
   CloudAlert,
   Database,
@@ -29,8 +32,6 @@ import {
   Target,
   User,
   X,
-  CircleSmall,
-  ChevronLeft,
 } from 'lucide-react';
 
 export const AreaExpandedIcon = ChevronRight;
@@ -69,3 +70,4 @@ export const MoveIcon = SendToBack;
 export const CircleSmallIcon = CircleSmall;
 export const LeftIcon = ChevronLeft;
 export const RightIcon = ChevronRight;
+export const CircleIcon = Circle;

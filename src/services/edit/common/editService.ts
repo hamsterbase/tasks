@@ -6,17 +6,27 @@ export interface IEditEvent {
   value: string | undefined;
 }
 
+export interface IFocusInputEvent {
+  inputId: string;
+}
+
 export interface IEditService {
   getInputValue(inputKey: string, defaultValue: string): string;
   setInputValue(inputKey: string, value: string): void;
   onInputChange: Event<IEditEvent>;
+  onFocusInput: Event<IFocusInputEvent>;
+  focusInput(inputId: string): void;
 }
 
 export class EditService implements IEditService {
   private _onInputChange = new Emitter<IEditEvent>();
   public readonly onInputChange = this._onInputChange.event;
 
+  private _onFocusInput = new Emitter<IFocusInputEvent>();
+  public readonly onFocusInput = this._onFocusInput.event;
+
   private _inputValueMap = new Map<string, string>();
+  
   constructor() {}
 
   getInputValue(inputKey: string, defaultValue: string): string {
@@ -32,6 +42,10 @@ export class EditService implements IEditService {
       this._inputValueMap.set(inputKey, value);
       this._onInputChange.fire({ inputKey, value });
     }
+  }
+
+  focusInput(inputId: string): void {
+    this._onFocusInput.fire({ inputId });
   }
 }
 

@@ -2,6 +2,7 @@ import { getTodayTimestampInUtc } from '@/base/common/time';
 import { InboxIcon, TaskDisplaySettingsIcon } from '@/components/icons';
 import { TaskList } from '@/components/taskList/taskList.ts';
 import { getInboxTasks } from '@/core/state/inbox/getInboxTasks';
+import { calculateDragPosition } from '@/core/dnd/calculateDragPosition';
 import { DragOverlayItem } from '@/desktop/components/drag/DragOverlayItem';
 import { InboxTaskInput } from '@/desktop/components/inboxTaskInput/InboxTaskInput';
 import { CreateTaskEvent } from '@/desktop/components/inboxTaskInput/InboxTaskInputController';
@@ -25,7 +26,7 @@ import {
 } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import type { TreeID } from 'loro-crdt';
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { flushSync } from 'react-dom';
 
 export const Inbox = () => {
@@ -57,19 +58,23 @@ export const Inbox = () => {
     keepAliveElements: todoService.keepAliveElements,
   });
 
-  if (listService.mainList && listService.mainList.name === 'Inbox') {
-    listService.mainList.updateItems(inboxTasks.map((task) => task.id));
-  } else {
-    listService.setMainList(
-      new TaskList(
-        'Inbox',
-        inboxTasks.map((task) => task.id),
-        [],
-        null,
-        null
-      )
-    );
-  }
+  const inboxTaskIds = inboxTasks.map((task) => task.id);
+
+  useEffect(() => {
+    if (listService.mainList && listService.mainList.name === 'Inbox') {
+      listService.mainList.updateItems(inboxTaskIds);
+    } else {
+      listService.setMainList(
+        new TaskList(
+          'Inbox',
+          inboxTaskIds,
+          [],
+          null,
+          null
+        )
+      );
+    }
+  }, [listService, inboxTaskIds]);
 
   const setFocus = useCallback(() => {
     listService.mainList?.setFocus(true);
@@ -121,29 +126,18 @@ export const Inbox = () => {
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
 
-    if (active.id !== over?.id) {
-      const oldIndex = inboxTasks.findIndex((task) => task.id === active.id);
-      const newIndex = inboxTasks.findIndex((task) => task.id === over?.id);
+    if (!over) return;
 
-      if (oldIndex !== -1 && newIndex !== -1) {
-        const targetTaskId = inboxTasks[newIndex].id;
-        let position;
-        if (newIndex > oldIndex) {
-          position = {
-            type: 'afterElement' as const,
-            previousElementId: targetTaskId,
-          };
-        } else {
-          position = {
-            type: 'beforeElement' as const,
-            nextElementId: targetTaskId,
-          };
-        }
+    const position = calculateDragPosition(
+      active.id as string,
+      over.id as string,
+      inboxTasks.map(task => task.id)
+    );
 
-        todoService.updateTask(active.id as TreeID, {
-          position,
-        });
-      }
+    if (position) {
+      todoService.updateTask(active.id as TreeID, {
+        position,
+      });
     }
   };
 
