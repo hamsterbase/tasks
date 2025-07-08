@@ -50,7 +50,7 @@ export const SidebarProjectItem: React.FC<SidebarProjectItemProps> = ({ projectI
               isActive={isActive}
             />
           </div>
-          <span className={classNames({'text-t3': !projectInfo.title})}>{projectInfo.title || localize('project.untitled', 'New Project')}</span>
+          <span className={classNames('truncate flex-1 min-w-0', {'text-t3': !projectInfo.title})}>{projectInfo.title || localize('project.untitled', 'New Project')}</span>
         </div>
       </Link>
     </div>
