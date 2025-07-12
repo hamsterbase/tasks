@@ -1,5 +1,5 @@
 import { getTodayTimestampInUtc } from '@/base/common/time';
-import { PlusIcon } from '@/components/icons';
+import { PlusIcon, SettingsIcon } from '@/components/icons';
 import { FlattenedResult } from '@/core/state/home/flattenedItemsToResult';
 import { flattenRootCollections } from '@/core/state/home/getFlattenRootCollections';
 import { getRootCollectionsState } from '@/core/state/home/getRootCollectionsState';
@@ -19,6 +19,7 @@ import { DndContext, DragEndEvent, useDndContext } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import classNames from 'classnames';
 import React from 'react';
+import { Link } from 'react-router';
 import { IInstantiationService } from 'vscf/platform/instantiation/common';
 import { desktopStyles } from '../../theme/main';
 import { DragOverlayItem } from '../drag/DragOverlayItem';
@@ -150,14 +151,20 @@ export const SidebarContent: React.FC = () => {
             <DragOverlayItem />
           </DndContext>
         </div>
-        <div>
+        <div className="flex gap-2">
           <button
             onClick={handleCreateMenu}
-            className="w-full flex items-center gap-2 px-3 py-2 text-sm text-t2 hover:bg-bg2 rounded-md transition-colors"
+            className="flex-1 flex items-center gap-2 px-3 py-2 text-sm text-t2 hover:bg-bg2 rounded-md transition-colors"
           >
             <PlusIcon className="size-4" />
             <span>{localize('sidebar.create_menu', 'Create New')}</span>
           </button>
+          <Link
+            to="/desktop/settings"
+            className="flex items-center justify-center px-3 py-2 text-sm text-t2 hover:bg-bg2 rounded-md transition-colors"
+          >
+            <SettingsIcon className="size-4" />
+          </Link>
         </div>
       </div>
     </div>

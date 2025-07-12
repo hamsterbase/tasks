@@ -141,7 +141,9 @@ export const LoginPage: React.FC = () => {
           onClick={handleSubmit}
           disabled={!account || !password || (mode === LoginMode.Register && (!confirmPassword || !agreedToTerms))}
         >
-          {mode === LoginMode.Register ? localize('register.submit', 'Register') : localize('login.submit', 'Sign In')}
+          {mode === LoginMode.Register
+            ? localize('register.submit.label', 'Register')
+            : localize('login.submit', 'Sign In')}
         </button>
       </div>
     </PageLayout>

@@ -11,45 +11,87 @@ import { FutureProjects } from './pages/futureProjects';
 import { Today } from './pages/today';
 import { Schedule } from './pages/schedule';
 import { Completed } from './pages/completed';
+import { SettingsLayout } from './pages/settings/SettingsLayout';
+import { AppearanceSettings } from './pages/settings/AppearanceSettings';
+import { SyncSettings } from './pages/settings/SyncSettings';
+import { AccountSettings } from './pages/settings/AccountSettings';
+import { ImportExportSettings } from './pages/settings/ImportExportSettings';
 
 export const App = () => {
   useInputFocused();
   const element = useRoutes([
     {
       path: '/desktop',
-      element: <SidebarLayout></SidebarLayout>,
       children: [
         {
-          index: true,
-          element: <Navigate to="inbox" replace />,
+          path: '',
+          element: <SidebarLayout />,
+          children: [
+            {
+              index: true,
+              element: <Navigate to="inbox" replace />,
+            },
+            {
+              path: 'inbox',
+              element: <Inbox />,
+            },
+            {
+              path: 'today',
+              element: <Today />,
+            },
+            {
+              path: 'schedule',
+              element: <Schedule />,
+            },
+            {
+              path: 'completed',
+              element: <Completed />,
+            },
+            {
+              path: 'future_projects',
+              element: <FutureProjects />,
+            },
+            {
+              path: 'area/:areaUid',
+              element: <AreaPage />,
+            },
+            {
+              path: 'project/:projectUid',
+              element: <ProjectPage />,
+            },
+          ],
         },
         {
-          path: 'inbox',
-          element: <Inbox />,
-        },
-        {
-          path: 'today',
-          element: <Today />,
-        },
-        {
-          path: 'schedule',
-          element: <Schedule />,
-        },
-        {
-          path: 'completed',
-          element: <Completed />,
-        },
-        {
-          path: 'future_projects',
-          element: <FutureProjects />,
-        },
-        {
-          path: 'area/:areaUid',
-          element: <AreaPage />,
-        },
-        {
-          path: 'project/:projectUid',
-          element: <ProjectPage />,
+          path: 'settings',
+          element: <SidebarLayout hideSelectionPanel />,
+          children: [
+            {
+              path: '',
+              element: <SettingsLayout />,
+              children: [
+                {
+                  index: true,
+                  element: <Navigate to="appearance" replace />,
+                },
+                {
+                  path: 'appearance',
+                  element: <AppearanceSettings />,
+                },
+                {
+                  path: 'sync',
+                  element: <SyncSettings />,
+                },
+                {
+                  path: 'account',
+                  element: <AccountSettings />,
+                },
+                {
+                  path: 'import-export',
+                  element: <ImportExportSettings />,
+                },
+              ],
+            },
+          ],
         },
       ],
     },

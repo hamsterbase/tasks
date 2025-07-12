@@ -4,8 +4,11 @@ import { Allotment } from 'allotment';
 import React from 'react';
 import { Outlet } from 'react-router';
 
-export const SidebarLayout = () => {
+interface SidebarLayoutProps {
+  hideSelectionPanel?: boolean;
+}
 
+export const SidebarLayout = ({ hideSelectionPanel = false }: SidebarLayoutProps) => {
   return (
     <div className="h-screen w-screen relative">
       <Allotment>
@@ -17,9 +20,11 @@ export const SidebarLayout = () => {
             <Allotment.Pane>
               <Outlet />
             </Allotment.Pane>
-            <Allotment.Pane minSize={200} maxSize={350}>
-              <SelectionPanel />
-            </Allotment.Pane>
+            {!hideSelectionPanel && (
+              <Allotment.Pane minSize={200} maxSize={350}>
+                <SelectionPanel />
+              </Allotment.Pane>
+            )}
           </Allotment>
         </Allotment.Pane>
       </Allotment>
