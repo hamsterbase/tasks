@@ -17,6 +17,14 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin }) =
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
+  const handleOpenPrivacy = () => {
+    window.open('/desktop/privacy', '_blank', 'width=800,height=600');
+  };
+
+  const handleOpenEULA = () => {
+    window.open('/desktop/eula', '_blank', 'width=800,height=600');
+  };
+
   const handleSubmit = async () => {
     setErrorMessage('');
 
@@ -86,11 +94,13 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin }) =
         />
         <div className="text-sm text-t2">
           {localize('register.agree', 'I agree to')}
-          <span className="text-accent mx-1 cursor-pointer hover:underline">{localize('register.eula', 'EULA')}</span>
+          <button onClick={handleOpenEULA} className="text-accent mx-1 hover:underline">
+            {localize('register.eula', 'EULA')}
+          </button>
           {localize('register.and', 'and')}
-          <span className="text-accent mx-1 cursor-pointer hover:underline">
+          <button onClick={handleOpenPrivacy} className="text-accent mx-1 hover:underline">
             {localize('register.privacyPolicy', 'Privacy Policy')}
-          </span>
+          </button>
         </div>
       </div>
 

@@ -16,6 +16,8 @@ import { AppearanceSettings } from './pages/settings/AppearanceSettings';
 import { SyncSettings } from './pages/settings/SyncSettings';
 import { AccountSettings } from './pages/settings/AccountSettings';
 import { ImportExportSettings } from './pages/settings/ImportExportSettings';
+import { Privacy } from './pages/Privacy';
+import { EULA } from './pages/EULA';
 
 export const App = () => {
   useInputFocused();
@@ -92,6 +94,14 @@ export const App = () => {
               ],
             },
           ],
+        },
+        {
+          path: 'privacy',
+          element: <Privacy />,
+        },
+        {
+          path: 'eula',
+          element: <EULA />,
         },
       ],
     },
