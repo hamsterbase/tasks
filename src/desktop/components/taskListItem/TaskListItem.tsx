@@ -19,9 +19,15 @@ export interface TaskListItemProps {
   task: TaskInfo;
   willDisappear: boolean;
   taskList: ITaskList;
+  hideProjectTitle?: boolean;
 }
 
-export const TaskListItem: React.FC<TaskListItemProps> = ({ task, willDisappear, taskList }) => {
+export const TaskListItem: React.FC<TaskListItemProps> = ({
+  task,
+  willDisappear,
+  taskList,
+  hideProjectTitle = false,
+}) => {
   const isCompleted = task.status === 'completed';
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -119,7 +125,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({ task, willDisappear,
           className={'text-sm font-medium w-full bg-transparent border-none outline-none text-ellipsis text-t1'}
           placeholder={localize('tasks.untitled', 'New Task')}
         />
-        {task.projectTitle && (
+        {task.projectTitle && !hideProjectTitle && (
           <p className={'text-xs mt-0.5 overflow-hidden text-ellipsis whitespace-nowrap text-t3 opacity-50'}>
             {task.projectTitle}
           </p>

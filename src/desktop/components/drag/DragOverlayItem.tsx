@@ -15,11 +15,16 @@ import { SubtaskItem } from '../taskListItem/SubtaskItem';
 import { TaskListItem } from '../taskListItem/TaskListItem';
 import { DesktopProjectHeadingItem } from '../todo/ProjectHeadingItem';
 
-export interface DragOverlayItemProps {
-  isSubtask?: boolean;
+interface TaskProps {
+  hideProjectTitle: boolean;
 }
 
-export const DragOverlayItem: React.FC<DragOverlayItemProps> = ({ isSubtask }) => {
+export interface DragOverlayItemProps {
+  isSubtask?: boolean;
+  taskProps?: TaskProps;
+}
+
+export const DragOverlayItem: React.FC<DragOverlayItemProps> = ({ isSubtask, taskProps }) => {
   const { active } = useDndContext();
   const activeId = active?.id;
   const todoService = useService(ITodoService);
@@ -41,7 +46,14 @@ export const DragOverlayItem: React.FC<DragOverlayItemProps> = ({ isSubtask }) =
           return <SubtaskItem subtask={taskInfo} subList={emptyTaskList} />;
         } else {
           const taskInfo = getTaskInfo(modelState, activeId as TreeID);
-          return <TaskListItem task={taskInfo} willDisappear={false} taskList={emptyTaskList} />;
+          return (
+            <TaskListItem
+              task={taskInfo}
+              willDisappear={false}
+              taskList={emptyTaskList}
+              hideProjectTitle={taskProps?.hideProjectTitle}
+            />
+          );
         }
       }
       case 'projectHeading': {
@@ -59,7 +71,7 @@ export const DragOverlayItem: React.FC<DragOverlayItemProps> = ({ isSubtask }) =
       default:
         return null;
     }
-  }, [activeId, modelState, isSubtask]);
+  }, [activeId, modelState, isSubtask, taskProps]);
 
   return (
     <DragOverlay>

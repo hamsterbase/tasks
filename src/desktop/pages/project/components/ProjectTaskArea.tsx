@@ -46,6 +46,7 @@ const ProjectTaskList: React.FC<ProjectTaskListProps> = ({ items, result, willDi
           return (
             <TaskListItem
               key={item.id}
+              hideProjectTitle={true}
               task={item.content}
               willDisappear={willDisappearObjectIdSet.has(item.id)}
               taskList={taskList}
@@ -116,7 +117,7 @@ export const ProjectTaskArea: React.FC<ProjectTaskAreaProps> = ({
               taskList={taskList}
             />
           </SortableContext>
-          <DragOverlayItem />
+          <DragOverlayItem taskProps={{ hideProjectTitle: true }} />
         </DndContext>
       </div>
     </div>
