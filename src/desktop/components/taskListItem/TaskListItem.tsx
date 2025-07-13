@@ -5,6 +5,7 @@ import { ITaskList } from '@/components/taskList/type.ts';
 import { TaskInfo } from '@/core/state/type';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { useRegisterEvent } from '@/hooks/useRegisterEvent.ts';
+import { useLongPress } from '@/hooks/useLongPress.ts';
 import { localize } from '@/nls';
 import classNames from 'classnames';
 import React, { useRef } from 'react';
@@ -48,6 +49,10 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
 
   const taskItemActions = useTaskItemActions(task);
 
+  const longPress = useLongPress(() => {
+    taskItemActions.cancelTask();
+  });
+
   const handleInputSelect = (e: React.SyntheticEvent<HTMLInputElement>) => {
     const target = e.currentTarget;
     if (!target) {
@@ -79,6 +84,14 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
         'hover:bg-bg2': !isDragging,
       })}
       onClickCapture={(e) => {
+        let element = e.target as HTMLElement;
+        while (element && element !== e.currentTarget) {
+          if (element.getAttribute('data-testid') === 'task-item-status-box') {
+            return;
+          }
+          element = element.parentElement as HTMLElement;
+        }
+        
         const taskId = task.id;
         if (e.metaKey) {
           taskList.select(taskId, {
@@ -94,8 +107,13 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
       }}
     >
       <button
+        {...longPress.longPressEvents}
+        data-testid="task-item-status-box"
         onClick={(e) => {
           e.stopPropagation();
+          if (longPress.isLongPress.current) {
+            return;
+          }
           taskItemActions.toggleTask();
         }}
         onPointerDown={(e) => e.stopPropagation()}

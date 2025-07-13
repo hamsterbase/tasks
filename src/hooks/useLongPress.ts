@@ -2,11 +2,14 @@ import { useRef } from 'react';
 
 export const useLongPress = (callback: () => void, delay: number = 1500) => {
   const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isLongPress = useRef(false);
 
   const handleTouchStart = (e: React.TouchEvent | React.MouseEvent) => {
     e.stopPropagation();
+    isLongPress.current = false;
     if (callback) {
       longPressTimer.current = setTimeout(() => {
+        isLongPress.current = true;
         callback();
       }, delay);
     }
@@ -29,6 +32,7 @@ export const useLongPress = (callback: () => void, delay: number = 1500) => {
   };
 
   return {
+    isLongPress: isLongPress,
     longPressEvents: {
       onTouchStart: handleTouchStart,
       onTouchEnd: handleTouchEnd,

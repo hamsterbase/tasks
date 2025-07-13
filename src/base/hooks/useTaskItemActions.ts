@@ -58,5 +58,12 @@ export const useTaskItemActions = (taskInfo: TaskInfo | null) => {
     todoService.updateTask(taskInfo.id, { dueDate });
   };
 
-  return { toggleTask, updateTaskTitle, updateTaskNotes, clearStartDate, clearDueDate, updateStartDate, updateDueDate };
+  const cancelTask = () => {
+    if (!taskInfo) {
+      return;
+    }
+    todoService.updateTask(taskInfo.id, { status: 'canceled' });
+  };
+
+  return { toggleTask, updateTaskTitle, updateTaskNotes, clearStartDate, clearDueDate, updateStartDate, updateDueDate, cancelTask };
 };
