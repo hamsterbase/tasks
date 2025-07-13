@@ -82,7 +82,6 @@ export class ListService implements IListService {
     this._onSubListChange.fire();
 
     list.onListStateChange(() => {
-      console.log('onListStateChange', list.isFocused);
       this._subListFocusContext.set(list.isFocused);
       this._subListCursorHasNextItemContext.set(list.cursorHasNextItem());
       this._subListCursorHasPreviousItemContext.set(list.cursorHasPreviousItem());
