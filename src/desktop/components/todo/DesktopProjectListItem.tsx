@@ -1,5 +1,6 @@
 import { ProjectInfoState } from '@/core/state/type';
 import { ProjectStatusIcon } from '@/desktop/components/sidebar/ProjectStatusIcon';
+import { TaskItemCompletionAt } from '@/desktop/components/taskListItem/TaskItemCompletionAt';
 import { localize } from '@/nls';
 import React from 'react';
 import { Link } from 'react-router';
@@ -31,6 +32,7 @@ export const DesktopProjectListItem: React.FC<DesktopProjectListItemProps> = ({ 
           <div className="flex-shrink-0">
             <ProjectStatusIcon progress={progress} status={project.status} />
           </div>
+          <TaskItemCompletionAt completionAt={project.completionAt} status={project.status} />
           <div className="flex-1 min-w-0">
             <h3 className="text-base font-medium text-t1 truncate">
               {project.title || localize('project.untitled', 'New Project')}

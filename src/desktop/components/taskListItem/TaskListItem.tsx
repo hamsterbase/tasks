@@ -9,6 +9,7 @@ import { useLongPress } from '@/hooks/useLongPress.ts';
 import { localize } from '@/nls';
 import classNames from 'classnames';
 import React, { useRef } from 'react';
+import { TaskItemCompletionAt } from './TaskItemCompletionAt';
 import { TaskItemDueDate } from './TaskItemDueDate';
 import { TaskItemIcons } from './TaskItemIcons';
 import { TaskStatusBox } from './TaskStatusBox';
@@ -127,6 +128,8 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
           })}
         />
       </button>
+
+      <TaskItemCompletionAt completionAt={task.completionAt} status={task.status} />
 
       <div className="flex-1 min-w-0" onClick={(e) => e.stopPropagation()} onPointerDown={(e) => e.stopPropagation()}>
         <EditableInput
