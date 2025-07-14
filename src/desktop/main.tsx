@@ -27,6 +27,8 @@ import { IContextKeyService } from 'vscf/platform/contextkey/common';
 import { InstantiationService, ServiceCollection, SyncDescriptor } from 'vscf/platform/instantiation/common';
 import { IKeybindingService } from 'vscf/platform/keybinding/common';
 import { App } from './app';
+import { IWebLoggerService } from '@/services/weblogger/common/webloggerService';
+import { WorkbenchWebLoggerService } from '@/services/weblogger/browser/workbenchWebLoggerService';
 
 export async function startDesktop() {
   initializeTheme();
@@ -46,6 +48,7 @@ export async function startDesktop() {
   serviceCollection.set(IListService, new SyncDescriptor(ListService));
   serviceCollection.set(IEditService, new SyncDescriptor(EditService));
   serviceCollection.set(IWorkbenchInstanceService, new SyncDescriptor(WorkbenchInstanceService));
+  serviceCollection.set(IWebLoggerService, new SyncDescriptor(WorkbenchWebLoggerService));
   const instantiationService = new InstantiationService(serviceCollection, true);
   await instantiationService.invokeFunction(async (dss) => {
     await dss.get(IConfigService).init();

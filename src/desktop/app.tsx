@@ -19,6 +19,7 @@ import { AccountSettings } from './pages/settings/AccountSettings';
 import { ImportExportSettings } from './pages/settings/ImportExportSettings';
 import { Privacy } from './pages/Privacy';
 import { EULA } from './pages/EULA';
+import { Logs } from './pages/logger';
 
 export const App = () => {
   useInputFocused();
@@ -103,6 +104,10 @@ export const App = () => {
         {
           path: 'eula',
           element: <EULA />,
+        },
+        {
+          path: 'logs',
+          element: <Logs />,
         },
       ],
     },

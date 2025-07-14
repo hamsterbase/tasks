@@ -11,6 +11,7 @@ import { Emitter, Event } from 'vscf/base/common/event';
 import { IDisposable } from 'vscf/base/common/lifecycle';
 import { createDecorator } from 'vscf/platform/instantiation/common';
 import { syncDatabaseLogic } from './syncLogic';
+import { IWebLoggerService } from '@/services/weblogger/common/webloggerService';
 
 export type NotLoginConfig = {
   type: 'not_login';
@@ -157,7 +158,8 @@ export class CloudService implements ICloudService {
   constructor(
     @ITodoService private readonly todoService: ITodoService,
     @IDatabaseService private readonly databaseService: IDatabaseService,
-    @IConfigService private readonly configService: IConfigService
+    @IConfigService private readonly configService: IConfigService,
+    @IWebLoggerService private readonly webLoggerService: IWebLoggerService
   ) {
     this.config = localStorage.getItem('account')
       ? JSON.parse(localStorage.getItem('account')!)
@@ -173,6 +175,7 @@ export class CloudService implements ICloudService {
       this.needSync = true;
     });
     this.setInterval();
+    this.webLoggerService.log(`CloudService constructor, accountType: ${this.config.type}`);
   }
 
   async checkAndInsertPurchaseHistory() {

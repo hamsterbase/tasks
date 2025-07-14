@@ -22,6 +22,8 @@ import { App } from './App.tsx';
 import '../styles/main.css';
 import { Directory } from '@capacitor/filesystem';
 import { ISwitchService, SwitchService } from '@/services/switchService/common/switchService.ts';
+import { IWebLoggerService } from '@/services/weblogger/common/webloggerService.ts';
+import { WorkbenchWebLoggerService } from '@/services/weblogger/browser/workbenchWebLoggerService.ts';
 
 export const startMobile = async () => {
   initializeTheme();
@@ -33,6 +35,7 @@ export const startMobile = async () => {
   serviceCollection.set(IConfigService, new SyncDescriptor(WorkbenchConfig, [new LocalStorageConfigStore()]));
   serviceCollection.set(INavigationService, new SyncDescriptor(NavigationService));
   serviceCollection.set(ICloudService, new SyncDescriptor(CloudService));
+  serviceCollection.set(IWebLoggerService, new SyncDescriptor(WorkbenchWebLoggerService));
   if (checkPlatform().isNative) {
     serviceCollection.set(IDatabaseService, new SyncDescriptor(FsDatabaseService, [Directory.Data]));
   } else {
