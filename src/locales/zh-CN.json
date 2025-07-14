@@ -56,6 +56,10 @@
     "defaultMessage": "Error",
     "content": "错误"
   },
+  "account.eula": {
+    "defaultMessage": "EULA",
+    "content": "最终用户许可协议"
+  },
   "account.expiry": {
     "defaultMessage": "Pro Expires",
     "content": "会员到期时间"
@@ -80,6 +84,10 @@
     "defaultMessage": "Logout",
     "content": "登出"
   },
+  "account.privacy": {
+    "defaultMessage": "Privacy Policy",
+    "content": "隐私政策"
+  },
   "account.pro.title": {
     "defaultMessage": "Subscribe 1 Year Cloud Pro",
     "content": "订阅 1 年云会员"
@@ -100,9 +108,17 @@
     "defaultMessage": "Buy VIP",
     "content": "购买VIP"
   },
+  "addTask": {
+    "defaultMessage": "Add task...",
+    "content": "添加任务..."
+  },
   "area.create_project": {
     "defaultMessage": "Add Project",
     "content": "添加项目"
+  },
+  "area.createProject": {
+    "defaultMessage": "Create Project",
+    "content": "创建项目"
   },
   "area.edit_title": {
     "defaultMessage": "Edit Title",
@@ -111,6 +127,22 @@
   "area.new_project": {
     "defaultMessage": "New Project",
     "content": "新项目"
+  },
+  "area.noProjects": {
+    "defaultMessage": "No projects in this area",
+    "content": "此区域没有项目"
+  },
+  "area.projects": {
+    "defaultMessage": "Projects",
+    "content": "项目"
+  },
+  "area.taskDisplaySettings": {
+    "defaultMessage": "Task Display Settings",
+    "content": "任务显示设置"
+  },
+  "area.tasks": {
+    "defaultMessage": "Tasks",
+    "content": "任务"
   },
   "area.title_placeholder": {
     "defaultMessage": "New Area",
@@ -132,6 +164,14 @@
     "defaultMessage": "Close",
     "content": "关闭"
   },
+  "common.exporting": {
+    "defaultMessage": "Exporting...",
+    "content": "导出中..."
+  },
+  "common.importing": {
+    "defaultMessage": "Importing...",
+    "content": "导入中..."
+  },
   "common.loading": {
     "defaultMessage": "Loading...",
     "content": "加载中..."
@@ -139,6 +179,10 @@
   "common.ok": {
     "defaultMessage": "OK",
     "content": "确定"
+  },
+  "common.untitled": {
+    "defaultMessage": "Untitled",
+    "content": "无标题"
   },
   "completed": {
     "defaultMessage": "Completed",
@@ -151,6 +195,10 @@
   "completed_tasks.title": {
     "defaultMessage": "Completed",
     "content": "已完成"
+  },
+  "completed.taskDisplaySettings": {
+    "defaultMessage": "Task Display Settings",
+    "content": "任务显示设置"
   },
   "confirm": {
     "defaultMessage": "Confirm",
@@ -376,6 +424,10 @@
     "defaultMessage": "Future Projects",
     "content": "未来项目"
   },
+  "futureProjects.empty": {
+    "defaultMessage": "No future projects",
+    "content": "没有未来项目"
+  },
   "home.futureProjects": {
     "defaultMessage": "Future Projects",
     "content": "未来项目"
@@ -484,6 +536,18 @@
     "defaultMessage": "Enter your email",
     "content": "输入您的电子邮件"
   },
+  "login.agree": {
+    "defaultMessage": "I agree to",
+    "content": "我同意"
+  },
+  "login.and": {
+    "defaultMessage": "and",
+    "content": "和"
+  },
+  "login.createAccount": {
+    "defaultMessage": "Create one",
+    "content": "创建账户"
+  },
   "login.error.accountExists": {
     "defaultMessage": "Account already exists",
     "content": "账户已存在"
@@ -500,13 +564,33 @@
     "defaultMessage": "You must agree to the terms",
     "content": "您必须同意条款。"
   },
+  "login.eula": {
+    "defaultMessage": "EULA",
+    "content": "最终用户许可协议"
+  },
+  "login.noAccount": {
+    "defaultMessage": "Don't have an account?",
+    "content": "没有账户？"
+  },
   "login.password.placeholder": {
     "defaultMessage": "Enter your password",
     "content": "输入您的密码"
   },
+  "login.privacyPolicy": {
+    "defaultMessage": "Privacy Policy",
+    "content": "隐私政策"
+  },
+  "login.signIn": {
+    "defaultMessage": "Sign In",
+    "content": "登录"
+  },
   "login.submit": {
     "defaultMessage": "Sign In",
     "content": "登录"
+  },
+  "login.subtitle": {
+    "defaultMessage": "Welcome back! Please sign in to your account.",
+    "content": "欢迎回来！请登录您的账户。"
   },
   "login.tab.register": {
     "defaultMessage": "Register",
@@ -576,6 +660,10 @@
     "defaultMessage": "Add Heading",
     "content": "添加标题"
   },
+  "project.addHeading": {
+    "defaultMessage": "Add Heading",
+    "content": "添加标题"
+  },
   "project.delete": {
     "defaultMessage": "Delete",
     "content": "删除"
@@ -628,6 +716,10 @@
     "defaultMessage": "Project not found",
     "content": "项目未找到"
   },
+  "project.taskDisplaySettings": {
+    "defaultMessage": "Task Display Settings",
+    "content": "任务显示设置"
+  },
   "project.toggle_status_description": {
     "defaultMessage": "There are {0} tasks left, what do you want to do?",
     "content": "还有{0}个任务剩余，您想怎么做？"
@@ -652,17 +744,45 @@
     "defaultMessage": "EULA",
     "content": "最终用户许可协议（EULA）"
   },
+  "register.hasAccount": {
+    "defaultMessage": "Already have an account?",
+    "content": "已有账户？"
+  },
   "register.privacyPolicy": {
     "defaultMessage": "Privacy Policy",
     "content": "隐私政策"
   },
+  "register.signIn": {
+    "defaultMessage": "Sign in",
+    "content": "登录"
+  },
   "register.submit": {
+    "defaultMessage": "Create Account",
+    "content": "创建账户"
+  },
+  "register.submit.label": {
     "defaultMessage": "Register",
     "content": "注册"
+  },
+  "register.subtitle": {
+    "defaultMessage": "Join us today! Create your account to get started.",
+    "content": "立即加入我们！创建您的账户开始使用。"
+  },
+  "register.title": {
+    "defaultMessage": "Create Account",
+    "content": "创建账户"
   },
   "schedule": {
     "defaultMessage": "Schedule",
     "content": "日程安排"
+  },
+  "schedule.empty": {
+    "defaultMessage": "No scheduled tasks",
+    "content": "没有已安排的任务"
+  },
+  "schedule.taskDisplaySettings": {
+    "defaultMessage": "Task Display Settings",
+    "content": "任务显示设置"
   },
   "scheduled.title": {
     "defaultMessage": "Scheduled",
@@ -672,6 +792,14 @@
     "defaultMessage": "Tomorrow",
     "content": "明天"
   },
+  "selection.clear_selection": {
+    "defaultMessage": "Clear Selection",
+    "content": "清除选择"
+  },
+  "settings": {
+    "defaultMessage": "Settings",
+    "content": "设置"
+  },
   "settings.about": {
     "defaultMessage": "About",
     "content": "关于"
@@ -679,6 +807,10 @@
   "settings.account.management": {
     "defaultMessage": "Account Management",
     "content": "账户管理"
+  },
+  "settings.appearance": {
+    "defaultMessage": "Appearance",
+    "content": "外观"
   },
   "settings.cloud": {
     "defaultMessage": "Cloud",
@@ -748,6 +880,10 @@
     "defaultMessage": "Import",
     "content": "导入"
   },
+  "settings.import_export": {
+    "defaultMessage": "Import/Export",
+    "content": "导入/导出"
+  },
   "settings.import.description": {
     "defaultMessage": "Import your tasks from a backup file",
     "content": "从备份文件中导入任务"
@@ -772,6 +908,10 @@
     "defaultMessage": "简体中文",
     "content": "简体中文"
   },
+  "settings.language.description": {
+    "defaultMessage": "Select your preferred language.",
+    "content": "选择您的首选语言。"
+  },
   "settings.language.english": {
     "defaultMessage": "English",
     "content": "English"
@@ -779,6 +919,14 @@
   "settings.local.database": {
     "defaultMessage": "Local Database",
     "content": "本地数据库"
+  },
+  "settings.sync": {
+    "defaultMessage": "Sync",
+    "content": "同步"
+  },
+  "settings.sync.coming_soon": {
+    "defaultMessage": "Sync functionality coming soon.",
+    "content": "同步功能即将推出。"
   },
   "settings.theme": {
     "defaultMessage": "Theme",
@@ -792,6 +940,10 @@
     "defaultMessage": "Dark",
     "content": "深色主题"
   },
+  "settings.theme.description": {
+    "defaultMessage": "Select your preferred theme.",
+    "content": "选择您的首选主题。"
+  },
   "settings.theme.eink": {
     "defaultMessage": "E-Ink",
     "content": "E-Ink 主题"
@@ -803,6 +955,10 @@
   "settings.title": {
     "defaultMessage": "Settings",
     "content": "设置"
+  },
+  "sidebar.create_menu": {
+    "defaultMessage": "Create New",
+    "content": "新建"
   },
   "subtask.placeholder": {
     "defaultMessage": "Add subtask...",
@@ -847,6 +1003,10 @@
   "tasks.clear_date": {
     "defaultMessage": "Clear date",
     "content": "清除日期"
+  },
+  "tasks.click_to_create_subtask": {
+    "defaultMessage": "Click to create subtask",
+    "content": "点击创建子任务"
   },
   "tasks.daysAgo": {
     "defaultMessage": "{0}d ago",
@@ -919,5 +1079,21 @@
   "today": {
     "defaultMessage": "Today",
     "content": "今天"
+  },
+  "today.noProjects": {
+    "defaultMessage": "No projects for today",
+    "content": "今天没有项目"
+  },
+  "today.projects": {
+    "defaultMessage": "Projects",
+    "content": "项目"
+  },
+  "today.taskDisplaySettings": {
+    "defaultMessage": "Task Display Settings",
+    "content": "任务显示设置"
+  },
+  "today.tasks": {
+    "defaultMessage": "Tasks",
+    "content": "任务"
   }
 }

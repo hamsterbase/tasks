@@ -1,25 +1,26 @@
 import { DatePickerOverlay } from '@/desktop/overlay/datePicker/DatePickerOverlay';
-import { DesktopMenu } from '@/desktop/overlay/desktopMenu/DesktopMenu.tsx';
 import { DesktopDialog } from '@/desktop/overlay/desktopDialog/DesktopDialog';
+import { DesktopMenu } from '@/desktop/overlay/desktopMenu/DesktopMenu.tsx';
+import { DesktopMessage } from '@/desktop/overlay/desktopMessage/DesktopMessage';
 import { useInputFocused } from '@/hooks/global/useInputFocused';
 import React from 'react';
 import { Navigate, useRoutes } from 'react-router';
 import { SidebarLayout } from './layout/sidebar.tsx';
-import { Inbox } from './pages/inbox';
 import { AreaPage } from './pages/area';
-import { ProjectPage } from './pages/project';
-import { FutureProjects } from './pages/futureProjects';
-import { Today } from './pages/today';
-import { Schedule } from './pages/schedule';
 import { Completed } from './pages/completed';
-import { SettingsLayout } from './pages/settings/SettingsLayout';
-import { AppearanceSettings } from './pages/settings/AppearanceSettings';
-import { SyncSettings } from './pages/settings/SyncSettings';
-import { AccountSettings } from './pages/settings/AccountSettings';
-import { ImportExportSettings } from './pages/settings/ImportExportSettings';
-import { Privacy } from './pages/Privacy';
 import { EULA } from './pages/EULA';
+import { FutureProjects } from './pages/futureProjects';
+import { Inbox } from './pages/inbox';
 import { Logs } from './pages/logger';
+import { Privacy } from './pages/Privacy';
+import { ProjectPage } from './pages/project';
+import { Schedule } from './pages/schedule';
+import { AccountSettings } from './pages/settings/AccountSettings';
+import { AppearanceSettings } from './pages/settings/AppearanceSettings';
+import { ImportExportSettings } from './pages/settings/ImportExportSettings';
+import { SettingsLayout } from './pages/settings/SettingsLayout';
+import { SyncSettings } from './pages/settings/SyncSettings';
+import { Today } from './pages/today/index.tsx';
 
 export const App = () => {
   useInputFocused();
@@ -119,6 +120,7 @@ export const App = () => {
       <DesktopMenu />
       <DatePickerOverlay />
       <DesktopDialog />
+      <DesktopMessage />
     </div>
   );
 };

@@ -56,6 +56,10 @@
     "defaultMessage": "Error",
     "content": "Error"
   },
+  "account.eula": {
+    "defaultMessage": "EULA",
+    "content": "EULA"
+  },
   "account.expiry": {
     "defaultMessage": "Pro Expires",
     "content": "Pro Expires"
@@ -80,6 +84,10 @@
     "defaultMessage": "Logout",
     "content": "Logout"
   },
+  "account.privacy": {
+    "defaultMessage": "Privacy Policy",
+    "content": "Privacy Policy"
+  },
   "account.pro.title": {
     "defaultMessage": "Subscribe 1 Year Cloud Pro",
     "content": "Subscribe 1 Year Cloud Pro"
@@ -100,9 +108,17 @@
     "defaultMessage": "Buy VIP",
     "content": "Buy VIP"
   },
+  "addTask": {
+    "defaultMessage": "Add task...",
+    "content": "Add task..."
+  },
   "area.create_project": {
     "defaultMessage": "Add Project",
     "content": "Add Project"
+  },
+  "area.createProject": {
+    "defaultMessage": "Create Project",
+    "content": "Create Project"
   },
   "area.edit_title": {
     "defaultMessage": "Edit Title",
@@ -111,6 +127,22 @@
   "area.new_project": {
     "defaultMessage": "New Project",
     "content": "New Project"
+  },
+  "area.noProjects": {
+    "defaultMessage": "No projects in this area",
+    "content": "No projects in this area"
+  },
+  "area.projects": {
+    "defaultMessage": "Projects",
+    "content": "Projects"
+  },
+  "area.taskDisplaySettings": {
+    "defaultMessage": "Task Display Settings",
+    "content": "Task Display Settings"
+  },
+  "area.tasks": {
+    "defaultMessage": "Tasks",
+    "content": "Tasks"
   },
   "area.title_placeholder": {
     "defaultMessage": "New Area",
@@ -132,6 +164,14 @@
     "defaultMessage": "Close",
     "content": "Close"
   },
+  "common.exporting": {
+    "defaultMessage": "Exporting...",
+    "content": "Exporting..."
+  },
+  "common.importing": {
+    "defaultMessage": "Importing...",
+    "content": "Importing..."
+  },
   "common.loading": {
     "defaultMessage": "Loading...",
     "content": "Loading..."
@@ -139,6 +179,10 @@
   "common.ok": {
     "defaultMessage": "OK",
     "content": "OK"
+  },
+  "common.untitled": {
+    "defaultMessage": "Untitled",
+    "content": "Untitled"
   },
   "completed": {
     "defaultMessage": "Completed",
@@ -151,6 +195,10 @@
   "completed_tasks.title": {
     "defaultMessage": "Completed",
     "content": "Completed"
+  },
+  "completed.taskDisplaySettings": {
+    "defaultMessage": "Task Display Settings",
+    "content": "Task Display Settings"
   },
   "confirm": {
     "defaultMessage": "Confirm",
@@ -376,6 +424,10 @@
     "defaultMessage": "Future Projects",
     "content": "Future Projects"
   },
+  "futureProjects.empty": {
+    "defaultMessage": "No future projects",
+    "content": "No future projects"
+  },
   "home.futureProjects": {
     "defaultMessage": "Future Projects",
     "content": "Future Projects"
@@ -484,6 +536,18 @@
     "defaultMessage": "Enter your email",
     "content": "Enter your email"
   },
+  "login.agree": {
+    "defaultMessage": "I agree to",
+    "content": "I agree to"
+  },
+  "login.and": {
+    "defaultMessage": "and",
+    "content": "and"
+  },
+  "login.createAccount": {
+    "defaultMessage": "Create one",
+    "content": "Create one"
+  },
   "login.error.accountExists": {
     "defaultMessage": "Account already exists",
     "content": "Account already exists"
@@ -500,13 +564,33 @@
     "defaultMessage": "You must agree to the terms",
     "content": "You must agree to the terms"
   },
+  "login.eula": {
+    "defaultMessage": "EULA",
+    "content": "EULA"
+  },
+  "login.noAccount": {
+    "defaultMessage": "Don't have an account?",
+    "content": "Don't have an account?"
+  },
   "login.password.placeholder": {
     "defaultMessage": "Enter your password",
     "content": "Enter your password"
   },
+  "login.privacyPolicy": {
+    "defaultMessage": "Privacy Policy",
+    "content": "Privacy Policy"
+  },
+  "login.signIn": {
+    "defaultMessage": "Sign In",
+    "content": "Sign In"
+  },
   "login.submit": {
     "defaultMessage": "Sign In",
     "content": "Sign In"
+  },
+  "login.subtitle": {
+    "defaultMessage": "Welcome back! Please sign in to your account.",
+    "content": "Welcome back! Please sign in to your account."
   },
   "login.tab.register": {
     "defaultMessage": "Register",
@@ -576,6 +660,10 @@
     "defaultMessage": "Add Heading",
     "content": "Add Heading"
   },
+  "project.addHeading": {
+    "defaultMessage": "Add Heading",
+    "content": "Add Heading"
+  },
   "project.delete": {
     "defaultMessage": "Delete",
     "content": "Delete"
@@ -628,6 +716,10 @@
     "defaultMessage": "Project not found",
     "content": "Project not found"
   },
+  "project.taskDisplaySettings": {
+    "defaultMessage": "Task Display Settings",
+    "content": "Task Display Settings"
+  },
   "project.toggle_status_description": {
     "defaultMessage": "There are {0} tasks left, what do you want to do?",
     "content": "There are {0} tasks left, what do you want to do?"
@@ -652,17 +744,45 @@
     "defaultMessage": "EULA",
     "content": "EULA"
   },
+  "register.hasAccount": {
+    "defaultMessage": "Already have an account?",
+    "content": "Already have an account?"
+  },
   "register.privacyPolicy": {
     "defaultMessage": "Privacy Policy",
     "content": "Privacy Policy"
   },
+  "register.signIn": {
+    "defaultMessage": "Sign in",
+    "content": "Sign in"
+  },
   "register.submit": {
+    "defaultMessage": "Create Account",
+    "content": "Create Account"
+  },
+  "register.submit.label": {
     "defaultMessage": "Register",
     "content": "Register"
+  },
+  "register.subtitle": {
+    "defaultMessage": "Join us today! Create your account to get started.",
+    "content": "Join us today! Create your account to get started."
+  },
+  "register.title": {
+    "defaultMessage": "Create Account",
+    "content": "Create Account"
   },
   "schedule": {
     "defaultMessage": "Schedule",
     "content": "Schedule"
+  },
+  "schedule.empty": {
+    "defaultMessage": "No scheduled tasks",
+    "content": "No scheduled tasks"
+  },
+  "schedule.taskDisplaySettings": {
+    "defaultMessage": "Task Display Settings",
+    "content": "Task Display Settings"
   },
   "scheduled.title": {
     "defaultMessage": "Scheduled",
@@ -672,6 +792,14 @@
     "defaultMessage": "Tomorrow",
     "content": "Tomorrow"
   },
+  "selection.clear_selection": {
+    "defaultMessage": "Clear Selection",
+    "content": "Clear Selection"
+  },
+  "settings": {
+    "defaultMessage": "Settings",
+    "content": "Settings"
+  },
   "settings.about": {
     "defaultMessage": "About",
     "content": "About"
@@ -679,6 +807,10 @@
   "settings.account.management": {
     "defaultMessage": "Account Management",
     "content": "Account Management"
+  },
+  "settings.appearance": {
+    "defaultMessage": "Appearance",
+    "content": "Appearance"
   },
   "settings.cloud": {
     "defaultMessage": "Cloud",
@@ -748,6 +880,10 @@
     "defaultMessage": "Import",
     "content": "Import"
   },
+  "settings.import_export": {
+    "defaultMessage": "Import/Export",
+    "content": "Import/Export"
+  },
   "settings.import.description": {
     "defaultMessage": "Import your tasks from a backup file",
     "content": "Import your tasks from a backup file"
@@ -772,6 +908,10 @@
     "defaultMessage": "简体中文",
     "content": "简体中文"
   },
+  "settings.language.description": {
+    "defaultMessage": "Select your preferred language.",
+    "content": "Select your preferred language."
+  },
   "settings.language.english": {
     "defaultMessage": "English",
     "content": "English"
@@ -779,6 +919,14 @@
   "settings.local.database": {
     "defaultMessage": "Local Database",
     "content": "Local Database"
+  },
+  "settings.sync": {
+    "defaultMessage": "Sync",
+    "content": "Sync"
+  },
+  "settings.sync.coming_soon": {
+    "defaultMessage": "Sync functionality coming soon.",
+    "content": "Sync functionality coming soon."
   },
   "settings.theme": {
     "defaultMessage": "Theme",
@@ -792,6 +940,10 @@
     "defaultMessage": "Dark",
     "content": "Dark"
   },
+  "settings.theme.description": {
+    "defaultMessage": "Select your preferred theme.",
+    "content": "Select your preferred theme."
+  },
   "settings.theme.eink": {
     "defaultMessage": "E-Ink",
     "content": "E-Ink"
@@ -803,6 +955,10 @@
   "settings.title": {
     "defaultMessage": "Settings",
     "content": "Settings"
+  },
+  "sidebar.create_menu": {
+    "defaultMessage": "Create New",
+    "content": "Create New"
   },
   "subtask.placeholder": {
     "defaultMessage": "Add subtask...",
@@ -847,6 +1003,10 @@
   "tasks.clear_date": {
     "defaultMessage": "Clear date",
     "content": "Clear date"
+  },
+  "tasks.click_to_create_subtask": {
+    "defaultMessage": "Click to create subtask",
+    "content": "Click to create subtask"
   },
   "tasks.daysAgo": {
     "defaultMessage": "{0}d ago",
@@ -919,5 +1079,21 @@
   "today": {
     "defaultMessage": "Today",
     "content": "Today"
+  },
+  "today.noProjects": {
+    "defaultMessage": "No projects for today",
+    "content": "No projects for today"
+  },
+  "today.projects": {
+    "defaultMessage": "Projects",
+    "content": "Projects"
+  },
+  "today.taskDisplaySettings": {
+    "defaultMessage": "Task Display Settings",
+    "content": "Task Display Settings"
+  },
+  "today.tasks": {
+    "defaultMessage": "Tasks",
+    "content": "Tasks"
   }
 }

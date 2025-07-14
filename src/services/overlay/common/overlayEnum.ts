@@ -8,4 +8,5 @@ export enum OverlayEnum {
   projectAreaSelector = 'projectAreaSelector',
   desktopMenu = 'desktopMenu',
   desktopDatePicker = 'desktopDatePicker',
+  message = 'message',
 }

@@ -19,6 +19,7 @@ import {
   Heading,
   Home,
   Inbox,
+  Info,
   Layers,
   Logs,
   MoreVerticalIcon,
@@ -32,6 +33,7 @@ import {
   Target,
   User,
   X,
+  AlertCircle,
 } from 'lucide-react';
 
 export const AreaExpandedIcon = ChevronRight;
@@ -71,3 +73,5 @@ export const CircleSmallIcon = CircleSmall;
 export const LeftIcon = ChevronLeft;
 export const RightIcon = ChevronRight;
 export const CircleIcon = Circle;
+export const InfoIcon = Info;
+export const AlertCircleIcon = AlertCircle;
