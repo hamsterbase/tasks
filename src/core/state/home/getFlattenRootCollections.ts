@@ -57,6 +57,9 @@ export function flattenRootCollections(
       if (project.status !== 'created') {
         return;
       }
+      if (project.startDate && project.startDate > currentDate) {
+        return;
+      }
       flattenedItems.push({ type: 'item', content: project, id: project.id, headerId: area.id, index });
       index++;
     });
