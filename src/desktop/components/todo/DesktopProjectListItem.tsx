@@ -1,12 +1,14 @@
+import { ChevronRightIcon } from '@/components/icons';
 import { ProjectInfoState } from '@/core/state/type';
 import { ProjectStatusIcon } from '@/desktop/components/sidebar/ProjectStatusIcon';
 import { TaskItemCompletionAt } from '@/desktop/components/taskListItem/TaskItemCompletionAt';
+import { TaskItemDueDate } from '@/desktop/components/taskListItem/TaskItemDueDate';
+import { TaskItemStartDate } from '@/desktop/components/taskListItem/TaskItemStartDate';
 import { localize } from '@/nls';
-import React from 'react';
-import { Link } from 'react-router';
-import { ChevronRightIcon } from '@/components/icons';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import React from 'react';
+import { Link } from 'react-router';
 
 interface DesktopProjectListItemProps {
   project: ProjectInfoState;
@@ -33,13 +35,17 @@ export const DesktopProjectListItem: React.FC<DesktopProjectListItemProps> = ({ 
             <ProjectStatusIcon progress={progress} status={project.status} />
           </div>
           <TaskItemCompletionAt completionAt={project.completionAt} status={project.status} />
+          <TaskItemStartDate startDate={project.startDate} />
           <div className="flex-1 min-w-0">
             <h3 className="text-base font-medium text-t1 truncate">
               {project.title || localize('project.untitled', 'New Project')}
             </h3>
           </div>
-          <div className="opacity-0 group-hover:opacity-100 transition-opacity">
-            <ChevronRightIcon className="w-4 h-4 text-t3" />
+          <div className="flex items-center gap-1.5 flex-shrink-0">
+            <TaskItemDueDate dueDate={project.dueDate} />
+            <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+              <ChevronRightIcon className="w-4 h-4 text-t3" />
+            </div>
           </div>
         </div>
       </Link>
