@@ -17,9 +17,9 @@ import { ProjectPage } from './pages/project';
 import { Schedule } from './pages/schedule';
 import { AccountSettings } from './pages/settings/AccountSettings';
 import { AppearanceSettings } from './pages/settings/AppearanceSettings';
+import { SyncSettings } from './pages/settings/databases/SyncSettings.tsx';
 import { ImportExportSettings } from './pages/settings/ImportExportSettings';
 import { SettingsLayout } from './pages/settings/SettingsLayout';
-import { SyncSettings } from './pages/settings/SyncSettings';
 import { Today } from './pages/today/index.tsx';
 
 export const App = () => {

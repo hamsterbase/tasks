@@ -51,39 +51,32 @@ interface AccountInfo {
   accountId: string;
 }
 
-export type DeviceDatabaseItem =
-  | {
-      type: 'local';
-      databaseId: 'local';
-      databaseName: string;
-    }
-  | {
-      type: 'cloud';
-      // 数据库所在账户
-      account: string;
-      // 数据库ID
-      databaseId: string;
-      // 数据库名称
-      databaseName: string;
-      // 数据库最后修改时间
-      lastModified: number;
-      // 数据库使用量
-      usage: number;
-      // 数据库盐值
-      database_salt: string;
-      // 数据库是否存在
-      exists: boolean;
-    }
-  | {
-      type: 'offline';
-      reason: AccountOfflineReason;
-      // 数据库所在账户
-      account: string;
-      // 数据库ID
-      databaseId: string;
-      // 数据库名称
-      databaseName: string;
-    };
+export type LocalDatabaseItem = {
+  type: 'local';
+  databaseId: 'local';
+  databaseName: string;
+};
+
+export type CloudDatabaseItem = {
+  type: 'cloud';
+  account: string;
+  databaseId: string;
+  databaseName: string;
+  lastModified: number;
+  usage: number;
+  database_salt: string;
+  exists: boolean;
+};
+
+export type OfflineDatabaseItem = {
+  type: 'offline';
+  reason: AccountOfflineReason;
+  account: string;
+  databaseId: string;
+  databaseName: string;
+};
+
+export type DeviceDatabaseItem = LocalDatabaseItem | CloudDatabaseItem | OfflineDatabaseItem;
 
 export function formatReason(reason: AccountOfflineReason): string {
   switch (reason) {

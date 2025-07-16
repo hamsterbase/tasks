@@ -62,7 +62,7 @@ export const SettingsItem: React.FC<SettingsItemProps> = ({ title, description, 
               }`}
             >
               <div
-                className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform ${
+                className={`absolute top-0.5 left-0.5 w-5 h-5 bg-bg2 rounded-full transition-transform ${
                   action.currentValue ? 'translate-x-5' : 'translate-x-0'
                 }`}
               />
@@ -88,9 +88,7 @@ export const SettingsItem: React.FC<SettingsItemProps> = ({ title, description, 
         <h2 className="text-lg font-medium text-t1 mb-1">{title}</h2>
         {description && <p className="text-sm text-t2">{description}</p>}
       </div>
-      <div className="flex-shrink-0">
-        {renderAction()}
-      </div>
+      <div className="flex-shrink-0">{renderAction()}</div>
     </div>
   );
 };
