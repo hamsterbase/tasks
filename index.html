@@ -6,6 +6,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0" />
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <title>HamsterBase Tasks</title>
+  <style>
+    #root:empty {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f8f9fa;
+    }
+
+    #root:empty::before,
+    #root:empty::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      background: #fff;
+      background-repeat: no-repeat;
+    }
+
+    #root:empty::before {
+      width: 40px;
+      height: 40px;
+      background-image:
+        radial-gradient(circle 10px at 20px 20px, #30cccc 100%, transparent 0),
+        radial-gradient(circle 5px at 20px 0px, #30cccc 100%, transparent 0),
+        radial-gradient(circle 5px at 0px 20px, #30cccc 100%, transparent 0),
+        radial-gradient(circle 5px at 40px 20px, #30cccc 100%, transparent 0),
+        radial-gradient(circle 5px at 20px 40px, #30cccc 100%, transparent 0),
+        radial-gradient(circle 5px at 34px 6px, #30cccc 100%, transparent 0),
+        radial-gradient(circle 5px at 34px 34px, #30cccc 100%, transparent 0),
+        radial-gradient(circle 5px at 6px 34px, #30cccc 100%, transparent 0),
+        radial-gradient(circle 5px at 6px 6px, #30cccc 100%, transparent 0);
+      animation: rotate 3s linear infinite;
+    }
+
+    @keyframes rotate {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
 </head>
 
 <body>
