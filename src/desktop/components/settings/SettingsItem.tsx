@@ -1,4 +1,5 @@
 import React from 'react';
+import { Switch } from '../Switch';
 
 export type ActionType = 'select' | 'switch' | 'button';
 
@@ -49,25 +50,10 @@ export const SettingsItem: React.FC<SettingsItemProps> = ({ title, description, 
         );
       case 'switch':
         return (
-          <label className="inline-flex items-center cursor-pointer">
-            <input
-              type="checkbox"
-              checked={action.currentValue}
-              onChange={(e) => action.onChange(e.target.checked)}
-              className="sr-only"
-            />
-            <div
-              className={`relative w-11 h-6 rounded-full transition-colors ${
-                action.currentValue ? 'bg-accent' : 'bg-bg3'
-              }`}
-            >
-              <div
-                className={`absolute top-0.5 left-0.5 w-5 h-5 bg-bg2 rounded-full transition-transform ${
-                  action.currentValue ? 'translate-x-5' : 'translate-x-0'
-                }`}
-              />
-            </div>
-          </label>
+          <Switch
+            checked={action.currentValue}
+            onChange={action.onChange}
+          />
         );
       case 'button':
         return (
