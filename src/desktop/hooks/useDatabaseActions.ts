@@ -106,6 +106,7 @@ export const useDatabaseActions = (
     if (database.type === 'cloud') {
       if (database.exists) {
         await cloudService.switchToLocalDatabase(id);
+        window.location.reload();
       } else {
         dialog({
           title: localize('database.switch', 'Switch to Database'),
@@ -127,6 +128,7 @@ export const useDatabaseActions = (
             if (action && action.value) {
               try {
                 await cloudService.loginDatabase(id, database.database_salt, action.value, database.databaseName);
+                window.location.reload();
               } catch (error) {
                 console.error(error);
                 desktopMessage({
@@ -141,8 +143,8 @@ export const useDatabaseActions = (
       }
     } else if (database.type === 'offline' || database.type === 'local') {
       await cloudService.switchToLocalDatabase(id);
+      window.location.reload();
     }
-    window.location.reload();
   };
 
   return {
