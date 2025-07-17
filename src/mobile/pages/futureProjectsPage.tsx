@@ -1,6 +1,6 @@
 import { getTodayTimestampInUtc } from '@/base/common/time';
 import { BackIcon, LaterProjectsIcon } from '@/components/icons';
-import { getRootCollectionsState } from '@/core/state/home/getRootCollectionsState';
+import { getFutureProjects } from '@/core/state/home/getFutureProjects';
 import { useService } from '@/hooks/use-service.ts';
 import { useWatchEvent } from '@/hooks/use-watch-event.ts';
 import { useBack } from '@/hooks/useBack';
@@ -16,7 +16,7 @@ export const FutureProjectsPage = () => {
   const todoService = useService(ITodoService);
   useWatchEvent(todoService.onStateChange);
 
-  const { futureProjects } = getRootCollectionsState(todoService.modelState, getTodayTimestampInUtc());
+  const futureProjects = getFutureProjects(todoService.modelState, getTodayTimestampInUtc());
   const handleBack = useBack();
 
   return (

@@ -1,7 +1,8 @@
 import { DragDropElements } from '@/utils/dnd/dragDropCollision';
 import { AreaInfoState, ITaskModelData, ProjectInfoState } from '../type';
-import { getRootCollectionsState } from './getRootCollectionsState';
 import { FlattenedItem, flattenedItemsToResult, FlattenedResult } from './flattenedItemsToResult.ts';
+import { getProjectList } from '../getProject.ts';
+import { getAreaList } from '../getAreaState.ts';
 
 interface GetFlattenedRootCollectionsConfig {
   currentDate: number;
@@ -14,7 +15,31 @@ export function flattenRootCollections(
   config: GetFlattenedRootCollectionsConfig
 ): FlattenedResult<AreaInfoState, ProjectInfoState> {
   const { currentDate, colspanAreaList } = config;
-  const rootCollections = getRootCollectionsState(modelData, currentDate);
+  
+  // Get root collections state inline
+  const projectList = getProjectList(modelData, modelData.rootObjectIdList);
+  const startedProjects = projectList.filter((project) => {
+    if (!project.startDate) {
+      return true;
+    }
+    return project.startDate <= currentDate;
+  });
+  const futureProjects = projectList.filter((project) => {
+    if (!project.startDate) {
+      return false;
+    }
+    if (project.status !== 'created') {
+      return false;
+    }
+    return project.startDate > currentDate;
+  });
+  const areaList = getAreaList(modelData, modelData.rootObjectIdList);
+  
+  const rootCollections = {
+    startedProjects,
+    futureProjects,
+    areaList,
+  };
   const flattenedItems: FlattenedItem<AreaInfoState, ProjectInfoState>[] = [];
   let index = 0;
   const skipFirstHeader = rootCollections.startedProjects.length > 0;

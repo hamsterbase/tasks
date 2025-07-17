@@ -4,8 +4,11 @@ import { useWatchEvent } from '@/hooks/use-watch-event.ts';
 import { IListService } from '@/services/list/common/listService.ts';
 import { ITodoService } from '@/services/todo/common/todoService.ts';
 import React from 'react';
+import { matchPath, useLocation } from 'react-router';
+import { AreaDetailPanel } from './area/AreaDetailPanel.tsx';
 import { EmptyPanel } from './EmptyPanel.tsx';
 import { MultipleSelectionView } from './MultipleSelectionView.tsx';
+import { ProjectDetailPanel } from './project/ProjectDetailPanel.tsx';
 import { TaskDetailView } from './TaskDetailView.tsx';
 
 export const SelectionPanel: React.FC = () => {
@@ -16,6 +19,8 @@ export const SelectionPanel: React.FC = () => {
   useWatchEvent(listService.onMainListChange);
   useWatchEvent(listService.mainList?.onListStateChange);
 
+  const location = useLocation();
+
   const handleClearSelection = () => {
     listService.mainList?.clearSelection();
   };
@@ -23,6 +28,19 @@ export const SelectionPanel: React.FC = () => {
   const selectedItems = listService.mainList?.selectedIds || [];
 
   if (selectedItems.length === 0) {
+    // Check if we're on area or project routes using proper route matching
+    const areaMatch = matchPath({ path: '/desktop/area/:areaUid' }, location.pathname);
+
+    const projectMatch = matchPath({ path: '/desktop/project/:projectUid' }, location.pathname);
+
+    if (areaMatch) {
+      return <AreaDetailPanel />;
+    }
+
+    if (projectMatch) {
+      return <ProjectDetailPanel />;
+    }
+
     return <EmptyPanel />;
   }
 

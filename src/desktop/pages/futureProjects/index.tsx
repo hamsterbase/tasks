@@ -1,6 +1,6 @@
 import { getTodayTimestampInUtc } from '@/base/common/time';
 import { LaterProjectsIcon } from '@/components/icons';
-import { getRootCollectionsState } from '@/core/state/home/getRootCollectionsState';
+import { getFutureProjects } from '@/core/state/home/getFutureProjects';
 import { EntityHeader } from '@/desktop/components/common/EntityHeader';
 import { DesktopProjectList } from '@/desktop/components/DesktopProjectList/DesktopProjectList';
 import { useService } from '@/hooks/use-service';
@@ -13,7 +13,7 @@ export const FutureProjects = () => {
   const todoService = useService(ITodoService);
   useWatchEvent(todoService.onStateChange);
 
-  const { futureProjects } = getRootCollectionsState(todoService.modelState, getTodayTimestampInUtc());
+  const futureProjects = getFutureProjects(todoService.modelState, getTodayTimestampInUtc());
 
   return (
     <div className="h-full w-full bg-bg1">

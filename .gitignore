@@ -25,3 +25,4 @@ dist-ssr
 *.sw?
 android/app/release/
 .cursor
+.claude

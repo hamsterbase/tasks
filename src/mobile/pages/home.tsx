@@ -1,7 +1,7 @@
 import { getTodayTimestampInUtc } from '@/base/common/time.ts';
 import { AreaIcon, HomeIcon, SettingsIcon } from '@/components/icons';
 import { flattenRootCollections } from '@/core/state/home/getFlattenRootCollections.ts';
-import { getRootCollectionsState } from '@/core/state/home/getRootCollectionsState.ts';
+import { getFutureProjects } from '@/core/state/home/getFutureProjects.ts';
 import { FlattenedResult } from '@/core/state/home/flattenedItemsToResult.ts';
 import { AreaInfoState, ProjectInfoState } from '@/core/state/type.ts';
 import { useService } from '@/hooks/use-service';
@@ -100,7 +100,7 @@ export const MobileHome = () => {
   const todoService = useService(ITodoService);
   const navigate = useNavigate();
   useWatchEvent(todoService.onStateChange);
-  const { futureProjects: unstartedProjects } = getRootCollectionsState(
+  const unstartedProjects = getFutureProjects(
     todoService.modelState,
     getTodayTimestampInUtc()
   );

@@ -2,7 +2,7 @@ import { getTodayTimestampInUtc } from '@/base/common/time';
 import { PlusIcon, SettingsIcon } from '@/components/icons';
 import { FlattenedResult } from '@/core/state/home/flattenedItemsToResult';
 import { flattenRootCollections } from '@/core/state/home/getFlattenRootCollections';
-import { getRootCollectionsState } from '@/core/state/home/getRootCollectionsState';
+import { getFutureProjects } from '@/core/state/home/getFutureProjects';
 import { AreaInfoState, ProjectInfoState } from '@/core/state/type';
 import { DesktopMenuController } from '@/desktop/overlay/desktopMenu/DesktopMenuController';
 import { useService } from '@/hooks/use-service';
@@ -131,7 +131,7 @@ export const SidebarContent: React.FC = () => {
     );
   };
 
-  const { futureProjects } = getRootCollectionsState(todoService.modelState, getTodayTimestampInUtc());
+  const futureProjects = getFutureProjects(todoService.modelState, getTodayTimestampInUtc());
   return (
     <div className={classNames(desktopStyles.sidebarBackground, desktopStyles.sidebarContainerStyle)}>
       <div className="flex flex-col h-full gap-2">
