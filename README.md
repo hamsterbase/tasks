@@ -2,6 +2,8 @@
 
 A local-first and privacy first task manager. It is designed to be simple and easy to use.
 
+![Weekly Meal Planning Screenshot](screenshots/weekly-meal-planning-screenshot.png)
+
 ## Online Demo
 
 [Web version](https://tasks-app.hamsterbase.com/)
