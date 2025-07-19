@@ -1,6 +1,6 @@
 import { ChevronRightIcon } from '@/components/icons';
+import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox';
 import { ProjectInfoState } from '@/core/state/type';
-import { ProjectStatusIcon } from '@/desktop/components/sidebar/ProjectStatusIcon';
 import { TaskItemCompletionAt } from '@/desktop/components/taskListItem/TaskItemCompletionAt';
 import { TaskItemDueDate } from '@/desktop/components/taskListItem/TaskItemDueDate';
 import { TaskItemStartDate } from '@/desktop/components/taskListItem/TaskItemStartDate';
@@ -32,7 +32,7 @@ export const DesktopProjectListItem: React.FC<DesktopProjectListItemProps> = ({ 
       <Link to={`/desktop/project/${project.uid}`} className="block no-underline">
         <div className="flex items-center gap-3 px-3 py-2 hover:bg-bg2 rounded-md transition-colors cursor-pointer group">
           <div className="flex-shrink-0">
-            <ProjectStatusIcon progress={progress} status={project.status} />
+            <ProjectStatusBox progress={progress} status={project.status} className="size-5" color="t3" />
           </div>
           <TaskItemCompletionAt completionAt={project.completionAt} status={project.status} />
           <TaskItemStartDate startDate={project.startDate} />

@@ -84,7 +84,8 @@ export const SidebarAreaItem: React.FC<SidebarAreaItemProps> = ({ areaInfo }) =>
             <div
               className={classNames(desktopStyles.sidebarIconSize, {
                 'text-white': isActive,
-                'text-t3': !isActive,
+                'text-t1': !isActive && areaInfo.title,
+                'text-t3': !isActive && !areaInfo.title,
               })}
             >
               <AreaIcon />

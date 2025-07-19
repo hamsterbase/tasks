@@ -1,6 +1,6 @@
-import { HeadingIcon, MenuIcon } from '@/components/icons';
 import { EditableInput } from '@/components/edit/EditableInput';
 import { projectHeadingTitleInputKey } from '@/components/edit/inputKeys';
+import { HeadingIcon, MenuIcon } from '@/components/icons';
 import { ITaskList } from '@/components/taskList/type.ts';
 import { ProjectHeadingInfo } from '@/core/state/type.ts';
 import { useDesktopProjectHeader } from '@/desktop/hooks/useDesktopProjectHeader';

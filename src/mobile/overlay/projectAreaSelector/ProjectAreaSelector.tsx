@@ -3,7 +3,7 @@ import { getAllProject } from '@/core/state/getAllProject';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { ActionSheet } from '@/mobile/components/ActionSheet';
-import { ProjectStatusBox } from '@/mobile/components/taskItem/ProjectStatusBox';
+import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox.tsx';
 import { styles } from '@/mobile/theme';
 import { localize } from '@/nls';
 import { OverlayEnum } from '@/services/overlay/common/overlayEnum';

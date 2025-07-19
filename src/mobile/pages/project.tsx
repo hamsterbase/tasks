@@ -8,7 +8,7 @@ import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import useProject from '@/hooks/useProject';
 import { useTaskDisplaySettings } from '@/hooks/useTaskDisplaySettings.ts';
-import { ProjectStatusBox } from '@/mobile/components/taskItem/ProjectStatusBox.tsx';
+import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox.tsx';
 import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService';
 import { getFlattenedItemsCollisionDetectionStrategy } from '@/utils/dnd/flattenedItemsCollisionDetectionStrategy';

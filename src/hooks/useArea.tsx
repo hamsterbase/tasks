@@ -2,7 +2,7 @@ import { EditIcon, TagIcon } from '@/components/icons';
 import { getAreaDetail } from '@/core/state/getArea';
 import { AreaDetailState } from '@/core/state/type';
 import { ItemPosition } from '@/core/type';
-import { ProjectStatusBox } from '@/mobile/components/taskItem/ProjectStatusBox';
+import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox.tsx';
 import { PopupActionItem } from '@/mobile/overlay/popupAction/PopupActionController';
 import { usePopupAction } from '@/mobile/overlay/popupAction/usePopupAction';
 import { useTagEditor } from '@/mobile/overlay/tagEditor/useTagEditor';

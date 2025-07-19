@@ -1,6 +1,6 @@
 import { DeleteIcon, EditIcon, MoveIcon } from '@/components/icons';
 import { ProjectHeadingInfo } from '@/core/state/type';
-import { ProjectStatusBox } from '@/mobile/components/taskItem/ProjectStatusBox';
+import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox.tsx';
 import { useDialog } from '@/mobile/overlay/dialog/useDialog';
 import { usePopupAction } from '@/mobile/overlay/popupAction/usePopupAction';
 import { useProjectAreaSelector } from '@/mobile/overlay/projectAreaSelector/useProjectAreaSelector';

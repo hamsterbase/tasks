@@ -1,3 +1,4 @@
+import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox';
 import { ProjectInfoState } from '@/core/state/type';
 import { localize } from '@/nls';
 import { useSortable } from '@dnd-kit/sortable';
@@ -6,7 +7,6 @@ import classNames from 'classnames';
 import React from 'react';
 import { Link, useLocation } from 'react-router';
 import { desktopStyles } from '../../theme/main';
-import { ProjectStatusIcon } from './ProjectStatusIcon';
 
 interface SidebarProjectItemProps {
   projectInfo: ProjectInfoState;
@@ -44,9 +44,19 @@ export const SidebarProjectItem: React.FC<SidebarProjectItemProps> = ({ projectI
           )}
         >
           <div className={classNames(desktopStyles.sidebarIconSize, 'text-t3')}>
-            <ProjectStatusIcon progress={projectInfo.progress} status={projectInfo.status} isActive={isActive} />
+            <ProjectStatusBox
+              progress={projectInfo.progress}
+              status={projectInfo.status}
+              color={isActive ? 'white' : projectInfo.title ? 't1' : 't3'}
+            />
           </div>
-          <span className={classNames('truncate flex-1 min-w-0', { 'text-t3': !projectInfo.title })}>
+          <span
+            className={classNames('truncate flex-1 min-w-0', {
+              'text-white': isActive,
+              'text-t1': !isActive && projectInfo.title,
+              'text-t3': !isActive && !projectInfo.title,
+            })}
+          >
             {projectInfo.title || localize('project.untitled', 'New Project')}
           </span>
         </div>

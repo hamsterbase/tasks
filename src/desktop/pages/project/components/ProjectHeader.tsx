@@ -1,18 +1,18 @@
-import { projectTitleInputKey } from '@/components/edit/inputKeys';
 import { projectPageTitleInputId } from '@/components/edit/inputId';
+import { projectTitleInputKey } from '@/components/edit/inputKeys';
 import { HeadingIcon, TaskDisplaySettingsIcon } from '@/components/icons';
+import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox';
 import { getProject } from '@/core/state/getProject';
 import { EntityHeader, EntityHeaderAction } from '@/desktop/components/common/EntityHeader';
-import { ProjectStatusIcon } from '@/desktop/components/sidebar/ProjectStatusIcon';
 import { useDesktopTaskDisplaySettings } from '@/desktop/hooks/useDesktopTaskDisplaySettings.ts';
 import { useService } from '@/hooks/use-service';
 import useProject from '@/hooks/useProject';
 import { localize } from '@/nls';
+import { IEditService } from '@/services/edit/common/editService';
 import { IListService } from '@/services/list/common/listService';
 import { ITodoService } from '@/services/todo/common/todoService';
 import React, { useEffect } from 'react';
 import { flushSync } from 'react-dom';
-import { IEditService } from '@/services/edit/common/editService';
 import { useLocation } from 'react-router';
 
 interface ProjectHeaderProps {
@@ -89,7 +89,7 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({ project, projectId
       inputId={projectPageTitleInputId(projectId)}
       renderIcon={() => (
         <button className="flex items-center justify-center" onClick={handleToggleProjectStatus}>
-          <ProjectStatusIcon progress={project.progress} status={project.status} />
+          <ProjectStatusBox progress={project.progress} status={project.status} className="size-5" />
         </button>
       )}
       title={project.title}

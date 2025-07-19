@@ -1,7 +1,7 @@
 import { DeleteIcon, DueIcon, MoveIcon, ScheduledIcon, SubtaskIcon, TagIcon } from '@/components/icons';
 import { TaskInfo } from '@/core/state/type';
 import { ItemStatus } from '@/core/type';
-import { ProjectStatusBox } from '@/mobile/components/taskItem/ProjectStatusBox';
+import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox.tsx';
 import { DatePickerActionSheetController } from '@/mobile/overlay/datePicker/DatePickerActionSheetController';
 import { useDialog } from '@/mobile/overlay/dialog/useDialog';
 import { PopupActionItem } from '@/mobile/overlay/popupAction/PopupActionController';

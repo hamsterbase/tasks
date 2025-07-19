@@ -2,7 +2,7 @@ import { ProjectInfoState } from '@/core/state/type.ts';
 import { useService } from '@/hooks/use-service';
 import { useCancelEdit } from '@/hooks/useCancelEdit';
 import { useEdit } from '@/hooks/useEdit';
-import { ProjectStatusBox } from '@/mobile/components/taskItem/ProjectStatusBox';
+import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox.tsx';
 import { styles } from '@/mobile/theme';
 import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService';

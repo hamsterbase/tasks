@@ -2,7 +2,7 @@ import { DeleteIcon, DueIcon, EditIcon, HeadingIcon, ScheduledIcon, TagIcon } fr
 import { ProjectInfoState } from '@/core/state/type';
 import { ItemStatus } from '@/core/type';
 import { useBack } from '@/hooks/useBack.ts';
-import { ProjectStatusBox } from '@/mobile/components/taskItem/ProjectStatusBox';
+import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox.tsx';
 import { TaskStatusBox } from '@/mobile/components/taskItem/TaskStatusBox';
 import { useDatepicker } from '@/mobile/overlay/datePicker/useDatepicker';
 import { useDialog } from '@/mobile/overlay/dialog/useDialog.ts';
