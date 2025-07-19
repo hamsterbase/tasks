@@ -14,6 +14,7 @@ import { SidebarProjectItem } from '../sidebar/SidebarProjectItem';
 import { SubtaskItem } from '../taskListItem/SubtaskItem';
 import { TaskListItem } from '../taskListItem/TaskListItem';
 import { DesktopProjectHeadingItem } from '../todo/ProjectHeadingItem';
+import { DesktopProjectListItem } from '../todo/DesktopProjectListItem';
 
 interface TaskProps {
   hideProjectTitle: boolean;
@@ -22,9 +23,14 @@ interface TaskProps {
 export interface DragOverlayItemProps {
   isSubtask?: boolean;
   taskProps?: TaskProps;
+  projectVariant?: 'sidebar' | 'desktop';
 }
 
-export const DragOverlayItem: React.FC<DragOverlayItemProps> = ({ isSubtask, taskProps }) => {
+export const DragOverlayItem: React.FC<DragOverlayItemProps> = ({
+  isSubtask,
+  taskProps,
+  projectVariant = 'sidebar',
+}) => {
   const { active } = useDndContext();
   const activeId = active?.id;
   const todoService = useService(ITodoService);
@@ -66,12 +72,16 @@ export const DragOverlayItem: React.FC<DragOverlayItemProps> = ({ isSubtask, tas
       }
       case 'project': {
         const projectInfo = getProject(modelState, activeId as string);
-        return <SidebarProjectItem projectInfo={projectInfo} />;
+        return projectVariant === 'desktop' ? (
+          <DesktopProjectListItem project={projectInfo} />
+        ) : (
+          <SidebarProjectItem projectInfo={projectInfo} />
+        );
       }
       default:
         return null;
     }
-  }, [activeId, modelState, isSubtask, taskProps]);
+  }, [activeId, modelState, isSubtask, taskProps, projectVariant]);
 
   return (
     <DragOverlay>
