@@ -8,10 +8,12 @@
     "build": "tsc -b && vite build",
     "build:coverage": "tsc -b && VITE_COVERAGE=true vite build",
     "lint": "eslint src --no-warn-ignored",
-    "check": "tsc -b && npm run lint"
+    "check": "tsc -b && npm run lint",
+    "format": "prettier -w src"
   },
   "simple-git-hooks": {
-    "pre-commit": "npm run check"
+    "pre-commit": "npm run check",
+    "pre-push": "npm run format"
   },
   "license": "AGPL-3.0-only",
   "devDependencies": {
