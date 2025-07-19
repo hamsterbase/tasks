@@ -17,14 +17,14 @@ export const useProjectDragAndDrop = ({ flattenedItemsResult }: UseProjectDragAn
       distance: 3,
     },
   });
-  
+
   const touchSensor = useSensor(TouchSensor, {
     activationConstraint: {
       delay: 100,
       tolerance: 5,
     },
   });
-  
+
   const sensors = useSensors(mouseSensor, touchSensor);
 
   const handleDragEnd = (event: DragEndEvent): null | undefined => {

@@ -25,19 +25,27 @@ export const useDatePickerHandlers = ({ task }: UseDatePickerHandlersProps) => {
   };
 
   const handleStartDateClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    showDatePickerAtPosition(task.startDate, (date) => {
-      if (date !== undefined) {
-        taskItemActions.updateStartDate(date);
-      }
-    }, e);
+    showDatePickerAtPosition(
+      task.startDate,
+      (date) => {
+        if (date !== undefined) {
+          taskItemActions.updateStartDate(date);
+        }
+      },
+      e
+    );
   };
 
   const handleDueDateClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    showDatePickerAtPosition(task.dueDate, (date) => {
-      if (date !== undefined) {
-        taskItemActions.updateDueDate(date);
-      }
-    }, e);
+    showDatePickerAtPosition(
+      task.dueDate,
+      (date) => {
+        if (date !== undefined) {
+          taskItemActions.updateDueDate(date);
+        }
+      },
+      e
+    );
   };
 
   const handleClearStartDate = (e: React.MouseEvent) => {

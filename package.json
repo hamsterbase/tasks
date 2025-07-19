@@ -12,8 +12,14 @@
     "format": "prettier -w src"
   },
   "simple-git-hooks": {
-    "pre-commit": "npm run check",
-    "pre-push": "npm run format"
+    "pre-commit": "npx lint-staged",
+    "pre-push": "npm run check"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   },
   "license": "AGPL-3.0-only",
   "devDependencies": {
@@ -43,6 +49,7 @@
     "@types/react-window": "^1.8.8",
     "@types/test-exclude": "^6.0.2",
     "@vitejs/plugin-react": "^4.3.4",
+    "allotment": "^1.20.3",
     "capacitor-plugin-safe-area": "^4.0.0",
     "classnames": "^2.5.1",
     "crypto-js": "^4.2.0",
@@ -76,8 +83,10 @@
     "typescript-eslint": "^8.18.2",
     "vite": "^6.0.5",
     "vite-plugin-top-level-await": "^1.5.0",
-    "vite-plugin-wasm": "^3.4.1",
-    "allotment": "^1.20.3"
+    "vite-plugin-wasm": "^3.4.1"
   },
-  "packageManager": "pnpm@8.14.0+sha512.5d4bf97b349faf1a51318aa1ba887e99d9c36e203dbcb55938a91fddd2454246cb00723d6642f54d463a0f52a2701dadf8de002a37fc613c9cdc94ed5675ddce"
+  "packageManager": "pnpm@8.14.0+sha512.5d4bf97b349faf1a51318aa1ba887e99d9c36e203dbcb55938a91fddd2454246cb00723d6642f54d463a0f52a2701dadf8de002a37fc613c9cdc94ed5675ddce",
+  "dependencies": {
+    "lint-staged": "^16.1.2"
+  }
 }

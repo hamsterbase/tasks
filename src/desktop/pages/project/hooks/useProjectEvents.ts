@@ -34,7 +34,7 @@ export const useProjectEvents = () => {
 
     let newTaskId = null;
     const taskObject = todoService.modelState.taskObjectMap.get(afterId);
-    
+
     if (taskObject?.type === 'projectHeading') {
       newTaskId = flushSync(() => {
         return todoService.addTask({

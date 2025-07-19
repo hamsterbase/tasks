@@ -13,7 +13,7 @@ export const MultipleSelectionView: React.FC<MultipleSelectionViewProps> = ({ se
       <div className="flex items-center justify-center flex-1">
         <p className="text-t2 text-center">{localize('tasks.selected_count', 'Selected {0} items', selectedCount)}</p>
       </div>
-      
+
       {onClearSelection && <ClearSelectionButton onClearSelection={onClearSelection} />}
     </div>
   );

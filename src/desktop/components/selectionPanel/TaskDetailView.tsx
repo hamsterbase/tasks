@@ -19,8 +19,9 @@ interface TaskDetailViewProps {
 export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task, onClearSelection }) => {
   const taskItemActions = useTaskItemActions(task);
   const { openTaskMenu } = useTaskMenu(task.id);
-  const { handleStartDateClick, handleDueDateClick, handleClearStartDate, handleClearDueDate } = 
-    useDatePickerHandlers({ task });
+  const { handleStartDateClick, handleDueDateClick, handleClearStartDate, handleClearDueDate } = useDatePickerHandlers({
+    task,
+  });
 
   const handleTitleSave = (value: string) => {
     taskItemActions.updateTaskTitle(value);
@@ -109,7 +110,7 @@ export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task, onClearSel
           </div>
         </div>
       </div>
-      
+
       {onClearSelection && <ClearSelectionButton onClearSelection={onClearSelection} />}
     </div>
   );

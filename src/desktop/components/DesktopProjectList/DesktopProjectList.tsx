@@ -17,7 +17,11 @@ interface DesktopProjectListProps {
   useDateAssignedMove?: boolean;
 }
 
-export const DesktopProjectList: React.FC<DesktopProjectListProps> = ({ projects, emptyStateLabel, useDateAssignedMove = false }) => {
+export const DesktopProjectList: React.FC<DesktopProjectListProps> = ({
+  projects,
+  emptyStateLabel,
+  useDateAssignedMove = false,
+}) => {
   const todoService = useService(ITodoService);
   const sensors = useDesktopDndSensors();
 

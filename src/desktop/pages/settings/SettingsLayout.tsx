@@ -13,7 +13,7 @@ export const SettingsLayout: React.FC = () => {
           renderIcon={() => <SettingsIcon className="size-5 text-t2" />}
           title={localize('settings', 'Settings')}
         />
-        
+
         <div className="border-b border-line-light bg-bg1">
           <div className="flex justify-center">
             <div className="w-full max-w-4xl px-4">

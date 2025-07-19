@@ -100,10 +100,7 @@ export const MobileHome = () => {
   const todoService = useService(ITodoService);
   const navigate = useNavigate();
   useWatchEvent(todoService.onStateChange);
-  const unstartedProjects = getFutureProjects(
-    todoService.modelState,
-    getTodayTimestampInUtc()
-  );
+  const unstartedProjects = getFutureProjects(todoService.modelState, getTodayTimestampInUtc());
   const { value: config, setValue } = useConfig(toggleAreaConfigKey());
   const flattenedItemsResult = flattenRootCollections(todoService.modelState, {
     currentDate: getTodayTimestampInUtc(),

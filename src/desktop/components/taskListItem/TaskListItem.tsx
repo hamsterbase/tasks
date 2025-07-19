@@ -92,7 +92,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
           }
           element = element.parentElement as HTMLElement;
         }
-        
+
         const taskId = task.id;
         if (e.metaKey) {
           taskList.select(taskId, {

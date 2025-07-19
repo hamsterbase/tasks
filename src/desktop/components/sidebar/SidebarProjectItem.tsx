@@ -44,13 +44,11 @@ export const SidebarProjectItem: React.FC<SidebarProjectItemProps> = ({ projectI
           )}
         >
           <div className={classNames(desktopStyles.sidebarIconSize, 'text-t3')}>
-            <ProjectStatusIcon
-              progress={projectInfo.progress}
-              status={projectInfo.status}
-              isActive={isActive}
-            />
+            <ProjectStatusIcon progress={projectInfo.progress} status={projectInfo.status} isActive={isActive} />
           </div>
-          <span className={classNames('truncate flex-1 min-w-0', {'text-t3': !projectInfo.title})}>{projectInfo.title || localize('project.untitled', 'New Project')}</span>
+          <span className={classNames('truncate flex-1 min-w-0', { 'text-t3': !projectInfo.title })}>
+            {projectInfo.title || localize('project.untitled', 'New Project')}
+          </span>
         </div>
       </Link>
     </div>

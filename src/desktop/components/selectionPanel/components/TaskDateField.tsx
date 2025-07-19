@@ -43,10 +43,7 @@ export const TaskDateField: React.FC<TaskDateFieldProps> = ({
             <span className="text-xs text-t2">{formatRemainingDays(date)}</span>
           </div>
         ) : (
-          <button
-            onClick={onDateClick}
-            className="text-sm text-t1 hover:bg-bg2 px-2 py-1 rounded transition-colors"
-          >
+          <button onClick={onDateClick} className="text-sm text-t1 hover:bg-bg2 px-2 py-1 rounded transition-colors">
             {localize('tasks.set_date', 'Set date')}
           </button>
         )}

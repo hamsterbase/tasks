@@ -88,19 +88,21 @@ export const ImportExportSettings: React.FC = () => {
                 type: 'button',
                 label: exporting ? localize('common.exporting', 'Exporting...') : localize('settings.export', 'Export'),
                 onClick: handleExport,
-                disabled: exporting
+                disabled: exporting,
               }}
             />
-            
+
             <div className="border-t border-line-light">
               <SettingsItem
                 title={localize('settings.import', 'Import')}
                 description={localize('settings.import.description', 'Import your tasks from a backup file')}
                 action={{
                   type: 'button',
-                  label: importing ? localize('common.importing', 'Importing...') : localize('settings.import', 'Import'),
+                  label: importing
+                    ? localize('common.importing', 'Importing...')
+                    : localize('settings.import', 'Import'),
                   onClick: handleImport,
-                  disabled: importing
+                  disabled: importing,
                 }}
               />
             </div>

@@ -49,12 +49,7 @@ export const SettingsItem: React.FC<SettingsItemProps> = ({ title, description, 
           </select>
         );
       case 'switch':
-        return (
-          <Switch
-            checked={action.currentValue}
-            onChange={action.onChange}
-          />
-        );
+        return <Switch checked={action.currentValue} onChange={action.onChange} />;
       case 'button':
         return (
           <button

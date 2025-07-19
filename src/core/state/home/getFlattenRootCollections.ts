@@ -15,7 +15,7 @@ export function flattenRootCollections(
   config: GetFlattenedRootCollectionsConfig
 ): FlattenedResult<AreaInfoState, ProjectInfoState> {
   const { currentDate, colspanAreaList } = config;
-  
+
   // Get root collections state inline
   const projectList = getProjectList(modelData, modelData.rootObjectIdList);
   const startedProjects = projectList.filter((project) => {
@@ -34,7 +34,7 @@ export function flattenRootCollections(
     return project.startDate > currentDate;
   });
   const areaList = getAreaList(modelData, modelData.rootObjectIdList);
-  
+
   const rootCollections = {
     startedProjects,
     futureProjects,

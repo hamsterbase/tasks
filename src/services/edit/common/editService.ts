@@ -26,7 +26,7 @@ export class EditService implements IEditService {
   public readonly onFocusInput = this._onFocusInput.event;
 
   private _inputValueMap = new Map<string, string>();
-  
+
   constructor() {}
 
   getInputValue(inputKey: string, defaultValue: string): string {
