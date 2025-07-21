@@ -22,7 +22,7 @@ export const LocalDatabaseItem: React.FC<LocalDatabaseItemProps> = ({ database, 
   };
 
   const DatabaseDetail = () => (
-    <div className="px-3 py-3 bg-bg3 rounded-lg">
+    <div className="px-3 py-3 bg-bg1 rounded-b-lg -mt-2">
       <div className="space-y-3">
         <div className="flex space-x-2 pt-2">
           <button
@@ -41,8 +41,8 @@ export const LocalDatabaseItem: React.FC<LocalDatabaseItemProps> = ({ database, 
       <button
         onClick={databaseActions.handleSwitchToDatabase}
         disabled={isCurrent}
-        className={`w-full flex items-center space-x-3 py-3 px-3 rounded-lg transition-colors text-left ${
-          isCurrent ? 'bg-brand-light' : 'bg-bg3 hover:bg-line-light cursor-pointer'
+        className={`w-full flex items-center space-x-3 py-3 px-3 ${isCurrent ? 'rounded-t-lg' : 'rounded-lg'} transition-colors text-left ${
+          isCurrent ? 'bg-bg1' : 'bg-bg3 hover:bg-line-light cursor-pointer'
         }`}
       >
         {getIcon()}

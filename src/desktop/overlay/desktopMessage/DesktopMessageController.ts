@@ -18,7 +18,6 @@ export class DesktopMessageController implements IDisposable {
     const workbenchOverlayService = instantiationService.invokeFunction((accessor) => {
       return accessor.get(IWorkbenchOverlayService);
     });
-    console.log('createOverlay');
     return workbenchOverlayService.createOverlay('message', OverlayEnum.message, (initOptions) => {
       return instantiationService.createInstance(DesktopMessageController, initOptions, options);
     });

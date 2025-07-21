@@ -57,14 +57,6 @@ export const AccountSettings: React.FC = () => {
     }
   };
 
-  const handleOpenPrivacy = () => {
-    window.open('#/desktop/privacy', '_blank', 'width=800,height=600');
-  };
-
-  const handleOpenEULA = () => {
-    window.open('#/desktop/eula', '_blank', 'width=800,height=600');
-  };
-
   const formatExpiryDate = (timestamp: number) => {
     const localDate = new Date(timestamp);
     return format(localDate, 'yyyy-MM-dd HH:mm:ss');
@@ -86,7 +78,7 @@ export const AccountSettings: React.FC = () => {
 
   return (
     <div className="p-6 space-y-6 flex justify-center">
-      <div className="max-w-md w-full space-y-6">
+      <div className="w-full space-y-6">
         <div className="bg-bg2 rounded-lg p-4 space-y-4">
           <h3 className="text-lg font-medium text-t1 mb-4">{localize('account.title', 'Account')}</h3>
 
@@ -111,20 +103,6 @@ export const AccountSettings: React.FC = () => {
         </div>
 
         <div className="space-y-3">
-          <div className="flex space-x-3">
-            <button
-              onClick={handleOpenPrivacy}
-              className="flex-1 py-2 px-4 bg-bg3 text-t1 rounded-md hover:bg-bg3/80 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
-            >
-              {localize('account.privacy', 'Privacy Policy')}
-            </button>
-            <button
-              onClick={handleOpenEULA}
-              className="flex-1 py-2 px-4 bg-bg3 text-t1 rounded-md hover:bg-bg3/80 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
-            >
-              {localize('account.eula', 'EULA')}
-            </button>
-          </div>
           <button
             onClick={handleLogout}
             className="w-full py-2 px-4 bg-accent text-t1 rounded-md hover:bg-accent/90 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"

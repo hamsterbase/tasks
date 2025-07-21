@@ -16,7 +16,7 @@ export const SettingsLayout: React.FC = () => {
 
         <div className="border-b border-line-light bg-bg1">
           <div className="flex justify-center">
-            <div className="w-full max-w-4xl px-4">
+            <div className="w-full max-w-2xl px-4">
               <SettingsTabBar />
             </div>
           </div>
@@ -24,7 +24,7 @@ export const SettingsLayout: React.FC = () => {
 
         <div className="flex-1 overflow-y-auto">
           <div className="flex justify-center">
-            <div className="w-full max-w-4xl">
+            <div className="w-full max-w-xl">
               <Outlet />
             </div>
           </div>

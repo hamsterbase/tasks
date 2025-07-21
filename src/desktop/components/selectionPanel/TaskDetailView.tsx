@@ -9,6 +9,7 @@ import React from 'react';
 import { ClearSelectionButton } from './ClearSelectionButton';
 import { SubtaskList } from './SubtaskList';
 import { TaskDateField } from './components/TaskDateField';
+import { TaskLocationField } from './components/TaskLocationField';
 import { useDatePickerHandlers } from './hooks/useDatePickerHandlers';
 
 interface TaskDetailViewProps {
@@ -56,6 +57,7 @@ export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task, onClearSel
 
       <div className="flex-1 overflow-y-auto">
         <div className="p-6 space-y-6">
+          <TaskLocationField itemId={task.id} />
           <div>
             <div className="flex items-center gap-2 mb-2 text-t2">
               <NoteIcon className="size-4" />

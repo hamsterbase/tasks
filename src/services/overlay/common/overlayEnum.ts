@@ -10,4 +10,5 @@ export enum OverlayEnum {
   desktopDatePicker = 'desktopDatePicker',
   message = 'message',
   createDatabase = 'createDatabase',
+  treeSelect = 'treeSelect',
 }

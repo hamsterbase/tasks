@@ -12,6 +12,7 @@ import React from 'react';
 import { useParams } from 'react-router';
 import { TaskDateField } from '../components/TaskDateField';
 import { useDesktopProjectMenu } from './useDesktopProjectMenu';
+import { TaskLocationField } from '../components/TaskLocationField';
 
 const useProjectId = (): TreeID | null => {
   const todoService = useService(ITodoService);
@@ -132,6 +133,7 @@ const ProjectDetailPanelContent: React.FC<IProjectDetailPanelContentProps> = ({ 
           </div>
 
           <div>
+            <TaskLocationField itemId={projectId} />
             <TaskDateField
               label={localize('project.start_date', 'Start Date')}
               icon={<ScheduledIcon className="size-4" />}

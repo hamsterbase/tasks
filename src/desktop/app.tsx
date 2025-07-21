@@ -3,6 +3,7 @@ import { CreateDatabaseOverlay } from '@/desktop/overlay/createDatabase/CreateDa
 import { DesktopDialog } from '@/desktop/overlay/desktopDialog/DesktopDialog';
 import { DesktopMenu } from '@/desktop/overlay/desktopMenu/DesktopMenu.tsx';
 import { DesktopMessage } from '@/desktop/overlay/desktopMessage/DesktopMessage';
+import { TreeSelectOverlay } from '@/desktop/overlay/treeSelect/TreeSelectOverlay';
 import { useInputFocused } from '@/hooks/global/useInputFocused';
 import React from 'react';
 import { Navigate, useRoutes } from 'react-router';
@@ -123,6 +124,7 @@ export const App = () => {
       <DesktopDialog />
       <DesktopMessage />
       <CreateDatabaseOverlay />
+      <TreeSelectOverlay />
     </div>
   );
 };

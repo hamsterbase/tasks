@@ -36,7 +36,7 @@ export const SettingsTabBar: React.FC = () => {
   const currentPath = location.pathname;
 
   return (
-    <div className="flex">
+    <div className="flex justify-around">
       {tabs.map((tab) => (
         <Link
           key={tab.id}

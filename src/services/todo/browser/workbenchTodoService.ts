@@ -101,6 +101,7 @@ export class WorkbenchTodoService implements ITodoService {
       this.dataModel.dispose();
     }
     this.dataModel = dataModel;
+    this._onStateChange.fire();
   }
 
   private get taskModel() {
