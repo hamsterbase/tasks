@@ -120,6 +120,14 @@
     "defaultMessage": "Create Project",
     "content": "Create Project"
   },
+  "area.delete_area": {
+    "defaultMessage": "Delete Area",
+    "content": "Delete Area"
+  },
+  "area.detail.titlePlaceholder": {
+    "defaultMessage": "Enter area title...",
+    "content": "Enter area title..."
+  },
   "area.edit_title": {
     "defaultMessage": "Edit Title",
     "content": "Edit Title"
@@ -396,6 +404,10 @@
     "defaultMessage": "Wrong password",
     "content": "Wrong password"
   },
+  "desktop.tag_editor.create_new_tag": {
+    "defaultMessage": "Create tag \"{0}\"",
+    "content": "Create tag \"{0}\""
+  },
   "edit_task_item.task_notes_placeholder": {
     "defaultMessage": "Add Notes...",
     "content": "Add Notes..."
@@ -604,9 +616,41 @@
     "defaultMessage": "Login & Register",
     "content": "Login & Register"
   },
+  "logs.export": {
+    "defaultMessage": "Export Logs",
+    "content": "Export Logs"
+  },
+  "logs.loading": {
+    "defaultMessage": "Loading logs...",
+    "content": "Loading logs..."
+  },
+  "logs.noLogs": {
+    "defaultMessage": "No logs available",
+    "content": "No logs available"
+  },
+  "logs.noLogsDesc": {
+    "defaultMessage": "Logs will appear here as they are generated",
+    "content": "Logs will appear here as they are generated"
+  },
+  "logs.refresh": {
+    "defaultMessage": "Refresh",
+    "content": "Refresh"
+  },
+  "logs.sortInfo": {
+    "defaultMessage": "Sorted by timestamp and creation order",
+    "content": "Sorted by timestamp and creation order"
+  },
   "logs.thisWeek": {
     "defaultMessage": "This Week",
     "content": "This Week"
+  },
+  "logs.title": {
+    "defaultMessage": "Logs",
+    "content": "Logs"
+  },
+  "logs.totalCount": {
+    "defaultMessage": "Total: {0} logs",
+    "content": "Total: {0} logs"
   },
   "move_success": {
     "defaultMessage": "Moved successfully",
@@ -676,6 +720,26 @@
     "defaultMessage": "Are you sure you want to delete this project?",
     "content": "Are you sure you want to delete this project?"
   },
+  "project.detail.notes": {
+    "defaultMessage": "Notes",
+    "content": "Notes"
+  },
+  "project.detail.notesPlaceholder": {
+    "defaultMessage": "Enter project notes...",
+    "content": "Enter project notes..."
+  },
+  "project.detail.progress": {
+    "defaultMessage": "Progress",
+    "content": "Progress"
+  },
+  "project.detail.titlePlaceholder": {
+    "defaultMessage": "Enter project title...",
+    "content": "Enter project title..."
+  },
+  "project.due_date": {
+    "defaultMessage": "Due Date",
+    "content": "Due Date"
+  },
   "project.edit_due_date": {
     "defaultMessage": "Edit Due Date",
     "content": "Edit Due Date"
@@ -715,6 +779,10 @@
   "project.notFound": {
     "defaultMessage": "Project not found",
     "content": "Project not found"
+  },
+  "project.start_date": {
+    "defaultMessage": "Start Date",
+    "content": "Start Date"
   },
   "project.taskDisplaySettings": {
     "defaultMessage": "Task Display Settings",
@@ -820,6 +888,10 @@
     "defaultMessage": "Use China Server",
     "content": "Use China Server"
   },
+  "settings.cloud.chinaServer.description": {
+    "defaultMessage": "Switch to China server for better performance",
+    "content": "Switch to China server for better performance"
+  },
   "settings.cloud.createDatabase": {
     "defaultMessage": "Create CloudDatabase",
     "content": "Create CloudDatabase"
@@ -863,6 +935,10 @@
   "settings.createDatabase.title": {
     "defaultMessage": "Create Cloud Database",
     "content": "Create Cloud Database"
+  },
+  "settings.database.clickToSwitch": {
+    "defaultMessage": "Click to switch",
+    "content": "Click to switch"
   },
   "settings.database.detail": {
     "defaultMessage": "Database Details",
@@ -928,6 +1004,10 @@
     "defaultMessage": "Sync functionality coming soon.",
     "content": "Sync functionality coming soon."
   },
+  "settings.sync.noDatabases": {
+    "defaultMessage": "No databases available",
+    "content": "No databases available"
+  },
   "settings.theme": {
     "defaultMessage": "Theme",
     "content": "Theme"
@@ -988,6 +1068,10 @@
     "defaultMessage": "Delete",
     "content": "Delete"
   },
+  "task.delete_project": {
+    "defaultMessage": "Delete Project",
+    "content": "Delete Project"
+  },
   "task.delete_task": {
     "defaultMessage": "Delete Task",
     "content": "Delete Task"
@@ -1019,6 +1103,18 @@
   "tasks.due_date": {
     "defaultMessage": "Due Date",
     "content": "Due Date"
+  },
+  "tasks.edit_tags": {
+    "defaultMessage": "Edit tags",
+    "content": "Edit tags"
+  },
+  "tasks.location": {
+    "defaultMessage": "Location",
+    "content": "Location"
+  },
+  "tasks.location.null": {
+    "defaultMessage": "Set Location",
+    "content": "Set Location"
   },
   "tasks.mark_as_canceled": {
     "defaultMessage": "Mark as Canceled",

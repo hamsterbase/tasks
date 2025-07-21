@@ -120,6 +120,14 @@
     "defaultMessage": "Create Project",
     "content": "创建项目"
   },
+  "area.delete_area": {
+    "defaultMessage": "Delete Area",
+    "content": "删除区域"
+  },
+  "area.detail.titlePlaceholder": {
+    "defaultMessage": "Enter area title...",
+    "content": "输入区域标题..."
+  },
   "area.edit_title": {
     "defaultMessage": "Edit Title",
     "content": "编辑标题"
@@ -396,6 +404,10 @@
     "defaultMessage": "Wrong password",
     "content": "密码错误"
   },
+  "desktop.tag_editor.create_new_tag": {
+    "defaultMessage": "Create tag \"{0}\"",
+    "content": "创建标签 \"{0}\""
+  },
   "edit_task_item.task_notes_placeholder": {
     "defaultMessage": "Add Notes...",
     "content": "添加笔记..."
@@ -604,9 +616,41 @@
     "defaultMessage": "Login & Register",
     "content": "登录与注册"
   },
+  "logs.export": {
+    "defaultMessage": "Export Logs",
+    "content": "导出日志"
+  },
+  "logs.loading": {
+    "defaultMessage": "Loading logs...",
+    "content": "加载日志中..."
+  },
+  "logs.noLogs": {
+    "defaultMessage": "No logs available",
+    "content": "暂无日志"
+  },
+  "logs.noLogsDesc": {
+    "defaultMessage": "Logs will appear here as they are generated",
+    "content": "日志生成后将在此显示"
+  },
+  "logs.refresh": {
+    "defaultMessage": "Refresh",
+    "content": "刷新"
+  },
+  "logs.sortInfo": {
+    "defaultMessage": "Sorted by timestamp and creation order",
+    "content": "按时间戳和创建顺序排序"
+  },
   "logs.thisWeek": {
     "defaultMessage": "This Week",
     "content": "本周"
+  },
+  "logs.title": {
+    "defaultMessage": "Logs",
+    "content": "日志"
+  },
+  "logs.totalCount": {
+    "defaultMessage": "Total: {0} logs",
+    "content": "总计：{0} 条日志"
   },
   "move_success": {
     "defaultMessage": "Moved successfully",
@@ -676,6 +720,26 @@
     "defaultMessage": "Are you sure you want to delete this project?",
     "content": "您确定要删除此项目吗？"
   },
+  "project.detail.notes": {
+    "defaultMessage": "Notes",
+    "content": "笔记"
+  },
+  "project.detail.notesPlaceholder": {
+    "defaultMessage": "Enter project notes...",
+    "content": "输入项目笔记..."
+  },
+  "project.detail.progress": {
+    "defaultMessage": "Progress",
+    "content": "进度"
+  },
+  "project.detail.titlePlaceholder": {
+    "defaultMessage": "Enter project title...",
+    "content": "输入项目标题..."
+  },
+  "project.due_date": {
+    "defaultMessage": "Due Date",
+    "content": "截止日期"
+  },
   "project.edit_due_date": {
     "defaultMessage": "Edit Due Date",
     "content": "编辑截止日期"
@@ -715,6 +779,10 @@
   "project.notFound": {
     "defaultMessage": "Project not found",
     "content": "项目未找到"
+  },
+  "project.start_date": {
+    "defaultMessage": "Start Date",
+    "content": "开始日期"
   },
   "project.taskDisplaySettings": {
     "defaultMessage": "Task Display Settings",
@@ -820,6 +888,10 @@
     "defaultMessage": "Use China Server",
     "content": "使用中国服务器"
   },
+  "settings.cloud.chinaServer.description": {
+    "defaultMessage": "Switch to China server for better performance",
+    "content": "切换到中国服务器以获得更好的性能"
+  },
   "settings.cloud.createDatabase": {
     "defaultMessage": "Create CloudDatabase",
     "content": "创建云数据库"
@@ -863,6 +935,10 @@
   "settings.createDatabase.title": {
     "defaultMessage": "Create Cloud Database",
     "content": "创建云数据库"
+  },
+  "settings.database.clickToSwitch": {
+    "defaultMessage": "Click to switch",
+    "content": "点击切换"
   },
   "settings.database.detail": {
     "defaultMessage": "Database Details",
@@ -928,6 +1004,10 @@
     "defaultMessage": "Sync functionality coming soon.",
     "content": "同步功能即将推出。"
   },
+  "settings.sync.noDatabases": {
+    "defaultMessage": "No databases available",
+    "content": "暂无可用数据库"
+  },
   "settings.theme": {
     "defaultMessage": "Theme",
     "content": "主题"
@@ -988,6 +1068,10 @@
     "defaultMessage": "Delete",
     "content": "删除"
   },
+  "task.delete_project": {
+    "defaultMessage": "Delete Project",
+    "content": "删除项目"
+  },
   "task.delete_task": {
     "defaultMessage": "Delete Task",
     "content": "删除任务"
@@ -1019,6 +1103,18 @@
   "tasks.due_date": {
     "defaultMessage": "Due Date",
     "content": "截止日期"
+  },
+  "tasks.edit_tags": {
+    "defaultMessage": "Edit tags",
+    "content": "编辑标签"
+  },
+  "tasks.location": {
+    "defaultMessage": "Location",
+    "content": "位置"
+  },
+  "tasks.location.null": {
+    "defaultMessage": "Set Location",
+    "content": "设置位置"
   },
   "tasks.mark_as_canceled": {
     "defaultMessage": "Mark as Canceled",
