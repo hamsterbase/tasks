@@ -1,4 +1,5 @@
 import { DatePickerOverlay } from '@/desktop/overlay/datePicker/DatePickerOverlay';
+import { TagEditorOverlay } from '@/desktop/overlay/tagEditor/TagEditorOverlay';
 import { CreateDatabaseOverlay } from '@/desktop/overlay/createDatabase/CreateDatabaseOverlay';
 import { DesktopDialog } from '@/desktop/overlay/desktopDialog/DesktopDialog';
 import { DesktopMenu } from '@/desktop/overlay/desktopMenu/DesktopMenu.tsx';
@@ -121,6 +122,7 @@ export const App = () => {
       {element}
       <DesktopMenu />
       <DatePickerOverlay />
+      <TagEditorOverlay />
       <DesktopDialog />
       <DesktopMessage />
       <CreateDatabaseOverlay />

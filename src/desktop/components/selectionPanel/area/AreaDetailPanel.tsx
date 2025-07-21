@@ -5,11 +5,12 @@ import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService';
 import { EditableTextArea } from '@/components/edit/EditableTextArea.tsx';
 import { areaTitleInputKey } from '@/components/edit/inputKeys.ts';
-import { MenuIcon, TagIcon } from '@/components/icons';
+import { MenuIcon } from '@/components/icons';
 import type { TreeID } from 'loro-crdt';
 import React from 'react';
 import { useParams } from 'react-router';
 import { useAreaDesktopProjectMenu } from './useAreaDesktopProjectMenu';
+import { TagsField } from '../../TagsField';
 
 const useAreaId = (): TreeID | null => {
   const todoService = useService(ITodoService);
@@ -63,23 +64,7 @@ const AreaDetailPanelContent: React.FC<IAreaDetailPanelContentProps> = ({ areaId
       <div className="flex-1 overflow-y-auto">
         <div className="p-6 space-y-6">
           <div>
-            <div className="flex items-center justify-between py-2 gap-3">
-              <div className="flex items-center gap-2 text-t2">
-                <TagIcon className="size-4" />
-                <span className="text-sm">{localize('area.detail.tags', 'Tags')}</span>
-              </div>
-              <div className="flex flex-wrap gap-1 justify-end">
-                {area.tags.length > 0 ? (
-                  area.tags.map((tag, index) => (
-                    <span key={index} className="text-brand rounded-md text-xs font-medium">
-                      #{tag}
-                    </span>
-                  ))
-                ) : (
-                  <span className="text-sm text-t3">-</span>
-                )}
-              </div>
-            </div>
+            <TagsField itemId={areaId} />
           </div>
         </div>
       </div>

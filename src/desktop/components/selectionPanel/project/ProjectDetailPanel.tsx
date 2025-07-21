@@ -1,6 +1,6 @@
 import { EditableTextArea } from '@/components/edit/EditableTextArea.tsx';
 import { projectTitleInputKey } from '@/components/edit/inputKeys.ts';
-import { DueIcon, MenuIcon, NoteIcon, ScheduledIcon, TagIcon } from '@/components/icons';
+import { DueIcon, MenuIcon, NoteIcon, ScheduledIcon } from '@/components/icons';
 import { getProject } from '@/core/state/getProject';
 import { useDatepicker } from '@/desktop/overlay/datePicker/useDatepicker';
 import { useService } from '@/hooks/use-service';
@@ -13,6 +13,7 @@ import { useParams } from 'react-router';
 import { TaskDateField } from '../components/TaskDateField';
 import { useDesktopProjectMenu } from './useDesktopProjectMenu';
 import { TaskLocationField } from '../components/TaskLocationField';
+import { TagsField } from '../../TagsField';
 
 const useProjectId = (): TreeID | null => {
   const todoService = useService(ITodoService);
@@ -151,23 +152,7 @@ const ProjectDetailPanelContent: React.FC<IProjectDetailPanelContentProps> = ({ 
               isDue={true}
             />
 
-            <div className="flex items-center justify-between py-2 gap-3">
-              <div className="flex items-center gap-2 text-t2">
-                <TagIcon className="size-4" />
-                <span className="text-sm">{localize('project.detail.tags', 'Tags')}</span>
-              </div>
-              <div className="flex flex-wrap gap-1 justify-end">
-                {project.tags.length > 0 ? (
-                  project.tags.map((tag, index) => (
-                    <span key={index} className="text-brand rounded-md text-xs font-medium">
-                      #{tag}
-                    </span>
-                  ))
-                ) : (
-                  <span className="text-sm text-t3">-</span>
-                )}
-              </div>
-            </div>
+            <TagsField itemId={projectId} />
 
             <div className="flex items-center justify-between py-2 gap-3">
               <div className="flex items-center gap-2 text-t2">

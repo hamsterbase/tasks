@@ -1,7 +1,7 @@
 import { useTaskItemActions } from '@/base/hooks/useTaskItemActions';
 import { EditableTextArea } from '@/components/edit/EditableTextArea.tsx';
 import { taskNotesInputKey, taskTitleInputKey } from '@/components/edit/inputKeys.ts';
-import { DueIcon, MenuIcon, NoteIcon, ScheduledIcon, TagIcon } from '@/components/icons';
+import { DueIcon, MenuIcon, NoteIcon, ScheduledIcon } from '@/components/icons';
 import { TaskInfo } from '@/core/state/type.ts';
 import { useTaskMenu } from '@/desktop/hooks/useTaskMenu.ts';
 import { localize } from '@/nls';
@@ -10,6 +10,7 @@ import { ClearSelectionButton } from './ClearSelectionButton';
 import { SubtaskList } from './SubtaskList';
 import { TaskDateField } from './components/TaskDateField';
 import { TaskLocationField } from './components/TaskLocationField';
+import { TagsField } from '../TagsField';
 import { useDatePickerHandlers } from './hooks/useDatePickerHandlers';
 
 interface TaskDetailViewProps {
@@ -91,23 +92,7 @@ export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task, onClearSel
               isDue={true}
             />
 
-            <div className="flex items-center justify-between py-2 gap-3">
-              <div className="flex items-center gap-2 text-t2">
-                <TagIcon className="size-4" />
-                <span className="text-sm">{localize('tasks.tags', 'Tags')}</span>
-              </div>
-              <div className="flex flex-wrap gap-1 justify-end">
-                {task.tags.length > 0 ? (
-                  task.tags.map((tag) => (
-                    <span key={tag} className="text-brand rounded-md text-xs font-medium">
-                      #{tag}
-                    </span>
-                  ))
-                ) : (
-                  <span className="text-sm text-t3">-</span>
-                )}
-              </div>
-            </div>
+            <TagsField itemId={task.id} />
             <SubtaskList task={task} />
           </div>
         </div>
