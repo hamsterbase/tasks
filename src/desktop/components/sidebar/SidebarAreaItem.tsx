@@ -55,7 +55,12 @@ export const SidebarAreaItem: React.FC<SidebarAreaItemProps> = ({ areaInfo }) =>
             <div className={desktopStyles.sidebarIconSize}>
               <AreaIcon />
             </div>
-            <span className={classNames({ 'text-t3': !areaInfo.title })}>
+            <span
+              className={classNames({
+                'text-t1': areaInfo.title,
+                'text-t3': !areaInfo.title,
+              })}
+            >
               {areaInfo.title || localize('area.untitled', 'New Area')}
             </span>
           </div>
@@ -66,7 +71,7 @@ export const SidebarAreaItem: React.FC<SidebarAreaItemProps> = ({ areaInfo }) =>
 
   return (
     <div>
-      <div ref={setNodeRef} style={style} {...attributes} {...listeners} className="pt-4">
+      <div ref={setNodeRef} style={style} {...attributes} {...listeners} className="pt-4 group">
         <Link
           to={`/desktop/area/${areaInfo.uid}`}
           className={classNames(desktopStyles.sidebarItemContainerStyle, {
@@ -90,13 +95,19 @@ export const SidebarAreaItem: React.FC<SidebarAreaItemProps> = ({ areaInfo }) =>
             >
               <AreaIcon />
             </div>
-            <span className={classNames('flex-1 truncate', { 'text-t3': !areaInfo.title })}>
+            <span
+              className={classNames('flex-1 truncate', {
+                'text-white': isActive,
+                'text-t1': !isActive && areaInfo.title,
+                'text-t3': !isActive && !areaInfo.title,
+              })}
+            >
               {areaInfo.title || localize('area.untitled', 'New Area')}
             </span>
             <button
               onClick={handleToggle}
               onPointerDown={(e) => e.stopPropagation()}
-              className="flex-shrink-0 p-1 hover:bg-bg2 rounded transition-colors"
+              className="flex-shrink-0 p-1 hover:bg-bg2 rounded transition-all opacity-0 group-hover:opacity-100"
             >
               <AreaExpandedIcon
                 className={classNames('size-3 text-t3 transition-transform', isExpanded ? 'rotate-90' : '')}

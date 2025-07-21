@@ -154,14 +154,14 @@ export const SidebarContent: React.FC = () => {
         <div className="flex gap-2">
           <button
             onClick={handleCreateMenu}
-            className="flex-1 flex items-center gap-2 px-3 py-2 text-sm text-t2 hover:bg-bg2 rounded-md transition-colors"
+            className="flex-1 flex items-center gap-2 px-3 py-2 text-sm text-t1 hover:bg-bg2 rounded-md transition-colors"
           >
             <PlusIcon className="size-4" />
             <span>{localize('sidebar.create_menu', 'Create New')}</span>
           </button>
           <Link
             to="/desktop/settings"
-            className="flex items-center justify-center px-3 py-2 text-sm text-t2 hover:bg-bg2 rounded-md transition-colors"
+            className="flex items-center justify-center px-3 py-2 text-sm text-t1 hover:bg-bg2 rounded-md transition-colors"
           >
             <SettingsIcon className="size-4" />
           </Link>

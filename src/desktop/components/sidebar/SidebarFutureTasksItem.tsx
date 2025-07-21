@@ -39,7 +39,7 @@ export const SidebarFutureTasksItem: React.FC<SidebarFutureTasksItemProps> = ({ 
           <div className={classNames(desktopStyles.sidebarIconSize, 'text-t3')}>
             <LaterProjectsIcon />
           </div>
-          <span className="flex-1">{localize('home.futureProjects', 'Future Projects')}</span>
+          <span className="flex-1 text-t1">{localize('home.futureProjects', 'Future Projects')}</span>
           {count !== undefined && count > 0 && (
             <span className="text-xs text-t3 bg-bg2 px-1.5 py-0.5 rounded">{count}</span>
           )}
