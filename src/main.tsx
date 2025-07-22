@@ -7,10 +7,9 @@ import './styles/main.css';
 
 function shouldLoadDesktop() {
   const pathname = location.pathname;
-  if (pathname.startsWith('/desktop')) {
-    return true;
+  if (pathname !== '/') {
+    return pathname.startsWith('/desktop');
   }
-
   // Check if user agent matches mobile device
   const userAgent = navigator.userAgent.toLowerCase();
   const isMobileDevice = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
