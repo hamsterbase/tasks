@@ -94,7 +94,7 @@ export const App = () => {
             {pages.map((page) => (
               <Route key={page.url} path={page.url} element={page.content} />
             ))}
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="*" element={<Navigate to="/home" replace />} />
           </Route>
         </Routes>
       </BrowserRouter>

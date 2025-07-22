@@ -115,6 +115,10 @@ export const App = () => {
         },
       ],
     },
+    {
+      path: '*',
+      element: <Navigate to="/desktop/inbox" replace />,
+    },
   ]);
 
   return (

@@ -5,14 +5,24 @@ import { startDesktop } from './desktop/main';
 import { startMobile } from './mobile/main';
 import './styles/main.css';
 
-function loadDesktop() {
-  if (location.href.includes('desktop')) {
+function shouldLoadDesktop() {
+  const pathname = location.pathname;
+  if (pathname.startsWith('/desktop')) {
     return true;
   }
-  return sessionStorage.getItem('desktop') === 'true';
+
+  // Check if user agent matches mobile device
+  const userAgent = navigator.userAgent.toLowerCase();
+  const isMobileDevice = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
+
+  if (isMobileDevice) {
+    return false;
+  }
+
+  return true;
 }
 
-if (loadDesktop()) {
+if (shouldLoadDesktop()) {
   startDesktop();
 } else {
   startMobile();

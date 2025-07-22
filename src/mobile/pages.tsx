@@ -28,7 +28,7 @@ interface IPage {
 
 export const pages: IPage[] = [
   {
-    url: '/',
+    url: '/home',
     content: <MobileHome></MobileHome>,
   },
   {
