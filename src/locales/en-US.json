@@ -124,6 +124,10 @@
     "defaultMessage": "Delete Area",
     "content": "Delete Area"
   },
+  "area.detail.tags": {
+    "defaultMessage": "Tags",
+    "content": "Tags"
+  },
   "area.detail.titlePlaceholder": {
     "defaultMessage": "Enter area title...",
     "content": "Enter area title..."
@@ -731,6 +735,10 @@
   "project.detail.progress": {
     "defaultMessage": "Progress",
     "content": "Progress"
+  },
+  "project.detail.tags": {
+    "defaultMessage": "Tags",
+    "content": "Tags"
   },
   "project.detail.titlePlaceholder": {
     "defaultMessage": "Enter project title...",

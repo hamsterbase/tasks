@@ -63,10 +63,10 @@ export const TagsField: React.FC<ITagsFieldProps> = ({ itemId }) => {
 
   const labelKey =
     itemData.itemType === 'project'
-      ? 'project.detail.tags'
+      ? localize('project.detail.tags', 'Tags')
       : itemData.itemType === 'area'
-        ? 'area.detail.tags'
-        : 'tasks.tags';
+        ? localize('area.detail.tags', 'Tags')
+        : localize('tasks.tags', 'Tags');
 
   return (
     <div
@@ -75,7 +75,7 @@ export const TagsField: React.FC<ITagsFieldProps> = ({ itemId }) => {
     >
       <div className="flex items-center gap-2 text-t2">
         <TagIcon className="size-4" />
-        <span className="text-sm">{localize(labelKey, 'Tags')}</span>
+        <span className="text-sm">{labelKey}</span>
       </div>
       <div className="flex flex-wrap gap-1 justify-end">
         {itemData.tags.length > 0 ? (

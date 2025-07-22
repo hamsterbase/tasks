@@ -104,7 +104,7 @@ const ProjectDetailPanelContent: React.FC<IProjectDetailPanelContentProps> = ({ 
         <EditableTextArea
           inputKey={projectTitleInputKey(projectId)}
           defaultValue={project.title}
-          placeholder={localize('project.detail.titlePlaceholder', 'Enter project title...')}
+          placeholder={localize('project.untitled', 'New Project')}
           onSave={handleTitleSave}
           className="flex-1 text-xl font-medium outline-none"
           autoSize={{ minRows: 1 }}

@@ -124,6 +124,10 @@
     "defaultMessage": "Delete Area",
     "content": "删除区域"
   },
+  "area.detail.tags": {
+    "defaultMessage": "Tags",
+    "content": "标签"
+  },
   "area.detail.titlePlaceholder": {
     "defaultMessage": "Enter area title...",
     "content": "输入区域标题..."
@@ -731,6 +735,10 @@
   "project.detail.progress": {
     "defaultMessage": "Progress",
     "content": "进度"
+  },
+  "project.detail.tags": {
+    "defaultMessage": "Tags",
+    "content": "标签"
   },
   "project.detail.titlePlaceholder": {
     "defaultMessage": "Enter project title...",

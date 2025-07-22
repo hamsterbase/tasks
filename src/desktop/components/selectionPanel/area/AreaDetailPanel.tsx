@@ -49,7 +49,7 @@ const AreaDetailPanelContent: React.FC<IAreaDetailPanelContentProps> = ({ areaId
         <EditableTextArea
           inputKey={areaTitleInputKey(areaId)}
           defaultValue={area.title}
-          placeholder={localize('area.detail.titlePlaceholder', 'Enter area title...')}
+          placeholder={localize('area.untitled', 'New Area')}
           onSave={handleTitleSave}
           className="flex-1 text-xl font-medium outline-none"
           autoSize={{ minRows: 1 }}

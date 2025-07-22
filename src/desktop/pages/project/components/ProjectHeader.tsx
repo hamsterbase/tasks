@@ -30,7 +30,7 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({ project, projectId
   const location = useLocation();
   const state = location.state as { focusInput?: string };
   useEffect(() => {
-    if (state?.focusInput) {
+    if (state?.focusInput && !project.title) {
       editService.focusInput(state.focusInput);
     }
   }, [state?.focusInput, editService]);
