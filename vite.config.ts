@@ -4,9 +4,21 @@ import path from 'path';
 import topLevelAwait from 'vite-plugin-top-level-await';
 import wasm from 'vite-plugin-wasm';
 import { defineConfig } from 'vite';
+import { execSync } from 'child_process';
 import IstanbulPlugin from './src/packages/vite-plugin-istanbul/index';
 
+function getGitCommitHash() {
+  try {
+    return execSync('git rev-parse HEAD', { encoding: 'utf8' }).trim();
+  } catch {
+    return 'unknown';
+  }
+}
+
 export default defineConfig({
+  define: {
+    __PROJECT_COMMIT_HASH__: JSON.stringify(getGitCommitHash()),
+  },
   build: {
     target: 'es2020',
     sourcemap: true,

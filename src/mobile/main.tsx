@@ -57,12 +57,6 @@ export const startMobile = async () => {
   createRoot(document.getElementById('root')!).render(
     <StrictMode>
       <GlobalContext.Provider value={globalContext}>
-        {/* <div>
-          <div className="fixed w-[1px] h-[100vh] bg-red-500 z-100000 left-6"></div>
-          <div className="fixed w-[1px] h-[100vh] bg-blue-500 z-100000 left-8"></div>
-          <div className="fixed w-[1px] h-[100vh] bg-blue-500 z-100000 left-12.5"></div>
-          <div className="fixed w-[1px] h-[100vh] bg-red-500 z-100000 right-6"></div>
-        </div> */}
         <App />
       </GlobalContext.Provider>
     </StrictMode>

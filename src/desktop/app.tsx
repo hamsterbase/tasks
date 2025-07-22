@@ -24,9 +24,11 @@ import { SyncSettings } from './pages/settings/databases/SyncSettings.tsx';
 import { ImportExportSettings } from './pages/settings/ImportExportSettings';
 import { SettingsLayout } from './pages/settings/SettingsLayout';
 import { Today } from './pages/today/index.tsx';
+import { useCloudSync } from '@/hooks/useCloudSync.ts';
 
 export const App = () => {
   useInputFocused();
+  useCloudSync();
   const element = useRoutes([
     {
       path: '/desktop',

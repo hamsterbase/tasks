@@ -1,17 +1,15 @@
 import { useService } from '@/hooks/use-service';
-import { useWatchEvent } from '@/hooks/use-watch-event';
+import { useCloudSync } from '@/hooks/useCloudSync';
 import { DatePickerActionSheet } from '@/mobile/overlay/datePicker/DatePickerActionSheet.tsx';
 import { Dialog } from '@/mobile/overlay/dialog/Dialog';
 import { PopupActionSheet } from '@/mobile/overlay/popupAction/PopupActionSheet';
 import { TagEditorActionSheet } from '@/mobile/overlay/tagEditor/TagEditorActionSheet';
 import { TaskDisplaySettings } from '@/mobile/overlay/taskDisplaySettings/TaskDisplaySettings';
 import { pages } from '@/mobile/pages.tsx';
-import { ICloudService } from '@/services/cloud/common/cloudService';
 import { INavigationService } from '@/services/navigationService/common/navigationService';
 import { SafeArea } from 'capacitor-plugin-safe-area';
 import React, { useEffect, useRef } from 'react';
 import { BrowserRouter, Navigate, Outlet, Route, Routes, useNavigate } from 'react-router';
-import useSWR from 'swr';
 import { Toast } from './overlay/toast/Toast';
 import { ProjectAreaSelector } from './overlay/projectAreaSelector/ProjectAreaSelector';
 import { ISwitchService } from '@/services/switchService/common/switchService';
@@ -52,19 +50,8 @@ const ContentNavigation = () => {
 };
 
 export const App = () => {
-  const cloundService = useService(ICloudService);
-  useWatchEvent(cloundService.onSessionChange);
+  useCloudSync();
   const switchService = useService(ISwitchService);
-  useSWR(
-    'autoSync',
-    () => {
-      return cloundService.sync();
-    },
-    {
-      refreshInterval: 1000 * 60 * 5,
-      revalidateOnFocus: true,
-    }
-  );
 
   useEffect(() => {
     (async function () {

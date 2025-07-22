@@ -1,6 +1,7 @@
 import { LogEntry, LogLevel } from '../common/webloggerService';
 import { generateUuid } from 'vscf/base/common/uuid';
 import { nanoid } from 'nanoid';
+import { PROJECT_COMMIT_HASH } from '@/base/common/version';
 
 export class WebLoggerIndexedDBStorage {
   private static readonly DB_NAME = 'weblogger';
@@ -21,6 +22,11 @@ export class WebLoggerIndexedDBStorage {
   constructor() {
     this.instanceId = nanoid(5);
     this.tabId = this.getOrCreateTabId();
+
+    this.saveLog(
+      LogLevel.LOG,
+      `WebLogger initialized with instanceId: ${this.instanceId}, tabId: ${this.tabId}, version: ${PROJECT_COMMIT_HASH}`
+    );
   }
 
   private getOrCreateTabId(): string {
