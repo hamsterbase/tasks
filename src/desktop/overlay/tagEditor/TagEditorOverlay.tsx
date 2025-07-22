@@ -32,7 +32,7 @@ export const TagEditorOverlay: React.FC = () => {
         block: 'nearest',
       });
     }
-  }, [controller?.focusedIndex]);
+  }, [controller?.focusedIndex, controller]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     controller?.updateSearchText(e.target.value);
