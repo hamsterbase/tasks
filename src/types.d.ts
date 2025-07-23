@@ -73,3 +73,13 @@ declare module 'espree' {
   // https://github.com/eslint/espree#tokenize
   export function tokenize(code: string, options?: Options): any;
 }
+
+interface ElectronAPI {
+  isFullscreen(): Promise<boolean>;
+}
+
+declare global {
+  interface Window {
+    electronAPI?: ElectronAPI;
+  }
+}

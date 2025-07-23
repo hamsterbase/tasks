@@ -5,6 +5,7 @@ import electron from 'electron';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
 import { watch } from 'fs';
+import fs from 'fs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -15,10 +16,21 @@ async function compileElectron() {
   return new Promise((resolve, reject) => {
     spawn('npx', ['tsc', '-p', 'tsconfig.electron.json'], {
       stdio: 'inherit',
-      shell: true
+      shell: true,
     }).on('exit', (code) => {
       if (code === 0) {
-        resolve();
+        // Copy preload.js file
+        const srcPreload = path.join(__dirname, '../src/electron/preload.js');
+        const distPreload = path.join(__dirname, '../dist/electron/preload.js');
+
+        try {
+          fs.copyFileSync(srcPreload, distPreload);
+          console.log('[electron] Copied preload.js');
+          resolve();
+        } catch (err) {
+          console.error('[electron] Failed to copy preload.js:', err);
+          reject(err);
+        }
       } else {
         reject(new Error('TypeScript compilation failed'));
       }
@@ -34,10 +46,10 @@ async function runDev() {
     const server = await createServer({
       configFile: path.join(__dirname, '../vite.config.ts'),
     });
-    
+
     await server.listen();
     server.printUrls();
-    
+
     return server;
   }
 
@@ -45,7 +57,7 @@ async function runDev() {
     if (electronRestartLock) {
       return;
     }
-    
+
     electronRestartLock = true;
 
     if (electronProcess) {
@@ -54,13 +66,13 @@ async function runDev() {
 
     electronProcess = spawn(electron, ['--enable-logging', path.join(__dirname, '../dist/electron/main.js')], {
       env: { ...process.env, NODE_ENV: 'development' },
-      stdio: 'inherit'
+      stdio: 'inherit',
     });
 
     electronProcess.on('exit', () => {
       electronRestartLock = false;
       electronProcess = null;
-      
+
       if (!process.env.ELECTRON_STOP_ON_CLOSE) {
         process.exit();
       }
@@ -69,17 +81,19 @@ async function runDev() {
 
   function watchElectronFiles() {
     const electronPath = path.join(__dirname, '../src/electron');
-    
+
     watch(electronPath, { recursive: true }, (_, filename) => {
-      if (filename && filename.endsWith('.ts')) {
+      if (filename && (filename.endsWith('.ts') || filename.endsWith('.js'))) {
         console.log(`\n[electron] Detected change in ${filename}, recompiling...`);
-        
-        compileElectron().then(() => {
-          console.log('[electron] Recompilation successful, restarting...');
-          startElectron();
-        }).catch(err => {
-          console.error('[electron] Recompilation failed:', err);
-        });
+
+        compileElectron()
+          .then(() => {
+            console.log('[electron] Recompilation successful, restarting...');
+            startElectron();
+          })
+          .catch((err) => {
+            console.error('[electron] Recompilation failed:', err);
+          });
       }
     });
   }
@@ -88,18 +102,17 @@ async function runDev() {
     // Start Vite dev server
     console.log('[vite] Starting development server...');
     await startVite();
-    
+
     // Initial TypeScript compilation
     console.log('\n[electron] Compiling TypeScript files...');
     await compileElectron();
-    
+
     // Start Electron
     console.log('[electron] Starting Electron...\n');
     startElectron();
-    
+
     // Watch for changes
     watchElectronFiles();
-    
   } catch (error) {
     console.error('Error starting development server:', error);
     process.exit(1);
@@ -111,14 +124,14 @@ async function runMain() {
     // Compile TypeScript
     console.log('[electron] Compiling TypeScript files...');
     await compileElectron();
-    
+
     console.log('[electron] Starting Electron...');
-    
+
     // Start Electron
     const electronProcess = spawn(electron, [path.join(__dirname, '../dist/electron/main.js')], {
-      stdio: 'inherit'
+      stdio: 'inherit',
     });
-    
+
     electronProcess.on('exit', (code) => {
       process.exit(code);
     });

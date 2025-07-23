@@ -1,9 +1,12 @@
 import { app, BrowserWindow, ipcMain, shell } from 'electron';
+import * as path from 'path';
 
 let mainWindow: BrowserWindow | null = null;
 
 const isDev = process.env.NODE_ENV === 'development';
 const isMac = process.platform === 'darwin';
+
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 function createWindow() {
   const windowOptions: Electron.BrowserWindowConstructorOptions = {
@@ -12,6 +15,7 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
+      preload: path.join(__dirname, 'preload.js'),
     },
   };
 
@@ -59,4 +63,23 @@ app.on('window-all-closed', () => {
 
 ipcMain.handle('get-version', () => {
   return app.getVersion();
+});
+
+ipcMain.handle('is-fullscreen', () => {
+  return mainWindow?.isFullScreen() || false;
+});
+
+ipcMain.handle('on-fullscreen-change', () => {
+  return new Promise((resolve) => {
+    if (mainWindow) {
+      const window = mainWindow;
+      const listener = () => {
+        resolve(window.isFullScreen());
+        window.off('enter-full-screen', listener);
+        window.off('leave-full-screen', listener);
+      };
+      window.on('enter-full-screen', listener);
+      window.on('leave-full-screen', listener);
+    }
+  });
 });
