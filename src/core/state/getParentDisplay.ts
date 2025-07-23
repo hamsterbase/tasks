@@ -59,7 +59,7 @@ export function getParentDisplay(modelState: ITaskModelData, itemId: TreeID): Pa
             status: projectInfo.status,
             color: 't3',
           },
-          title: parentObject.title || localize('project.untitled', 'New Project'),
+          title: projectInfo.title || localize('project.untitled', 'New Project'),
         };
       }
     }
