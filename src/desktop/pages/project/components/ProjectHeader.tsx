@@ -33,7 +33,7 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({ project, projectId
     if (state?.focusInput && !project.title) {
       editService.focusInput(state.focusInput);
     }
-  }, [state?.focusInput, editService]);
+  }, [state?.focusInput, editService, project.title]);
 
   const handleAddHeading = () => {
     const headingId = flushSync(() => {

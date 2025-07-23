@@ -13,6 +13,7 @@ export const DatabaseList: React.FC = () => {
   const cloudService = useService(ICloudService);
   useWatchEvent(cloudService.onSessionChange);
   const createDatabaseOverlay = useCreateDatabaseOverlay();
+  const isLoggedIn = cloudService.config.type === 'login';
 
   const {
     data: databases,
@@ -81,12 +82,14 @@ export const DatabaseList: React.FC = () => {
     <div className="bg-bg2 rounded-lg p-4">
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-medium text-t1">{localize('settings.cloud.database', 'Database')}</h3>
-        <button
-          className="px-3 py-1.5 text-sm font-medium text-white bg-brand border border-brand rounded hover:bg-brand-hover focus:outline-none transition-colors"
-          onClick={() => createDatabaseOverlay({ onSuccess: () => mutate() })}
-        >
-          {localize('settings.createDatabase.title', 'Create Cloud Database')}
-        </button>
+        {isLoggedIn && (
+          <button
+            className="px-3 py-1.5 text-sm font-medium text-white bg-brand border border-brand rounded hover:bg-brand-hover focus:outline-none transition-colors"
+            onClick={() => createDatabaseOverlay({ onSuccess: () => mutate() })}
+          >
+            {localize('settings.createDatabase.title', 'Create Cloud Database')}
+          </button>
+        )}
       </div>
 
       <div className="space-y-2">

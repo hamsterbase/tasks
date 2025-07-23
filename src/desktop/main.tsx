@@ -1,3 +1,4 @@
+import { checkPlatform } from '@/base/browser/checkPlatform';
 import { initializeTheme, watchThemeChange } from '@/base/browser/initializeTheme';
 import { initKeyboardListeners } from '@/base/browser/initKeyboardListeners';
 import '@/base/commands/desktop';
@@ -17,18 +18,18 @@ import { IWorkbenchOverlayService, WorkbenchOverlayService } from '@/services/ov
 import { ISwitchService, SwitchService } from '@/services/switchService/common/switchService';
 import { WorkbenchTodoService } from '@/services/todo/browser/workbenchTodoService';
 import { ITodoService } from '@/services/todo/common/todoService';
+import { WorkbenchWebLoggerService } from '@/services/weblogger/browser/workbenchWebLoggerService';
+import { IWebLoggerService } from '@/services/weblogger/common/webloggerService';
 import 'allotment/dist/style.css';
 import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router';
+import { BrowserRouter, HashRouter } from 'react-router';
 import { ICommandService } from 'vscf/platform/commands/common';
 import { ContextKeyService } from 'vscf/platform/contextkey/browser';
 import { IContextKeyService } from 'vscf/platform/contextkey/common';
 import { InstantiationService, ServiceCollection, SyncDescriptor } from 'vscf/platform/instantiation/common';
 import { IKeybindingService } from 'vscf/platform/keybinding/common';
 import { App } from './app';
-import { IWebLoggerService } from '@/services/weblogger/common/webloggerService';
-import { WorkbenchWebLoggerService } from '@/services/weblogger/browser/workbenchWebLoggerService';
 
 export async function startDesktop() {
   initializeTheme();
@@ -65,12 +66,15 @@ export async function startDesktop() {
     instantiationService,
   };
 
+  const { isElectron } = checkPlatform();
+  const Router = isElectron ? HashRouter : BrowserRouter;
+
   createRoot(document.getElementById('root')!).render(
     <StrictMode>
       <GlobalContext.Provider value={globalContext}>
-        <BrowserRouter>
+        <Router>
           <App></App>
-        </BrowserRouter>
+        </Router>
       </GlobalContext.Provider>
     </StrictMode>
   );

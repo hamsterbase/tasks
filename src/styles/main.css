@@ -6,5 +6,6 @@
 @import './dark-theme.css';
 @import './eink-theme.css';
 @import './utils.css';
+@import './electron.css';
 
 @import './reset.css';

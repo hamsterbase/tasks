@@ -16,6 +16,7 @@ function getGitCommitHash() {
 }
 
 export default defineConfig({
+  base: './',
   define: {
     __PROJECT_COMMIT_HASH__: JSON.stringify(getGitCommitHash()),
   },

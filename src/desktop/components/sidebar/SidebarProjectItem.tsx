@@ -7,6 +7,7 @@ import classNames from 'classnames';
 import React from 'react';
 import { Link, useLocation } from 'react-router';
 import { desktopStyles } from '../../theme/main';
+import { TaskItemDueDate } from '../taskListItem/TaskItemDueDate';
 
 interface SidebarProjectItemProps {
   projectInfo: ProjectInfoState;
@@ -59,6 +60,9 @@ export const SidebarProjectItem: React.FC<SidebarProjectItemProps> = ({ projectI
           >
             {projectInfo.title || localize('project.untitled', 'New Project')}
           </span>
+          {projectInfo.dueDate && (
+            <TaskItemDueDate dueDate={projectInfo.dueDate} hideIcon textColor={isActive ? 'text-white' : null} />
+          )}
         </div>
       </Link>
     </div>

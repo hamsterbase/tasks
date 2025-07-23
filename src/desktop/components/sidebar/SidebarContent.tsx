@@ -1,4 +1,5 @@
 import { getTodayTimestampInUtc } from '@/base/common/time';
+import { checkPlatform } from '@/base/browser/checkPlatform';
 import { PlusIcon, SettingsIcon } from '@/components/icons';
 import { FlattenedResult } from '@/core/state/home/flattenedItemsToResult';
 import { flattenRootCollections } from '@/core/state/home/getFlattenRootCollections';
@@ -132,9 +133,14 @@ export const SidebarContent: React.FC = () => {
   };
 
   const futureProjects = getFutureProjects(todoService.modelState, getTodayTimestampInUtc());
+  const { isElectron, isMac } = checkPlatform();
+
   return (
     <div className={classNames(desktopStyles.sidebarBackground, desktopStyles.sidebarContainerStyle)}>
-      <div className="flex flex-col h-full gap-2">
+      <div className={classNames('flex flex-col h-full gap-2')}>
+        {isElectron && isMac && (
+          <div className="h-7 w-full" style={{ WebkitAppRegion: 'drag', cursor: 'move' } as React.CSSProperties} />
+        )}
         <SidebarNavigation />
         <div className="flex-1 overflow-y-auto">
           <DndContext
