@@ -27,7 +27,12 @@ cli
 
 cli.command('electronDev', 'Start Electron development server').action(electronDevCommand);
 
-cli.command('electronBuild', 'Build Electron application').action(electronBuildCommand);
+cli
+  .command('electronBuild', 'Build Electron application')
+  .option('--release', 'Enable release mode')
+  .action((options) => {
+    electronBuildCommand(options);
+  });
 
 cli.command('electronPack', 'Package Electron application').action(async () => {
   await electronPackCommand();
