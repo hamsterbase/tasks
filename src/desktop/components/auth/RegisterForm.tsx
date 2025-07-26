@@ -3,6 +3,7 @@ import { useService } from '@/hooks/use-service';
 import { localize } from '@/nls';
 import { ICloudService } from '@/services/cloud/common/cloudService';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 
 interface RegisterFormProps {
   onSwitchToLogin: () => void;
@@ -10,6 +11,7 @@ interface RegisterFormProps {
 
 export const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin }) => {
   const cloudService = useService(ICloudService);
+  const navigate = useNavigate();
   const [account, setAccount] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -18,11 +20,11 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin }) =
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleOpenPrivacy = () => {
-    window.open('/desktop/privacy', '_blank', 'width=800,height=600');
+    navigate('/desktop/privacy');
   };
 
   const handleOpenEULA = () => {
-    window.open('/desktop/eula', '_blank', 'width=800,height=600');
+    navigate('/desktop/eula');
   };
 
   const handleSubmit = async () => {
@@ -107,7 +109,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin }) =
       {errorMessage && <div className="text-red-500 text-sm">{errorMessage}</div>}
 
       <button
-        className="w-full py-2 px-4 bg-accent text-white rounded-md hover:bg-accent/90 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full py-2 px-4 bg-accent text-t1 rounded-md hover:bg-accent/90 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
         onClick={handleSubmit}
         disabled={isLoading || !account || !password || !confirmPassword || !agreedToTerms}
       >

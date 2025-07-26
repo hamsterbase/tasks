@@ -1,6 +1,6 @@
 import { app, BrowserWindow, ipcMain, shell } from 'electron';
-import * as path from 'path';
 import * as os from 'os';
+import * as path from 'path';
 import { ElectronDatabaseService } from './databaseService';
 
 let mainWindow: BrowserWindow | null = null;
@@ -21,10 +21,7 @@ const basePath = path.join(homeDir, 'Library', 'Application Support', appName);
 
 const databaseService: ElectronDatabaseService = new ElectronDatabaseService(basePath);
 
-const isDev = process.env.NODE_ENV === 'development';
 const isMac = process.platform === 'darwin';
-
-const __dirname = path.dirname(decodeURIComponent(new URL(import.meta.url).pathname));
 
 function createWindow() {
   const windowOptions: Electron.BrowserWindowConstructorOptions = {
@@ -33,7 +30,7 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
-      preload: path.join(__dirname, 'preload.js'),
+      preload: path.join(app.getAppPath(), 'preload.js'),
     },
   };
 
@@ -47,12 +44,7 @@ function createWindow() {
   }
 
   mainWindow = new BrowserWindow(windowOptions);
-
-  if (isDev) {
-    mainWindow.loadURL('http://localhost:5173');
-  } else {
-    mainWindow.loadFile('frontend/index.html');
-  }
+  mainWindow.loadFile(path.join(app.getAppPath(), 'frontend', 'index.html'));
   mainWindow.webContents.setWindowOpenHandler(({ url }) => {
     shell.openExternal(url);
     return { action: 'deny' };

@@ -1,14 +1,13 @@
 import { buildElectron } from '../utils/buildElectron.js';
 import { startElectronProcess } from '../utils/startElectronProcess.js';
-import { startViteServer } from '../utils/vite-server.js';
+import { startViteBuildWatch } from '../utils/vite-build-watch.js';
 
 export async function electronDevCommand() {
   try {
     // Build Electron with Rollup
     console.log('[electron] Building Electron...');
     await buildElectron({ sourcemap: true });
-
-    await startViteServer();
+    await startViteBuildWatch();
 
     // Start Electron
     console.log('[electron] Starting Electron...\n');
