@@ -7,6 +7,7 @@ import { resolveRoot } from '../utils/paths.js';
 import { getDarwinArm64Config } from './electronPack/config/darwin-arm64.js';
 import { checkUncommittedChanges } from '../utils/git.js';
 import { validateReleaseConfigs } from '../utils/release.js';
+import { createTempDir } from '../utils/createTempDir.js';
 
 interface ElectronPackOptions {
   release?: boolean;
@@ -32,6 +33,12 @@ export async function electronPackCommand(options: ElectronPackOptions = {}) {
       const electronDistPath = resolveRoot('electron-dist');
 
       validateReleaseConfigs(distPath, electronDistPath);
+
+      const loadEnvSuccess = await loadElectronPackEnv();
+      if (!loadEnvSuccess) {
+        console.error('[electron] Error: Failed to load environment variables from electronPackEnv.json');
+        process.exit(1);
+      }
     }
 
     // Ensure electron-dist directory exists
@@ -45,18 +52,12 @@ export async function electronPackCommand(options: ElectronPackOptions = {}) {
 
     const tempDir = await createTempBuildDir();
     console.log(`[electron] Temporary build directory created at: ${tempDir}`);
-    const loadEnvSuccess = await loadElectronPackEnv();
-    if (!loadEnvSuccess) {
-      console.error('[electron] Error: Failed to load environment variables from electronPackEnv.json');
-      process.exit(1);
-    }
-
-    const tempOutputDir = await createTempBuildDir();
+    const tempOutputDir = await createTempDir();
 
     const darwinArm64Config = getDarwinArm64Config({
       appDirectory: tempDir,
       outputDirectory: tempOutputDir,
-      codeSign: false,
+      codeSign: !!options.release,
     });
 
     const buildResult = await build(darwinArm64Config);
