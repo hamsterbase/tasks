@@ -20,6 +20,7 @@ cli
   .command('webBuild', 'Build Vite project')
   .option('--coverage', 'Enable coverage mode')
   .option('--use-relative-base', 'Use relative base path (./) instead of absolute (/)')
+  .option('--release', 'Enable release mode')
   .action((options) => {
     webBuildCommand(options);
   });
