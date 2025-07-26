@@ -4,7 +4,7 @@ import * as os from 'os';
 import * as path from 'path';
 import { resolveRoot } from './paths';
 
-export async function createTempBuildDir() {
+export async function createTempBuildDir(version?: string | null): Promise<string> {
   const tempDirBase = await fs.realpath(os.tmpdir());
   const tempDir = await fs.mkdtemp(path.join(tempDirBase, 'tasks-build-'));
 
@@ -21,7 +21,7 @@ export async function createTempBuildDir() {
   const originalPackage = JSON.parse(await fs.readFile(resolveRoot('package.json'), 'utf-8'));
   const minimalPackage = {
     name: originalPackage.name,
-    version: originalPackage.version,
+    version: version || originalPackage.version,
     main: 'main.js',
     devDependencies: {
       electron: originalPackage.devDependencies.electron,

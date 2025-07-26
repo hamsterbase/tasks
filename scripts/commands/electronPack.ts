@@ -2,6 +2,7 @@ import { build } from 'electron-builder';
 import { promises as fs } from 'fs';
 import path, { join } from 'path';
 import { createTempBuildDir } from '../utils/createTempBuildDir.js';
+import { getLatestVersionForTarget } from '../utils/getLatestVersionForTarget.js';
 import { loadElectronPackEnv } from '../utils/loadEnv.js';
 import { resolveRoot } from '../utils/paths.js';
 import { getDarwinArm64Config } from './electronPack/config/darwin-arm64.js';
@@ -74,7 +75,23 @@ export async function electronPackCommand(options: ElectronPackOptions) {
       process.exit(1);
     }
 
-    const tempDir = await createTempBuildDir();
+    let version: string | null = null;
+
+    if (options.release) {
+      // In release mode, get version from git tags
+      const latestVersion = getLatestVersionForTarget(target);
+      if (latestVersion) {
+        console.log(`[electron] Using version from git tag: ${latestVersion}`);
+        version = latestVersion;
+      } else {
+        console.error(
+          `[electron] Error: No matching git tag found for target '${target}' in release mode. Expected format: ${target}-x.y.z`
+        );
+        process.exit(1);
+      }
+    }
+
+    const tempDir = await createTempBuildDir(version);
     console.log(`[electron] Temporary build directory created at: ${tempDir}`);
     const tempOutputDir = await createTempDir();
 
