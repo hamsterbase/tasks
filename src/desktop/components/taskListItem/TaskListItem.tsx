@@ -37,6 +37,18 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
     id: task.id,
   });
 
+  const dragListeners = {
+    ...listeners,
+    onMouseDown: (e: React.MouseEvent) => {
+      // Prevent drag when interacting with input elements or their containers
+      const target = e.target as HTMLElement;
+      if (target.closest('input') || target.closest('[data-no-drag]')) {
+        return;
+      }
+      listeners?.onMouseDown?.(e);
+    },
+  };
+
   const style = {
     transform: CSS.Transform.toString(transform),
     opacity: isDragging ? 0.6 : 1,
@@ -77,7 +89,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
       ref={setNodeRef}
       style={style}
       {...attributes}
-      {...listeners}
+      {...dragListeners}
       className={classNames('group relative flex items-center gap-2 px-3 py-2 rounded-md', {
         'opacity-50': willDisappear,
         'bg-bg3': isFocused && isSelected && !isDragging,

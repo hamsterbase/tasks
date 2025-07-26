@@ -28,3 +28,5 @@ android/app/release/
 .cursor
 .claude
 scripts/env.json
+electron-dist
+scripts/electronPackEnv.json

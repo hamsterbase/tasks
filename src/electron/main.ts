@@ -1,12 +1,30 @@
 import { app, BrowserWindow, ipcMain, shell } from 'electron';
 import * as path from 'path';
+import * as os from 'os';
+import { ElectronDatabaseService } from './databaseService';
 
 let mainWindow: BrowserWindow | null = null;
+
+// Platform check
+if (process.platform !== 'darwin') {
+  console.error(`Platform ${process.platform} is not supported yet`);
+  app.quit();
+}
+
+// Determine base path for database storage
+const homeDir = os.homedir();
+if (!homeDir) {
+  throw new Error('Home directory not found');
+}
+const appName = 'HamsterBaseTasks';
+const basePath = path.join(homeDir, 'Library', 'Application Support', appName);
+
+const databaseService: ElectronDatabaseService = new ElectronDatabaseService(basePath);
 
 const isDev = process.env.NODE_ENV === 'development';
 const isMac = process.platform === 'darwin';
 
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
+const __dirname = path.dirname(decodeURIComponent(new URL(import.meta.url).pathname));
 
 function createWindow() {
   const windowOptions: Electron.BrowserWindowConstructorOptions = {
@@ -33,7 +51,7 @@ function createWindow() {
   if (isDev) {
     mainWindow.loadURL('http://localhost:5173');
   } else {
-    mainWindow.loadFile('dist/index.html');
+    mainWindow.loadFile('frontend/index.html');
   }
   mainWindow.webContents.setWindowOpenHandler(({ url }) => {
     shell.openExternal(url);
@@ -61,25 +79,39 @@ app.on('window-all-closed', () => {
   }
 });
 
-ipcMain.handle('get-version', () => {
-  return app.getVersion();
-});
-
 ipcMain.handle('is-fullscreen', () => {
   return mainWindow?.isFullScreen() || false;
 });
 
-ipcMain.handle('on-fullscreen-change', () => {
-  return new Promise((resolve) => {
-    if (mainWindow) {
-      const window = mainWindow;
-      const listener = () => {
-        resolve(window.isFullScreen());
-        window.off('enter-full-screen', listener);
-        window.off('leave-full-screen', listener);
-      };
-      window.on('enter-full-screen', listener);
-      window.on('leave-full-screen', listener);
+// Service registry
+const services: Record<string, unknown> = {
+  databaseService: databaseService,
+};
+
+// Generic service handler
+ipcMain.handle('service-channel-call', async (_event, { serviceName, method, args }) => {
+  try {
+    const service = services[serviceName];
+    if (!service) {
+      throw new Error(`Service '${serviceName}' not found`);
     }
-  });
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const serviceMethod = (service as any)[method];
+    if (typeof serviceMethod !== 'function') {
+      throw new Error(`Method '${method}' not found on service '${serviceName}'`);
+    }
+
+    return await serviceMethod.apply(service, args);
+  } catch (error) {
+    // Return error with message and stack trace
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const errorStack = error instanceof Error ? error.stack : undefined;
+
+    return {
+      __isError: true,
+      message: errorMessage,
+      stack: errorStack,
+    };
+  }
 });

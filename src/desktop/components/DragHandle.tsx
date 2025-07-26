@@ -1,14 +1,6 @@
 import { checkPlatform } from '@/base/browser/checkPlatform';
 import React, { useEffect, useState } from 'react';
 
-declare global {
-  interface Window {
-    electronAPI?: {
-      isFullscreen(): Promise<boolean>;
-    };
-  }
-}
-
 export const DragHandle: React.FC = () => {
   const [fullscreen, setFullscreen] = useState(false);
   const { isElectron, isMac } = checkPlatform();

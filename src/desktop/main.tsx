@@ -9,6 +9,7 @@ import { LocalStorageConfigStore } from '@/services/config/browser/localStorageC
 import { IConfigService, WorkbenchConfig } from '@/services/config/configService';
 import { IndexdbDatabaseService } from '@/services/database/browser/indexdbDatabaseService';
 import { IDatabaseService } from '@/services/database/common/database';
+import { ElectronFsDatabaseService } from '@/services/database/native/electronFsDatabaseService';
 import { EditService, IEditService } from '@/services/edit/common/editService';
 import { IWorkbenchInstanceService, WorkbenchInstanceService } from '@/services/instance/common/instanceService';
 import { StandaloneKeybindingService } from '@/services/keybinding/browser/standaloneKeybindingService';
@@ -35,13 +36,18 @@ export async function startDesktop() {
   initializeTheme();
   watchThemeChange();
   initKeyboardListeners();
+  const { isElectron } = checkPlatform();
+
   const serviceCollection = new ServiceCollection();
   serviceCollection.set(IWorkbenchOverlayService, new SyncDescriptor(WorkbenchOverlayService));
   serviceCollection.set(ITodoService, new SyncDescriptor(WorkbenchTodoService));
   serviceCollection.set(IConfigService, new SyncDescriptor(WorkbenchConfig, [new LocalStorageConfigStore()]));
   serviceCollection.set(INavigationService, new SyncDescriptor(NavigationService));
   serviceCollection.set(ICloudService, new SyncDescriptor(CloudService));
-  serviceCollection.set(IDatabaseService, new SyncDescriptor(IndexdbDatabaseService));
+  serviceCollection.set(
+    IDatabaseService,
+    new SyncDescriptor(isElectron ? ElectronFsDatabaseService : IndexdbDatabaseService)
+  );
   serviceCollection.set(ISwitchService, new SyncDescriptor(SwitchService));
   serviceCollection.set(IContextKeyService, new SyncDescriptor(ContextKeyService));
   serviceCollection.set(ICommandService, new SyncDescriptor(StandaloneCommandService));
@@ -66,7 +72,6 @@ export async function startDesktop() {
     instantiationService,
   };
 
-  const { isElectron } = checkPlatform();
   const Router = isElectron ? HashRouter : BrowserRouter;
 
   createRoot(document.getElementById('root')!).render(

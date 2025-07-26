@@ -15,8 +15,10 @@ function getGitCommitHash() {
   }
 }
 
+const base = process.env.USE_RELATIVE_BASE === 'true' ? './' : '/';
+
 export default defineConfig({
-  base: './',
+  base,
   define: {
     __PROJECT_COMMIT_HASH__: JSON.stringify(getGitCommitHash()),
   },
