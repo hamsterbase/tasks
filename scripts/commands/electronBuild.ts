@@ -27,7 +27,7 @@ export async function electronBuildCommand(options: ElectronBuildOptions = {}) {
     await buildElectron({ sourcemap: false });
 
     if (options.release) {
-      const distDir = resolveRoot('dist-electron');
+      const distDir = resolveRoot('electron-dist');
       generateReleaseConfig(options, distDir);
     }
 
