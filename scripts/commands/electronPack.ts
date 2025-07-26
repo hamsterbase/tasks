@@ -11,11 +11,35 @@ import { createTempDir } from '../utils/createTempDir.js';
 
 interface ElectronPackOptions {
   release?: boolean;
+  target: string;
 }
 
-export async function electronPackCommand(options: ElectronPackOptions = {}) {
+const SUPPORTED_TARGETS = ['darwin-arm64'] as const;
+type SupportedTarget = (typeof SUPPORTED_TARGETS)[number];
+
+const targetConfigMap = {
+  'darwin-arm64': getDarwinArm64Config,
+} as const;
+
+export async function electronPackCommand(options: ElectronPackOptions) {
   try {
     console.log('[electron] Starting Electron packaging...');
+
+    // Validate target parameter
+    if (!options.target) {
+      console.error('[electron] Error: Target parameter is required');
+      process.exit(1);
+    }
+
+    if (!SUPPORTED_TARGETS.includes(options.target as SupportedTarget)) {
+      console.error(
+        `[electron] Error: Invalid target '${options.target}'. Supported targets: ${SUPPORTED_TARGETS.join(', ')}`
+      );
+      process.exit(1);
+    }
+
+    const target = options.target as SupportedTarget;
+    console.log(`[electron] Packaging for target: ${target}`);
 
     if (options.release) {
       console.log('[release] Release mode enabled');
@@ -54,13 +78,19 @@ export async function electronPackCommand(options: ElectronPackOptions = {}) {
     console.log(`[electron] Temporary build directory created at: ${tempDir}`);
     const tempOutputDir = await createTempDir();
 
-    const darwinArm64Config = getDarwinArm64Config({
+    const getConfig = targetConfigMap[target];
+    if (!getConfig) {
+      console.error(`[electron] Error: No configuration found for target '${target}'`);
+      process.exit(1);
+    }
+
+    const configResult = getConfig({
       appDirectory: tempDir,
       outputDirectory: tempOutputDir,
       codeSign: !!options.release,
     });
 
-    const buildResult = await build(darwinArm64Config);
+    const buildResult = await build(configResult);
     console.log('[electron] Build completed:', buildResult);
 
     // Copy build artifacts to release directory

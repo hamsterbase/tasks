@@ -37,6 +37,7 @@ cli
 cli
   .command('electronPack', 'Package Electron application')
   .option('--release', 'Enable release mode')
+  .option('-t, --target <target>', 'Target platform (required)')
   .action(async (options) => {
     await electronPackCommand(options);
   });

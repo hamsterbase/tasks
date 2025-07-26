@@ -18,6 +18,7 @@ export const getDarwinArm64Config = (options: ElectronPackConfigOption) => {
             if (electronPlatformName !== 'darwin') {
               return;
             }
+            console.log('[electron] Notarizing macOS app...');
             const appName = context.packager.appInfo.productFilename;
             return notarize({
               appPath: `${appOutDir}/${appName}.app`,
