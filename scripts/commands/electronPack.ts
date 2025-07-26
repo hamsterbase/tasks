@@ -5,10 +5,35 @@ import { createTempBuildDir } from '../utils/createTempBuildDir.js';
 import { loadElectronPackEnv } from '../utils/loadEnv.js';
 import { resolveRoot } from '../utils/paths.js';
 import { getDarwinArm64Config } from './electronPack/config/darwin-arm64.js';
+import { checkUncommittedChanges } from '../utils/git.js';
+import { validateReleaseConfigs } from '../utils/release.js';
 
-export async function electronPackCommand() {
+interface ElectronPackOptions {
+  release?: boolean;
+}
+
+export async function electronPackCommand(options: ElectronPackOptions = {}) {
   try {
     console.log('[electron] Starting Electron packaging...');
+
+    if (options.release) {
+      console.log('[release] Release mode enabled');
+
+      if (checkUncommittedChanges()) {
+        console.error(
+          '[release] Error: Uncommitted changes detected. Please commit all changes before packaging in release mode.'
+        );
+        process.exit(1);
+      }
+
+      console.log('[release] Working directory is clean');
+
+      const distPath = resolveRoot('dist');
+      const electronDistPath = resolveRoot('electron-dist');
+
+      validateReleaseConfigs(distPath, electronDistPath);
+    }
+
     // Ensure electron-dist directory exists
     const electronDistPath = resolveRoot('electron-dist');
     try {

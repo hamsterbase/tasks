@@ -34,9 +34,12 @@ cli
     electronBuildCommand(options);
   });
 
-cli.command('electronPack', 'Package Electron application').action(async () => {
-  await electronPackCommand();
-});
+cli
+  .command('electronPack', 'Package Electron application')
+  .option('--release', 'Enable release mode')
+  .action(async (options) => {
+    await electronPackCommand(options);
+  });
 
 cli.help();
 cli.version('1.0.0');
