@@ -5,19 +5,23 @@ import { ElectronDatabaseService } from './databaseService';
 
 let mainWindow: BrowserWindow | null = null;
 
-// Platform check
-if (process.platform !== 'darwin') {
-  console.error(`Platform ${process.platform} is not supported yet`);
-  app.quit();
-}
-
 // Determine base path for database storage
 const homeDir = os.homedir();
 if (!homeDir) {
   throw new Error('Home directory not found');
 }
 const appName = 'HamsterBaseTasks';
-const basePath = path.join(homeDir, 'Library', 'Application Support', appName);
+// Platform-specific paths
+let basePath: string;
+if (process.platform === 'darwin') {
+  basePath = path.join(homeDir, 'Library', 'Application Support', appName);
+} else if (process.platform === 'linux') {
+  basePath = path.join(homeDir, '.config', appName);
+} else if (process.platform === 'win32') {
+  basePath = path.join(homeDir, 'AppData', 'Roaming', appName);
+} else {
+  throw new Error(`Unsupported platform: ${process.platform}`);
+}
 
 const databaseService: ElectronDatabaseService = new ElectronDatabaseService(basePath);
 
