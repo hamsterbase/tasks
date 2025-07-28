@@ -6,6 +6,7 @@ import { getLatestVersionForTarget } from '../utils/getLatestVersionForTarget.js
 import { loadElectronPackEnv } from '../utils/loadEnv.js';
 import { resolveRoot } from '../utils/paths.js';
 import { getDarwinArm64Config } from './electronPack/config/darwin-arm64.js';
+import { getLinuxX64Config } from './electronPack/config/linux-x64.js';
 import { checkUncommittedChanges } from '../utils/git.js';
 import { validateReleaseConfigs } from '../utils/release.js';
 import { createTempDir } from '../utils/createTempDir.js';
@@ -15,11 +16,12 @@ interface ElectronPackOptions {
   target: string;
 }
 
-const SUPPORTED_TARGETS = ['darwin-arm64'] as const;
+const SUPPORTED_TARGETS = ['darwin-arm64', 'linux-x64'] as const;
 type SupportedTarget = (typeof SUPPORTED_TARGETS)[number];
 
 const targetConfigMap = {
   'darwin-arm64': getDarwinArm64Config,
+  'linux-x64': getLinuxX64Config,
 } as const;
 
 export async function electronPackCommand(options: ElectronPackOptions) {
@@ -112,7 +114,7 @@ export async function electronPackCommand(options: ElectronPackOptions) {
 
     // Copy build artifacts to release directory
     const releaseDir = resolveRoot('release');
-    await fs.rm(releaseDir, { recursive: true });
+    await fs.rm(releaseDir, { recursive: true, force: true });
     await fs.mkdir(releaseDir, { recursive: true });
 
     // Copy files from buildResult to release directory
