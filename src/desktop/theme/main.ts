@@ -1,23 +1,17 @@
-import { baseDesktopStyles } from './base';
-import { DesktopThemeDefinition } from './types';
+import { formatTheme } from '@/base/common/formatTheme';
 
-function formatTheme(theme: DesktopThemeDefinition): DesktopThemeDefinition {
-  const clone = { ...theme };
+export const desktopStyles = {
+  sidebarContainerStyle: 'p-4 w-full h-full',
+  sidebarBackground: 'bg-bg3',
+  sidebarLinkActive: 'bg-brand text-white',
+  sidebarLinkInactive: 'hover:bg-bg3',
+  sidebarIconSize: 'size-4 flex items-center justify-center',
+  sidebarItemHeight: 'h-4',
+  sidebarItemGap: 'space-y-0.5',
+  sidebarItemTextStyle: 'font-medium text-base',
+  sidebarItemContainerStyle: 'block px-2 py-1.5 rounded-lg cursor-pointer',
+};
 
-  Object.entries(clone).forEach(([key, value]) => {
-    const values = value.split(' ').map((v) => {
-      if (typeof v === 'string' && v.startsWith('extend::')) {
-        const extendKey = v.replace('extend::', '') as keyof DesktopThemeDefinition;
-        if (extendKey in clone) {
-          return clone[extendKey];
-        }
-      }
-      return v;
-    });
-    clone[key as keyof DesktopThemeDefinition] = values.join(' ');
-  });
+export type DesktopThemeDefinition = typeof desktopStyles;
 
-  return clone;
-}
-
-export const desktopStyles = formatTheme(baseDesktopStyles);
+formatTheme(desktopStyles);

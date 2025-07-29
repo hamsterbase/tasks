@@ -1,6 +1,4 @@
-import { ThemeDefinition } from './types';
-
-export const einkStyles: Partial<ThemeDefinition> = {
+export const einkStyles = {
   overlayBackgroundOpacity: 'opacity-100',
   actionSheetBackground: 'bg-bg1',
   overlayBackground: 'bg-bg1',

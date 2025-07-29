@@ -1,8 +1,4 @@
-import classNames from 'classnames';
-import { extendsStyle, ThemeDefinition } from './types';
-
-export const baseStyles: ThemeDefinition = {
-  /** 首页菜单的样式 */
+export const baseStyles = {
   homeMenuBackground: 'bg-bg1',
   homeMenuRound: 'rounded-md',
   homeMenuItemPadding: 'px-3 py-2',
@@ -11,12 +7,9 @@ export const baseStyles: ThemeDefinition = {
   homeMenuDueTaskNumberColor: 'text-sm font-medium text-white bg-stress-red rounded-full h-4 min-w-4',
   homeMenuIconStyle: 'w-5 h-5 text-brand',
 
-  // header 和底部按钮的 padding
   headerFooterPadding: 'px-6',
-  // 屏幕边框距离列表元素的 padding
   screenEdgePadding: 'px-3',
 
-  // Bottom Menu theme variables
   bottomMenuHeight: 'h-11',
   bottomMenuBackground: 'bg-bg2',
   bottomMenuBorder: 'border-t border-line-light',
@@ -25,23 +18,19 @@ export const baseStyles: ThemeDefinition = {
   bottomMenuTextActive: 'text-brand',
   bottomMenuTextInactive: 'text-t3',
 
-  // 列表元素的高度
-  // 列表元素的圆角
   listItemRound: '',
-  // 列表元素被拖拽时的背景色
   listItemDraggedBackground: 'bg-bg3',
 
   pageBackground: 'bg-bg2',
   listItemBackground: 'bg-bg1',
   listItemEditingBackground: 'bg-bg1',
 
-  // 全局的圆角
   itemRound: 'rounded-md',
 
   headerBackground: 'bg-bg1',
-  headerPadding: classNames(extendsStyle('headerFooterPadding'), 'py-2'),
+  headerPadding: 'px-6 py-2',
 
-  taskItemGroupRound: extendsStyle('itemRound'),
+  taskItemGroupRound: 'rounded-md',
   taskItemGroupBackground: 'bg-bg1',
   taskItemGroupHeaderPadding: 'pt-2',
   taskItemGroupTopRound: 'rounded-t-lg',
@@ -55,20 +44,18 @@ export const baseStyles: ThemeDefinition = {
   taskItemGap: 'gap-2',
   taskItemIconSize: 'size-5 flex-shrink-0 flex items-center justify-center',
 
-  // 任务项编辑时的圆角
-  taskItemEditingRound: extendsStyle('itemRound'),
+  taskItemEditingRound: 'rounded-md',
   taskItemEditingShadow: 'shadow-sm',
 
-  taskItemOverlayBackground: extendsStyle('listItemBackground'),
-  taskItemOverlayRound: extendsStyle('itemRound'),
+  taskItemOverlayBackground: 'bg-bg1',
+  taskItemOverlayRound: 'rounded-md',
   taskItemOverlayShadow: 'inset-shadow-sm shadow-sm',
 
-  taskItemDraggingRound: extendsStyle('itemRound'),
+  taskItemDraggingRound: 'rounded-md',
 
   pageContentPaddingX: 'px-3',
   pageContentPaddingY: 'pb-15',
 
-  // 弹窗背景的颜色
   overlayBackground: 'bg-black',
   overlayBackgroundOpacity: 'opacity-50',
   overlayAnimationDuration: 'duration-250',
@@ -83,7 +70,6 @@ export const baseStyles: ThemeDefinition = {
   actionSheetActionGroupItemGap: 'gap-2',
   actionSheetContentBorder: '',
 
-  // Tag Editor theme variables
   tagEditorContainerBackground: 'bg-bg1',
   tagEditorSelectedTagColor: 'text-brand',
   tagEditorInputTextColor: 'text-t1',
@@ -99,11 +85,10 @@ export const baseStyles: ThemeDefinition = {
   tagEditorHeightDefault: 'h-11',
   tagEditorMinHeightDefault: 'min-h-11',
 
-  // Calendar/DatePicker theme variables
   datePickerDayCellHeight: '56',
   datePickerMonthHeaderHeight: '40',
   datePickerGapHeight: '4',
-  datePickerItemHeight: '0', // This will be calculated in the component
+  datePickerItemHeight: '0',
   datePickerDayButtonHeight: 'h-14',
   datePickerDayButtonRound: 'rounded-lg',
   datePickerDaySelectedBackground: 'bg-brand',
@@ -123,7 +108,6 @@ export const baseStyles: ThemeDefinition = {
   taskDetailBottomActionStyle: 'flex items-center justify-center size-9 rounded-lg  text-t2',
   taskDetailBottomActionIconStyle: 'size-5',
 
-  // InfoItem theme variables
   infoItemRound: 'rounded-md',
   infoItemPadding: 'py-1.5 px-2',
   infoItemMargin: 'mb-1.5',
@@ -168,7 +152,6 @@ export const baseStyles: ThemeDefinition = {
   createTaskPageTitleStyle: 'text-base font-semibold text-t1 h-12 flex items-center',
   createTaskPageContentGap: 'gap-2',
 
-  // Tabbar theme variables
   tabbarBackground: 'bg-bg1',
   tabbarHeight: 'h-10',
   tabbarRound: 'rounded-lg',
