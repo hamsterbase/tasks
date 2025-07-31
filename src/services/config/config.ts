@@ -43,3 +43,21 @@ export function chinaServerConfigKey(): ConfigKey<boolean> {
     check: (value: boolean) => typeof value === 'boolean',
   };
 }
+
+export function mainSidebarWidthConfigKey(): ConfigKey<number[]> {
+  return {
+    key: 'mainSidebarWidth',
+    default: [],
+    check: (value: number[]) =>
+      Array.isArray(value) && value.length === 2 && value.every((item) => typeof item === 'number'),
+  };
+}
+
+export function detailPanelConfigKey(): ConfigKey<number[]> {
+  return {
+    key: 'detailPanel',
+    default: [],
+    check: (value: number[]) =>
+      Array.isArray(value) && value.length === 2 && value.every((item) => typeof item === 'number'),
+  };
+}
