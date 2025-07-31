@@ -2,6 +2,7 @@ import { buildElectron } from '../utils/buildElectron.js';
 import { checkUncommittedChanges } from '../utils/git.js';
 import { generateReleaseConfig } from '../utils/release.js';
 import { resolveRoot } from '../utils/paths.js';
+import { promises as fs } from 'fs';
 
 interface ElectronBuildOptions {
   release?: boolean;
@@ -10,6 +11,10 @@ interface ElectronBuildOptions {
 export async function electronBuildCommand(options: ElectronBuildOptions = {}) {
   try {
     console.log('[electron] Building Electron...');
+
+    const electronDistDir = resolveRoot('electron-dist');
+    await fs.rm(electronDistDir, { recursive: true, force: true });
+    await fs.mkdir(electronDistDir, { recursive: true });
 
     if (options.release) {
       console.log('[release] Release mode enabled');

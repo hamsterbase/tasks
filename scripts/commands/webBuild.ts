@@ -2,6 +2,7 @@ import { build } from 'vite';
 import { resolveRoot } from '../utils/paths.js';
 import { checkUncommittedChanges } from '../utils/git.js';
 import { generateReleaseConfig } from '../utils/release.js';
+import { promises as fs } from 'fs';
 
 interface WebBuildOptions {
   coverage?: boolean;
@@ -12,6 +13,10 @@ interface WebBuildOptions {
 export async function webBuildCommand(options: WebBuildOptions = {}) {
   try {
     console.log('[vite] Building for production...');
+
+    const distDir = resolveRoot('dist');
+    await fs.rm(distDir, { recursive: true, force: true });
+    await fs.mkdir(distDir, { recursive: true });
 
     if (options.release) {
       console.log('[release] Release mode enabled');
