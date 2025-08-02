@@ -1,3 +1,4 @@
+import { useCreateDatabaseOverlay } from '@/desktop/overlay/createDatabase/useCreateDatabaseOverlay.ts';
 import { useService } from '@/hooks/use-service.ts';
 import { useWatchEvent } from '@/hooks/use-watch-event.ts';
 import { localize } from '@/nls.ts';
@@ -7,7 +8,6 @@ import useSWR from 'swr';
 import { CloudDatabaseItem } from './CloudDatabaseItem';
 import { LocalDatabaseItem } from './LocalDatabaseItem';
 import { OfflineDatabaseItem } from './OfflineDatabaseItem';
-import { useCreateDatabaseOverlay } from '@/desktop/overlay/createDatabase/useCreateDatabaseOverlay.ts';
 
 export const DatabaseList: React.FC = () => {
   const cloudService = useService(ICloudService);
@@ -29,6 +29,8 @@ export const DatabaseList: React.FC = () => {
       revalidateOnFocus: true,
     }
   );
+
+  const cloudDatabasesCount = databases?.filter((db) => db.type === 'cloud').length || 0;
 
   const renderDatabaseItem = (database: DeviceDatabaseItem) => {
     const isCurrent = database.databaseId === cloudService.databaseConfig;
@@ -82,7 +84,7 @@ export const DatabaseList: React.FC = () => {
     <div className="bg-bg2 rounded-lg p-4">
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-medium text-t1">{localize('settings.cloud.database', 'Database')}</h3>
-        {isLoggedIn && (
+        {isLoggedIn && cloudDatabasesCount < 3 && (
           <button
             className="px-3 py-1.5 text-sm font-medium text-white bg-brand border border-brand rounded hover:bg-brand-hover focus:outline-none transition-colors"
             onClick={() => createDatabaseOverlay({ onSuccess: () => mutate() })}

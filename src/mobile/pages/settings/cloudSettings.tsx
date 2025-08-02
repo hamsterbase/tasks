@@ -32,6 +32,7 @@ export const CloudSettings = () => {
   );
 
   const isLoggedIn = cloudService.config.type !== 'not_login';
+  const cloudDatabasesCount = databases?.filter((db) => db.type === 'cloud').length || 0;
   const handleCreateDatabase = () => {
     navigate({ path: '/settings/create-database' });
   };
@@ -129,7 +130,7 @@ export const CloudSettings = () => {
               title={localize('settings.cloud.database', 'Database')}
               items={(databaseItems as ListItemOption[]).concat([
                 {
-                  hidden: !isLoggedIn,
+                  hidden: !isLoggedIn || cloudDatabasesCount >= 3,
                   title: localize('settings.cloud.createDatabase', 'Create CloudDatabase'),
                   onClick: handleCreateDatabase,
                   mode: {
