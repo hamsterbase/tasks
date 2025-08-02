@@ -5,7 +5,6 @@ import { TreeSelectController } from './TreeSelectController';
 
 interface UseTreeSelectOptions {
   onConfirm: (id: TreeID) => void;
-  allowMoveToArea?: boolean;
   currentItemId?: TreeID;
 }
 
@@ -18,7 +17,6 @@ export function useTreeSelect() {
         x,
         y,
         onConfirm: options.onConfirm,
-        allowMoveToArea: options.allowMoveToArea,
         currentItemId: options.currentItemId,
       },
       instantiationService

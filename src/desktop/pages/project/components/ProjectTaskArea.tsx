@@ -7,7 +7,7 @@ import { DragOverlayItem } from '@/desktop/components/drag/DragOverlayItem';
 import { InboxTaskInput } from '@/desktop/components/inboxTaskInput/InboxTaskInput';
 import { CreateTaskEvent } from '@/desktop/components/inboxTaskInput/InboxTaskInputController';
 import { TaskListItem } from '@/desktop/components/taskListItem/TaskListItem';
-import { DesktopProjectHeadingItem } from '@/desktop/components/todo/ProjectHeadingItem';
+import { DesktopHeadingListItem } from '@/desktop/components/desktopHeadingListItem/desktopHeadingListItem';
 import { useService } from '@/hooks/use-service';
 import { IListService } from '@/services/list/common/listService';
 import { ITodoService } from '@/services/todo/common/todoService';
@@ -31,7 +31,7 @@ const ProjectTaskList: React.FC<ProjectTaskListProps> = ({ items, result, willDi
       {items.map((item) => {
         if (item.type === 'header') {
           return (
-            <DesktopProjectHeadingItem
+            <DesktopHeadingListItem
               key={item.id}
               projectHeadingInfo={item.content}
               className={classNames({

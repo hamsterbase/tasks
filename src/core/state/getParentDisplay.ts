@@ -80,6 +80,24 @@ export function getParentDisplay(modelState: ITaskModelData, itemId: TreeID): Pa
       };
     }
   }
+  if (item.type === 'projectHeading') {
+    if (!item.parentId) {
+      return null;
+    }
+    const parentObject = modelState.taskObjectMap.get(item.parentId);
+    if (parentObject?.type === 'project') {
+      const projectInfo = getProject(modelState, item.parentId);
+      return {
+        icon: {
+          type: 'project',
+          progress: projectInfo.progress,
+          status: projectInfo.status,
+          color: 't3',
+        },
+        title: parentObject.title || localize('project.untitled', 'New Project'),
+      };
+    }
+  }
 
   return null;
 }

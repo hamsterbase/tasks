@@ -13,7 +13,7 @@ import { SidebarAreaItem } from '../sidebar/SidebarAreaItem';
 import { SidebarProjectItem } from '../sidebar/SidebarProjectItem';
 import { SubtaskItem } from '../taskListItem/SubtaskItem';
 import { TaskListItem } from '../taskListItem/TaskListItem';
-import { DesktopProjectHeadingItem } from '../todo/ProjectHeadingItem';
+import { DesktopHeadingListItem } from '../desktopHeadingListItem/desktopHeadingListItem';
 import { DesktopProjectListItem } from '../todo/DesktopProjectListItem';
 
 interface TaskProps {
@@ -64,7 +64,7 @@ export const DragOverlayItem: React.FC<DragOverlayItemProps> = ({
       }
       case 'projectHeading': {
         const projectHeadingInfo = getProjectHeadingInfo(modelState, activeId as TreeID);
-        return <DesktopProjectHeadingItem projectHeadingInfo={projectHeadingInfo} />;
+        return <DesktopHeadingListItem projectHeadingInfo={projectHeadingInfo} />;
       }
       case 'area': {
         const areaInfo = getArea(modelState, activeId as TreeID);

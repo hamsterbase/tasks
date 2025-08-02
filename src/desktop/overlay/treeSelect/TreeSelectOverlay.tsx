@@ -26,7 +26,9 @@ const TreeSelectContent: React.FC<TreeSelectContentProps> = ({ controller }) => 
   const currentItem = controller.currentItemId
     ? todoService.modelState.taskObjectMap.get(controller.currentItemId)
     : null;
+
   const isCurrentItemProject = currentItem?.type === 'project';
+  const isCurrentItemHeading = currentItem?.type === 'projectHeading';
 
   useEffect(() => {
     if (overlayRef.current) {
@@ -50,6 +52,8 @@ const TreeSelectContent: React.FC<TreeSelectContentProps> = ({ controller }) => 
     maxHeight: '400px',
     zIndex: 1000,
   };
+
+  const allowMoveToArea = !isCurrentItemHeading;
 
   return (
     <>
@@ -87,7 +91,11 @@ const TreeSelectContent: React.FC<TreeSelectContentProps> = ({ controller }) => 
                     color="t3"
                     className="size-5 shrink-0"
                   />
-                  <span className="text-sm truncate">{project.title}</span>
+                  {project.title ? (
+                    <span className="text-sm truncate">{project.title}</span>
+                  ) : (
+                    <span className="text-sm truncate text-t3">{localize('project.untitled', 'New Project')}</span>
+                  )}
                 </button>
               ))}
             </div>
@@ -98,16 +106,23 @@ const TreeSelectContent: React.FC<TreeSelectContentProps> = ({ controller }) => 
               <button
                 className={classNames(
                   'w-full flex items-center gap-2 px-2 py-1.5 rounded-md transition-colors text-left',
-                  controller.allowMoveToArea ? 'hover:bg-bg3' : 'opacity-50 cursor-not-allowed'
+                  allowMoveToArea ? 'hover:bg-bg3' : 'opacity-50 cursor-not-allowed'
                 )}
+                disabled={!allowMoveToArea}
                 onClick={() => {
-                  if (controller.allowMoveToArea) {
+                  if (allowMoveToArea) {
                     handleConfirmSelection(area.id);
                   }
                 }}
               >
                 <AreaIcon className="size-5 shrink-0 text-t3" />
-                <span className="text-sm font-medium truncate">{area.title}</span>
+                {area.title ? (
+                  <span className="text-sm font-medium truncate">{area.title}</span>
+                ) : (
+                  <span className="text-sm font-medium truncate text-t3">
+                    {localize('project.untitled', 'New Project')}
+                  </span>
+                )}
               </button>
 
               {!isCurrentItemProject && area.projectList.length > 0 && (
@@ -124,7 +139,11 @@ const TreeSelectContent: React.FC<TreeSelectContentProps> = ({ controller }) => 
                         color="t3"
                         className="size-5 shrink-0"
                       />
-                      <span className="text-sm truncate">{project.title}</span>
+                      {project.title ? (
+                        <span className="text-sm truncate">{project.title}</span>
+                      ) : (
+                        <span className="text-sm truncate text-t3">{localize('project.untitled', 'New Project')}</span>
+                      )}
                     </button>
                   ))}
                 </div>

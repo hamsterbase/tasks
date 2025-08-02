@@ -9,7 +9,6 @@ interface ITreeSelectOptions {
   x: number;
   y: number;
   onConfirm: (id: TreeID) => void;
-  allowMoveToArea?: boolean;
   currentItemId?: TreeID;
 }
 
@@ -42,10 +41,6 @@ export class TreeSelectController implements IDisposable {
 
   get y(): number {
     return this.options.y;
-  }
-
-  get allowMoveToArea(): boolean {
-    return this.options.allowMoveToArea ?? true;
   }
 
   get currentItemId(): TreeID | undefined {

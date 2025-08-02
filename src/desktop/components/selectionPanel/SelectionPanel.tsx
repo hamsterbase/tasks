@@ -1,3 +1,4 @@
+import { getProjectHeadingInfo } from '@/core/state/getProjectHeadingInfo.ts';
 import { getTaskInfo } from '@/core/state/getTaskInfo.ts';
 import { useService } from '@/hooks/use-service.ts';
 import { useWatchEvent } from '@/hooks/use-watch-event.ts';
@@ -7,6 +8,7 @@ import React from 'react';
 import { matchPath, useLocation } from 'react-router';
 import { AreaDetailPanel } from './area/AreaDetailPanel.tsx';
 import { EmptyPanel } from './EmptyPanel.tsx';
+import { HeadingDetailView } from './HeadingDetailView.tsx';
 import { MultipleSelectionView } from './MultipleSelectionView.tsx';
 import { ProjectDetailPanel } from './project/ProjectDetailPanel.tsx';
 import { TaskDetailView } from './TaskDetailView.tsx';
@@ -58,6 +60,11 @@ export const SelectionPanel: React.FC = () => {
   if (taskObject.type === 'task') {
     const taskInfo = getTaskInfo(todoService.modelState, selectedItemId);
     return <TaskDetailView task={taskInfo} onClearSelection={handleClearSelection} />;
+  }
+
+  if (taskObject.type === 'projectHeading') {
+    const headingInfo = getProjectHeadingInfo(todoService.modelState, selectedItemId);
+    return <HeadingDetailView heading={headingInfo} onClearSelection={handleClearSelection} />;
   }
 
   return <EmptyPanel />;

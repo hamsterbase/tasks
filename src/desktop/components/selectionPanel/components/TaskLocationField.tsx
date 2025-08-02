@@ -17,6 +17,7 @@ export const TaskLocationField: React.FC<TaskLocationFieldProps> = ({ itemId }) 
   const todoService = useService(ITodoService);
   useWatchEvent(todoService.onStateChange);
   const treeSelect = useTreeSelect();
+
   const handleMoveClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     treeSelect(rect.right, rect.bottom + 4, {
@@ -35,6 +36,14 @@ export const TaskLocationField: React.FC<TaskLocationFieldProps> = ({ itemId }) 
             },
           });
         }
+        if (item.type === 'projectHeading') {
+          todoService.updateProjectHeading(itemId, {
+            position: {
+              parentId: id,
+              type: 'firstElement',
+            },
+          });
+        }
       },
     });
   };
@@ -47,6 +56,14 @@ export const TaskLocationField: React.FC<TaskLocationFieldProps> = ({ itemId }) 
     }
     if (item.type === 'project') {
       todoService.updateProject(itemId, {
+        position: {
+          type: 'firstElement',
+          parentId: undefined,
+        },
+      });
+    }
+    if (item.type === 'projectHeading') {
+      todoService.updateProjectHeading(itemId, {
         position: {
           type: 'firstElement',
           parentId: undefined,
