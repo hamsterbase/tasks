@@ -23,6 +23,9 @@ export const getLinuxX64Config = (options: ElectronPackConfigOption) => {
         category: 'Office',
         icon: resolveRoot('assets/desktop-icon.png'),
       },
+      appImage: {
+        artifactName: '${productName}-${version}-linux-x64.${ext}',
+      },
     },
   };
 };

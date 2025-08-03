@@ -28,6 +28,7 @@ export const getWin32X64Config = (options: ElectronPackConfigOption) => {
         allowToChangeInstallationDirectory: true,
         createDesktopShortcut: true,
         createStartMenuShortcut: true,
+        artifactName: '${productName}-${version}-win32-x64.${ext}',
       },
     },
   };

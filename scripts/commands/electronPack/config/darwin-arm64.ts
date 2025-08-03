@@ -38,6 +38,7 @@ export const getDarwinArm64Config = (options: ElectronPackConfigOption) => {
       files: ['main.js', 'preload.js', 'frontend/**/*'],
       dmg: {
         sign: false,
+        artifactName: '${productName}-${version}-darwin-arm64.${ext}',
       },
       mac: {
         category: 'public.app-category.productivity',
