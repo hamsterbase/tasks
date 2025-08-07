@@ -1,6 +1,6 @@
 import { AreaIcon } from '@/components/icons';
 import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox';
-import { getAllProject } from '@/core/state/getAllProject';
+import { getFilteredProjectsAndAreas } from '@/core/state/getFilteredProjectsAndAreas';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { localize } from '@/nls';
@@ -21,14 +21,11 @@ const TreeSelectContent: React.FC<TreeSelectContentProps> = ({ controller }) => 
   useWatchEvent(todoService.onStateChange);
   const [searchText, setSearchText] = useState('');
   const overlayRef = useRef<HTMLDivElement>(null);
-  const { filteredProjects, filteredAreas } = getAllProject(todoService.modelState, searchText);
-
-  const currentItem = controller.currentItemId
-    ? todoService.modelState.taskObjectMap.get(controller.currentItemId)
-    : null;
-
-  const isCurrentItemProject = currentItem?.type === 'project';
-  const isCurrentItemHeading = currentItem?.type === 'projectHeading';
+  const { filteredProjects, filteredAreas, canMoveToRoot } = getFilteredProjectsAndAreas(
+    todoService.modelState,
+    searchText,
+    controller.currentItemId as TreeID
+  );
 
   useEffect(() => {
     if (overlayRef.current) {
@@ -36,7 +33,7 @@ const TreeSelectContent: React.FC<TreeSelectContentProps> = ({ controller }) => 
     }
   }, []);
 
-  const handleConfirmSelection = (id: TreeID) => {
+  const handleConfirmSelection = (id: TreeID | null) => {
     controller.confirmSelection(id);
   };
 
@@ -52,8 +49,6 @@ const TreeSelectContent: React.FC<TreeSelectContentProps> = ({ controller }) => 
     maxHeight: '400px',
     zIndex: 1000,
   };
-
-  const allowMoveToArea = !isCurrentItemHeading;
 
   return (
     <>
@@ -77,7 +72,16 @@ const TreeSelectContent: React.FC<TreeSelectContentProps> = ({ controller }) => 
         </div>
 
         <div className="max-h-[320px] overflow-y-auto p-2">
-          {!isCurrentItemProject && filteredProjects.length > 0 && (
+          {canMoveToRoot && (
+            <button
+              className="w-full flex items-center gap-2 px-2 py-1.5 hover:bg-bg3 rounded-md transition-colors text-left mb-2"
+              onClick={() => handleConfirmSelection(null)}
+            >
+              <span className="text-sm">{localize('project_area_selector.move_to_root', 'Move to root')}</span>
+            </button>
+          )}
+
+          {filteredProjects.length > 0 && (
             <div className="mb-2">
               {filteredProjects.map((project) => (
                 <button
@@ -91,11 +95,9 @@ const TreeSelectContent: React.FC<TreeSelectContentProps> = ({ controller }) => 
                     color="t3"
                     className="size-5 shrink-0"
                   />
-                  {project.title ? (
-                    <span className="text-sm truncate">{project.title}</span>
-                  ) : (
-                    <span className="text-sm truncate text-t3">{localize('project.untitled', 'New Project')}</span>
-                  )}
+                  <span className={classNames('text-sm truncate', project.isPlaceholder && 'text-t3')}>
+                    {project.displayTitle}
+                  </span>
                 </button>
               ))}
             </div>
@@ -106,26 +108,18 @@ const TreeSelectContent: React.FC<TreeSelectContentProps> = ({ controller }) => 
               <button
                 className={classNames(
                   'w-full flex items-center gap-2 px-2 py-1.5 rounded-md transition-colors text-left',
-                  allowMoveToArea ? 'hover:bg-bg3' : 'opacity-50 cursor-not-allowed'
+                  area.isDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-bg3'
                 )}
-                disabled={!allowMoveToArea}
-                onClick={() => {
-                  if (allowMoveToArea) {
-                    handleConfirmSelection(area.id);
-                  }
-                }}
+                disabled={area.isDisabled}
+                onClick={() => !area.isDisabled && handleConfirmSelection(area.id)}
               >
                 <AreaIcon className="size-5 shrink-0 text-t3" />
-                {area.title ? (
-                  <span className="text-sm font-medium truncate">{area.title}</span>
-                ) : (
-                  <span className="text-sm font-medium truncate text-t3">
-                    {localize('project.untitled', 'New Project')}
-                  </span>
-                )}
+                <span className={classNames('text-sm font-medium truncate', area.isPlaceholder && 'text-t3')}>
+                  {area.displayTitle}
+                </span>
               </button>
 
-              {!isCurrentItemProject && area.projectList.length > 0 && (
+              {area.projectList.length > 0 && (
                 <div className="ml-6">
                   {area.projectList.map((project) => (
                     <button
@@ -139,11 +133,9 @@ const TreeSelectContent: React.FC<TreeSelectContentProps> = ({ controller }) => 
                         color="t3"
                         className="size-5 shrink-0"
                       />
-                      {project.title ? (
-                        <span className="text-sm truncate">{project.title}</span>
-                      ) : (
-                        <span className="text-sm truncate text-t3">{localize('project.untitled', 'New Project')}</span>
-                      )}
+                      <span className={classNames('text-sm truncate', project.isPlaceholder && 'text-t3')}>
+                        {project.displayTitle}
+                      </span>
                     </button>
                   ))}
                 </div>

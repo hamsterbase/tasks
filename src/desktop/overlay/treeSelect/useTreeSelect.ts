@@ -4,7 +4,7 @@ import { TreeID } from 'loro-crdt';
 import { TreeSelectController } from './TreeSelectController';
 
 interface UseTreeSelectOptions {
-  onConfirm: (id: TreeID) => void;
+  onConfirm: (id: TreeID | null) => void;
   currentItemId?: TreeID;
 }
 

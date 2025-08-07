@@ -62,8 +62,14 @@ export const useEditTaskHooks = (taskInfo: TaskInfo) => {
           name: localize('task.move', 'Move'),
           onClick: () => {
             projectAreaSelector({
-              onConfirm: (id) => {
-                console.log('move', id);
+              currentItemId: taskInfo.id,
+              onConfirm: (id: TreeID | null) => {
+                if (!id) {
+                  todoService.updateTask(taskInfo.id, {
+                    position: { type: 'firstElement' },
+                  });
+                  return;
+                }
                 todoService.updateTask(taskInfo.id, { parentId: id as TreeID });
               },
             });

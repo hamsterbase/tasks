@@ -1,5 +1,5 @@
 import { AreaIcon } from '@/components/icons';
-import { getAllProject } from '@/core/state/getAllProject';
+import { getFilteredProjectsAndAreas } from '@/core/state/getFilteredProjectsAndAreas';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { ActionSheet } from '@/mobile/components/ActionSheet';
@@ -18,8 +18,13 @@ const ProjectAreaSelectorImpl: React.FC<{ controller: ProjectAreaSelectorControl
   const todoService = useService(ITodoService);
   useWatchEvent(todoService.onStateChange);
   const [searchText, setSearchText] = useState('');
-  const { filteredProjects, filteredAreas } = getAllProject(todoService.modelState, searchText);
-  const handleConfirmSelection = (id: TreeID) => {
+  const { filteredProjects, filteredAreas, canMoveToRoot } = getFilteredProjectsAndAreas(
+    todoService.modelState,
+    searchText,
+    controller.currentItemId as TreeID
+  );
+
+  const handleConfirmSelection = (id: TreeID | null) => {
     controller.confirmSelection(id);
   };
 
@@ -35,7 +40,15 @@ const ProjectAreaSelectorImpl: React.FC<{ controller: ProjectAreaSelectorControl
             className={styles.projectAreaSelectorInput}
           />
         </div>
+
         <div className={styles.projectAreaSelectorContainer}>
+          {canMoveToRoot && (
+            <div className={styles.projectAreaSelectorContentGap}>
+              <button className={styles.projectAreaSelectorItem} onClick={() => handleConfirmSelection(null)}>
+                <span>{localize('project_area_selector.move_to_root', 'Move to root')}</span>
+              </button>
+            </div>
+          )}
           {filteredProjects.length > 0 && (
             <div className={styles.projectAreaSelectorContentGap}>
               {filteredProjects.map((project) => (
@@ -47,7 +60,7 @@ const ProjectAreaSelectorImpl: React.FC<{ controller: ProjectAreaSelectorControl
                   <div className={styles.projectAreaSelectorItemIcon}>
                     <ProjectStatusBox progress={project.progress} status={project.status} color="t3" />
                   </div>
-                  {project.title}
+                  <span className={project.isPlaceholder ? 'text-t3' : ''}>{project.displayTitle}</span>
                 </button>
               ))}
             </div>
@@ -56,10 +69,10 @@ const ProjectAreaSelectorImpl: React.FC<{ controller: ProjectAreaSelectorControl
             <div key={area.id} className={classNames(styles.projectAreaSelectorContentGap, {})}>
               <div
                 className={classNames(styles.projectAreaSelectorItem, {
-                  'opacity-50': !controller.allowMoveToArea,
+                  'opacity-50': area.isDisabled,
                 })}
                 onClick={() => {
-                  if (controller.allowMoveToArea) {
+                  if (!area.isDisabled) {
                     handleConfirmSelection(area.id);
                   }
                 }}
@@ -67,7 +80,7 @@ const ProjectAreaSelectorImpl: React.FC<{ controller: ProjectAreaSelectorControl
                 <div className={styles.projectAreaSelectorItemIcon}>
                   <AreaIcon />
                 </div>
-                {area.title}
+                <span className={area.isPlaceholder ? 'text-t3' : ''}>{area.displayTitle}</span>
               </div>
               {area.projectList.length > 0 && (
                 <div
@@ -82,7 +95,7 @@ const ProjectAreaSelectorImpl: React.FC<{ controller: ProjectAreaSelectorControl
                       <div className={styles.projectAreaSelectorItemIcon}>
                         <ProjectStatusBox progress={project.progress} status={project.status} color="t3" />
                       </div>
-                      {project.title}
+                      <span className={project.isPlaceholder ? 'text-t3' : ''}>{project.displayTitle}</span>
                     </button>
                   ))}
                 </div>

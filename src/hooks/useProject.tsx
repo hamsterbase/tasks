@@ -1,4 +1,4 @@
-import { DeleteIcon, DueIcon, EditIcon, HeadingIcon, ScheduledIcon, TagIcon } from '@/components/icons';
+import { DeleteIcon, DueIcon, EditIcon, HeadingIcon, MoveIcon, ScheduledIcon, TagIcon } from '@/components/icons';
 import { ProjectInfoState } from '@/core/state/type';
 import { ItemStatus } from '@/core/type';
 import { useBack } from '@/hooks/useBack.ts';
@@ -8,6 +8,7 @@ import { useDatepicker } from '@/mobile/overlay/datePicker/useDatepicker';
 import { useDialog } from '@/mobile/overlay/dialog/useDialog.ts';
 import { PopupActionItem } from '@/mobile/overlay/popupAction/PopupActionController';
 import { usePopupAction } from '@/mobile/overlay/popupAction/usePopupAction';
+import { useProjectAreaSelector } from '@/mobile/overlay/projectAreaSelector/useProjectAreaSelector';
 import { useTagEditor } from '@/mobile/overlay/tagEditor/useTagEditor';
 import { ITodoService } from '@/services/todo/common/todoService';
 import { localize } from '@/nls';
@@ -21,6 +22,7 @@ const useProject = (project: ProjectInfoState | null) => {
   const popupAction = usePopupAction();
   const tagEditor = useTagEditor();
   const datepicker = useDatepicker();
+  const projectAreaSelector = useProjectAreaSelector();
 
   const handleEditTag = () => {
     if (!project) return;
@@ -99,6 +101,29 @@ const useProject = (project: ProjectInfoState | null) => {
     });
   }
 
+  const handleMoveProject = () => {
+    if (!project) return;
+    projectAreaSelector({
+      currentItemId: project.id,
+      onConfirm: (parentId) => {
+        if (!parentId) {
+          todoService.updateProject(project.id, {
+            position: {
+              type: 'firstElement',
+            },
+          });
+          return;
+        }
+        todoService.updateProject(project.id, {
+          position: {
+            parentId: parentId,
+            type: 'firstElement',
+          },
+        });
+      },
+    });
+  };
+
   const handleMoreOptions = () => {
     popupAction({
       items: [
@@ -126,6 +151,11 @@ const useProject = (project: ProjectInfoState | null) => {
           icon: <TagIcon />,
           name: localize('project.edit_tags', 'Edit Tags'),
           onClick: handleEditTag,
+        },
+        {
+          icon: <MoveIcon />,
+          name: localize('project.move_project', 'Move Project'),
+          onClick: handleMoveProject,
         },
         {
           icon: <DeleteIcon />,

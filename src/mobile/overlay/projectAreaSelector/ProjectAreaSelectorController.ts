@@ -6,8 +6,8 @@ import { IDisposable } from 'vscf/base/common/lifecycle';
 import { IInstantiationService } from 'vscf/platform/instantiation/common';
 
 export interface ProjectAreaSelectorOptions {
-  allowMoveToArea?: boolean;
-  onConfirm: (parentId: TreeID) => void;
+  currentItemId: TreeID;
+  onConfirm: (parentId: TreeID | null) => void;
 }
 
 export class ProjectAreaSelectorController implements IDisposable {
@@ -26,7 +26,7 @@ export class ProjectAreaSelectorController implements IDisposable {
   readonly zIndex: number;
   readonly instanceId: string;
 
-  public readonly allowMoveToArea: boolean;
+  public readonly currentItemId?: TreeID;
 
   constructor(
     private readonly options: ProjectAreaSelectorOptions,
@@ -35,10 +35,10 @@ export class ProjectAreaSelectorController implements IDisposable {
   ) {
     this.zIndex = initOptions.index;
     this.instanceId = initOptions.instanceId;
-    this.allowMoveToArea = options.allowMoveToArea ?? true;
+    this.currentItemId = options.currentItemId;
   }
 
-  confirmSelection(id: TreeID) {
+  confirmSelection(id: TreeID | null) {
     this.options.onConfirm(id);
     this.dispose();
   }

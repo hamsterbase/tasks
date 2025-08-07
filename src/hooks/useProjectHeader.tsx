@@ -55,8 +55,11 @@ export const useProjectHeader = (options: IUseProjectHeaderOptions) => {
 
   const handleMoveToProject = () => {
     projectAreaSelector({
-      allowMoveToArea: false,
-      onConfirm: (id: TreeID) => {
+      currentItemId: projectHeadingInfo.id,
+      onConfirm: (id: TreeID | null) => {
+        if (!id) {
+          return;
+        }
         todoService.updateProjectHeading(projectHeadingInfo.id, {
           position: { parentId: id, type: 'firstElement' },
         });

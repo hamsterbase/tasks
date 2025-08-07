@@ -1,4 +1,4 @@
-import { AreaIcon, MoveIcon, CloseIcon } from '@/components/icons';
+import { AreaIcon, MoveIcon } from '@/components/icons';
 import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox';
 import { getParentDisplay } from '@/core/state/getParentDisplay';
 import { useTreeSelect } from '@/desktop/overlay/treeSelect/useTreeSelect';
@@ -22,7 +22,11 @@ export const TaskLocationField: React.FC<TaskLocationFieldProps> = ({ itemId }) 
     const rect = e.currentTarget.getBoundingClientRect();
     treeSelect(rect.right, rect.bottom + 4, {
       currentItemId: itemId,
-      onConfirm: (id: TreeID) => {
+      onConfirm: (id: TreeID | null) => {
+        if (!id) {
+          handleClearClick();
+          return;
+        }
         const item = todoService.modelState.taskObjectMap.get(itemId);
         if (!item) return;
         if (item.type === 'task') {
@@ -104,11 +108,6 @@ export const TaskLocationField: React.FC<TaskLocationFieldProps> = ({ itemId }) 
             <span className="text-sm text-t3">{localize('tasks.location.null', 'Set Location')}</span>
           )}
         </button>
-        {parentDisplayData && (
-          <button onClick={handleClearClick} className="p-1 hover:bg-bg3 rounded-md transition-colors">
-            <CloseIcon className="size-4 text-t3" />
-          </button>
-        )}
       </div>
     </div>
   );

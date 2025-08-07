@@ -8,7 +8,7 @@ import { IInstantiationService } from 'vscf/platform/instantiation/common';
 interface ITreeSelectOptions {
   x: number;
   y: number;
-  onConfirm: (id: TreeID) => void;
+  onConfirm: (id: TreeID | null) => void;
   currentItemId?: TreeID;
 }
 
@@ -47,7 +47,7 @@ export class TreeSelectController implements IDisposable {
     return this.options.currentItemId;
   }
 
-  confirmSelection(id: TreeID): void {
+  confirmSelection(id: TreeID | null): void {
     this.options.onConfirm(id);
     this.dispose();
   }
