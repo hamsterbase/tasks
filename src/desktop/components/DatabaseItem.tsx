@@ -47,7 +47,7 @@ export const DatabaseItem: React.FC<DatabaseItemProps> = ({
         {isCurrent && actionButtons && <div className="flex items-center gap-2">{actionButtons}</div>}
         {!isCurrent && (
           <button className="px-3 py-1.5 text-sm text-t2 hover:bg-bg2 rounded-md transition-colors" onClick={onClick}>
-            {localize('database.switch', 'Switch')}
+            {localize('database.switch', 'Switch to Database')}
           </button>
         )}
       </div>
