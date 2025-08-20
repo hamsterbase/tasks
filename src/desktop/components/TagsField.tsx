@@ -4,6 +4,7 @@ import { getAreaDetail } from '@/core/state/getArea';
 import { getProject } from '@/core/state/getProject';
 import { getTaskInfo } from '@/core/state/getTaskInfo';
 import { useTagEditor } from '@/desktop/overlay/tagEditor/useTagEditor';
+import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
 import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService';
@@ -61,32 +62,24 @@ export const TagsField: React.FC<ITagsFieldProps> = ({ itemId }) => {
     );
   };
 
-  const labelKey =
-    itemData.itemType === 'project'
-      ? localize('project.detail.tags', 'Tags')
-      : itemData.itemType === 'area'
-        ? localize('area.detail.tags', 'Tags')
-        : localize('tasks.tags', 'Tags');
+  if (itemData.tags.length === 0) {
+    return (
+      <div className={desktopStyles.TagsFieldEmptyButton} onClick={handleTagsClick}>
+        <TagIcon className={desktopStyles.TagsFieldIcon} />
+        <span className={desktopStyles.TagsFieldText}>{localize('tasks.add.tags', 'Add Tags')}</span>
+      </div>
+    );
+  }
 
   return (
-    <div
-      className="flex items-center justify-between py-2 gap-3 cursor-pointer hover:bg-bg2 rounded-md px-2 -mx-2 transition-colors"
-      onClick={handleTagsClick}
-    >
-      <div className="flex items-center gap-2 text-t2">
-        <TagIcon className="size-4" />
-        <span className="text-sm">{labelKey}</span>
-      </div>
-      <div className="flex flex-wrap gap-1 justify-end">
-        {itemData.tags.length > 0 ? (
-          itemData.tags.map((tag, index) => (
-            <span key={index} className="text-brand rounded-md text-xs font-medium">
-              #{tag}
-            </span>
-          ))
-        ) : (
-          <span className="text-sm text-t3">{localize('tasks.edit_tags', 'Edit tags')}</span>
-        )}
+    <div className={desktopStyles.TagsFieldWithTagsButton} onClick={handleTagsClick}>
+      <TagIcon className={desktopStyles.TagsFieldIconWithTags} />
+      <div className={desktopStyles.TagsFieldTagsContainer}>
+        {itemData.tags.map((tag, index) => (
+          <span key={index} className={desktopStyles.TagsFieldTag}>
+            {tag}
+          </span>
+        ))}
       </div>
     </div>
   );

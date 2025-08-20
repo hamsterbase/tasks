@@ -4,7 +4,7 @@ import { calculateDragPosition } from '@/core/dnd/calculateDragPosition';
 import { TaskInfo } from '@/core/state/type';
 import { EmptyState } from '@/desktop/components/EmptyState';
 import { DragOverlayItem } from '@/desktop/components/drag/DragOverlayItem';
-import { TaskListItem } from '@/desktop/components/taskListItem/TaskListItem';
+import { TaskListItem } from '@/desktop/components/todo/TaskListItem';
 import { useService } from '@/hooks/use-service';
 import { useRegisterEvent } from '@/hooks/useRegisterEvent';
 import { IListService } from '@/services/list/common/listService';

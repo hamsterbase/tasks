@@ -10,7 +10,8 @@ interface ProjectStatusBoxProps {
   className?: string;
   onClick?: () => void;
   onLongPress?: () => void;
-  color?: 't3' | 'brand' | 't1' | 'white';
+  color?: 't3' | 'brand' | 't1' | 'white' | 't2';
+  border?: string;
 }
 
 export const ProjectStatusBox: React.FC<ProjectStatusBoxProps> = ({
@@ -20,6 +21,7 @@ export const ProjectStatusBox: React.FC<ProjectStatusBoxProps> = ({
   onClick,
   onLongPress,
   color = 't1',
+  border = 'border-2',
 }) => {
   const normalizedProgress = Math.min(Math.max(progress, 0), 1);
   const rotation = -90;
@@ -60,11 +62,13 @@ export const ProjectStatusBox: React.FC<ProjectStatusBoxProps> = ({
       <div
         onClick={onClick}
         {...longPressEvents}
-        className={classNames('flex items-center justify-center border-2 rounded-full size-[90%] box-border', {
+        className={classNames('flex items-center justify-center rounded-full size-[90%] box-border', {
           'border-brand fill-brand text-brand': color === 'brand',
           'border-t3 fill-t3 text-t3': color === 't3',
           'border-t1 fill-t1 text-t1': color === 't1',
+          'border-t2 fill-t2 text-t2': color === 't2',
           'border-white fill-white text-white': color === 'white',
+          [border]: true,
         })}
       >
         {status !== 'completed' && status !== 'canceled' && normalizedProgress > 0 && (

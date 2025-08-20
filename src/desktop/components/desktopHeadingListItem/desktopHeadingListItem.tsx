@@ -1,6 +1,6 @@
 import { EditableInput } from '@/components/edit/EditableInput';
 import { projectHeadingTitleInputKey } from '@/components/edit/inputKeys';
-import { HeadingIcon } from '@/components/icons';
+import { DragHandleIcon, HeadingIcon } from '@/components/icons';
 import { ITaskList } from '@/components/taskList/type.ts';
 import { ProjectHeadingInfo } from '@/core/state/type.ts';
 import { useService } from '@/hooks/use-service';
@@ -16,12 +16,14 @@ export interface DesktopHeadingListItemProps {
   projectHeadingInfo: ProjectHeadingInfo;
   className?: string;
   taskList?: ITaskList;
+  hideDividers?: boolean;
 }
 
 export const DesktopHeadingListItem: React.FC<DesktopHeadingListItemProps> = ({
   projectHeadingInfo,
   className,
   taskList,
+  hideDividers,
 }) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: projectHeadingInfo.id,
@@ -59,75 +61,74 @@ export const DesktopHeadingListItem: React.FC<DesktopHeadingListItemProps> = ({
     opacity: isDragging ? 0.5 : 1,
   };
 
-  if (isDragging) {
-    return (
-      <div
-        ref={setNodeRef}
-        style={style}
-        {...attributes}
-        {...listeners}
-        className="px-4 py-2 text-sm font-medium text-t2 bg-bg2 rounded opacity-50"
-      >
-        {projectHeadingInfo.title}
-      </div>
-    );
-  }
+  const handleClickCapture = (e: React.MouseEvent) => {
+    if (taskList) {
+      const projectHeadingId = projectHeadingInfo.id;
+      taskList.select(projectHeadingId, {
+        offset: null,
+        multipleMode: e.metaKey,
+      });
+    }
+  };
+
+  const handleClick = () => {
+    if (!isEditing) {
+      setIsEditing(true);
+      setTimeout(() => {
+        inputRef.current?.focus();
+      }, 0);
+    }
+  };
 
   return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners} className="pt-2">
+    <div
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
+      className={classNames('group relative', {
+        'bg-bg3 rounded-lg': isDragging,
+        'pt-4': !hideDividers,
+      })}
+    >
+      {!hideDividers && (
+        <div
+          className={classNames('h-px mb-4 shadow-[0_0.5px_0_0_theme(colors.line.bold)]', {
+            'opacity-0': isDragging,
+          })}
+        ></div>
+      )}
       <div
         className={classNames(
-          'px-4 py-2 flex items-center gap-2 justify-between text-sm font-medium text-t2 rounded cursor-pointer hover:bg-bg3 transition-colors',
+          'px-3 py-3 flex items-center gap-3 justify-between text-base leading-5 font-medium text-t1 rounded-lg transition-colors min-h-11 relative',
           {
-            'bg-bg3': (isFocused && isSelected) || isEditing,
-            'bg-bg2': !isFocused && isSelected,
+            'bg-bg3': isFocused && isSelected && !isEditing,
+            'bg-bg2': !isFocused && isSelected && !isEditing,
+            'opacity-0': isDragging,
           },
           className
         )}
-        onClickCapture={(e) => {
-          if (taskList) {
-            const projectHeadingId = projectHeadingInfo.id;
-            if (e.metaKey) {
-              taskList.select(projectHeadingId, {
-                offset: null,
-                multipleMode: true,
-              });
-            } else {
-              taskList.select(projectHeadingId, {
-                offset: null,
-                multipleMode: false,
-              });
-            }
-          }
-        }}
-        onClick={() => {
-          if (!isEditing) {
-            setIsEditing(true);
-            setTimeout(() => {
-              inputRef.current?.focus();
-            }, 0);
-          }
-        }}
+        onClickCapture={handleClickCapture}
+        onClick={handleClick}
       >
-        <div className="flex items-center gap-2 flex-1 min-w-0">
-          <HeadingIcon className="size-4 text-t3 flex-shrink-0" />
-          <EditableInput
-            ref={inputRef}
-            inputKey={projectHeadingTitleInputKey(projectHeadingInfo.id)}
-            defaultValue={projectHeadingInfo.title}
-            onChange={(e) => {
-              taskList?.updateInputValue(e.target.value);
-            }}
-            onSelect={handleInputSelect}
-            onSave={(title: string) => {
-              todoService.updateProjectHeading(projectHeadingInfo.id, { title });
-              setIsEditing(false);
-            }}
-            onBlur={() => setIsEditing(false)}
-            className="flex-1 bg-transparent outline-none text-t1 font-medium"
-            placeholder="Project Heading"
-          />
-        </div>
+        <DragHandleIcon className="absolute -left-5 top-1/2 -translate-y-1/2 size-5 text-t3 opacity-0 group-hover:opacity-50 transition-opacity z-10" />
+        <HeadingIcon className="size-5 text-t1 flex-shrink-0" />
+        <EditableInput
+          ref={inputRef}
+          inputKey={projectHeadingTitleInputKey(projectHeadingInfo.id)}
+          defaultValue={projectHeadingInfo.title}
+          onChange={(e) => {
+            taskList?.updateInputValue(e.target.value);
+          }}
+          onSelect={handleInputSelect}
+          onSave={(title: string) => {
+            todoService.updateProjectHeading(projectHeadingInfo.id, { title });
+            setIsEditing(false);
+          }}
+          onBlur={() => setIsEditing(false)}
+          className="flex-1 bg-transparent outline-none text-t1 font-medium"
+          placeholder="Project Heading"
+        />
       </div>
     </div>
   );

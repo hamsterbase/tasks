@@ -1,4 +1,6 @@
 import { EditableTextArea } from '@/components/edit/EditableTextArea';
+import { TaskDisplaySettingsIcon } from '@/components/icons';
+import { desktopStyles } from '@/desktop/theme/main';
 import { localize } from '@/nls';
 import { TextAreaRef } from 'rc-textarea';
 import React, { ReactNode, useRef } from 'react';
@@ -7,6 +9,7 @@ export interface EntityHeaderAction {
   icon: React.ReactNode;
   handleClick: (e: React.MouseEvent) => void;
   title?: string;
+  label?: string;
   className?: string;
 }
 
@@ -19,6 +22,12 @@ interface EntityHeaderProps {
   onSave?: (value: string) => void;
   placeholder?: string;
   editable?: boolean;
+
+  internalActions?: {
+    displaySettings?: {
+      onOpen: (right: number, bottom: number) => void;
+    };
+  };
 }
 
 export const EntityHeader: React.FC<EntityHeaderProps> = ({
@@ -30,16 +39,32 @@ export const EntityHeader: React.FC<EntityHeaderProps> = ({
   onSave,
   placeholder,
   editable = false,
+  internalActions,
 }) => {
   const textAreaRef = useRef<TextAreaRef>(null);
   const handleSave = (value: string) => {
     onSave?.(value);
   };
 
+  const allActions = [...actions];
+  if (internalActions?.displaySettings) {
+    const handleOpenTaskDisplaySettings = (e: React.MouseEvent) => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      internalActions.displaySettings!.onOpen(rect.right, rect.bottom + 4);
+    };
+
+    allActions.push({
+      icon: <TaskDisplaySettingsIcon className="size-5" />,
+      handleClick: handleOpenTaskDisplaySettings,
+      label: localize('inbox.display', 'Display'),
+      title: localize('inbox.taskDisplaySettings', 'Task Display Settings'),
+    });
+  }
+
   return (
-    <div className="min-h-12 flex items-center justify-between px-4 border-b border-line-light bg-bg1">
-      <div className="flex items-center gap-3 flex-1 min-w-0">
-        {renderIcon()}
+    <div className={desktopStyles.EntityHeaderContainer}>
+      <div className={desktopStyles.EntityHeaderContentWrapper}>
+        <button className={desktopStyles.EntityHeaderIconButton}>{renderIcon()}</button>
         {editable && inputKey && onSave ? (
           <EditableTextArea
             ref={textAreaRef}
@@ -48,28 +73,26 @@ export const EntityHeader: React.FC<EntityHeaderProps> = ({
             defaultValue={title}
             onSave={handleSave}
             placeholder={placeholder || localize('common.untitled', 'Untitled')}
-            className="flex-1 text-lg font-medium text-t1 resize-none bg-transparent border-none outline-none px-0 py-0"
+            className={desktopStyles.EntityHeaderEditableTextArea}
             autoSize={{ minRows: 1 }}
           />
         ) : (
-          <h1 className={`text-lg font-medium text-t1 truncate`}>
+          <h1 className={desktopStyles.EntityHeaderTitle}>
             {title || placeholder || localize('common.untitled', 'Untitled')}
           </h1>
         )}
       </div>
-      {actions.length > 0 && (
-        <div className="flex items-center">
-          {actions.map((action, index) => (
+      {allActions.length > 0 && (
+        <div className={desktopStyles.EntityHeaderActionsContainer}>
+          {allActions.map((action, index) => (
             <button
               key={index}
-              className={
-                action.className ||
-                'flex items-center gap-1 px-3 py-1.5 text-sm text-t2 hover:text-t1 hover:bg-bg2 rounded-md transition-colors'
-              }
+              className={action.className || desktopStyles.EntityHeaderActionButton}
               title={action.title}
               onClick={action.handleClick}
             >
-              {action.icon}
+              <span className={desktopStyles.EntityHeaderActionIcon}>{action.icon}</span>
+              <span className={desktopStyles.EntityHeaderActionLabel}>{action.label}</span>
             </button>
           ))}
         </div>

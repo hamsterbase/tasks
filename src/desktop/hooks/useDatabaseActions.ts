@@ -6,6 +6,7 @@ import { useWatchEvent } from '@/hooks/use-watch-event';
 import { useBack } from '@/hooks/useBack';
 import { localize } from '@/nls';
 import { DeviceDatabaseItem, ICloudService } from '@/services/cloud/common/cloudService';
+import { useState, useEffect } from 'react';
 
 export const useDatabaseActions = (
   id: string | undefined,
@@ -17,6 +18,18 @@ export const useDatabaseActions = (
   const dialog = useDesktopDialog();
   const back = useBack();
   const desktopMessage = useDesktopMessage();
+
+  const [lastClickTime, setLastClickTime] = useState<Date | undefined>(() => {
+    if (!id) return undefined;
+    const stored = localStorage.getItem(`db_click_time_${id}`);
+    return stored ? new Date(stored) : undefined;
+  });
+
+  useEffect(() => {
+    if (id && lastClickTime) {
+      localStorage.setItem(`db_click_time_${id}`, lastClickTime.toISOString());
+    }
+  }, [id, lastClickTime]);
 
   const isSwitchNeeded = cloudService.databaseConfig !== id;
   const handleSync = async () => {
@@ -102,13 +115,14 @@ export const useDatabaseActions = (
 
   const handleSwitchToDatabase = async () => {
     if (!id || !database) return;
+    setLastClickTime(new Date());
     await cloudService.syncImmediately();
     if (database.type === 'cloud') {
       if (database.exists) {
         await cloudService.switchToLocalDatabase(id);
       } else {
         dialog({
-          title: localize('database.switch', 'Switch to Database'),
+          title: localize('database.switch.to', 'Switch to Database'),
           description: localize('database.switch.desc', 'Enter your password to switch to this database'),
           confirmText: localize('database.switch.confirm', 'Switch'),
           cancelText: localize('common.cancel', 'Cancel'),
@@ -150,5 +164,6 @@ export const useDatabaseActions = (
     handleDelete,
     handleClearLocalData,
     handleSwitchToDatabase,
+    lastClickTime,
   };
 };

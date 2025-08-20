@@ -1,31 +1,25 @@
 import { getTodayTimestampInUtc } from '@/base/common/time';
-import { TodayIcon, TaskDisplaySettingsIcon } from '@/components/icons';
+import { useDesktopDndSensors } from '@/base/hooks/useDesktopDndSensors';
+import { TodayIcon } from '@/components/icons';
 import { TaskList } from '@/components/taskList/taskList.ts';
-import { getTodayItems } from '@/core/state/today/getTodayItems';
 import { calculateDragPosition } from '@/core/dnd/calculateDragPosition';
-import { EntityHeader, EntityHeaderAction } from '@/desktop/components/common/EntityHeader';
-import { DragOverlayItem } from '@/desktop/components/drag/DragOverlayItem';
+import { getTodayItems } from '@/core/state/today/getTodayItems';
+import { EntityHeader } from '@/desktop/components/common/EntityHeader';
+import { DesktopPage } from '@/desktop/components/DesktopPage';
 import { DesktopProjectList } from '@/desktop/components/DesktopProjectList/DesktopProjectList';
+import { DragOverlayItem } from '@/desktop/components/drag/DragOverlayItem';
 import { InboxTaskInput } from '@/desktop/components/inboxTaskInput/InboxTaskInput';
 import { CreateTaskEvent } from '@/desktop/components/inboxTaskInput/InboxTaskInputController';
-import { TaskListItem } from '@/desktop/components/taskListItem/TaskListItem';
+import { TitleContentSection } from '@/desktop/components/TitleContentSection';
+import { TaskListItem } from '@/desktop/components/todo/TaskListItem';
 import { useDesktopTaskDisplaySettings } from '@/desktop/hooks/useDesktopTaskDisplaySettings.ts';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { useRegisterEvent } from '@/hooks/useRegisterEvent';
-import { useTaskDisplaySettings } from '@/hooks/useTaskDisplaySettings';
 import { localize } from '@/nls';
 import { IListService } from '@/services/list/common/listService';
 import { ITodoService } from '@/services/todo/common/todoService';
-import {
-  closestCenter,
-  DndContext,
-  DragEndEvent,
-  MouseSensor,
-  TouchSensor,
-  useSensor,
-  useSensors,
-} from '@dnd-kit/core';
+import { closestCenter, DndContext, DragEndEvent } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import type { TreeID } from 'loro-crdt';
 import React, { useCallback, useEffect } from 'react';
@@ -36,24 +30,11 @@ export const Today = () => {
   const listService = useService(IListService);
   useWatchEvent(listService.onMainListChange);
   useWatchEvent(todoService.onStateChange);
-  const { showCompletedTasks } = useTaskDisplaySettings('today', {
+  const { showCompletedTasks, openTaskDisplaySettings } = useDesktopTaskDisplaySettings('today', {
     hideShowFutureTasks: true,
   });
-  const { openTaskDisplaySettings } = useDesktopTaskDisplaySettings('today');
 
-  const mouseSensor = useSensor(MouseSensor, {
-    activationConstraint: {
-      distance: 3,
-    },
-  });
-  const touchSensor = useSensor(TouchSensor, {
-    activationConstraint: {
-      delay: 100,
-      tolerance: 5,
-    },
-  });
-  const sensors = useSensors(mouseSensor, touchSensor);
-
+  const sensors = useDesktopDndSensors();
   const todayItems = getTodayItems(todoService.modelState, getTodayTimestampInUtc(), {
     showCompletedTasks,
     showFutureTasks: false,
@@ -139,81 +120,54 @@ export const Today = () => {
     }
   };
 
-  const handleOpenTaskDisplaySettings = (e: React.MouseEvent) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    openTaskDisplaySettings(rect.right, rect.bottom + 4);
-  };
-
-  const actions: EntityHeaderAction[] = [
-    {
-      icon: <TaskDisplaySettingsIcon className="size-4" />,
-      handleClick: handleOpenTaskDisplaySettings,
-      title: localize('today.taskDisplaySettings', 'Task Display Settings'),
-    },
-  ];
-
   const mainList = listService.mainList;
   if (!mainList) {
     return null;
   }
 
   return (
-    <div className="h-full w-full bg-bg1">
-      <div className="h-full flex flex-col">
+    <DesktopPage
+      header={
         <EntityHeader
-          renderIcon={() => <TodayIcon className="size-5 text-t2" />}
+          renderIcon={() => <TodayIcon />}
+          internalActions={{ displaySettings: { onOpen: (right, bottom) => openTaskDisplaySettings(right, bottom) } }}
           title={localize('today', 'Today')}
-          actions={actions}
         />
-
-        <div className="flex-1 overflow-y-auto">
-          <div className="mx-auto p-6 space-y-6">
-            {projects.length > 0 && (
-              <div className="space-y-3">
-                <h2 className="text-sm font-medium text-t2 uppercase tracking-wide">
-                  {localize('today.projects', 'Projects')}
-                </h2>
-                <DesktopProjectList
-                  projects={projects}
-                  emptyStateLabel={localize('today.noProjects', 'No projects for today')}
-                  useDateAssignedMove={true}
-                />
-              </div>
-            )}
-
-            <div className="space-y-3">
-              <h2 className="text-sm font-medium text-t2 uppercase tracking-wide">
-                {localize('today.tasks', 'Tasks')}
-              </h2>
-              <InboxTaskInput
-                onCreateTask={(event: CreateTaskEvent) => {
-                  todoService.addTask({
-                    title: event.title,
-                    startDate: getTodayTimestampInUtc(),
-                    position: {
-                      type: 'firstElement',
-                    },
-                  });
-                }}
-              />
-
-              <div className="outline-none" tabIndex={1} onFocus={setFocus} onBlur={clearFocus}>
-                <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-                  <SortableContext items={tasks.map((task) => task.id)} strategy={verticalListSortingStrategy}>
-                    {tasks.map((task) => {
-                      const willDisappear = todayItems.willDisappearObjectIdSet.has(task.id);
-                      return (
-                        <TaskListItem taskList={mainList} key={task.id} task={task} willDisappear={willDisappear} />
-                      );
-                    })}
-                  </SortableContext>
-                  <DragOverlayItem />
-                </DndContext>
-              </div>
-            </div>
-          </div>
+      }
+    >
+      {projects.length > 0 && (
+        <TitleContentSection title={localize('today.projects', 'Projects')}>
+          <DesktopProjectList
+            projects={projects}
+            emptyStateLabel={localize('today.noProjects', 'No projects for today')}
+            useDateAssignedMove={true}
+          />
+        </TitleContentSection>
+      )}
+      <TitleContentSection title={localize('today.tasks', 'Tasks')}>
+        <InboxTaskInput
+          onCreateTask={(event: CreateTaskEvent) => {
+            todoService.addTask({
+              title: event.title,
+              startDate: getTodayTimestampInUtc(),
+              position: {
+                type: 'firstElement',
+              },
+            });
+          }}
+        />
+        <div className="outline-none" tabIndex={1} onFocus={setFocus} onBlur={clearFocus}>
+          <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+            <SortableContext items={tasks.map((task) => task.id)} strategy={verticalListSortingStrategy}>
+              {tasks.map((task) => {
+                const willDisappear = todayItems.willDisappearObjectIdSet.has(task.id);
+                return <TaskListItem taskList={mainList} key={task.id} task={task} willDisappear={willDisappear} />;
+              })}
+            </SortableContext>
+            <DragOverlayItem />
+          </DndContext>
         </div>
-      </div>
-    </div>
+      </TitleContentSection>
+    </DesktopPage>
   );
 };

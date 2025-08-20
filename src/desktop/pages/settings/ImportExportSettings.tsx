@@ -1,9 +1,12 @@
-import { encodePatch } from '@/core/export/encode';
 import { decodePatch } from '@/core/export/decode';
+import { encodePatch } from '@/core/export/encode';
+import { ItemGroup } from '@/desktop/components/Settings/ItemGroup';
+import { SettingsContent } from '@/desktop/components/Settings/SettingsContent/SettingsContent';
+import { SettingsItem } from '@/desktop/components/Settings/SettingsItem';
+import { SettingsTitle } from '@/desktop/components/Settings/SettingsTitle';
 import { useService } from '@/hooks/use-service.ts';
-import { ITodoService } from '@/services/todo/common/todoService';
 import { localize } from '@/nls';
-import { SettingsItem } from '@/desktop/components/settings/SettingsItem';
+import { ITodoService } from '@/services/todo/common/todoService';
 import React, { useState } from 'react';
 
 export const ImportExportSettings: React.FC = () => {
@@ -74,41 +77,33 @@ export const ImportExportSettings: React.FC = () => {
   };
 
   return (
-    <div className="p-6 w-full">
-      <div className="space-y-8">
-        <div>
-          <div className="space-y-6">
-            <SettingsItem
-              title={localize('settings.export', 'Export')}
-              description={localize(
-                'settings.export.description',
-                'Export your database to back up your data or transfer it to another device.'
-              )}
-              action={{
-                type: 'button',
-                label: exporting ? localize('common.exporting', 'Exporting...') : localize('settings.export', 'Export'),
-                onClick: handleExport,
-                disabled: exporting,
-              }}
-            />
-
-            <div className="border-t border-line-light">
-              <SettingsItem
-                title={localize('settings.import', 'Import')}
-                description={localize('settings.import.description', 'Import your tasks from a backup file')}
-                action={{
-                  type: 'button',
-                  label: importing
-                    ? localize('common.importing', 'Importing...')
-                    : localize('settings.import', 'Import'),
-                  onClick: handleImport,
-                  disabled: importing,
-                }}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <SettingsContent>
+      <SettingsTitle title={localize('settings.import_export', 'Import & Export')} />
+      <ItemGroup>
+        <SettingsItem
+          title={localize('settings.export', 'Export')}
+          description={localize(
+            'settings.export.description',
+            'Export your database to back up your data or transfer it to another device.'
+          )}
+          action={{
+            type: 'button',
+            label: exporting ? localize('common.exporting', 'Exporting...') : localize('settings.export', 'Export'),
+            onClick: handleExport,
+            disabled: exporting,
+          }}
+        />
+        <SettingsItem
+          title={localize('settings.import', 'Import')}
+          description={localize('settings.import.description', 'Import your tasks from a backup file')}
+          action={{
+            type: 'button',
+            label: importing ? localize('common.importing', 'Importing...') : localize('settings.import', 'Import'),
+            onClick: handleImport,
+            disabled: importing,
+          }}
+        />
+      </ItemGroup>
+    </SettingsContent>
   );
 };

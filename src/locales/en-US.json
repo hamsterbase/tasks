@@ -24,6 +24,10 @@
     "defaultMessage": "Account ID copied to clipboard",
     "content": "Account ID copied to clipboard"
   },
+  "account.copySuccess": {
+    "defaultMessage": "Copied Successfully",
+    "content": "Copied Successfully"
+  },
   "account.delete": {
     "defaultMessage": "Delete Account",
     "content": "Delete Account"
@@ -109,8 +113,8 @@
     "content": "Buy VIP"
   },
   "addTask": {
-    "defaultMessage": "Add task...",
-    "content": "Add task..."
+    "defaultMessage": "Add Task",
+    "content": "Add Task"
   },
   "area.create_project": {
     "defaultMessage": "Add Project",
@@ -167,6 +171,10 @@
   "cancel": {
     "defaultMessage": "Cancel",
     "content": "Cancel"
+  },
+  "common.back": {
+    "defaultMessage": "Back",
+    "content": "Back"
   },
   "common.cancel": {
     "defaultMessage": "Cancel",
@@ -309,8 +317,8 @@
     "content": "Database not found"
   },
   "database.offline.reason": {
-    "defaultMessage": "Reason",
-    "content": "Reason"
+    "defaultMessage": "Offline Reason",
+    "content": "Offline Reason"
   },
   "database.other_account": {
     "defaultMessage": "This database does not belong to this account",
@@ -444,6 +452,10 @@
     "defaultMessage": "No future projects",
     "content": "No future projects"
   },
+  "heading.title_placeholder": {
+    "defaultMessage": "Add heading title...",
+    "content": "Add heading title..."
+  },
   "home.futureProjects": {
     "defaultMessage": "Future Projects",
     "content": "Future Projects"
@@ -520,6 +532,10 @@
     "defaultMessage": "Completed Tasks Range",
     "content": "Completed Tasks Range"
   },
+  "inbox.display": {
+    "defaultMessage": "Display",
+    "content": "Display"
+  },
   "inbox.hoverMessage": {
     "defaultMessage": "Create Task",
     "content": "Create Task"
@@ -531,6 +547,10 @@
   "inbox.show_future_tasks": {
     "defaultMessage": "Show Future Tasks",
     "content": "Show Future Tasks"
+  },
+  "inbox.taskDisplaySettings": {
+    "defaultMessage": "Task Display Settings",
+    "content": "Task Display Settings"
   },
   "indexedDBStorageInvalidParams": {
     "defaultMessage": "dbName and storeName are required",
@@ -668,6 +688,10 @@
     "defaultMessage": "An error occurred",
     "content": "An error occurred"
   },
+  "project_area_selector.move_to_root": {
+    "defaultMessage": "Move to root",
+    "content": "Move to root"
+  },
   "project_area_selector.search": {
     "defaultMessage": "Search projects and areas...",
     "content": "Search projects and areas..."
@@ -748,6 +772,10 @@
     "defaultMessage": "Due Date",
     "content": "Due Date"
   },
+  "project.due_date_placeholder": {
+    "defaultMessage": "Select due date",
+    "content": "Select due date"
+  },
   "project.edit_due_date": {
     "defaultMessage": "Edit Due Date",
     "content": "Edit Due Date"
@@ -780,6 +808,10 @@
     "defaultMessage": "Mark as Created",
     "content": "Mark as Created"
   },
+  "project.move_project": {
+    "defaultMessage": "Move Project",
+    "content": "Move Project"
+  },
   "project.notes": {
     "defaultMessage": "Notes",
     "content": "Notes"
@@ -791,6 +823,10 @@
   "project.start_date": {
     "defaultMessage": "Start Date",
     "content": "Start Date"
+  },
+  "project.start_date_placeholder": {
+    "defaultMessage": "Select start date",
+    "content": "Select start date"
   },
   "project.taskDisplaySettings": {
     "defaultMessage": "Task Display Settings",
@@ -841,8 +877,8 @@
     "content": "Register"
   },
   "register.subtitle": {
-    "defaultMessage": "Join us today! Create your account to get started.",
-    "content": "Join us today! Create your account to get started."
+    "defaultMessage": "Sign up and enjoy 30 days of free cloud sync!",
+    "content": "Sign up and enjoy 30 days of free cloud sync!"
   },
   "register.title": {
     "defaultMessage": "Create Account",
@@ -880,6 +916,10 @@
     "defaultMessage": "About",
     "content": "About"
   },
+  "settings.account": {
+    "defaultMessage": "Account",
+    "content": "Account"
+  },
   "settings.account.management": {
     "defaultMessage": "Account Management",
     "content": "Account Management"
@@ -887,6 +927,10 @@
   "settings.appearance": {
     "defaultMessage": "Appearance",
     "content": "Appearance"
+  },
+  "settings.back_to_app": {
+    "defaultMessage": "Back to App",
+    "content": "Back to App"
   },
   "settings.cloud": {
     "defaultMessage": "Cloud",
@@ -965,8 +1009,8 @@
     "content": "Import"
   },
   "settings.import_export": {
-    "defaultMessage": "Import/Export",
-    "content": "Import/Export"
+    "defaultMessage": "Import & Export",
+    "content": "Import & Export"
   },
   "settings.import.description": {
     "defaultMessage": "Import your tasks from a backup file",
@@ -1092,6 +1136,10 @@
     "defaultMessage": "Move",
     "content": "Move"
   },
+  "tasks.add.tags": {
+    "defaultMessage": "Add Tags",
+    "content": "Add Tags"
+  },
   "tasks.clear_date": {
     "defaultMessage": "Clear date",
     "content": "Clear date"
@@ -1112,6 +1160,10 @@
     "defaultMessage": "Due Date",
     "content": "Due Date"
   },
+  "tasks.due_date_placeholder": {
+    "defaultMessage": "Select due date",
+    "content": "Select due date"
+  },
   "tasks.edit_tags": {
     "defaultMessage": "Edit tags",
     "content": "Edit tags"
@@ -1119,6 +1171,10 @@
   "tasks.location": {
     "defaultMessage": "Location",
     "content": "Location"
+  },
+  "tasks.location.move": {
+    "defaultMessage": "Move to",
+    "content": "Move to"
   },
   "tasks.location.null": {
     "defaultMessage": "Set Location",
@@ -1159,6 +1215,10 @@
   "tasks.start_date": {
     "defaultMessage": "Start Date",
     "content": "Start Date"
+  },
+  "tasks.start_date_placeholder": {
+    "defaultMessage": "Select start date",
+    "content": "Select start date"
   },
   "tasks.subtasks": {
     "defaultMessage": "Subtasks",

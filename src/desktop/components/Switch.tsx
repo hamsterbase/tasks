@@ -1,4 +1,5 @@
 import React from 'react';
+import { desktopStyles } from '@/desktop/theme/main';
 
 export interface SwitchProps {
   checked: boolean;
@@ -16,10 +17,12 @@ export const Switch: React.FC<SwitchProps> = ({ checked, onChange, disabled = fa
         disabled={disabled}
         className="sr-only"
       />
-      <div className={`relative w-10 h-6 rounded-full transition-colors ${checked ? 'bg-brand' : 'bg-bg2'}`}>
+      <div
+        className={`${desktopStyles.SwitchContainer} ${checked ? desktopStyles.SwitchContainerActive : desktopStyles.SwitchContainerInactive}`}
+      >
         <div
-          className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-all duration-200 ${
-            checked ? 'left-5' : 'left-1'
+          className={`${desktopStyles.SwitchKnob} ${
+            checked ? desktopStyles.SwitchKnobActive : desktopStyles.SwitchKnobInactive
           }`}
         />
       </div>

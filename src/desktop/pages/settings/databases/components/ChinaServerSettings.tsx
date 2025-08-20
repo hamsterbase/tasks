@@ -1,4 +1,5 @@
-import { SettingsItem } from '@/desktop/components/settings/SettingsItem';
+import { ItemGroup } from '@/desktop/components/Settings/ItemGroup';
+import { SettingsItem } from '@/desktop/components/Settings/SettingsItem';
 import { useConfig } from '@/hooks/useConfig.ts';
 import { localize } from '@/nls.ts';
 import { chinaServerConfigKey } from '@/services/config/config.ts';
@@ -12,7 +13,7 @@ export const ChinaServerSettings: React.FC = () => {
   }
 
   return (
-    <div>
+    <ItemGroup>
       <SettingsItem
         title={localize('settings.cloud.chinaServer', 'Use China Server')}
         description={localize(
@@ -21,13 +22,12 @@ export const ChinaServerSettings: React.FC = () => {
         )}
         action={{
           type: 'switch',
-
           currentValue: chinaServer.value,
           onChange: (v) => {
             chinaServer.setValue(v);
           },
         }}
       />
-    </div>
+    </ItemGroup>
   );
 };

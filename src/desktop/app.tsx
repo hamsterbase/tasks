@@ -1,30 +1,32 @@
-import { DatePickerOverlay } from '@/desktop/overlay/datePicker/DatePickerOverlay';
-import { TagEditorOverlay } from '@/desktop/overlay/tagEditor/TagEditorOverlay';
 import { CreateDatabaseOverlay } from '@/desktop/overlay/createDatabase/CreateDatabaseOverlay';
+import { DatePickerOverlay } from '@/desktop/overlay/datePicker/DatePickerOverlay';
 import { DesktopDialog } from '@/desktop/overlay/desktopDialog/DesktopDialog';
 import { DesktopMenu } from '@/desktop/overlay/desktopMenu/DesktopMenu.tsx';
 import { DesktopMessage } from '@/desktop/overlay/desktopMessage/DesktopMessage';
+import { TagEditorOverlay } from '@/desktop/overlay/tagEditor/TagEditorOverlay';
 import { TreeSelectOverlay } from '@/desktop/overlay/treeSelect/TreeSelectOverlay';
+import { Privacy } from '@/desktop/pages/settings/account/Privacy.tsx';
 import { useInputFocused } from '@/hooks/global/useInputFocused';
+import { useCloudSync } from '@/hooks/useCloudSync.ts';
 import React from 'react';
 import { Navigate, useRoutes } from 'react-router';
+import { SettingsSidebarLayout } from './layout/SettingsSidebarLayout.tsx';
 import { SidebarLayout } from './layout/sidebar.tsx';
 import { AreaPage } from './pages/area';
 import { Completed } from './pages/completed';
-import { EULA } from './pages/EULA';
 import { FutureProjects } from './pages/futureProjects';
 import { Inbox } from './pages/inbox';
 import { Logs } from './pages/logger';
-import { Privacy } from './pages/Privacy';
 import { ProjectPage } from './pages/project';
 import { Schedule } from './pages/schedule';
+import { EULA } from './pages/settings/account/eula/EULA.tsx';
 import { AccountSettings } from './pages/settings/AccountSettings';
 import { AppearanceSettings } from './pages/settings/AppearanceSettings';
 import { SyncSettings } from './pages/settings/databases/SyncSettings.tsx';
 import { ImportExportSettings } from './pages/settings/ImportExportSettings';
-import { SettingsLayout } from './pages/settings/SettingsLayout';
+import { LoginPage } from './pages/settings/Login/LoginPage.tsx';
+import { RegisterPage } from './pages/settings/Register/RegisterPage.tsx';
 import { Today } from './pages/today/index.tsx';
-import { useCloudSync } from '@/hooks/useCloudSync.ts';
 
 export const App = () => {
   useInputFocused();
@@ -73,15 +75,22 @@ export const App = () => {
         },
         {
           path: 'settings',
-          element: <SidebarLayout hideSelectionPanel />,
+          element: <SettingsSidebarLayout />,
           children: [
             {
               path: '',
-              element: <SettingsLayout />,
               children: [
                 {
                   index: true,
                   element: <Navigate to="appearance" replace />,
+                },
+                {
+                  path: 'privacy',
+                  element: <Privacy />,
+                },
+                {
+                  path: 'eula',
+                  element: <EULA />,
                 },
                 {
                   path: 'appearance',
@@ -93,7 +102,32 @@ export const App = () => {
                 },
                 {
                   path: 'account',
-                  element: <AccountSettings />,
+                  children: [
+                    {
+                      index: true,
+                      element: <Navigate to="detail" replace />,
+                    },
+                    {
+                      path: 'login',
+                      element: <LoginPage />,
+                    },
+                    {
+                      path: 'register',
+                      element: <RegisterPage />,
+                    },
+                    {
+                      path: 'detail',
+                      element: <AccountSettings />,
+                    },
+                    {
+                      path: 'privacy',
+                      element: <Privacy />,
+                    },
+                    {
+                      path: 'eula',
+                      element: <EULA />,
+                    },
+                  ],
                 },
                 {
                   path: 'import-export',
@@ -103,14 +137,7 @@ export const App = () => {
             },
           ],
         },
-        {
-          path: 'privacy',
-          element: <Privacy />,
-        },
-        {
-          path: 'eula',
-          element: <EULA />,
-        },
+
         {
           path: 'logs',
           element: <Logs />,

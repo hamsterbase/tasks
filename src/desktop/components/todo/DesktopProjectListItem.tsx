@@ -1,24 +1,28 @@
-import { ChevronRightIcon } from '@/components/icons';
+import { ChevronRightIcon, DragHandleIcon } from '@/components/icons';
 import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox';
+import { getProjectItemTags } from '@/core/state/getProjectItemTags';
 import { ProjectInfoState } from '@/core/state/type';
-import { TaskItemCompletionAt } from '@/desktop/components/taskListItem/TaskItemCompletionAt';
-import { TaskItemDueDate } from '@/desktop/components/taskListItem/TaskItemDueDate';
-import { TaskItemStartDate } from '@/desktop/components/taskListItem/TaskItemStartDate';
+import { useService } from '@/hooks/use-service';
 import { localize } from '@/nls';
+import { ITodoService } from '@/services/todo/common/todoService';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import React from 'react';
 import { Link } from 'react-router';
+import { ItemTagsList } from './ItemTagsList';
+import classNames from 'classnames';
 
 interface DesktopProjectListItemProps {
   project: ProjectInfoState;
+  disableDrag?: boolean;
 }
 
-export const DesktopProjectListItem: React.FC<DesktopProjectListItemProps> = ({ project }) => {
+export const DesktopProjectListItem: React.FC<DesktopProjectListItemProps> = ({ project, disableDrag }) => {
   const progress = project.progress || 0;
 
   const { attributes, listeners, setNodeRef, transform, isDragging } = useSortable({
     id: project.id,
+    disabled: disableDrag,
   });
 
   const style = {
@@ -27,28 +31,45 @@ export const DesktopProjectListItem: React.FC<DesktopProjectListItemProps> = ({ 
     pointerEvents: (isDragging ? 'none' : 'auto') as React.CSSProperties['pointerEvents'],
   };
 
+  const todoService = useService(ITodoService);
+
+  const tags = getProjectItemTags(todoService.modelState, {
+    projectId: project.id,
+    hideParent: false,
+  });
+
   return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      <Link to={`/desktop/project/${project.uid}`} className="block no-underline">
-        <div className="flex items-center gap-3 px-3 py-2 hover:bg-bg2 rounded-md transition-colors cursor-pointer group">
-          <div className="flex-shrink-0">
-            <ProjectStatusBox progress={progress} status={project.status} className="size-5" color="t3" />
-          </div>
-          <TaskItemCompletionAt completionAt={project.completionAt} status={project.status} />
-          <TaskItemStartDate startDate={project.startDate} />
-          <div className="flex-1 min-w-0">
-            <h3 className="text-base font-medium text-t1 truncate">
-              {project.title || localize('project.untitled', 'New Project')}
-            </h3>
-          </div>
-          <div className="flex items-center gap-1.5 flex-shrink-0">
-            <TaskItemDueDate dueDate={project.dueDate} />
-            <div className="opacity-0 group-hover:opacity-100 transition-opacity">
-              <ChevronRightIcon className="w-4 h-4 text-t3" />
-            </div>
-          </div>
-        </div>
-      </Link>
-    </div>
+    <Link
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
+      to={`/desktop/project/${project.uid}`}
+      className={classNames(
+        'min-h-11 no-underline flex items-start gap-3 px-3 py-3 rounded-lg group relative cursor-default',
+        {
+          ['bg-bg3']: isDragging,
+        }
+      )}
+    >
+      {!disableDrag && (
+        <DragHandleIcon className="absolute -left-5 top-1/2 -translate-y-1/2 size-5 text-t3 opacity-0 group-hover:opacity-60 transition-opacity" />
+      )}
+      <div className="flex-shrink-0" style={{ visibility: isDragging ? 'hidden' : 'visible' }}>
+        <ProjectStatusBox progress={progress} status={project.status} className="size-5" color="t2" />
+      </div>
+      <div className="flex-1 min-w-0 flex gap-2 flex-col" style={{ visibility: isDragging ? 'hidden' : 'visible' }}>
+        <h3 className="text-base font-base text-t2 truncate leading-5">
+          {project.title || localize('project.untitled', 'New Project')}
+        </h3>
+        <ItemTagsList tags={tags} isSelected={false} />
+      </div>
+      <div
+        className="flex items-center gap-1.5 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity size-5 text-t3"
+        style={{ visibility: isDragging ? 'hidden' : 'visible' }}
+      >
+        <ChevronRightIcon />
+      </div>
+    </Link>
   );
 };

@@ -1,3 +1,5 @@
+import { ItemGroup } from '@/desktop/components/Settings/ItemGroup';
+import { SettingsTitle } from '@/desktop/components/Settings/SettingsTitle';
 import { useCreateDatabaseOverlay } from '@/desktop/overlay/createDatabase/useCreateDatabaseOverlay.ts';
 import { useService } from '@/hooks/use-service.ts';
 import { useWatchEvent } from '@/hooks/use-watch-event.ts';
@@ -81,24 +83,28 @@ export const DatabaseList: React.FC = () => {
   }
 
   return (
-    <div className="bg-bg2 rounded-lg p-4">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-medium text-t1">{localize('settings.cloud.database', 'Database')}</h3>
-        {isLoggedIn && cloudDatabasesCount < 3 && (
-          <button
-            className="px-3 py-1.5 text-sm font-medium text-white bg-brand border border-brand rounded hover:bg-brand-hover focus:outline-none transition-colors"
-            onClick={() => createDatabaseOverlay({ onSuccess: () => mutate() })}
-          >
-            {localize('settings.createDatabase.title', 'Create Cloud Database')}
-          </button>
-        )}
-      </div>
-
-      <div className="space-y-2">
+    <div className="mt-12">
+      <SettingsTitle
+        title={localize('settings.cloud.database', 'Database')}
+        level={2}
+        action={
+          (isLoggedIn && cloudDatabasesCount < 3) || (
+            <button
+              className="px-3 py-1.5 text-sm font-medium text-white bg-brand border border-brand rounded hover:bg-brand-hover focus:outline-none transition-colors"
+              onClick={() => createDatabaseOverlay({ onSuccess: () => mutate() })}
+            >
+              {localize('settings.createDatabase.title', 'Create Cloud Database')}
+            </button>
+          )
+        }
+      />
+      <ItemGroup>
         {databases.map((database) => (
-          <div key={database.databaseId}>{renderDatabaseItem(database)}</div>
+          <div key={database.databaseId} className="w-full">
+            {renderDatabaseItem(database)}
+          </div>
         ))}
-      </div>
+      </ItemGroup>
     </div>
   );
 };

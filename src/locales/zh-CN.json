@@ -24,6 +24,10 @@
     "defaultMessage": "Account ID copied to clipboard",
     "content": "账户ID已复制到剪贴板"
   },
+  "account.copySuccess": {
+    "defaultMessage": "Copied Successfully",
+    "content": ""
+  },
   "account.delete": {
     "defaultMessage": "Delete Account",
     "content": "删除账户"
@@ -109,8 +113,8 @@
     "content": "购买VIP"
   },
   "addTask": {
-    "defaultMessage": "Add task...",
-    "content": "添加任务..."
+    "defaultMessage": "Add Task",
+    "content": "添加任务"
   },
   "area.create_project": {
     "defaultMessage": "Add Project",
@@ -167,6 +171,10 @@
   "cancel": {
     "defaultMessage": "Cancel",
     "content": "取消"
+  },
+  "common.back": {
+    "defaultMessage": "Back",
+    "content": "返回"
   },
   "common.cancel": {
     "defaultMessage": "Cancel",
@@ -309,8 +317,8 @@
     "content": "数据库未找到"
   },
   "database.offline.reason": {
-    "defaultMessage": "Reason",
-    "content": "原因"
+    "defaultMessage": "Offline Reason",
+    "content": ""
   },
   "database.other_account": {
     "defaultMessage": "This database does not belong to this account",
@@ -444,6 +452,10 @@
     "defaultMessage": "No future projects",
     "content": "没有未来项目"
   },
+  "heading.title_placeholder": {
+    "defaultMessage": "Add heading title...",
+    "content": "添加标题..."
+  },
   "home.futureProjects": {
     "defaultMessage": "Future Projects",
     "content": "未来项目"
@@ -520,6 +532,10 @@
     "defaultMessage": "Completed Tasks Range",
     "content": "已完成任务范围"
   },
+  "inbox.display": {
+    "defaultMessage": "Display",
+    "content": "显示"
+  },
   "inbox.hoverMessage": {
     "defaultMessage": "Create Task",
     "content": "创建任务"
@@ -531,6 +547,10 @@
   "inbox.show_future_tasks": {
     "defaultMessage": "Show Future Tasks",
     "content": "显示未来任务"
+  },
+  "inbox.taskDisplaySettings": {
+    "defaultMessage": "Task Display Settings",
+    "content": "任务显示设置"
   },
   "indexedDBStorageInvalidParams": {
     "defaultMessage": "dbName and storeName are required",
@@ -668,6 +688,10 @@
     "defaultMessage": "An error occurred",
     "content": "发生错误"
   },
+  "project_area_selector.move_to_root": {
+    "defaultMessage": "Move to root",
+    "content": "移动到根目录"
+  },
   "project_area_selector.search": {
     "defaultMessage": "Search projects and areas...",
     "content": "搜索项目和区域..."
@@ -748,6 +772,10 @@
     "defaultMessage": "Due Date",
     "content": "截止日期"
   },
+  "project.due_date_placeholder": {
+    "defaultMessage": "Select due date",
+    "content": "选择截止日期"
+  },
   "project.edit_due_date": {
     "defaultMessage": "Edit Due Date",
     "content": "编辑截止日期"
@@ -780,6 +808,10 @@
     "defaultMessage": "Mark as Created",
     "content": "标记为已创建"
   },
+  "project.move_project": {
+    "defaultMessage": "Move Project",
+    "content": "移动项目"
+  },
   "project.notes": {
     "defaultMessage": "Notes",
     "content": "笔记"
@@ -791,6 +823,10 @@
   "project.start_date": {
     "defaultMessage": "Start Date",
     "content": "开始日期"
+  },
+  "project.start_date_placeholder": {
+    "defaultMessage": "Select start date",
+    "content": "选择开始日期"
   },
   "project.taskDisplaySettings": {
     "defaultMessage": "Task Display Settings",
@@ -841,8 +877,8 @@
     "content": "注册"
   },
   "register.subtitle": {
-    "defaultMessage": "Join us today! Create your account to get started.",
-    "content": "立即加入我们！创建您的账户开始使用。"
+    "defaultMessage": "Sign up and enjoy 30 days of free cloud sync!",
+    "content": ""
   },
   "register.title": {
     "defaultMessage": "Create Account",
@@ -880,6 +916,10 @@
     "defaultMessage": "About",
     "content": "关于"
   },
+  "settings.account": {
+    "defaultMessage": "Account",
+    "content": ""
+  },
   "settings.account.management": {
     "defaultMessage": "Account Management",
     "content": "账户管理"
@@ -887,6 +927,10 @@
   "settings.appearance": {
     "defaultMessage": "Appearance",
     "content": "外观"
+  },
+  "settings.back_to_app": {
+    "defaultMessage": "Back to App",
+    "content": ""
   },
   "settings.cloud": {
     "defaultMessage": "Cloud",
@@ -965,8 +1009,8 @@
     "content": "导入"
   },
   "settings.import_export": {
-    "defaultMessage": "Import/Export",
-    "content": "导入/导出"
+    "defaultMessage": "Import & Export",
+    "content": ""
   },
   "settings.import.description": {
     "defaultMessage": "Import your tasks from a backup file",
@@ -1092,6 +1136,10 @@
     "defaultMessage": "Move",
     "content": "移动"
   },
+  "tasks.add.tags": {
+    "defaultMessage": "Add Tags",
+    "content": "添加标签"
+  },
   "tasks.clear_date": {
     "defaultMessage": "Clear date",
     "content": "清除日期"
@@ -1112,6 +1160,10 @@
     "defaultMessage": "Due Date",
     "content": "截止日期"
   },
+  "tasks.due_date_placeholder": {
+    "defaultMessage": "Select due date",
+    "content": "选择截止日期"
+  },
   "tasks.edit_tags": {
     "defaultMessage": "Edit tags",
     "content": "编辑标签"
@@ -1119,6 +1171,10 @@
   "tasks.location": {
     "defaultMessage": "Location",
     "content": "位置"
+  },
+  "tasks.location.move": {
+    "defaultMessage": "Move to",
+    "content": "移动到"
   },
   "tasks.location.null": {
     "defaultMessage": "Set Location",
@@ -1159,6 +1215,10 @@
   "tasks.start_date": {
     "defaultMessage": "Start Date",
     "content": "开始日期"
+  },
+  "tasks.start_date_placeholder": {
+    "defaultMessage": "Select start date",
+    "content": "选择开始日期"
   },
   "tasks.subtasks": {
     "defaultMessage": "Subtasks",

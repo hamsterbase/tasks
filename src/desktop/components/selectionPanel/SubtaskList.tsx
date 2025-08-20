@@ -1,7 +1,9 @@
 import { useDesktopDndSensors } from '@/base/hooks/useDesktopDndSensors';
+import { PlusIcon, SubtaskIcon } from '@/components/icons';
 import { TaskList } from '@/components/taskList/taskList.ts';
 import { ListOperation } from '@/components/taskList/type';
 import { TaskInfo } from '@/core/state/type.ts';
+import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { useRegisterEvent } from '@/hooks/useRegisterEvent';
@@ -14,7 +16,7 @@ import type { TreeID } from 'loro-crdt';
 import React, { useCallback } from 'react';
 import { flushSync } from 'react-dom';
 import { DragOverlayItem } from '../drag/DragOverlayItem';
-import { SubtaskItem } from '../taskListItem/SubtaskItem';
+import { SubtaskItem } from '@/desktop/components/todo/SubtaskItem';
 
 interface SubtaskListProps {
   task: TaskInfo;
@@ -119,19 +121,6 @@ export const SubtaskList: React.FC<SubtaskListProps> = ({ task }) => {
     );
   }
 
-  if (task.children.length === 0) {
-    return (
-      <div>
-        <button
-          onClick={handleCreateFirstSubtask}
-          className="w-full text-left text-sm text-t3 hover:text-t2 hover:bg-bg2 px-3 py-2 rounded-md transition-colors"
-        >
-          {localize('tasks.click_to_create_subtask', 'Click to create subtask')}
-        </button>
-      </div>
-    );
-  }
-
   return (
     <div
       tabIndex={-1}
@@ -142,16 +131,29 @@ export const SubtaskList: React.FC<SubtaskListProps> = ({ task }) => {
         listService.subList?.setFocus(false);
       }}
     >
-      <div className="space-y-1 group">
+      <div className={desktopStyles.SubtaskListTitle}>
+        <div className={desktopStyles.SubtaskListTitleIcon}>
+          <SubtaskIcon />
+        </div>
+        <span className={desktopStyles.SubtaskListTitleText}>{localize('tasks.subtasks', 'Subtasks')}</span>
+      </div>
+      <div className="space-y-0.25 group">
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
           <SortableContext items={task.children.map((child) => child.id)} strategy={verticalListSortingStrategy}>
             {task.children.map((subtask) => (
               <SubtaskItem key={subtask.id} subtask={subtask} subList={listService.subList!} />
             ))}
           </SortableContext>
-          <DragOverlayItem />
+          <DragOverlayItem isSubtask={true} />
         </DndContext>
       </div>
+      <button
+        onClick={handleCreateFirstSubtask}
+        className="flex items-center gap-2 justify-center w-full text-base leading-5 h-11 text-t3 hover:bg-bg3 px-3 rounded-lg transition-colors"
+      >
+        <PlusIcon className="size-5" />
+        {localize('tasks.click_to_create_subtask', 'Click to create subtask')}
+      </button>
     </div>
   );
 };

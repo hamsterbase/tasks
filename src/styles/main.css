@@ -9,3 +9,7 @@
 @import './electron.css';
 
 @import './reset.css';
+
+:root {
+  --separator-border: transparent;
+}

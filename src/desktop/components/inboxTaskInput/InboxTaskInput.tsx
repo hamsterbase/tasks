@@ -1,9 +1,11 @@
+import { PlusIcon } from '@/components/icons';
 import { useWorkbenchInstance } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { useRegisterEvent } from '@/hooks/useRegisterEvent';
 import { localize } from '@/nls';
 import React, { useCallback } from 'react';
 import { CreateTaskEvent, INBOX_TASK_INPUT_CONTROLLER_KEY, InboxTaskInputController } from './InboxTaskInputController';
+import { desktopStyles } from '@/desktop/theme/main';
 import './commands';
 
 interface InboxTaskInputProps {
@@ -35,16 +37,19 @@ export const InboxTaskInput: React.FC<InboxTaskInputProps> = ({ onCreateTask }) 
   }, [controller]);
 
   return (
-    <div className="mb-2">
-      <input
-        type="text"
-        value={controller.inputValue}
-        onChange={handleInputChange}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        placeholder={localize('addTask', 'Add task...')}
-        className="w-full px-3 py-2 bg-bg2 rounded-md text-t1 placeholder-t3 focus:outline-none"
-      />
+    <div className={desktopStyles.InboxTaskInputWrapper}>
+      <div className={desktopStyles.InboxTaskInputContainer}>
+        <PlusIcon className={desktopStyles.InboxTaskInputIcon} />
+        <input
+          type="text"
+          value={controller.inputValue}
+          onChange={handleInputChange}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          placeholder={localize('addTask', 'Add Task')}
+          className={desktopStyles.InboxTaskInputField}
+        />
+      </div>
     </div>
   );
 };

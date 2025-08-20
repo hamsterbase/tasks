@@ -1,5 +1,8 @@
+import { desktopStyles } from '@/desktop/theme/main';
 import React from 'react';
+import { Select } from '../Form/Select/Select';
 import { Switch } from '../Switch';
+import { Button } from './Button/Button';
 
 export type ActionType = 'select' | 'switch' | 'button';
 
@@ -35,41 +38,25 @@ export const SettingsItem: React.FC<SettingsItemProps> = ({ title, description, 
   const renderAction = () => {
     switch (action.type) {
       case 'select':
-        return (
-          <select
-            value={action.currentValue}
-            onChange={(e) => action.onChange(e.target.value)}
-            className="w-full max-w-xs px-3 py-2 border border-line-light rounded-md bg-bg1 text-t1 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent"
-          >
-            {action.options.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        );
+        return <Select value={action.currentValue} onChange={action.onChange} options={action.options} />;
       case 'switch':
         return <Switch checked={action.currentValue} onChange={action.onChange} />;
       case 'button':
         return (
-          <button
-            onClick={action.onClick}
-            disabled={action.disabled}
-            className="px-4 py-2 bg-accent rounded-md hover:bg-accent/90 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
-          >
+          <Button onClick={action.onClick} disabled={action.disabled} variant="import" inline>
             {action.label}
-          </button>
+          </Button>
         );
     }
   };
 
   return (
-    <div className="flex items-start justify-between py-4">
-      <div className="flex-1 pr-4">
-        <h2 className="text-lg font-medium text-t1 mb-1">{title}</h2>
-        {description && <p className="text-sm text-t2">{description}</p>}
+    <div className={desktopStyles.SettingsItemContainer}>
+      <div className={desktopStyles.SettingsItemContentWrapper}>
+        <h2 className={desktopStyles.SettingsItemTitle}>{title}</h2>
+        {description && <p className={desktopStyles.SettingsItemDescription}>{description}</p>}
       </div>
-      <div className="flex-shrink-0">{renderAction()}</div>
+      <div className={desktopStyles.SettingsItemActionWrapper}>{renderAction()}</div>
     </div>
   );
 };

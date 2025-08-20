@@ -1,6 +1,6 @@
 import { areaPageTitleInputId, projectPageTitleInputId } from '@/components/edit/inputId';
 import { areaTitleInputKey } from '@/components/edit/inputKeys';
-import { AreaIcon, CircleIcon, TaskDisplaySettingsIcon } from '@/components/icons';
+import { AreaIcon, CircleIcon } from '@/components/icons';
 import { getAreaDetail } from '@/core/state/getArea';
 import { EntityHeader, EntityHeaderAction } from '@/desktop/components/common/EntityHeader';
 import { useDesktopTaskDisplaySettings } from '@/desktop/hooks/useDesktopTaskDisplaySettings';
@@ -45,11 +45,6 @@ export const AreaHeader: React.FC<AreaHeaderProps> = ({ area, areaId }) => {
     }
   };
 
-  const handleOpenTaskDisplaySettings = (e: React.MouseEvent) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    openTaskDisplaySettings(rect.right, rect.bottom + 4);
-  };
-
   const actions: EntityHeaderAction[] = [
     {
       icon: (
@@ -65,11 +60,6 @@ export const AreaHeader: React.FC<AreaHeaderProps> = ({ area, areaId }) => {
       className:
         'flex items-center gap-2 px-3 py-1.5 text-sm text-t2 hover:text-t1 hover:bg-bg2 rounded-md transition-colors',
     },
-    {
-      icon: <TaskDisplaySettingsIcon className="size-4" />,
-      handleClick: handleOpenTaskDisplaySettings,
-      title: localize('area.taskDisplaySettings', 'Task Display Settings'),
-    },
   ];
 
   return (
@@ -81,6 +71,7 @@ export const AreaHeader: React.FC<AreaHeaderProps> = ({ area, areaId }) => {
       title={area.title}
       placeholder={localize('area.untitled', 'New Area')}
       actions={actions}
+      internalActions={{ displaySettings: { onOpen: openTaskDisplaySettings } }}
       onSave={(title) => {
         todoService.updateArea(areaId, { title });
       }}

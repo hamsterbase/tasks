@@ -1,6 +1,9 @@
+import { ItemGroup } from '@/desktop/components/Settings/ItemGroup';
+import { SettingsContent } from '@/desktop/components/Settings/SettingsContent/SettingsContent';
+import { SettingsItem } from '@/desktop/components/Settings/SettingsItem';
+import { SettingsTitle } from '@/desktop/components/Settings/SettingsTitle';
 import { localize } from '@/nls';
 import React, { useState } from 'react';
-import { SettingsItem } from '@/desktop/components/settings/SettingsItem';
 
 export const AppearanceSettings: React.FC = () => {
   const [currentTheme, setCurrentTheme] = useState(localStorage.getItem('theme') || 'auto');
@@ -29,8 +32,9 @@ export const AppearanceSettings: React.FC = () => {
   };
 
   return (
-    <div className="p-6 w-full">
-      <div className="space-y-8">
+    <SettingsContent>
+      <SettingsTitle title={localize('settings.appearance', 'Appearance')} />
+      <ItemGroup>
         <SettingsItem
           title={localize('settings.theme', 'Theme')}
           description={localize('settings.theme.description', 'Select your preferred theme.')}
@@ -46,7 +50,6 @@ export const AppearanceSettings: React.FC = () => {
             onChange: changeTheme,
           }}
         />
-
         <SettingsItem
           title={localize('settings.language', 'Language')}
           description={localize('settings.language.description', 'Select your preferred language.')}
@@ -60,7 +63,7 @@ export const AppearanceSettings: React.FC = () => {
             onChange: changeLanguage,
           }}
         />
-      </div>
-    </div>
+      </ItemGroup>
+    </SettingsContent>
   );
 };

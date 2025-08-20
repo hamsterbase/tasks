@@ -1,13 +1,12 @@
 import { getTodayTimestampInUtc } from '@/base/common/time';
-import { LogIcon, TaskDisplaySettingsIcon } from '@/components/icons';
+import { LogIcon } from '@/components/icons';
 import { TaskList } from '@/components/taskList/taskList.ts';
 import { ModelTypes } from '@/core/enum.ts';
 import { getCompletedItems } from '@/core/state/completed/getCompletedItems';
 import { ProjectInfoState, TaskInfo } from '@/core/state/type.ts';
-import { EntityHeader, EntityHeaderAction } from '@/desktop/components/common/EntityHeader';
-import { TaskListItem } from '@/desktop/components/taskListItem/TaskListItem';
+import { EntityHeader } from '@/desktop/components/common/EntityHeader';
 import { DesktopProjectListItem } from '@/desktop/components/todo/DesktopProjectListItem';
-import { useDesktopTaskDisplaySettings } from '@/desktop/hooks/useDesktopTaskDisplaySettings.ts';
+import { TaskListItem } from '@/desktop/components/todo/TaskListItem';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { localize } from '@/nls';
@@ -17,7 +16,6 @@ import React, { useMemo } from 'react';
 export const Completed = () => {
   const todoService = useService(ITodoService);
   useWatchEvent(todoService.onStateChange);
-  const { openTaskDisplaySettings } = useDesktopTaskDisplaySettings('completed');
 
   const completedTaskGroups = getCompletedItems(todoService.modelState, {
     currentDate: getTodayTimestampInUtc(),
@@ -30,26 +28,12 @@ export const Completed = () => {
     return new TaskList('Completed-ReadOnly', [], [], null, null);
   }, []);
 
-  const handleOpenTaskDisplaySettings = (e: React.MouseEvent) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    openTaskDisplaySettings(rect.right, rect.bottom + 4);
-  };
-
-  const actions: EntityHeaderAction[] = [
-    {
-      icon: <TaskDisplaySettingsIcon className="size-4" />,
-      handleClick: handleOpenTaskDisplaySettings,
-      title: localize('completed.taskDisplaySettings', 'Task Display Settings'),
-    },
-  ];
-
   return (
     <div className="h-full w-full bg-bg1">
       <div className="h-full flex flex-col">
         <EntityHeader
           renderIcon={() => <LogIcon className="size-5 text-t2" />}
           title={localize('completed_tasks.title', 'Completed')}
-          actions={actions}
         />
 
         <div className="flex-1 overflow-y-auto">
@@ -68,6 +52,7 @@ export const Completed = () => {
                     } else {
                       return (
                         <TaskListItem
+                          disableDrag
                           key={item.id}
                           task={item as TaskInfo}
                           willDisappear={willDisappear}

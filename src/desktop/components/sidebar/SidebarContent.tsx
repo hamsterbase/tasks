@@ -24,10 +24,10 @@ import { IInstantiationService } from 'vscf/platform/instantiation/common';
 import { desktopStyles } from '../../theme/main';
 import { DragOverlayItem } from '../drag/DragOverlayItem';
 import { DragHandle } from '../DragHandle';
-import { SidebarAreaItem } from './SidebarAreaItem';
-import { SidebarFutureTasksItem } from './SidebarFutureTasksItem';
-import { SidebarNavigation } from './SidebarNavigation';
-import { SidebarProjectItem as SidebarProjectItemComponent } from './SidebarProjectItem';
+import { SidebarAreaItem } from './SidebarAreaItem/SidebarAreaItem.tsx';
+import { SidebarFutureProjectsItem } from './SidebarFutureProjectsItem/SidebarFutureProjectsItem.tsx';
+import { SidebarMenu } from './SidebarMenu/SidebarMenu.tsx';
+import { SidebarProjectItem as SidebarProjectItemComponent } from './SidebarProjectItem/SidebarProjectItem.tsx';
 
 interface SidebarProjectAndAreaProps {
   flattenedResult: FlattenedResult<AreaInfoState, ProjectInfoState>;
@@ -38,7 +38,7 @@ const SidebarProjectsAndAreas: React.FC<SidebarProjectAndAreaProps> = ({ flatten
   const { active } = useDndContext();
 
   return (
-    <div className="space-y-1">
+    <div>
       {flattenedResult.flattenedItems.map((item) => {
         switch (item.type) {
           case 'header':
@@ -51,7 +51,7 @@ const SidebarProjectsAndAreas: React.FC<SidebarProjectAndAreaProps> = ({ flatten
           }
           case 'special': {
             if (item.id === DragDropElements.futureProjects) {
-              return <SidebarFutureTasksItem key={item.id} count={unstartedProjects.length} />;
+              return <SidebarFutureProjectsItem key={item.id} count={unstartedProjects.length} />;
             }
             return null;
           }
@@ -133,42 +133,40 @@ export const SidebarContent: React.FC = () => {
   };
 
   const futureProjects = getFutureProjects(todoService.modelState, getTodayTimestampInUtc());
+  const sidebarProjectAreaListNoTopPadding =
+    rootCollections.flattenedItems && rootCollections.flattenedItems[0]?.type === 'header';
 
   return (
     <div className={classNames(desktopStyles.sidebarBackground, desktopStyles.sidebarContainerStyle)}>
-      <div className={classNames('flex flex-col h-full gap-2')}>
-        <DragHandle></DragHandle>
-        <SidebarNavigation />
-        <div className="flex-1 overflow-y-auto">
-          <DndContext
-            sensors={sensors}
-            collisionDetection={getFlattenedItemsCollisionDetectionStrategy(rootCollections)}
-            onDragEnd={handleDragEnd}
+      <DragHandle></DragHandle>
+      <SidebarMenu />
+      <div
+        className={classNames(desktopStyles.SidebarProjectAreaList, {
+          [desktopStyles.SidebarProjectAreaListNoTopPadding]: sidebarProjectAreaListNoTopPadding,
+        })}
+      >
+        <DndContext
+          sensors={sensors}
+          collisionDetection={getFlattenedItemsCollisionDetectionStrategy(rootCollections)}
+          onDragEnd={handleDragEnd}
+        >
+          <SortableContext
+            items={rootCollections.flattenedItems.map((item) => item.id)}
+            strategy={verticalListSortingStrategy}
           >
-            <SortableContext
-              items={rootCollections.flattenedItems.map((item) => item.id)}
-              strategy={verticalListSortingStrategy}
-            >
-              <SidebarProjectsAndAreas flattenedResult={rootCollections} unstartedProjects={futureProjects} />
-            </SortableContext>
-            <DragOverlayItem />
-          </DndContext>
-        </div>
-        <div className="flex gap-2">
-          <button
-            onClick={handleCreateMenu}
-            className="flex-1 flex items-center gap-2 px-3 py-2 text-sm text-t1 hover:bg-bg2 rounded-md transition-colors"
-          >
-            <PlusIcon className="size-4" />
-            <span>{localize('sidebar.create_menu', 'Create New')}</span>
-          </button>
-          <Link
-            to="/desktop/settings"
-            className="flex items-center justify-center px-3 py-2 text-sm text-t1 hover:bg-bg2 rounded-md transition-colors"
-          >
-            <SettingsIcon className="size-4" />
-          </Link>
-        </div>
+            <SidebarProjectsAndAreas flattenedResult={rootCollections} unstartedProjects={futureProjects} />
+          </SortableContext>
+          <DragOverlayItem />
+        </DndContext>
+      </div>
+      <div className={desktopStyles.SidebarActionsContainer}>
+        <button onClick={handleCreateMenu} className={desktopStyles.SidebarCreateButton}>
+          <PlusIcon className={desktopStyles.SidebarCreateButtonIcon} />
+          <span>{localize('sidebar.create_menu', 'Create New')}</span>
+        </button>
+        <Link to="/desktop/settings" className={desktopStyles.SidebarSettingsButton}>
+          <SettingsIcon className={desktopStyles.SidebarSettingsButtonIcon} />
+        </Link>
       </div>
     </div>
   );

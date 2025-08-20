@@ -1,3 +1,4 @@
+import { desktopStyles } from '@/desktop/theme/main';
 import { localize } from '@/nls';
 import React from 'react';
 
@@ -7,13 +8,8 @@ interface ClearSelectionButtonProps {
 
 export const ClearSelectionButton: React.FC<ClearSelectionButtonProps> = ({ onClearSelection }) => {
   return (
-    <div className="border-t border-line-light p-4">
-      <button
-        onClick={onClearSelection}
-        className="w-full py-2 px-4 text-sm text-t2 hover:text-t1 hover:bg-bg2 rounded-md transition-colors"
-      >
-        {localize('selection.clear_selection', 'Clear Selection')}
-      </button>
+    <div className={desktopStyles.ClearSelectionButton} onClick={onClearSelection}>
+      {localize('selection.clear_selection', 'Clear Selection')}
     </div>
   );
 };

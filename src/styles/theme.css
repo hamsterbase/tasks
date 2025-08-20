@@ -44,5 +44,22 @@
   --color-brand: #30cccc;
   --color-brand-light: #e6fffb;
 
+  /* Button colors */
+  --color-btn-primary-bg: var(--color-brand);
+  --color-btn-primary-text: var(--color-text-white);
+  --color-btn-primary-hover: rgba(48, 204, 204, 0.9);
+  --color-btn-primary-focus: var(--color-brand);
+
+  --color-btn-secondary-bg: var(--color-bg3);
+  --color-btn-secondary-text: var(--color-t3);
+  --color-btn-secondary-hover: rgba(241, 242, 243, 0.9);
+  --color-btn-secondary-focus: var(--color-bg3);
+
+  --color-btn-danger-bg: transparent;
+  --color-btn-danger-text: var(--color-stress-red);
+  --color-btn-danger-border: var(--color-line-regular);
+  --color-btn-danger-hover: rgba(248, 90, 84, 0.1);
+  --color-btn-danger-focus: var(--color-stress-red);
+
   --color-toast-bg: #2f3238;
 }

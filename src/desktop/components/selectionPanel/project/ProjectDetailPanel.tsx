@@ -83,16 +83,6 @@ const ProjectDetailPanelContent: React.FC<IProjectDetailPanelContentProps> = ({ 
     );
   };
 
-  const handleClearStartDate = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    todoService.updateProject(projectId, { startDate: null });
-  };
-
-  const handleClearDueDate = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    todoService.updateProject(projectId, { dueDate: null });
-  };
-
   const handleMenuClick = (_e: React.MouseEvent<HTMLButtonElement>) => {
     const rect = _e.currentTarget.getBoundingClientRect();
     openDesktopProjectMenu(rect.right, rect.bottom);
@@ -140,7 +130,7 @@ const ProjectDetailPanelContent: React.FC<IProjectDetailPanelContentProps> = ({ 
               icon={<ScheduledIcon className="size-4" />}
               date={project.startDate}
               onDateClick={handleStartDateClick}
-              onClearDate={handleClearStartDate}
+              placeholder={localize('project.start_date_placeholder', 'Select start date')}
             />
 
             <TaskDateField
@@ -148,7 +138,7 @@ const ProjectDetailPanelContent: React.FC<IProjectDetailPanelContentProps> = ({ 
               icon={<DueIcon className="size-4" />}
               date={project.dueDate}
               onDateClick={handleDueDateClick}
-              onClearDate={handleClearDueDate}
+              placeholder={localize('project.due_date_placeholder', 'Select due date')}
               isDue={true}
             />
 

@@ -2,6 +2,7 @@ import { getTodayTimestampInUtc } from '@/base/common/time';
 import { TaskList } from '@/components/taskList/taskList.ts';
 import { flattenProjectTaskNew } from '@/core/state/flattenProjectHeading-New';
 import { getProject } from '@/core/state/getProject';
+import { DesktopPage } from '@/desktop/components/DesktopPage';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { useTaskDisplaySettings } from '@/hooks/useTaskDisplaySettings';
@@ -64,21 +65,17 @@ const ProjectContent: React.FC<ProjectContentProps> = ({ project, projectId }) =
   if (!mainList) {
     return null;
   }
-
   return (
-    <div className="h-full w-full bg-bg1">
-      <div className="h-full flex flex-col">
-        <ProjectHeader project={project} projectId={projectId} />
-        <ProjectTaskArea
-          project={project}
-          flattenedItems={flattenedItems}
-          flattenedItemsResult={flattenedItemsResult}
-          willDisappearObjectIdSet={willDisappearObjectIdSet}
-          taskList={mainList}
-          onDragEnd={handleDragEnd}
-        />
-      </div>
-    </div>
+    <DesktopPage header={<ProjectHeader project={project} projectId={projectId} />}>
+      <ProjectTaskArea
+        project={project}
+        flattenedItems={flattenedItems}
+        flattenedItemsResult={flattenedItemsResult}
+        willDisappearObjectIdSet={willDisappearObjectIdSet}
+        taskList={mainList}
+        onDragEnd={handleDragEnd}
+      />
+    </DesktopPage>
   );
 };
 

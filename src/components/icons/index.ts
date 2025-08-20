@@ -1,12 +1,17 @@
 // eslint-disable-next-line custom/no-restricted-packages
 import {
+  AlertCircle,
   ArrowLeft,
   ArrowRight,
+  CalendarCheck,
   CalendarClock,
   CalendarDays,
   CalendarRange,
+  CalendarX,
   Check,
+  ChevronDown,
   ChevronLeft,
+  Copy,
   ChevronRight,
   Circle,
   CircleCheck,
@@ -16,13 +21,14 @@ import {
   Database,
   FileText,
   GripVertical,
-  Heading,
   Home,
   Inbox,
   Info,
   Layers,
-  Logs,
+  ListTree,
+  LocateFixed,
   MoreVerticalIcon,
+  Palette,
   PenLine,
   Plus,
   SendToBack,
@@ -30,16 +36,15 @@ import {
   SlidersHorizontal,
   Sun,
   Tag,
-  Target,
+  TypeIcon,
   User,
   X,
-  AlertCircle,
 } from 'lucide-react';
 
 export const AreaExpandedIcon = ChevronRight;
 export const BackIcon = ArrowLeft;
 export const TodayIcon = Sun;
-export const DueIcon = Target;
+export const DueIcon = LocateFixed;
 export const HomeIcon = Home;
 export const InboxIcon = Inbox;
 export const LogIcon = CircleCheck;
@@ -50,14 +55,14 @@ export const RightArrowIcon = ArrowRight;
 export const SettingsIcon = Settings;
 export const TagIcon = Tag;
 export const DragHandleIcon = GripVertical;
-export const SubtaskIcon = Logs;
+export const SubtaskIcon = ListTree;
 export const CloseIcon = X;
 export const CheckIcon = Check;
 export const CancelIcon = X;
 export const AreaIcon = Layers;
 export const PlusIcon = Plus;
 export const LaterProjectsIcon = CalendarClock;
-export const HeadingIcon = Heading;
+export const HeadingIcon = TypeIcon;
 export const EditIcon = PenLine;
 export const NavIcon = ChevronRight;
 export const DeleteIcon = X;
@@ -67,6 +72,7 @@ export const DatabaseIcon = Database;
 export const UserIcon = User;
 export const ChevronRightIcon = ChevronRight;
 export const TaskDisplaySettingsIcon = SlidersHorizontal;
+export const PaletteIcon = Palette;
 export const CalendarRangeIcon = CalendarRange;
 export const MoveIcon = SendToBack;
 export const CircleSmallIcon = CircleSmall;
@@ -75,3 +81,8 @@ export const RightIcon = ChevronRight;
 export const CircleIcon = Circle;
 export const InfoIcon = Info;
 export const AlertCircleIcon = AlertCircle;
+export const CircleCheckIcon = CircleCheck;
+export const CalendarCheckIcon = CalendarCheck;
+export const CalendarXIcon = CalendarX;
+export const CopyIcon = Copy;
+export const ChevronDownIcon = ChevronDown;

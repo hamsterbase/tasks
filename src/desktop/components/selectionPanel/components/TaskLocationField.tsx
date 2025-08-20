@@ -2,6 +2,7 @@ import { AreaIcon, MoveIcon } from '@/components/icons';
 import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox';
 import { getParentDisplay } from '@/core/state/getParentDisplay';
 import { useTreeSelect } from '@/desktop/overlay/treeSelect/useTreeSelect';
+import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { localize } from '@/nls';
@@ -20,7 +21,7 @@ export const TaskLocationField: React.FC<TaskLocationFieldProps> = ({ itemId }) 
 
   const handleMoveClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    treeSelect(rect.right, rect.bottom + 4, {
+    treeSelect(rect.left, rect.bottom + 4, {
       currentItemId: itemId,
       onConfirm: (id: TreeID | null) => {
         if (!id) {
@@ -77,38 +78,29 @@ export const TaskLocationField: React.FC<TaskLocationFieldProps> = ({ itemId }) 
   };
 
   const parentDisplayData = getParentDisplay(todoService.modelState, itemId);
+
+  if (!parentDisplayData) {
+    return (
+      <button className={desktopStyles.TaskLocationFieldButton} onClick={handleMoveClick}>
+        <MoveIcon className={desktopStyles.TaskLocationFieldIcon} />
+        <span className={desktopStyles.TaskLocationFieldMoveText}>{localize('tasks.location.move', 'Move to')}</span>
+      </button>
+    );
+  }
+
   return (
-    <div className="flex items-center justify-between py-2 gap-2">
-      <div className="flex items-center gap-2 text-t2">
-        <MoveIcon className="size-4" />
-        <span className="text-sm font-medium">{localize('tasks.location', 'Location')}</span>
-      </div>
-      <div className="flex items-center gap-1">
-        <button
-          onClick={handleMoveClick}
-          className="flex items-center gap-2 px-2 py-1 hover:bg-bg3 rounded-md transition-colors max-w-[200px]"
-        >
-          {parentDisplayData ? (
-            <>
-              <span className="shrink-0">
-                {parentDisplayData.icon.type === 'area' ? (
-                  <AreaIcon className="size-5 shrink-0 text-t3" />
-                ) : (
-                  <ProjectStatusBox
-                    progress={parentDisplayData.icon.progress}
-                    status={parentDisplayData.icon.status}
-                    color="t3"
-                    className="size-5 shrink-0"
-                  />
-                )}
-              </span>
-              <span className="text-sm text-t1 truncate">{parentDisplayData.title}</span>
-            </>
-          ) : (
-            <span className="text-sm text-t3">{localize('tasks.location.null', 'Set Location')}</span>
-          )}
-        </button>
-      </div>
-    </div>
+    <button className={desktopStyles.TaskLocationFieldButton} onClick={handleMoveClick}>
+      {parentDisplayData.icon.type === 'area' ? (
+        <AreaIcon className={`${desktopStyles.TaskLocationFieldIcon} text-t2`} />
+      ) : (
+        <ProjectStatusBox
+          progress={parentDisplayData.icon.progress}
+          status={parentDisplayData.icon.status}
+          color="t2"
+          className={desktopStyles.TaskLocationFieldIcon}
+        />
+      )}
+      <span className={desktopStyles.TaskLocationFieldLocationText}>{parentDisplayData.title}</span>
+    </button>
   );
 };

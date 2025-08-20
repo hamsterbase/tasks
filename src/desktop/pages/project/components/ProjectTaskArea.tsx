@@ -6,7 +6,7 @@ import { ProjectHeadingInfo, TaskInfo } from '@/core/state/type';
 import { DragOverlayItem } from '@/desktop/components/drag/DragOverlayItem';
 import { InboxTaskInput } from '@/desktop/components/inboxTaskInput/InboxTaskInput';
 import { CreateTaskEvent } from '@/desktop/components/inboxTaskInput/InboxTaskInputController';
-import { TaskListItem } from '@/desktop/components/taskListItem/TaskListItem';
+import { TaskListItem } from '@/desktop/components/todo/TaskListItem';
 import { DesktopHeadingListItem } from '@/desktop/components/desktopHeadingListItem/desktopHeadingListItem';
 import { useService } from '@/hooks/use-service';
 import { IListService } from '@/services/list/common/listService';
@@ -17,6 +17,8 @@ import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import classNames from 'classnames';
 import type { TreeID } from 'loro-crdt';
 import React, { useCallback } from 'react';
+import { flushSync } from 'react-dom';
+import { HeadingIcon } from '@/components/icons';
 
 interface ProjectTaskListProps {
   items: FlattenedItem<ProjectHeadingInfo, TaskInfo>[];
@@ -28,11 +30,12 @@ interface ProjectTaskListProps {
 const ProjectTaskList: React.FC<ProjectTaskListProps> = ({ items, result, willDisappearObjectIdSet, taskList }) => {
   return (
     <>
-      {items.map((item) => {
+      {items.map((item, index) => {
         if (item.type === 'header') {
           return (
             <DesktopHeadingListItem
               key={item.id}
+              hideDividers={index === 0}
               projectHeadingInfo={item.content}
               className={classNames({
                 'rounded-t-md': result.borderTop(item.id),
@@ -98,12 +101,40 @@ export const ProjectTaskArea: React.FC<ProjectTaskAreaProps> = ({
     });
   };
 
+  const handleAddHeading = () => {
+    const headingId = flushSync(() => {
+      return todoService.addProjectHeading({
+        title: '',
+        position: {
+          type: 'firstElement',
+          parentId: project.id,
+        },
+      });
+    });
+
+    if (headingId) {
+      listService.mainList?.select(headingId, {
+        multipleMode: false,
+        offset: 0,
+        fireEditEvent: true,
+      });
+    }
+  };
+
   return (
-    <div className="flex-1 overflow-y-auto">
-      <div className="p-4">
-        <InboxTaskInput onCreateTask={handleCreateTask} />
+    <div className="flex-1">
+      <div className="flex items-center gap-6">
+        <div className="flex-1">
+          <InboxTaskInput onCreateTask={handleCreateTask} />
+        </div>
+        <div className="relative size-11 bg-bg3 flex items-center justify-center rounded-lg" onClick={handleAddHeading}>
+          <HeadingIcon className="size-5 text-t3" />
+          <div className="absolute top-5.5 right-2.5 w-2 h-2 bg-primary rounded-full flex items-center justify-center">
+            <span className="text-t3 text-xs leading-none">+</span>
+          </div>
+        </div>
       </div>
-      <div className="p-4 outline-none" tabIndex={1} onFocus={setFocus} onBlur={clearFocus}>
+      <div className="outline-none" tabIndex={1} onFocus={setFocus} onBlur={clearFocus}>
         <DndContext
           sensors={sensors}
           collisionDetection={getFlattenedItemsCollisionDetectionStrategy(flattenedItemsResult)}

@@ -3,18 +3,18 @@ import { getArea } from '@/core/state/getAreaState.ts';
 import { getProject } from '@/core/state/getProject.ts';
 import { getProjectHeadingInfo } from '@/core/state/getProjectHeadingInfo.ts';
 import { getTaskInfo } from '@/core/state/getTaskInfo.ts';
+import { DesktopProjectListItem } from '@/desktop/components/todo/DesktopProjectListItem';
+import { SubtaskItem } from '@/desktop/components/todo/SubtaskItem';
+import { TaskListItem } from '@/desktop/components/todo/TaskListItem';
 import { useService } from '@/hooks/use-service.ts';
 import { useWatchEvent } from '@/hooks/use-watch-event.ts';
-import { ITodoService } from '@/services/todo/common/todoService.ts';
+import { ITodoService } from '@/services/todo/common/todoService';
 import { DragOverlay, useDndContext } from '@dnd-kit/core';
 import type { TreeID } from 'loro-crdt';
 import React, { useMemo } from 'react';
-import { SidebarAreaItem } from '../sidebar/SidebarAreaItem';
-import { SidebarProjectItem } from '../sidebar/SidebarProjectItem';
-import { SubtaskItem } from '../taskListItem/SubtaskItem';
-import { TaskListItem } from '../taskListItem/TaskListItem';
 import { DesktopHeadingListItem } from '../desktopHeadingListItem/desktopHeadingListItem';
-import { DesktopProjectListItem } from '../todo/DesktopProjectListItem';
+import { SidebarAreaItem } from '../sidebar/SidebarAreaItem/SidebarAreaItem';
+import { SidebarProjectItem } from '../sidebar/SidebarProjectItem/SidebarProjectItem';
 
 interface TaskProps {
   hideProjectTitle: boolean;
@@ -64,7 +64,7 @@ export const DragOverlayItem: React.FC<DragOverlayItemProps> = ({
       }
       case 'projectHeading': {
         const projectHeadingInfo = getProjectHeadingInfo(modelState, activeId as TreeID);
-        return <DesktopHeadingListItem projectHeadingInfo={projectHeadingInfo} />;
+        return <DesktopHeadingListItem hideDividers projectHeadingInfo={projectHeadingInfo} />;
       }
       case 'area': {
         const areaInfo = getArea(modelState, activeId as TreeID);
@@ -85,7 +85,7 @@ export const DragOverlayItem: React.FC<DragOverlayItemProps> = ({
 
   return (
     <DragOverlay>
-      <div>{overlayContent}</div>
+      <div className="bg-bg1 shadow-sm rounded-lg">{overlayContent}</div>
     </DragOverlay>
   );
 };
