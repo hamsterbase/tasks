@@ -29,7 +29,7 @@ export const OfflineDatabaseContent = ({
       title={localize('database.isOffline', 'Database is Offline')}
       items={[
         {
-          title: localize('database.offline.reason', 'Reason'),
+          title: localize('database.offline.reason', 'Offline Reason'),
           mode: {
             type: 'label',
             label: database.reason,

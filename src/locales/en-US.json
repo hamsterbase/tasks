@@ -348,6 +348,10 @@
     "defaultMessage": "Please enter password",
     "content": "Please enter password"
   },
+  "database.switch.to": {
+    "defaultMessage": "Switch to Database",
+    "content": "Switch to Database"
+  },
   "database.sync": {
     "defaultMessage": "Sync",
     "content": "Sync"
@@ -683,6 +687,10 @@
   "not_login": {
     "defaultMessage": "Account is logged out",
     "content": "Account is logged out"
+  },
+  "offline.database": {
+    "defaultMessage": "Offline Database",
+    "content": "Offline Database"
   },
   "otherError": {
     "defaultMessage": "An error occurred",

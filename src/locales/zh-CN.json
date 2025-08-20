@@ -348,6 +348,10 @@
     "defaultMessage": "Please enter password",
     "content": "请输入密码"
   },
+  "database.switch.to": {
+    "defaultMessage": "Switch to Database",
+    "content": ""
+  },
   "database.sync": {
     "defaultMessage": "Sync",
     "content": "同步"
@@ -683,6 +687,10 @@
   "not_login": {
     "defaultMessage": "Account is logged out",
     "content": "账户已登出"
+  },
+  "offline.database": {
+    "defaultMessage": "Offline Database",
+    "content": ""
   },
   "otherError": {
     "defaultMessage": "An error occurred",
