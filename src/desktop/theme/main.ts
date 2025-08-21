@@ -527,6 +527,10 @@ export const desktopStyles = {
   TreeSelectOverlayButtonDisabled: 'opacity-50 cursor-not-allowed',
   TreeSelectOverlayIcon: 'size-5 shrink-0 text-t2',
   TreeSelectOverlayText: 'text-base leading-5',
+
+  // Create Database Overlay
+  CreateDatabaseOverlayFormContainer: 'flex flex-col gap-3',
+  CreateDatabaseOverlayErrorText: 'text-stress-red text-sm',
 };
 
 export type DesktopThemeDefinition = typeof desktopStyles;

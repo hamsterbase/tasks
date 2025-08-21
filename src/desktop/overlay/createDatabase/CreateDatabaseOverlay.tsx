@@ -8,6 +8,7 @@ import { IWorkbenchOverlayService } from '@/services/overlay/common/WorkbenchOve
 import { Overlay } from '@/desktop/components/Overlay/Overlay';
 import { InputField } from '@/desktop/components/Form/InputField/InputField';
 import { Checkbox } from '@/desktop/components/Form/Checkbox/Checkbox';
+import { desktopStyles } from '@/desktop/theme/main';
 import React, { useState } from 'react';
 import { CreateDatabaseController } from './CreateDatabaseController';
 
@@ -56,7 +57,7 @@ const CreateDatabaseContent: React.FC<{ controller: CreateDatabaseController }> 
       cancelDisabled={isLoading}
       confirmDisabled={!isFormValid || isLoading}
     >
-      <div className="flex flex-col gap-3">
+      <div className={desktopStyles.CreateDatabaseOverlayFormContainer}>
         <InputField
           type="text"
           placeholder={localize('settings.createDatabase.databaseName', 'Database')}
@@ -85,7 +86,7 @@ const CreateDatabaseContent: React.FC<{ controller: CreateDatabaseController }> 
           )}
         </Checkbox>
 
-        {error && <div className="text-stress-red text-sm">{error}</div>}
+        {error && <div className={desktopStyles.CreateDatabaseOverlayErrorText}>{error}</div>}
       </div>
     </Overlay>
   );
