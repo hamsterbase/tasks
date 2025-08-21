@@ -972,6 +972,10 @@
     "defaultMessage": "Loading...",
     "content": "Loading..."
   },
+  "settings.cloud.online_database": {
+    "defaultMessage": "Online Database",
+    "content": "Online Database"
+  },
   "settings.createDatabase.createAndUse": {
     "defaultMessage": "Create and Use",
     "content": "Create and Use"

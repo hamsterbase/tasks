@@ -1,6 +1,7 @@
 import { getLoginErrorMessage } from '@/base/common/error';
 import { Checkbox } from '@/desktop/components/Form/Checkbox/Checkbox';
 import { InputField } from '@/desktop/components/Form/InputField/InputField';
+import { SettingButton } from '@/desktop/components/Settings/Button/Button';
 import { SettingsContent } from '@/desktop/components/Settings/SettingsContent/SettingsContent';
 import { SettingsTitle } from '@/desktop/components/Settings/SettingsTitle';
 import { desktopStyles } from '@/desktop/theme/main';
@@ -48,8 +49,8 @@ export const RegisterPage: React.FC = () => {
 
   return (
     <SettingsContent>
-      <div className="flex flex-col gap-9">
-        <div className="flex flex-col gap-3">
+      <div className={desktopStyles.AuthFormContainer}>
+        <div className={desktopStyles.AuthFormSection}>
           <SettingsTitle
             title={localize('register.title', 'Create Account')}
             description={localize('register.subtitle', 'Sign up and enjoy 30 days of free cloud sync!')}
@@ -88,19 +89,20 @@ export const RegisterPage: React.FC = () => {
           </Checkbox>
         </div>
 
-        {errorMessage && <div className="text-stress-red text-base">{errorMessage}</div>}
+        {errorMessage && <div className={desktopStyles.AuthFormErrorMessage}>{errorMessage}</div>}
 
-        <div className="flex flex-col gap-3">
-          <button
-            className="w-full py-3 px-3 h-13 bg-brand text-white rounded-lg hover:bg-brand/90 focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed text-base font-normal leading-5"
+        <div className={desktopStyles.AuthFormButtonSection}>
+          <SettingButton
+            variant="filled"
+            color="primary"
             onClick={handleSubmit}
             disabled={isLoading || !account || !password || !confirmPassword || !agreedToTerms}
           >
             {isLoading ? localize('common.loading', 'Loading...') : localize('register.submit', 'Create Account')}
-          </button>
+          </SettingButton>
 
-          <div className="flex items-center gap-2 justify-center">
-            <p className="text-base font-normal text-t3 leading-5">
+          <div className={desktopStyles.AuthFormFooterContainer}>
+            <p className={desktopStyles.AuthFormFooterText}>
               {localize('register.hasAccount', 'Already have an account?')}
               <Link className={desktopStyles.AuthFormSwitchButton} to="/desktop/settings/account/login" replace>
                 {localize('register.signIn', 'Sign in')}

@@ -1,5 +1,6 @@
 import { DatabaseIcon } from '@/components/icons';
 import { DatabaseItem } from '@/desktop/components/DatabaseItem';
+import { SettingButton } from '@/desktop/components/Settings/Button/Button';
 import { useDatabaseActions } from '@/desktop/hooks/useDatabaseActions';
 import { localize } from '@/nls.ts';
 import { LocalDatabaseItem as LocalDatabaseType } from '@/services/cloud/common/cloudService.ts';
@@ -16,18 +17,15 @@ export const LocalDatabaseItem: React.FC<LocalDatabaseItemProps> = ({ database, 
 
   return (
     <DatabaseItem
-      icon={<DatabaseIcon className="w-5 h-5 text-t2" />}
-      title={database.databaseName}
-      description={localize('settings.local.database', 'Local Database')}
+      icon={<DatabaseIcon />}
+      description={database.databaseName}
+      title={localize('settings.local.database', 'Local Database')}
       isCurrent={isCurrent}
       onClick={() => databaseActions.handleSwitchToDatabase()}
       actionButtons={
-        <button
-          onClick={databaseActions.handleClearLocalData}
-          className="px-3 py-1.5 text-sm bg-stress-red text-white rounded hover:bg-stress-red/80"
-        >
+        <SettingButton onClick={databaseActions.handleClearLocalData} variant="text" color="danger" size="small">
           {localize('database.clearData', 'Clear Data')}
-        </button>
+        </SettingButton>
       }
     />
   );

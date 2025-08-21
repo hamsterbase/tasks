@@ -1,5 +1,6 @@
 import { CloudIcon } from '@/components/icons';
 import { DatabaseItem } from '@/desktop/components/DatabaseItem';
+import { SettingButton } from '@/desktop/components/Settings/Button/Button';
 import { useDatabaseActions } from '@/desktop/hooks/useDatabaseActions';
 import { localize } from '@/nls.ts';
 import { CloudDatabaseItem as CloudDatabaseType } from '@/services/cloud/common/cloudService.ts';
@@ -24,38 +25,27 @@ export const CloudDatabaseItem: React.FC<CloudDatabaseItemProps> = ({ database, 
 
   const actionButtons = (
     <>
-      {!databaseActions.isSwitchNeeded && (
-        <button
-          onClick={databaseActions.handleSync}
-          className="px-3 py-1.5 text-sm bg-brand text-white rounded hover:bg-brand/80"
-        >
-          {localize('database.sync', 'Sync')}
-        </button>
-      )}
-
-      {databaseActions.isSwitchNeeded && (
-        <button
-          onClick={databaseActions.handleSwitchToDatabase}
-          className="px-3 py-1.5 text-sm bg-brand text-white rounded hover:bg-brand/80"
-        >
-          {localize('database.switch.to', 'Switch to Database')}
-        </button>
-      )}
-
-      <button
+      <SettingButton
         onClick={() => databaseActions.handleDelete('cloud')}
-        className="px-3 py-1.5 text-sm bg-stress-red text-white rounded hover:bg-stress-red/80"
+        variant="text"
+        color="danger"
+        size="small"
+        inline
       >
         {localize('database.delete', 'Delete Database')}
-      </button>
+      </SettingButton>
+
+      <SettingButton onClick={databaseActions.handleSync} variant="solid" color="primary" size="small">
+        {localize('database.sync', 'Sync')}
+      </SettingButton>
     </>
   );
 
   return (
     <DatabaseItem
-      icon={<CloudIcon className="w-5 h-5 text-brand" />}
+      icon={<CloudIcon />}
       title={database.databaseName}
-      description={`${new Date(database.lastModified).toLocaleDateString()} · ${(database.usage / 1024).toFixed(2)} kb`}
+      description={`${localize('settings.cloud.online_database', 'Online Database')} · ${format(database.lastModified, 'yyyy/MM/dd HH:mm:ss')} · ${(database.usage / 1024).toFixed(2)} kb`}
       isCurrent={isCurrent}
       onClick={() => databaseActions.handleSwitchToDatabase()}
       actionButtons={actionButtons}
@@ -66,7 +56,7 @@ export const CloudDatabaseItem: React.FC<CloudDatabaseItemProps> = ({ database, 
         },
         {
           label: localize('database.lastUpdated', 'Last Updated'),
-          value: format(database.lastModified, 'yyyy/MM/dd HH:mm:ss'),
+          value: format(database.lastModified, 'yyyy/MM/dd HH:mm'),
         },
       ]}
     />

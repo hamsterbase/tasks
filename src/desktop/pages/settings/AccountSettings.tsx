@@ -1,5 +1,5 @@
 import { InfoItem } from '@/desktop/components/InfoItem';
-import { Button } from '@/desktop/components/Settings/Button/Button';
+import { SettingButton } from '@/desktop/components/Settings/Button/Button';
 import { ItemGroup } from '@/desktop/components/Settings/ItemGroup';
 import { SettingsContent } from '@/desktop/components/Settings/SettingsContent/SettingsContent';
 import { SettingsTitle } from '@/desktop/components/Settings/SettingsTitle';
@@ -93,12 +93,12 @@ export const AccountSettings: React.FC = () => {
       </ItemGroup>
       <div className="h-9"></div>
       <div className="space-y-3">
-        <Button variant="secondary" onClick={handleLogout}>
+        <SettingButton variant="filled" onClick={handleLogout}>
           {localize('account.logout', 'Log out')}
-        </Button>
-        <Button variant="danger" onClick={handleDeleteAccount}>
+        </SettingButton>
+        <SettingButton color="danger" onClick={handleDeleteAccount}>
           {localize('account.delete', 'Delete Account')}
-        </Button>
+        </SettingButton>
       </div>
     </SettingsContent>
   );

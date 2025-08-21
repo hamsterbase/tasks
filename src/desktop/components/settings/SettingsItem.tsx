@@ -2,7 +2,7 @@ import { desktopStyles } from '@/desktop/theme/main';
 import React from 'react';
 import { Select } from '../Form/Select/Select';
 import { Switch } from '../Switch';
-import { Button } from './Button/Button';
+import { SettingButton } from './Button/Button';
 
 export type ActionType = 'select' | 'switch' | 'button';
 
@@ -43,9 +43,9 @@ export const SettingsItem: React.FC<SettingsItemProps> = ({ title, description, 
         return <Switch checked={action.currentValue} onChange={action.onChange} />;
       case 'button':
         return (
-          <Button onClick={action.onClick} disabled={action.disabled} variant="import" inline>
+          <SettingButton onClick={action.onClick} disabled={action.disabled} inline size="medium">
             {action.label}
-          </Button>
+          </SettingButton>
         );
     }
   };

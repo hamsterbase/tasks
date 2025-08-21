@@ -1,6 +1,8 @@
+import { SettingButton } from '@/desktop/components/Settings/Button/Button';
 import { ItemGroup } from '@/desktop/components/Settings/ItemGroup';
 import { SettingsTitle } from '@/desktop/components/Settings/SettingsTitle';
 import { useCreateDatabaseOverlay } from '@/desktop/overlay/createDatabase/useCreateDatabaseOverlay.ts';
+import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service.ts';
 import { useWatchEvent } from '@/hooks/use-watch-event.ts';
 import { localize } from '@/nls.ts';
@@ -39,11 +41,17 @@ export const DatabaseList: React.FC = () => {
 
     switch (database.type) {
       case 'cloud':
-        return <CloudDatabaseItem isCurrent={isCurrent} mutate={mutate} database={database} />;
+        return (
+          <CloudDatabaseItem key={database.databaseId} isCurrent={isCurrent} mutate={mutate} database={database} />
+        );
       case 'local':
-        return <LocalDatabaseItem isCurrent={isCurrent} mutate={mutate} database={database} />;
+        return (
+          <LocalDatabaseItem key={database.databaseId} isCurrent={isCurrent} mutate={mutate} database={database} />
+        );
       case 'offline':
-        return <OfflineDatabaseItem isCurrent={isCurrent} mutate={mutate} database={database} />;
+        return (
+          <OfflineDatabaseItem key={database.databaseId} isCurrent={isCurrent} mutate={mutate} database={database} />
+        );
       default:
         return null;
     }
@@ -51,60 +59,66 @@ export const DatabaseList: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="bg-bg2 rounded-lg p-4">
-        <h3 className="text-lg font-medium text-t1 mb-4">{localize('settings.cloud.database', 'Database')}</h3>
-        <div className="text-center py-4">
-          <span className="text-t2">{localize('common.loading', 'Loading...')}</span>
-        </div>
+      <div className={desktopStyles.DatabaseListContainer}>
+        <SettingsTitle title={localize('settings.cloud.database', 'Database')} level={2} />
+        <ItemGroup>
+          <div className={desktopStyles.DatabaseListLoadingContainer}>
+            <span className={desktopStyles.DatabaseListLoadingText}>{localize('common.loading', 'Loading...')}</span>
+          </div>
+        </ItemGroup>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="bg-bg2 rounded-lg p-4">
-        <h3 className="text-lg font-medium text-t1 mb-4">{localize('settings.cloud.database', 'Database')}</h3>
-        <div className="text-center py-4">
-          <span className="text-red-500">{localize('settings.cloud.error', 'Failed to load databases')}</span>
-        </div>
+      <div className={desktopStyles.DatabaseListContainer}>
+        <SettingsTitle title={localize('settings.cloud.database', 'Database')} level={2} />
+        <ItemGroup>
+          <div className={desktopStyles.DatabaseListErrorContainer}>
+            <span className={desktopStyles.DatabaseListErrorText}>
+              {localize('settings.cloud.error', 'Failed to load databases')}
+            </span>
+          </div>
+        </ItemGroup>
       </div>
     );
   }
 
   if (!databases || databases.length === 0) {
     return (
-      <div className="bg-bg2 rounded-lg p-4">
-        <h3 className="text-lg font-medium text-t1 mb-4">{localize('settings.cloud.database', 'Database')}</h3>
-        <div className="text-center py-4">
-          <span className="text-t2">{localize('settings.sync.noDatabases', 'No databases available')}</span>
-        </div>
+      <div className={desktopStyles.DatabaseListContainer}>
+        <SettingsTitle title={localize('settings.cloud.database', 'Database')} level={2} />
+        <ItemGroup>
+          <div className={desktopStyles.DatabaseListEmptyContainer}>
+            <span className={desktopStyles.DatabaseListEmptyText}>
+              {localize('settings.sync.noDatabases', 'No databases available')}
+            </span>
+          </div>
+        </ItemGroup>
       </div>
     );
   }
 
   return (
-    <div className="mt-12">
+    <div className={desktopStyles.DatabaseListContainer}>
       <SettingsTitle
         title={localize('settings.cloud.database', 'Database')}
         level={2}
         action={
           (isLoggedIn && cloudDatabasesCount < 3) || (
-            <button
-              className="px-3 py-1.5 text-sm font-medium text-white bg-brand border border-brand rounded hover:bg-brand-hover focus:outline-none transition-colors"
+            <SettingButton
+              variant="solid"
+              color="primary"
+              size="small"
               onClick={() => createDatabaseOverlay({ onSuccess: () => mutate() })}
             >
               {localize('settings.createDatabase.title', 'Create Cloud Database')}
-            </button>
+            </SettingButton>
           )
         }
       />
-      <ItemGroup>
-        {databases.map((database) => (
-          <div key={database.databaseId} className="w-full">
-            {renderDatabaseItem(database)}
-          </div>
-        ))}
-      </ItemGroup>
+      <ItemGroup>{databases.map((database) => renderDatabaseItem(database))}</ItemGroup>
     </div>
   );
 };

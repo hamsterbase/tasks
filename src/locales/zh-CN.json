@@ -972,6 +972,10 @@
     "defaultMessage": "Loading...",
     "content": "加载中..."
   },
+  "settings.cloud.online_database": {
+    "defaultMessage": "Online Database",
+    "content": ""
+  },
   "settings.createDatabase.createAndUse": {
     "defaultMessage": "Create and Use",
     "content": "创建并使用"

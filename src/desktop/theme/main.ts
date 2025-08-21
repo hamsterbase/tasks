@@ -12,7 +12,7 @@ export const desktopStyles = {
   SidebarMenuItemIcon: 'size-5 flex items-center justify-center flex-shrink-0',
   SidebarMenuItemLabel: 'flex-1 truncate min-w-0',
   SidebarMenuItemBadgePrimary:
-    'bg-stress-red min-w-5 text-sm leading-3.5 h-5 rounded-full text-red flex items-center justify-center px-1.5 text-white',
+    'bg-stress-red min-w-5 text-sm leading-3.5 h-5 rounded-full text-white flex items-center justify-center px-1.5',
   SidebarMenuItemBadgeSecondaryActive: 'text-white',
   SidebarMenuItemBadgeSecondary: 'text-t3',
   SidebarMenuDivider: 'bg-line-bold h-0.25',
@@ -100,18 +100,24 @@ export const desktopStyles = {
   ItemTagLabel: 'truncate',
 
   // Auth Forms
+  AuthFormContainer: 'flex flex-col gap-9',
+  AuthFormSection: 'flex flex-col gap-3',
+  AuthFormErrorMessage: 'text-stress-red text-base',
+  AuthFormButtonSection: 'flex flex-col gap-3',
+  AuthFormFooterContainer: 'flex items-center gap-2 justify-center',
+  AuthFormFooterText: 'text-base font-normal text-t3 leading-5',
   AuthFormSwitchButton: 'text-brand hover:underline ml-1',
   AuthFormLink: 'text-brand mx-1 hover:underline',
 
   // Select Component
   SelectContainer: 'relative',
   SelectTrigger:
-    'box-border flex flex-row justify-between items-center p-3 gap-3 w-44 h-11 border border-line-light rounded-lg cursor-pointer bg-bg1 hover:border-brand focus-within:border-brand',
+    'box-border flex flex-row justify-between items-center p-3 gap-3 w-44 h-11 border border-line-regular rounded-lg cursor-pointer bg-bg1 hover:border-brand focus-within:border-brand',
   SelectTriggerText: 'flex-none order-0 flex-grow-0 w-auto h-5 font-normal text-base leading-5 text-t1',
   SelectTriggerIcon: 'flex-none order-1 flex-grow-0 w-5 h-5 text-t3 transition-transform',
   SelectTriggerIconOpen: 'rotate-180',
   SelectDropdown:
-    'absolute top-full left-0 right-0 mt-1 bg-bg1 border border-line-light rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto py-1',
+    'absolute top-full left-0 right-0 mt-1 bg-bg1 border border-line-regular rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto py-1',
   SelectOption: 'px-3 py-3 h-11 hover:bg-bg2 cursor-pointer text-t1 font-normal text-base leading-5 flex items-center',
 
   // Switch Component
@@ -133,6 +139,42 @@ export const desktopStyles = {
   SettingsItemGroupContainer:
     'flex flex-col justify-center items-start p-4 gap-3 border border-line-regular rounded-lg',
   SettingsItemGroupDivider: 'w-full h-0.25 bg-bg3',
+
+  // Settings Button Component
+  SettingButtonBase: 'rounded-lg focus:outline-none flex flex-row justify-center items-center whitespace-nowrap',
+  SettingButtonSizeLarge: 'h-13 text-base font-normal min-w-20',
+  SettingButtonSizeMedium: 'h-11 text-base font-normal min-w-20 px-3',
+  SettingButtonSizeSmall: 'h-9 text-sm font-normal min-w-20 px-3',
+  SettingButtonFullWidth: 'w-full',
+
+  // Solid variant styles
+  SettingButtonSolidPrimary: 'bg-brand text-white hover:bg-brand/90',
+  SettingButtonSolidDanger: 'bg-stress-red text-white hover:bg-stress-red/90',
+  SettingButtonSolidDefault: 'bg-bg3 text-white hover:bg-bg3/90',
+
+  // Filled variant styles
+  SettingButtonFilledPrimary: 'bg-brand/10 text-brand hover:bg-brand/20',
+  SettingButtonFilledDanger: 'bg-stress-red/10 text-stress-red hover:bg-stress-red/20',
+  SettingButtonFilledDefault: 'bg-bg2 text-t1 hover:bg-bg3',
+
+  // Default variant styles (bordered)
+  SettingButtonDefaultPrimary: 'bg-transparent text-brand border border-brand hover:bg-brand/10',
+  SettingButtonDefaultDanger: 'bg-transparent text-stress-red border border-stress-red hover:bg-stress-red/10',
+  SettingButtonDefaultDefault: 'bg-transparent text-t1 border border-line-regular hover:bg-bg2',
+
+  // Text variant styles
+  SettingButtonTextPrimary: 'bg-transparent text-brand hover:bg-brand/10',
+  SettingButtonTextDanger: 'bg-transparent text-stress-red hover:bg-stress-red/10',
+  SettingButtonTextDefault: 'bg-transparent text-t1 hover:bg-bg2',
+
+  // Database List
+  DatabaseListContainer: 'mt-12',
+  DatabaseListLoadingContainer: 'text-center py-4',
+  DatabaseListLoadingText: 'text-t2',
+  DatabaseListErrorContainer: 'text-center py-4',
+  DatabaseListErrorText: 'text-stress-red',
+  DatabaseListEmptyContainer: 'text-center py-4',
+  DatabaseListEmptyText: 'text-t2',
 };
 
 export type DesktopThemeDefinition = typeof desktopStyles;

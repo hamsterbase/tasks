@@ -50,7 +50,7 @@ export default tseslint.config(
       'custom/no-blacklisted-strings': [
         'error',
         {
-          strings: ['gray', 'border-[', 'font-['],
+          strings: ['gray', 'border-[', 'font-[', 'bg-red', 'text-red'],
         },
       ],
     },
