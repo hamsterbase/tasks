@@ -113,19 +113,16 @@ const AreaPageContent: React.FC<AreaPageContentProps> = ({ area, areaId }) => {
         />
       }
     >
-      <div className={desktopStyles.AreaPageContentWrapper}>
-        <TitleContentSection title={localize('area.projects', 'Projects')}>
-          <DesktopProjectList
-            projects={projects}
-            emptyStateLabel={localize('area.noProjects', 'No projects in this area')}
-          />
-        </TitleContentSection>
-
-        <TitleContentSection title={localize('area.tasks', 'Tasks')}>
-          <InboxTaskInput onCreateTask={handleCreateTask} />
-          <TaskListSection tasks={tasks} willDisappearObjectIdSet={willDisappearObjectIdSet} areaId={area.id} />
-        </TitleContentSection>
-      </div>
+      <TitleContentSection title={localize('area.projects', 'Projects')}>
+        <DesktopProjectList
+          projects={projects}
+          emptyStateLabel={localize('area.noProjects', 'No projects in this area')}
+        />
+      </TitleContentSection>
+      <TitleContentSection title={localize('area.tasks', 'Tasks')}>
+        <InboxTaskInput onCreateTask={handleCreateTask} />
+        <TaskListSection tasks={tasks} willDisappearObjectIdSet={willDisappearObjectIdSet} areaId={area.id} />
+      </TitleContentSection>
     </DesktopPage>
   );
 };

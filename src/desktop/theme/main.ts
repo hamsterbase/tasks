@@ -177,6 +177,9 @@ export const desktopStyles = {
   SettingButtonTextDanger: 'bg-transparent text-stress-red hover:bg-stress-red/10',
   SettingButtonTextDefault: 'bg-transparent text-t1 hover:bg-bg2',
 
+  // Disabled styles
+  SettingButtonDisabled: 'opacity-50 cursor-not-allowed pointer-events-none',
+
   // Database List
   DatabaseListContainer: 'mt-12',
   DatabaseListLoadingContainer: 'text-center py-4',
@@ -334,7 +337,6 @@ export const desktopStyles = {
   TaskStatusBoxIcon: 'size-full',
 
   // Area Page
-  AreaPageContentWrapper: 'flex-1 overflow-y-auto',
   AreaPageNotFoundContainer: 'h-full w-full bg-bg1 flex items-center justify-center',
   AreaPageNotFoundText: 'text-t3 text-lg',
 
@@ -479,6 +481,19 @@ export const desktopStyles = {
   // Desktop Submenu - Specific Styles
   DesktopSubmenuContainer: 'fixed bg-bg1 border border-line-light rounded-lg shadow-lg py-1',
   DesktopSubmenuItem: 'w-full flex items-center gap-2 py-2 px-3 text-left text-sm transition-colors',
+
+  // Overlay Component
+  OverlayBackdrop: 'fixed inset-0 flex items-center justify-center',
+  OverlayBackgroundMask: 'absolute inset-0 bg-black opacity-45',
+  OverlayContainer: 'bg-bg1-float rounded-lg shadow-2xl flex flex-col min-w-130 mx-4 relative p-5',
+  OverlayHeader: 'flex items-center justify-between order-b border-bg2-float mb-6',
+  OverlayTitle: 'text-xl leading-6 font-medium text-t1',
+  OverlayCloseButton: 'text-t3 transition-colors size-6',
+  OverlayContent: '',
+  OverlayFooter: 'flex justify-end gap-3 rounded-b-lg',
+
+  // Desktop Dialog Component
+  DesktopDialogDescription: 'text-sm text-t3 leading-4.5 font-normal',
 };
 
 export type DesktopThemeDefinition = typeof desktopStyles;

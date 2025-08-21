@@ -1,6 +1,8 @@
-import React from 'react';
 import { CloseIcon } from '@/components/icons';
+import { desktopStyles } from '@/desktop/theme/main';
+import React from 'react';
 import { SettingButton } from '../Settings/Button/Button';
+import { Space } from '../Space/Space';
 
 interface OverlayProps {
   title: string;
@@ -27,32 +29,29 @@ export const Overlay: React.FC<OverlayProps> = ({
   cancelDisabled = false,
   confirmDisabled = false,
 }) => {
+  const showFooter = onCancel || onConfirm;
   return (
     <div
-      className="fixed inset-0 flex items-center justify-center"
+      className={desktopStyles.OverlayBackdrop}
       style={{
         zIndex,
       }}
     >
-      <div className="absolute inset-0 bg-black opacity-45" />
-
-      <div className="bg-bg1-float rounded-lg shadow-2xl flex flex-col min-w-96 max-w-lg mx-4 relative">
-        {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-bg2-float">
-          <h3 className="text-lg font-semibold text-t1">{title}</h3>
-          <button onClick={onClose} className="text-t3 hover:text-t2 transition-colors">
-            <CloseIcon width="16" height="16" />
+      <div className={desktopStyles.OverlayBackgroundMask} />
+      <div className={desktopStyles.OverlayContainer}>
+        <div className={desktopStyles.OverlayHeader}>
+          <h3 className={desktopStyles.OverlayTitle}>{title}</h3>
+          <button onClick={onClose} className={desktopStyles.OverlayCloseButton}>
+            <CloseIcon />
           </button>
         </div>
 
-        {/* Body */}
-        <div className="px-6 py-4">{children}</div>
-
-        {/* Footer */}
-        {(onCancel || onConfirm) && (
-          <div className="flex justify-end gap-2 px-6 py-4 rounded-b-lg">
+        <div className={desktopStyles.OverlayContent}>{children}</div>
+        {showFooter && <Space size="medium"></Space>}
+        {showFooter && (
+          <div className={desktopStyles.OverlayFooter}>
             {onCancel && (
-              <SettingButton variant="default" size="medium" inline onClick={onCancel} disabled={cancelDisabled}>
+              <SettingButton variant="default" size="medium" onClick={onCancel} disabled={cancelDisabled}>
                 {cancelText || 'Cancel'}
               </SettingButton>
             )}
@@ -62,7 +61,6 @@ export const Overlay: React.FC<OverlayProps> = ({
                 variant="solid"
                 color="primary"
                 size="medium"
-                inline
                 onClick={onConfirm}
                 disabled={confirmDisabled}
               >

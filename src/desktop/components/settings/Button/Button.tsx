@@ -77,6 +77,7 @@ export const SettingButton: React.FC<ButtonProps> = ({
     [desktopStyles.SettingButtonSizeMedium]: size === 'medium',
     [desktopStyles.SettingButtonSizeSmall]: size === 'small',
     [desktopStyles.SettingButtonFullWidth]: !inline,
+    [desktopStyles.SettingButtonDisabled]: props.disabled,
   });
 
   return (

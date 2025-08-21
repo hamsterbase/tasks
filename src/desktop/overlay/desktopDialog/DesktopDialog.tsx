@@ -7,6 +7,7 @@ import { IWorkbenchOverlayService } from '../../../services/overlay/common/Workb
 import { Overlay } from '@/desktop/components/Overlay/Overlay';
 import { InputField } from '@/desktop/components/Form/InputField/InputField';
 import { DesktopDialogController } from './DesktopDialogController';
+import { desktopStyles } from '@/desktop/theme/main';
 
 const DesktopDialogContent: React.FC<{ controller: DesktopDialogController }> = ({ controller }) => {
   const [inputValue, setInputValue] = useState(controller?.actions?.value || '');
@@ -27,7 +28,7 @@ const DesktopDialogContent: React.FC<{ controller: DesktopDialogController }> = 
       confirmText={controller.confirmText || localize('confirm', 'Confirm')}
       zIndex={controller.zIndex}
     >
-      {controller.description && <p className="text-sm text-t2 mb-4 leading-relaxed">{controller.description}</p>}
+      {controller.description && <p className={desktopStyles.DesktopDialogDescription}>{controller.description}</p>}
       {controller.actions?.type === 'input' && (
         <InputField
           type="text"
