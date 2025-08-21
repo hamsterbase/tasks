@@ -5,6 +5,7 @@ import { getScheduledTasks } from '@/core/state/scheduled/getScheduledTask';
 import { EntityHeader } from '@/desktop/components/common/EntityHeader';
 import { DesktopProjectListItem } from '@/desktop/components/todo/DesktopProjectListItem';
 import { TaskListItem } from '@/desktop/components/todo/TaskListItem';
+import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { localize } from '@/nls';
@@ -28,23 +29,20 @@ export const Schedule = () => {
   }, []);
 
   return (
-    <div className="h-full w-full bg-bg1">
-      <div className="h-full flex flex-col">
-        <EntityHeader
-          renderIcon={() => <ScheduledIcon className="size-5 text-t2" />}
-          title={localize('schedule', 'Schedule')}
-        />
+    <div className={desktopStyles.SchedulePageContainer}>
+      <div className={desktopStyles.SchedulePageLayout}>
+        <EntityHeader renderIcon={() => <ScheduledIcon />} title={localize('schedule', 'Schedule')} />
 
-        <div className="flex-1 overflow-y-auto">
-          <div className="mx-auto p-6 space-y-6">
+        <div className={desktopStyles.SchedulePageScrollArea}>
+          <div className={desktopStyles.SchedulePageContent}>
             {scheduledGroups.map((group) => (
-              <div key={group.key} className="space-y-4">
-                <div className="space-y-1 flex items-center gap-2">
-                  <h2 className="text-lg font-semibold text-t1">{group.title}</h2>
-                  {group.subtitle && <p className="text-sm text-t2">{group.subtitle}</p>}
+              <div key={group.key} className={desktopStyles.SchedulePageGroupContainer}>
+                <div className={desktopStyles.SchedulePageGroupHeader}>
+                  <h2 className={desktopStyles.SchedulePageGroupTitle}>{group.title}</h2>
+                  {group.subtitle && <p className={desktopStyles.SchedulePageGroupSubtitle}>{group.subtitle}</p>}
                 </div>
 
-                <div className="space-y-2">
+                <div className={desktopStyles.SchedulePageItemList}>
                   {group.items.map((item) => {
                     const willDisappear = willDisappearObjectIdSet.has(item.id);
                     if (item.type === 'project') {
@@ -66,8 +64,10 @@ export const Schedule = () => {
             ))}
 
             {scheduledGroups.length === 0 && (
-              <div className="text-center py-12">
-                <p className="text-t3 text-lg">{localize('schedule.empty', 'No scheduled tasks')}</p>
+              <div className={desktopStyles.SchedulePageEmptyState}>
+                <p className={desktopStyles.SchedulePageEmptyText}>
+                  {localize('schedule.empty', 'No scheduled tasks')}
+                </p>
               </div>
             )}
           </div>

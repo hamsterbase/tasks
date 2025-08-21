@@ -4,6 +4,7 @@ import { taskNotesInputKey, taskTitleInputKey } from '@/components/edit/inputKey
 import { DueIcon, MenuIcon, ScheduledIcon } from '@/components/icons';
 import { TaskInfo } from '@/core/state/type.ts';
 import { useTaskMenu } from '@/desktop/hooks/useTaskMenu.ts';
+import { desktopStyles } from '@/desktop/theme/main.ts';
 import { localize } from '@/nls';
 import React from 'react';
 import { TagsField } from '../TagsField';
@@ -39,27 +40,27 @@ export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task, onClearSel
   };
 
   return (
-    <div className="h-full flex flex-col">
-      <div className="min-h-15 flex px-5 py-3.75 gap-5 items-start justify-between border-b border-line-regular">
+    <div className={desktopStyles.DetailViewContainer}>
+      <div className={desktopStyles.DetailViewHeader}>
         <EditableTextArea
           inputKey={taskTitleInputKey(task.id)}
           defaultValue={task.title}
           placeholder={localize('tasks.title_placeholder', 'Add title...')}
           onSave={handleTitleSave}
-          className="flex-1 text-xl leading-7.5 font-medium outline-none"
+          className={desktopStyles.DetailViewHeaderTitle}
           autoSize={{ minRows: 1 }}
         />
-        <button onClick={handleMenuClick} className="size-6 h-7.6 flex items-center">
-          <MenuIcon className="size-6 text-t3" />
+        <button onClick={handleMenuClick} className={desktopStyles.DetailViewHeaderMenuButton}>
+          <MenuIcon className={desktopStyles.DetailViewHeaderMenuIcon} />
         </button>
       </div>
-      <div className="flex-1 overflow-y-auto">
-        <div className="p-5 space-y-2">
+      <div className={desktopStyles.DetailViewContent}>
+        <div className={desktopStyles.DetailViewContentInner}>
           <EditableTextArea
             inputKey={taskNotesInputKey(task.id)}
             defaultValue={task.notes || ''}
             onSave={handleNotesSave}
-            className="w-full p-3 bg-bg2 rounded-lg outline-none resize-none text-base leading-5 placeholder:text-t3"
+            className={desktopStyles.DetailViewNotesTextarea}
             placeholder={localize('tasks.notes_placeholder', 'Add notes...')}
             autoSize={{ minRows: 1 }}
           />
@@ -80,7 +81,7 @@ export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task, onClearSel
             isDue={true}
           />
           <TagsField itemId={task.id} />
-          <div className="h-[1px] bg-line-regular"></div>
+          <div className={desktopStyles.DetailViewDivider}></div>
           <SubtaskList task={task} />
         </div>
       </div>

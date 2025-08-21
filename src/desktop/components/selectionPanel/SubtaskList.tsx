@@ -137,7 +137,7 @@ export const SubtaskList: React.FC<SubtaskListProps> = ({ task }) => {
         </div>
         <span className={desktopStyles.SubtaskListTitleText}>{localize('tasks.subtasks', 'Subtasks')}</span>
       </div>
-      <div className="space-y-0.25 group">
+      <div className={desktopStyles.SubtaskListContainer}>
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
           <SortableContext items={task.children.map((child) => child.id)} strategy={verticalListSortingStrategy}>
             {task.children.map((subtask) => (
@@ -147,11 +147,8 @@ export const SubtaskList: React.FC<SubtaskListProps> = ({ task }) => {
           <DragOverlayItem isSubtask={true} />
         </DndContext>
       </div>
-      <button
-        onClick={handleCreateFirstSubtask}
-        className="flex items-center gap-2 justify-center w-full text-base leading-5 h-11 text-t3 hover:bg-bg3 px-3 rounded-lg transition-colors"
-      >
-        <PlusIcon className="size-5" />
+      <button onClick={handleCreateFirstSubtask} className={desktopStyles.SubtaskListCreateButton}>
+        <PlusIcon className={desktopStyles.SubtaskListCreateButtonIcon} />
         {localize('tasks.click_to_create_subtask', 'Click to create subtask')}
       </button>
     </div>

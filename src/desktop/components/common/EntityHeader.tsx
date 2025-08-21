@@ -54,7 +54,7 @@ export const EntityHeader: React.FC<EntityHeaderProps> = ({
     };
 
     allActions.push({
-      icon: <TaskDisplaySettingsIcon className="size-5" />,
+      icon: <TaskDisplaySettingsIcon />,
       handleClick: handleOpenTaskDisplaySettings,
       label: localize('inbox.display', 'Display'),
       title: localize('inbox.taskDisplaySettings', 'Task Display Settings'),

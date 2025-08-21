@@ -1,8 +1,9 @@
 import { EditableTextArea } from '@/components/edit/EditableTextArea.tsx';
 import { projectTitleInputKey } from '@/components/edit/inputKeys.ts';
-import { DueIcon, MenuIcon, NoteIcon, ScheduledIcon } from '@/components/icons';
+import { DueIcon, MenuIcon, ScheduledIcon } from '@/components/icons';
 import { getProject } from '@/core/state/getProject';
 import { useDatepicker } from '@/desktop/overlay/datePicker/useDatepicker';
+import { desktopStyles } from '@/desktop/theme/main.ts';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { localize } from '@/nls';
@@ -10,10 +11,10 @@ import { ITodoService } from '@/services/todo/common/todoService';
 import type { TreeID } from 'loro-crdt';
 import React from 'react';
 import { useParams } from 'react-router';
-import { TaskDateField } from '../components/TaskDateField';
-import { useDesktopProjectMenu } from './useDesktopProjectMenu';
-import { TaskLocationField } from '../components/TaskLocationField';
 import { TagsField } from '../../TagsField';
+import { TaskDateField } from '../components/TaskDateField';
+import { TaskLocationField } from '../components/TaskLocationField';
+import { useDesktopProjectMenu } from './useDesktopProjectMenu';
 
 const useProjectId = (): TreeID | null => {
   const todoService = useService(ITodoService);
@@ -89,72 +90,49 @@ const ProjectDetailPanelContent: React.FC<IProjectDetailPanelContentProps> = ({ 
   };
 
   return (
-    <div className="h-full flex flex-col bg-bg1">
-      <div className="flex items-center justify-between px-6 py-4 border-b border-line-light">
+    <div className={desktopStyles.DetailViewContainer}>
+      <div className={desktopStyles.DetailViewHeader}>
         <EditableTextArea
           inputKey={projectTitleInputKey(projectId)}
           defaultValue={project.title}
           placeholder={localize('project.untitled', 'New Project')}
           onSave={handleTitleSave}
-          className="flex-1 text-xl font-medium outline-none"
+          className={desktopStyles.DetailViewHeaderTitle}
           autoSize={{ minRows: 1 }}
         />
-        <div className="flex items-center gap-2">
-          <button onClick={handleMenuClick} className="p-1.5 hover:bg-bg3 rounded-md transition-colors">
-            <MenuIcon className="size-4 text-t2" />
-          </button>
-        </div>
+        <button onClick={handleMenuClick} className={desktopStyles.DetailViewHeaderMenuButton}>
+          <MenuIcon className={desktopStyles.DetailViewHeaderMenuIcon} />
+        </button>
       </div>
 
-      <div className="flex-1 overflow-y-auto">
-        <div className="p-6 space-y-6">
-          <div>
-            <div className="flex items-center gap-2 mb-2 text-t2">
-              <NoteIcon className="size-4" />
-              <span className="text-sm font-medium">{localize('project.detail.notes', 'Notes')}</span>
-            </div>
-            <EditableTextArea
-              inputKey={`project-${projectId}-notes`}
-              defaultValue={project.notes || ''}
-              onSave={handleNotesSave}
-              className="w-full p-3 bg-bg2 rounded-md outline-none resize-none"
-              placeholder={localize('project.detail.notesPlaceholder', 'Enter project notes...')}
-              autoSize={{ minRows: 1 }}
-            />
-          </div>
+      <div className={desktopStyles.DetailViewContent}>
+        <div className={desktopStyles.DetailViewContentInner}>
+          <EditableTextArea
+            inputKey={`project-${projectId}-notes`}
+            defaultValue={project.notes || ''}
+            onSave={handleNotesSave}
+            className={desktopStyles.DetailViewNotesTextarea}
+            placeholder={localize('project.detail.notesPlaceholder', 'Enter project notes...')}
+            autoSize={{ minRows: 1 }}
+          />
+          <TaskLocationField itemId={projectId} />
+          <TaskDateField
+            label={localize('project.start_date', 'Start Date')}
+            icon={<ScheduledIcon />}
+            date={project.startDate}
+            onDateClick={handleStartDateClick}
+            placeholder={localize('project.start_date_placeholder', 'Select start date')}
+          />
 
-          <div>
-            <TaskLocationField itemId={projectId} />
-            <TaskDateField
-              label={localize('project.start_date', 'Start Date')}
-              icon={<ScheduledIcon className="size-4" />}
-              date={project.startDate}
-              onDateClick={handleStartDateClick}
-              placeholder={localize('project.start_date_placeholder', 'Select start date')}
-            />
-
-            <TaskDateField
-              label={localize('project.due_date', 'Due Date')}
-              icon={<DueIcon className="size-4" />}
-              date={project.dueDate}
-              onDateClick={handleDueDateClick}
-              placeholder={localize('project.due_date_placeholder', 'Select due date')}
-              isDue={true}
-            />
-
-            <TagsField itemId={projectId} />
-
-            <div className="flex items-center justify-between py-2 gap-3">
-              <div className="flex items-center gap-2 text-t2">
-                <span className="text-sm">{localize('project.detail.progress', 'Progress')}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-sm text-t1">
-                  {project.completedTasks} / {project.totalTasks}
-                </span>
-              </div>
-            </div>
-          </div>
+          <TaskDateField
+            label={localize('project.due_date', 'Due Date')}
+            icon={<DueIcon />}
+            date={project.dueDate}
+            onDateClick={handleDueDateClick}
+            placeholder={localize('project.due_date_placeholder', 'Select due date')}
+            isDue={true}
+          />
+          <TagsField itemId={projectId} />
         </div>
       </div>
     </div>

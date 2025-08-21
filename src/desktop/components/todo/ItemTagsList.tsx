@@ -1,4 +1,5 @@
 import { ItemTag, ItemTagProps } from '@/desktop/components/todo/ItemTag';
+import { desktopStyles } from '@/desktop/theme/main';
 import React from 'react';
 
 interface ItemTagsListProps {
@@ -10,7 +11,7 @@ interface ItemTagsListProps {
 export const ItemTagsList: React.FC<ItemTagsListProps> = ({ tags, isSelected, maxVisibleTags = 6 }) => {
   if (tags.length === 0) return null;
   return (
-    <div className="flex gap-2 items-center">
+    <div className={desktopStyles.ItemTagsListContainer}>
       {tags.slice(0, maxVisibleTags).map((tag) => {
         return <ItemTag isSelected={isSelected} key={tag.label} label={tag.label} icon={tag.icon} />;
       })}

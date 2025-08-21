@@ -8,6 +8,7 @@ import { useWatchEvent } from '@/hooks/use-watch-event';
 import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService';
 import React from 'react';
+import { desktopStyles } from '@/desktop/theme/main';
 
 export const FutureProjects = () => {
   const todoService = useService(ITodoService);
@@ -16,13 +17,10 @@ export const FutureProjects = () => {
   const futureProjects = getFutureProjects(todoService.modelState, getTodayTimestampInUtc());
 
   return (
-    <div className="h-full w-full bg-bg1">
-      <div className="h-full flex flex-col">
-        <EntityHeader
-          renderIcon={() => <LaterProjectsIcon className="size-5 text-t2" />}
-          title={localize('futureProjects', 'Future Projects')}
-        />
-        <div className="flex-1 overflow-y-auto p-4">
+    <div className={desktopStyles.FutureProjectsPageContainer}>
+      <div className={desktopStyles.FutureProjectsPageWrapper}>
+        <EntityHeader renderIcon={() => <LaterProjectsIcon />} title={localize('futureProjects', 'Future Projects')} />
+        <div className={desktopStyles.FutureProjectsPageContent}>
           <DesktopProjectList
             projects={futureProjects}
             emptyStateLabel={localize('futureProjects.empty', 'No future projects')}

@@ -3,6 +3,7 @@ import type {
   IMenuConfig,
   IMenuSubmenuConfig,
 } from '@/desktop/overlay/desktopMenu/DesktopMenuController.ts';
+import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
@@ -41,10 +42,14 @@ const DesktopMenuContent: React.FC<IDesktopMenuContentProps> = ({ controller }) 
 
   return (
     <>
-      <div className="fixed inset-0" style={{ zIndex: controller.zIndex - 1 }} onClick={handleBackdropClick} />
+      <div
+        className={desktopStyles.DesktopMenuBackdrop}
+        style={{ zIndex: controller.zIndex - 1 }}
+        onClick={handleBackdropClick}
+      />
 
-      <div ref={menuRef} className="fixed outline-none" style={controller.menuStyle} tabIndex={0}>
-        <div className="bg-bg1 border border-line-light rounded-lg shadow-lg py-1 w-full">
+      <div ref={menuRef} className={desktopStyles.DesktopMenuContainer} style={controller.menuStyle} tabIndex={0}>
+        <div className={desktopStyles.DesktopMenuContent}>
           {controller.menuConfig.map((item, index) => (
             <DesktopMenuItemComponent
               key={index}

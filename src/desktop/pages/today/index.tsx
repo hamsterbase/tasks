@@ -135,15 +135,13 @@ export const Today = () => {
         />
       }
     >
-      {projects.length > 0 && (
-        <TitleContentSection title={localize('today.projects', 'Projects')}>
-          <DesktopProjectList
-            projects={projects}
-            emptyStateLabel={localize('today.noProjects', 'No projects for today')}
-            useDateAssignedMove={true}
-          />
-        </TitleContentSection>
-      )}
+      <TitleContentSection title={localize('today.projects', 'Projects')}>
+        <DesktopProjectList
+          projects={projects}
+          emptyStateLabel={localize('today.noProjects', 'No projects for today')}
+          useDateAssignedMove={true}
+        />
+      </TitleContentSection>
       <TitleContentSection title={localize('today.tasks', 'Tasks')}>
         <InboxTaskInput
           onCreateTask={(event: CreateTaskEvent) => {
@@ -156,7 +154,7 @@ export const Today = () => {
             });
           }}
         />
-        <div className="outline-none" tabIndex={1} onFocus={setFocus} onBlur={clearFocus}>
+        <div tabIndex={1} onFocus={setFocus} onBlur={clearFocus}>
           <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
             <SortableContext items={tasks.map((task) => task.id)} strategy={verticalListSortingStrategy}>
               {tasks.map((task) => {

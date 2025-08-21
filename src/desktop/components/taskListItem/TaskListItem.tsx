@@ -13,6 +13,7 @@ import { TaskStatusBox } from './TaskStatusBox';
 
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { desktopStyles } from '@/desktop/theme/main';
 
 export interface TaskListItemProps {
   task: TaskInfo;
@@ -127,7 +128,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
           taskItemActions.toggleTask();
         }}
         onPointerDown={(e) => e.stopPropagation()}
-        className="flex-shrink-0 size-5 outline-none"
+        className={desktopStyles.TaskListItemOldMainStatusButton}
       >
         <TaskStatusBox
           status={task.status}
@@ -137,7 +138,11 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
           })}
         />
       </button>
-      <div className="flex-1 min-w-0" onClick={(e) => e.stopPropagation()} onPointerDown={(e) => e.stopPropagation()}>
+      <div
+        className={desktopStyles.TaskListItemOldMainInputWrapper}
+        onClick={(e) => e.stopPropagation()}
+        onPointerDown={(e) => e.stopPropagation()}
+      >
         <EditableInput
           inputKey={taskTitleInputKey(task.id)}
           ref={inputRef}

@@ -141,7 +141,7 @@ export const Inbox = () => {
 
   const header = (
     <EntityHeader
-      renderIcon={() => <InboxIcon className="size-6" />}
+      renderIcon={() => <InboxIcon />}
       title={localize('inbox', 'Inbox')}
       internalActions={{ displaySettings: { onOpen: (right, bottom) => openTaskDisplaySettings(right, bottom) } }}
     />
@@ -159,7 +159,7 @@ export const Inbox = () => {
           });
         }}
       />
-      <div className="outline-none mt-5 pb-5" tabIndex={1} onFocus={setFocus} onBlur={clearFocus}>
+      <div tabIndex={1} onFocus={setFocus} onBlur={clearFocus}>
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
           <SortableContext items={inboxTasks.map((task) => task.id)} strategy={verticalListSortingStrategy}>
             {inboxTasks.map((task) => (

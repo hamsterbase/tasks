@@ -16,7 +16,6 @@ import { AreaPage } from './pages/area';
 import { Completed } from './pages/completed';
 import { FutureProjects } from './pages/futureProjects';
 import { Inbox } from './pages/inbox';
-import { Logs } from './pages/logger';
 import { ProjectPage } from './pages/project';
 import { Schedule } from './pages/schedule';
 import { EULA } from './pages/settings/account/eula/EULA.tsx';
@@ -136,11 +135,6 @@ export const App = () => {
               ],
             },
           ],
-        },
-
-        {
-          path: 'logs',
-          element: <Logs />,
         },
       ],
     },

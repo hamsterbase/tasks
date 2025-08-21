@@ -1,17 +1,28 @@
 import { getTodayTimestampInUtc } from '@/base/common/time';
+import { areaPageTitleInputId } from '@/components/edit/inputId';
+import { areaTitleInputKey } from '@/components/edit/inputKeys';
+import { AreaIcon } from '@/components/icons';
 import { getAreaDetail } from '@/core/state/getArea';
 import { isTaskVisible } from '@/core/time/filterProjectAndTask';
+import { EntityHeader } from '@/desktop/components/common/EntityHeader';
+import { DesktopPage } from '@/desktop/components/DesktopPage';
+import { DesktopProjectList } from '@/desktop/components/DesktopProjectList/DesktopProjectList';
+import { InboxTaskInput } from '@/desktop/components/inboxTaskInput/InboxTaskInput';
+import { CreateTaskEvent } from '@/desktop/components/inboxTaskInput/InboxTaskInputController';
+import { TitleContentSection } from '@/desktop/components/TitleContentSection';
+import { useDesktopTaskDisplaySettings } from '@/desktop/hooks/useDesktopTaskDisplaySettings';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { useArea } from '@/hooks/useArea';
 import { useTaskDisplaySettings } from '@/hooks/useTaskDisplaySettings';
+import { localize } from '@/nls';
 import { IListService } from '@/services/list/common/listService';
 import { ITodoService } from '@/services/todo/common/todoService';
 import type { TreeID } from 'loro-crdt';
 import React from 'react';
 import { useParams } from 'react-router';
-import { AreaContent } from './components/AreaContent';
-import { AreaHeader } from './components/AreaHeader';
+import { TaskListSection } from './components/TaskListSection';
+import { desktopStyles } from '@/desktop/theme/main';
 
 const useAreaId = (): TreeID => {
   const todoService = useService(ITodoService);
@@ -36,8 +47,20 @@ const AreaPageContent: React.FC<AreaPageContentProps> = ({ area, areaId }) => {
   const listService = useService(IListService);
   const { areaDetail } = useArea(areaId);
 
+  const { openTaskDisplaySettings } = useDesktopTaskDisplaySettings(`area-${areaId}`);
+
   useWatchEvent(todoService.onStateChange);
   useWatchEvent(listService.onMainListChange);
+
+  const handleCreateTask = (event: CreateTaskEvent) => {
+    todoService.addTask({
+      title: event.title,
+      position: {
+        type: 'firstElement',
+        parentId: area.id,
+      },
+    });
+  };
 
   const { showCompletedTasks, showFutureTasks, completedAfter } = useTaskDisplaySettings(`area-${areaId}`);
 
@@ -74,18 +97,36 @@ const AreaPageContent: React.FC<AreaPageContentProps> = ({ area, areaId }) => {
   });
 
   return (
-    <div className="h-full w-full bg-bg1">
-      <div className="h-full flex flex-col">
-        <AreaHeader area={area} areaId={areaId} />
-        <AreaContent
-          area={area}
-          areaDetail={areaDetail}
-          projects={projects}
-          tasks={tasks}
-          willDisappearObjectIdSet={willDisappearObjectIdSet}
+    <DesktopPage
+      header={
+        <EntityHeader
+          editable
+          inputKey={areaTitleInputKey(areaId)}
+          inputId={areaPageTitleInputId(areaId)}
+          renderIcon={() => <AreaIcon />}
+          title={area.title}
+          placeholder={localize('area.untitled', 'New Area')}
+          internalActions={{ displaySettings: { onOpen: openTaskDisplaySettings } }}
+          onSave={(title) => {
+            todoService.updateArea(areaId, { title });
+          }}
         />
+      }
+    >
+      <div className={desktopStyles.AreaPageContentWrapper}>
+        <TitleContentSection title={localize('area.projects', 'Projects')}>
+          <DesktopProjectList
+            projects={projects}
+            emptyStateLabel={localize('area.noProjects', 'No projects in this area')}
+          />
+        </TitleContentSection>
+
+        <TitleContentSection title={localize('area.tasks', 'Tasks')}>
+          <InboxTaskInput onCreateTask={handleCreateTask} />
+          <TaskListSection tasks={tasks} willDisappearObjectIdSet={willDisappearObjectIdSet} areaId={area.id} />
+        </TitleContentSection>
       </div>
-    </div>
+    </DesktopPage>
   );
 };
 
@@ -104,8 +145,8 @@ export const AreaPage = () => {
 
   if (!area) {
     return (
-      <div className="h-full w-full bg-bg1 flex items-center justify-center">
-        <div className="text-t3 text-lg">Area not found</div>
+      <div className={desktopStyles.AreaPageNotFoundContainer}>
+        <div className={desktopStyles.AreaPageNotFoundText}>Area not found</div>
       </div>
     );
   }

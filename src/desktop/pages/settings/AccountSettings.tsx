@@ -3,6 +3,8 @@ import { SettingButton } from '@/desktop/components/Settings/Button/Button';
 import { ItemGroup } from '@/desktop/components/Settings/ItemGroup';
 import { SettingsContent } from '@/desktop/components/Settings/SettingsContent/SettingsContent';
 import { SettingsTitle } from '@/desktop/components/Settings/SettingsTitle';
+import { Space } from '@/desktop/components/Space/Space';
+import { desktopStyles } from '@/desktop/theme/main';
 import { useDesktopMessage } from '@/desktop/overlay/desktopMessage/useDesktopMessage';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
@@ -91,8 +93,8 @@ export const AccountSettings: React.FC = () => {
           value={userInfo ? formatExpiryDate(userInfo.expiresAt) : '-'}
         />
       </ItemGroup>
-      <div className="h-9"></div>
-      <div className="space-y-3">
+      <Space size="medium"></Space>
+      <div className={desktopStyles.AccountSettingsButtonContainer}>
         <SettingButton variant="filled" onClick={handleLogout}>
           {localize('account.logout', 'Log out')}
         </SettingButton>

@@ -1,3 +1,4 @@
+import { desktopStyles } from '@/desktop/theme/main';
 import React from 'react';
 
 interface EmptyStateProps {
@@ -6,8 +7,8 @@ interface EmptyStateProps {
 
 export const EmptyState: React.FC<EmptyStateProps> = ({ label }) => {
   return (
-    <div className="text-center py-12 text-t3">
-      <p className="text-sm">{label}</p>
+    <div className={desktopStyles.EmptyStateContainer}>
+      <p className={desktopStyles.EmptyStateText}>{label}</p>
     </div>
   );
 };

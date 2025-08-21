@@ -1,3 +1,4 @@
+import { desktopStyles } from '@/desktop/theme/main';
 import { localize } from '@/nls.ts';
 import React from 'react';
 import { ClearSelectionButton } from './ClearSelectionButton';
@@ -9,9 +10,11 @@ interface MultipleSelectionViewProps {
 
 export const MultipleSelectionView: React.FC<MultipleSelectionViewProps> = ({ selectedCount, onClearSelection }) => {
   return (
-    <div className="h-full flex flex-col bg-bg1">
-      <div className="flex items-center justify-center flex-1">
-        <p className="text-t2 text-center">{localize('tasks.selected_count', 'Selected {0} items', selectedCount)}</p>
+    <div className={desktopStyles.MultipleSelectionViewContainer}>
+      <div className={desktopStyles.MultipleSelectionViewContent}>
+        <p className={desktopStyles.MultipleSelectionViewText}>
+          {localize('tasks.selected_count', 'Selected {0} items', selectedCount)}
+        </p>
       </div>
 
       {onClearSelection && <ClearSelectionButton onClearSelection={onClearSelection} />}

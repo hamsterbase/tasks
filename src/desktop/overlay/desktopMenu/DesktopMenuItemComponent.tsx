@@ -1,5 +1,6 @@
 import { CheckIcon, ChevronRightIcon } from '@/components/icons';
 import type { IMenuConfig } from '@/desktop/overlay/desktopMenu/DesktopMenuController.ts';
+import { desktopStyles } from '@/desktop/theme/main';
 import classNames from 'classnames';
 import React, { useRef } from 'react';
 
@@ -28,23 +29,24 @@ export const DesktopMenuItemComponent: React.FC<DesktopMenuItemComponentProps> =
     <button
       ref={itemRef}
       className={classNames(
-        'w-full flex items-center justify-between py-2 px-3 text-left text-sm transition-colors',
-        item.disabled ? 'text-t3 cursor-not-allowed' : 'text-t1 hover:bg-bg2',
-        isActive && 'bg-bg2'
+        desktopStyles.DesktopMenuItemBase,
+        'justify-between',
+        item.disabled ? desktopStyles.DesktopMenuItemDisabled : desktopStyles.DesktopMenuItemEnabled,
+        isActive && desktopStyles.DesktopMenuItemActive
       )}
       onClick={handleClick}
       onMouseEnter={onMouseEnter}
       disabled={item.disabled}
     >
-      <div className="flex items-center gap-2 flex-1">
+      <div className={desktopStyles.DesktopMenuItemContent}>
         {showCheckmarks && (
-          <div className="w-4 h-4 flex items-center justify-center">
-            {item.checked && <CheckIcon className="w-3 h-3 text-t1" />}
+          <div className={desktopStyles.DesktopMenuItemCheckbox}>
+            {item.checked && <CheckIcon className={desktopStyles.DesktopMenuItemCheckIcon} />}
           </div>
         )}
-        <span className="flex-1">{item.label}</span>
+        <span className={desktopStyles.DesktopMenuItemLabel}>{item.label}</span>
       </div>
-      {item.submenu && item.submenu.length > 0 && <ChevronRightIcon className="w-4 h-4 text-t3" />}
+      {item.submenu && item.submenu.length > 0 && <ChevronRightIcon className={desktopStyles.DesktopMenuItemChevron} />}
     </button>
   );
 };

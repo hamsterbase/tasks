@@ -9,6 +9,7 @@ import { ITodoService } from '@/services/todo/common/todoService.ts';
 import React from 'react';
 import { ClearSelectionButton } from './ClearSelectionButton';
 import { TaskLocationField } from './components/TaskLocationField';
+import { desktopStyles } from '@/desktop/theme/main';
 
 interface HeadingDetailViewProps {
   heading: ProjectHeadingInfo;
@@ -25,25 +26,23 @@ export const HeadingDetailView: React.FC<HeadingDetailViewProps> = ({ heading, o
   const { handleMenuClick } = useDesktopProjectHeader({ projectHeadingInfo: heading });
 
   return (
-    <div className="h-full flex flex-col bg-bg1">
-      <div className="flex items-center justify-between px-6 py-4 border-b border-line-light">
+    <div className={desktopStyles.DetailViewContainer}>
+      <div className={desktopStyles.DetailViewHeader}>
         <EditableTextArea
           inputKey={projectHeadingTitleInputKey(heading.id)}
           defaultValue={heading.title}
           placeholder={localize('heading.title_placeholder', 'Add heading title...')}
           onSave={handleTitleSave}
-          className="flex-1 text-xl font-medium outline-none"
+          className={desktopStyles.DetailViewHeaderTitle}
           autoSize={{ minRows: 1 }}
         />
-        <div className="flex items-center gap-2">
-          <button onClick={handleMenuClick} className="p-1.5 hover:bg-bg3 rounded-md transition-colors">
-            <MenuIcon className="size-4 text-t2" />
-          </button>
-        </div>
+        <button onClick={handleMenuClick} className={desktopStyles.DetailViewHeaderMenuButton}>
+          <MenuIcon className={desktopStyles.DetailViewHeaderMenuIcon} />
+        </button>
       </div>
 
-      <div className="flex-1 overflow-y-auto">
-        <div className="p-6 space-y-6">
+      <div className={desktopStyles.DetailViewContent}>
+        <div className={desktopStyles.DetailViewContentInner}>
           <TaskLocationField itemId={heading.id} />
         </div>
       </div>

@@ -3,6 +3,7 @@ import { EditableInput } from '@/components/edit/EditableInput';
 import { taskTitleInputKey } from '@/components/edit/inputKeys';
 import { ITaskList } from '@/components/taskList/type.ts';
 import { TaskInfo } from '@/core/state/type';
+import { desktopStyles } from '@/desktop/theme/main';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { useLongPress } from '@/hooks/useLongPress.ts';
 import { useRegisterEvent } from '@/hooks/useRegisterEvent.ts';
@@ -111,10 +112,10 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
     }
   };
 
-  const taskClassName = classNames('group relative flex items-start gap-3 px-3 py-3 rounded-md outline-none', {
-    'opacity-50': willDisappear,
-    'bg-bg3': (isFocused && isSelected && !isDragging) || isDragging,
-    'bg-bg2': !isFocused && isSelected && !isDragging,
+  const taskClassName = classNames(desktopStyles.TaskListItemContainer, {
+    [desktopStyles.TaskListItemContainerWillDisappear]: willDisappear,
+    [desktopStyles.TaskListItemContainerSelected]: (isFocused && isSelected && !isDragging) || isDragging,
+    [desktopStyles.TaskListItemContainerSelectedInactive]: !isFocused && isSelected && !isDragging,
   });
 
   const todoService = useService(ITodoService);
@@ -137,9 +138,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
       className={taskClassName}
       onClickCapture={handleClickCapture}
     >
-      {!disableDrag && (
-        <DragHandleIcon className="absolute -left-5 top-1/2 -translate-y-1/2 size-5 text-t3 opacity-0 group-hover:opacity-60 transition-opacity" />
-      )}
+      {!disableDrag && <DragHandleIcon className={desktopStyles.TaskListItemDragHandle} />}
       <button
         {...longPress.longPressEvents}
         data-testid="task-item-status-box"
@@ -151,19 +150,19 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
           taskItemActions.toggleTask();
         }}
         onPointerDown={(e) => e.stopPropagation()}
-        className="flex-shrink-0 size-5 outline-none"
+        className={desktopStyles.TaskListItemStatusButton}
         style={{ visibility: isDragging ? 'hidden' : 'visible' }}
       >
         <TaskStatusBox
           status={task.status}
-          className={classNames('size-5', {
-            'text-brand': isCompleted,
-            'text-t3': !isCompleted,
+          className={classNames(desktopStyles.TaskListItemStatusBox, {
+            [desktopStyles.TaskListItemStatusBoxCompleted]: isCompleted,
+            [desktopStyles.TaskListItemStatusBoxUncompleted]: !isCompleted,
           })}
         />
       </button>
-      <div className="flex flex-col gap-2 flex-1" style={{ visibility: isDragging ? 'hidden' : 'visible' }}>
-        <div className="flex items-center gap-2">
+      <div className={desktopStyles.TaskListItemContent} style={{ visibility: isDragging ? 'hidden' : 'visible' }}>
+        <div className={desktopStyles.TaskListItemTitleRow}>
           <EditableInput
             inputKey={taskTitleInputKey(task.id)}
             ref={inputRef}
@@ -175,11 +174,11 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
             onSave={(value) => {
               taskItemActions.updateTaskTitle(value);
             }}
-            className={'text-base leading-5 flex-1 bg-transparent border-none outline-none text-ellipsis text-t2'}
+            className={desktopStyles.TaskListItemTitleInput}
             placeholder={localize('tasks.untitled', 'New Task')}
           />
-          {task.notes && <NoteIcon className="size-5 text-t3 flex-shrink-0" />}
-          {task.children && task.children.length > 0 && <SubtaskIcon className="size-5 text-t3 flex-shrink-0" />}
+          {task.notes && <NoteIcon className={desktopStyles.TaskListItemIcon} />}
+          {task.children && task.children.length > 0 && <SubtaskIcon className={desktopStyles.TaskListItemIcon} />}
         </div>
         <ItemTagsList tags={tags} isSelected={isSelected} />
       </div>

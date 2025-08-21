@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
+import { desktopStyles } from '@/desktop/theme/main';
 
 interface SettingsTitleProps {
   title: string;
@@ -10,19 +11,19 @@ interface SettingsTitleProps {
 
 export const SettingsTitle: React.FC<SettingsTitleProps> = ({ title, description, level = 1, action }) => {
   return (
-    <div className="flex mb-8">
-      <div className="flex flex-col gap-1 flex-1">
+    <div className={desktopStyles.SettingsTitleContainer}>
+      <div className={desktopStyles.SettingsTitleContent}>
         <h2
-          className={classNames('font-medium text-t1 leading-5', {
-            'text-2xl': level === 1,
-            'text-xl': level === 2,
+          className={classNames(desktopStyles.SettingsTitleHeading, {
+            [desktopStyles.SettingsTitleHeadingLevel1]: level === 1,
+            [desktopStyles.SettingsTitleHeadingLevel2]: level === 2,
           })}
         >
           {title}
         </h2>
-        {description && <p className="text-base font-normal text-t3 leading-5">{description}</p>}
+        {description && <p className={desktopStyles.SettingsTitleDescription}>{description}</p>}
       </div>
-      {action && <div className="flex items-center">{action}</div>}
+      {action && <div className={desktopStyles.SettingsTitleActionContainer}>{action}</div>}
     </div>
   );
 };

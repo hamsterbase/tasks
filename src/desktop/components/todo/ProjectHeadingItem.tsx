@@ -3,6 +3,7 @@ import { projectHeadingTitleInputKey } from '@/components/edit/inputKeys';
 import { HeadingIcon, MenuIcon } from '@/components/icons';
 import { ITaskList } from '@/components/taskList/type.ts';
 import { ProjectHeadingInfo } from '@/core/state/type.ts';
+import { desktopStyles } from '@/desktop/theme/main';
 import { useDesktopProjectHeader } from '@/desktop/hooks/useDesktopProjectHeader';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
@@ -68,7 +69,7 @@ export const DesktopProjectHeadingItem: React.FC<DesktopProjectHeadingItemProps>
         style={style}
         {...attributes}
         {...listeners}
-        className="px-4 py-2 text-sm font-medium text-t2 bg-bg2 rounded opacity-50"
+        className={desktopStyles.ProjectHeadingItemDragging}
       >
         {projectHeadingInfo.title}
       </div>
@@ -76,13 +77,19 @@ export const DesktopProjectHeadingItem: React.FC<DesktopProjectHeadingItemProps>
   }
 
   return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners} className="pt-2">
+    <div
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
+      className={desktopStyles.ProjectHeadingItemWrapper}
+    >
       <div
         className={classNames(
-          'px-4 py-2 flex items-center gap-2 justify-between text-sm font-medium text-t2 rounded cursor-pointer hover:bg-bg3 transition-colors',
+          desktopStyles.ProjectHeadingItemContainer,
           {
-            'bg-bg3': (isFocused && isSelected) || isEditing,
-            'bg-bg2': !isFocused && isSelected,
+            [desktopStyles.ProjectHeadingItemContainerSelected]: (isFocused && isSelected) || isEditing,
+            [desktopStyles.ProjectHeadingItemContainerSelectedInactive]: !isFocused && isSelected,
           },
           className
         )}
@@ -111,8 +118,8 @@ export const DesktopProjectHeadingItem: React.FC<DesktopProjectHeadingItemProps>
           }
         }}
       >
-        <div className="flex items-center gap-2 flex-1 min-w-0">
-          <HeadingIcon className="size-4 text-t3 flex-shrink-0" />
+        <div className={desktopStyles.ProjectHeadingItemContent}>
+          <HeadingIcon className={desktopStyles.ProjectHeadingItemIcon} />
           <EditableInput
             ref={inputRef}
             inputKey={projectHeadingTitleInputKey(projectHeadingInfo.id)}
@@ -126,14 +133,11 @@ export const DesktopProjectHeadingItem: React.FC<DesktopProjectHeadingItemProps>
               setIsEditing(false);
             }}
             onBlur={() => setIsEditing(false)}
-            className="flex-1 bg-transparent outline-none text-t1 font-medium"
+            className={desktopStyles.ProjectHeadingItemInput}
             placeholder="Project Heading"
           />
         </div>
-        <MenuIcon
-          onClick={handleMenuClick}
-          className="size-4 text-t3 hover:text-t1 transition-colors flex-shrink-0 cursor-pointer"
-        />
+        <MenuIcon onClick={handleMenuClick} className={desktopStyles.ProjectHeadingItemMenuIcon} />
       </div>
     </div>
   );

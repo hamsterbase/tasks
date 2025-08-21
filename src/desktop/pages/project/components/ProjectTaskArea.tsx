@@ -19,6 +19,7 @@ import type { TreeID } from 'loro-crdt';
 import React, { useCallback } from 'react';
 import { flushSync } from 'react-dom';
 import { HeadingIcon } from '@/components/icons';
+import { desktopStyles } from '@/desktop/theme/main';
 
 interface ProjectTaskListProps {
   items: FlattenedItem<ProjectHeadingInfo, TaskInfo>[];
@@ -122,19 +123,19 @@ export const ProjectTaskArea: React.FC<ProjectTaskAreaProps> = ({
   };
 
   return (
-    <div className="flex-1">
-      <div className="flex items-center gap-6">
-        <div className="flex-1">
+    <div className={desktopStyles.ProjectTaskAreaContainer}>
+      <div className={desktopStyles.InboxAreaContainer}>
+        <div className={desktopStyles.InboxAreaInputWrapper}>
           <InboxTaskInput onCreateTask={handleCreateTask} />
         </div>
-        <div className="relative size-11 bg-bg3 flex items-center justify-center rounded-lg" onClick={handleAddHeading}>
-          <HeadingIcon className="size-5 text-t3" />
-          <div className="absolute top-5.5 right-2.5 w-2 h-2 bg-primary rounded-full flex items-center justify-center">
-            <span className="text-t3 text-xs leading-none">+</span>
+        <div className={desktopStyles.InboxAreaHeadingButton} onClick={handleAddHeading}>
+          <HeadingIcon className={desktopStyles.InboxAreaHeadingIcon} />
+          <div className={desktopStyles.InboxAreaHeadingBadge}>
+            <span className={desktopStyles.InboxAreaHeadingBadgeIcon}>+</span>
           </div>
         </div>
       </div>
-      <div className="outline-none" tabIndex={1} onFocus={setFocus} onBlur={clearFocus}>
+      <div tabIndex={1} onFocus={setFocus} onBlur={clearFocus}>
         <DndContext
           sensors={sensors}
           collisionDetection={getFlattenedItemsCollisionDetectionStrategy(flattenedItemsResult)}

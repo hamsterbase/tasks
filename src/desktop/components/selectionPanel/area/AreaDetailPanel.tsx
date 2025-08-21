@@ -1,16 +1,17 @@
+import { EditableTextArea } from '@/components/edit/EditableTextArea.tsx';
+import { areaTitleInputKey } from '@/components/edit/inputKeys.ts';
+import { MenuIcon } from '@/components/icons';
 import { getAreaDetail } from '@/core/state/getArea';
+import { desktopStyles } from '@/desktop/theme/main.ts';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService';
-import { EditableTextArea } from '@/components/edit/EditableTextArea.tsx';
-import { areaTitleInputKey } from '@/components/edit/inputKeys.ts';
-import { MenuIcon } from '@/components/icons';
 import type { TreeID } from 'loro-crdt';
 import React from 'react';
 import { useParams } from 'react-router';
-import { useAreaDesktopProjectMenu } from './useAreaDesktopProjectMenu';
 import { TagsField } from '../../TagsField';
+import { useAreaDesktopProjectMenu } from './useAreaDesktopProjectMenu';
 
 const useAreaId = (): TreeID | null => {
   const todoService = useService(ITodoService);
@@ -44,28 +45,24 @@ const AreaDetailPanelContent: React.FC<IAreaDetailPanelContentProps> = ({ areaId
   };
 
   return (
-    <div className="h-full flex flex-col bg-bg1">
-      <div className="flex items-center justify-between px-6 py-4 border-b border-line-light">
+    <div className={desktopStyles.DetailViewContainer}>
+      <div className={desktopStyles.DetailViewHeader}>
         <EditableTextArea
           inputKey={areaTitleInputKey(areaId)}
           defaultValue={area.title}
           placeholder={localize('area.untitled', 'New Area')}
           onSave={handleTitleSave}
-          className="flex-1 text-xl font-medium outline-none"
+          className={desktopStyles.DetailViewHeaderTitle}
           autoSize={{ minRows: 1 }}
         />
-        <div className="flex items-center gap-2">
-          <button onClick={handleMenuClick} className="p-1.5 hover:bg-bg3 rounded-md transition-colors">
-            <MenuIcon className="size-4 text-t2" />
-          </button>
-        </div>
+        <button onClick={handleMenuClick} className={desktopStyles.DetailViewHeaderMenuButton}>
+          <MenuIcon className={desktopStyles.DetailViewHeaderMenuIcon} />
+        </button>
       </div>
 
-      <div className="flex-1 overflow-y-auto">
-        <div className="p-6 space-y-6">
-          <div>
-            <TagsField itemId={areaId} />
-          </div>
+      <div className={desktopStyles.DetailViewContent}>
+        <div className={desktopStyles.DetailViewContentInner}>
+          <TagsField itemId={areaId} />
         </div>
       </div>
     </div>

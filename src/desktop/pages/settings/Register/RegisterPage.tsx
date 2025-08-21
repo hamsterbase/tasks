@@ -100,7 +100,6 @@ export const RegisterPage: React.FC = () => {
           >
             {isLoading ? localize('common.loading', 'Loading...') : localize('register.submit', 'Create Account')}
           </SettingButton>
-
           <div className={desktopStyles.AuthFormFooterContainer}>
             <p className={desktopStyles.AuthFormFooterText}>
               {localize('register.hasAccount', 'Already have an account?')}

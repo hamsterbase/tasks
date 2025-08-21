@@ -9,13 +9,13 @@ export interface SwitchProps {
 
 export const Switch: React.FC<SwitchProps> = ({ checked, onChange, disabled = false }) => {
   return (
-    <label className={`inline-flex items-center cursor-pointer ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}>
+    <label className={`${desktopStyles.SwitchLabel} ${disabled ? desktopStyles.SwitchLabelDisabled : ''}`}>
       <input
         type="checkbox"
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
         disabled={disabled}
-        className="sr-only"
+        className={desktopStyles.SwitchInput}
       />
       <div
         className={`${desktopStyles.SwitchContainer} ${checked ? desktopStyles.SwitchContainerActive : desktopStyles.SwitchContainerInactive}`}

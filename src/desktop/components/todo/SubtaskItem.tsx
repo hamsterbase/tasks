@@ -4,6 +4,7 @@ import { DragHandleIcon } from '@/components/icons';
 import { ITaskList } from '@/components/taskList/type.ts';
 import { SubTaskInfo } from '@/core/state/type';
 import { ItemStatus } from '@/core/type.ts';
+import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { useLongPress } from '@/hooks/useLongPress.ts';
@@ -105,20 +106,20 @@ export const SubtaskItem: React.FC<SubtaskItemProps> = ({ subtask, subList, clas
     inputElement.setSelectionRange(e.offset, e.offset);
   });
 
-  const inputClassName = classNames('text-sm bg-transparent outline-none border-none w-full', {
-    'line-through text-t3': subtask.status === 'canceled',
-    'text-t3': subtask.status === 'completed',
-    'text-t1': subtask.status === 'created',
+  const inputClassName = classNames(desktopStyles.SubtaskItemInput, {
+    [desktopStyles.SubtaskItemInputCanceled]: subtask.status === 'canceled',
+    [desktopStyles.SubtaskItemInputCompleted]: subtask.status === 'completed',
+    [desktopStyles.SubtaskItemInputCreated]: subtask.status === 'created',
   });
 
-  const containerClassName = classNames('flex items-center gap-3 h-11 rounded px-3 group', className, {
-    'bg-bg3': isFocused && isSelected,
-    'bg-bg2': !isFocused && isSelected,
-    'bg-bg1': !isFocused && !isSelected,
+  const containerClassName = classNames(desktopStyles.SubtaskItemContainer, className, {
+    [desktopStyles.SubtaskItemContainerSelected]: isFocused && isSelected,
+    [desktopStyles.SubtaskItemContainerSelectedInactive]: !isFocused && isSelected,
+    [desktopStyles.SubtaskItemContainerDefault]: !isFocused && !isSelected,
   });
 
   if (isDragging) {
-    return <div className="flex items-center h-8 bg-bg3 rounded opacity-50" ref={setNodeRef} style={style} />;
+    return <div className={desktopStyles.SubtaskItemDragging} ref={setNodeRef} style={style} />;
   }
 
   return (
@@ -127,12 +128,16 @@ export const SubtaskItem: React.FC<SubtaskItemProps> = ({ subtask, subList, clas
         {...longPress.longPressEvents}
         onClick={handleStatusButtonClick}
         onPointerDown={handleStopPropagation}
-        className="size-5 text-t3 flex items-center justify-center hover:bg-bg3 rounded transition-colors flex-shrink-0"
+        className={desktopStyles.SubtaskItemStatusButton}
       >
         <TaskStatusBox status={subtask.status} />
       </button>
 
-      <div className="flex-1 min-w-0" onClick={handleStopPropagation} onPointerDown={handleStopPropagation}>
+      <div
+        className={desktopStyles.SubtaskItemInputWrapper}
+        onClick={handleStopPropagation}
+        onPointerDown={handleStopPropagation}
+      >
         <EditableInput
           inputKey={taskTitleInputKey(subtask.id)}
           ref={inputElementRef}
@@ -146,12 +151,12 @@ export const SubtaskItem: React.FC<SubtaskItemProps> = ({ subtask, subList, clas
       </div>
 
       <button
-        className="opacity-0 group-hover:opacity-100 hover:bg-bg3 p-1 rounded transition-all flex-shrink-0"
+        className={desktopStyles.SubtaskItemDragHandle}
         onPointerDown={handleStopPropagation}
         {...attributes}
         {...listeners}
       >
-        <DragHandleIcon className="size-5 text-t3" />
+        <DragHandleIcon className={desktopStyles.SubtaskItemDragHandleIcon} />
       </button>
     </div>
   );

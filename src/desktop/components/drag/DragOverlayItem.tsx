@@ -6,6 +6,7 @@ import { getTaskInfo } from '@/core/state/getTaskInfo.ts';
 import { DesktopProjectListItem } from '@/desktop/components/todo/DesktopProjectListItem';
 import { SubtaskItem } from '@/desktop/components/todo/SubtaskItem';
 import { TaskListItem } from '@/desktop/components/todo/TaskListItem';
+import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service.ts';
 import { useWatchEvent } from '@/hooks/use-watch-event.ts';
 import { ITodoService } from '@/services/todo/common/todoService';
@@ -85,7 +86,7 @@ export const DragOverlayItem: React.FC<DragOverlayItemProps> = ({
 
   return (
     <DragOverlay>
-      <div className="bg-bg1 shadow-sm rounded-lg">{overlayContent}</div>
+      <div className={desktopStyles.DragOverlayContent}>{overlayContent}</div>
     </DragOverlay>
   );
 };

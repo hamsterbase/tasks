@@ -1,5 +1,6 @@
 import { CheckIcon } from '@/components/icons';
 import type { IMenuConfig } from '@/desktop/overlay/desktopMenu/DesktopMenuController.ts';
+import { desktopStyles } from '@/desktop/theme/main';
 import classNames from 'classnames';
 import React from 'react';
 
@@ -23,10 +24,10 @@ export const DesktopSubmenuComponent: React.FC<DesktopSubmenuComponentProps> = (
   let itemIndex = 0;
 
   return (
-    <div className="fixed bg-bg1 border border-line-light rounded-lg shadow-lg py-1" style={style}>
+    <div className={desktopStyles.DesktopSubmenuContainer} style={style}>
       {submenu.map((group, groupIndex) => (
         <div key={groupIndex}>
-          {groupIndex > 0 && <div className="border-t border-line-light my-1" />}
+          {groupIndex > 0 && <div className={desktopStyles.DesktopMenuDivider} />}
           {group.map((subItem, subIndex) => {
             const currentIndex = itemIndex;
             const isActive = activeSubmenuIndex === currentIndex;
@@ -35,9 +36,9 @@ export const DesktopSubmenuComponent: React.FC<DesktopSubmenuComponentProps> = (
               <button
                 key={subIndex}
                 className={classNames(
-                  'w-full flex items-center gap-2 py-2 px-3 text-left text-sm transition-colors',
-                  subItem.disabled ? 'text-t3 cursor-not-allowed' : 'text-t1 hover:bg-bg2',
-                  isActive && 'bg-bg2'
+                  desktopStyles.DesktopSubmenuItem,
+                  subItem.disabled ? desktopStyles.DesktopMenuItemDisabled : desktopStyles.DesktopMenuItemEnabled,
+                  isActive && desktopStyles.DesktopMenuItemActive
                 )}
                 onClickCapture={(e) => {
                   e.stopPropagation();
@@ -47,11 +48,11 @@ export const DesktopSubmenuComponent: React.FC<DesktopSubmenuComponentProps> = (
                 disabled={subItem.disabled}
               >
                 {showCheckmarks && (
-                  <div className="w-4 h-4 flex items-center justify-center">
-                    {subItem.checked && <CheckIcon className="w-3 h-3 text-t1" />}
+                  <div className={desktopStyles.DesktopMenuItemCheckbox}>
+                    {subItem.checked && <CheckIcon className={desktopStyles.DesktopMenuItemCheckIcon} />}
                   </div>
                 )}
-                <span className="flex-1">{subItem.label}</span>
+                <span className={desktopStyles.DesktopMenuItemLabel}>{subItem.label}</span>
               </button>
             );
           })}

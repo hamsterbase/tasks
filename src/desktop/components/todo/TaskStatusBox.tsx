@@ -10,8 +10,8 @@ export const TaskStatusBox: React.FC<{ status: string; className?: string }> = (
           'rounded-sm border-2 border-solid transition-colors flex items-center justify-center box-border size-[90%]'
         )}
       >
-        {status === 'completed' && <CheckIcon className="size-full" />}
-        {status === 'canceled' && <CancelIcon className="size-full" />}
+        {status === 'completed' && <CheckIcon />}
+        {status === 'canceled' && <CancelIcon />}
       </div>
     </div>
   );

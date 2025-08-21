@@ -14,6 +14,7 @@ import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { TreeID } from 'loro-crdt';
 import React, { useEffect } from 'react';
 import { flushSync } from 'react-dom';
+import { desktopStyles } from '@/desktop/theme/main';
 
 interface TaskListSectionProps {
   tasks: TaskInfo[];
@@ -103,10 +104,10 @@ export const TaskListSection: React.FC<TaskListSectionProps> = ({ tasks, willDis
   }
 
   return (
-    <div className="outline-none" tabIndex={1} onFocus={setFocus} onBlur={clearFocus}>
+    <div tabIndex={1} onFocus={setFocus} onBlur={clearFocus}>
       <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
         <SortableContext items={tasks.map((task) => task.id)} strategy={verticalListSortingStrategy}>
-          <div className="space-y-1">
+          <div className={desktopStyles.TaskListSectionItemsContainer}>
             {tasks.map((task) => (
               <TaskListItem
                 key={task.id}

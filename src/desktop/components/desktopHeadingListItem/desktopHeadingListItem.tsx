@@ -3,6 +3,7 @@ import { projectHeadingTitleInputKey } from '@/components/edit/inputKeys';
 import { DragHandleIcon, HeadingIcon } from '@/components/icons';
 import { ITaskList } from '@/components/taskList/type.ts';
 import { ProjectHeadingInfo } from '@/core/state/type.ts';
+import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { useRegisterEvent } from '@/hooks/useRegisterEvent.ts';
@@ -86,33 +87,33 @@ export const DesktopHeadingListItem: React.FC<DesktopHeadingListItemProps> = ({
       style={style}
       {...attributes}
       {...listeners}
-      className={classNames('group relative', {
-        'bg-bg3 rounded-lg': isDragging,
-        'pt-4': !hideDividers,
+      className={classNames(desktopStyles.DesktopHeadingListItemContainer, {
+        [desktopStyles.DesktopHeadingListItemContainerDragging]: isDragging,
+        [desktopStyles.DesktopHeadingListItemContainerPadding]: !hideDividers,
       })}
     >
       {!hideDividers && (
         <div
-          className={classNames('h-px mb-4 shadow-[0_0.5px_0_0_theme(colors.line.bold)]', {
-            'opacity-0': isDragging,
+          className={classNames(desktopStyles.DesktopHeadingListItemDivider, {
+            [desktopStyles.DesktopHeadingListItemDividerHidden]: isDragging,
           })}
         ></div>
       )}
       <div
         className={classNames(
-          'px-3 py-3 flex items-center gap-3 justify-between text-base leading-5 font-medium text-t1 rounded-lg transition-colors min-h-11 relative',
+          desktopStyles.DesktopHeadingListItemContent,
           {
-            'bg-bg3': isFocused && isSelected && !isEditing,
-            'bg-bg2': !isFocused && isSelected && !isEditing,
-            'opacity-0': isDragging,
+            [desktopStyles.DesktopHeadingListItemContentFocused]: isFocused && isSelected && !isEditing,
+            [desktopStyles.DesktopHeadingListItemContentSelected]: !isFocused && isSelected && !isEditing,
+            [desktopStyles.DesktopHeadingListItemContentHidden]: isDragging,
           },
           className
         )}
         onClickCapture={handleClickCapture}
         onClick={handleClick}
       >
-        <DragHandleIcon className="absolute -left-5 top-1/2 -translate-y-1/2 size-5 text-t3 opacity-0 group-hover:opacity-50 transition-opacity z-10" />
-        <HeadingIcon className="size-5 text-t1 flex-shrink-0" />
+        <DragHandleIcon className={desktopStyles.DesktopHeadingListItemDragHandle} />
+        <HeadingIcon className={desktopStyles.DesktopHeadingListItemIcon} />
         <EditableInput
           ref={inputRef}
           inputKey={projectHeadingTitleInputKey(projectHeadingInfo.id)}
@@ -126,7 +127,7 @@ export const DesktopHeadingListItem: React.FC<DesktopHeadingListItemProps> = ({
             setIsEditing(false);
           }}
           onBlur={() => setIsEditing(false)}
-          className="flex-1 bg-transparent outline-none text-t1 font-medium"
+          className={desktopStyles.DesktopHeadingListItemInput}
           placeholder="Project Heading"
         />
       </div>

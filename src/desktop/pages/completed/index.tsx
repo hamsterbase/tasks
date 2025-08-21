@@ -7,6 +7,7 @@ import { ProjectInfoState, TaskInfo } from '@/core/state/type.ts';
 import { EntityHeader } from '@/desktop/components/common/EntityHeader';
 import { DesktopProjectListItem } from '@/desktop/components/todo/DesktopProjectListItem';
 import { TaskListItem } from '@/desktop/components/todo/TaskListItem';
+import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { localize } from '@/nls';
@@ -29,22 +30,19 @@ export const Completed = () => {
   }, []);
 
   return (
-    <div className="h-full w-full bg-bg1">
-      <div className="h-full flex flex-col">
-        <EntityHeader
-          renderIcon={() => <LogIcon className="size-5 text-t2" />}
-          title={localize('completed_tasks.title', 'Completed')}
-        />
+    <div className={desktopStyles.SchedulePageContainer}>
+      <div className={desktopStyles.SchedulePageLayout}>
+        <EntityHeader renderIcon={() => <LogIcon />} title={localize('completed_tasks.title', 'Completed')} />
 
-        <div className="flex-1 overflow-y-auto">
-          <div className="mx-auto p-6 space-y-6">
+        <div className={desktopStyles.SchedulePageScrollArea}>
+          <div className={desktopStyles.SchedulePageContent}>
             {completedTaskGroups.groups.map((group) => (
-              <div key={group.label} className="space-y-4">
-                <div className="space-y-1 flex items-center gap-2">
-                  <h2 className="text-lg font-semibold text-t1 w-10">{group.label}</h2>
+              <div key={group.label} className={desktopStyles.SchedulePageGroupContainer}>
+                <div className={desktopStyles.SchedulePageGroupHeader}>
+                  <h2 className={desktopStyles.CompletedPageGroupTitle}>{group.label}</h2>
                 </div>
 
-                <div className="space-y-2">
+                <div className={desktopStyles.SchedulePageItemList}>
                   {group.tasks.map((item) => {
                     const willDisappear = willDisappearObjectIdSet.has(item.id);
                     if (item.type === ModelTypes.project) {
@@ -66,8 +64,8 @@ export const Completed = () => {
             ))}
 
             {completedTaskGroups.groups.length === 0 && (
-              <div className="text-center py-12">
-                <p className="text-t3 text-lg">
+              <div className={desktopStyles.SchedulePageEmptyState}>
+                <p className={desktopStyles.SchedulePageEmptyText}>
                   {localize('completed_tasks.noCompletedTasks', 'No completed tasks or projects yet')}
                 </p>
               </div>

@@ -1,4 +1,5 @@
 import { checkPlatform } from '@/base/browser/checkPlatform';
+import { desktopStyles } from '@/desktop/theme/main';
 import React, { useEffect, useState } from 'react';
 
 export const DragHandle: React.FC = () => {
@@ -34,5 +35,10 @@ export const DragHandle: React.FC = () => {
   if (fullscreen || !isElectron || !isMac) {
     return null;
   }
-  return <div className="h-7 w-full" style={{ WebkitAppRegion: 'drag', cursor: 'move' } as React.CSSProperties} />;
+  return (
+    <div
+      className={desktopStyles.DragHandleContainer}
+      style={{ WebkitAppRegion: 'drag', cursor: 'move' } as React.CSSProperties}
+    />
+  );
 };

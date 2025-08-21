@@ -15,6 +15,7 @@ import { CSS } from '@dnd-kit/utilities';
 import classNames from 'classnames';
 import React, { useRef } from 'react';
 import { TaskStatusBox } from './TaskStatusBox';
+import { desktopStyles } from '@/desktop/theme/main';
 
 interface SubtaskItemProps {
   subtask: SubTaskInfo;
@@ -117,7 +118,7 @@ export const SubtaskItem: React.FC<SubtaskItemProps> = ({ subtask, subList, clas
   });
 
   if (isDragging) {
-    return <div className="flex items-center h-8 bg-bg3 rounded opacity-50" ref={setNodeRef} style={style} />;
+    return <div className={desktopStyles.TaskListItemOldSubtaskDragging} ref={setNodeRef} style={style} />;
   }
 
   return (
@@ -126,12 +127,16 @@ export const SubtaskItem: React.FC<SubtaskItemProps> = ({ subtask, subList, clas
         {...longPress.longPressEvents}
         onClick={handleStatusButtonClick}
         onPointerDown={handleStopPropagation}
-        className="size-4 flex items-center justify-center hover:bg-bg3 rounded transition-colors flex-shrink-0"
+        className={desktopStyles.TaskListItemOldStatusButton}
       >
-        <TaskStatusBox className="size-4 text-t3" status={subtask.status} />
+        <TaskStatusBox className={desktopStyles.TaskListItemOldStatusBox} status={subtask.status} />
       </button>
 
-      <div className="flex-1 min-w-0" onClick={handleStopPropagation} onPointerDown={handleStopPropagation}>
+      <div
+        className={desktopStyles.TaskListItemOldInputWrapper}
+        onClick={handleStopPropagation}
+        onPointerDown={handleStopPropagation}
+      >
         <EditableInput
           inputKey={taskTitleInputKey(subtask.id)}
           ref={inputElementRef}
@@ -145,12 +150,12 @@ export const SubtaskItem: React.FC<SubtaskItemProps> = ({ subtask, subList, clas
       </div>
 
       <button
-        className="opacity-0 group-hover:opacity-100 hover:bg-bg3 p-1 rounded transition-all flex-shrink-0"
+        className={desktopStyles.TaskListItemOldDragHandle}
         onPointerDown={handleStopPropagation}
         {...attributes}
         {...listeners}
       >
-        <DragHandleIcon className="size-3 text-t3" />
+        <DragHandleIcon className={desktopStyles.TaskListItemOldDragHandleIcon} />
       </button>
     </div>
   );

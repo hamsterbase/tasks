@@ -16,6 +16,7 @@ import { ProjectTaskArea } from './components/ProjectTaskArea';
 import { useProjectDragAndDrop } from './hooks/useProjectDragAndDrop';
 import { useProjectEvents } from './hooks/useProjectEvents';
 import { useProjectId } from './hooks/useProjectId';
+import { desktopStyles } from '@/desktop/theme/main';
 
 interface ProjectContentProps {
   project: ReturnType<typeof getProject>;
@@ -94,8 +95,8 @@ export const ProjectPage = () => {
 
   if (!project) {
     return (
-      <div className="h-full w-full bg-bg1 flex items-center justify-center">
-        <div className="text-t3 text-lg">{localize('project.notFound', 'Project not found')}</div>
+      <div className={desktopStyles.ProjectPageNotFoundContainer}>
+        <div className={desktopStyles.ProjectPageNotFoundText}>{localize('project.notFound', 'Project not found')}</div>
       </div>
     );
   }
