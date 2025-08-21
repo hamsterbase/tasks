@@ -43,7 +43,8 @@ export const desktopStyles = {
   // Entity Header
   EntityHeaderContainer: 'min-h-15 flex items-start justify-between px-5 py-3.75 border-b border-line-regular bg-bg1',
   EntityHeaderContentWrapper: 'flex items-start gap-3 flex-1 min-w-0',
-  EntityHeaderIconButton: 'size-7.5 flex items-center justify-center',
+  EntityHeaderIconContainer: 'size-7.5 flex items-center justify-center',
+  EntityHeaderIconButton: 'size-6 flex items-center justify-center',
   EntityHeaderEditableTextArea:
     'flex-1 text-xl leading-7.5 font-medium text-t1 resize-none bg-transparent border-none outline-none px-0 py-0',
   EntityHeaderTitle: 'text-xl leading-7.5 font-medium text-t1 truncate',
@@ -486,6 +487,10 @@ export const desktopStyles = {
   OverlayBackdrop: 'fixed inset-0 flex items-center justify-center',
   OverlayBackgroundMask: 'absolute inset-0 bg-black opacity-45',
   OverlayContainer: 'bg-bg1-float rounded-lg shadow-2xl flex flex-col min-w-130 mx-4 relative p-5',
+
+  // Overlay Container Component
+  OverlayContainerBackdrop: 'fixed inset-0',
+  OverlayContainerContent: 'fixed bg-bg1 rounded-lg shadow-xl border border-line-light p-5',
   OverlayHeader: 'flex items-center justify-between order-b border-bg2-float mb-6',
   OverlayTitle: 'text-xl leading-6 font-medium text-t1',
   OverlayCloseButton: 'text-t3 transition-colors size-6',
@@ -494,6 +499,34 @@ export const desktopStyles = {
 
   // Desktop Dialog Component
   DesktopDialogDescription: 'text-sm text-t3 leading-4.5 font-normal',
+
+  // Tag Editor Overlay
+  TagEditorOverlayContainer: 'w-80 max-h-100',
+  TagEditorOverlayInputWrapper: 'mb-3',
+  TagEditorOverlayInput: 'flex flex-row items-center p-3 gap-3 h-11 bg-bg3 rounded-lg w-full',
+  TagEditorOverlayCreateButton:
+    'h-11 w-full px-3 text-left text-sm hover:bg-bg2 transition-colors flex items-center gap-2 rounded-lg',
+  TagEditorOverlayCreateButtonActive: 'bg-bg2',
+  TagEditorOverlayCreateButtonIcon: 'text-brand',
+  TagEditorOverlayScrollContainer: 'overflow-y-auto max-h-70',
+  TagEditorOverlayTagItem:
+    'h-11 flex items-center gap-2 px-3 text-sm hover:bg-bg2 cursor-pointer transition-colors rounded-lg',
+  TagEditorOverlayTagItemActive: 'bg-bg2',
+  TagEditorOverlayTagCheckbox: 'size-5 flex items-center justify-center',
+  TagEditorOverlayTagCheckboxSelected: 'text-brand',
+  TagEditorOverlayTagCheckboxUnselected: 'text-t3',
+
+  // Tree Select Overlay
+  TreeSelectOverlayContainer: 'w-80 max-h-100',
+  TreeSelectOverlayInnerWrapper: '',
+  TreeSelectOverlayInputWrapper: 'mb-3',
+  TreeSelectOverlayInput: 'flex flex-row items-center p-3 gap-3 h-11 bg-bg3 rounded-lg w-full',
+  TreeSelectOverlayContentArea: 'max-h-76 overflow-y-auto',
+  TreeSelectOverlayButton:
+    'w-full h-11 flex items-center gap-2 px-3 hover:bg-bg3 rounded-lg transition-colors text-left text-t2',
+  TreeSelectOverlayButtonDisabled: 'opacity-50 cursor-not-allowed',
+  TreeSelectOverlayIcon: 'size-5 shrink-0 text-t2',
+  TreeSelectOverlayText: 'text-base leading-5',
 };
 
 export type DesktopThemeDefinition = typeof desktopStyles;

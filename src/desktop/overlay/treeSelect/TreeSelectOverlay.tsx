@@ -1,6 +1,9 @@
-import { AreaIcon } from '@/components/icons';
+import { AreaIcon, HomeIcon } from '@/components/icons';
 import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox';
 import { getFilteredProjectsAndAreas } from '@/core/state/getFilteredProjectsAndAreas';
+import { getTreeSelectItems, TreeSelectItem } from '@/core/state/getTreeSelectItems';
+import { OverlayContainer } from '@/desktop/components/Overlay/OverlayContainer';
+import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { localize } from '@/nls';
@@ -21,7 +24,7 @@ const TreeSelectContent: React.FC<TreeSelectContentProps> = ({ controller }) => 
   useWatchEvent(todoService.onStateChange);
   const [searchText, setSearchText] = useState('');
   const overlayRef = useRef<HTMLDivElement>(null);
-  const { filteredProjects, filteredAreas, canMoveToRoot } = getFilteredProjectsAndAreas(
+  const filteredData = getFilteredProjectsAndAreas(
     todoService.modelState,
     searchText,
     controller.currentItemId as TreeID
@@ -37,114 +40,64 @@ const TreeSelectContent: React.FC<TreeSelectContentProps> = ({ controller }) => 
     controller.confirmSelection(id);
   };
 
-  const handleBackdropClick = () => {
-    controller.dispose();
-  };
+  const flattenedItems = getTreeSelectItems(filteredData);
 
-  const overlayStyle: React.CSSProperties = {
-    position: 'fixed',
-    left: controller.x - 320,
-    top: controller.y,
-    width: '320px',
-    maxHeight: '400px',
-    zIndex: 1000,
+  const renderIcon = (item: TreeSelectItem) => {
+    switch (item.type) {
+      case 'root':
+        return <HomeIcon className={desktopStyles.TreeSelectOverlayIcon} />;
+      case 'area':
+        return <AreaIcon className={desktopStyles.TreeSelectOverlayIcon} />;
+      case 'project':
+        return (
+          <ProjectStatusBox
+            progress={item.progress}
+            status={item.status}
+            color="t2"
+            className={desktopStyles.TreeSelectOverlayIcon}
+          />
+        );
+    }
   };
 
   return (
-    <>
-      <div className="fixed inset-0" style={{ zIndex: 999 }} onClick={handleBackdropClick} />
-
-      <div
-        ref={overlayRef}
-        style={overlayStyle}
-        className="bg-bg1 border border-line-light rounded-lg shadow-lg"
-        tabIndex={0}
-      >
-        <div className="p-3 border-b border-line-light">
+    <OverlayContainer
+      zIndex={controller.zIndex}
+      onDispose={() => controller.dispose()}
+      left={controller.x}
+      top={controller.y}
+      className={desktopStyles.TreeSelectOverlayContainer}
+    >
+      <div ref={overlayRef} className={desktopStyles.TreeSelectOverlayInnerWrapper} tabIndex={0}>
+        <div className={desktopStyles.TreeSelectOverlayInputWrapper}>
           <input
             type="text"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
             placeholder={localize('project_area_selector.search', 'Search projects and areas...')}
-            className="w-full px-3 py-2 bg-bg2 rounded-md outline-none text-sm"
+            className={desktopStyles.TreeSelectOverlayInput}
             autoFocus
           />
         </div>
 
-        <div className="max-h-[320px] overflow-y-auto p-2">
-          {canMoveToRoot && (
+        <div className={desktopStyles.TreeSelectOverlayContentArea}>
+          {flattenedItems.map((item) => (
             <button
-              className="w-full flex items-center gap-2 px-2 py-1.5 hover:bg-bg3 rounded-md transition-colors text-left mb-2"
-              onClick={() => handleConfirmSelection(null)}
-            >
-              <span className="text-sm">{localize('project_area_selector.move_to_root', 'Move to root')}</span>
-            </button>
-          )}
-
-          {filteredProjects.length > 0 && (
-            <div className="mb-2">
-              {filteredProjects.map((project) => (
-                <button
-                  key={project.id}
-                  className="w-full flex items-center gap-2 px-2 py-1.5 hover:bg-bg3 rounded-md transition-colors text-left"
-                  onClick={() => handleConfirmSelection(project.id)}
-                >
-                  <ProjectStatusBox
-                    progress={project.progress}
-                    status={project.status}
-                    color="t3"
-                    className="size-5 shrink-0"
-                  />
-                  <span className={classNames('text-sm truncate', project.isPlaceholder && 'text-t3')}>
-                    {project.displayTitle}
-                  </span>
-                </button>
-              ))}
-            </div>
-          )}
-
-          {filteredAreas.map((area) => (
-            <div key={area.id} className="mb-2">
-              <button
-                className={classNames(
-                  'w-full flex items-center gap-2 px-2 py-1.5 rounded-md transition-colors text-left',
-                  area.isDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-bg3'
-                )}
-                disabled={area.isDisabled}
-                onClick={() => !area.isDisabled && handleConfirmSelection(area.id)}
-              >
-                <AreaIcon className="size-5 shrink-0 text-t3" />
-                <span className={classNames('text-sm font-medium truncate', area.isPlaceholder && 'text-t3')}>
-                  {area.displayTitle}
-                </span>
-              </button>
-
-              {area.projectList.length > 0 && (
-                <div className="ml-6">
-                  {area.projectList.map((project) => (
-                    <button
-                      key={project.id}
-                      className="w-full flex items-center gap-2 px-2 py-1.5 hover:bg-bg3 rounded-md transition-colors text-left"
-                      onClick={() => handleConfirmSelection(project.id)}
-                    >
-                      <ProjectStatusBox
-                        progress={project.progress}
-                        status={project.status}
-                        color="t3"
-                        className="size-5 shrink-0"
-                      />
-                      <span className={classNames('text-sm truncate', project.isPlaceholder && 'text-t3')}>
-                        {project.displayTitle}
-                      </span>
-                    </button>
-                  ))}
-                </div>
+              key={item.id || 'root'}
+              className={classNames(
+                desktopStyles.TreeSelectOverlayButton,
+                item.disabled ? desktopStyles.TreeSelectOverlayButtonDisabled : ''
               )}
-            </div>
+              disabled={item.disabled}
+              onClick={() => !item.disabled && handleConfirmSelection(item.id)}
+            >
+              {renderIcon(item)}
+              <span className={desktopStyles.TreeSelectOverlayText}>{item.label}</span>
+            </button>
           ))}
         </div>
       </div>
-    </>
+    </OverlayContainer>
   );
 };
 

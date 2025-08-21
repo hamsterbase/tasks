@@ -64,7 +64,9 @@ export const EntityHeader: React.FC<EntityHeaderProps> = ({
   return (
     <div className={desktopStyles.EntityHeaderContainer}>
       <div className={desktopStyles.EntityHeaderContentWrapper}>
-        <button className={desktopStyles.EntityHeaderIconButton}>{renderIcon()}</button>
+        <div className={desktopStyles.EntityHeaderIconContainer}>
+          <button className={desktopStyles.EntityHeaderIconButton}>{renderIcon()}</button>
+        </div>
         {editable && inputKey && onSave ? (
           <EditableTextArea
             ref={textAreaRef}
