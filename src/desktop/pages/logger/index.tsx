@@ -30,9 +30,9 @@ const LogItem: React.FC<LogItemProps> = ({ index, style, data }) => {
       bg: 'bg-green-50/50',
     },
     error: {
-      dot: 'bg-red-500',
-      text: 'text-red-700',
-      bg: 'bg-red-50/50',
+      dot: 'bg-stress-red',
+      text: 'text-stress-red',
+      bg: 'bg-stress-red/50',
     },
   };
 
@@ -42,7 +42,7 @@ const LogItem: React.FC<LogItemProps> = ({ index, style, data }) => {
   return (
     <div
       style={style}
-      className={`px-4 py-1.5 border-b border-line-regular transition-colors ${isError ? 'bg-red-50/20' : ''}`}
+      className={`px-4 py-1.5 border-b border-line-regular transition-colors ${isError ? 'text-stress-red/20' : ''}`}
     >
       <div className="flex items-center gap-3">
         <div className="flex-shrink-0 flex items-center gap-2">
@@ -192,7 +192,7 @@ export const Logs = () => {
                       {localize('logs.totalCount', 'Total: {0} logs', logs.length)}
                     </div>
                     <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full bg-red-500" />
+                      <div className="w-2 h-2 rounded-full bg-stress-red" />
                       <span className="text-xs text-t3">Error</span>
                       <div className="w-2 h-2 rounded-full bg-green-500" />
                       <span className="text-xs text-t3">Log</span>

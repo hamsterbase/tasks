@@ -103,7 +103,7 @@ const CreateDatabaseContent: React.FC<{ controller: CreateDatabaseController }> 
               </label>
             </div>
 
-            {error && <div className="text-red-500 text-sm">{error}</div>}
+            {error && <div className="text-stress-red text-sm">{error}</div>}
           </div>
         </div>
 
