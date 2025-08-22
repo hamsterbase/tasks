@@ -1,7 +1,21 @@
-// Desktop calendar layout constants
-const DAY_CELL_HEIGHT = 24; // 6 * 4 (h-6 in tailwind)
-const MONTH_HEADER_HEIGHT = 32;
-const GAP_HEIGHT = 4; // gap-1
-const ITEM_HEIGHT = MONTH_HEADER_HEIGHT + 6 * (DAY_CELL_HEIGHT + GAP_HEIGHT);
+import { desktopStyles } from '@/desktop/theme/main';
 
-export { ITEM_HEIGHT, DAY_CELL_HEIGHT, MONTH_HEADER_HEIGHT, GAP_HEIGHT };
+// Desktop calendar layout constants
+export const DAY_CELL_HEIGHT = calculateElementHeight(desktopStyles.DatePickerOverlayDayButton);
+export const MONTH_HEADER_HEIGHT = calculateElementHeight(desktopStyles.DatePickerOverlayMonthHeaderTitle);
+export const SCROLL_CONTAINER_HEIGHT = calculateElementHeight(desktopStyles.DatePickerOverlayScrollContainer);
+
+export function calculateElementHeight(className: string): number {
+  const div = document.createElement('div');
+  div.className = className;
+  div.textContent = '你好World';
+  div.style.visibility = 'hidden';
+  div.style.position = 'absolute';
+  div.style.width = 'auto';
+
+  document.body.appendChild(div);
+  const height = div.getBoundingClientRect().height;
+  document.body.removeChild(div);
+
+  return height;
+}

@@ -531,6 +531,28 @@ export const desktopStyles = {
   // Create Database Overlay
   CreateDatabaseOverlayFormContainer: 'flex flex-col gap-3',
   CreateDatabaseOverlayErrorText: 'text-stress-red text-sm',
+
+  // Date Picker Overlay
+  DatePickerOverlayContainer: 'w-76',
+  DatePickerOverlayInputWrapper: 'mb-3',
+  DatePickerOverlayInput: 'flex flex-row items-center p-3 gap-3 h-11 bg-bg3 rounded-lg w-full',
+  DatePickerOverlayHeaderContainer: 'flex justify-between items-center mb-3',
+  DatePickerOverlayHeaderTitle: 'text-lg font-medium text-t1',
+  DatePickerOverlayNavContainer: 'flex items-center',
+  DatePickerOverlayNavButton: 'p-1.5 hover:bg-bg2 rounded text-lg text-t2 hover:text-t1 transition-colors',
+  DatePickerOverlayNavIcon: 'size-4',
+  DatePickerOverlayCalendarWrapper: 'text-base',
+  DatePickerOverlayScrollContainer: 'h-60 overflow-y-auto',
+  DatePickerOverlayMonthHeaderTitle: 'text-lg font-medium text-t1 border-b border-line-regular py-2',
+  DatePickerOverlayMonthGrid: 'grid grid-cols-7 gap-x-0.5 bg-bg1',
+  DatePickerOverlayDayButton: 'size-9  rounded text-base relative hover:bg-bg2 transition-colors',
+  DatePickerOverlayDaySelected: 'bg-brand text-white',
+  DatePickerOverlayDayNotCurrentMonth: 'opacity-30',
+  DatePickerOverlayDayToday: 'text-brand font-bold',
+  DatePickerOverlayDayCurrentMonth: 'text-t1',
+  DatePickerOverlayTodayLabel: 'absolute top-0 left-0 w-full h-full flex items-center justify-center text-xs',
+  DatePickerOverlayWeekdayGrid: 'grid grid-cols-7 gap-0.5 sticky top-0 bg-white',
+  DatePickerOverlayWeekdayCell: 'text-center text-xs text-t3 h-9 w-9 flex items-center justify-center',
 };
 
 export type DesktopThemeDefinition = typeof desktopStyles;

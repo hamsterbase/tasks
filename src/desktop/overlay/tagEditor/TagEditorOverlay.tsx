@@ -68,7 +68,7 @@ export const TagEditorOverlay: React.FC = () => {
           value={controller.searchText}
           onChange={handleInputChange}
           onBlur={() => {
-            // controller.dispose();
+            controller.dispose();
           }}
           placeholder={localize('tag_editor.input_placeholder', 'Add or search tags...')}
           className={desktopStyles.TagEditorOverlayInput}

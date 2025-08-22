@@ -1,3 +1,4 @@
+import { desktopStyles } from '@/desktop/theme/main';
 import { localize } from '@/nls';
 import React from 'react';
 
@@ -13,9 +14,9 @@ export const WeekdayHeader: React.FC = () => {
   ];
 
   return (
-    <div className="grid grid-cols-7 gap-1 py-1 px-2 sticky top-0 bg-white">
+    <div className={desktopStyles.DatePickerOverlayWeekdayGrid}>
       {weekdays.map((day) => (
-        <div key={day} className="text-center text-xs text-t3 h-6 flex items-center justify-center">
+        <div key={day} className={desktopStyles.DatePickerOverlayWeekdayCell}>
           {day}
         </div>
       ))}
