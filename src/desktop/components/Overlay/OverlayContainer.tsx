@@ -2,6 +2,14 @@ import { desktopStyles } from '@/desktop/theme/main';
 import classNames from 'classnames';
 import React, { useLayoutEffect, useRef, useState } from 'react';
 
+interface OverlayFilterOption {
+  value: string;
+  placeholder: string;
+  onChange: (value: string) => void;
+  autoFocus?: boolean;
+  disposeWhenBlur?: boolean;
+}
+
 interface OverlayContainerProps {
   zIndex: number;
   onDispose: () => void;
@@ -9,6 +17,7 @@ interface OverlayContainerProps {
   top: number;
   children: React.ReactNode;
   className?: string;
+  filter?: OverlayFilterOption;
 }
 
 export const OverlayContainer: React.FC<OverlayContainerProps> = ({
@@ -18,6 +27,7 @@ export const OverlayContainer: React.FC<OverlayContainerProps> = ({
   top,
   children,
   className,
+  filter,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ left, top });
@@ -75,7 +85,23 @@ export const OverlayContainer: React.FC<OverlayContainerProps> = ({
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        {children}
+        {filter && (
+          <div className={desktopStyles.OverlayContainerFilterWrapper}>
+            <input
+              type="text"
+              value={filter.value}
+              onBlur={() => {
+                if (filter.disposeWhenBlur) {
+                  onDispose();
+                }
+              }}
+              onChange={(e) => filter.onChange(e.target.value)}
+              placeholder={filter.placeholder}
+              autoFocus={filter.autoFocus}
+            />
+          </div>
+        )}
+        <div>{children}</div>
       </div>
     </>
   );

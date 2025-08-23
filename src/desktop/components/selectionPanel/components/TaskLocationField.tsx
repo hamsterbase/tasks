@@ -21,7 +21,7 @@ export const TaskLocationField: React.FC<TaskLocationFieldProps> = ({ itemId }) 
 
   const handleMoveClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    treeSelect(rect.left, rect.bottom + 4, {
+    treeSelect(rect.left, rect.top, {
       currentItemId: itemId,
       onConfirm: (id: TreeID | null) => {
         if (!id) {

@@ -9,6 +9,7 @@ import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
 import classNames from 'classnames';
 import React, { useEffect, useRef } from 'react';
 import { TagEditorOverlayController } from './TagEditorOverlayController';
+import { calculateElementWidth } from '../datePicker/constant';
 
 export const TagEditorOverlay: React.FC = () => {
   const workbenchOverlayService = useService(IWorkbenchOverlayService);
@@ -36,10 +37,6 @@ export const TagEditorOverlay: React.FC = () => {
     }
   }, [controller?.focusedIndex, controller]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    controller?.updateSearchText(e.target.value);
-  };
-
   const handleTagClick = (tag: string) => {
     if (!controller) return;
     if (controller.selectedTags.includes(tag)) {
@@ -57,40 +54,34 @@ export const TagEditorOverlay: React.FC = () => {
     <OverlayContainer
       zIndex={controller.zIndex}
       onDispose={() => controller.dispose()}
-      left={position.x}
+      left={position.x - calculateElementWidth(desktopStyles.TagEditorOverlayContainer)}
       top={position.y}
       className={desktopStyles.TagEditorOverlayContainer}
+      filter={{
+        value: controller.searchText,
+        placeholder: localize('tag_editor.input_placeholder', 'Add or search tags...'),
+        onChange: (value) => controller.updateSearchText(value),
+        autoFocus: true,
+        disposeWhenBlur: true,
+      }}
     >
-      <div className={desktopStyles.TagEditorOverlayInputWrapper}>
-        <input
-          ref={inputRef}
-          type="text"
-          value={controller.searchText}
-          onChange={handleInputChange}
-          onBlur={() => {
-            controller.dispose();
-          }}
-          placeholder={localize('tag_editor.input_placeholder', 'Add or search tags...')}
-          className={desktopStyles.TagEditorOverlayInput}
-        />
-      </div>
-      {controller.searchText && !controller.selectedTags.includes(controller.searchText) && (
-        <button
-          onMouseDown={(e) => {
-            e.preventDefault();
-          }}
-          className={classNames(
-            desktopStyles.TagEditorOverlayCreateButton,
-            controller.focusedIndex === -1 && desktopStyles.TagEditorOverlayCreateButtonActive
-          )}
-          onClick={() => handleTagClick(controller.searchText)}
-        >
-          <span className={desktopStyles.TagEditorOverlayCreateButtonIcon}>+</span>
-          {localize('desktop.tag_editor.create_new_tag', 'Create tag "{0}"', controller.searchText)}
-        </button>
-      )}
-      {controller.displayTags.length > 0 && (
+      {
         <div ref={scrollContainerRef} className={desktopStyles.TagEditorOverlayScrollContainer}>
+          {controller.searchText && !controller.selectedTags.includes(controller.searchText) && (
+            <button
+              onMouseDown={(e) => {
+                e.preventDefault();
+              }}
+              className={classNames(
+                desktopStyles.TagEditorOverlayCreateButton,
+                controller.focusedIndex === -1 && desktopStyles.TagEditorOverlayCreateButtonActive
+              )}
+              onClick={() => handleTagClick(controller.searchText)}
+            >
+              <span className={desktopStyles.TagEditorOverlayCreateButtonIcon}>+</span>
+              {localize('desktop.tag_editor.create_new_tag', 'Create tag "{0}"', controller.searchText)}
+            </button>
+          )}
           {controller.displayTags.map((tag, index) => {
             const isSelected = controller.selectedTags.includes(tag);
             const isFocused = controller.focusedIndex === index;
@@ -125,7 +116,7 @@ export const TagEditorOverlay: React.FC = () => {
             );
           })}
         </div>
-      )}
+      }
     </OverlayContainer>
   );
 };

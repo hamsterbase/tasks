@@ -18,7 +18,7 @@ export const useDatePickerHandlers = ({ task }: UseDatePickerHandlersProps) => {
   ) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const position = {
-      x: rect.left - 280 - 10, // 280px is the width of datepicker, 10px gap
+      x: rect.left,
       y: rect.top,
     };
     showDatePicker(currentDate, onDateSelect, position);

@@ -14,6 +14,7 @@ import classNames from 'classnames';
 import { TreeID } from 'loro-crdt';
 import React, { useEffect, useRef, useState } from 'react';
 import { TreeSelectController } from './TreeSelectController';
+import { calculateElementWidth } from '../datePicker/constant';
 
 interface TreeSelectContentProps {
   controller: TreeSelectController;
@@ -64,39 +65,32 @@ const TreeSelectContent: React.FC<TreeSelectContentProps> = ({ controller }) => 
     <OverlayContainer
       zIndex={controller.zIndex}
       onDispose={() => controller.dispose()}
-      left={controller.x}
+      left={controller.x - calculateElementWidth(desktopStyles.TreeSelectOverlayContainer)}
       top={controller.y}
       className={desktopStyles.TreeSelectOverlayContainer}
+      filter={{
+        value: searchText,
+        placeholder: localize('project_area_selector.search', 'Search projects and areas...'),
+        onChange: setSearchText,
+        autoFocus: true,
+      }}
     >
-      <div ref={overlayRef} tabIndex={0}>
-        <div className={desktopStyles.TreeSelectOverlayInputWrapper}>
-          <input
-            type="text"
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-            placeholder={localize('project_area_selector.search', 'Search projects and areas...')}
-            className={desktopStyles.TreeSelectOverlayInput}
-            autoFocus
-          />
-        </div>
-
-        <div className={desktopStyles.TreeSelectOverlayContentArea}>
-          {flattenedItems.map((item) => (
-            <button
-              key={item.id || 'root'}
-              className={classNames(
-                desktopStyles.TreeSelectOverlayButton,
-                item.disabled ? desktopStyles.TreeSelectOverlayButtonDisabled : '',
-                item.type === 'project' && item.padding ? desktopStyles.TreeSelectOverlayButtonPadding : ''
-              )}
-              disabled={item.disabled}
-              onClick={() => !item.disabled && handleConfirmSelection(item.id)}
-            >
-              {renderIcon(item)}
-              <span className={desktopStyles.TreeSelectOverlayText}>{item.label}</span>
-            </button>
-          ))}
-        </div>
+      <div className={desktopStyles.TreeSelectOverlayContentArea} ref={overlayRef} tabIndex={0}>
+        {flattenedItems.map((item) => (
+          <button
+            key={item.id || 'root'}
+            className={classNames(
+              desktopStyles.TreeSelectOverlayButton,
+              item.disabled ? desktopStyles.TreeSelectOverlayButtonDisabled : '',
+              item.type === 'project' && item.padding ? desktopStyles.TreeSelectOverlayButtonPadding : ''
+            )}
+            disabled={item.disabled}
+            onClick={() => !item.disabled && handleConfirmSelection(item.id)}
+          >
+            {renderIcon(item)}
+            <span className={desktopStyles.TreeSelectOverlayText}>{item.label}</span>
+          </button>
+        ))}
       </div>
     </OverlayContainer>
   );

@@ -14,7 +14,7 @@ import React, { useEffect, useRef } from 'react';
 import { VariableSizeList } from 'react-window';
 import { DatePickerOverlayController } from './DatePickerOverlayController';
 import { WeekdayHeader } from './WeekdayHeader';
-import { calculateElementHeight } from './constant';
+import { calculateElementHeight, calculateElementWidth } from './constant';
 
 interface MonthGridProps {
   days: Array<{
@@ -89,11 +89,6 @@ export const DatePickerOverlay: React.FC = () => {
     }
   }, [controller]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    controller?.updateInputValue(value);
-  };
-
   const handlePrevMonth = () => {
     const newIndex = controller?.navigateToPrevMonth();
     if (newIndex !== undefined) {
@@ -127,20 +122,16 @@ export const DatePickerOverlay: React.FC = () => {
     <OverlayContainer
       zIndex={controller.zIndex}
       onDispose={() => controller.dispose()}
-      left={position.x}
+      left={position.x - calculateElementWidth(desktopStyles.DatePickerOverlayContainer)}
       top={position.y}
       className={desktopStyles.DatePickerOverlayContainer}
+      filter={{
+        value: controller.getCurrentInputValue() || '',
+        placeholder: 'YYYY-MM-DD',
+        onChange: (value) => controller.updateInputValue(value),
+        autoFocus: true,
+      }}
     >
-      <div className={desktopStyles.DatePickerOverlayInputWrapper}>
-        <input
-          type="text"
-          value={controller?.getCurrentInputValue() || ''}
-          onChange={handleInputChange}
-          placeholder="YYYY-MM-DD"
-          className={desktopStyles.DatePickerOverlayInput}
-          autoFocus
-        />
-      </div>
       <div className={desktopStyles.DatePickerOverlayQuickActionsContainer}>
         <button onClick={() => controller?.selectToday()} className={desktopStyles.DatePickerOverlayQuickActionButton}>
           <TodayIcon className={desktopStyles.DatePickerOverlayQuickActionIcon} />

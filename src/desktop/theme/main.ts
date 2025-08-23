@@ -433,7 +433,8 @@ export const desktopStyles = {
   OverlayContainer: 'bg-bg1-float rounded-lg shadow-2xl flex flex-col min-w-130 mx-4 relative p-5',
 
   OverlayContainerBackdrop: 'fixed inset-0',
-  OverlayContainerContent: 'fixed bg-bg1 rounded-lg shadow-xl border border-line-light p-5',
+  OverlayContainerContent: 'fixed bg-bg1 rounded-lg shadow-xl border border-line-light',
+  OverlayContainerFilterWrapper: 'border-b border-line-regular p-3',
   OverlayHeader: 'flex items-center justify-between order-b border-bg2-float mb-6',
   OverlayTitle: 'text-xl leading-6 font-medium text-t1',
   OverlayCloseButton: 'text-t3 transition-colors size-6',
@@ -442,24 +443,20 @@ export const desktopStyles = {
 
   DesktopDialogDescription: 'text-sm text-t3 leading-4.5 font-normal',
 
-  TagEditorOverlayContainer: 'w-80 max-h-100 px-0 pb-2 pt-0',
-  TagEditorOverlayInputWrapper: 'mb-3 px-3 border-b border-line-regular p-3',
-  TagEditorOverlayInput: 'flex flex-row items-center gap-3 w-full',
+  TagEditorOverlayContainer: 'w-80',
   TagEditorOverlayCreateButton:
     'h-11 w-full px-3 text-left text-sm hover:bg-bg2 transition-colors flex items-center gap-2',
   TagEditorOverlayCreateButtonActive: 'bg-bg2',
   TagEditorOverlayCreateButtonIcon: 'text-brand',
-  TagEditorOverlayScrollContainer: 'overflow-y-auto max-h-70',
+  TagEditorOverlayScrollContainer: 'py-3 overflow-y-auto max-h-70',
   TagEditorOverlayTagItem: 'h-11 flex items-center gap-2 px-3 text-sm hover:bg-bg2 cursor-pointer transition-colors',
   TagEditorOverlayTagItemActive: 'bg-bg2',
   TagEditorOverlayTagCheckbox: 'size-5 flex items-center justify-center',
   TagEditorOverlayTagCheckboxSelected: 'text-brand',
   TagEditorOverlayTagCheckboxUnselected: 'text-t3',
 
-  TreeSelectOverlayContainer: 'w-80 max-h-100  px-0 pb-2 pt-0',
-  TreeSelectOverlayInputWrapper: 'mb-3 px-3 border-b border-line-regular p-3',
-  TreeSelectOverlayInput: 'flex flex-row items-center gap-3 w-full',
-  TreeSelectOverlayContentArea: 'max-h-76 overflow-y-auto',
+  TreeSelectOverlayContainer: 'w-80',
+  TreeSelectOverlayContentArea: 'max-h-76 overflow-y-auto py-3',
   TreeSelectOverlayButton: 'w-full h-11 flex items-center gap-2 px-3 hover:bg-bg3 transition-colors text-left text-t2',
   TreeSelectOverlayButtonDisabled: 'opacity-50 cursor-not-allowed',
   TreeSelectOverlayButtonPadding: 'pl-6',
@@ -469,14 +466,14 @@ export const desktopStyles = {
   CreateDatabaseOverlayFormContainer: 'flex flex-col gap-3',
   CreateDatabaseOverlayErrorText: 'text-stress-red text-sm',
 
-  DatePickerOverlayContainer: 'w-76 px-0 py-3',
+  DatePickerOverlayContainer: 'w-76',
   DatePickerOverlayInputWrapper: 'mb-3 px-3 border-b border-line-regular',
   DatePickerOverlayInput: 'flex flex-row items-center gap-3 w-full pb-3',
   DatePickerOverlayHeaderContainer: 'flex justify-between items-center mb-3 px-3',
   DatePickerOverlayHeaderTitle: 'text-lg font-medium text-t1',
   DatePickerOverlayNavContainer: 'flex items-center',
   DatePickerOverlayNavButton: 'p-1.5 hover:bg-bg2 rounded text-lg text-t2 hover:text-t1 transition-colors',
-  DatePickerOverlayQuickActionsContainer: 'flex flex-col gap-1 mb-3',
+  DatePickerOverlayQuickActionsContainer: 'flex flex-col gap-1 py-3',
   DatePickerOverlayQuickActionButton:
     'h-11 px-3 text-left text-t1 hover:bg-bg2 rounded transition-colors flex items-center gap-2',
   DatePickerOverlayQuickActionIcon: 'size-5 text-t2',
@@ -492,7 +489,7 @@ export const desktopStyles = {
   DatePickerOverlayDayCurrentMonth: 'text-t1',
   DatePickerOverlayTodayLabel: 'absolute top-0 left-0 w-full h-full flex items-center justify-center text-xs',
   DatePickerOverlayWeekdayGrid: 'grid grid-cols-7 gap-0.5 sticky top-0 bg-white',
-  DatePickerOverlayWeekdayCell: 'text-center text-xs text-t3 h-9 w-9 flex items-center justify-center',
+  DatePickerOverlayWeekdayCell: 'text-center text-xs text-t3 h-6 w-9 flex items-center justify-center',
 };
 
 export type DesktopThemeDefinition = typeof desktopStyles;

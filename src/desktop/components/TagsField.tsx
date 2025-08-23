@@ -42,7 +42,7 @@ export const TagsField: React.FC<ITagsFieldProps> = ({ itemId }) => {
   const handleTagsClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const position = {
-      x: rect.left - 320 - 10,
+      x: rect.left,
       y: rect.top,
     };
     const allTags = getAllTags(todoService.modelState);
