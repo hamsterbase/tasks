@@ -49,7 +49,7 @@ const ProjectDetailPanelContent: React.FC<IProjectDetailPanelContentProps> = ({ 
 
   const showDatePickerAtPosition = (
     currentDate: number | undefined,
-    onDateSelect: (date: number | undefined) => void,
+    onDateSelect: (date: number | undefined | null) => void,
     e: React.MouseEvent<HTMLButtonElement>
   ) => {
     const rect = e.currentTarget.getBoundingClientRect();
