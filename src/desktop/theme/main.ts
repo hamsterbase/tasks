@@ -467,8 +467,6 @@ export const desktopStyles = {
   CreateDatabaseOverlayErrorText: 'text-stress-red text-sm',
 
   DatePickerOverlayContainer: 'w-76',
-  DatePickerOverlayInputWrapper: 'mb-3 px-3 border-b border-line-regular',
-  DatePickerOverlayInput: 'flex flex-row items-center gap-3 w-full pb-3',
   DatePickerOverlayHeaderContainer: 'flex justify-between items-center mb-3 px-3',
   DatePickerOverlayHeaderTitle: 'text-lg font-medium text-t1',
   DatePickerOverlayNavContainer: 'flex items-center',
