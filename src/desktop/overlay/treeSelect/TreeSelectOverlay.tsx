@@ -68,7 +68,7 @@ const TreeSelectContent: React.FC<TreeSelectContentProps> = ({ controller }) => 
       top={controller.y}
       className={desktopStyles.TreeSelectOverlayContainer}
     >
-      <div ref={overlayRef} className={desktopStyles.TreeSelectOverlayInnerWrapper} tabIndex={0}>
+      <div ref={overlayRef} tabIndex={0}>
         <div className={desktopStyles.TreeSelectOverlayInputWrapper}>
           <input
             type="text"
@@ -86,7 +86,8 @@ const TreeSelectContent: React.FC<TreeSelectContentProps> = ({ controller }) => 
               key={item.id || 'root'}
               className={classNames(
                 desktopStyles.TreeSelectOverlayButton,
-                item.disabled ? desktopStyles.TreeSelectOverlayButtonDisabled : ''
+                item.disabled ? desktopStyles.TreeSelectOverlayButtonDisabled : '',
+                item.type === 'project' && item.padding ? desktopStyles.TreeSelectOverlayButtonPadding : ''
               )}
               disabled={item.disabled}
               onClick={() => !item.disabled && handleConfirmSelection(item.id)}

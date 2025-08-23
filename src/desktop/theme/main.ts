@@ -442,29 +442,27 @@ export const desktopStyles = {
 
   DesktopDialogDescription: 'text-sm text-t3 leading-4.5 font-normal',
 
-  TagEditorOverlayContainer: 'w-80 max-h-100',
-  TagEditorOverlayInputWrapper: 'mb-3',
-  TagEditorOverlayInput: 'flex flex-row items-center p-3 gap-3 h-11 bg-bg3 rounded-lg w-full',
+  TagEditorOverlayContainer: 'w-80 max-h-100 px-0 pb-2 pt-0',
+  TagEditorOverlayInputWrapper: 'mb-3 px-3 border-b border-line-regular p-3',
+  TagEditorOverlayInput: 'flex flex-row items-center gap-3 w-full',
   TagEditorOverlayCreateButton:
-    'h-11 w-full px-3 text-left text-sm hover:bg-bg2 transition-colors flex items-center gap-2 rounded-lg',
+    'h-11 w-full px-3 text-left text-sm hover:bg-bg2 transition-colors flex items-center gap-2',
   TagEditorOverlayCreateButtonActive: 'bg-bg2',
   TagEditorOverlayCreateButtonIcon: 'text-brand',
   TagEditorOverlayScrollContainer: 'overflow-y-auto max-h-70',
-  TagEditorOverlayTagItem:
-    'h-11 flex items-center gap-2 px-3 text-sm hover:bg-bg2 cursor-pointer transition-colors rounded-lg',
+  TagEditorOverlayTagItem: 'h-11 flex items-center gap-2 px-3 text-sm hover:bg-bg2 cursor-pointer transition-colors',
   TagEditorOverlayTagItemActive: 'bg-bg2',
   TagEditorOverlayTagCheckbox: 'size-5 flex items-center justify-center',
   TagEditorOverlayTagCheckboxSelected: 'text-brand',
   TagEditorOverlayTagCheckboxUnselected: 'text-t3',
 
-  TreeSelectOverlayContainer: 'w-80 max-h-100',
-  TreeSelectOverlayInnerWrapper: '',
-  TreeSelectOverlayInputWrapper: 'mb-3',
-  TreeSelectOverlayInput: 'flex flex-row items-center p-3 gap-3 h-11 bg-bg3 rounded-lg w-full',
+  TreeSelectOverlayContainer: 'w-80 max-h-100  px-0 pb-2 pt-0',
+  TreeSelectOverlayInputWrapper: 'mb-3 px-3 border-b border-line-regular p-3',
+  TreeSelectOverlayInput: 'flex flex-row items-center gap-3 w-full',
   TreeSelectOverlayContentArea: 'max-h-76 overflow-y-auto',
-  TreeSelectOverlayButton:
-    'w-full h-11 flex items-center gap-2 px-3 hover:bg-bg3 rounded-lg transition-colors text-left text-t2',
+  TreeSelectOverlayButton: 'w-full h-11 flex items-center gap-2 px-3 hover:bg-bg3 transition-colors text-left text-t2',
   TreeSelectOverlayButtonDisabled: 'opacity-50 cursor-not-allowed',
+  TreeSelectOverlayButtonPadding: 'pl-6',
   TreeSelectOverlayIcon: 'size-5 shrink-0 text-t2',
   TreeSelectOverlayText: 'text-base leading-5 truncate',
 

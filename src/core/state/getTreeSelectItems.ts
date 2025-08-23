@@ -7,7 +7,11 @@ export type TreeSelectItem = {
   id: TreeID | null;
   label: string;
   disabled?: boolean;
-} & ({ type: 'root' } | { type: 'area' } | { type: 'project'; progress: number; status: ItemStatus });
+} & (
+  | { type: 'root' }
+  | { type: 'area' }
+  | { type: 'project'; progress: number; status: ItemStatus; padding?: boolean }
+);
 
 export function getTreeSelectItems(data: FilteredProjectsAndAreas): TreeSelectItem[] {
   const flattenedItems: TreeSelectItem[] = [];
@@ -45,6 +49,7 @@ export function getTreeSelectItems(data: FilteredProjectsAndAreas): TreeSelectIt
         label: project.displayTitle,
         progress: project.progress,
         status: project.status,
+        padding: true,
       });
     });
   });
