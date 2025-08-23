@@ -15,11 +15,13 @@ interface DesktopProjectListProps {
   projects: ProjectInfoState[];
   emptyStateLabel: string;
   useDateAssignedMove?: boolean;
+  hideProjectTitle?: boolean;
 }
 
 export const DesktopProjectList: React.FC<DesktopProjectListProps> = ({
   projects,
   emptyStateLabel,
+  hideProjectTitle,
   useDateAssignedMove = false,
 }) => {
   const todoService = useService(ITodoService);
@@ -52,7 +54,7 @@ export const DesktopProjectList: React.FC<DesktopProjectListProps> = ({
     <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
       <SortableContext items={projects.map((p) => p.id)} strategy={verticalListSortingStrategy}>
         {projects.map((project) => (
-          <DesktopProjectListItem key={project.id} project={project} />
+          <DesktopProjectListItem hideProjectTitle={hideProjectTitle} key={project.id} project={project} />
         ))}
       </SortableContext>
       <DragOverlayItem projectVariant="desktop" />

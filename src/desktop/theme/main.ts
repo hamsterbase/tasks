@@ -4,7 +4,6 @@ export const desktopStyles = {
   sidebarContainerStyle: 'w-full h-full pl-2 pt-2 pr-4 flex flex-col',
   sidebarBackground: 'bg-bg3',
 
-  // Sidebar Menu
   SidebarMenuItemContainer: 'space-y-2',
   SidebarMenuItem: 'h-11 px-3 flex rounded-lg text-base leading-5 items-center gap-3 group',
   SidebarMenuItemActive: 'bg-brand text-white',
@@ -31,7 +30,6 @@ export const desktopStyles = {
   SidebarProjectItemDueDateActive: 'text-white',
   SidebarProjectItemDueDateInactive: 'text-t3',
 
-  // Sidebar Bottom Actions
   SidebarActionsContainer: 'flex gap-1 h-15 items-center',
   SidebarCreateButton:
     'flex-1 flex items-center gap-2 px-3 py-2 text-sm text-t1 hover:bg-bg1 hover:text-brand rounded-md transition-colors h-11',
@@ -40,7 +38,6 @@ export const desktopStyles = {
     'flex items-center justify-center hover:bg-bg hover:bg-bg1 hover:text-brand rounded-md transition-colors size-11 text-t3',
   SidebarSettingsButtonIcon: 'size-5',
 
-  // Entity Header
   EntityHeaderContainer: 'min-h-15 flex items-start justify-between px-5 py-3.75 border-b border-line-regular bg-bg1',
   EntityHeaderContentWrapper: 'flex items-start gap-3 flex-1 min-w-0',
   EntityHeaderIconContainer: 'size-7.5 flex items-center justify-center',
@@ -54,17 +51,14 @@ export const desktopStyles = {
   EntityHeaderActionIcon: 'size-5 flex items-center content-center',
   EntityHeaderActionLabel: 'text-base leading-5 font-normal',
 
-  // Clear Selection Button
   ClearSelectionButton:
     'border-t border-line-regular h-15 flex items-center text-base text-t3 justify-center cursor-pointer',
 
-  // Task Location Field
   TaskLocationFieldButton: 'flex items-center py-2 gap-2 text-t2 h-11 hover:bg-bg3 px-3 rounded-lg w-full',
   TaskLocationFieldIcon: 'size-5 shrink-0',
   TaskLocationFieldMoveText: 'text-base leading-5',
   TaskLocationFieldLocationText: 'text-base leading-5 text-t1 truncate',
 
-  // Task Date Field
   TaskDateFieldButton: 'flex items-center py-2 gap-2 text-t2 h-11 hover:bg-bg3 px-3 rounded-lg w-full',
   TaskDateFieldIcon: 'size-5 shrink-0 flex items-center justify-center',
   TaskDateFieldPlaceholderText: 'text-base leading-5',
@@ -73,7 +67,6 @@ export const desktopStyles = {
   TaskDateFieldDateOverdue: 'text-stress-red',
   TaskDateFieldRemainingText: 'text-t3',
 
-  // Tags Field
   TagsFieldEmptyButton: 'flex items-center py-2 gap-2 text-t2 h-11 hover:bg-bg3 px-3 rounded-lg w-full',
   TagsFieldWithTagsButton: 'flex items-start py-3 gap-2 text-t2 min-h-11 hover:bg-bg3 px-3 rounded-lg w-full',
   TagsFieldIcon: 'size-5',
@@ -86,13 +79,11 @@ export const desktopStyles = {
   SubtaskListTitleIcon: 'size-5 flex-shrink-0 text-t1 flex items-center justify-center',
   SubtaskListTitleText: 'flex-1 text-base leading-5 font-normal text-t1',
 
-  // Inbox Task Input
   InboxTaskInputWrapper: 'pt-3 mb-3',
   InboxTaskInputContainer: 'flex flex-row items-center p-3 gap-3 h-11 bg-bg3 rounded-lg',
   InboxTaskInputIcon: 'flex-none size-5 text-t3',
   InboxTaskInputField: 'flex-1 bg-transparent text-base text-t1 placeholder-t3 focus:outline-none font-normal',
 
-  // Inbox Area Container
   InboxAreaContainer: 'flex items-center gap-6',
   InboxAreaInputWrapper: 'flex-1',
   InboxAreaHeadingButton: 'relative size-11 bg-bg3 flex items-center justify-center rounded-lg',
@@ -100,14 +91,12 @@ export const desktopStyles = {
   InboxAreaHeadingBadge: 'absolute top-5.5 right-2.5 w-2 h-2 bg-primary rounded-full flex items-center justify-center',
   InboxAreaHeadingBadgeIcon: 'text-t3 text-xs leading-none',
 
-  // Item Tag
   ItemTagContainer: 'flex text-xs leading-4 h-5 items-center px-2 gap-1 rounded-sm max-w-30 text-t2',
   ItemTagSelected: 'bg-bg1',
   ItemTagUnselected: 'bg-bg3',
   ItemTagIcon: 'size-3 flex items-center content-center flex-shrink-0',
   ItemTagLabel: 'truncate',
 
-  // Auth Forms
   AuthFormContainer: 'flex flex-col gap-9',
   AuthFormSection: 'flex flex-col gap-3',
   AuthFormErrorMessage: 'text-stress-red text-base',
@@ -117,7 +106,6 @@ export const desktopStyles = {
   AuthFormSwitchButton: 'text-brand hover:underline ml-1',
   AuthFormLink: 'text-brand mx-1 hover:underline',
 
-  // Select Component
   SelectContainer: 'relative',
   SelectTrigger:
     'box-border flex flex-row justify-between items-center p-3 gap-3 w-44 h-11 border border-line-regular rounded-lg cursor-pointer bg-bg1 hover:border-brand focus-within:border-brand',
@@ -128,7 +116,6 @@ export const desktopStyles = {
     'absolute top-full left-0 right-0 mt-1 bg-bg1 border border-line-regular rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto py-1',
   SelectOption: 'px-3 py-3 h-11 hover:bg-bg2 cursor-pointer text-t1 font-normal text-base leading-5 flex items-center',
 
-  // Switch Component
   SwitchLabel: 'inline-flex items-center cursor-pointer',
   SwitchLabelDisabled: 'opacity-50 cursor-not-allowed',
   SwitchInput: 'sr-only',
@@ -139,49 +126,40 @@ export const desktopStyles = {
   SwitchKnobActive: 'left-5',
   SwitchKnobInactive: 'left-0.5',
 
-  // Settings Item Component
   SettingsItemContainer: 'flex w-full items-start justify-between',
   SettingsItemContentWrapper: 'flex-1 pr-4',
   SettingsItemTitle: 'text-base font-medium text-t1 leading-6 h-6',
   SettingsItemDescription: 'text-sm font-normal text-t3 leading-4.5 h-4.5',
   SettingsItemActionWrapper: 'flex-shrink-0 h-10.5 flex item-center',
 
-  // Settings Item Group Component
   SettingsItemGroupContainer:
     'flex flex-col justify-center items-start p-4 gap-3 border border-line-regular rounded-lg',
   SettingsItemGroupDivider: 'w-full h-0.25 bg-bg3',
 
-  // Settings Button Component
   SettingButtonBase: 'rounded-lg focus:outline-none flex flex-row justify-center items-center whitespace-nowrap',
   SettingButtonSizeLarge: 'h-13 text-base font-normal min-w-20',
   SettingButtonSizeMedium: 'h-11 text-base font-normal min-w-20 px-3',
   SettingButtonSizeSmall: 'h-9 text-sm font-normal min-w-20 px-3',
   SettingButtonFullWidth: 'w-full',
 
-  // Solid variant styles
   SettingButtonSolidPrimary: 'bg-brand text-white hover:bg-brand/90',
   SettingButtonSolidDanger: 'bg-stress-red text-white hover:bg-stress-red/90',
   SettingButtonSolidDefault: 'bg-bg3 text-white hover:bg-bg3/90',
 
-  // Filled variant styles
   SettingButtonFilledPrimary: 'bg-brand/10 text-brand hover:bg-brand/20',
   SettingButtonFilledDanger: 'bg-stress-red/10 text-stress-red hover:bg-stress-red/20',
   SettingButtonFilledDefault: 'bg-bg2 text-t1 hover:bg-bg3',
 
-  // Default variant styles (bordered)
   SettingButtonDefaultPrimary: 'bg-transparent text-brand border border-brand hover:bg-brand/10',
   SettingButtonDefaultDanger: 'bg-transparent text-stress-red border border-stress-red hover:bg-stress-red/10',
   SettingButtonDefaultDefault: 'bg-transparent text-t1 border border-line-regular hover:bg-bg2',
 
-  // Text variant styles
   SettingButtonTextPrimary: 'bg-transparent text-brand hover:bg-brand/10',
   SettingButtonTextDanger: 'bg-transparent text-stress-red hover:bg-stress-red/10',
   SettingButtonTextDefault: 'bg-transparent text-t1 hover:bg-bg2',
 
-  // Disabled styles
   SettingButtonDisabled: 'opacity-50 cursor-not-allowed pointer-events-none',
 
-  // Database List
   DatabaseListContainer: 'mt-12',
   DatabaseListLoadingContainer: 'text-center py-4',
   DatabaseListLoadingText: 'text-t2',
@@ -190,18 +168,18 @@ export const desktopStyles = {
   DatabaseListEmptyContainer: 'text-center py-4',
   DatabaseListEmptyText: 'text-t2',
 
-  // Title Content Section
   TitleContentSectionContainer: 'flex flex-col pt-5',
   TitleContentSectionHeader: 'flex flex-row justify-center items-center px-3 gap-2 w-full h-11 flex-none',
   TitleContentSectionTitle: 'flex-1 text-base leading-5 font-normal text-t1 truncate',
+  TitleContentSectionAction: 'flex-shrink-0',
+  TitleContentSectionActionButton:
+    'px-3 py-1 h-11 text-base rounded-lg hover:bg-bg2 transition-colors text-t2 hover:text-t1',
 
-  // Back Button
   BackButtonLink: 'flex flex-row items-center h-12 no-underline text-t1 hover:bg-bg2 mb-2 rounded-lg px-3 w-fit',
   BackButtonContainer: 'flex flex-row items-center gap-1',
   BackButtonIcon: 'w-6 h-6 flex items-center justify-center',
   BackButtonLabel: 'text-xl leading-5',
 
-  // Detail View Components
   DetailViewContainer: 'h-full flex flex-col',
   DetailViewHeader: 'min-h-15 flex px-5 py-3.75 gap-5 items-start justify-between border-b border-line-regular',
   DetailViewHeaderTitle: 'flex-1 text-xl leading-7.5 font-medium outline-none',
@@ -213,7 +191,6 @@ export const desktopStyles = {
     'w-full p-3 bg-bg2 rounded-lg outline-none resize-none text-base leading-5 placeholder:text-t3',
   DetailViewDivider: 'h-[1px] bg-line-regular',
 
-  // Markdown Page
   MarkdownPageLoading: 'text-t2',
   MarkdownPageH1: 'text-2xl font-medium text-t1 mb-4 mt-6',
   MarkdownPageH2: 'text-xl font-medium text-t1 mb-3 mt-5',
@@ -226,7 +203,6 @@ export const desktopStyles = {
   MarkdownPageLi: 'my-1',
   MarkdownPageBlockquote: 'text-t2 border-l-4 border-line-light pl-4 my-4',
 
-  // Info Item
   InfoItemContainer: 'flex flex-row justify-between items-center gap-3 w-full h-5 font-normal text-balance leading-5',
   InfoItemLabel: 'text-t3',
   InfoItemValueContainer: 'flex items-center gap-2',
@@ -234,7 +210,6 @@ export const desktopStyles = {
   InfoItemCopyButton: 'text-t3 hover:text-t1 transition-colors',
   InfoItemCopyIcon: 'w-4 h-4',
 
-  // Checkbox Component
   CheckboxContainer: 'flex items-center gap-2',
   CheckboxInputContainer: 'relative',
   CheckboxInput: 'sr-only',
@@ -244,7 +219,6 @@ export const desktopStyles = {
   CheckboxStatusBox: 'size-full',
   CheckboxLabel: 'text-base text-t3 leading-5',
 
-  // Settings Title Component
   SettingsTitleContainer: 'flex mb-8',
   SettingsTitleContent: 'flex flex-col gap-1 flex-1',
   SettingsTitleHeading: 'font-medium text-t1 leading-5',
@@ -253,7 +227,6 @@ export const desktopStyles = {
   SettingsTitleDescription: 'text-base font-normal text-t3 leading-5',
   SettingsTitleActionContainer: 'flex items-center',
 
-  // Todo List Items
   TaskListItemContainer: 'group relative flex items-start gap-3 px-3 py-3 rounded-md outline-none',
   TaskListItemContainerWillDisappear: 'opacity-50',
   TaskListItemContainerSelected: 'bg-bg3',
@@ -309,21 +282,17 @@ export const desktopStyles = {
   DesktopProjectListItemChevron:
     'flex items-center gap-1.5 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity size-5 text-t3',
 
-  // Desktop Page
   DesktopPageContainer: 'h-full w-full flex flex-col',
   DesktopPageContentPane: 'w-full flex-1',
   DesktopPageMainPane: 'h-full flex flex-col overflow-hidden',
   DesktopPageMainContent: 'flex-1 overflow-y-auto px-5',
   DesktopPageDetailPane: 'border-l border-line-regular',
 
-  // Subtask List
   SubtaskListContainer: 'space-y-0.25 group',
 
-  // Settings Content
   SettingsContentContainer: 'w-full flex flex-col',
   SettingsContentBackButton: 'p-3',
 
-  // Task List Item (taskListItem folder)
   TaskListItemOldSubtaskDragging: 'flex items-center h-8 bg-bg3 rounded opacity-50',
   TaskListItemOldStatusButton:
     'size-4 flex items-center justify-center hover:bg-bg3 rounded transition-colors flex-shrink-0',
@@ -334,29 +303,22 @@ export const desktopStyles = {
   TaskListItemOldMainStatusButton: 'flex-shrink-0 size-5 outline-none',
   TaskListItemOldMainInputWrapper: 'flex-1 min-w-0',
 
-  // Task Status Box
   TaskStatusBoxIcon: 'size-full',
 
-  // Area Page
   AreaPageNotFoundContainer: 'h-full w-full bg-bg1 flex items-center justify-center',
   AreaPageNotFoundText: 'text-t3 text-lg',
 
-  // Task List Section
   TaskListSectionItemsContainer: 'space-y-1',
 
-  // Future Projects Page
   FutureProjectsPageContainer: 'h-full w-full bg-bg1',
   FutureProjectsPageWrapper: 'h-full flex flex-col',
   FutureProjectsPageContent: 'flex-1 overflow-y-auto p-4',
 
-  // Project Page
   ProjectPageNotFoundContainer: 'h-full w-full bg-bg1 flex items-center justify-center',
   ProjectPageNotFoundText: 'text-t3 text-lg',
 
-  // Project Task Area
   ProjectTaskAreaContainer: 'flex-1',
 
-  // Database Item
   DatabaseItemContainer: 'flex flex-col gap-3 w-full',
   DatabaseItemMainRow: 'flex items-center gap-3',
   DatabaseItemContentWrapper: 'flex items-center gap-2 flex-1',
@@ -374,14 +336,11 @@ export const desktopStyles = {
   DatabaseItemPropertyLabel: 'text-base font-medium text-t1 leading-6',
   DatabaseItemPropertyValue: 'text-sm font-normal text-t3 leading-[18px]',
 
-  // Space Component
   SpaceMedium: 'h-8',
   SpaceLarge: 'h-16',
 
-  // Account Settings
   AccountSettingsButtonContainer: 'space-y-3',
 
-  // Schedule & Completed Pages
   SchedulePageContainer: 'h-full w-full bg-bg1',
   SchedulePageLayout: 'h-full flex flex-col',
   SchedulePageScrollArea: 'flex-1 overflow-y-auto',
@@ -395,37 +354,29 @@ export const desktopStyles = {
   SchedulePageEmptyText: 'text-t3 text-lg',
   CompletedPageGroupTitle: 'text-lg font-semibold text-t1 w-10',
 
-  // Drag Overlay
   DragOverlayContent: 'bg-bg1 shadow-sm rounded-lg',
 
-  // Empty Panel
   EmptyPanelContainer: 'flex items-center justify-center h-full',
   EmptyPanelText: 'text-t3',
 
-  // Empty State
   EmptyStateContainer: 'text-center py-12 text-t3',
   EmptyStateText: 'text-sm',
 
-  // Subtask List - Additional Button
   SubtaskListCreateButton:
     'flex items-center gap-2 justify-center w-full text-base leading-5 h-11 text-t3 hover:bg-bg3 px-3 rounded-lg transition-colors',
   SubtaskListCreateButtonIcon: 'size-5',
 
-  // Sidebar Layout
   SidebarLayoutContainer: 'h-screen w-screen relative',
   SidebarLayoutPaneWrapper: 'p-4 pl-0 bg-bg3',
   SidebarLayoutContent: 'bg-bg1 rounded-lg overflow-hidden border border-line-regular h-full',
 
-  // Settings Sidebar Layout
   SettingsSidebarLayoutContent:
     'bg-bg1 rounded-lg overflow-hidden border border-line-regular h-full flex justify-center',
 
-  // Multiple Selection View
   MultipleSelectionViewContainer: 'h-full flex flex-col bg-bg1',
   MultipleSelectionViewContent: 'flex items-center justify-center flex-1',
   MultipleSelectionViewText: 'text-t2 text-center',
 
-  // Desktop Heading List Item
   DesktopHeadingListItemContainer: 'group relative',
   DesktopHeadingListItemContainerDragging: 'bg-bg3 rounded-lg',
   DesktopHeadingListItemContainerPadding: 'pt-4',
@@ -441,10 +392,8 @@ export const desktopStyles = {
   DesktopHeadingListItemIcon: 'size-5 text-t1 flex-shrink-0',
   DesktopHeadingListItemInput: 'flex-1 bg-transparent outline-none text-t1 font-medium',
 
-  // Drag Handle
   DragHandleContainer: 'h-7 w-full',
 
-  // Desktop Message
   DesktopMessageContainer: 'fixed top-6 right-6 flex flex-col items-end pointer-events-none',
   DesktopMessageContent:
     'bg-bg1 text-t1 border-line-regular border rounded-lg shadow-lg backdrop-blur-sm min-w-80 max-w-md p-4 pointer-events-auto transform transition-all duration-200 ease-out',
@@ -460,35 +409,29 @@ export const desktopStyles = {
   DesktopMessageCloseButton:
     'size-5 flex items-center justify-center hover:opacity-70 transition-opacity flex-shrink-0 ml-2',
 
-  // Desktop Menu - Shared Components
   DesktopMenuBackdrop: 'fixed inset-0',
-  DesktopMenuContainer: 'fixed outline-none',
+  DesktopMenuContainer: 'fixed outline-none w-65',
   DesktopMenuContent: 'bg-bg1 border border-line-light rounded-lg shadow-lg py-1 w-full',
   DesktopMenuDivider: 'border-t border-line-light my-1',
 
-  // Desktop Menu Item - Shared Base Styles
-  DesktopMenuItemBase: 'w-full flex items-center py-2 px-3 text-left text-sm transition-colors',
-  DesktopMenuItemEnabled: 'text-t1 hover:bg-bg2',
+  DesktopMenuItemBase: 'h-11 w-full flex items-center py-2 px-3 text-left text-base transition-colors',
+  DesktopMenuItemEnabled: 'text-t2 hover:bg-bg2',
   DesktopMenuItemDisabled: 'text-t3 cursor-not-allowed',
   DesktopMenuItemActive: 'bg-bg2',
 
-  // Desktop Menu Item - Layout Components
   DesktopMenuItemContent: 'flex items-center gap-2 flex-1',
   DesktopMenuItemLabel: 'flex-1',
   DesktopMenuItemCheckbox: 'w-4 h-4 flex items-center justify-center',
   DesktopMenuItemCheckIcon: 'w-3 h-3 text-t1',
   DesktopMenuItemChevron: 'w-4 h-4 text-t3',
 
-  // Desktop Submenu - Specific Styles
   DesktopSubmenuContainer: 'fixed bg-bg1 border border-line-light rounded-lg shadow-lg py-1',
-  DesktopSubmenuItem: 'w-full flex items-center gap-2 py-2 px-3 text-left text-sm transition-colors',
+  DesktopSubmenuItem: 'h-11 w-full flex items-center gap-2 py-2 px-3 text-left text-base transition-colors',
 
-  // Overlay Component
   OverlayBackdrop: 'fixed inset-0 flex items-center justify-center',
   OverlayBackgroundMask: 'absolute inset-0 bg-black opacity-45',
   OverlayContainer: 'bg-bg1-float rounded-lg shadow-2xl flex flex-col min-w-130 mx-4 relative p-5',
 
-  // Overlay Container Component
   OverlayContainerBackdrop: 'fixed inset-0',
   OverlayContainerContent: 'fixed bg-bg1 rounded-lg shadow-xl border border-line-light p-5',
   OverlayHeader: 'flex items-center justify-between order-b border-bg2-float mb-6',
@@ -497,10 +440,8 @@ export const desktopStyles = {
   OverlayContent: '',
   OverlayFooter: 'flex justify-end gap-3 rounded-b-lg',
 
-  // Desktop Dialog Component
   DesktopDialogDescription: 'text-sm text-t3 leading-4.5 font-normal',
 
-  // Tag Editor Overlay
   TagEditorOverlayContainer: 'w-80 max-h-100',
   TagEditorOverlayInputWrapper: 'mb-3',
   TagEditorOverlayInput: 'flex flex-row items-center p-3 gap-3 h-11 bg-bg3 rounded-lg w-full',
@@ -516,7 +457,6 @@ export const desktopStyles = {
   TagEditorOverlayTagCheckboxSelected: 'text-brand',
   TagEditorOverlayTagCheckboxUnselected: 'text-t3',
 
-  // Tree Select Overlay
   TreeSelectOverlayContainer: 'w-80 max-h-100',
   TreeSelectOverlayInnerWrapper: '',
   TreeSelectOverlayInputWrapper: 'mb-3',
@@ -526,22 +466,24 @@ export const desktopStyles = {
     'w-full h-11 flex items-center gap-2 px-3 hover:bg-bg3 rounded-lg transition-colors text-left text-t2',
   TreeSelectOverlayButtonDisabled: 'opacity-50 cursor-not-allowed',
   TreeSelectOverlayIcon: 'size-5 shrink-0 text-t2',
-  TreeSelectOverlayText: 'text-base leading-5',
+  TreeSelectOverlayText: 'text-base leading-5 truncate',
 
-  // Create Database Overlay
   CreateDatabaseOverlayFormContainer: 'flex flex-col gap-3',
   CreateDatabaseOverlayErrorText: 'text-stress-red text-sm',
 
-  // Date Picker Overlay
-  DatePickerOverlayContainer: 'w-76',
-  DatePickerOverlayInputWrapper: 'mb-3',
-  DatePickerOverlayInput: 'flex flex-row items-center p-3 gap-3 h-11 bg-bg3 rounded-lg w-full',
-  DatePickerOverlayHeaderContainer: 'flex justify-between items-center mb-3',
+  DatePickerOverlayContainer: 'w-76 px-0 py-3',
+  DatePickerOverlayInputWrapper: 'mb-3 px-3 border-b border-line-regular',
+  DatePickerOverlayInput: 'flex flex-row items-center gap-3 w-full pb-3',
+  DatePickerOverlayHeaderContainer: 'flex justify-between items-center mb-3 px-3',
   DatePickerOverlayHeaderTitle: 'text-lg font-medium text-t1',
   DatePickerOverlayNavContainer: 'flex items-center',
   DatePickerOverlayNavButton: 'p-1.5 hover:bg-bg2 rounded text-lg text-t2 hover:text-t1 transition-colors',
+  DatePickerOverlayQuickActionsContainer: 'flex flex-col gap-1 mb-3',
+  DatePickerOverlayQuickActionButton:
+    'h-11 px-3 text-left text-t1 hover:bg-bg2 rounded transition-colors flex items-center gap-2',
+  DatePickerOverlayQuickActionIcon: 'size-5 text-t2',
   DatePickerOverlayNavIcon: 'size-4',
-  DatePickerOverlayCalendarWrapper: 'text-base',
+  DatePickerOverlayCalendarWrapper: 'text-base px-3',
   DatePickerOverlayScrollContainer: 'h-60 overflow-y-auto',
   DatePickerOverlayMonthHeaderTitle: 'text-lg font-medium text-t1 border-b border-line-regular py-2',
   DatePickerOverlayMonthGrid: 'grid grid-cols-7 gap-x-0.5 bg-bg1',

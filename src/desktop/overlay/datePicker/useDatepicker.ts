@@ -7,7 +7,7 @@ export const useDatepicker = () => {
 
   return (
     initialDate: number | undefined,
-    onDateSelected: (date: number) => void,
+    onDateSelected: (date: number | null) => void,
     position?: { x: number; y: number }
   ) => {
     DatePickerOverlayController.create(initialDate, onDateSelected, instantiationService, position);

@@ -44,14 +44,14 @@ export const useTaskItemActions = (taskInfo: TaskInfo | null) => {
     todoService.updateTask(taskInfo.id, { dueDate: null });
   };
 
-  const updateStartDate = (startDate: number) => {
+  const updateStartDate = (startDate: number | null) => {
     if (!taskInfo) {
       return;
     }
     todoService.updateTask(taskInfo.id, { startDate });
   };
 
-  const updateDueDate = (dueDate: number) => {
+  const updateDueDate = (dueDate: number | null) => {
     if (!taskInfo) {
       return;
     }

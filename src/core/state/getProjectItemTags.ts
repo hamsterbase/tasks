@@ -82,6 +82,5 @@ export function getProjectItemTags(model: ITaskModelData, options: TaskItemTagsO
       });
     });
   }
-
   return res;
 }

@@ -86,3 +86,4 @@ export const CalendarCheckIcon = CalendarCheck;
 export const CalendarXIcon = CalendarX;
 export const CopyIcon = Copy;
 export const ChevronDownIcon = ChevronDown;
+export { CalendarDays };

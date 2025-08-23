@@ -144,9 +144,17 @@
     "defaultMessage": "New Project",
     "content": "新项目"
   },
+  "area.newProject": {
+    "defaultMessage": "New Project",
+    "content": ""
+  },
   "area.noProjects": {
     "defaultMessage": "No projects in this area",
     "content": "此区域没有项目"
+  },
+  "area.notFound": {
+    "defaultMessage": "Area not found",
+    "content": ""
   },
   "area.projects": {
     "defaultMessage": "Projects",
@@ -276,6 +284,10 @@
     "defaultMessage": "Are you sure you want to clear all data? This action cannot be undone.",
     "content": "您确定要清除所有数据吗？此操作无法撤销。"
   },
+  "database.current": {
+    "defaultMessage": "Current Database",
+    "content": ""
+  },
   "database.database_deleted": {
     "defaultMessage": "Database was deleted in cloud",
     "content": "数据库已在云中删除"
@@ -376,6 +388,10 @@
     "defaultMessage": "Mon",
     "content": "周一"
   },
+  "date_picker.no_date": {
+    "defaultMessage": "No Date",
+    "content": ""
+  },
   "date_picker.saturday": {
     "defaultMessage": "Sat",
     "content": "周六"
@@ -391,6 +407,14 @@
   "date_picker.today": {
     "defaultMessage": "Today",
     "content": "今天"
+  },
+  "date_picker.today_button": {
+    "defaultMessage": "Today",
+    "content": ""
+  },
+  "date_picker.tomorrow": {
+    "defaultMessage": "Tomorrow",
+    "content": ""
   },
   "date_picker.tuesday": {
     "defaultMessage": "Tue",

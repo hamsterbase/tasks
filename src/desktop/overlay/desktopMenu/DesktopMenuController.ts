@@ -56,8 +56,6 @@ function validateMenuConfig(config: IMenuConfig[]): IMenuConfig[] {
   return config;
 }
 
-const menuItemHeight = 36;
-const menuWidth = 270;
 const menuItemOffset = 4;
 
 export class DesktopMenuController implements IDisposable {
@@ -91,7 +89,7 @@ export class DesktopMenuController implements IDisposable {
     return this.initOptions.y;
   }
 
-  get menuStyle() {
+  getMenuStyle({ menuItemHeight, menuWidth }: { menuItemHeight: number; menuWidth: number }) {
     const placement = this.initOptions.placement || 'bottom-end';
     let left: number;
     let top: number;
@@ -158,10 +156,37 @@ export class DesktopMenuController implements IDisposable {
     };
   }
 
-  get submenuStyle() {
+  getSubmenuStyle({ menuItemHeight, menuWidth }: { menuItemHeight: number; menuWidth: number }) {
+    const submenuHeight = this.activeMenu?.submenu
+      ? this.activeMenu.submenu.reduce((acc, group) => acc + group.length, 0) * menuItemHeight
+      : 0;
+
+    const menuLeft = this.getMenuStyle({ menuItemHeight, menuWidth }).left as number;
+    const submenuTop = this.y + (this.activeIndex ?? 0) * menuItemHeight;
+
+    let submenuLeft = menuLeft + menuWidth + menuItemOffset;
+
+    const screenWidth = window.innerWidth;
+    const submenuRightEdge = submenuLeft + menuWidth;
+
+    if (submenuRightEdge > screenWidth) {
+      submenuLeft = menuLeft - menuWidth - menuItemOffset;
+    }
+
+    let adjustedTop = submenuTop;
+    const screenHeight = window.innerHeight;
+
+    if (adjustedTop + submenuHeight > screenHeight) {
+      adjustedTop = Math.max(0, screenHeight - submenuHeight);
+    }
+
+    if (adjustedTop < 0) {
+      adjustedTop = 0;
+    }
+
     return {
-      left: this.x + menuItemOffset,
-      top: this.y + (this.activeIndex ?? 0) * menuItemHeight,
+      left: submenuLeft,
+      top: adjustedTop,
       zIndex: this.zIndex,
       width: menuWidth,
     };

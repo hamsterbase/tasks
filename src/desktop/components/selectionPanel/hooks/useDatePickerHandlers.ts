@@ -13,7 +13,7 @@ export const useDatePickerHandlers = ({ task }: UseDatePickerHandlersProps) => {
 
   const showDatePickerAtPosition = (
     currentDate: number | undefined,
-    onDateSelect: (date: number | undefined) => void,
+    onDateSelect: (date: number | null) => void,
     e: React.MouseEvent<HTMLButtonElement>
   ) => {
     const rect = e.currentTarget.getBoundingClientRect();

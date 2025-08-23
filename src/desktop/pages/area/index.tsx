@@ -1,5 +1,5 @@
 import { getTodayTimestampInUtc } from '@/base/common/time';
-import { areaPageTitleInputId } from '@/components/edit/inputId';
+import { areaPageTitleInputId, projectPageTitleInputId } from '@/components/edit/inputId';
 import { areaTitleInputKey } from '@/components/edit/inputKeys';
 import { AreaIcon } from '@/components/icons';
 import { getAreaDetail } from '@/core/state/getArea';
@@ -11,6 +11,7 @@ import { InboxTaskInput } from '@/desktop/components/inboxTaskInput/InboxTaskInp
 import { CreateTaskEvent } from '@/desktop/components/inboxTaskInput/InboxTaskInputController';
 import { TitleContentSection } from '@/desktop/components/TitleContentSection';
 import { useDesktopTaskDisplaySettings } from '@/desktop/hooks/useDesktopTaskDisplaySettings';
+import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { useArea } from '@/hooks/useArea';
@@ -20,9 +21,9 @@ import { IListService } from '@/services/list/common/listService';
 import { ITodoService } from '@/services/todo/common/todoService';
 import type { TreeID } from 'loro-crdt';
 import React from 'react';
-import { useParams } from 'react-router';
+import { flushSync } from 'react-dom';
+import { useNavigate, useParams } from 'react-router';
 import { TaskListSection } from './components/TaskListSection';
-import { desktopStyles } from '@/desktop/theme/main';
 
 const useAreaId = (): TreeID => {
   const todoService = useService(ITodoService);
@@ -45,12 +46,36 @@ interface AreaPageContentProps {
 const AreaPageContent: React.FC<AreaPageContentProps> = ({ area, areaId }) => {
   const todoService = useService(ITodoService);
   const listService = useService(IListService);
+  const navigate = useNavigate();
   const { areaDetail } = useArea(areaId);
 
   const { openTaskDisplaySettings } = useDesktopTaskDisplaySettings(`area-${areaId}`);
 
   useWatchEvent(todoService.onStateChange);
   useWatchEvent(listService.onMainListChange);
+
+  const handleCreateProject = () => {
+    const projectId = flushSync(() => {
+      return todoService.addProject({
+        title: '',
+        position: {
+          type: 'firstElement',
+          parentId: areaId,
+        },
+      });
+    });
+
+    if (projectId) {
+      const projectUid = todoService.modelState.taskObjectMap.get(projectId)?.uid;
+      if (projectUid) {
+        navigate(`/desktop/project/${projectUid}`, {
+          state: {
+            focusInput: projectPageTitleInputId(projectId),
+          },
+        });
+      }
+    }
+  };
 
   const handleCreateTask = (event: CreateTaskEvent) => {
     todoService.addTask({
@@ -113,9 +138,17 @@ const AreaPageContent: React.FC<AreaPageContentProps> = ({ area, areaId }) => {
         />
       }
     >
-      <TitleContentSection title={localize('area.projects', 'Projects')}>
+      <TitleContentSection
+        title={localize('area.projects', 'Projects')}
+        action={
+          <button onClick={handleCreateProject} className={desktopStyles.TitleContentSectionActionButton}>
+            {localize('area.newProject', 'New Project')}
+          </button>
+        }
+      >
         <DesktopProjectList
           projects={projects}
+          hideProjectTitle
           emptyStateLabel={localize('area.noProjects', 'No projects in this area')}
         />
       </TitleContentSection>
@@ -143,7 +176,7 @@ export const AreaPage = () => {
   if (!area) {
     return (
       <div className={desktopStyles.AreaPageNotFoundContainer}>
-        <div className={desktopStyles.AreaPageNotFoundText}>Area not found</div>
+        <div className={desktopStyles.AreaPageNotFoundText}>{localize('area.notFound', 'Area not found')}</div>
       </div>
     );
   }

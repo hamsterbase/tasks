@@ -12,6 +12,7 @@ import React, { useCallback, useEffect, useRef } from 'react';
 import { DesktopMenuItemComponent } from './DesktopMenuItemComponent';
 import { DesktopSubmenuComponent } from './DesktopSubmenuComponent';
 import './commands';
+import { calculateElementHeight, calculateElementWidth } from '../datePicker/constant';
 
 interface IDesktopMenuContentProps {
   controller: DesktopMenuController;
@@ -48,7 +49,15 @@ const DesktopMenuContent: React.FC<IDesktopMenuContentProps> = ({ controller }) 
         onClick={handleBackdropClick}
       />
 
-      <div ref={menuRef} className={desktopStyles.DesktopMenuContainer} style={controller.menuStyle} tabIndex={0}>
+      <div
+        ref={menuRef}
+        className={desktopStyles.DesktopMenuContainer}
+        style={controller.getMenuStyle({
+          menuItemHeight: calculateElementHeight(desktopStyles.DesktopMenuItemBase),
+          menuWidth: calculateElementWidth(desktopStyles.DesktopMenuContainer),
+        })}
+        tabIndex={0}
+      >
         <div className={desktopStyles.DesktopMenuContent}>
           {controller.menuConfig.map((item, index) => (
             <DesktopMenuItemComponent
@@ -66,7 +75,10 @@ const DesktopMenuContent: React.FC<IDesktopMenuContentProps> = ({ controller }) 
       {controller.activeIndex !== null && controller.activeMenu?.submenu && controller.isSubmenuOpen && (
         <DesktopSubmenuComponent
           submenu={controller.activeMenu.submenu}
-          style={controller.submenuStyle}
+          style={controller.getSubmenuStyle({
+            menuItemHeight: calculateElementHeight(desktopStyles.DesktopMenuItemBase),
+            menuWidth: calculateElementWidth(desktopStyles.DesktopMenuContainer),
+          })}
           onItemClick={handleItemClick}
           activeSubmenuIndex={controller.activeSubmenuIndex}
           onMouseEnter={(index) => controller.setActiveSubmenuIndex(index)}

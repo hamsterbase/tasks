@@ -16,9 +16,14 @@ import classNames from 'classnames';
 interface DesktopProjectListItemProps {
   project: ProjectInfoState;
   disableDrag?: boolean;
+  hideProjectTitle?: boolean;
 }
 
-export const DesktopProjectListItem: React.FC<DesktopProjectListItemProps> = ({ project, disableDrag }) => {
+export const DesktopProjectListItem: React.FC<DesktopProjectListItemProps> = ({
+  project,
+  disableDrag,
+  hideProjectTitle,
+}) => {
   const progress = project.progress || 0;
 
   const { attributes, listeners, setNodeRef, transform, isDragging } = useSortable({
@@ -36,7 +41,7 @@ export const DesktopProjectListItem: React.FC<DesktopProjectListItemProps> = ({ 
 
   const tags = getProjectItemTags(todoService.modelState, {
     projectId: project.id,
-    hideParent: false,
+    hideParent: hideProjectTitle ?? false,
   });
 
   return (

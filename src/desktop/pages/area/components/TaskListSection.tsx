@@ -113,6 +113,7 @@ export const TaskListSection: React.FC<TaskListSectionProps> = ({ tasks, willDis
                 key={task.id}
                 task={task}
                 taskList={taskList}
+                hideProjectTitle
                 willDisappear={willDisappearObjectIdSet.has(task.id)}
               />
             ))}

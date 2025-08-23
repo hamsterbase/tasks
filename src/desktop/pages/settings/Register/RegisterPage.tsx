@@ -9,10 +9,11 @@ import { useService } from '@/hooks/use-service';
 import { localize } from '@/nls';
 import { ICloudService } from '@/services/cloud/common/cloudService';
 import React, { useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 
 export const RegisterPage: React.FC = () => {
   const cloudService = useService(ICloudService);
+  const navigate = useNavigate();
   const [account, setAccount] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -40,6 +41,7 @@ export const RegisterPage: React.FC = () => {
       setPassword('');
       setConfirmPassword('');
       setAgreedToTerms(false);
+      navigate('/desktop/settings/account', { replace: true });
     } catch (error) {
       setErrorMessage(getLoginErrorMessage(error as Error));
     } finally {
@@ -93,7 +95,7 @@ export const RegisterPage: React.FC = () => {
 
         <div className={desktopStyles.AuthFormButtonSection}>
           <SettingButton
-            variant="filled"
+            variant="solid"
             color="primary"
             onClick={handleSubmit}
             disabled={isLoading || !account || !password || !confirmPassword || !agreedToTerms}

@@ -1,4 +1,4 @@
-import { getUtcDayjsFromDateStr } from '@/base/common/time';
+import { getTodayDayjsUtc, getUtcDayjsFromDateStr } from '@/base/common/time';
 import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
 import dayjs from 'dayjs';
 import { Emitter } from 'vscf/base/common/event';
@@ -28,7 +28,7 @@ interface MonthData {
 export class DatePickerOverlayController extends Disposable {
   static create(
     initialDate: number | undefined,
-    onDateSelected: (date: number) => void,
+    onDateSelected: (date: number | null) => void,
     instantiationService: IInstantiationService,
     position?: { x: number; y: number }
   ) {
@@ -72,7 +72,7 @@ export class DatePickerOverlayController extends Disposable {
   constructor(
     public option: OverlayInitOptions,
     initialDate: number | undefined,
-    private onDateSelected: (date: number) => void,
+    private onDateSelected: (date: number | null) => void,
     @IWorkbenchOverlayService private readonly workbenchOverlayService: IWorkbenchOverlayService,
     @IContextKeyService contextKeyService: IContextKeyService
   ) {
@@ -213,6 +213,21 @@ export class DatePickerOverlayController extends Disposable {
     this._selectedDate = date;
     this._currentInputValue = dayjs(date).format('YYYY-MM-DD');
     this.onDateSelected(getUtcDayjsFromDateStr(dayjs(date).format('YYYY-MM-DD')).valueOf());
+    this.dispose();
+  }
+
+  selectToday() {
+    this.selectDate(getTodayDayjsUtc().toDate());
+  }
+
+  selectTomorrow() {
+    this.selectDate(getTodayDayjsUtc().add(1, 'day').toDate());
+  }
+
+  selectNoDate() {
+    this._selectedDate = null;
+    this._currentInputValue = '';
+    this.onDateSelected(null);
     this.dispose();
   }
 

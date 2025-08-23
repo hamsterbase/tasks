@@ -1,5 +1,5 @@
 import { getCurrentDateStr } from '@/base/common/time';
-import { CircleSmallIcon, LeftIcon, RightIcon } from '@/components/icons';
+import { CalendarDays, CalendarXIcon, CircleSmallIcon, LeftIcon, RightIcon, TodayIcon } from '@/components/icons';
 import { formatCalendarMonth, formatShortMonth } from '@/core/time/formatCalendarMonth';
 import { OverlayContainer } from '@/desktop/components/Overlay/OverlayContainer';
 import { desktopStyles } from '@/desktop/theme/main';
@@ -14,7 +14,7 @@ import React, { useEffect, useRef } from 'react';
 import { VariableSizeList } from 'react-window';
 import { DatePickerOverlayController } from './DatePickerOverlayController';
 import { WeekdayHeader } from './WeekdayHeader';
-import { DAY_CELL_HEIGHT, MONTH_HEADER_HEIGHT, SCROLL_CONTAINER_HEIGHT } from './constant';
+import { calculateElementHeight } from './constant';
 
 interface MonthGridProps {
   days: Array<{
@@ -69,7 +69,10 @@ export const DatePickerOverlay: React.FC = () => {
   const getItemSize = (index: number) => {
     if (!controller) return 0;
     const rowCount = controller.getMonthRowCount(index);
-    return MONTH_HEADER_HEIGHT + rowCount * DAY_CELL_HEIGHT;
+    return (
+      calculateElementHeight(desktopStyles.DatePickerOverlayMonthHeaderTitle) +
+      rowCount * calculateElementHeight(desktopStyles.DatePickerOverlayDayButton)
+    );
   };
 
   useEffect(() => {
@@ -138,6 +141,23 @@ export const DatePickerOverlay: React.FC = () => {
           autoFocus
         />
       </div>
+      <div className={desktopStyles.DatePickerOverlayQuickActionsContainer}>
+        <button onClick={() => controller?.selectToday()} className={desktopStyles.DatePickerOverlayQuickActionButton}>
+          <TodayIcon className={desktopStyles.DatePickerOverlayQuickActionIcon} />
+          {localize('date_picker.today_button', 'Today')}
+        </button>
+        <button
+          onClick={() => controller?.selectTomorrow()}
+          className={desktopStyles.DatePickerOverlayQuickActionButton}
+        >
+          <CalendarDays className={desktopStyles.DatePickerOverlayQuickActionIcon} />
+          {localize('date_picker.tomorrow', 'Tomorrow')}
+        </button>
+        <button onClick={() => controller?.selectNoDate()} className={desktopStyles.DatePickerOverlayQuickActionButton}>
+          <CalendarXIcon className={desktopStyles.DatePickerOverlayQuickActionIcon} />
+          {localize('date_picker.no_date', 'No Date')}
+        </button>
+      </div>
       <div className={desktopStyles.DatePickerOverlayHeaderContainer}>
         <div className={desktopStyles.DatePickerOverlayHeaderTitle}>
           {controller.getVisibleMonthIndex() !== undefined
@@ -166,7 +186,7 @@ export const DatePickerOverlay: React.FC = () => {
         <div className={desktopStyles.DatePickerOverlayScrollContainer}>
           <VariableSizeList
             ref={listRef}
-            height={SCROLL_CONTAINER_HEIGHT}
+            height={calculateElementHeight(desktopStyles.DatePickerOverlayScrollContainer)}
             width="100%"
             itemCount={1000}
             itemSize={getItemSize}
