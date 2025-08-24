@@ -9,6 +9,7 @@ import { desktopStyles } from '../../theme/main.ts';
 import { BackButton } from '../BackButton/BackButton.tsx';
 import { DragHandle } from '../DragHandle.tsx';
 import { MenuItem } from '../MenuItem/MenuItem.tsx';
+import { useShouldShowOnDesktopMac } from '@/desktop/hooks/useShouldShowOnDesktopMac.ts';
 
 const tabs = [
   {
@@ -40,9 +41,14 @@ const tabs = [
 export const SettingsSidebarContent: React.FC = () => {
   const todoService = useService(ITodoService);
   useWatchEvent(todoService.onStateChange);
+  const sidebarContainerNoPaddingTop = useShouldShowOnDesktopMac();
 
   return (
-    <div className={classNames(desktopStyles.sidebarBackground, desktopStyles.sidebarContainerStyle)}>
+    <div
+      className={classNames(desktopStyles.sidebarBackground, desktopStyles.sidebarContainerStyle, {
+        [desktopStyles.sidebarContainerNoPaddingTop]: sidebarContainerNoPaddingTop,
+      })}
+    >
       <DragHandle></DragHandle>
       <BackButton label={localize('settings.back_to_app', 'Back to App')} to="/desktop" />
       <ul className={classNames(desktopStyles.SidebarMenuItemContainer, 'flex-1')}>

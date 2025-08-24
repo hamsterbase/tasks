@@ -1,44 +1,22 @@
-import { checkPlatform } from '@/base/browser/checkPlatform';
 import { desktopStyles } from '@/desktop/theme/main';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useShouldShowOnDesktopMac } from '../hooks/useShouldShowOnDesktopMac';
 
 export const DragHandle: React.FC = () => {
-  const [fullscreen, setFullscreen] = useState(false);
-  const { isElectron, isMac } = checkPlatform();
-
-  useEffect(() => {
-    if (isElectron && isMac && window.electronAPI) {
-      // 使用 Electron 的 fullscreen 检测
-      const electronAPI = window.electronAPI;
-      const checkFullscreen = async () => {
-        try {
-          const isFullScreen = await electronAPI.isFullscreen();
-          setFullscreen(isFullScreen);
-        } catch {
-          setFullscreen(false);
-        }
-      };
-
-      checkFullscreen();
-
-      const handleFullscreenChange = () => {
-        checkFullscreen();
-      };
-
-      window.addEventListener('resize', handleFullscreenChange);
-      return () => {
-        window.removeEventListener('resize', handleFullscreenChange);
-      };
-    }
-  }, [isElectron, isMac]);
-
-  if (fullscreen || !isElectron || !isMac) {
+  const shouldShow = useShouldShowOnDesktopMac();
+  if (!shouldShow) {
     return null;
   }
   return (
     <div
       className={desktopStyles.DragHandleContainer}
-      style={{ WebkitAppRegion: 'drag', cursor: 'move' } as React.CSSProperties}
+      style={
+        {
+          WebkitAppRegion: 'drag',
+          cursor: 'move',
+          height: 44,
+        } as React.CSSProperties
+      }
     />
   );
 };

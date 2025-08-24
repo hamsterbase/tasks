@@ -2,6 +2,7 @@ import { formatTheme } from '@/base/common/formatTheme';
 
 export const desktopStyles = {
   sidebarContainerStyle: 'w-full h-full pl-2 pt-2 pr-4 flex flex-col',
+  sidebarContainerNoPaddingTop: 'pt-0!',
   sidebarBackground: 'bg-bg3',
   SidebarMinWidth: 'w-45',
   SidebarMaxWidth: 'w-128',
@@ -400,7 +401,7 @@ export const desktopStyles = {
   DesktopHeadingListItemIcon: 'size-5 text-t1 flex-shrink-0',
   DesktopHeadingListItemInput: 'flex-1 bg-transparent outline-none text-t1 font-medium',
 
-  DragHandleContainer: 'h-10 w-full',
+  DragHandleContainer: 'w-full',
 
   DesktopMessageContainer: 'fixed top-6 right-6 flex flex-col items-end pointer-events-none',
   DesktopMessageContent:

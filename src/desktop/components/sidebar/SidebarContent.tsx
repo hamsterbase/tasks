@@ -28,6 +28,7 @@ import { SidebarAreaItem } from './SidebarAreaItem/SidebarAreaItem.tsx';
 import { SidebarFutureProjectsItem } from './SidebarFutureProjectsItem/SidebarFutureProjectsItem.tsx';
 import { SidebarMenu } from './SidebarMenu/SidebarMenu.tsx';
 import { SidebarProjectItem as SidebarProjectItemComponent } from './SidebarProjectItem/SidebarProjectItem.tsx';
+import { useShouldShowOnDesktopMac } from '@/desktop/hooks/useShouldShowOnDesktopMac.ts';
 
 interface SidebarProjectAndAreaProps {
   flattenedResult: FlattenedResult<AreaInfoState, ProjectInfoState>;
@@ -65,6 +66,7 @@ const SidebarProjectsAndAreas: React.FC<SidebarProjectAndAreaProps> = ({ flatten
 
 export const SidebarContent: React.FC = () => {
   const todoService = useService(ITodoService);
+  const sidebarContainerNoPaddingTop = useShouldShowOnDesktopMac();
   const instantiationService = useService(IInstantiationService);
   useWatchEvent(todoService.onStateChange);
   const { value: config, setValue } = useConfig(toggleAreaConfigKey());
@@ -137,7 +139,11 @@ export const SidebarContent: React.FC = () => {
     rootCollections.flattenedItems && rootCollections.flattenedItems[0]?.type === 'header';
 
   return (
-    <div className={classNames(desktopStyles.sidebarBackground, desktopStyles.sidebarContainerStyle)}>
+    <div
+      className={classNames(desktopStyles.sidebarBackground, desktopStyles.sidebarContainerStyle, {
+        [desktopStyles.sidebarContainerNoPaddingTop]: sidebarContainerNoPaddingTop,
+      })}
+    >
       <DragHandle></DragHandle>
       <SidebarMenu />
       <div
