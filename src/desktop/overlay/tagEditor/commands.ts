@@ -82,6 +82,16 @@ KeybindingsRegistry.registerCommandAndKeybindingRule({
     const controller: TagEditorOverlayController | null = workbenchOverlayService.getOverlay(
       OverlayEnum.desktopTagEditor
     );
+    if (!controller) {
+      return;
+    }
+    if (controller.focusedIndex === -1) {
+      if (controller.showCreateButton) {
+        controller.createTagFromSearch();
+      }
+    } else {
+      controller.toggleFocusedTag();
+    }
     controller?.dispose();
   },
 });

@@ -92,6 +92,10 @@ export class TagEditorOverlayController extends Disposable {
     return this._sortedTags.filter((tag) => tag.toLowerCase().includes(this._searchText.toLowerCase()));
   }
 
+  get showCreateButton() {
+    return this._searchText && !this._allTags.includes(this._searchText);
+  }
+
   setPosition(position: { x: number; y: number }) {
     this._position = position;
   }
@@ -117,11 +121,10 @@ export class TagEditorOverlayController extends Disposable {
       // Add the new tag to _allTags if it doesn't exist
       if (!this._allTags.includes(tag)) {
         this._allTags.push(tag);
-        // Add new tag to the end of sorted tags to maintain order
         this._sortedTags.push(tag);
       }
       this._searchText = '';
-      this._focusedIndex = -1;
+      this._focusedIndex = this.displayTags.indexOf(tag);
       this._updateContextKeys();
       this._onStatusChange.fire();
     }
@@ -157,9 +160,14 @@ export class TagEditorOverlayController extends Disposable {
 
   focusPrevious() {
     if (this.displayTags.length > 0) {
-      this._focusedIndex = Math.max(this._focusedIndex - 1, 0);
+      this._focusedIndex = Math.max(this._focusedIndex - 1, this.showCreateButton ? -1 : 0);
       this._onStatusChange.fire();
     }
+  }
+
+  updateFocusedIndex(index: number) {
+    this._focusedIndex = index;
+    this._onStatusChange.fire();
   }
 
   removeTag(tag: string) {

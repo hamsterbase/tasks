@@ -8,8 +8,8 @@ import { IWorkbenchOverlayService } from '@/services/overlay/common/WorkbenchOve
 import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
 import classNames from 'classnames';
 import React, { useEffect, useRef } from 'react';
-import { TagEditorOverlayController } from './TagEditorOverlayController';
 import { calculateElementWidth } from '../datePicker/constant';
+import { TagEditorOverlayController } from './TagEditorOverlayController';
 
 export const TagEditorOverlay: React.FC = () => {
   const workbenchOverlayService = useService(IWorkbenchOverlayService);
@@ -67,7 +67,7 @@ export const TagEditorOverlay: React.FC = () => {
     >
       {
         <div ref={scrollContainerRef} className={desktopStyles.TagEditorOverlayScrollContainer}>
-          {controller.searchText && !controller.selectedTags.includes(controller.searchText) && (
+          {controller.showCreateButton && (
             <button
               onMouseDown={(e) => {
                 e.preventDefault();
@@ -96,6 +96,7 @@ export const TagEditorOverlay: React.FC = () => {
                 onMouseDown={(e) => {
                   e.preventDefault();
                 }}
+                onMouseEnter={() => controller.updateFocusedIndex(index)}
                 onClick={(e) => {
                   e.stopPropagation();
                   handleTagClick(tag);

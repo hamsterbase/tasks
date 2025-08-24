@@ -457,7 +457,7 @@ export const desktopStyles = {
   TagEditorOverlayCreateButtonActive: 'bg-bg2',
   TagEditorOverlayCreateButtonIcon: 'text-brand',
   TagEditorOverlayScrollContainer: 'py-3 overflow-y-auto max-h-70',
-  TagEditorOverlayTagItem: 'h-11 flex items-center gap-2 px-3 text-sm hover:bg-bg2 cursor-pointer transition-colors',
+  TagEditorOverlayTagItem: 'h-11 flex items-center gap-2 px-3 text-sm transition-colors',
   TagEditorOverlayTagItemActive: 'bg-bg2',
   TagEditorOverlayTagCheckbox: 'size-5 flex items-center justify-center',
   TagEditorOverlayTagCheckboxSelected: 'text-brand',
