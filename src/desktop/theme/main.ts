@@ -291,6 +291,10 @@ export const desktopStyles = {
   DesktopPageMainContent: 'flex-1 overflow-y-auto px-5',
   DesktopPageDetailPane: 'border-l border-line-regular',
 
+  DetailPanelMinWidth: 'w-45',
+  DetailPanelMaxWidth: 'w-128',
+  DetailPanelPreferredWidth: 'w-75',
+
   SubtaskListContainer: 'space-y-0.25 group',
 
   SettingsContentContainer: 'w-full flex flex-col',

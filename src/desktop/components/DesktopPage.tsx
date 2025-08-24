@@ -4,6 +4,7 @@ import { useConfig } from '@/hooks/useConfig';
 import { detailPanelConfigKey } from '@/services/config/config';
 import { Allotment } from 'allotment';
 import React, { ReactNode } from 'react';
+import { calculateElementWidth } from '../overlay/datePicker/constant';
 
 interface DesktopPageProps {
   header: ReactNode;
@@ -22,9 +23,9 @@ export const DesktopPage: React.FC<DesktopPageProps> = ({ header, children }) =>
             <div className={desktopStyles.DesktopPageMainContent}>{children}</div>
           </Allotment.Pane>
           <Allotment.Pane
-            minSize={180}
-            maxSize={512}
-            preferredSize={300}
+            minSize={calculateElementWidth(desktopStyles.DetailPanelMinWidth)}
+            maxSize={calculateElementWidth(desktopStyles.DetailPanelMaxWidth)}
+            preferredSize={calculateElementWidth(desktopStyles.DetailPanelPreferredWidth)}
             snap
             className={desktopStyles.DesktopPageDetailPane}
           >
