@@ -106,7 +106,8 @@ export const DatabaseList: React.FC = () => {
         title={localize('settings.cloud.database', 'Database')}
         level={2}
         action={
-          (isLoggedIn && cloudDatabasesCount < 3) || (
+          isLoggedIn &&
+          cloudDatabasesCount < 3 && (
             <SettingButton
               variant="solid"
               color="primary"
