@@ -26,7 +26,7 @@
   },
   "account.copySuccess": {
     "defaultMessage": "Copied Successfully",
-    "content": ""
+    "content": "复制成功"
   },
   "account.delete": {
     "defaultMessage": "Delete Account",
@@ -146,7 +146,7 @@
   },
   "area.newProject": {
     "defaultMessage": "New Project",
-    "content": ""
+    "content": "新项目"
   },
   "area.noProjects": {
     "defaultMessage": "No projects in this area",
@@ -154,7 +154,7 @@
   },
   "area.notFound": {
     "defaultMessage": "Area not found",
-    "content": ""
+    "content": "未找到区域"
   },
   "area.projects": {
     "defaultMessage": "Projects",
@@ -286,7 +286,7 @@
   },
   "database.current": {
     "defaultMessage": "Current Database",
-    "content": ""
+    "content": "当前数据库"
   },
   "database.database_deleted": {
     "defaultMessage": "Database was deleted in cloud",
@@ -330,7 +330,7 @@
   },
   "database.offline.reason": {
     "defaultMessage": "Offline Reason",
-    "content": ""
+    "content": "离线原因"
   },
   "database.other_account": {
     "defaultMessage": "This database does not belong to this account",
@@ -362,7 +362,7 @@
   },
   "database.switch.to": {
     "defaultMessage": "Switch to Database",
-    "content": ""
+    "content": "切换到数据库"
   },
   "database.sync": {
     "defaultMessage": "Sync",
@@ -390,7 +390,7 @@
   },
   "date_picker.no_date": {
     "defaultMessage": "No Date",
-    "content": ""
+    "content": "无日期"
   },
   "date_picker.saturday": {
     "defaultMessage": "Sat",
@@ -410,11 +410,11 @@
   },
   "date_picker.today_button": {
     "defaultMessage": "Today",
-    "content": ""
+    "content": "今天"
   },
   "date_picker.tomorrow": {
     "defaultMessage": "Tomorrow",
-    "content": ""
+    "content": "明天"
   },
   "date_picker.tuesday": {
     "defaultMessage": "Tue",
@@ -447,6 +447,18 @@
   "desktop.tag_editor.create_new_tag": {
     "defaultMessage": "Create tag \"{0}\"",
     "content": "创建标签 \"{0}\""
+  },
+  "display_settings.completed_tasks": {
+    "defaultMessage": "Completed Tasks",
+    "content": "已完成任务"
+  },
+  "display_settings.completed_tasks_range": {
+    "defaultMessage": "Completed Tasks Range",
+    "content": "已完成任务范围"
+  },
+  "display_settings.future_tasks": {
+    "defaultMessage": "Future Tasks",
+    "content": "未来任务"
   },
   "edit_task_item.task_notes_placeholder": {
     "defaultMessage": "Add Notes...",
@@ -714,7 +726,7 @@
   },
   "offline.database": {
     "defaultMessage": "Offline Database",
-    "content": ""
+    "content": "离线数据库"
   },
   "otherError": {
     "defaultMessage": "An error occurred",
@@ -910,7 +922,7 @@
   },
   "register.subtitle": {
     "defaultMessage": "Sign up and enjoy 30 days of free cloud sync!",
-    "content": ""
+    "content": "注册并享受30天免费云同步！"
   },
   "register.title": {
     "defaultMessage": "Create Account",
@@ -950,7 +962,7 @@
   },
   "settings.account": {
     "defaultMessage": "Account",
-    "content": ""
+    "content": "账户"
   },
   "settings.account.management": {
     "defaultMessage": "Account Management",
@@ -962,7 +974,7 @@
   },
   "settings.back_to_app": {
     "defaultMessage": "Back to App",
-    "content": ""
+    "content": "返回应用"
   },
   "settings.cloud": {
     "defaultMessage": "Cloud",
@@ -998,7 +1010,7 @@
   },
   "settings.cloud.online_database": {
     "defaultMessage": "Online Database",
-    "content": ""
+    "content": "在线数据库"
   },
   "settings.createDatabase.createAndUse": {
     "defaultMessage": "Create and Use",
@@ -1046,7 +1058,7 @@
   },
   "settings.import_export": {
     "defaultMessage": "Import & Export",
-    "content": ""
+    "content": "导入和导出"
   },
   "settings.import.description": {
     "defaultMessage": "Import your tasks from a backup file",

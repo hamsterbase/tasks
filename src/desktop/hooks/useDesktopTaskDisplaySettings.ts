@@ -27,14 +27,14 @@ export const useDesktopTaskDisplaySettings = (page: string, option?: UseDesktopT
 
     if (!option?.hideShowFutureTasks) {
       menuItems.push({
-        label: 'Future Tasks',
+        label: localize('display_settings.future_tasks', 'Future Tasks'),
         checked: showFutureTasks,
         onSelect: () => setShowFutureTasks(!showFutureTasks),
       });
     }
 
     menuItems.push({
-      label: 'Completed Tasks',
+      label: localize('display_settings.completed_tasks', 'Completed Tasks'),
       checked: showCompletedTasks,
       onSelect: () => setShowCompletedTasks(!showCompletedTasks),
     });
@@ -71,7 +71,7 @@ export const useDesktopTaskDisplaySettings = (page: string, option?: UseDesktopT
     ];
 
     menuItems.push({
-      label: 'Completed Tasks Range',
+      label: localize('display_settings.completed_tasks_range', 'Completed Tasks Range'),
       submenu: completedRangeSubmenu,
     });
 

@@ -448,6 +448,18 @@
     "defaultMessage": "Create tag \"{0}\"",
     "content": "Create tag \"{0}\""
   },
+  "display_settings.completed_tasks": {
+    "defaultMessage": "Completed Tasks",
+    "content": "Completed Tasks"
+  },
+  "display_settings.completed_tasks_range": {
+    "defaultMessage": "Completed Tasks Range",
+    "content": "Completed Tasks Range"
+  },
+  "display_settings.future_tasks": {
+    "defaultMessage": "Future Tasks",
+    "content": "Future Tasks"
+  },
   "edit_task_item.task_notes_placeholder": {
     "defaultMessage": "Add Notes...",
     "content": "Add Notes..."
