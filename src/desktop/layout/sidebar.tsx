@@ -6,6 +6,7 @@ import { Allotment } from 'allotment';
 import classNames from 'classnames';
 import React from 'react';
 import { Outlet } from 'react-router';
+import { calculateElementWidth } from '../overlay/datePicker/constant';
 
 export const SidebarLayout = () => {
   const mainSidebarConfig = useConfig(mainSidebarWidthConfigKey());
@@ -13,7 +14,12 @@ export const SidebarLayout = () => {
   return (
     <div className={desktopStyles.SidebarLayoutContainer}>
       <Allotment defaultSizes={mainSidebarConfig.value} onChange={mainSidebarConfig.saveIfValid}>
-        <Allotment.Pane minSize={180} maxSize={512} snap preferredSize={240}>
+        <Allotment.Pane
+          minSize={calculateElementWidth(desktopStyles.SidebarMinWidth)}
+          maxSize={calculateElementWidth(desktopStyles.SidebarMaxWidth)}
+          snap
+          preferredSize={calculateElementWidth(desktopStyles.SidebarPreferredWidth)}
+        >
           <SidebarContent />
         </Allotment.Pane>
         <Allotment.Pane

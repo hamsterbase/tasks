@@ -3,6 +3,9 @@ import { formatTheme } from '@/base/common/formatTheme';
 export const desktopStyles = {
   sidebarContainerStyle: 'w-full h-full pl-2 pt-2 pr-4 flex flex-col',
   sidebarBackground: 'bg-bg3',
+  SidebarMinWidth: 'w-45',
+  SidebarMaxWidth: 'w-128',
+  SidebarPreferredWidth: 'w-60',
 
   SidebarMenuItemContainer: 'space-y-2',
   SidebarMenuItem: 'h-11 px-3 flex rounded-lg text-base leading-5 items-center gap-3 group',
