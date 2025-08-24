@@ -3,6 +3,7 @@ import { desktopStyles } from '@/desktop/theme/main';
 import { useConfig } from '@/hooks/useConfig';
 import { mainSidebarWidthConfigKey } from '@/services/config/config';
 import { Allotment } from 'allotment';
+import classNames from 'classnames';
 import React from 'react';
 import { Outlet } from 'react-router';
 
@@ -15,7 +16,11 @@ export const SidebarLayout = () => {
         <Allotment.Pane minSize={180} maxSize={512} snap preferredSize={240}>
           <SidebarContent />
         </Allotment.Pane>
-        <Allotment.Pane className={desktopStyles.SidebarLayoutPaneWrapper}>
+        <Allotment.Pane
+          className={classNames(desktopStyles.SidebarLayoutPaneWrapper, {
+            [desktopStyles.SidebarLayoutContentCollapsedPadding]: mainSidebarConfig.value[0] === 0,
+          })}
+        >
           <div className={desktopStyles.SidebarLayoutContent}>
             <Outlet />
           </div>

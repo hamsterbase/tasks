@@ -8,7 +8,7 @@ import { TreeSelectOverlay } from '@/desktop/overlay/treeSelect/TreeSelectOverla
 import { Privacy } from '@/desktop/pages/settings/account/Privacy.tsx';
 import { useInputFocused } from '@/hooks/global/useInputFocused';
 import { useCloudSync } from '@/hooks/useCloudSync.ts';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Navigate, useRoutes } from 'react-router';
 import { SettingsSidebarLayout } from './layout/SettingsSidebarLayout.tsx';
 import { SidebarLayout } from './layout/sidebar.tsx';
@@ -30,6 +30,13 @@ import { Today } from './pages/today/index.tsx';
 export const App = () => {
   useInputFocused();
   useCloudSync();
+  useEffect(() => {
+    const originalFontSize = document.documentElement.style.fontSize;
+    document.documentElement.style.fontSize = '14px';
+    return () => {
+      document.documentElement.style.fontSize = originalFontSize;
+    };
+  }, []);
   const element = useRoutes([
     {
       path: '/desktop',
