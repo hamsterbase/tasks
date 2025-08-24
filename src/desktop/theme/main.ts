@@ -400,7 +400,7 @@ export const desktopStyles = {
   DesktopHeadingListItemIcon: 'size-5 text-t1 flex-shrink-0',
   DesktopHeadingListItemInput: 'flex-1 bg-transparent outline-none text-t1 font-medium',
 
-  DragHandleContainer: 'h-7 w-full',
+  DragHandleContainer: 'h-10 w-full',
 
   DesktopMessageContainer: 'fixed top-6 right-6 flex flex-col items-end pointer-events-none',
   DesktopMessageContent:
