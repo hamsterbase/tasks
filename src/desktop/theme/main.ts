@@ -378,6 +378,7 @@ export const desktopStyles = {
   SidebarLayoutPaneWrapper: 'p-4 pl-0 bg-bg3',
   SidebarLayoutContent: 'bg-bg1 rounded-lg overflow-hidden border border-line-regular h-full',
   SidebarLayoutContentCollapsedPadding: 'pl-4',
+  SidebarLayoutContentShowDragHandle: 'pt-0',
 
   SettingsSidebarLayoutContent:
     'bg-bg1 rounded-lg overflow-hidden border border-line-regular h-full flex justify-center',

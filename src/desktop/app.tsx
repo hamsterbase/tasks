@@ -10,7 +10,6 @@ import { useInputFocused } from '@/hooks/global/useInputFocused';
 import { useCloudSync } from '@/hooks/useCloudSync.ts';
 import React, { useEffect } from 'react';
 import { Navigate, useRoutes } from 'react-router';
-import { SettingsSidebarLayout } from './layout/SettingsSidebarLayout.tsx';
 import { SidebarLayout } from './layout/sidebar.tsx';
 import { AreaPage } from './pages/area';
 import { Completed } from './pages/completed';
@@ -43,7 +42,7 @@ export const App = () => {
       children: [
         {
           path: '',
-          element: <SidebarLayout />,
+          element: <SidebarLayout setting={false} />,
           children: [
             {
               index: true,
@@ -81,7 +80,7 @@ export const App = () => {
         },
         {
           path: 'settings',
-          element: <SettingsSidebarLayout />,
+          element: <SidebarLayout setting={true} />,
           children: [
             {
               path: '',

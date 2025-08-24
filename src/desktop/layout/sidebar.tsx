@@ -6,10 +6,20 @@ import { Allotment } from 'allotment';
 import classNames from 'classnames';
 import React from 'react';
 import { Outlet } from 'react-router';
+import { DragHandle } from '../components/DragHandle';
+import { SettingsSidebarContent } from '../components/SettingsSidebarContent/SettingsSidebarContent';
+import { useShouldShowOnDesktopMac } from '../hooks/useShouldShowOnDesktopMac';
 import { calculateElementWidth } from '../overlay/datePicker/constant';
 
-export const SidebarLayout = () => {
+interface SidebarLayoutOptions {
+  setting: boolean;
+}
+
+export const SidebarLayout: React.FC<SidebarLayoutOptions> = ({ setting }) => {
   const mainSidebarConfig = useConfig(mainSidebarWidthConfigKey());
+  const shouldShowOnDesktopMac = useShouldShowOnDesktopMac();
+  const isSidebarCollapsed = mainSidebarConfig.value[0] === 0;
+  const showDragHandleInContent = isSidebarCollapsed && shouldShowOnDesktopMac;
 
   return (
     <div className={desktopStyles.SidebarLayoutContainer}>
@@ -20,13 +30,15 @@ export const SidebarLayout = () => {
           snap
           preferredSize={calculateElementWidth(desktopStyles.SidebarPreferredWidth)}
         >
-          <SidebarContent />
+          {setting ? <SettingsSidebarContent /> : <SidebarContent />}
         </Allotment.Pane>
         <Allotment.Pane
           className={classNames(desktopStyles.SidebarLayoutPaneWrapper, {
-            [desktopStyles.SidebarLayoutContentCollapsedPadding]: mainSidebarConfig.value[0] === 0,
+            [desktopStyles.SidebarLayoutContentCollapsedPadding]: isSidebarCollapsed,
+            [desktopStyles.SidebarLayoutContentShowDragHandle]: showDragHandleInContent,
           })}
         >
+          {showDragHandleInContent && <DragHandle />}
           <div className={desktopStyles.SidebarLayoutContent}>
             <Outlet />
           </div>
