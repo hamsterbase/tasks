@@ -1,3 +1,4 @@
+import { SidebarLayout } from '@/desktop/components/SidebarLayout/SidebarLayout.tsx';
 import { CreateDatabaseOverlay } from '@/desktop/overlay/createDatabase/CreateDatabaseOverlay';
 import { DatePickerOverlay } from '@/desktop/overlay/datePicker/DatePickerOverlay';
 import { DesktopDialog } from '@/desktop/overlay/desktopDialog/DesktopDialog';
@@ -5,26 +6,25 @@ import { DesktopMenu } from '@/desktop/overlay/desktopMenu/DesktopMenu.tsx';
 import { DesktopMessage } from '@/desktop/overlay/desktopMessage/DesktopMessage';
 import { TagEditorOverlay } from '@/desktop/overlay/tagEditor/TagEditorOverlay';
 import { TreeSelectOverlay } from '@/desktop/overlay/treeSelect/TreeSelectOverlay';
+import { AreaPage } from '@/desktop/pages/area';
+import { Completed } from '@/desktop/pages/completed';
+import { FutureProjects } from '@/desktop/pages/futureProjects';
+import { Inbox } from '@/desktop/pages/inbox';
+import { ProjectPage } from '@/desktop/pages/project';
+import { Schedule } from '@/desktop/pages/schedule';
+import { EULA } from '@/desktop/pages/settings/account/eula/EULA.tsx';
 import { Privacy } from '@/desktop/pages/settings/account/Privacy.tsx';
+import { AccountSettings } from '@/desktop/pages/settings/AccountSettings';
+import { AppearanceSettings } from '@/desktop/pages/settings/AppearanceSettings';
+import { SyncSettings } from '@/desktop/pages/settings/databases/SyncSettings.tsx';
+import { ImportExportSettings } from '@/desktop/pages/settings/ImportExportSettings';
+import { LoginPage } from '@/desktop/pages/settings/Login/LoginPage.tsx';
+import { RegisterPage } from '@/desktop/pages/settings/Register/RegisterPage.tsx';
+import { Today } from '@/desktop/pages/today/index.tsx';
 import { useInputFocused } from '@/hooks/global/useInputFocused';
 import { useCloudSync } from '@/hooks/useCloudSync.ts';
 import React, { useEffect } from 'react';
 import { Navigate, useRoutes } from 'react-router';
-import { SidebarLayout } from './layout/sidebar.tsx';
-import { AreaPage } from './pages/area';
-import { Completed } from './pages/completed';
-import { FutureProjects } from './pages/futureProjects';
-import { Inbox } from './pages/inbox';
-import { ProjectPage } from './pages/project';
-import { Schedule } from './pages/schedule';
-import { EULA } from './pages/settings/account/eula/EULA.tsx';
-import { AccountSettings } from './pages/settings/AccountSettings';
-import { AppearanceSettings } from './pages/settings/AppearanceSettings';
-import { SyncSettings } from './pages/settings/databases/SyncSettings.tsx';
-import { ImportExportSettings } from './pages/settings/ImportExportSettings';
-import { LoginPage } from './pages/settings/Login/LoginPage.tsx';
-import { RegisterPage } from './pages/settings/Register/RegisterPage.tsx';
-import { Today } from './pages/today/index.tsx';
 
 export const App = () => {
   useInputFocused();
@@ -36,6 +36,7 @@ export const App = () => {
       document.documentElement.style.fontSize = originalFontSize;
     };
   }, []);
+
   const element = useRoutes([
     {
       path: '/desktop',

@@ -6,10 +6,10 @@ import { Allotment } from 'allotment';
 import classNames from 'classnames';
 import React from 'react';
 import { Outlet } from 'react-router';
-import { DragHandle } from '../components/DragHandle';
-import { SettingsSidebarContent } from '../components/SettingsSidebarContent/SettingsSidebarContent';
-import { useShouldShowOnDesktopMac } from '../hooks/useShouldShowOnDesktopMac';
-import { calculateElementWidth } from '../overlay/datePicker/constant';
+import { DragHandle } from '../DragHandle';
+import { SettingsSidebarContent } from '../SettingsSidebarContent/SettingsSidebarContent';
+import { useShouldShowOnDesktopMac } from '../../hooks/useShouldShowOnDesktopMac';
+import { calculateElementWidth } from '../../overlay/datePicker/constant';
 
 interface SidebarLayoutOptions {
   setting: boolean;
