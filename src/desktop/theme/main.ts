@@ -43,6 +43,8 @@ export const desktopStyles = {
   SidebarSettingsButtonIcon: 'size-5',
 
   EntityHeaderContainer: 'min-h-15 flex items-start justify-between px-5 py-3.75 border-b border-line-regular bg-bg1',
+  EntityHeaderPanelIconContainer: 'flex items-center size-7.5 text-t2 mr-3 justify-center',
+  EntityHeaderPanelIcon: 'size-5',
   EntityHeaderContentWrapper: 'flex items-start gap-3 flex-1 min-w-0',
   EntityHeaderIconContainer: 'size-7.5 flex items-center justify-center',
   EntityHeaderIconButton: 'size-6 flex items-center justify-center',
@@ -51,7 +53,7 @@ export const desktopStyles = {
   EntityHeaderTitle: 'text-xl leading-7.5 font-medium text-t1 truncate',
   EntityHeaderActionsContainer: 'flex items-center gap-5',
   EntityHeaderActionButton:
-    'flex items-center gap-2 px-1.5 py-1 text-sm text-t3 hover:bg-bg3 rounded-sm transition-colors h-7',
+    'flex items-center gap-2 px-1.5 py-1 text-sm text-t2 hover:bg-bg3 rounded-sm transition-colors h-7',
   EntityHeaderActionIcon: 'size-5 flex items-center content-center',
   EntityHeaderActionLabel: 'text-base leading-5 font-normal',
 

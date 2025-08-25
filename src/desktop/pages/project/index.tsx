@@ -3,6 +3,7 @@ import { TaskList } from '@/components/taskList/taskList.ts';
 import { flattenProjectTaskNew } from '@/core/state/flattenProjectHeading-New';
 import { getProject } from '@/core/state/getProject';
 import { DesktopPage } from '@/desktop/components/DesktopPage';
+import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { useTaskDisplaySettings } from '@/hooks/useTaskDisplaySettings';
@@ -16,7 +17,6 @@ import { ProjectTaskArea } from './components/ProjectTaskArea';
 import { useProjectDragAndDrop } from './hooks/useProjectDragAndDrop';
 import { useProjectEvents } from './hooks/useProjectEvents';
 import { useProjectId } from './hooks/useProjectId';
-import { desktopStyles } from '@/desktop/theme/main';
 
 interface ProjectContentProps {
   project: ReturnType<typeof getProject>;

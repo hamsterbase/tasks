@@ -39,6 +39,7 @@ import {
   TypeIcon,
   User,
   X,
+  PanelLeft,
 } from 'lucide-react';
 
 export const AreaExpandedIcon = ChevronRight;
@@ -87,3 +88,4 @@ export const CalendarXIcon = CalendarX;
 export const CopyIcon = Copy;
 export const ChevronDownIcon = ChevronDown;
 export { CalendarDays };
+export const PanelLeftIcon = PanelLeft;

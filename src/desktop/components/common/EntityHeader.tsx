@@ -1,22 +1,13 @@
 import { EditableTextArea } from '@/components/edit/EditableTextArea';
-import { TaskDisplaySettingsIcon } from '@/components/icons';
+import { PanelLeftIcon, TaskDisplaySettingsIcon } from '@/components/icons';
 import { desktopStyles } from '@/desktop/theme/main';
 import { localize } from '@/nls';
 import { TextAreaRef } from 'rc-textarea';
 import React, { ReactNode, useRef } from 'react';
 
-export interface EntityHeaderAction {
-  icon: React.ReactNode;
-  handleClick: (e: React.MouseEvent) => void;
-  title?: string;
-  label?: string;
-  className?: string;
-}
-
 interface EntityHeaderProps {
   renderIcon: () => ReactNode;
   title: string;
-  actions?: EntityHeaderAction[];
   inputKey?: string;
   inputId?: string;
   onSave?: (value: string) => void;
@@ -33,7 +24,6 @@ interface EntityHeaderProps {
 export const EntityHeader: React.FC<EntityHeaderProps> = ({
   renderIcon,
   title,
-  actions = [],
   inputKey,
   inputId,
   onSave,
@@ -46,7 +36,7 @@ export const EntityHeader: React.FC<EntityHeaderProps> = ({
     onSave?.(value);
   };
 
-  const allActions = [...actions];
+  const allActions = [];
   if (internalActions?.displaySettings) {
     const handleOpenTaskDisplaySettings = (e: React.MouseEvent) => {
       const rect = e.currentTarget.getBoundingClientRect();
@@ -64,6 +54,9 @@ export const EntityHeader: React.FC<EntityHeaderProps> = ({
   return (
     <div className={desktopStyles.EntityHeaderContainer}>
       <div className={desktopStyles.EntityHeaderContentWrapper}>
+        <div className={desktopStyles.EntityHeaderPanelIconContainer} style={{ display: 'none' }}>
+          <PanelLeftIcon className={desktopStyles.EntityHeaderPanelIcon} />
+        </div>
         <div className={desktopStyles.EntityHeaderIconContainer}>
           <button className={desktopStyles.EntityHeaderIconButton}>{renderIcon()}</button>
         </div>
@@ -89,7 +82,7 @@ export const EntityHeader: React.FC<EntityHeaderProps> = ({
           {allActions.map((action, index) => (
             <button
               key={index}
-              className={action.className || desktopStyles.EntityHeaderActionButton}
+              className={desktopStyles.EntityHeaderActionButton}
               title={action.title}
               onClick={action.handleClick}
             >
