@@ -382,9 +382,6 @@ export const desktopStyles = {
   SidebarLayoutContentCollapsedPadding: 'pl-4',
   SidebarLayoutContentShowDragHandle: 'pt-0',
 
-  SettingsSidebarLayoutContent:
-    'bg-bg1 rounded-lg overflow-hidden border border-line-regular h-full flex justify-center',
-
   MultipleSelectionViewContainer: 'h-full flex flex-col bg-bg1',
   MultipleSelectionViewContent: 'flex items-center justify-center flex-1',
   MultipleSelectionViewText: 'text-t2 text-center',
