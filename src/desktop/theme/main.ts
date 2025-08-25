@@ -195,7 +195,7 @@ export const desktopStyles = {
   DetailViewContentInner: 'p-5 space-y-2',
   DetailViewNotesTextarea:
     'w-full p-3 bg-bg2 rounded-lg outline-none resize-none text-base leading-5 placeholder:text-t3',
-  DetailViewDivider: 'h-[1px] bg-line-regular',
+  DetailViewDivider: 'h-px bg-line-regular',
 
   MarkdownPageLoading: 'text-t2',
   MarkdownPageH1: 'text-2xl font-medium text-t1 mb-4 mt-6',
@@ -337,14 +337,14 @@ export const desktopStyles = {
   DatabaseItemContent: 'flex flex-col gap-1 flex-1',
   DatabaseItemTitleRow: 'flex items-center gap-2 h-6',
   DatabaseItemTitle: 'text-base font-medium text-t1 leading-6',
-  DatabaseItemCurrentBadge: 'text-sm font-normal text-brand leading-[18px]',
+  DatabaseItemCurrentBadge: 'text-sm font-normal text-brand leading-4.5',
   DatabaseItemDescriptionRow: 'flex items-center gap-2',
-  DatabaseItemDescription: 'text-sm font-normal text-t3 leading-[18px]',
+  DatabaseItemDescription: 'text-sm font-normal text-t3 leading-4.5',
   DatabaseItemActionButtons: 'flex items-center gap-2 shrink-0',
   DatabaseItemPropertiesSection: 'shrink-0',
-  DatabaseItemProperty: 'flex flex-col gap-1 h-[46px] justify-center',
+  DatabaseItemProperty: 'flex flex-col gap-1 h-11.5 justify-center',
   DatabaseItemPropertyLabel: 'text-base font-medium text-t1 leading-6',
-  DatabaseItemPropertyValue: 'text-sm font-normal text-t3 leading-[18px]',
+  DatabaseItemPropertyValue: 'text-sm font-normal text-t3 leading-4.5',
 
   SpaceMedium: 'h-8',
   SpaceLarge: 'h-16',
@@ -389,7 +389,7 @@ export const desktopStyles = {
   DesktopHeadingListItemContainer: 'group relative',
   DesktopHeadingListItemContainerDragging: 'bg-bg3 rounded-lg',
   DesktopHeadingListItemContainerPadding: 'pt-4',
-  DesktopHeadingListItemDivider: 'h-px mb-4 shadow-[0_0.5px_0_0_theme(colors.line.bold)]',
+  DesktopHeadingListItemDivider: 'h-px mb-4 shadow-sm',
   DesktopHeadingListItemDividerHidden: 'opacity-0',
   DesktopHeadingListItemContent:
     'px-3 py-3 flex items-center gap-3 justify-between text-base leading-5 font-medium text-t1 rounded-lg transition-colors min-h-11 relative',
