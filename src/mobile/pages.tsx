@@ -11,6 +11,7 @@ import { CreateTaskActionSheet } from './pages/createTask.tsx';
 import { LoginPage } from './pages/login';
 import { LanguageSettings } from './pages/settings/languageSettings';
 import { ThemeSettings } from '@/mobile/pages/settings/themeSettings.tsx';
+import { TaskDisplaySettings } from '@/mobile/pages/settings/taskDisplaySettings.tsx';
 import { CloudSettings } from '@/mobile/pages/settings/cloudSettings.tsx';
 import { CreateDatabasePage } from '@/mobile/pages/settings/createDatabase.tsx';
 import { DatabaseDetailPage } from '@/mobile/pages/settings/deatbaseDetail/databaseDetail.tsx';
@@ -58,6 +59,10 @@ export const pages: IPage[] = [
   {
     url: '/settings/theme',
     content: <ThemeSettings />,
+  },
+  {
+    url: '/settings/task-display',
+    content: <TaskDisplaySettings />,
   },
   {
     url: '/settings/login',

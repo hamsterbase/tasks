@@ -1,5 +1,9 @@
 import { startViteServer } from '../utils/vite-server.js';
 
-export async function webDevCommand() {
-  await startViteServer();
+interface WebDevOptions {
+  host?: string | boolean;
+}
+
+export async function webDevCommand(options: WebDevOptions = {}) {
+  await startViteServer(options.host);
 }

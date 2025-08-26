@@ -1,3 +1,4 @@
+import { taskDisplaySettingOptions } from '@/base/common/TaskDisplaySettings';
 import { getTimeAfter, TimeAfterEnum } from '@/core/time/getTimeAfter.ts';
 import { DesktopMenuController, IMenuConfig } from '@/desktop/overlay/desktopMenu/DesktopMenuController.ts';
 import {
@@ -5,6 +6,7 @@ import {
   showCompletedTasksConfigKey,
   showFutureTasksConfigKey,
 } from '@/services/config/config.ts';
+import { useGlobalTaskDisplaySettings } from '@/hooks/useGlobalTaskDisplaySettings';
 import { localize } from '@/nls.ts';
 import { IInstantiationService } from 'vscf/platform/instantiation/common.ts';
 import { useService } from '@/hooks/use-service.ts';
@@ -16,10 +18,16 @@ interface UseDesktopTaskDisplaySettingsOption {
 
 export const useDesktopTaskDisplaySettings = (page: string, option?: UseDesktopTaskDisplaySettingsOption) => {
   const instantiationService = useService(IInstantiationService);
-  const { value: showFutureTasks, setValue: setShowFutureTasks } = useConfig(showFutureTasksConfigKey(page));
-  const { value: showCompletedTasks, setValue: setShowCompletedTasks } = useConfig(showCompletedTasksConfigKey(page));
+  const globalSettings = useGlobalTaskDisplaySettings();
+
+  const { value: showFutureTasks, setValue: setShowFutureTasks } = useConfig(
+    showFutureTasksConfigKey(page, globalSettings.showFutureTasks)
+  );
+  const { value: showCompletedTasks, setValue: setShowCompletedTasks } = useConfig(
+    showCompletedTasksConfigKey(page, globalSettings.showCompletedTasks)
+  );
   const { value: completedTasksRange, setValue: setCompletedTasksRange } = useConfig(
-    completedTasksRangeConfigKey(page)
+    completedTasksRangeConfigKey(page, globalSettings.completedTasksRange)
   );
 
   function createMenuConfig(): IMenuConfig[] {
@@ -39,35 +47,12 @@ export const useDesktopTaskDisplaySettings = (page: string, option?: UseDesktopT
       onSelect: () => setShowCompletedTasks(!showCompletedTasks),
     });
 
-    // 完成任务范围作为子菜单
     const completedRangeSubmenu: IMenuConfig[][] = [
-      [
-        {
-          label: localize('inbox.completed_range.today.short', 'Today'),
-          checked: completedTasksRange === 'today',
-          onSelect: () => setCompletedTasksRange('today' as TimeAfterEnum),
-        },
-        {
-          label: localize('inbox.completed_range.day.short', 'Past day'),
-          checked: completedTasksRange === 'day',
-          onSelect: () => setCompletedTasksRange('day' as TimeAfterEnum),
-        },
-        {
-          label: localize('inbox.completed_range.week.short', 'Past week'),
-          checked: completedTasksRange === 'week',
-          onSelect: () => setCompletedTasksRange('week' as TimeAfterEnum),
-        },
-        {
-          label: localize('inbox.completed_range.month.short', 'Past month'),
-          checked: completedTasksRange === 'month',
-          onSelect: () => setCompletedTasksRange('month' as TimeAfterEnum),
-        },
-        {
-          label: localize('inbox.completed_range.all.short', 'All'),
-          checked: completedTasksRange === 'all',
-          onSelect: () => setCompletedTasksRange('all' as TimeAfterEnum),
-        },
-      ],
+      taskDisplaySettingOptions.completedTasksRange.options.map((option) => ({
+        label: option.label,
+        checked: completedTasksRange === option.value,
+        onSelect: () => setCompletedTasksRange(option.value as TimeAfterEnum),
+      })),
     ];
 
     menuItems.push({
@@ -80,7 +65,6 @@ export const useDesktopTaskDisplaySettings = (page: string, option?: UseDesktopT
 
   function openTaskDisplaySettings(x: number, y: number) {
     const menuConfig = createMenuConfig();
-
     DesktopMenuController.create(
       {
         menuConfig,

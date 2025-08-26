@@ -1012,6 +1012,54 @@
     "defaultMessage": "Online Database",
     "content": "在线数据库"
   },
+  "settings.completedTasksRange": {
+    "defaultMessage": "Completed Tasks Range",
+    "content": "已完成任务范围"
+  },
+  "settings.completedTasksRange.all": {
+    "defaultMessage": "All time",
+    "content": "全部时间"
+  },
+  "settings.completedTasksRange.all.description": {
+    "defaultMessage": "Show all completed tasks",
+    "content": "显示所有已完成的任务"
+  },
+  "settings.completedTasksRange.day": {
+    "defaultMessage": "Last 24 hours",
+    "content": "过去24小时"
+  },
+  "settings.completedTasksRange.day.description": {
+    "defaultMessage": "Show tasks completed since start of yesterday",
+    "content": "显示自昨天开始以来已完成的任务"
+  },
+  "settings.completedTasksRange.description": {
+    "defaultMessage": "How long to keep completed tasks visible across all views.",
+    "content": "在所有视图中保持已完成任务可见的时长。"
+  },
+  "settings.completedTasksRange.month": {
+    "defaultMessage": "Last month",
+    "content": "过去一个月"
+  },
+  "settings.completedTasksRange.month.description": {
+    "defaultMessage": "Show tasks completed since start of last month",
+    "content": "显示自上个月开始以来已完成的任务"
+  },
+  "settings.completedTasksRange.today": {
+    "defaultMessage": "Today",
+    "content": "今天"
+  },
+  "settings.completedTasksRange.today.description": {
+    "defaultMessage": "Show tasks completed since start of today",
+    "content": "显示自今天开始以来已完成的任务"
+  },
+  "settings.completedTasksRange.week": {
+    "defaultMessage": "Last week",
+    "content": "过去一周"
+  },
+  "settings.completedTasksRange.week.description": {
+    "defaultMessage": "Show tasks completed since start of last week",
+    "content": "显示自上周开始以来已完成的任务"
+  },
   "settings.createDatabase.createAndUse": {
     "defaultMessage": "Create and Use",
     "content": "创建并使用"
@@ -1043,6 +1091,14 @@
   "settings.database.detail": {
     "defaultMessage": "Database Details",
     "content": "数据库详情"
+  },
+  "settings.displaySettings": {
+    "defaultMessage": "Global Task Display Settings",
+    "content": "全局任务显示设置"
+  },
+  "settings.displaySettings.description": {
+    "defaultMessage": "Control which tasks are visible across all views (Today, Projects, Areas). These settings apply everywhere unless overridden in specific views.",
+    "content": "控制在所有视图（今天、项目、区域）中显示哪些任务。这些设置适用于所有位置，除非在特定视图中被覆盖。"
   },
   "settings.export": {
     "defaultMessage": "Export",
@@ -1096,6 +1152,22 @@
     "defaultMessage": "Local Database",
     "content": "本地数据库"
   },
+  "settings.showCompletedTasks": {
+    "defaultMessage": "Show Completed Tasks",
+    "content": "显示已完成任务"
+  },
+  "settings.showCompletedTasks.description": {
+    "defaultMessage": "Display finished tasks in all views.",
+    "content": "在所有视图中显示已完成的任务。"
+  },
+  "settings.showFutureTasks": {
+    "defaultMessage": "Show Future Tasks",
+    "content": "显示未来任务"
+  },
+  "settings.showFutureTasks.description": {
+    "defaultMessage": "Display tasks with future due dates in all views.",
+    "content": "在所有视图中显示具有未来截止日期的任务。"
+  },
   "settings.sync": {
     "defaultMessage": "Sync",
     "content": "同步"
@@ -1107,6 +1179,10 @@
   "settings.sync.noDatabases": {
     "defaultMessage": "No databases available",
     "content": "暂无可用数据库"
+  },
+  "settings.taskDisplaySettings": {
+    "defaultMessage": "Global Task Display Settings",
+    "content": "全局任务显示设置"
   },
   "settings.theme": {
     "defaultMessage": "Theme",
@@ -1147,6 +1223,10 @@
   "tag_editor.create_new_tag": {
     "defaultMessage": "Create tag \"#{0}\"",
     "content": "创建标签 \"#{0}\""
+  },
+  "tag_editor.empty_hint": {
+    "defaultMessage": "Type to create your first tag",
+    "content": "输入以创建您的第一个标签"
   },
   "tag_editor.input_placeholder": {
     "defaultMessage": "Add or search tags...",

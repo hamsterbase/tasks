@@ -23,7 +23,8 @@ export const desktopStyles = {
   SidebarProjectAreaList: 'flex-1 overflow-y-auto py-2',
   SidebarProjectAreaListNoTopPadding: 'pt-0',
 
-  SidebarAreaToggleButton: 'flex-shrink-0 size-5 transition-all opacity-0 group-hover:opacity-100',
+  SidebarAreaToggleButton:
+    'flex-shrink-0 size-5 transition-all opacity-0 group-hover:opacity-100 flex items-center justify-center',
   SidebarAreaToggleButtonActive: 'text-white',
   SidebarAreaToggleButtonInactive: 'text-t3',
   SidebarAreaGap: 'mt-2',
@@ -117,10 +118,6 @@ export const desktopStyles = {
     'box-border flex flex-row justify-between items-center p-3 gap-3 w-44 h-11 border border-line-regular rounded-lg cursor-pointer bg-bg1 hover:border-brand focus-within:border-brand',
   SelectTriggerText: 'flex-none order-0 flex-grow-0 w-auto h-5 font-normal text-base leading-5 text-t1',
   SelectTriggerIcon: 'flex-none order-1 flex-grow-0 w-5 h-5 text-t3 transition-transform',
-  SelectTriggerIconOpen: 'rotate-180',
-  SelectDropdown:
-    'absolute top-full left-0 right-0 mt-1 bg-bg1 border border-line-regular rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto py-1',
-  SelectOption: 'px-3 py-3 h-11 hover:bg-bg2 cursor-pointer text-t1 font-normal text-base leading-5 flex items-center',
 
   SwitchLabel: 'inline-flex items-center cursor-pointer',
   SwitchLabelDisabled: 'opacity-50 cursor-not-allowed',
@@ -135,7 +132,7 @@ export const desktopStyles = {
   SettingsItemContainer: 'flex w-full items-start justify-between',
   SettingsItemContentWrapper: 'flex-1 pr-4',
   SettingsItemTitle: 'text-base font-medium text-t1 leading-6 h-6',
-  SettingsItemDescription: 'text-sm font-normal text-t3 leading-4.5 h-4.5',
+  SettingsItemDescription: 'text-sm font-normal text-t3 leading-4.5 min-h-4.5',
   SettingsItemActionWrapper: 'flex-shrink-0 h-10.5 flex item-center',
 
   SettingsItemGroupContainer:
@@ -463,6 +460,7 @@ export const desktopStyles = {
   TagEditorOverlayTagCheckbox: 'size-5 flex items-center justify-center',
   TagEditorOverlayTagCheckboxSelected: 'text-brand',
   TagEditorOverlayTagCheckboxUnselected: 'text-t3',
+  TagEditorOverlayEmptyHint: 'px-3 py-2 text-sm text-t3 text-center',
 
   TreeSelectOverlayContainer: 'w-80',
   TreeSelectOverlayContentArea: 'max-h-76 overflow-y-auto py-3',

@@ -1,13 +1,17 @@
 import { createServer, ViteDevServer } from 'vite';
 import { resolveRoot } from './paths';
 
-export async function startViteServer(): Promise<ViteDevServer> {
+export async function startViteServer(host?: string | boolean): Promise<ViteDevServer> {
   console.log('[startViteServer] Starting development server...');
+  console.log();
   const server = await createServer({
     configFile: resolveRoot('vite.config.ts'),
+    server: {
+      host,
+    },
   });
 
   await server.listen();
-  console.log(`[startViteServer] Development server started on http://localhost:${server.config.server.port}`);
+  server.printUrls();
   return server;
 }

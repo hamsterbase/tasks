@@ -14,7 +14,12 @@ process.on('SIGINT', () => {
 // Main entry point
 const cli = cac('tasks');
 
-cli.command('webDev', 'Start development server').action(webDevCommand);
+cli
+  .command('webDev', 'Start development server')
+  .option('--host [host]', 'Specify host (default: localhost, use --host without value for 0.0.0.0)')
+  .action(async (options) => {
+    await webDevCommand(options);
+  });
 
 cli
   .command('webBuild', 'Build Vite project')

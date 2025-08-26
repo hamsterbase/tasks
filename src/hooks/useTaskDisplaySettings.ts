@@ -8,6 +8,7 @@ import {
 import { IInstantiationService } from 'vscf/platform/instantiation/common';
 import { useService } from './use-service';
 import { useConfig } from './useConfig';
+import { useGlobalTaskDisplaySettings } from './useGlobalTaskDisplaySettings';
 
 interface useTaskDisplaySettingsOption {
   hideShowFutureTasks?: boolean;
@@ -15,10 +16,15 @@ interface useTaskDisplaySettingsOption {
 
 export const useTaskDisplaySettings = (page: string, option?: useTaskDisplaySettingsOption) => {
   const instantiationService = useService(IInstantiationService);
-  const { value: showFutureTasks, setValue: setShowFutureTasks } = useConfig(showFutureTasksConfigKey(page));
-  const { value: showCompletedTasks, setValue: setShowCompletedTasks } = useConfig(showCompletedTasksConfigKey(page));
+  const globalSettings = useGlobalTaskDisplaySettings();
+  const { value: showFutureTasks, setValue: setShowFutureTasks } = useConfig(
+    showFutureTasksConfigKey(page, globalSettings.showFutureTasks)
+  );
+  const { value: showCompletedTasks, setValue: setShowCompletedTasks } = useConfig(
+    showCompletedTasksConfigKey(page, globalSettings.showCompletedTasks)
+  );
   const { value: completedTasksRange, setValue: setCompletedTasksRange } = useConfig(
-    completedTasksRangeConfigKey(page)
+    completedTasksRangeConfigKey(page, globalSettings.completedTasksRange)
   );
 
   function openTaskDisplaySettings() {

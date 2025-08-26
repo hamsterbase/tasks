@@ -138,10 +138,7 @@ export const TagEditorActionSheet: React.FC = () => {
             className={inputStyles}
           />
         </div>
-        <div
-          className={`h-50 overflow-y-scroll flex flex-col ${styles.tagEditorSmallGap}`}
-          style={{ marginBottom: 'var(--keyboard-height)' }}
-        >
+        <div className={`h-50 overflow-y-scroll flex flex-col ${styles.tagEditorSmallGap}`}>
           {controller.searchText && !controller.selectedTags.includes(controller.searchText) && (
             <button className={createTagButtonStyle} {...tagProps(controller.searchText)}>
               {localize('tag_editor.create_new_tag', 'Create tag "#{0}"', controller.searchText)}

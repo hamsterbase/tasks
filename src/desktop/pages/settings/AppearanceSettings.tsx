@@ -1,13 +1,25 @@
+import { TimeAfterEnum } from '@/core/time/getTimeAfter';
 import { ItemGroup } from '@/desktop/components/Settings/ItemGroup';
 import { SettingsContent } from '@/desktop/components/Settings/SettingsContent/SettingsContent';
 import { SettingsItem } from '@/desktop/components/Settings/SettingsItem';
 import { SettingsTitle } from '@/desktop/components/Settings/SettingsTitle';
+import { Space } from '@/desktop/components/Space/Space';
+import { useGlobalTaskDisplaySettings } from '@/hooks/useGlobalTaskDisplaySettings';
 import { localize } from '@/nls';
 import React, { useState } from 'react';
 
 export const AppearanceSettings: React.FC = () => {
   const [currentTheme, setCurrentTheme] = useState(localStorage.getItem('theme') || 'auto');
   const [currentLanguage] = useState(globalThis.language || 'en-US');
+  const {
+    showFutureTasks,
+    showCompletedTasks,
+    completedTasksRange,
+    setShowFutureTasks,
+    setShowCompletedTasks,
+    setCompletedTasksRange,
+    settingOptions,
+  } = useGlobalTaskDisplaySettings();
 
   const changeTheme = (theme: string) => {
     localStorage.setItem('theme', theme);
@@ -61,6 +73,38 @@ export const AppearanceSettings: React.FC = () => {
             ],
             currentValue: getLanguageValue(currentLanguage),
             onChange: changeLanguage,
+          }}
+        />
+      </ItemGroup>
+      <Space size="large"></Space>
+      <SettingsTitle title={settingOptions.title} description={settingOptions.description} level={2} />
+      <ItemGroup>
+        <SettingsItem
+          title={settingOptions.showFutureTasks.title}
+          description={settingOptions.showFutureTasks.description}
+          action={{
+            type: 'switch',
+            currentValue: showFutureTasks,
+            onChange: setShowFutureTasks,
+          }}
+        />
+        <SettingsItem
+          title={settingOptions.showCompletedTasks.title}
+          description={settingOptions.showCompletedTasks.description}
+          action={{
+            type: 'switch',
+            currentValue: showCompletedTasks,
+            onChange: setShowCompletedTasks,
+          }}
+        />
+        <SettingsItem
+          title={settingOptions.completedTasksRange.title}
+          description={settingOptions.completedTasksRange.description}
+          action={{
+            type: 'select',
+            options: [...settingOptions.completedTasksRange.options],
+            currentValue: completedTasksRange,
+            onChange: (value: string) => setCompletedTasksRange(value as TimeAfterEnum),
           }}
         />
       </ItemGroup>

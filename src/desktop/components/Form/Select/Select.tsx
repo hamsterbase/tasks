@@ -1,6 +1,9 @@
 import { ChevronDownIcon } from '@/components/icons';
 import { desktopStyles } from '@/desktop/theme/main';
-import React, { useEffect, useRef, useState } from 'react';
+import { DesktopMenuController } from '@/desktop/overlay/desktopMenu/DesktopMenuController';
+import { useService } from '@/hooks/use-service';
+import { IInstantiationService } from 'vscf/platform/instantiation/common';
+import React, { useRef } from 'react';
 
 export interface SelectOption {
   value: string;
@@ -15,47 +18,39 @@ export interface SelectProps {
 }
 
 export const Select: React.FC<SelectProps> = ({ value, onChange, options, className = '' }) => {
-  const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
+  const instantiationService = useService(IInstantiationService);
 
   const selectedOption = options.find((option) => option.value === value);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (selectRef.current && !selectRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
+  const handleToggle = () => {
+    if (selectRef.current) {
+      const rect = selectRef.current.getBoundingClientRect();
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
+      const menuConfig = options.map((option) => ({
+        label: option.label,
+        checked: option.value === value,
+        onSelect: () => onChange(option.value),
+      }));
 
-  const handleSelect = (optionValue: string) => {
-    onChange(optionValue);
-    setIsOpen(false);
+      DesktopMenuController.create(
+        {
+          menuConfig,
+          x: rect.right,
+          y: rect.bottom,
+          placement: 'bottom-end',
+        },
+        instantiationService
+      );
+    }
   };
 
   return (
     <div ref={selectRef} className={`${desktopStyles.SelectContainer} ${className}`}>
-      <div className={desktopStyles.SelectTrigger} onClick={() => setIsOpen(!isOpen)}>
+      <div className={desktopStyles.SelectTrigger} onClick={handleToggle}>
         <span className={desktopStyles.SelectTriggerText}>{selectedOption?.label || ''}</span>
-        <ChevronDownIcon
-          className={`${desktopStyles.SelectTriggerIcon} ${isOpen ? desktopStyles.SelectTriggerIconOpen : ''}`}
-          size={20}
-        />
+        <ChevronDownIcon className={desktopStyles.SelectTriggerIcon} size={20} />
       </div>
-      {isOpen && (
-        <div className={desktopStyles.SelectDropdown}>
-          {options.map((option) => (
-            <div key={option.value} className={desktopStyles.SelectOption} onClick={() => handleSelect(option.value)}>
-              {option.label}
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   );
 };

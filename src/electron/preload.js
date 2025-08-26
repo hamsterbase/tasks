@@ -8,7 +8,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
   serviceChannel: {
     call: async (request) => {
       const result = await ipcRenderer.invoke('service-channel-call', request);
-      
+
       // Check if the result is an error
       if (result && result.__isError) {
         const error = new Error(result.message);
@@ -17,7 +17,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
         }
         throw error;
       }
-      
+
       return result;
     },
   },

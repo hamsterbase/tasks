@@ -51,7 +51,6 @@ export class WorkbenchConfig implements IConfigService {
     if (!storedValue) {
       return config.default as T;
     }
-
     try {
       const parsedValue = JSON.parse(storedValue);
       if (!config.check(parsedValue)) {

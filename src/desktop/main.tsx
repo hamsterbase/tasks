@@ -57,6 +57,7 @@ export async function startDesktop() {
   serviceCollection.set(IWorkbenchInstanceService, new SyncDescriptor(WorkbenchInstanceService));
   serviceCollection.set(IWebLoggerService, new SyncDescriptor(WorkbenchWebLoggerService));
   const instantiationService = new InstantiationService(serviceCollection, true);
+
   await instantiationService.invokeFunction(async (dss) => {
     await dss.get(IConfigService).init();
   });

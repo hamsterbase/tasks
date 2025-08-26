@@ -82,6 +82,11 @@ export const TagEditorOverlay: React.FC = () => {
               {localize('desktop.tag_editor.create_new_tag', 'Create tag "{0}"', controller.searchText)}
             </button>
           )}
+          {controller.totalTags === 0 && !controller.showCreateButton && (
+            <div className={desktopStyles.TagEditorOverlayEmptyHint}>
+              {localize('tag_editor.empty_hint', 'Type to create your first tag')}
+            </div>
+          )}
           {controller.displayTags.map((tag, index) => {
             const isSelected = controller.selectedTags.includes(tag);
             const isFocused = controller.focusedIndex === index;

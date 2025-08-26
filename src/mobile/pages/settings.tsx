@@ -61,6 +61,13 @@ export const MobileSettings = () => {
             },
           },
           {
+            title: localize('settings.taskDisplaySettings', 'Global Task Display Settings'),
+            onClick: () => navigate({ path: '/settings/task-display' }),
+            mode: {
+              type: 'navigation',
+            },
+          },
+          {
             title: localize('settings.export', 'Export'),
             onClick: () => navigate({ path: '/settings/export' }),
             mode: {

@@ -85,6 +85,10 @@ export class TagEditorOverlayController extends Disposable {
     return this._searchText;
   }
 
+  get totalTags() {
+    return this._allTags.length;
+  }
+
   get displayTags() {
     if (!this._searchText) {
       return this._sortedTags;

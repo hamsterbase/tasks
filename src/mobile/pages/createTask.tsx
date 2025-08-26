@@ -279,7 +279,6 @@ export const CreateTaskActionSheet: React.FC = () => {
           <InfoItemGroup items={taskDetailItems} />
         </div>
       </div>
-      <div className="h-[var(--keyboard-height)] w-full"></div>
     </div>
   );
 };

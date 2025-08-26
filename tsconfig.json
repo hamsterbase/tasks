@@ -5,5 +5,5 @@
     "experimentalDecorators": true
   },
   "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }],
-  "exclude": ["src/packages/vscf/**/*.ts","node_modules"]
+  "exclude": ["src/packages/vscf/**/*.ts", "node_modules"]
 }

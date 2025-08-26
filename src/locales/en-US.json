@@ -1012,6 +1012,54 @@
     "defaultMessage": "Online Database",
     "content": "Online Database"
   },
+  "settings.completedTasksRange": {
+    "defaultMessage": "Completed Tasks Range",
+    "content": "Completed Tasks Range"
+  },
+  "settings.completedTasksRange.all": {
+    "defaultMessage": "All time",
+    "content": "All time"
+  },
+  "settings.completedTasksRange.all.description": {
+    "defaultMessage": "Show all completed tasks",
+    "content": "Show all completed tasks"
+  },
+  "settings.completedTasksRange.day": {
+    "defaultMessage": "Last 24 hours",
+    "content": "Last 24 hours"
+  },
+  "settings.completedTasksRange.day.description": {
+    "defaultMessage": "Show tasks completed since start of yesterday",
+    "content": "Show tasks completed since start of yesterday"
+  },
+  "settings.completedTasksRange.description": {
+    "defaultMessage": "How long to keep completed tasks visible across all views.",
+    "content": "How long to keep completed tasks visible across all views."
+  },
+  "settings.completedTasksRange.month": {
+    "defaultMessage": "Last month",
+    "content": "Last month"
+  },
+  "settings.completedTasksRange.month.description": {
+    "defaultMessage": "Show tasks completed since start of last month",
+    "content": "Show tasks completed since start of last month"
+  },
+  "settings.completedTasksRange.today": {
+    "defaultMessage": "Today",
+    "content": "Today"
+  },
+  "settings.completedTasksRange.today.description": {
+    "defaultMessage": "Show tasks completed since start of today",
+    "content": "Show tasks completed since start of today"
+  },
+  "settings.completedTasksRange.week": {
+    "defaultMessage": "Last week",
+    "content": "Last week"
+  },
+  "settings.completedTasksRange.week.description": {
+    "defaultMessage": "Show tasks completed since start of last week",
+    "content": "Show tasks completed since start of last week"
+  },
   "settings.createDatabase.createAndUse": {
     "defaultMessage": "Create and Use",
     "content": "Create and Use"
@@ -1043,6 +1091,14 @@
   "settings.database.detail": {
     "defaultMessage": "Database Details",
     "content": "Database Details"
+  },
+  "settings.displaySettings": {
+    "defaultMessage": "Global Task Display Settings",
+    "content": "Global Task Display Settings"
+  },
+  "settings.displaySettings.description": {
+    "defaultMessage": "Control which tasks are visible across all views (Today, Projects, Areas). These settings apply everywhere unless overridden in specific views.",
+    "content": "Control which tasks are visible across all views (Today, Projects, Areas). These settings apply everywhere unless overridden in specific views."
   },
   "settings.export": {
     "defaultMessage": "Export",
@@ -1096,6 +1152,22 @@
     "defaultMessage": "Local Database",
     "content": "Local Database"
   },
+  "settings.showCompletedTasks": {
+    "defaultMessage": "Show Completed Tasks",
+    "content": "Show Completed Tasks"
+  },
+  "settings.showCompletedTasks.description": {
+    "defaultMessage": "Display finished tasks in all views.",
+    "content": "Display finished tasks in all views."
+  },
+  "settings.showFutureTasks": {
+    "defaultMessage": "Show Future Tasks",
+    "content": "Show Future Tasks"
+  },
+  "settings.showFutureTasks.description": {
+    "defaultMessage": "Display tasks with future due dates in all views.",
+    "content": "Display tasks with future due dates in all views."
+  },
   "settings.sync": {
     "defaultMessage": "Sync",
     "content": "Sync"
@@ -1107,6 +1179,10 @@
   "settings.sync.noDatabases": {
     "defaultMessage": "No databases available",
     "content": "No databases available"
+  },
+  "settings.taskDisplaySettings": {
+    "defaultMessage": "Global Task Display Settings",
+    "content": "Global Task Display Settings"
   },
   "settings.theme": {
     "defaultMessage": "Theme",
@@ -1147,6 +1223,10 @@
   "tag_editor.create_new_tag": {
     "defaultMessage": "Create tag \"#{0}\"",
     "content": "Create tag \"#{0}\""
+  },
+  "tag_editor.empty_hint": {
+    "defaultMessage": "Type to create your first tag",
+    "content": "Type to create your first tag"
   },
   "tag_editor.input_placeholder": {
     "defaultMessage": "Add or search tags...",
