@@ -1,5 +1,24 @@
 apply plugin: 'com.android.application'
 
+// Read version information from file
+def versionFile = file('../version')
+if (!versionFile.exists()) {
+    throw new GradleException("Version file not found at: ${versionFile.absolutePath}")
+}
+
+def versionProps = new Properties()
+versionFile.withInputStream { versionProps.load(it) }
+
+def versionCodeValue = versionProps['versionCode']?.toInteger()
+def versionNameValue = versionProps['versionName']
+
+if (!versionCodeValue) {
+    throw new GradleException("versionCode not found or invalid in version file")
+}
+if (!versionNameValue) {
+    throw new GradleException("versionName not found in version file")
+}
+
 android {
     namespace "com.hamsterbase.tasks"
     compileSdk rootProject.ext.compileSdkVersion
@@ -7,8 +26,8 @@ android {
         applicationId "com.hamsterbase.tasks"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 5
-        versionName "2025.08.2600"
+        versionCode versionCodeValue
+        versionName versionNameValue
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.

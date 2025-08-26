@@ -30,3 +30,4 @@ android/app/release/
 scripts/env.json
 electron-dist
 scripts/electronPackEnv.json
+android/version
