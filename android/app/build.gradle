@@ -19,6 +19,13 @@ if (!versionNameValue) {
     throw new GradleException("versionName not found in version file")
 }
 
+// Read release signing configuration
+def releaseProperties = new Properties()
+def releasePropertiesFile = file('../release.properties')
+if (releasePropertiesFile.exists()) {
+    releasePropertiesFile.withInputStream { releaseProperties.load(it) }
+}
+
 android {
     namespace "com.hamsterbase.tasks"
     compileSdk rootProject.ext.compileSdkVersion
@@ -45,10 +52,24 @@ android {
         }
     }
 
+    signingConfigs {
+        release {
+            if (releasePropertiesFile.exists()) {
+                storeFile file(releaseProperties.getProperty('RELEASE_STORE_FILE'))
+                storePassword releaseProperties.getProperty('RELEASE_STORE_PASSWORD')
+                keyAlias releaseProperties.getProperty('RELEASE_KEY_ALIAS')
+                keyPassword releaseProperties.getProperty('RELEASE_KEY_PASSWORD')
+            }
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            if (releasePropertiesFile.exists()) {
+                signingConfig signingConfigs.release
+            }
         }
     }
 }

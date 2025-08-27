@@ -31,3 +31,5 @@ scripts/env.json
 electron-dist
 scripts/electronPackEnv.json
 android/version
+android/release.keystore
+android/release.properties
