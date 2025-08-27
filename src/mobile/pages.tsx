@@ -21,6 +21,7 @@ import { MobileCompleted } from '@/mobile/pages/completed.tsx';
 import { ImportPage } from '@/mobile/pages/settings/import.tsx';
 import { PrivacyPage } from '@/mobile/pages/settings/privacy.tsx';
 import { EULAPage } from '@/mobile/pages/settings/eula.tsx';
+import { AboutPage } from '@/mobile/pages/settings/about.tsx';
 
 interface IPage {
   url: string;
@@ -115,5 +116,9 @@ export const pages: IPage[] = [
   {
     url: '/settings/eula',
     content: <EULAPage />,
+  },
+  {
+    url: '/settings/about',
+    content: <AboutPage />,
   },
 ];

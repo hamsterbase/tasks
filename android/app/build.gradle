@@ -11,6 +11,7 @@ versionFile.withInputStream { versionProps.load(it) }
 
 def versionCodeValue = versionProps['versionCode']?.toInteger()
 def versionNameValue = versionProps['versionName']
+def androidSourceValue = versionProps['androidSource'] ?: ''
 
 if (!versionCodeValue) {
     throw new GradleException("versionCode not found or invalid in version file")
@@ -29,6 +30,9 @@ if (releasePropertiesFile.exists()) {
 android {
     namespace "com.hamsterbase.tasks"
     compileSdk rootProject.ext.compileSdkVersion
+    buildFeatures {
+        buildConfig true
+    }
     defaultConfig {
         applicationId "com.hamsterbase.tasks"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -36,6 +40,7 @@ android {
         versionCode versionCodeValue
         versionName versionNameValue
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "ANDROID_SOURCE", "\"${androidSourceValue}\""
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
              // Default: https://android.googlesource.com/platform/frameworks/base/+/282e181b58cf72b6ca770dc7ca5f91f135444502/tools/aapt/AaptAssets.cpp#61

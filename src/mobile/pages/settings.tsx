@@ -89,6 +89,14 @@ export const MobileSettings = () => {
             },
           },
           {
+            hidden: switchService.getLocalSwitch('showNativeAboutButton'),
+            title: localize('settings.about', 'About'),
+            onClick: () => navigate({ path: '/settings/about' }),
+            mode: {
+              type: 'navigation',
+            },
+          },
+          {
             hidden: !switchService.getLocalSwitch('showNativeAboutButton'),
             title: localize('settings.about', 'About'),
             onClick: () => showAbout({ showICP: globalThis.language === 'zh-CN', displayMode: getTheme() }),
