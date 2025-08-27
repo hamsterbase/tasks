@@ -33,3 +33,4 @@ scripts/electronPackEnv.json
 android/version
 android/release.keystore
 android/release.properties
+ios/App/project.version.xcconfig

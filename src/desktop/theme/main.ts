@@ -373,7 +373,7 @@ export const desktopStyles = {
     'flex items-center gap-2 justify-center w-full text-base leading-5 h-11 text-t3 hover:bg-bg3 px-3 rounded-lg transition-colors',
   SubtaskListCreateButtonIcon: 'size-5',
 
-  SidebarLayoutContainer: 'h-screen w-screen relative',
+  SidebarLayoutContainer: 'h-screen w-screen relative  safe-top bg-bg3',
   SidebarLayoutPaneWrapper: 'p-4 pl-0 bg-bg3',
   SidebarLayoutContent: 'bg-bg1 rounded-lg overflow-hidden border border-line-regular h-full',
   SidebarLayoutContentCollapsedPadding: 'pl-4',
