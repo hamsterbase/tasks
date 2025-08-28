@@ -13,7 +13,7 @@ export const TaskItemTitle: React.FC<TaskItemTitleProps> = ({ title, emptyText, 
   return (
     <h3
       data-testid={testId}
-      className={classNames(`text-lg overflow-hidden text-ellipsis whitespace-nowrap leading-none`, {
+      className={classNames(`text-lg overflow-hidden text-ellipsis whitespace-nowrap`, {
         'line-through': isCanceled,
         [styles.taskItemPlaceholderColor]: !title,
       })}

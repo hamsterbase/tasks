@@ -8,5 +8,5 @@ export const TaskItemSubtitle: React.FC<TaskItemSubtitleProps> = ({ title, hide 
   if (hide || !title) {
     return null;
   }
-  return <div className="text-sm text-t3 overflow-hidden text-ellipsis whitespace-nowrap leading-none">{title}</div>;
+  return <div className="text-sm text-t3 overflow-hidden text-ellipsis whitespace-nowrap">{title}</div>;
 };
