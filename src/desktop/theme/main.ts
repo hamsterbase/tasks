@@ -242,7 +242,7 @@ export const desktopStyles = {
   TaskListItemStatusBoxUncompleted: 'text-t3',
   TaskListItemContent: 'flex flex-col gap-2 flex-1',
   TaskListItemTitleRow: 'flex items-center gap-2',
-  TaskListItemTitleInput: 'text-base leading-5 flex-1 bg-transparent border-none outline-none text-ellipsis text-t2',
+  TaskListItemTitleInput: 'text-base leading-5 flex-1 bg-transparent border-none outline-none text-ellipsis text-t1',
   TaskListItemIcon: 'size-5 text-t3 flex-shrink-0',
 
   SubtaskItemContainer: 'flex items-center gap-3 h-11 rounded px-3 group',
@@ -281,7 +281,7 @@ export const desktopStyles = {
   DesktopProjectListItemStatusBox: 'flex-shrink-0',
   DesktopProjectListItemStatusBoxIcon: 'size-5',
   DesktopProjectListItemContent: 'flex-1 min-w-0 flex gap-2 flex-col',
-  DesktopProjectListItemTitle: 'text-base font-base text-t2 truncate leading-5',
+  DesktopProjectListItemTitle: 'text-base font-base text-t1 truncate leading-5',
   DesktopProjectListItemChevron:
     'flex items-center gap-1.5 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity size-5 text-t3',
 
