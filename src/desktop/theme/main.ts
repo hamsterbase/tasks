@@ -27,7 +27,7 @@ export const desktopStyles = {
     'flex-shrink-0 size-5 transition-all opacity-0 group-hover:opacity-100 flex items-center justify-center',
   SidebarAreaToggleButtonActive: 'text-white',
   SidebarAreaToggleButtonInactive: 'text-t3',
-  SidebarAreaGap: 'mt-2',
+  SidebarAreaGap: 'mt-3',
 
   SidebarProjectItemActive: 'bg-brand text-white',
   SidebarProjectItemInactive: 'text-t2 hover:bg-bg1',
