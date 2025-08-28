@@ -9,7 +9,7 @@ export const desktopStyles = {
   SidebarPreferredWidth: 'w-60',
 
   SidebarMenuItemContainer: 'space-y-2',
-  SidebarMenuItem: 'h-11 px-3 flex rounded-lg text-base leading-5 items-center gap-3 group',
+  SidebarMenuItem: 'h-9 px-3 flex rounded-lg text-base leading-5 items-center gap-3 group',
   SidebarMenuItemActive: 'bg-brand text-white',
   SidebarMenuItemInactive: 'text-t1 hover:bg-bg1',
   SidebarMenuItemIcon: 'size-5 flex items-center justify-center flex-shrink-0',
