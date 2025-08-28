@@ -9,5 +9,6 @@ export function useContextKey<T extends ContextKeyValue>(rawKey: RawContextKey<T
     contentKeyRef.current = rawKey.bindTo(contextKeyService);
     return contentKeyRef.current as IContextKey<T>;
   }
+
   return contentKeyRef.current;
 }

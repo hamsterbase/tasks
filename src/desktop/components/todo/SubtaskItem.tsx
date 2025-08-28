@@ -7,6 +7,7 @@ import { ItemStatus } from '@/core/type.ts';
 import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
+import { useContextKeyValue } from '@/hooks/useContextKeyValue';
 import { useLongPress } from '@/hooks/useLongPress.ts';
 import { useRegisterEvent } from '@/hooks/useRegisterEvent.ts';
 import { localize } from '@/nls';
@@ -15,6 +16,7 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import classNames from 'classnames';
 import React, { useRef } from 'react';
+import { InputFocusedContext } from 'vscf/platform/contextkey/common';
 import { TaskStatusBox } from './TaskStatusBox';
 
 interface SubtaskItemProps {
@@ -27,9 +29,10 @@ export const SubtaskItem: React.FC<SubtaskItemProps> = ({ subtask, subList, clas
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: subtask.id });
   const inputElementRef = useRef<HTMLInputElement>(null);
   const todoService = useService(ITodoService);
-
   useWatchEvent(todoService.onStateChange);
   useWatchEvent(subList.onListStateChange);
+
+  const isInputFocused = useContextKeyValue(InputFocusedContext);
 
   const isSelected = subList.selectedIds.includes(subtask.id);
   const isFocused = subList.isFocused;
@@ -113,9 +116,10 @@ export const SubtaskItem: React.FC<SubtaskItemProps> = ({ subtask, subList, clas
   });
 
   const containerClassName = classNames(desktopStyles.SubtaskItemContainer, className, {
-    [desktopStyles.SubtaskItemContainerSelected]: isFocused && isSelected,
+    [desktopStyles.SubtaskItemContainerSelected]: isFocused && isSelected && !isInputFocused,
     [desktopStyles.SubtaskItemContainerSelectedInactive]: !isFocused && isSelected,
     [desktopStyles.SubtaskItemContainerDefault]: !isFocused && !isSelected,
+    [desktopStyles.SubtaskItemContainerEditing]: isInputFocused && isSelected && isFocused,
   });
 
   if (isDragging) {

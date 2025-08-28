@@ -1,6 +1,6 @@
 import { ITaskList } from '@/components/taskList/type.ts';
 import { Emitter, Event } from 'vscf/base/common/event';
-import { IContextKey, IContextKeyService } from 'vscf/platform/contextkey/common';
+import { IContextKey, IContextKeyService, InputFocusedContextKey } from 'vscf/platform/contextkey/common';
 import { createDecorator } from 'vscf/platform/instantiation/common';
 import './commonds';
 import {
@@ -55,6 +55,15 @@ export class ListService implements IListService {
     this._subListCursorHasNextItemContext = SubListCursorHasNextItem.bindTo(contextKeyService);
     this._subListCursorHasPreviousItemContext = SubListCursorHasPreviousItem.bindTo(contextKeyService);
     this._subListIsInputValueEmptyContext = SubListIsInputValueEmpty.bindTo(contextKeyService);
+
+    contextKeyService.onDidChangeContext(() => {
+      if (this.mainList) {
+        this.mainList.setEditingState(!!contextKeyService.getContextKeyValue(InputFocusedContextKey));
+      }
+      if (this.subList) {
+        this.subList.setEditingState(!!contextKeyService.getContextKeyValue(InputFocusedContextKey));
+      }
+    });
   }
 
   public get mainList() {

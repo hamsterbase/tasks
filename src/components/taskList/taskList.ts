@@ -1,5 +1,5 @@
-import { Emitter } from 'vscf/base/common/event';
 import { TreeID } from 'loro-crdt';
+import { Emitter } from 'vscf/base/common/event';
 import { IEditItemState, ISelectionOption, ITaskList, ListOperation } from './type.ts';
 
 export class TaskList implements ITaskList {
@@ -44,6 +44,8 @@ export class TaskList implements ITaskList {
     return this._inputValue === '';
   }
 
+  private _isEditing = false;
+
   constructor(
     public name: string,
     private _items: TreeID[],
@@ -53,6 +55,9 @@ export class TaskList implements ITaskList {
   ) {}
 
   public select(id: TreeID, option: ISelectionOption): void {
+    if (typeof option.offset === 'number') {
+      this._cursorOffset = option.offset;
+    }
     if (option?.multipleMode) {
       if (this._selectedIds.includes(id)) {
         this._selectedIds = this._selectedIds.filter((item) => item !== id);
@@ -64,9 +69,6 @@ export class TaskList implements ITaskList {
       this._cursorId = id;
     }
 
-    if (typeof option.offset === 'number') {
-      this._cursorOffset = option.offset;
-    }
     this._onListStateChange.fire();
     if (option.fireEditEvent) {
       this._onFocusItem.fire({
@@ -104,7 +106,7 @@ export class TaskList implements ITaskList {
     this.select(nextItem, {
       multipleMode: false,
       offset: this.cursorOffset ?? 0,
-      fireEditEvent: true,
+      fireEditEvent: this._isEditing,
     });
   }
 
@@ -130,6 +132,17 @@ export class TaskList implements ITaskList {
       return;
     }
     this.select(previousItem, {
+      multipleMode: false,
+      offset: this.cursorOffset ?? 0,
+      fireEditEvent: this._isEditing,
+    });
+  }
+
+  focusCurrent() {
+    if (!this.cursorId) {
+      return;
+    }
+    this.select(this.cursorId, {
       multipleMode: false,
       offset: this.cursorOffset ?? 0,
       fireEditEvent: true,
@@ -185,5 +198,9 @@ export class TaskList implements ITaskList {
   clearSelection(): void {
     this._selectedIds = [];
     this._onListStateChange.fire();
+  }
+
+  setEditingState(isEditing: boolean): void {
+    this._isEditing = isEditing;
   }
 }

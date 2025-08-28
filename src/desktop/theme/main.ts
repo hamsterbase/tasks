@@ -245,14 +245,15 @@ export const desktopStyles = {
   TaskListItemTitleInput: 'text-base leading-5 flex-1 bg-transparent border-none outline-none text-ellipsis text-t1',
   TaskListItemIcon: 'size-5 text-t3 flex-shrink-0',
 
-  SubtaskItemContainer: 'flex items-center gap-3 h-11 rounded px-3 group',
+  SubtaskItemContainer: 'flex items-center gap-3 h-11 px-3 group rounded-lg',
   SubtaskItemContainerSelected: 'bg-bg3',
   SubtaskItemContainerSelectedInactive: 'bg-bg2',
   SubtaskItemContainerDefault: 'bg-bg1',
+  SubtaskItemContainerEditing: 'shadow-[inset_2px_0_0_var(--color-brand)] rounded-l-none',
   SubtaskItemStatusButton:
     'size-5 text-t3 flex items-center justify-center hover:bg-bg3 rounded transition-colors flex-shrink-0',
   SubtaskItemInputWrapper: 'flex-1 min-w-0',
-  SubtaskItemInput: 'text-sm bg-transparent outline-none border-none w-full',
+  SubtaskItemInput: 'text-sm bg-transparent outline-none border-none w-full text-ellipsis',
   SubtaskItemInputCanceled: 'line-through text-t3',
   SubtaskItemInputCompleted: 'text-t3',
   SubtaskItemInputCreated: 'text-t1',

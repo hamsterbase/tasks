@@ -47,9 +47,11 @@ export interface ITaskList {
 
   createNewOne(): void;
 
+  focusCurrent(): void;
+
   select(id: string, option: ISelectionOption): void;
 
-  updateCursor(offset: number): void;
+  updateCursor(offset: number | null): void;
 
   updateInputValue(value: string): void;
 
@@ -70,4 +72,6 @@ export interface ITaskList {
   updateItems(items: TreeID[]): void;
 
   clearSelection(): void;
+
+  setEditingState(isEditing: boolean): void;
 }

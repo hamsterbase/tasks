@@ -11,7 +11,6 @@ KeybindingsRegistry.registerCommandAndKeybindingRule({
     const inputElement = document.activeElement as HTMLInputElement;
     if (inputElement) {
       inputElement.blur();
-
       let parentNode = inputElement.parentNode as HTMLElement;
       while (parentNode && parentNode !== document.body) {
         if (parentNode.hasAttribute && parentNode.hasAttribute('tabindex')) {

@@ -1,7 +1,7 @@
-import { KeyCode } from 'vscf/internal/base/common/keyCodes';
-import { ContextKeyExpr } from 'vscf/platform/contextkey/common';
-import { KeybindingsRegistry, KeybindingWeight } from 'vscf/platform/keybinding/common';
 import { IListService } from '@/services/list/common/listService';
+import { KeyCode } from 'vscf/internal/base/common/keyCodes';
+import { ContextKeyExpr, InputFocusedContext } from 'vscf/platform/contextkey/common';
+import { KeybindingsRegistry, KeybindingWeight } from 'vscf/platform/keybinding/common';
 import {
   MainListCursorHasNextItem,
   MainListCursorHasPreviousItem,
@@ -36,6 +36,19 @@ KeybindingsRegistry.registerCommandAndKeybindingRule({
     const currentList = acc.get(IListService).mainList;
     if (currentList) {
       currentList.selectPrevious();
+    }
+  },
+});
+
+KeybindingsRegistry.registerCommandAndKeybindingRule({
+  id: 'MainListFocusCurrent',
+  weight: KeybindingWeight.WorkbenchContrib + 5,
+  when: ContextKeyExpr.and(MainListFocus, ContextKeyExpr.not(InputFocusedContext.key)),
+  primary: KeyCode.KeyE,
+  handler: (acc) => {
+    const currentList = acc.get(IListService).mainList;
+    if (currentList) {
+      currentList.focusCurrent();
     }
   },
 });
@@ -115,6 +128,19 @@ KeybindingsRegistry.registerCommandAndKeybindingRule({
     const currentList = acc.get(IListService).subList;
     if (currentList) {
       currentList.deleteCurrentItem();
+    }
+  },
+});
+
+KeybindingsRegistry.registerCommandAndKeybindingRule({
+  id: 'SubListFocusCurrent',
+  weight: KeybindingWeight.WorkbenchContrib + 5,
+  when: ContextKeyExpr.and(SubListFocus, ContextKeyExpr.not(InputFocusedContext.key)),
+  primary: KeyCode.KeyE,
+  handler: (acc) => {
+    const currentList = acc.get(IListService).subList;
+    if (currentList) {
+      currentList.focusCurrent();
     }
   },
 });
