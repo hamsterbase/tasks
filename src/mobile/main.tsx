@@ -44,6 +44,9 @@ export const startMobile = async () => {
   serviceCollection.set(ISwitchService, new SyncDescriptor(SwitchService));
   const instantiationService = new InstantiationService(serviceCollection, true);
   await instantiationService.invokeFunction(async (dss) => {
+    await dss.get(ISwitchService).init();
+  });
+  await instantiationService.invokeFunction(async (dss) => {
     await dss.get(IConfigService).init();
   });
   await instantiationService.invokeFunction(async (dss) => {

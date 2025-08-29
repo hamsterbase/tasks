@@ -19,3 +19,7 @@
 .half-top {
   top: calc(var(--1dvh, 1vh) * 50);
 }
+
+.border-thin {
+  border-width: 0.5px;
+}

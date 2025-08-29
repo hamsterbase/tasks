@@ -182,4 +182,21 @@ export const baseStyles = {
   switchOuterBorder: '',
 
   dialogBorder: '',
+
+  // font-size 14px
+  baseButtonStyle: 'flex items-center justify-center text-center rounded-full w-full',
+  baseButtonDisabledStyle: 'opacity-50 cursor-not-allowed',
+  buttonSizeLargeStyle: 'h-11 text-base',
+  buttonShapeDefaultStyle: 'bg-brand text-white hover:opacity-90',
+  buttonShapeLightStyle: 'border border-line-bold border-thin text-t2 hover:opacity-90',
+
+  // Privacy Agreement Overlay styles
+  privacyOverlayContainer: 'fixed inset-0 z-99999 flex items-center justify-center bg-black/50 p-4',
+  privacyOverlayModal: 'bg-bg1 rounded-xl p-4 max-w-sm w-full max-h-[85vh] overflow-y-auto shadow-2xl',
+  privacyOverlayTitle: 'text-t1 text-2xl font-bold mb-8 text-center',
+  privacyOverlayContent: 'mb-8',
+  privacyOverlayExplanation: 'text-t2 text-base mb-6 leading-relaxed',
+  privacyOverlayLinkList: 'space-y-4 mb-8 pl-4',
+  privacyOverlayLink: 'text-brand underline cursor-pointer text-base hover:text-opacity-80 transition-opacity',
+  privacyOverlayButtonContainer: 'space-y-4',
 };

@@ -116,6 +116,14 @@
     "defaultMessage": "Add Task",
     "content": "添加任务"
   },
+  "agree": {
+    "defaultMessage": "Agree",
+    "content": "同意"
+  },
+  "agreement_disclaimer": {
+    "defaultMessage": "By clicking \"Agree\", you acknowledge that you have read and agreed to both documents.",
+    "content": "点击\"同意\"即表示您确认已阅读并同意上述两份文件。"
+  },
   "area.create_project": {
     "defaultMessage": "Add Project",
     "content": "添加项目"
@@ -448,6 +456,10 @@
     "defaultMessage": "Create tag \"{0}\"",
     "content": "创建标签 \"{0}\""
   },
+  "disagree": {
+    "defaultMessage": "Not Now",
+    "content": "不同意"
+  },
   "display_settings.completed_tasks": {
     "defaultMessage": "Completed Tasks",
     "content": "已完成任务"
@@ -463,6 +475,10 @@
   "edit_task_item.task_notes_placeholder": {
     "defaultMessage": "Add Notes...",
     "content": "添加笔记..."
+  },
+  "end_user_license_agreement": {
+    "defaultMessage": "End User License Agreement",
+    "content": "最终用户许可协议"
   },
   "errorCreatingDirectory": {
     "defaultMessage": "Error creating directory:",
@@ -600,6 +616,10 @@
     "defaultMessage": "Key not found",
     "content": "未找到密钥"
   },
+  "legal_agreement_explanation": {
+    "defaultMessage": "To use HamsterBase, you must first review and agree to our:",
+    "content": "使用 HamsterBase 之前，您必须先审阅并同意我们的："
+  },
   "listItemsError": {
     "defaultMessage": "Error listing items from IndexedDB:",
     "content": "从 IndexedDB 列出项目时出错："
@@ -731,6 +751,14 @@
   "otherError": {
     "defaultMessage": "An error occurred",
     "content": "发生错误"
+  },
+  "privacy_and_EUAL": {
+    "defaultMessage": "Privacy Policy and EULA",
+    "content": "隐私政策和用户协议"
+  },
+  "privacy_policy": {
+    "defaultMessage": "Privacy Policy",
+    "content": "隐私政策"
   },
   "project_area_selector.move_to_root": {
     "defaultMessage": "Move to root",
@@ -959,6 +987,10 @@
   "settings.about": {
     "defaultMessage": "About",
     "content": "关于"
+  },
+  "settings.about.commit": {
+    "defaultMessage": "Commit",
+    "content": "提交版本"
   },
   "settings.account": {
     "defaultMessage": "Account",

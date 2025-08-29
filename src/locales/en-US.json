@@ -116,6 +116,14 @@
     "defaultMessage": "Add Task",
     "content": "Add Task"
   },
+  "agree": {
+    "defaultMessage": "Agree",
+    "content": "Agree"
+  },
+  "agreement_disclaimer": {
+    "defaultMessage": "By clicking \"Agree\", you acknowledge that you have read and agreed to both documents.",
+    "content": "By clicking \"Agree\", you acknowledge that you have read and agreed to both documents."
+  },
   "area.create_project": {
     "defaultMessage": "Add Project",
     "content": "Add Project"
@@ -448,6 +456,10 @@
     "defaultMessage": "Create tag \"{0}\"",
     "content": "Create tag \"{0}\""
   },
+  "disagree": {
+    "defaultMessage": "Not Now",
+    "content": "Not Now"
+  },
   "display_settings.completed_tasks": {
     "defaultMessage": "Completed Tasks",
     "content": "Completed Tasks"
@@ -463,6 +475,10 @@
   "edit_task_item.task_notes_placeholder": {
     "defaultMessage": "Add Notes...",
     "content": "Add Notes..."
+  },
+  "end_user_license_agreement": {
+    "defaultMessage": "End User License Agreement",
+    "content": "End User License Agreement"
   },
   "errorCreatingDirectory": {
     "defaultMessage": "Error creating directory:",
@@ -600,6 +616,10 @@
     "defaultMessage": "Key not found",
     "content": "Key not found"
   },
+  "legal_agreement_explanation": {
+    "defaultMessage": "To use HamsterBase, you must first review and agree to our:",
+    "content": "To use HamsterBase, you must first review and agree to our:"
+  },
   "listItemsError": {
     "defaultMessage": "Error listing items from IndexedDB:",
     "content": "Error listing items from IndexedDB:"
@@ -731,6 +751,14 @@
   "otherError": {
     "defaultMessage": "An error occurred",
     "content": "An error occurred"
+  },
+  "privacy_and_EULA": {
+    "defaultMessage": "Privacy Policy and EULA",
+    "content": "Privacy Policy and EULA"
+  },
+  "privacy_policy": {
+    "defaultMessage": "Privacy Policy",
+    "content": "Privacy Policy"
   },
   "project_area_selector.move_to_root": {
     "defaultMessage": "Move to root",
@@ -959,6 +987,10 @@
   "settings.about": {
     "defaultMessage": "About",
     "content": "About"
+  },
+  "settings.about.commit": {
+    "defaultMessage": "Commit",
+    "content": "Commit"
   },
   "settings.account": {
     "defaultMessage": "Account",
