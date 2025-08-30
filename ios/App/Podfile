@@ -17,8 +17,8 @@ def capacitor_pods
   pod 'CapacitorPreferences', :path => '../../node_modules/.pnpm/@capacitor+preferences@7.0.1_@capacitor+core@7.2.0/node_modules/@capacitor/preferences'
   pod 'CapacitorShare', :path => '../../node_modules/.pnpm/@capacitor+share@7.0.1_@capacitor+core@7.2.0/node_modules/@capacitor/share'
   pod 'CapacitorStatusBar', :path => '../../node_modules/.pnpm/@capacitor+status-bar@7.0.1_@capacitor+core@7.2.0/node_modules/@capacitor/status-bar'
+  pod 'HamsterbaseCapacitorPluginSafeArea', :path => '../../node_modules/.pnpm/@hamsterbase+capacitor-plugin-safe-area@4.0.1_@capacitor+core@7.2.0/node_modules/@hamsterbase/capacitor-plugin-safe-area'
   pod 'RevenuecatPurchasesCapacitor', :path => '../../node_modules/.pnpm/@revenuecat+purchases-capacitor@10.2.2_@capacitor+core@7.2.0/node_modules/@revenuecat/purchases-capacitor'
-  pod 'CapacitorPluginSafeArea', :path => '../../node_modules/.pnpm/capacitor-plugin-safe-area@4.0.0_@capacitor+core@7.2.0/node_modules/capacitor-plugin-safe-area'
 end
 
 target 'App' do
