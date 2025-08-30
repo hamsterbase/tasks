@@ -22,10 +22,8 @@ import { LoginPage } from '@/desktop/pages/settings/Login/LoginPage.tsx';
 import { RegisterPage } from '@/desktop/pages/settings/Register/RegisterPage.tsx';
 import { Today } from '@/desktop/pages/today/index.tsx';
 import { useInputFocused } from '@/hooks/global/useInputFocused';
-import { useService } from '@/hooks/use-service';
 import { useCloudSync } from '@/hooks/useCloudSync.ts';
-import { ISwitchService } from '@/services/switchService/common/switchService';
-import { SafeArea } from 'capacitor-plugin-safe-area';
+import { useSafeArea } from '@/hooks/useSafeArea';
 import React, { useEffect } from 'react';
 import { Navigate, useRoutes } from 'react-router';
 
@@ -39,20 +37,7 @@ export const App = () => {
       document.documentElement.style.fontSize = originalFontSize;
     };
   }, []);
-
-  const switchService = useService(ISwitchService);
-  useEffect(() => {
-    (async function () {
-      const safeAreaData = await SafeArea.getSafeAreaInsets();
-      const { insets } = safeAreaData;
-      for (const [key, value] of Object.entries(insets)) {
-        document.documentElement.style.setProperty(`--safe-area-inset-${key}`, `${value}px`);
-        if (switchService.getLocalSwitch('shouldIgnoreSafeBottom') && key === 'bottom') {
-          document.documentElement.style.setProperty(`--safe-area-inset-${key}`, `0px`);
-        }
-      }
-    })();
-  }, [switchService]);
+  useSafeArea();
 
   const element = useRoutes([
     {

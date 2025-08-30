@@ -1,3 +1,4 @@
+import { PRIVACY_AGREEMENT_KEY } from '@/base/common/privacy';
 import { useService } from '@/hooks/use-service';
 import useNavigate from '@/hooks/useNavigate';
 import { localize } from '@/nls';
@@ -5,8 +6,6 @@ import { ISwitchService } from '@/services/switchService/common/switchService';
 import React, { useEffect, useState } from 'react';
 import { styles } from '../theme';
 import { MobileButton } from './MobileButton';
-
-export const PRIVACY_AGREEMENT_KEY = 'hamsterbase_privacy_agreement_shown';
 
 export const PrivacyAgreementOverlay: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);

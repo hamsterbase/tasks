@@ -1,5 +1,6 @@
 import { useService } from '@/hooks/use-service';
 import { useCloudSync } from '@/hooks/useCloudSync';
+import { useSafeArea } from '@/hooks/useSafeArea';
 import { DatePickerActionSheet } from '@/mobile/overlay/datePicker/DatePickerActionSheet.tsx';
 import { Dialog } from '@/mobile/overlay/dialog/Dialog';
 import { PopupActionSheet } from '@/mobile/overlay/popupAction/PopupActionSheet';
@@ -7,13 +8,10 @@ import { TagEditorActionSheet } from '@/mobile/overlay/tagEditor/TagEditorAction
 import { TaskDisplaySettings } from '@/mobile/overlay/taskDisplaySettings/TaskDisplaySettings';
 import { pages } from '@/mobile/pages.tsx';
 import { INavigationService } from '@/services/navigationService/common/navigationService';
-import { SafeArea } from 'capacitor-plugin-safe-area';
 import React, { useEffect, useRef } from 'react';
 import { BrowserRouter, Navigate, Outlet, Route, Routes, useNavigate } from 'react-router';
 import { Toast } from './overlay/toast/Toast';
 import { ProjectAreaSelector } from './overlay/projectAreaSelector/ProjectAreaSelector';
-import { ISwitchService } from '@/services/switchService/common/switchService';
-import { PRIVACY_AGREEMENT_KEY } from './components/PrivacyAgreementOverlay';
 
 const ContentNavigation = () => {
   const navigate = useNavigate();
@@ -52,26 +50,7 @@ const ContentNavigation = () => {
 
 export const App = () => {
   useCloudSync();
-  const switchService = useService(ISwitchService);
-
-  useEffect(() => {
-    (async function () {
-      if (switchService.getLocalSwitch('showPrivacyAgreementOverlay')) {
-        const hasShown = localStorage.getItem(PRIVACY_AGREEMENT_KEY);
-        if (!hasShown) {
-          return;
-        }
-      }
-      const safeAreaData = await SafeArea.getSafeAreaInsets();
-      const { insets } = safeAreaData;
-      for (const [key, value] of Object.entries(insets)) {
-        document.documentElement.style.setProperty(`--safe-area-inset-${key}`, `${value}px`);
-        if (switchService.getLocalSwitch('shouldIgnoreSafeBottom') && key === 'bottom') {
-          document.documentElement.style.setProperty(`--safe-area-inset-${key}`, `0px`);
-        }
-      }
-    })();
-  }, [switchService]);
+  useSafeArea();
 
   return (
     <div>
