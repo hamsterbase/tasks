@@ -62,8 +62,8 @@ devDependencies:
     specifier: ^9.17.0
     version: 9.23.0
   '@hamsterbase/capacitor-plugin-safe-area':
-    specifier: ^4.0.0
-    version: 4.0.0(@capacitor/core@7.2.0)
+    specifier: ^4.0.1
+    version: 4.0.1(@capacitor/core@7.2.0)
   '@revenuecat/purchases-capacitor':
     specifier: ^10.2.1
     version: 10.2.2(@capacitor/core@7.2.0)
@@ -721,7 +721,7 @@ packages:
     engines: {node: '>=12.13.0'}
     hasBin: true
     dependencies:
-      '@electron/node-gyp': github.com/electron/node-gyp/06b29aafb7708acef8b3669835c8a7857ebc92d2
+      '@electron/node-gyp': git@github.com+electron/node-gyp/06b29aafb7708acef8b3669835c8a7857ebc92d2
       '@malept/cross-spawn-promise': 2.0.0
       chalk: 4.1.2
       debug: 4.4.1
@@ -1080,8 +1080,8 @@ packages:
     resolution: {integrity: sha512-k2Ty1JcVojjJFwrg/ThKi2ujJ7XNLYaFGNB/bWT9wGR+oSMJHMa5w+CUq6p/pVrKeNNgA7pCqEcjSnHVoqJQFw==}
     dev: true
 
-  /@hamsterbase/capacitor-plugin-safe-area@4.0.0(@capacitor/core@7.2.0):
-    resolution: {integrity: sha512-Hi8Oyf6HgDV7HakcBEErxIDHaIIofD0hLSLhKvIt6yCwanPd6ssnL3vmNbA1nam/9XV/blZ8Wn8seDRgYbmsZA==}
+  /@hamsterbase/capacitor-plugin-safe-area@4.0.1(@capacitor/core@7.2.0):
+    resolution: {integrity: sha512-24/ALRn6zofxeKltd8gUSt3EqhLA8ZaeHT4gTCw8Cw0c8nt+BYR859T1gXo0SfoFpCeBdnAwWjTM0PTPIP16Ow==}
     peerDependencies:
       '@capacitor/core': '>=7.0.0'
     dependencies:
@@ -8265,8 +8265,8 @@ packages:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: true
 
-  github.com/electron/node-gyp/06b29aafb7708acef8b3669835c8a7857ebc92d2:
-    resolution: {tarball: https://codeload.github.com/electron/node-gyp/tar.gz/06b29aafb7708acef8b3669835c8a7857ebc92d2}
+  git@github.com+electron/node-gyp/06b29aafb7708acef8b3669835c8a7857ebc92d2:
+    resolution: {commit: 06b29aafb7708acef8b3669835c8a7857ebc92d2, repo: git@github.com:electron/node-gyp.git, type: git}
     name: '@electron/node-gyp'
     version: 10.2.0-electron.1
     engines: {node: '>=12.13.0'}
