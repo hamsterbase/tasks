@@ -1,3 +1,4 @@
+import { checkPlatform } from '@/base/browser/checkPlatform';
 import { PRIVACY_AGREEMENT_KEY } from '@/base/common/privacy';
 import { useService } from '@/hooks/use-service';
 import { ISwitchService } from '@/services/switchService/common/switchService';
@@ -14,7 +15,16 @@ export const useSafeArea = () => {
           return;
         }
       }
-      const { SafeArea } = await import('capacitor-plugin-safe-area');
+      const { SafeArea } = await import('@hamsterbase/capacitor-plugin-safe-area');
+      if (checkPlatform().isAndroid && checkPlatform().isNative) {
+        try {
+          SafeArea.startListeningForSafeAreaChanges().catch(() => {
+            console.error('Error starting SafeArea listener');
+          });
+        } catch (error) {
+          console.error('Error initializing SafeArea listener:', error);
+        }
+      }
       const safeAreaData = await SafeArea.getSafeAreaInsets();
       const { insets } = safeAreaData;
       for (const [key, value] of Object.entries(insets)) {
