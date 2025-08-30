@@ -13,6 +13,7 @@ import { BrowserRouter, Navigate, Outlet, Route, Routes, useNavigate } from 'rea
 import { Toast } from './overlay/toast/Toast';
 import { ProjectAreaSelector } from './overlay/projectAreaSelector/ProjectAreaSelector';
 import { ISwitchService } from '@/services/switchService/common/switchService';
+import { PRIVACY_AGREEMENT_KEY } from './components/PrivacyAgreementOverlay';
 
 const ContentNavigation = () => {
   const navigate = useNavigate();
@@ -55,6 +56,12 @@ export const App = () => {
 
   useEffect(() => {
     (async function () {
+      if (switchService.getLocalSwitch('showPrivacyAgreementOverlay')) {
+        const hasShown = localStorage.getItem(PRIVACY_AGREEMENT_KEY);
+        if (!hasShown) {
+          return;
+        }
+      }
       const safeAreaData = await SafeArea.getSafeAreaInsets();
       const { insets } = safeAreaData;
       for (const [key, value] of Object.entries(insets)) {

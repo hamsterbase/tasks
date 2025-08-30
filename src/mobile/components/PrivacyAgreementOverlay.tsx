@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { styles } from '../theme';
 import { MobileButton } from './MobileButton';
 
-const PRIVACY_AGREEMENT_KEY = 'hamsterbase_privacy_agreement_shown';
+export const PRIVACY_AGREEMENT_KEY = 'hamsterbase_privacy_agreement_shown';
 
 export const PrivacyAgreementOverlay: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -23,11 +23,13 @@ export const PrivacyAgreementOverlay: React.FC = () => {
   const handleAgree = () => {
     localStorage.setItem(PRIVACY_AGREEMENT_KEY, 'true');
     setIsVisible(false);
+    window.location.reload();
   };
 
   const handleDisagree = () => {
     localStorage.setItem(PRIVACY_AGREEMENT_KEY, 'true');
     setIsVisible(false);
+    window.location.reload();
   };
 
   if (!isVisible) {
