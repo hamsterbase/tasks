@@ -17,6 +17,14 @@ If you don't register for an account, we don't collect any personal information.
 
 All collected data is stored on secure servers hosted by Tencent Cloud. We implement industry-standard security measures to protect your information.
 
+## Device Permissions and Sensors
+
+Our application uses certain device sensors and permissions to provide optimal user experience:
+
+| Sensor/Permission | Purpose | Core Functions | Data Processing |
+|-------------------|---------|----------------|-----------------|
+| Accelerometer | Device orientation detection to ensure proper interface adaptation for portrait and landscape modes | • Interface adaptation: Adjust app layout based on device orientation<br>• Screen adaptation: Ensure content displays correctly on different screen types<br>• App stability: Maintain normal app operation status | • Local processing: Sensor data is processed locally on device for real-time UI adjustments<br>• No remote transmission: Raw sensor data is never sent to remote servers<br>• No permanent storage: Sensor data is not permanently stored, only used temporarily during app runtime |
+
 ## Data Sharing
 
 We do not share, sell, or provide your data to any third parties except as necessary to provide our services. This includes:
