@@ -1,5 +1,4 @@
 import { checkPlatform } from '@/base/browser/checkPlatform';
-import { PRIVACY_AGREEMENT_KEY } from '@/base/common/privacy';
 import { useService } from '@/hooks/use-service';
 import { ISwitchService } from '@/services/switchService/common/switchService';
 import { useEffect } from 'react';
@@ -9,12 +8,6 @@ export const useSafeArea = () => {
 
   useEffect(() => {
     (async function () {
-      if (switchService.getLocalSwitch('showPrivacyAgreementOverlay')) {
-        const hasShown = localStorage.getItem(PRIVACY_AGREEMENT_KEY);
-        if (!hasShown) {
-          return;
-        }
-      }
       const { SafeArea } = await import('@hamsterbase/capacitor-plugin-safe-area');
       if (checkPlatform().isAndroid && checkPlatform().isNative) {
         try {

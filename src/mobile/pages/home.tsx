@@ -25,7 +25,6 @@ import React from 'react';
 import { InboxDropZone } from '../components/dnd/InboxDropZone.tsx';
 import { LastPlacement } from '../components/dnd/lastPlacement.tsx';
 import { PageLayout } from '../components/PageLayout.tsx';
-import { PrivacyAgreementOverlay } from '../components/PrivacyAgreementOverlay.tsx';
 import { ProjectStatusBox } from '../../components/icons/ProjectStatusBox.tsx';
 import { TaskStatusBox } from '../components/taskItem/TaskStatusBox.tsx';
 import { AreaHeader } from '../components/todo/AreaHeader.tsx';
@@ -223,7 +222,6 @@ export const MobileHome = () => {
         unstartedProjects={unstartedProjects}
       ></HomeProjectAndArea>
       <InboxDropZone />
-      <PrivacyAgreementOverlay />
     </PageLayout>
   );
 };
