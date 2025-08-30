@@ -61,6 +61,9 @@ devDependencies:
   '@eslint/js':
     specifier: ^9.17.0
     version: 9.23.0
+  '@hamsterbase/capacitor-plugin-safe-area':
+    specifier: ^4.0.0
+    version: 4.0.0(@capacitor/core@7.2.0)
   '@revenuecat/purchases-capacitor':
     specifier: ^10.2.1
     version: 10.2.2(@capacitor/core@7.2.0)
@@ -112,9 +115,6 @@ devDependencies:
   allotment:
     specifier: ^1.20.3
     version: 1.20.3(react-dom@18.3.1)(react@18.3.1)
-  capacitor-plugin-safe-area:
-    specifier: ^4.0.0
-    version: 4.0.0(@capacitor/core@7.2.0)
   classnames:
     specifier: ^2.5.1
     version: 2.5.1
@@ -1078,6 +1078,14 @@ packages:
 
   /@gar/promisify@1.1.3:
     resolution: {integrity: sha512-k2Ty1JcVojjJFwrg/ThKi2ujJ7XNLYaFGNB/bWT9wGR+oSMJHMa5w+CUq6p/pVrKeNNgA7pCqEcjSnHVoqJQFw==}
+    dev: true
+
+  /@hamsterbase/capacitor-plugin-safe-area@4.0.0(@capacitor/core@7.2.0):
+    resolution: {integrity: sha512-Hi8Oyf6HgDV7HakcBEErxIDHaIIofD0hLSLhKvIt6yCwanPd6ssnL3vmNbA1nam/9XV/blZ8Wn8seDRgYbmsZA==}
+    peerDependencies:
+      '@capacitor/core': '>=7.0.0'
+    dependencies:
+      '@capacitor/core': 7.2.0
     dev: true
 
   /@humanfs/core@0.19.1:
@@ -2952,14 +2960,6 @@ packages:
 
   /caniuse-lite@1.0.30001710:
     resolution: {integrity: sha512-B5C0I0UmaGqHgo5FuqJ7hBd4L57A4dDD+Xi+XX1nXOoxGeDdY4Ko38qJYOyqznBVJEqON5p8P1x5zRR3+rsnxA==}
-    dev: true
-
-  /capacitor-plugin-safe-area@4.0.0(@capacitor/core@7.2.0):
-    resolution: {integrity: sha512-5VHT4wG2TlwHtyy3zKrAjKwgJQgC3KeMfRW1bc8abTETLYNLxb85zvfpA0QFE59BxbtYHD57GvXKJuUPgEHl3g==}
-    peerDependencies:
-      '@capacitor/core': '>=7.0.0'
-    dependencies:
-      '@capacitor/core': 7.2.0
     dev: true
 
   /ccount@2.0.1:

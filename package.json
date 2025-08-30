@@ -62,7 +62,7 @@
     "@types/test-exclude": "^6.0.2",
     "@vitejs/plugin-react": "^4.3.4",
     "allotment": "^1.20.3",
-    "capacitor-plugin-safe-area": "^4.0.0",
+    "@hamsterbase/capacitor-plugin-safe-area": "^4.0.0",
     "classnames": "^2.5.1",
     "crypto-js": "^4.2.0",
     "date-fns": "^4.1.0",
