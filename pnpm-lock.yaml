@@ -66,7 +66,7 @@ devDependencies:
     version: 4.0.1(@capacitor/core@7.2.0)
   '@revenuecat/purchases-capacitor':
     specifier: ^10.2.1
-    version: 10.2.2(@capacitor/core@7.2.0)
+    version: 10.3.8(@capacitor/core@7.2.0)
   '@rollup/plugin-alias':
     specifier: ^5.1.1
     version: 5.1.1(rollup@4.45.1)
@@ -1407,17 +1407,17 @@ packages:
       prettier: 3.5.3
     dev: true
 
-  /@revenuecat/purchases-capacitor@10.2.2(@capacitor/core@7.2.0):
-    resolution: {integrity: sha512-yVMBmlpkLI1xApVX/MSUnIrVlCYbrCDUgJQKQaR31+be9iy8bnkYrrOqBcASQpLoaUI8qPSqEeTAIssfom+StQ==}
+  /@revenuecat/purchases-capacitor@10.3.8(@capacitor/core@7.2.0):
+    resolution: {integrity: sha512-Q0aUEfqfa1FLm/cg3KaVaSAP5emQ9A6fNFvzKlv/LTxGZN++yZHcx5UGe5TSjetdgWgOjJvy3wdtE/qDDxR2cA==}
     peerDependencies:
       '@capacitor/core': '>=7.0.0'
     dependencies:
       '@capacitor/core': 7.2.0
-      '@revenuecat/purchases-typescript-internal-esm': 13.26.0
+      '@revenuecat/purchases-typescript-internal-esm': 14.2.0
     dev: true
 
-  /@revenuecat/purchases-typescript-internal-esm@13.26.0:
-    resolution: {integrity: sha512-+oU1JmHUtSVRyqnQIMWbHIKhXh3DGiXr4SlH8NmIWi8HE2bcnuZcrmfXTUWl91FEkPqRlYy8sqvqv3JcdH6XtA==}
+  /@revenuecat/purchases-typescript-internal-esm@14.2.0:
+    resolution: {integrity: sha512-RPkRmE757x4EzHeULazVGieBhGmmq2t3AlHGCFiXQr1ZDdGzlnm00ZasTQYkaR2b1Ghklk2XCmTBp2oiMCbU2g==}
     dev: true
 
   /@rollup/plugin-alias@5.1.1(rollup@4.45.1):
