@@ -1,10 +1,12 @@
-import { isOther } from '@/base/browser/channel';
+import { useService } from '@/hooks/use-service';
 import { ListItemGroup } from '@/mobile/components/listItem/listItem';
 import { localize } from '@/nls';
+import { ISwitchService } from '@/services/switchService/common/switchService';
 import React from 'react';
 
 export const OtherPurchase = () => {
-  if (!isOther()) {
+  const switchService = useService(ISwitchService);
+  if (!switchService.getLocalSwitch('showIOSPurchaseButton')) {
     return null;
   }
   return (

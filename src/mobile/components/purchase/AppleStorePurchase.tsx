@@ -1,8 +1,9 @@
-import { isIosAppStore } from '@/base/browser/channel';
 import { TEST_ACCOUNT_LIST } from '@/base/common/account';
+import { useService } from '@/hooks/use-service';
 import { ListItemGroup } from '@/mobile/components/listItem/listItem';
 import { useToast } from '@/mobile/overlay/toast/useToast';
 import { localize } from '@/nls';
+import { ISwitchService } from '@/services/switchService/common/switchService';
 import { Purchases } from '@revenuecat/purchases-capacitor';
 import { differenceInCalendarDays } from 'date-fns';
 import React, { useState } from 'react';
@@ -20,8 +21,9 @@ export const AppleStorePurchase: React.FC<{
 }> = ({ userInfo, onPurchase }) => {
   const toast = useToast();
   const [isLoading, setIsLoading] = useState(false);
+  const switchService = useService(ISwitchService);
   const { data: productInfo } = useSWR(
-    isIosAppStore() && userInfo ? 'AppleStorePurchase.productInfo' : null,
+    switchService.getLocalSwitch('showIOSPurchaseButton') && userInfo ? 'AppleStorePurchase.productInfo' : null,
     async () => {
       if (!userInfo) {
         return null;
