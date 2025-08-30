@@ -33,4 +33,6 @@ scripts/electronPackEnv.json
 android/version
 android/release.keystore
 android/release.properties
+android/app/capacitor.build.gradle
+android/capacitor.settings.gradle
 ios/App/project.version.xcconfig
