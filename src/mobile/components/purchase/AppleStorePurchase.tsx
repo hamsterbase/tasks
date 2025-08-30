@@ -4,7 +4,6 @@ import { ListItemGroup } from '@/mobile/components/listItem/listItem';
 import { useToast } from '@/mobile/overlay/toast/useToast';
 import { localize } from '@/nls';
 import { ISwitchService } from '@/services/switchService/common/switchService';
-import { Purchases } from '@revenuecat/purchases-capacitor';
 import { differenceInCalendarDays } from 'date-fns';
 import React, { useState } from 'react';
 import useSWR from 'swr';
@@ -33,6 +32,7 @@ export const AppleStorePurchase: React.FC<{
       if (diff > 45 && !TEST_ACCOUNT_LIST.includes(userInfo.account)) {
         return null;
       }
+      const { Purchases } = await import('@revenuecat/purchases-capacitor');
       Purchases.configure({
         apiKey: 'appl_FWikbgMUBqiafUyuIiCjpOirXSH',
         appUserID: userInfo.accountId,
@@ -69,6 +69,7 @@ export const AppleStorePurchase: React.FC<{
           onClick: async () => {
             setIsLoading(true);
             try {
+              const { Purchases } = await import('@revenuecat/purchases-capacitor');
               const product = await Purchases.getProducts({
                 productIdentifiers: ['HamsterbaseCloudProOneYear'],
               });
