@@ -136,6 +136,14 @@
     "defaultMessage": "Delete Area",
     "content": "删除区域"
   },
+  "area.delete_area_confirm_description": {
+    "defaultMessage": "Are you sure you want to delete this area? This action cannot be undone.",
+    "content": "您确定要删除此区域吗？此操作无法撤销。"
+  },
+  "area.delete_area_confirm_title": {
+    "defaultMessage": "Delete Area",
+    "content": "删除区域"
+  },
   "area.detail.tags": {
     "defaultMessage": "Tags",
     "content": "标签"
@@ -736,6 +744,10 @@
     "defaultMessage": "Total: {0} logs",
     "content": "总计：{0} 条日志"
   },
+  "message.undo": {
+    "defaultMessage": "Undo",
+    "content": "撤销"
+  },
   "move_success": {
     "defaultMessage": "Moved successfully",
     "content": "移动成功"
@@ -1281,6 +1293,14 @@
     "content": "删除"
   },
   "task.delete_project": {
+    "defaultMessage": "Delete Project",
+    "content": "删除项目"
+  },
+  "task.delete_project_confirm_description": {
+    "defaultMessage": "Are you sure you want to delete this project? This action cannot be undone.",
+    "content": "您确定要删除此项目吗？此操作无法撤销。"
+  },
+  "task.delete_project_confirm_title": {
     "defaultMessage": "Delete Project",
     "content": "删除项目"
   },
