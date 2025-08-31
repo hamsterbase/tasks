@@ -3,9 +3,7 @@ import zhCN from '../zh-CN.json';
 import enUS from '../en-US.json';
 
 declare global {
-  // eslint-disable-next-line no-var
   var language: string;
-  // eslint-disable-next-line no-var
   var i18nMessages: Record<string, string | { content: string }>;
 }
 
