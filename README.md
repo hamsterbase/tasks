@@ -32,6 +32,12 @@ To download the latest version of HamsterBase Tasks, visit the [official page](h
 
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details on how to get started.
 
+## Build Instructions
+
+### Android
+
+To build the Android application from source, see detailed instructions in [docs/android-build-instructions.md](docs/android-build-instructions.md).
+
 ## License
 
 This project is licensed under the GNU Affero General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
