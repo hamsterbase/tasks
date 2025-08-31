@@ -18,7 +18,13 @@ const ContentNavigation = () => {
   const navigationService = useService(INavigationService);
   useEffect(() => {
     const listener = navigationService.listenBackButton(() => {
-      navigate(-1);
+      if (window.history.state && window.history.state.idx > 0) {
+        navigate(-1);
+      } else {
+        import('@capacitor/app').then(({ App }) => {
+          App.exitApp();
+        });
+      }
     });
     return () => {
       listener.dispose();
