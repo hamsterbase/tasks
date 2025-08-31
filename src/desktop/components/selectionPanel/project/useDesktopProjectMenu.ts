@@ -3,14 +3,17 @@ import { useService } from '@/hooks/use-service.ts';
 import { localize } from '@/nls.ts';
 import { ITodoService } from '@/services/todo/common/todoService.ts';
 import type { TreeID } from 'loro-crdt';
+import { useNavigate } from 'react-router';
 import { IInstantiationService } from 'vscf/platform/instantiation/common.ts';
 
 export const useDesktopProjectMenu = (taskId: TreeID) => {
   const instantiationService = useService(IInstantiationService);
   const todoService = useService(ITodoService);
+  const navigate = useNavigate();
 
   const handleDeleteProject = () => {
     todoService.deleteItem(taskId);
+    navigate('/desktop/inbox');
   };
 
   function createMenuConfig(): IMenuConfig[] {
