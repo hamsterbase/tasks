@@ -30,24 +30,24 @@ const ContentNavigation = () => {
       listener.dispose();
     };
   }, [navigate, navigationService]);
-  const wewe = useRef<HTMLInputElement>(null);
+  const hiddenInputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
-    const xx = navigationService.onNavigate((e) => {
+    const navigationSubscription = navigationService.onNavigate((e) => {
       if (e.path === '/create_task') {
-        wewe.current?.focus();
+        hiddenInputRef.current?.focus();
         navigate(e.path, { replace: e.replace });
       } else {
         navigate(e.path, { replace: e.replace });
       }
     });
     return () => {
-      xx.dispose();
+      navigationSubscription.dispose();
     };
   }, [navigationService, navigate]);
   return (
     <div>
       <div style={{ maxHeight: 0, overflow: 'hidden' }}>
-        <input ref={wewe}></input>
+        <input ref={hiddenInputRef}></input>
       </div>
       <Outlet></Outlet>
     </div>
