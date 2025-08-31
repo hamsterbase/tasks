@@ -3,14 +3,12 @@ import { iOSBackForwardNavigationGestures } from './iOSBackForwardNavigationGest
 import { shouldIgnoreSafeBottom } from './shouldIgnoreSafeBottom';
 import { showIOSPurchaseButton } from './showIOSPurchaseButton';
 import { showNativeAboutButton } from './showNativeAboutButton';
-import { showPrivacyAgreementOverlay } from './showPrivacyAgreementOverlay';
 
 export const switchKeys = {
   showIOSPurchaseButton,
   iOSBackForwardNavigationGestures,
   hideBottomMenuWhenKeyboardShow,
   showNativeAboutButton,
-  showPrivacyAgreementOverlay,
   shouldIgnoreSafeBottom,
 } as const;
 

@@ -1,4 +1,3 @@
-import { checkPlatform } from '@/base/browser/checkPlatform';
 import { useService } from '@/hooks/use-service';
 import { ISwitchService } from '@/services/switchService/common/switchService';
 import { useEffect } from 'react';
@@ -8,16 +7,7 @@ export const useSafeArea = () => {
 
   useEffect(() => {
     (async function () {
-      const { SafeArea } = await import('@hamsterbase/capacitor-plugin-safe-area');
-      if (checkPlatform().isAndroid && checkPlatform().isNative) {
-        try {
-          SafeArea.startListeningForSafeAreaChanges().catch(() => {
-            console.error('Error starting SafeArea listener');
-          });
-        } catch (error) {
-          console.error('Error initializing SafeArea listener:', error);
-        }
-      }
+      const { SafeArea } = await import('capacitor-plugin-safe-area');
       const safeAreaData = await SafeArea.getSafeAreaInsets();
       const { insets } = safeAreaData;
       for (const [key, value] of Object.entries(insets)) {
