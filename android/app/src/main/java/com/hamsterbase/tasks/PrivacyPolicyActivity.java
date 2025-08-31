@@ -5,12 +5,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Point;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +25,14 @@ public class PrivacyPolicyActivity extends Activity {
     
     private static final String PREFS_NAME = "PrivacyPolicyPrefs";
     private static final String KEY_PRIVACY_ACCEPTED = "privacy_policy_accepted";
+    
+    private int getButtonHeight() {
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int screenWidth = size.x;
+        return (int) (44.0f / 375.0f * screenWidth);
+    }
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +48,7 @@ public class PrivacyPolicyActivity extends Activity {
         
         LinearLayout mainLayout = new LinearLayout(this);
         mainLayout.setOrientation(LinearLayout.VERTICAL);
-        mainLayout.setPadding(50, 80, 50, 50);
+        mainLayout.setPadding(50, 150, 50, 50);
         mainLayout.setBackgroundColor(Color.WHITE);
         
         TextView titleView = new TextView(this);
@@ -79,7 +90,7 @@ public class PrivacyPolicyActivity extends Activity {
         contentView.setMovementMethod(LinkMovementMethod.getInstance());
         contentView.setPadding(20, 0, 20, 80);
         contentView.setLineSpacing(0, 1.3f);
-        contentView.setGravity(Gravity.CENTER);
+        contentView.setGravity(Gravity.LEFT);
         
         LinearLayout buttonLayout = new LinearLayout(this);
         buttonLayout.setOrientation(LinearLayout.HORIZONTAL);
@@ -89,18 +100,27 @@ public class PrivacyPolicyActivity extends Activity {
         Button disagreeButton = new Button(this);
         disagreeButton.setText("不同意");
         disagreeButton.setTextColor(Color.parseColor("#666666"));
-        disagreeButton.setBackgroundColor(Color.parseColor("#F5F5F5"));
+        GradientDrawable disagreeDrawable = new GradientDrawable();
+        disagreeDrawable.setColor(Color.parseColor("#F5F5F5"));
+        int buttonHeight = getButtonHeight();
+        disagreeDrawable.setCornerRadius(buttonHeight / 2.0f);
+        disagreeButton.setBackground(disagreeDrawable);
+        disagreeButton.setElevation(0);
         disagreeButton.setTextSize(16);
-        LinearLayout.LayoutParams disagreeParams = new LinearLayout.LayoutParams(0, 120, 1);
+        LinearLayout.LayoutParams disagreeParams = new LinearLayout.LayoutParams(0, buttonHeight, 1);
         disagreeParams.rightMargin = 30;
         disagreeButton.setLayoutParams(disagreeParams);
         
         Button agreeButton = new Button(this);
         agreeButton.setText("同意");
         agreeButton.setTextColor(Color.WHITE);
-        agreeButton.setBackgroundColor(Color.parseColor("#007AFF"));
+        GradientDrawable agreeDrawable = new GradientDrawable();
+        agreeDrawable.setColor(Color.parseColor("#30cccc"));
+        agreeDrawable.setCornerRadius(buttonHeight / 2.0f);
+        agreeButton.setBackground(agreeDrawable);
+        agreeButton.setElevation(0);
         agreeButton.setTextSize(16);
-        LinearLayout.LayoutParams agreeParams = new LinearLayout.LayoutParams(0, 120, 1);
+        LinearLayout.LayoutParams agreeParams = new LinearLayout.LayoutParams(0, buttonHeight, 1);
         agreeParams.leftMargin = 30;
         agreeButton.setLayoutParams(agreeParams);
         
@@ -150,7 +170,7 @@ public class PrivacyPolicyActivity extends Activity {
     private void showDocument(String title, String content) {
         LinearLayout documentLayout = new LinearLayout(this);
         documentLayout.setOrientation(LinearLayout.VERTICAL);
-        documentLayout.setPadding(40, 60, 40, 40);
+        documentLayout.setPadding(50, 150, 50, 50);
         documentLayout.setBackgroundColor(Color.WHITE);
         
         // 顶部导航栏
@@ -162,9 +182,14 @@ public class PrivacyPolicyActivity extends Activity {
         Button backButton = new Button(this);
         backButton.setText("返回");
         backButton.setTextColor(Color.WHITE);
-        backButton.setBackgroundColor(Color.parseColor("#007AFF"));
+        GradientDrawable backDrawable = new GradientDrawable();
+        backDrawable.setColor(Color.parseColor("#30cccc"));
+        int documentButtonHeight = getButtonHeight();
+        backDrawable.setCornerRadius(documentButtonHeight / 2.0f);
+        backButton.setBackground(backDrawable);
+        backButton.setElevation(0);
         backButton.setTextSize(14);
-        LinearLayout.LayoutParams backParams = new LinearLayout.LayoutParams(200, 100);
+        LinearLayout.LayoutParams backParams = new LinearLayout.LayoutParams(200, documentButtonHeight);
         backParams.setMargins(0, 10, 0, 0);
         backButton.setLayoutParams(backParams);
         
@@ -179,7 +204,7 @@ public class PrivacyPolicyActivity extends Activity {
         
         // 占位空间保持对称
         View spacer = new View(this);
-        LinearLayout.LayoutParams spacerParams = new LinearLayout.LayoutParams(200, 100);
+        LinearLayout.LayoutParams spacerParams = new LinearLayout.LayoutParams(200, documentButtonHeight);
         spacer.setLayoutParams(spacerParams);
         
         headerLayout.addView(backButton);

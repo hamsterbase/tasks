@@ -1,0 +1,10 @@
+ignoredBuiltDependencies:
+  - '@swc/core'
+  - '@tailwindcss/oxide'
+  - electron-winstaller
+  - sharp
+  - simple-git-hooks
+
+onlyBuiltDependencies:
+  - electron
+  - esbuild
