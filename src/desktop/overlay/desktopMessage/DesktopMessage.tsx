@@ -6,6 +6,7 @@ import { useWatchEvent } from '../../../hooks/use-watch-event';
 import { IWorkbenchOverlayService } from '../../../services/overlay/common/WorkbenchOverlayService';
 import { desktopStyles } from '../../theme/main';
 import { DesktopMessageController, MessageType } from './DesktopMessageController';
+import { localize } from '@/nls';
 
 const MessageIcon: React.FC<{ type: MessageType }> = ({ type }) => {
   const iconMap = {
@@ -28,6 +29,11 @@ const DesktopMessageContent: React.FC<{ controller: DesktopMessageController }> 
   const handleClose = () => {
     setIsLeaving(true);
     setTimeout(() => controller.handleClose(), 200);
+  };
+
+  const handleUndo = () => {
+    controller.undo();
+    handleClose();
   };
 
   const getIconClass = (type: MessageType) => {
@@ -61,15 +67,19 @@ const DesktopMessageContent: React.FC<{ controller: DesktopMessageController }> 
 
           <div className={desktopStyles.DesktopMessageTextContainer}>
             <p className={desktopStyles.DesktopMessageText}>{controller.message}</p>
+            {controller.description && (
+              <p className={desktopStyles.DesktopMessageDescription}>{controller.description}</p>
+            )}
           </div>
-
-          <button
-            onClick={handleClose}
-            className={`${desktopStyles.DesktopMessageCloseButton} ${getIconClass(controller.type)}`}
-          >
+          <button onClick={handleClose} className={`${desktopStyles.DesktopMessageCloseButton}`}>
             <CloseIcon />
           </button>
         </div>
+        {controller.showUndo && (
+          <div className={desktopStyles.DesktopMessageUndo} onClick={handleUndo}>
+            {localize('message.undo', 'Undo')}
+          </div>
+        )}
       </div>
     </div>
   );

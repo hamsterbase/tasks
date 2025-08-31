@@ -79,7 +79,7 @@ const detectUnusedDesktopStyles: Rule.RuleModule = {
           // 如果没有使用的样式，直接返回
           return;
         }
-        if (process.env.NODE_PATH?.includes('lint-staged')) {
+        if (process.env.npm_lifecycle_script?.includes('lint-staged')) {
           return;
         }
         for (const styleName of globalStyleState.definedStyles) {

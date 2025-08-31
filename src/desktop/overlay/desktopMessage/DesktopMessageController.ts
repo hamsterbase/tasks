@@ -8,8 +8,10 @@ export type MessageType = 'success' | 'error' | 'info';
 
 export interface MessageOptions {
   message: string;
+  description?: string;
   type: MessageType;
   duration?: number;
+  undo?: () => void;
   onClose?: () => void;
 }
 
@@ -47,6 +49,18 @@ export class DesktopMessageController implements IDisposable {
 
   get message() {
     return this.messageOptions.message;
+  }
+
+  get description() {
+    return this.messageOptions.description;
+  }
+
+  get showUndo() {
+    return !!this.messageOptions.undo;
+  }
+
+  undo() {
+    this.messageOptions.undo?.();
   }
 
   get type() {
