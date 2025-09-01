@@ -1137,8 +1137,8 @@
     "content": "Database Details"
   },
   "settings.displaySettings": {
-    "defaultMessage": "Global Task Display Settings",
-    "content": "Global Task Display Settings"
+    "defaultMessage": "Default Display Settings for Tasks",
+    "content": "Default Display Settings for Tasks"
   },
   "settings.displaySettings.description": {
     "defaultMessage": "Control which tasks are visible across all views (Today, Projects, Areas). These settings apply everywhere unless overridden in specific views.",

@@ -1,7 +1,7 @@
 import { localize } from '@/nls';
 
 export const taskDisplaySettingOptions = {
-  title: localize('settings.displaySettings', 'Global Task Display Settings'),
+  title: localize('settings.displaySettings', 'Default Display Settings for Tasks'),
   description: localize(
     'settings.displaySettings.description',
     'Control which tasks are visible across all views (Today, Projects, Areas). These settings apply everywhere unless overridden in specific views.'

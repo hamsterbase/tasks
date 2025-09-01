@@ -10,6 +10,7 @@ import { PageLayout } from '../components/PageLayout';
 import { useAbout } from '@/hooks/use-about';
 import { ISwitchService } from '@/services/switchService/common/switchService';
 import { getTheme } from '@/base/browser/initializeTheme';
+import { taskDisplaySettingOptions } from '@/base/common/TaskDisplaySettings';
 
 export const MobileSettings = () => {
   const navigate = useNavigate();
@@ -61,7 +62,7 @@ export const MobileSettings = () => {
             },
           },
           {
-            title: localize('settings.taskDisplaySettings', 'Global Task Display Settings'),
+            title: taskDisplaySettingOptions.title,
             onClick: () => navigate({ path: '/settings/task-display' }),
             mode: {
               type: 'navigation',

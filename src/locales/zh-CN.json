@@ -1137,8 +1137,8 @@
     "content": "数据库详情"
   },
   "settings.displaySettings": {
-    "defaultMessage": "Global Task Display Settings",
-    "content": "全局任务显示设置"
+    "defaultMessage": "Default Display Settings for Tasks",
+    "content": "任务的默认显示"
   },
   "settings.displaySettings.description": {
     "defaultMessage": "Control which tasks are visible across all views (Today, Projects, Areas). These settings apply everywhere unless overridden in specific views.",
