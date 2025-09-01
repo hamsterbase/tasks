@@ -201,7 +201,7 @@ export class CloudService implements ICloudService {
 
   async init(): Promise<void> {
     this.databaseConfig = localStorage.getItem('database_id') ? localStorage.getItem('database_id')! : 'local';
-    await this.updateDatabaseConfig(this.databaseConfig);
+    await this.updateDatabaseConfig(this.databaseConfig, true);
   }
 
   private setInterval() {
@@ -444,18 +444,18 @@ export class CloudService implements ICloudService {
     this.updateUserConfig({ type: 'not_login' });
   }
 
-  private async updateDatabaseConfig(config: string) {
+  private async updateDatabaseConfig(config: string, keepPeerId: boolean = false) {
     this.databaseConfig = config;
     localStorage.setItem('database_id', this.databaseConfig);
     this._onSessionChange.fire();
     try {
       const storage = await this.databaseService.getDatabaseStorage(config);
-      await this.todoService.initStorage(storage);
+      await this.todoService.initStorage(storage, keepPeerId);
     } catch {
       this.databaseConfig = 'local';
       localStorage.setItem('database_id', this.databaseConfig);
       this._onSessionChange.fire();
-      await this.todoService.initStorage(await this.databaseService.getDatabaseStorage('local'));
+      await this.todoService.initStorage(await this.databaseService.getDatabaseStorage('local'), keepPeerId);
     }
   }
 

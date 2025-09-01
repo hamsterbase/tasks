@@ -1,4 +1,4 @@
-import { getPeerId } from '@/base/browser/getPeerId';
+import { getPeerId, resetPeerId } from '@/base/browser/getPeerId';
 import { TaskModel } from '@/core/model.ts';
 import { ITaskModelData } from '@/core/state/type';
 import {
@@ -62,9 +62,12 @@ export class WorkbenchTodoService implements ITodoService {
     return this._storageId;
   }
 
-  public async initStorage(storage: IDatabaseStorage): Promise<void> {
+  public async initStorage(storage: IDatabaseStorage, keepPeerId?: boolean): Promise<void> {
     this._storageId = storage.id;
     const taskModel = new TaskModel();
+    if (!keepPeerId) {
+      await resetPeerId();
+    }
     const peerId = await getPeerId();
     taskModel.setPeerId(peerId);
     async function saveToStorage() {

@@ -20,3 +20,11 @@ export async function getPeerId(): Promise<`${number}`> {
   sessionStorage.setItem('peerId', doc.peerIdStr);
   return doc.peerIdStr as `${number}`;
 }
+
+export async function resetPeerId() {
+  if (checkPlatform().isNative) {
+    await Preferences.remove({ key: 'peerId' });
+  } else {
+    sessionStorage.removeItem('peerId');
+  }
+}

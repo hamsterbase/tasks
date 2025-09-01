@@ -27,7 +27,7 @@ export interface ITodoService {
   onStateChange: Event<void>;
   onEditingContentChange: Event<TreeID>;
 
-  initStorage(storage: IDatabaseStorage): Promise<void>;
+  initStorage(storage: IDatabaseStorage, keepPeerId: boolean): Promise<void>;
 
   editingContent: EditingContent | null;
 
