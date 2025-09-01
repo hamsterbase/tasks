@@ -1,15 +1,17 @@
+import { checkPlatform } from '@/base/browser/checkPlatform';
+import { PROJECT_COMMIT_HASH } from '@/base/common/version';
 import { ListItemGroup } from '@/mobile/components/listItem/listItem';
+import AndroidSource from '@/plugins/AndroidSourcePlugin';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 import { SettingsIcon } from '../../../components/icons';
 import { localize } from '../../../nls';
 import { PageLayout } from '../../components/PageLayout';
-import { checkPlatform } from '@/base/browser/checkPlatform';
-import AndroidSource from '@/plugins/AndroidSourcePlugin';
-import { PROJECT_COMMIT_HASH } from '@/base/common/version';
 
 export const AboutPage = () => {
   const [androidSource, setAndroidSource] = useState<string | null>(null);
   const platform = checkPlatform();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (platform.isAndroid) {
@@ -28,7 +30,14 @@ export const AboutPage = () => {
       title: localize('settings.about.commit', 'Commit'),
       mode: {
         type: 'label' as const,
-        label: PROJECT_COMMIT_HASH,
+        label: PROJECT_COMMIT_HASH.slice(0, 16),
+      },
+    },
+    {
+      title: localize('privacy_policy', 'Privacy Policy'),
+      onClick: () => navigate('/settings/privacy'),
+      mode: {
+        type: 'navigation' as const,
       },
     },
   ];

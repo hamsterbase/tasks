@@ -1002,7 +1002,7 @@
   },
   "settings.about.commit": {
     "defaultMessage": "Commit",
-    "content": "提交版本"
+    "content": "版本"
   },
   "settings.account": {
     "defaultMessage": "Account",
