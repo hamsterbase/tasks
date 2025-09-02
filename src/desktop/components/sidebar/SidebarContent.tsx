@@ -1,4 +1,5 @@
 import { getTodayTimestampInUtc } from '@/base/common/time';
+import { areaPageTitleInputId, projectPageTitleInputId } from '@/components/edit/inputId';
 import { PlusIcon, SettingsIcon } from '@/components/icons';
 import { FlattenedResult } from '@/core/state/home/flattenedItemsToResult';
 import { flattenRootCollections } from '@/core/state/home/getFlattenRootCollections';
@@ -19,7 +20,8 @@ import { DndContext, DragEndEvent, useDndContext } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import classNames from 'classnames';
 import React from 'react';
-import { Link } from 'react-router';
+import { flushSync } from 'react-dom';
+import { Link, useNavigate } from 'react-router';
 import { IInstantiationService } from 'vscf/platform/instantiation/common';
 import { desktopStyles } from '../../theme/main';
 import { DragOverlayItem } from '../drag/DragOverlayItem';
@@ -68,6 +70,7 @@ export const SidebarContent: React.FC = () => {
   const todoService = useService(ITodoService);
   const sidebarContainerNoPaddingTop = useShouldShowOnDesktopMac();
   const instantiationService = useService(IInstantiationService);
+  const navigate = useNavigate();
   useWatchEvent(todoService.onStateChange);
   const { value: config, setValue } = useConfig(toggleAreaConfigKey());
   const sensors = useDragSensors();
@@ -116,13 +119,39 @@ export const SidebarContent: React.FC = () => {
           {
             label: localize('create_popup.create_project', 'Create Project'),
             onSelect: () => {
-              todoService.addProject({ title: '' });
+              const projectId = flushSync(() => {
+                return todoService.addProject({ title: '' });
+              });
+
+              if (projectId) {
+                const projectUid = todoService.modelState.taskObjectMap.get(projectId)?.uid;
+                if (projectUid) {
+                  navigate(`/desktop/project/${projectUid}`, {
+                    state: {
+                      focusInput: projectPageTitleInputId(projectId),
+                    },
+                  });
+                }
+              }
             },
           },
           {
             label: localize('create_popup.create_area', 'Create Area'),
             onSelect: () => {
-              todoService.addArea({ title: '' });
+              const areaId = flushSync(() => {
+                return todoService.addArea({ title: '' });
+              });
+
+              if (areaId) {
+                const areaUid = todoService.modelState.taskObjectMap.get(areaId)?.uid;
+                if (areaUid) {
+                  navigate(`/desktop/area/${areaUid}`, {
+                    state: {
+                      focusInput: areaPageTitleInputId(areaId),
+                    },
+                  });
+                }
+              }
             },
           },
         ],

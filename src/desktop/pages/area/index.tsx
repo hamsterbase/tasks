@@ -17,12 +17,13 @@ import { useWatchEvent } from '@/hooks/use-watch-event';
 import { useArea } from '@/hooks/useArea';
 import { useTaskDisplaySettings } from '@/hooks/useTaskDisplaySettings';
 import { localize } from '@/nls';
+import { IEditService } from '@/services/edit/common/editService';
 import { IListService } from '@/services/list/common/listService';
 import { ITodoService } from '@/services/todo/common/todoService';
 import type { TreeID } from 'loro-crdt';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { flushSync } from 'react-dom';
-import { useNavigate, useParams } from 'react-router';
+import { useLocation, useNavigate, useParams } from 'react-router';
 import { TaskListSection } from './components/TaskListSection';
 
 const useAreaId = (): TreeID => {
@@ -48,8 +49,17 @@ const AreaPageContent: React.FC<AreaPageContentProps> = ({ area, areaId }) => {
   const listService = useService(IListService);
   const navigate = useNavigate();
   const { areaDetail } = useArea(areaId);
+  const editService = useService(IEditService);
+  const location = useLocation();
 
   const { openTaskDisplaySettings } = useDesktopTaskDisplaySettings(`area-${areaId}`);
+
+  const state = location.state as { focusInput?: string };
+  useEffect(() => {
+    if (state?.focusInput && !area.title) {
+      editService.focusInput(state.focusInput);
+    }
+  }, [state?.focusInput, editService, area.title]);
 
   useWatchEvent(todoService.onStateChange);
   useWatchEvent(listService.onMainListChange);
