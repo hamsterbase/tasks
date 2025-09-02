@@ -90,14 +90,6 @@ export const MobileSettings = () => {
             },
           },
           {
-            hidden: !switchService.getLocalSwitch('showPrivacyPolicy'),
-            title: localize('privacy_policy', 'Privacy Policy'),
-            onClick: () => navigate({ path: '/settings/privacy' }),
-            mode: {
-              type: 'navigation',
-            },
-          },
-          {
             hidden: switchService.getLocalSwitch('showNativeAboutButton'),
             title: localize('settings.about', 'About'),
             onClick: () => navigate({ path: '/settings/about' }),

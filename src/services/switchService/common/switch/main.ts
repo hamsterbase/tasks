@@ -3,7 +3,6 @@ import { iOSBackForwardNavigationGestures } from './iOSBackForwardNavigationGest
 import { shouldIgnoreSafeBottom } from './shouldIgnoreSafeBottom';
 import { showIOSPurchaseButton } from './showIOSPurchaseButton';
 import { showNativeAboutButton } from './showNativeAboutButton';
-import { showPrivacyPolicy } from './showPrivacyPolicy';
 
 export const switchKeys = {
   showIOSPurchaseButton,
@@ -11,7 +10,6 @@ export const switchKeys = {
   hideBottomMenuWhenKeyboardShow,
   showNativeAboutButton,
   shouldIgnoreSafeBottom,
-  showPrivacyPolicy,
 } as const;
 
 export type SwitchKeyType = keyof typeof switchKeys;
