@@ -60,10 +60,6 @@
     "defaultMessage": "Error",
     "content": "错误"
   },
-  "account.eula": {
-    "defaultMessage": "EULA",
-    "content": "最终用户许可协议"
-  },
   "account.expiry": {
     "defaultMessage": "Pro Expires",
     "content": "会员到期时间"
@@ -88,10 +84,6 @@
     "defaultMessage": "Logout",
     "content": "登出"
   },
-  "account.privacy": {
-    "defaultMessage": "Privacy Policy",
-    "content": "隐私政策"
-  },
   "account.pro.title": {
     "defaultMessage": "Subscribe 1 Year Cloud Pro",
     "content": "订阅 1 年云会员"
@@ -100,37 +92,17 @@
     "defaultMessage": "Failed to complete purchase {0}",
     "content": "购买失败 {0}"
   },
-  "account.purchase.success": {
-    "defaultMessage": "Purchase successful",
-    "content": "购买成功"
-  },
   "account.title": {
     "defaultMessage": "Account",
     "content": "账户"
-  },
-  "account.vip.title": {
-    "defaultMessage": "Buy VIP",
-    "content": "购买VIP"
   },
   "addTask": {
     "defaultMessage": "Add Task",
     "content": "添加任务"
   },
-  "agree": {
-    "defaultMessage": "Agree",
-    "content": "同意"
-  },
-  "agreement_disclaimer": {
-    "defaultMessage": "By clicking \"Agree\", you acknowledge that you have read and agreed to both documents.",
-    "content": "点击\"同意\"即表示您确认已阅读并同意上述两份文件。"
-  },
   "area.create_project": {
     "defaultMessage": "Add Project",
     "content": "添加项目"
-  },
-  "area.createProject": {
-    "defaultMessage": "Create Project",
-    "content": "创建项目"
   },
   "area.delete_area": {
     "defaultMessage": "Delete Area",
@@ -143,14 +115,6 @@
   "area.delete_area_confirm_title": {
     "defaultMessage": "Delete Area",
     "content": "删除区域"
-  },
-  "area.detail.tags": {
-    "defaultMessage": "Tags",
-    "content": "标签"
-  },
-  "area.detail.titlePlaceholder": {
-    "defaultMessage": "Enter area title...",
-    "content": "输入区域标题..."
   },
   "area.edit_title": {
     "defaultMessage": "Edit Title",
@@ -176,10 +140,6 @@
     "defaultMessage": "Projects",
     "content": "项目"
   },
-  "area.taskDisplaySettings": {
-    "defaultMessage": "Task Display Settings",
-    "content": "任务显示设置"
-  },
   "area.tasks": {
     "defaultMessage": "Tasks",
     "content": "任务"
@@ -196,17 +156,9 @@
     "defaultMessage": "Cancel",
     "content": "取消"
   },
-  "common.back": {
-    "defaultMessage": "Back",
-    "content": "返回"
-  },
   "common.cancel": {
     "defaultMessage": "Cancel",
     "content": "取消"
-  },
-  "common.close": {
-    "defaultMessage": "Close",
-    "content": "关闭"
   },
   "common.exporting": {
     "defaultMessage": "Exporting...",
@@ -239,10 +191,6 @@
   "completed_tasks.title": {
     "defaultMessage": "Completed",
     "content": "已完成"
-  },
-  "completed.taskDisplaySettings": {
-    "defaultMessage": "Task Display Settings",
-    "content": "任务显示设置"
   },
   "confirm": {
     "defaultMessage": "Confirm",
@@ -464,10 +412,6 @@
     "defaultMessage": "Create tag \"{0}\"",
     "content": "创建标签 \"{0}\""
   },
-  "disagree": {
-    "defaultMessage": "Not Now",
-    "content": "不同意"
-  },
   "display_settings.completed_tasks": {
     "defaultMessage": "Completed Tasks",
     "content": "已完成任务"
@@ -483,10 +427,6 @@
   "edit_task_item.task_notes_placeholder": {
     "defaultMessage": "Add Notes...",
     "content": "添加笔记..."
-  },
-  "end_user_license_agreement": {
-    "defaultMessage": "End User License Agreement",
-    "content": "最终用户许可协议"
   },
   "errorCreatingDirectory": {
     "defaultMessage": "Error creating directory:",
@@ -532,70 +472,6 @@
     "defaultMessage": "Inbox",
     "content": "收件箱"
   },
-  "inbox.completed_range.all": {
-    "defaultMessage": "All",
-    "content": "全部"
-  },
-  "inbox.completed_range.all.description": {
-    "defaultMessage": "Show all completed tasks",
-    "content": "显示所有已完成的任务"
-  },
-  "inbox.completed_range.all.short": {
-    "defaultMessage": "All",
-    "content": "全部"
-  },
-  "inbox.completed_range.day": {
-    "defaultMessage": "Past Day",
-    "content": "过去一天"
-  },
-  "inbox.completed_range.day.description": {
-    "defaultMessage": "Show tasks completed since start of yesterday",
-    "content": "显示自昨日开始以来已完成的任务"
-  },
-  "inbox.completed_range.day.short": {
-    "defaultMessage": "Past day",
-    "content": "过去一天"
-  },
-  "inbox.completed_range.month": {
-    "defaultMessage": "Past Month",
-    "content": "过去一个月"
-  },
-  "inbox.completed_range.month.description": {
-    "defaultMessage": "Show tasks completed since start of last month",
-    "content": "显示自上个月开始以来已完成的任务"
-  },
-  "inbox.completed_range.month.short": {
-    "defaultMessage": "Past month",
-    "content": "过去一个月"
-  },
-  "inbox.completed_range.today": {
-    "defaultMessage": "Today",
-    "content": "今天"
-  },
-  "inbox.completed_range.today.description": {
-    "defaultMessage": "Show tasks completed since start of today",
-    "content": "显示自今天开始以来已完成的任务"
-  },
-  "inbox.completed_range.today.short": {
-    "defaultMessage": "Today",
-    "content": "今天"
-  },
-  "inbox.completed_range.week": {
-    "defaultMessage": "Past Week",
-    "content": "过去一周"
-  },
-  "inbox.completed_range.week.description": {
-    "defaultMessage": "Show tasks completed since start of last week",
-    "content": "显示自上周开始以来已完成的任务"
-  },
-  "inbox.completed_range.week.short": {
-    "defaultMessage": "Past week",
-    "content": "过去一周"
-  },
-  "inbox.completed_tasks_range": {
-    "defaultMessage": "Completed Tasks Range",
-    "content": "已完成任务范围"
-  },
   "inbox.display": {
     "defaultMessage": "Display",
     "content": "显示"
@@ -603,14 +479,6 @@
   "inbox.hoverMessage": {
     "defaultMessage": "Create Task",
     "content": "创建任务"
-  },
-  "inbox.show_completed_tasks": {
-    "defaultMessage": "Show Completed Tasks",
-    "content": "显示已完成任务"
-  },
-  "inbox.show_future_tasks": {
-    "defaultMessage": "Show Future Tasks",
-    "content": "显示未来任务"
   },
   "inbox.taskDisplaySettings": {
     "defaultMessage": "Task Display Settings",
@@ -623,10 +491,6 @@
   "keyNotFound": {
     "defaultMessage": "Key not found",
     "content": "未找到密钥"
-  },
-  "legal_agreement_explanation": {
-    "defaultMessage": "To use HamsterBase, you must first review and agree to our:",
-    "content": "使用 HamsterBase 之前，您必须先审阅并同意我们的："
   },
   "listItemsError": {
     "defaultMessage": "Error listing items from IndexedDB:",
@@ -708,41 +572,9 @@
     "defaultMessage": "Login & Register",
     "content": "登录与注册"
   },
-  "logs.export": {
-    "defaultMessage": "Export Logs",
-    "content": "导出日志"
-  },
-  "logs.loading": {
-    "defaultMessage": "Loading logs...",
-    "content": "加载日志中..."
-  },
-  "logs.noLogs": {
-    "defaultMessage": "No logs available",
-    "content": "暂无日志"
-  },
-  "logs.noLogsDesc": {
-    "defaultMessage": "Logs will appear here as they are generated",
-    "content": "日志生成后将在此显示"
-  },
-  "logs.refresh": {
-    "defaultMessage": "Refresh",
-    "content": "刷新"
-  },
-  "logs.sortInfo": {
-    "defaultMessage": "Sorted by timestamp and creation order",
-    "content": "按时间戳和创建顺序排序"
-  },
   "logs.thisWeek": {
     "defaultMessage": "This Week",
     "content": "本周"
-  },
-  "logs.title": {
-    "defaultMessage": "Logs",
-    "content": "日志"
-  },
-  "logs.totalCount": {
-    "defaultMessage": "Total: {0} logs",
-    "content": "总计：{0} 条日志"
   },
   "message.undo": {
     "defaultMessage": "Undo",
@@ -763,10 +595,6 @@
   "otherError": {
     "defaultMessage": "An error occurred",
     "content": "发生错误"
-  },
-  "privacy_and_EUAL": {
-    "defaultMessage": "Privacy Policy and EULA",
-    "content": "隐私政策和用户协议"
   },
   "privacy_policy": {
     "defaultMessage": "Privacy Policy",
@@ -816,10 +644,6 @@
     "defaultMessage": "Add Heading",
     "content": "添加标题"
   },
-  "project.addHeading": {
-    "defaultMessage": "Add Heading",
-    "content": "添加标题"
-  },
   "project.delete": {
     "defaultMessage": "Delete",
     "content": "删除"
@@ -832,25 +656,9 @@
     "defaultMessage": "Are you sure you want to delete this project?",
     "content": "您确定要删除此项目吗？"
   },
-  "project.detail.notes": {
-    "defaultMessage": "Notes",
-    "content": "笔记"
-  },
   "project.detail.notesPlaceholder": {
     "defaultMessage": "Enter project notes...",
     "content": "输入项目笔记..."
-  },
-  "project.detail.progress": {
-    "defaultMessage": "Progress",
-    "content": "进度"
-  },
-  "project.detail.tags": {
-    "defaultMessage": "Tags",
-    "content": "标签"
-  },
-  "project.detail.titlePlaceholder": {
-    "defaultMessage": "Enter project title...",
-    "content": "输入项目标题..."
   },
   "project.due_date": {
     "defaultMessage": "Due Date",
@@ -912,10 +720,6 @@
     "defaultMessage": "Select start date",
     "content": "选择开始日期"
   },
-  "project.taskDisplaySettings": {
-    "defaultMessage": "Task Display Settings",
-    "content": "任务显示设置"
-  },
   "project.toggle_status_description": {
     "defaultMessage": "There are {0} tasks left, what do you want to do?",
     "content": "还有{0}个任务剩余，您想怎么做？"
@@ -976,10 +780,6 @@
     "defaultMessage": "No scheduled tasks",
     "content": "没有已安排的任务"
   },
-  "schedule.taskDisplaySettings": {
-    "defaultMessage": "Task Display Settings",
-    "content": "任务显示设置"
-  },
   "scheduled.title": {
     "defaultMessage": "Scheduled",
     "content": "已安排"
@@ -991,10 +791,6 @@
   "selection.clear_selection": {
     "defaultMessage": "Clear Selection",
     "content": "清除选择"
-  },
-  "settings": {
-    "defaultMessage": "Settings",
-    "content": "设置"
   },
   "settings.about": {
     "defaultMessage": "About",
@@ -1128,10 +924,6 @@
     "defaultMessage": "Create Cloud Database",
     "content": "创建云数据库"
   },
-  "settings.database.clickToSwitch": {
-    "defaultMessage": "Click to switch",
-    "content": "点击切换"
-  },
   "settings.database.detail": {
     "defaultMessage": "Database Details",
     "content": "数据库详情"
@@ -1155,14 +947,6 @@
   "settings.feedback": {
     "defaultMessage": "Customer Feedback",
     "content": "客户反馈"
-  },
-  "settings.feedback.contact": {
-    "defaultMessage": "Contact Support",
-    "content": "联系客服"
-  },
-  "settings.feedback.contact.description": {
-    "defaultMessage": "For any questions or issues, please contact us via email at:",
-    "content": "如有任何问题，请通过以下邮箱联系我们："
   },
   "settings.feedback.description": {
     "defaultMessage": "If you have any questions, suggestions, or issues, please feel free to contact our support team.",
@@ -1196,10 +980,6 @@
     "defaultMessage": "Language",
     "content": "语言"
   },
-  "settings.language.chinese": {
-    "defaultMessage": "简体中文",
-    "content": "简体中文"
-  },
   "settings.language.description": {
     "defaultMessage": "Select your preferred language.",
     "content": "选择您的首选语言。"
@@ -1232,17 +1012,9 @@
     "defaultMessage": "Sync",
     "content": "同步"
   },
-  "settings.sync.coming_soon": {
-    "defaultMessage": "Sync functionality coming soon.",
-    "content": "同步功能即将推出。"
-  },
   "settings.sync.noDatabases": {
     "defaultMessage": "No databases available",
     "content": "暂无可用数据库"
-  },
-  "settings.taskDisplaySettings": {
-    "defaultMessage": "Global Task Display Settings",
-    "content": "全局任务显示设置"
   },
   "settings.theme": {
     "defaultMessage": "Theme",
@@ -1336,10 +1108,6 @@
     "defaultMessage": "Add Tags",
     "content": "添加标签"
   },
-  "tasks.clear_date": {
-    "defaultMessage": "Clear date",
-    "content": "清除日期"
-  },
   "tasks.click_to_create_subtask": {
     "defaultMessage": "Click to create subtask",
     "content": "点击创建子任务"
@@ -1360,21 +1128,9 @@
     "defaultMessage": "Select due date",
     "content": "选择截止日期"
   },
-  "tasks.edit_tags": {
-    "defaultMessage": "Edit tags",
-    "content": "编辑标签"
-  },
-  "tasks.location": {
-    "defaultMessage": "Location",
-    "content": "位置"
-  },
   "tasks.location.move": {
     "defaultMessage": "Move to",
     "content": "移动到"
-  },
-  "tasks.location.null": {
-    "defaultMessage": "Set Location",
-    "content": "设置位置"
   },
   "tasks.mark_as_canceled": {
     "defaultMessage": "Mark as Canceled",
@@ -1388,10 +1144,6 @@
     "defaultMessage": "Mark as Created",
     "content": "标记为已创建"
   },
-  "tasks.notes": {
-    "defaultMessage": "Notes",
-    "content": "笔记"
-  },
   "tasks.notes_placeholder": {
     "defaultMessage": "Add notes...",
     "content": "添加笔记..."
@@ -1404,10 +1156,6 @@
     "defaultMessage": "Selected {0} items",
     "content": "已选择 {0} 个项目"
   },
-  "tasks.set_date": {
-    "defaultMessage": "Set date",
-    "content": "设置日期"
-  },
   "tasks.start_date": {
     "defaultMessage": "Start Date",
     "content": "开始日期"
@@ -1419,10 +1167,6 @@
   "tasks.subtasks": {
     "defaultMessage": "Subtasks",
     "content": "子任务"
-  },
-  "tasks.tags": {
-    "defaultMessage": "Tags",
-    "content": "标签"
   },
   "tasks.title_placeholder": {
     "defaultMessage": "Add title...",
@@ -1447,10 +1191,6 @@
   "today.projects": {
     "defaultMessage": "Projects",
     "content": "项目"
-  },
-  "today.taskDisplaySettings": {
-    "defaultMessage": "Task Display Settings",
-    "content": "任务显示设置"
   },
   "today.tasks": {
     "defaultMessage": "Tasks",

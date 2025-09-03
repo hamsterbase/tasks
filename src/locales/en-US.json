@@ -60,10 +60,6 @@
     "defaultMessage": "Error",
     "content": "Error"
   },
-  "account.eula": {
-    "defaultMessage": "EULA",
-    "content": "EULA"
-  },
   "account.expiry": {
     "defaultMessage": "Pro Expires",
     "content": "Pro Expires"
@@ -88,10 +84,6 @@
     "defaultMessage": "Logout",
     "content": "Logout"
   },
-  "account.privacy": {
-    "defaultMessage": "Privacy Policy",
-    "content": "Privacy Policy"
-  },
   "account.pro.title": {
     "defaultMessage": "Subscribe 1 Year Cloud Pro",
     "content": "Subscribe 1 Year Cloud Pro"
@@ -100,37 +92,17 @@
     "defaultMessage": "Failed to complete purchase {0}",
     "content": "Failed to complete purchase {0}"
   },
-  "account.purchase.success": {
-    "defaultMessage": "Purchase successful",
-    "content": "Purchase successful"
-  },
   "account.title": {
     "defaultMessage": "Account",
     "content": "Account"
-  },
-  "account.vip.title": {
-    "defaultMessage": "Buy VIP",
-    "content": "Buy VIP"
   },
   "addTask": {
     "defaultMessage": "Add Task",
     "content": "Add Task"
   },
-  "agree": {
-    "defaultMessage": "Agree",
-    "content": "Agree"
-  },
-  "agreement_disclaimer": {
-    "defaultMessage": "By clicking \"Agree\", you acknowledge that you have read and agreed to both documents.",
-    "content": "By clicking \"Agree\", you acknowledge that you have read and agreed to both documents."
-  },
   "area.create_project": {
     "defaultMessage": "Add Project",
     "content": "Add Project"
-  },
-  "area.createProject": {
-    "defaultMessage": "Create Project",
-    "content": "Create Project"
   },
   "area.delete_area": {
     "defaultMessage": "Delete Area",
@@ -143,14 +115,6 @@
   "area.delete_area_confirm_title": {
     "defaultMessage": "Delete Area",
     "content": "Delete Area"
-  },
-  "area.detail.tags": {
-    "defaultMessage": "Tags",
-    "content": "Tags"
-  },
-  "area.detail.titlePlaceholder": {
-    "defaultMessage": "Enter area title...",
-    "content": "Enter area title..."
   },
   "area.edit_title": {
     "defaultMessage": "Edit Title",
@@ -176,10 +140,6 @@
     "defaultMessage": "Projects",
     "content": "Projects"
   },
-  "area.taskDisplaySettings": {
-    "defaultMessage": "Task Display Settings",
-    "content": "Task Display Settings"
-  },
   "area.tasks": {
     "defaultMessage": "Tasks",
     "content": "Tasks"
@@ -196,17 +156,9 @@
     "defaultMessage": "Cancel",
     "content": "Cancel"
   },
-  "common.back": {
-    "defaultMessage": "Back",
-    "content": "Back"
-  },
   "common.cancel": {
     "defaultMessage": "Cancel",
     "content": "Cancel"
-  },
-  "common.close": {
-    "defaultMessage": "Close",
-    "content": "Close"
   },
   "common.exporting": {
     "defaultMessage": "Exporting...",
@@ -239,10 +191,6 @@
   "completed_tasks.title": {
     "defaultMessage": "Completed",
     "content": "Completed"
-  },
-  "completed.taskDisplaySettings": {
-    "defaultMessage": "Task Display Settings",
-    "content": "Task Display Settings"
   },
   "confirm": {
     "defaultMessage": "Confirm",
@@ -464,10 +412,6 @@
     "defaultMessage": "Create tag \"{0}\"",
     "content": "Create tag \"{0}\""
   },
-  "disagree": {
-    "defaultMessage": "Not Now",
-    "content": "Not Now"
-  },
   "display_settings.completed_tasks": {
     "defaultMessage": "Completed Tasks",
     "content": "Completed Tasks"
@@ -483,10 +427,6 @@
   "edit_task_item.task_notes_placeholder": {
     "defaultMessage": "Add Notes...",
     "content": "Add Notes..."
-  },
-  "end_user_license_agreement": {
-    "defaultMessage": "End User License Agreement",
-    "content": "End User License Agreement"
   },
   "errorCreatingDirectory": {
     "defaultMessage": "Error creating directory:",
@@ -532,70 +472,6 @@
     "defaultMessage": "Inbox",
     "content": "Inbox"
   },
-  "inbox.completed_range.all": {
-    "defaultMessage": "All",
-    "content": "All"
-  },
-  "inbox.completed_range.all.description": {
-    "defaultMessage": "Show all completed tasks",
-    "content": "Show all completed tasks"
-  },
-  "inbox.completed_range.all.short": {
-    "defaultMessage": "All",
-    "content": "All"
-  },
-  "inbox.completed_range.day": {
-    "defaultMessage": "Past Day",
-    "content": "Past Day"
-  },
-  "inbox.completed_range.day.description": {
-    "defaultMessage": "Show tasks completed since start of yesterday",
-    "content": "Show tasks completed since start of yesterday"
-  },
-  "inbox.completed_range.day.short": {
-    "defaultMessage": "Past day",
-    "content": "Past day"
-  },
-  "inbox.completed_range.month": {
-    "defaultMessage": "Past Month",
-    "content": "Past Month"
-  },
-  "inbox.completed_range.month.description": {
-    "defaultMessage": "Show tasks completed since start of last month",
-    "content": "Show tasks completed since start of last month"
-  },
-  "inbox.completed_range.month.short": {
-    "defaultMessage": "Past month",
-    "content": "Past month"
-  },
-  "inbox.completed_range.today": {
-    "defaultMessage": "Today",
-    "content": "Today"
-  },
-  "inbox.completed_range.today.description": {
-    "defaultMessage": "Show tasks completed since start of today",
-    "content": "Show tasks completed since start of today"
-  },
-  "inbox.completed_range.today.short": {
-    "defaultMessage": "Today",
-    "content": "Today"
-  },
-  "inbox.completed_range.week": {
-    "defaultMessage": "Past Week",
-    "content": "Past Week"
-  },
-  "inbox.completed_range.week.description": {
-    "defaultMessage": "Show tasks completed since start of last week",
-    "content": "Show tasks completed since start of last week"
-  },
-  "inbox.completed_range.week.short": {
-    "defaultMessage": "Past week",
-    "content": "Past week"
-  },
-  "inbox.completed_tasks_range": {
-    "defaultMessage": "Completed Tasks Range",
-    "content": "Completed Tasks Range"
-  },
   "inbox.display": {
     "defaultMessage": "Display",
     "content": "Display"
@@ -603,14 +479,6 @@
   "inbox.hoverMessage": {
     "defaultMessage": "Create Task",
     "content": "Create Task"
-  },
-  "inbox.show_completed_tasks": {
-    "defaultMessage": "Show Completed Tasks",
-    "content": "Show Completed Tasks"
-  },
-  "inbox.show_future_tasks": {
-    "defaultMessage": "Show Future Tasks",
-    "content": "Show Future Tasks"
   },
   "inbox.taskDisplaySettings": {
     "defaultMessage": "Task Display Settings",
@@ -623,10 +491,6 @@
   "keyNotFound": {
     "defaultMessage": "Key not found",
     "content": "Key not found"
-  },
-  "legal_agreement_explanation": {
-    "defaultMessage": "To use HamsterBase, you must first review and agree to our:",
-    "content": "To use HamsterBase, you must first review and agree to our:"
   },
   "listItemsError": {
     "defaultMessage": "Error listing items from IndexedDB:",
@@ -708,41 +572,9 @@
     "defaultMessage": "Login & Register",
     "content": "Login & Register"
   },
-  "logs.export": {
-    "defaultMessage": "Export Logs",
-    "content": "Export Logs"
-  },
-  "logs.loading": {
-    "defaultMessage": "Loading logs...",
-    "content": "Loading logs..."
-  },
-  "logs.noLogs": {
-    "defaultMessage": "No logs available",
-    "content": "No logs available"
-  },
-  "logs.noLogsDesc": {
-    "defaultMessage": "Logs will appear here as they are generated",
-    "content": "Logs will appear here as they are generated"
-  },
-  "logs.refresh": {
-    "defaultMessage": "Refresh",
-    "content": "Refresh"
-  },
-  "logs.sortInfo": {
-    "defaultMessage": "Sorted by timestamp and creation order",
-    "content": "Sorted by timestamp and creation order"
-  },
   "logs.thisWeek": {
     "defaultMessage": "This Week",
     "content": "This Week"
-  },
-  "logs.title": {
-    "defaultMessage": "Logs",
-    "content": "Logs"
-  },
-  "logs.totalCount": {
-    "defaultMessage": "Total: {0} logs",
-    "content": "Total: {0} logs"
   },
   "message.undo": {
     "defaultMessage": "Undo",
@@ -763,10 +595,6 @@
   "otherError": {
     "defaultMessage": "An error occurred",
     "content": "An error occurred"
-  },
-  "privacy_and_EULA": {
-    "defaultMessage": "Privacy Policy and EULA",
-    "content": "Privacy Policy and EULA"
   },
   "privacy_policy": {
     "defaultMessage": "Privacy Policy",
@@ -816,10 +644,6 @@
     "defaultMessage": "Add Heading",
     "content": "Add Heading"
   },
-  "project.addHeading": {
-    "defaultMessage": "Add Heading",
-    "content": "Add Heading"
-  },
   "project.delete": {
     "defaultMessage": "Delete",
     "content": "Delete"
@@ -832,25 +656,9 @@
     "defaultMessage": "Are you sure you want to delete this project?",
     "content": "Are you sure you want to delete this project?"
   },
-  "project.detail.notes": {
-    "defaultMessage": "Notes",
-    "content": "Notes"
-  },
   "project.detail.notesPlaceholder": {
     "defaultMessage": "Enter project notes...",
     "content": "Enter project notes..."
-  },
-  "project.detail.progress": {
-    "defaultMessage": "Progress",
-    "content": "Progress"
-  },
-  "project.detail.tags": {
-    "defaultMessage": "Tags",
-    "content": "Tags"
-  },
-  "project.detail.titlePlaceholder": {
-    "defaultMessage": "Enter project title...",
-    "content": "Enter project title..."
   },
   "project.due_date": {
     "defaultMessage": "Due Date",
@@ -912,10 +720,6 @@
     "defaultMessage": "Select start date",
     "content": "Select start date"
   },
-  "project.taskDisplaySettings": {
-    "defaultMessage": "Task Display Settings",
-    "content": "Task Display Settings"
-  },
   "project.toggle_status_description": {
     "defaultMessage": "There are {0} tasks left, what do you want to do?",
     "content": "There are {0} tasks left, what do you want to do?"
@@ -976,10 +780,6 @@
     "defaultMessage": "No scheduled tasks",
     "content": "No scheduled tasks"
   },
-  "schedule.taskDisplaySettings": {
-    "defaultMessage": "Task Display Settings",
-    "content": "Task Display Settings"
-  },
   "scheduled.title": {
     "defaultMessage": "Scheduled",
     "content": "Scheduled"
@@ -991,10 +791,6 @@
   "selection.clear_selection": {
     "defaultMessage": "Clear Selection",
     "content": "Clear Selection"
-  },
-  "settings": {
-    "defaultMessage": "Settings",
-    "content": "Settings"
   },
   "settings.about": {
     "defaultMessage": "About",
@@ -1128,10 +924,6 @@
     "defaultMessage": "Create Cloud Database",
     "content": "Create Cloud Database"
   },
-  "settings.database.clickToSwitch": {
-    "defaultMessage": "Click to switch",
-    "content": "Click to switch"
-  },
   "settings.database.detail": {
     "defaultMessage": "Database Details",
     "content": "Database Details"
@@ -1155,14 +947,6 @@
   "settings.feedback": {
     "defaultMessage": "Customer Feedback",
     "content": "Customer Feedback"
-  },
-  "settings.feedback.contact": {
-    "defaultMessage": "Contact Support",
-    "content": "Contact Support"
-  },
-  "settings.feedback.contact.description": {
-    "defaultMessage": "For any questions or issues, please contact us via email at:",
-    "content": "For any questions or issues, please contact us via email at:"
   },
   "settings.feedback.description": {
     "defaultMessage": "If you have any questions, suggestions, or issues, please feel free to contact our support team.",
@@ -1196,10 +980,6 @@
     "defaultMessage": "Language",
     "content": "Language"
   },
-  "settings.language.chinese": {
-    "defaultMessage": "简体中文",
-    "content": "简体中文"
-  },
   "settings.language.description": {
     "defaultMessage": "Select your preferred language.",
     "content": "Select your preferred language."
@@ -1232,17 +1012,9 @@
     "defaultMessage": "Sync",
     "content": "Sync"
   },
-  "settings.sync.coming_soon": {
-    "defaultMessage": "Sync functionality coming soon.",
-    "content": "Sync functionality coming soon."
-  },
   "settings.sync.noDatabases": {
     "defaultMessage": "No databases available",
     "content": "No databases available"
-  },
-  "settings.taskDisplaySettings": {
-    "defaultMessage": "Global Task Display Settings",
-    "content": "Global Task Display Settings"
   },
   "settings.theme": {
     "defaultMessage": "Theme",
@@ -1336,10 +1108,6 @@
     "defaultMessage": "Add Tags",
     "content": "Add Tags"
   },
-  "tasks.clear_date": {
-    "defaultMessage": "Clear date",
-    "content": "Clear date"
-  },
   "tasks.click_to_create_subtask": {
     "defaultMessage": "Click to create subtask",
     "content": "Click to create subtask"
@@ -1360,21 +1128,9 @@
     "defaultMessage": "Select due date",
     "content": "Select due date"
   },
-  "tasks.edit_tags": {
-    "defaultMessage": "Edit tags",
-    "content": "Edit tags"
-  },
-  "tasks.location": {
-    "defaultMessage": "Location",
-    "content": "Location"
-  },
   "tasks.location.move": {
     "defaultMessage": "Move to",
     "content": "Move to"
-  },
-  "tasks.location.null": {
-    "defaultMessage": "Set Location",
-    "content": "Set Location"
   },
   "tasks.mark_as_canceled": {
     "defaultMessage": "Mark as Canceled",
@@ -1388,10 +1144,6 @@
     "defaultMessage": "Mark as Created",
     "content": "Mark as Created"
   },
-  "tasks.notes": {
-    "defaultMessage": "Notes",
-    "content": "Notes"
-  },
   "tasks.notes_placeholder": {
     "defaultMessage": "Add notes...",
     "content": "Add notes..."
@@ -1404,10 +1156,6 @@
     "defaultMessage": "Selected {0} items",
     "content": "Selected {0} items"
   },
-  "tasks.set_date": {
-    "defaultMessage": "Set date",
-    "content": "Set date"
-  },
   "tasks.start_date": {
     "defaultMessage": "Start Date",
     "content": "Start Date"
@@ -1419,10 +1167,6 @@
   "tasks.subtasks": {
     "defaultMessage": "Subtasks",
     "content": "Subtasks"
-  },
-  "tasks.tags": {
-    "defaultMessage": "Tags",
-    "content": "Tags"
   },
   "tasks.title_placeholder": {
     "defaultMessage": "Add title...",
@@ -1447,10 +1191,6 @@
   "today.projects": {
     "defaultMessage": "Projects",
     "content": "Projects"
-  },
-  "today.taskDisplaySettings": {
-    "defaultMessage": "Task Display Settings",
-    "content": "Task Display Settings"
   },
   "today.tasks": {
     "defaultMessage": "Tasks",
