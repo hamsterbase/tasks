@@ -98,7 +98,7 @@ const ListItem: React.FC<ListItemProps> = (props) => {
   );
 };
 
-interface ListItemGroupProps {
+export interface ListItemGroupProps {
   className?: string;
   title?: string;
   items: ListItemOption[];

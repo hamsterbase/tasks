@@ -1152,6 +1152,22 @@
     "defaultMessage": "Export your database to back up your data or transfer it to another device.",
     "content": "将您的数据库导出，以备份数据或转移到另一个设备。"
   },
+  "settings.feedback": {
+    "defaultMessage": "Customer Feedback",
+    "content": "客户反馈"
+  },
+  "settings.feedback.contact": {
+    "defaultMessage": "Contact Support",
+    "content": "联系客服"
+  },
+  "settings.feedback.contact.description": {
+    "defaultMessage": "For any questions or issues, please contact us via email at:",
+    "content": "如有任何问题，请通过以下邮箱联系我们："
+  },
+  "settings.feedback.description": {
+    "defaultMessage": "If you have any questions, suggestions, or issues, please feel free to contact our support team.",
+    "content": "如果您有任何问题、建议或意见，请随时联系我们的客服团队。"
+  },
   "settings.import": {
     "defaultMessage": "Import",
     "content": "导入"

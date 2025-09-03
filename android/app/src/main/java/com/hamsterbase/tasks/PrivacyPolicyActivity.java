@@ -281,6 +281,7 @@ public class PrivacyPolicyActivity extends Activity {
     
     private String getPrivacyPolicyContent() {
         return "隐私协议\n\n" +
+                "生效日期：2025年9月3日\n\n" +
                 "我们是谁\n\n" +
                 "HamsterBase Tasks 由厦门康达通科技有限公司负责运营。我们的开发团队位于上海，这座城市的咖啡文化为我们的工作提供了动力。\n\n" +
                 "我们收集什么\n\n" +

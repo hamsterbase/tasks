@@ -22,6 +22,7 @@ import { ImportPage } from '@/mobile/pages/settings/import.tsx';
 import { PrivacyPage } from '@/mobile/pages/settings/privacy.tsx';
 import { EULAPage } from '@/mobile/pages/settings/eula.tsx';
 import { AboutPage } from '@/mobile/pages/settings/about.tsx';
+import { FeedbackPage } from '@/mobile/pages/settings/feedback.tsx';
 
 interface IPage {
   url: string;
@@ -92,6 +93,10 @@ export const pages: IPage[] = [
   {
     url: '/settings/import',
     content: <ImportPage />,
+  },
+  {
+    url: '/settings/feedback',
+    content: <FeedbackPage />,
   },
   {
     url: '/completed',

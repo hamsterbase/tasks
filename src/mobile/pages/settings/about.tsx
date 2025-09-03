@@ -1,6 +1,6 @@
 import { checkPlatform } from '@/base/browser/checkPlatform';
 import { PROJECT_COMMIT_HASH } from '@/base/common/version';
-import { ListItemGroup } from '@/mobile/components/listItem/listItem';
+import { ListItemGroup, ListItemOption } from '@/mobile/components/listItem/listItem';
 import AndroidSource from '@/plugins/AndroidSourcePlugin';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
@@ -25,11 +25,11 @@ export const AboutPage = () => {
     }
   }, [platform.isAndroid]);
 
-  const items = [
+  const items: ListItemOption[] = [
     {
       title: localize('settings.about.commit', 'Commit'),
       mode: {
-        type: 'label' as const,
+        type: 'label',
         label: PROJECT_COMMIT_HASH.slice(0, 16),
       },
     },
@@ -37,7 +37,14 @@ export const AboutPage = () => {
       title: localize('privacy_policy', 'Privacy Policy'),
       onClick: () => navigate('/settings/privacy'),
       mode: {
-        type: 'navigation' as const,
+        type: 'navigation',
+      },
+    },
+    {
+      title: localize('settings.feedback', 'Customer Feedback'),
+      onClick: () => navigate('/settings/feedback'),
+      mode: {
+        type: 'navigation',
       },
     },
   ];

@@ -1,5 +1,7 @@
 # Privacy Policy
 
+*Effective Date: September 3, 2025*
+
 ## Who We Are
 
 HamsterBase Tasks is operated by Xiamen Kandata Technology Co., Ltd. Our development team is based in Shanghai, where the city's coffee culture fuels our work.
