@@ -1,12 +1,14 @@
 # HamsterBase Tasks
 
-A local-first and privacy first task manager. It is designed to be simple and easy to use.
+help creators organize ideas and build great things.
+
+Plan, organize, build and ship - all as planned
 
 ![Weekly Meal Planning Screenshot](screenshots/weekly-meal-planning-screenshot.png)
 
 ## Online Demo
 
-[Web version](https://tasks-app.hamsterbase.com/)
+[Web version](https://tasks-app.hamsterbase.com/) - No registration required, free to use
 
 ## Features
 
