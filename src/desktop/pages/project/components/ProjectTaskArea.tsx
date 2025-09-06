@@ -1,25 +1,24 @@
 import { useDesktopDndSensors } from '@/base/hooks/useDesktopDndSensors';
+import { HeadingIcon } from '@/components/icons';
 import { ITaskList } from '@/components/taskList/type.ts';
 import { getProject } from '@/core/state/getProject';
 import { FlattenedItem, FlattenedResult } from '@/core/state/home/flattenedItemsToResult.ts';
 import { ProjectHeadingInfo, TaskInfo } from '@/core/state/type';
+import { DesktopHeadingListItem } from '@/desktop/components/desktopHeadingListItem/desktopHeadingListItem';
 import { DragOverlayItem } from '@/desktop/components/drag/DragOverlayItem';
 import { InboxTaskInput } from '@/desktop/components/inboxTaskInput/InboxTaskInput';
 import { CreateTaskEvent } from '@/desktop/components/inboxTaskInput/InboxTaskInputController';
 import { TaskListItem } from '@/desktop/components/todo/TaskListItem';
-import { DesktopHeadingListItem } from '@/desktop/components/desktopHeadingListItem/desktopHeadingListItem';
+import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
 import { IListService } from '@/services/list/common/listService';
 import { ITodoService } from '@/services/todo/common/todoService';
 import { getFlattenedItemsCollisionDetectionStrategy } from '@/utils/dnd/flattenedItemsCollisionDetectionStrategy';
 import { DndContext, DragEndEvent } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
-import classNames from 'classnames';
 import type { TreeID } from 'loro-crdt';
 import React, { useCallback } from 'react';
 import { flushSync } from 'react-dom';
-import { HeadingIcon } from '@/components/icons';
-import { desktopStyles } from '@/desktop/theme/main';
 
 interface ProjectTaskListProps {
   items: FlattenedItem<ProjectHeadingInfo, TaskInfo>[];
@@ -28,7 +27,7 @@ interface ProjectTaskListProps {
   taskList: ITaskList;
 }
 
-const ProjectTaskList: React.FC<ProjectTaskListProps> = ({ items, result, willDisappearObjectIdSet, taskList }) => {
+const ProjectTaskList: React.FC<ProjectTaskListProps> = ({ items, willDisappearObjectIdSet, taskList }) => {
   return (
     <>
       {items.map((item, index) => {
@@ -38,10 +37,6 @@ const ProjectTaskList: React.FC<ProjectTaskListProps> = ({ items, result, willDi
               key={item.id}
               hideDividers={index === 0}
               projectHeadingInfo={item.content}
-              className={classNames({
-                'rounded-t-md': result.borderTop(item.id),
-                'rounded-b-md': result.borderBottom(item.id),
-              })}
               taskList={taskList}
             />
           );

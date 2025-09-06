@@ -234,6 +234,7 @@ export const desktopStyles = {
   TaskListItemContainerWillDisappear: 'opacity-50',
   TaskListItemContainerSelected: 'bg-bg3',
   TaskListItemContainerSelectedInactive: 'bg-bg2',
+  TaskListItemContainerEditing: 'editing-border rounded-l-none',
   TaskListItemDragHandle:
     'absolute -left-5 top-1/2 -translate-y-1/2 size-5 text-t3 opacity-0 group-hover:opacity-60 transition-opacity',
   TaskListItemStatusButton: 'flex-shrink-0 size-5 outline-none',
@@ -252,7 +253,7 @@ export const desktopStyles = {
   SubtaskItemContainerSelected: 'bg-bg3',
   SubtaskItemContainerSelectedInactive: 'bg-bg2',
   SubtaskItemContainerDefault: 'bg-bg1',
-  SubtaskItemContainerEditing: 'shadow-[inset_2px_0_0_var(--color-brand)] rounded-l-none',
+  SubtaskItemContainerEditing: 'editing-border rounded-l-none',
   SubtaskItemStatusButton:
     'size-5 text-t3 flex items-center justify-center hover:bg-bg3 rounded transition-colors flex-shrink-0',
   SubtaskItemInputWrapper: 'flex-1 min-w-0',
@@ -373,6 +374,7 @@ export const desktopStyles = {
     'px-3 py-3 flex items-center gap-3 justify-between text-base leading-5 font-medium text-t1 rounded-lg transition-colors min-h-11 relative',
   DesktopHeadingListItemContentFocused: 'bg-bg3',
   DesktopHeadingListItemContentSelected: 'bg-bg2',
+  DesktopHeadingListItemContentEditing: 'editing-border rounded-l-none',
   DesktopHeadingListItemContentHidden: 'opacity-0',
   DesktopHeadingListItemDragHandle:
     'absolute -left-5 top-1/2 -translate-y-1/2 size-5 text-t3 opacity-0 group-hover:opacity-50 transition-opacity z-10',

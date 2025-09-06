@@ -132,8 +132,10 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
 
   const taskClassName = classNames(desktopStyles.TaskListItemContainer, {
     [desktopStyles.TaskListItemContainerWillDisappear]: willDisappear,
-    [desktopStyles.TaskListItemContainerSelected]: (isFocused && isSelected && !isDragging) || isDragging,
+    [desktopStyles.TaskListItemContainerSelected]:
+      (isFocused && isSelected && !isDragging && !isInputFocused) || isDragging,
     [desktopStyles.TaskListItemContainerSelectedInactive]: !isFocused && isSelected && !isDragging,
+    [desktopStyles.TaskListItemContainerEditing]: isFocused && isSelected && !isDragging && isInputFocused,
   });
 
   const todoService = useService(ITodoService);

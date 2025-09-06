@@ -23,3 +23,7 @@
 .border-thin {
   border-width: 0.5px;
 }
+
+.editing-border {
+  @apply shadow-[inset_2px_0_0_var(--color-brand)];
+}
