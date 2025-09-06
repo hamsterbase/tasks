@@ -303,18 +303,6 @@ export const desktopStyles = {
   SettingsContentContainer: 'w-full flex flex-col',
   SettingsContentBackButton: 'p-3',
 
-  TaskListItemOldSubtaskDragging: 'flex items-center h-8 bg-bg3 rounded opacity-50',
-  TaskListItemOldStatusButton:
-    'size-4 flex items-center justify-center hover:bg-bg3 rounded transition-colors flex-shrink-0',
-  TaskListItemOldStatusBox: 'size-4 text-t3',
-  TaskListItemOldInputWrapper: 'flex-1 min-w-0',
-  TaskListItemOldDragHandle: 'opacity-0 group-hover:opacity-100 hover:bg-bg3 p-1 rounded transition-all flex-shrink-0',
-  TaskListItemOldDragHandleIcon: 'size-3 text-t3',
-  TaskListItemOldMainStatusButton: 'flex-shrink-0 size-5 outline-none',
-  TaskListItemOldMainInputWrapper: 'flex-1 min-w-0',
-
-  TaskStatusBoxIcon: 'size-full',
-
   AreaPageNotFoundContainer: 'h-full w-full bg-bg1 flex items-center justify-center',
   AreaPageNotFoundText: 'text-t3 text-lg',
 
