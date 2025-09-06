@@ -263,17 +263,6 @@ export const desktopStyles = {
   SubtaskItemDragHandleIcon: 'size-5 text-t3',
   SubtaskItemDragging: 'flex items-center h-8 bg-bg3 rounded opacity-50',
 
-  ProjectHeadingItemWrapper: 'pt-2',
-  ProjectHeadingItemContainer:
-    'px-4 py-2 flex items-center gap-2 justify-between text-sm font-medium text-t2 rounded cursor-pointer hover:bg-bg3 transition-colors',
-  ProjectHeadingItemContainerSelected: 'bg-bg3',
-  ProjectHeadingItemContainerSelectedInactive: 'bg-bg2',
-  ProjectHeadingItemContent: 'flex items-center gap-2 flex-1 min-w-0',
-  ProjectHeadingItemIcon: 'size-4 text-t3 flex-shrink-0',
-  ProjectHeadingItemInput: 'flex-1 bg-transparent outline-none text-t1 font-medium',
-  ProjectHeadingItemMenuIcon: 'size-4 text-t3 hover:text-t1 transition-colors flex-shrink-0 cursor-pointer',
-  ProjectHeadingItemDragging: 'px-4 py-2 text-sm font-medium text-t2 bg-bg2 rounded opacity-50',
-
   ItemTagsListContainer: 'flex gap-2 items-center',
 
   DesktopProjectListItemLink:
