@@ -240,9 +240,11 @@ export const desktopStyles = {
   TaskListItemStatusBox: 'size-5',
   TaskListItemStatusBoxCompleted: 'text-brand',
   TaskListItemStatusBoxUncompleted: 'text-t3',
-  TaskListItemContent: 'flex flex-col gap-2 flex-1',
+  TaskListItemContent: 'flex flex-col gap-2 flex-1 min-w-0',
   TaskListItemTitleRow: 'flex items-center gap-2',
-  TaskListItemTitleInput: 'text-base leading-5 flex-1 bg-transparent border-none outline-none text-ellipsis text-t1',
+  TaskListItemTitleInput:
+    'text-base leading-5 flex-1 bg-transparent border-none outline-none text-ellipsis text-t1 overflow-hidden',
+  TaskListItemTitleSpan: 'cursor-text whitespace-nowrap overflow-hidden text-ellipsis',
   TaskListItemIcon: 'size-5 text-t3 flex-shrink-0',
 
   SubtaskItemContainer: 'flex items-center gap-3 h-11 px-3 group rounded-lg',

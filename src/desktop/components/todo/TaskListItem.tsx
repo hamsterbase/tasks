@@ -1,5 +1,4 @@
 import { useTaskItemActions } from '@/base/hooks/useTaskItemActions';
-import { EditableInput } from '@/components/edit/EditableInput';
 import { taskTitleInputKey } from '@/components/edit/inputKeys';
 import { ITaskList } from '@/components/taskList/type.ts';
 import { TaskInfo } from '@/core/state/type';
@@ -12,12 +11,16 @@ import classNames from 'classnames';
 import React, { useRef } from 'react';
 import { TaskStatusBox } from './TaskStatusBox';
 
+import { EditableInputSpan } from '@/components/edit/EditableInputSpan';
 import { DragHandleIcon, NoteIcon, SubtaskIcon } from '@/components/icons';
 import { getTaskItemTags } from '@/core/state/getTaskItemTags';
 import { useService } from '@/hooks/use-service';
+import { useSync } from '@/hooks/use-sync';
+import { useContextKeyValue } from '@/hooks/useContextKeyValue';
 import { ITodoService } from '@/services/todo/common/todoService';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { InputFocusedContext } from 'vscf/platform/contextkey/common';
 import { ItemTagsList } from './ItemTagsList';
 
 export interface TaskListItemProps {
@@ -70,19 +73,34 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
   const longPress = useLongPress(() => {
     taskItemActions.cancelTask();
   });
+  const isInputFocused = useContextKeyValue(InputFocusedContext);
 
-  const handleInputSelect = (e: React.SyntheticEvent<HTMLInputElement>) => {
-    const target = e.currentTarget;
-    if (!target) {
-      return;
+  const handleStartEdit = (_value: string, cursor: number) => {
+    if (taskList.cursorId === task.id) {
+      if (taskList.cursorOffset !== null) {
+        if (isInputFocused) {
+          return;
+        }
+      }
     }
-    taskList.updateCursor(target.selectionStart ?? 0);
-    taskList.updateInputValue(target.value);
+    taskList.select(task.id, {
+      offset: cursor,
+      multipleMode: false,
+      fireEditEvent: true,
+    });
   };
+  const sync = useSync();
 
   useRegisterEvent(taskList.onFocusItem, (e) => {
     const inputElement = inputRef.current;
-    if (e.id !== task.id || !inputElement) {
+    if (e.id !== task.id) {
+      return;
+    }
+    if (!inputElement) {
+      sync();
+      const inputElement = inputRef.current as HTMLInputElement | null;
+      inputElement?.focus({ preventScroll: true });
+      inputElement?.setSelectionRange(e.offset, e.offset);
       return;
     }
     inputElement.focus({ preventScroll: true });
@@ -129,6 +147,10 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
     dueDate: task.dueDate,
   });
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    taskList.updateInputValue(e.target.value);
+  };
+
   return (
     <div
       ref={setNodeRef}
@@ -163,14 +185,13 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
       </button>
       <div className={desktopStyles.TaskListItemContent} style={{ visibility: isDragging ? 'hidden' : 'visible' }}>
         <div className={desktopStyles.TaskListItemTitleRow}>
-          <EditableInput
+          <EditableInputSpan
             inputKey={taskTitleInputKey(task.id)}
             ref={inputRef}
             defaultValue={task.title}
-            onChange={(e) => {
-              taskList.updateInputValue(e.target.value);
-            }}
-            onSelect={handleInputSelect}
+            onChange={handleChange}
+            isFocused={isSelected && taskList.cursorOffset !== null}
+            onStartEdit={handleStartEdit}
             onSave={(value) => {
               taskItemActions.updateTaskTitle(value);
             }}
