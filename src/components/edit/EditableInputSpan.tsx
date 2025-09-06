@@ -3,6 +3,7 @@ import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { IEditService } from '@/services/edit/common/editService';
+import classNames from 'classnames';
 import React, { forwardRef, useCallback, useEffect } from 'react';
 
 interface EditableInputProps {
@@ -29,10 +30,10 @@ export const EditableInputSpan = forwardRef<HTMLInputElement, EditableInputProps
 
     const inputValue = editService.getInputValue(inputKey, defaultValue);
 
-    const handleInputBlur = useCallback(() => {
+    const handleInputBlur = () => {
       onSave(inputValue);
       onBlur?.();
-    }, [onSave, onBlur, inputValue]);
+    };
 
     const handleInputChange = useCallback(
       (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,6 +44,8 @@ export const EditableInputSpan = forwardRef<HTMLInputElement, EditableInputProps
     );
 
     const handleClickX = (e: React.MouseEvent<HTMLSpanElement>) => {
+      e.preventDefault();
+      e.stopPropagation();
       const position = getCaretIndexAtX(e.currentTarget, inputValue, e.clientX);
       onStartEdit?.(inputValue, position);
     };
@@ -51,25 +54,38 @@ export const EditableInputSpan = forwardRef<HTMLInputElement, EditableInputProps
       onStartEdit?.(e.currentTarget.value, e.currentTarget.selectionStart ?? 0);
     };
 
-    if (!isFocused) {
-      return (
-        <div className={className}>
-          <span className={desktopStyles.TaskListItemTitleSpan} onClickCapture={handleClickX}>
-            {inputValue}
+    return (
+      <React.Fragment>
+        <div
+          className={classNames(className, {
+            hidden: isFocused,
+          })}
+        >
+          <span
+            data-no-drag
+            style={{
+              userSelect: 'text',
+            }}
+            className={classNames(desktopStyles.TaskListItemTitleSpan, {
+              [desktopStyles.TaskListItemTitleSpanPlaceHolder]: !inputValue,
+            })}
+            onMouseDownCapture={handleClickX}
+          >
+            {inputValue || placeholder}
           </span>
         </div>
-      );
-    }
-    return (
-      <input
-        ref={ref}
-        className={className}
-        value={inputValue}
-        onChange={handleInputChange}
-        onSelect={handleSelect}
-        onBlur={handleInputBlur}
-        placeholder={placeholder}
-      />
+        <input
+          ref={ref}
+          className={classNames(className, {
+            hidden: !isFocused,
+          })}
+          value={inputValue}
+          onChange={handleInputChange}
+          onSelect={handleSelect}
+          onBlur={handleInputBlur}
+          placeholder={placeholder}
+        />
+      </React.Fragment>
     );
   }
 );

@@ -244,7 +244,8 @@ export const desktopStyles = {
   TaskListItemTitleRow: 'flex items-center gap-2',
   TaskListItemTitleInput:
     'text-base leading-5 flex-1 bg-transparent border-none outline-none text-ellipsis text-t1 overflow-hidden',
-  TaskListItemTitleSpan: 'cursor-text whitespace-nowrap overflow-hidden text-ellipsis',
+  TaskListItemTitleSpan: 'cursor-text whitespace-nowrap overflow-hidden',
+  TaskListItemTitleSpanPlaceHolder: 'text-t3',
   TaskListItemIcon: 'size-5 text-t3 flex-shrink-0',
 
   SubtaskItemContainer: 'flex items-center gap-3 h-11 px-3 group rounded-lg',

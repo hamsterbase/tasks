@@ -96,8 +96,8 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
     if (e.id !== task.id) {
       return;
     }
+    sync();
     if (!inputElement) {
-      sync();
       const inputElement = inputRef.current as HTMLInputElement | null;
       inputElement?.focus({ preventScroll: true });
       inputElement?.setSelectionRange(e.offset, e.offset);
@@ -190,7 +190,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
             ref={inputRef}
             defaultValue={task.title}
             onChange={handleChange}
-            isFocused={isSelected && taskList.cursorOffset !== null}
+            isFocused={isSelected}
             onStartEdit={handleStartEdit}
             onSave={(value) => {
               taskItemActions.updateTaskTitle(value);
