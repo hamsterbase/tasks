@@ -640,6 +640,10 @@
     "defaultMessage": "Move",
     "content": "Move"
   },
+  "project_heading.placeholder": {
+    "defaultMessage": "New Heading",
+    "content": "New Heading"
+  },
   "project.add_heading": {
     "defaultMessage": "Add Heading",
     "content": "Add Heading"

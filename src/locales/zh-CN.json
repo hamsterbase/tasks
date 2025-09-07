@@ -640,6 +640,10 @@
     "defaultMessage": "Move",
     "content": "移动"
   },
+  "project_heading.placeholder": {
+    "defaultMessage": "New Heading",
+    "content": "新的标题"
+  },
   "project.add_heading": {
     "defaultMessage": "Add Heading",
     "content": "添加标题"

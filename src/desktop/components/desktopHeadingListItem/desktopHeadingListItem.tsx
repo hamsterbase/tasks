@@ -15,6 +15,7 @@ import { CSS } from '@dnd-kit/utilities';
 import classNames from 'classnames';
 import React, { useRef } from 'react';
 import { InputFocusedContext } from 'vscf/platform/contextkey/common';
+import { localize } from '@/nls';
 
 export interface DesktopHeadingListItemProps {
   projectHeadingInfo: ProjectHeadingInfo;
@@ -150,7 +151,7 @@ export const DesktopHeadingListItem: React.FC<DesktopHeadingListItemProps> = ({
             todoService.updateProjectHeading(projectHeadingInfo.id, { title });
           }}
           className={desktopStyles.DesktopHeadingListItemInput}
-          placeholder="Project Heading"
+          placeholder={localize('project_heading.placeholder', 'New Heading')}
         />
       </div>
     </div>
