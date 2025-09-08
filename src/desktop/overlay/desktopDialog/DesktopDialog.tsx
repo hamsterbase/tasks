@@ -58,7 +58,7 @@ const DesktopDialogContent: React.FC<{ controller: DesktopDialogController }> = 
       zIndex={controller.zIndex}
     >
       {controller.description && <p className={desktopStyles.DesktopDialogDescription}>{controller.description}</p>}
-      <div className="flex flex-col gap-3 mt-5">
+      <div className={desktopStyles.DesktopDialogActionsContainer}>
         {controller.actions?.map((action) => {
           if (action.type === 'input') {
             return (

@@ -432,6 +432,7 @@ export const desktopStyles = {
   OverlayFooter: 'flex justify-end gap-3 rounded-b-lg',
 
   DesktopDialogDescription: 'text-sm text-t3 leading-4.5 font-normal',
+  DesktopDialogActionsContainer: 'flex flex-col gap-2 mt-5',
 
   TagEditorOverlayContainer: 'w-80',
   TagEditorOverlayCreateButton:
