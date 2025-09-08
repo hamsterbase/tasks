@@ -9,6 +9,7 @@ interface OverlayProps {
   onClose: () => void;
   onCancel?: () => void;
   onConfirm?: () => void;
+  hideFooter?: boolean;
   children: React.ReactNode;
   cancelText?: string;
   confirmText?: string;
@@ -28,8 +29,9 @@ export const Overlay: React.FC<OverlayProps> = ({
   zIndex = 1000,
   cancelDisabled = false,
   confirmDisabled = false,
+  hideFooter = false,
 }) => {
-  const showFooter = onCancel || onConfirm;
+  const showFooter = (onCancel || onConfirm) && !hideFooter;
   return (
     <div
       className={desktopStyles.OverlayBackdrop}

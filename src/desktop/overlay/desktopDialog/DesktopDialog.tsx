@@ -6,16 +6,44 @@ import { useWatchEvent } from '../../../hooks/use-watch-event';
 import { IWorkbenchOverlayService } from '../../../services/overlay/common/WorkbenchOverlayService';
 import { Overlay } from '@/desktop/components/Overlay/Overlay';
 import { InputField } from '@/desktop/components/Form/InputField/InputField';
-import { DesktopDialogController } from './DesktopDialogController';
+import { DesktopDialogController, DialogButtonAction } from './DesktopDialogController';
 import { desktopStyles } from '@/desktop/theme/main';
+import { SettingButton } from '@/desktop/components/Settings/Button/Button';
 
 const DesktopDialogContent: React.FC<{ controller: DesktopDialogController }> = ({ controller }) => {
-  const [inputValue, setInputValue] = useState(controller?.actions?.value || '');
-  const handleConfirm = () => {
-    controller.handleConfirm({
-      type: 'input',
-      value: inputValue,
+  const [actionValues, setActionValues] = useState<Record<string, string | boolean>>(() => {
+    const initialValues: Record<string, string | boolean> = {};
+    controller?.actions?.forEach((action) => {
+      if (action.type === 'input') {
+        initialValues[action.key] = action.value || '';
+      }
     });
+    return initialValues;
+  });
+
+  const handleConfirm = () => {
+    controller.handleConfirm(actionValues);
+  };
+
+  const handleButtonClick = (action: DialogButtonAction) => {
+    if (action.onclick) {
+      try {
+        const result = action.onclick(actionValues);
+        if (result instanceof Promise) {
+          result
+            .then(() => {
+              controller.handleCancel();
+            })
+            .catch(() => {});
+        } else {
+          controller.handleCancel();
+        }
+      } catch {
+        // do nothing
+      }
+    } else {
+      controller.handleCancel();
+    }
   };
 
   return (
@@ -24,19 +52,40 @@ const DesktopDialogContent: React.FC<{ controller: DesktopDialogController }> = 
       onClose={() => controller.handleCancel()}
       onCancel={() => controller.handleCancel()}
       onConfirm={handleConfirm}
+      hideFooter={controller.hideFooter}
       cancelText={controller.cancelText || localize('cancel', 'Cancel')}
       confirmText={controller.confirmText || localize('confirm', 'Confirm')}
       zIndex={controller.zIndex}
     >
       {controller.description && <p className={desktopStyles.DesktopDialogDescription}>{controller.description}</p>}
-      {controller.actions?.type === 'input' && (
-        <InputField
-          type="text"
-          placeholder={controller.actions.placeholder || ''}
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-        />
-      )}
+      <div className="flex flex-col gap-3 mt-5">
+        {controller.actions?.map((action) => {
+          if (action.type === 'input') {
+            return (
+              <InputField
+                key={action.key}
+                type="text"
+                placeholder={action.placeholder || ''}
+                value={(actionValues[action.key] as string) || ''}
+                onChange={(e) => setActionValues((prev) => ({ ...prev, [action.key]: e.target.value }))}
+              />
+            );
+          } else if (action.type === 'button') {
+            return (
+              <SettingButton
+                key={action.key}
+                size={action.size}
+                variant={action.variant}
+                color={action.color}
+                onClick={() => handleButtonClick(action)}
+              >
+                {action.label}
+              </SettingButton>
+            );
+          }
+          return null;
+        })}
+      </div>
     </Overlay>
   );
 };

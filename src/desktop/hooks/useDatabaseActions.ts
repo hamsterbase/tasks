@@ -53,21 +53,24 @@ export const useDatabaseActions = (
         ),
         confirmText: localize('database.delete', 'Delete Database'),
         cancelText: localize('common.cancel', 'Cancel'),
-        actions: {
-          type: 'input',
-          placeholder: localize('database.password', 'Password'),
-        },
+        actions: [
+          {
+            type: 'input',
+            key: 'password',
+            placeholder: localize('database.password', 'Password'),
+          },
+        ],
         onConfirm: async (action) => {
-          if (!action?.value) {
+          if (!action.password) {
             desktopMessage({
               type: 'error',
               message: localize('database.delete.error.emptyPassword', 'Please enter password'),
             });
             throw new Error('emptyPassword');
           }
-          if (action && action.value && database.type === 'cloud') {
+          if (action && action.password && database.type === 'cloud') {
             try {
-              await cloudService.deleteDatabase(id, action.value, database.database_salt);
+              await cloudService.deleteDatabase(id, action.password as string, database.database_salt);
               back();
             } catch (error) {
               desktopMessage({
@@ -126,21 +129,29 @@ export const useDatabaseActions = (
           description: localize('database.switch.desc', 'Enter your password to switch to this database'),
           confirmText: localize('database.switch.confirm', 'Switch'),
           cancelText: localize('common.cancel', 'Cancel'),
-          actions: {
-            type: 'input',
-            placeholder: localize('database.password', 'Password'),
-          },
+          actions: [
+            {
+              type: 'input',
+              key: 'password',
+              placeholder: localize('database.password', 'Password'),
+            },
+          ],
           onConfirm: async (action) => {
-            if (!action?.value) {
+            if (!action.password || typeof action.password !== 'string') {
               desktopMessage({
                 type: 'error',
                 message: localize('database.switch.error.emptyPassword', 'Please enter password'),
               });
               throw new Error('emptyPassword');
             }
-            if (action && action.value) {
+            if (action.password) {
               try {
-                await cloudService.loginDatabase(id, database.database_salt, action.value, database.databaseName);
+                await cloudService.loginDatabase(
+                  id,
+                  database.database_salt,
+                  action.password as string,
+                  database.databaseName
+                );
               } catch (error) {
                 console.error(error);
                 desktopMessage({

@@ -724,6 +724,10 @@
     "defaultMessage": "Select start date",
     "content": "选择开始日期"
   },
+  "project.status.toggle": {
+    "defaultMessage": "Toggle Project Status",
+    "content": "切换项目状态"
+  },
   "project.toggle_status_description": {
     "defaultMessage": "There are {0} tasks left, what do you want to do?",
     "content": "还有{0}个任务剩余，您想怎么做？"

@@ -3,26 +3,38 @@ import { IDisposable } from 'vscf/internal/base/common/lifecycle';
 import { IWorkbenchOverlayService, OverlayInitOptions } from '../../../services/overlay/common/WorkbenchOverlayService';
 import { IInstantiationService } from 'vscf/platform/instantiation/common';
 import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
+import { ButtonColor, ButtonSize, ButtonVariant } from '@/desktop/components/Settings/Button/Button';
 
-interface DialogAction {
+type DialogAction = DialogInputAction | DialogButtonAction;
+
+export interface DialogInputAction {
+  key: string;
   type: 'input';
   placeholder?: string;
   value?: string;
 }
 
-interface DialogActionValue {
-  type: 'input';
-  value: string;
+export interface DialogButtonAction {
+  key: string;
+  type: 'button';
+  label: string;
+  size?: ButtonSize;
+  variant?: ButtonVariant;
+  color?: ButtonColor;
+  onclick?: (actionValues: DialogActionValue) => void | Promise<void>;
 }
+
+export type DialogActionValue = Record<string, string | boolean>;
 
 export interface DialogOptions {
   title: string;
   description?: string;
   cancelText?: string;
+  hideFooter?: boolean;
   confirmText?: string;
   onCancel?: () => void;
-  onConfirm?: (action?: DialogActionValue) => void;
-  actions?: DialogAction;
+  onConfirm?: (actionValue: DialogActionValue) => void;
+  actions?: DialogAction[];
 }
 
 export class DesktopDialogController implements IDisposable {
@@ -60,6 +72,10 @@ export class DesktopDialogController implements IDisposable {
     return this.dialogOptions.cancelText || '';
   }
 
+  get hideFooter() {
+    return this.dialogOptions.hideFooter || false;
+  }
+
   get confirmText() {
     return this.dialogOptions.confirmText || '';
   }
@@ -75,7 +91,7 @@ export class DesktopDialogController implements IDisposable {
     this.dispose();
   }
 
-  handleConfirm(actionValue?: DialogActionValue) {
+  handleConfirm(actionValue: DialogActionValue) {
     if (this.dialogOptions.onConfirm) {
       Promise.resolve(this.dialogOptions.onConfirm(actionValue)).then(() => {
         this.dispose();

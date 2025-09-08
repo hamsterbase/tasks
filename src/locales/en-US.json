@@ -724,6 +724,10 @@
     "defaultMessage": "Select start date",
     "content": "Select start date"
   },
+  "project.status.toggle": {
+    "defaultMessage": "Toggle Project Status",
+    "content": "Toggle Project Status"
+  },
   "project.toggle_status_description": {
     "defaultMessage": "There are {0} tasks left, what do you want to do?",
     "content": "There are {0} tasks left, what do you want to do?"
