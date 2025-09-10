@@ -193,6 +193,7 @@ export interface ITaskModelData {
   taskObjectUidMap: Map<string, TaskObjectSchema>;
   rootObjectIdList: TreeID[];
   dateAssignedList: TreeID[];
+  remindersMap: Map<TreeID, ReminderWithId[]>;
 }
 
 export interface ProjectStatusTransition {
@@ -201,3 +202,23 @@ export interface ProjectStatusTransition {
   taskStatus?: ItemStatus;
   completionAt?: number;
 }
+
+export type ReminderSchema = {
+  itemId: TreeID;
+  time: number;
+};
+
+export type CreateReminderSchema = {
+  itemId: TreeID;
+  time: number;
+};
+
+export type UpdateReminderSchema = {
+  time: number;
+};
+
+export type ReminderWithId = {
+  reminderId: string;
+  itemId: TreeID;
+  time: number;
+};

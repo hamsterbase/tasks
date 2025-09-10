@@ -9,6 +9,7 @@ import {
   CreateAreaSchema,
   CreateProjectHeadingSchema,
   CreateProjectSchema,
+  CreateReminderSchema,
   CreateTaskSchema,
   ITaskModelData,
   ItemMovePosition,
@@ -17,6 +18,8 @@ import {
   ProjectHeadingSchema,
   ProjectLoroSchema,
   ProjectSchema,
+  ReminderSchema,
+  ReminderWithId,
   TaskLoroSchema,
   TaskObjectSchema,
   TaskObjectType,
@@ -25,6 +28,7 @@ import {
   UpdateAreaSchema,
   UpdateProjectHeadingSchema,
   UpdateProjectSchema,
+  UpdateReminderSchema,
   UpdateTaskSchema,
 } from './type.ts';
 import { patch } from './utils.ts';
@@ -342,6 +346,47 @@ export class TaskModel {
     return tree;
   }
 
+  addReminder(data: CreateReminderSchema): string {
+    const remindersMap = this.doc.getMap('reminders');
+    const reminderId = nanoid();
+    remindersMap.set(reminderId, data);
+    return reminderId;
+  }
+
+  updateReminder(reminderId: string, data: UpdateReminderSchema): void {
+    const remindersMap = this.doc.getMap('reminders');
+    const existingReminder = remindersMap.get(reminderId) as ReminderSchema;
+    if (existingReminder) {
+      remindersMap.set(reminderId, { ...existingReminder, ...data });
+    }
+  }
+
+  deleteReminder(reminderId: string): void {
+    const remindersMap = this.doc.getMap('reminders');
+    remindersMap.delete(reminderId);
+  }
+
+  getReminders(): Map<TreeID, ReminderWithId[]> {
+    const remindersMap = this.doc.getMap('reminders');
+    const remindersData = remindersMap.toJSON() as Record<string, ReminderSchema>;
+    const groupedReminders = new Map<TreeID, ReminderWithId[]>();
+
+    Object.entries(remindersData).forEach(([reminderId, reminder]) => {
+      const reminderWithId: ReminderWithId = {
+        reminderId,
+        itemId: reminder.itemId,
+        time: reminder.time,
+      };
+
+      if (!groupedReminders.has(reminder.itemId)) {
+        groupedReminders.set(reminder.itemId, []);
+      }
+      groupedReminders.get(reminder.itemId)!.push(reminderWithId);
+    });
+
+    return groupedReminders;
+  }
+
   private updateTaskStatus(taskId: TreeID, status: ItemStatus, completionAt?: number) {
     const { map, parentId } = this.getTreeNode<TaskLoroSchema>(taskId, ModelTypes.task);
     if (status) {
@@ -426,6 +471,7 @@ export class TaskModel {
       status = JSON.parse(completion).type;
       completionAt = JSON.parse(completion).timestamp;
     }
+
     return {
       id,
       status,
@@ -641,6 +687,7 @@ export class TaskModel {
     });
     const rootObjectIdList = this.getRootObjectIdList();
     const dateAssignedList = this.getDateAssignedList();
+
     const versions: Record<PeerID, number> = {};
     this.doc
       .version()
@@ -648,6 +695,7 @@ export class TaskModel {
       .forEach((version, peerId) => {
         versions[peerId] = version;
       });
+    const remindersMap = this.getReminders();
     return {
       taskObjectUidMap,
       version: versions,
@@ -655,6 +703,7 @@ export class TaskModel {
       taskObjectMap,
       rootObjectIdList,
       dateAssignedList,
+      remindersMap,
     };
   }
 
