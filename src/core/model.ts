@@ -350,6 +350,7 @@ export class TaskModel {
     const remindersMap = this.doc.getMap('reminders');
     const reminderId = nanoid();
     remindersMap.set(reminderId, data);
+    this.doc.commit();
     return reminderId;
   }
 
@@ -358,12 +359,17 @@ export class TaskModel {
     const existingReminder = remindersMap.get(reminderId) as ReminderSchema;
     if (existingReminder) {
       remindersMap.set(reminderId, { ...existingReminder, ...data });
+      this.doc.commit();
     }
   }
 
   deleteReminder(reminderId: string): void {
     const remindersMap = this.doc.getMap('reminders');
+    if (!remindersMap.get(reminderId)) {
+      return;
+    }
     remindersMap.delete(reminderId);
+    this.doc.commit();
   }
 
   getReminders(): Map<TreeID, ReminderWithId[]> {
