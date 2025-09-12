@@ -1,6 +1,6 @@
-import { TaskSchema } from '@/core/type.ts';
+import { ITaskModelData, TaskSchema } from '@/core/type.ts';
 import type { TreeID } from 'loro-crdt';
-import { ITaskModelData, TaskInfo } from './type';
+import { TaskInfo } from './type';
 
 export function getTaskInfo(modelData: ITaskModelData, taskId: TreeID): TaskInfo {
   const o = modelData.taskObjectMap.get(taskId);
@@ -37,6 +37,7 @@ export function getTaskInfo(modelData: ITaskModelData, taskId: TreeID): TaskInfo
     projectTitle,
     completionAt: o.completionAt,
     isSubTask,
+    reminders: modelData.remindersMap.get(taskId) || [],
     children: o.children.map((child) => {
       const childTask = modelData.taskObjectMap.get(child) as TaskSchema;
       return {

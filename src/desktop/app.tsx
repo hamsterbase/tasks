@@ -5,6 +5,7 @@ import { DesktopDialog } from '@/desktop/overlay/desktopDialog/DesktopDialog';
 import { DesktopMenu } from '@/desktop/overlay/desktopMenu/DesktopMenu.tsx';
 import { DesktopMessage } from '@/desktop/overlay/desktopMessage/DesktopMessage';
 import { TagEditorOverlay } from '@/desktop/overlay/tagEditor/TagEditorOverlay';
+import { TimePickerOverlay } from '@/desktop/overlay/timePicker/TimePickerOverlay';
 import { TreeSelectOverlay } from '@/desktop/overlay/treeSelect/TreeSelectOverlay';
 import { AreaPage } from '@/desktop/pages/area';
 import { Completed } from '@/desktop/pages/completed';
@@ -32,7 +33,7 @@ export const App = () => {
   useCloudSync();
   useEffect(() => {
     const originalFontSize = document.documentElement.style.fontSize;
-    document.documentElement.style.fontSize = '14px';
+    document.documentElement.style.fontSize = '16px';
     return () => {
       document.documentElement.style.fontSize = originalFontSize;
     };
@@ -158,6 +159,7 @@ export const App = () => {
       {element}
       <DesktopMenu />
       <DatePickerOverlay />
+      <TimePickerOverlay />
       <TagEditorOverlay />
       <DesktopDialog />
       <DesktopMessage />

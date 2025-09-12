@@ -23,17 +23,16 @@ export const TaskDateField: React.FC<TaskDateFieldProps> = ({
 }) => {
   if (!date) {
     return (
-      <button className={desktopStyles.TaskDateFieldButton} onClick={onDateClick}>
-        <div className={desktopStyles.TaskDateFieldIcon}>{icon}</div>
-
-        <span className={desktopStyles.TaskDateFieldPlaceholderText}> {placeholder}</span>
+      <button className={desktopStyles.SelectionFieldButton} onClick={onDateClick}>
+        <div className={desktopStyles.SelectionFieldIcon}>{icon}</div>
+        <span className={desktopStyles.SelectionFieldPlaceholderText}> {placeholder}</span>
       </button>
     );
   }
 
   return (
-    <button className={desktopStyles.TaskDateFieldButton} onClick={onDateClick}>
-      <div className={desktopStyles.TaskDateFieldIcon}>{icon}</div>
+    <button className={desktopStyles.SelectionFieldButton} onClick={onDateClick}>
+      <div className={desktopStyles.SelectionFieldIcon}>{icon}</div>
       <div className={desktopStyles.TaskDateFieldDateContainer}>
         <span
           className={classNames({

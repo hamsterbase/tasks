@@ -1,14 +1,17 @@
-import { ITaskModelData } from '@/core/state/type.ts';
+import { ITaskModelData } from '@/core/type.ts';
 import {
   CreateAreaSchema,
   CreateProjectHeadingSchema,
   CreateProjectSchema,
+  CreateReminderSchema,
   CreateTaskSchema,
   ItemMovePosition,
   ProjectStatusTransition,
+  ReminderWithId,
   UpdateAreaSchema,
   UpdateProjectHeadingSchema,
   UpdateProjectSchema,
+  UpdateReminderSchema,
   UpdateTaskSchema,
 } from '@/core/type.ts';
 import type { TreeID } from 'loro-crdt';
@@ -57,6 +60,11 @@ export interface ITodoService {
   editItem(itemId: TreeID): void;
   deleteItem(itemId: string): void;
   covertToProject(itemId: TreeID): void;
+
+  addReminder(data: CreateReminderSchema): string;
+  updateReminder(reminderId: string, data: UpdateReminderSchema): void;
+  deleteReminder(reminderId: string): void;
+  getReminders(): Map<TreeID, ReminderWithId[]>;
 }
 
 export const ITodoService = createDecorator<ITodoService>('todoService');

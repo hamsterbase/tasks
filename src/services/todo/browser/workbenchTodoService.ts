@@ -1,16 +1,19 @@
 import { getPeerId, resetPeerId } from '@/base/browser/getPeerId';
 import { TaskModel } from '@/core/model.ts';
-import { ITaskModelData } from '@/core/state/type';
+import { ITaskModelData } from '@/core/type';
 import {
   CreateAreaSchema,
   CreateProjectHeadingSchema,
   CreateProjectSchema,
+  CreateReminderSchema,
   CreateTaskSchema,
   ItemMovePosition,
   ProjectStatusTransition,
+  ReminderWithId,
   UpdateAreaSchema,
   UpdateProjectHeadingSchema,
   UpdateProjectSchema,
+  UpdateReminderSchema,
   UpdateTaskSchema,
 } from '@/core/type.ts';
 import { IDatabaseStorage } from '@/services/database/common/database';
@@ -224,5 +227,21 @@ export class WorkbenchTodoService implements ITodoService {
       id: itemId,
     };
     this._onEditingContentChange.fire(itemId);
+  }
+
+  addReminder(data: CreateReminderSchema): string {
+    return this.taskModel.addReminder(data);
+  }
+
+  updateReminder(reminderId: string, data: UpdateReminderSchema): void {
+    return this.taskModel.updateReminder(reminderId, data);
+  }
+
+  deleteReminder(reminderId: string): void {
+    return this.taskModel.deleteReminder(reminderId);
+  }
+
+  getReminders(): Map<TreeID, ReminderWithId[]> {
+    return this.taskModel.getReminders();
   }
 }

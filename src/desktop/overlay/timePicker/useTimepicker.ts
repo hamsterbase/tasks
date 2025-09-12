@@ -1,12 +1,8 @@
 import { useService } from '@/hooks/use-service';
 import { IInstantiationService } from 'vscf/platform/instantiation/common';
-import { DatePickerOverlayController } from './DatePickerOverlayController';
+import { TimePickerOverlayController } from './TimePickerOverlayController';
 
-export interface DatePickerOptions {
-  includeTime?: boolean;
-}
-
-export const useDatepicker = () => {
+export const useTimepicker = () => {
   const instantiationService = useService(IInstantiationService);
 
   return (
@@ -14,6 +10,6 @@ export const useDatepicker = () => {
     onDateSelected: (date: number | null) => void,
     position?: { x: number; y: number }
   ) => {
-    DatePickerOverlayController.create(initialDate, onDateSelected, instantiationService, position);
+    TimePickerOverlayController.create(initialDate, onDateSelected, instantiationService, position);
   };
 };

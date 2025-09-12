@@ -81,23 +81,25 @@ export const TaskLocationField: React.FC<TaskLocationFieldProps> = ({ itemId }) 
 
   if (!parentDisplayData) {
     return (
-      <button className={desktopStyles.TaskLocationFieldButton} onClick={handleMoveClick}>
-        <MoveIcon className={desktopStyles.TaskLocationFieldIcon} />
-        <span className={desktopStyles.TaskLocationFieldMoveText}>{localize('tasks.location.move', 'Move to')}</span>
+      <button className={desktopStyles.SelectionFieldButton} onClick={handleMoveClick}>
+        <MoveIcon className={desktopStyles.SelectionFieldIcon} />
+        <span className={desktopStyles.SelectionFieldPlaceholderText}>
+          {localize('tasks.location.move', 'Move to')}
+        </span>
       </button>
     );
   }
 
   return (
-    <button className={desktopStyles.TaskLocationFieldButton} onClick={handleMoveClick}>
+    <button className={desktopStyles.SelectionFieldButton} onClick={handleMoveClick}>
       {parentDisplayData.icon.type === 'area' ? (
-        <AreaIcon className={`${desktopStyles.TaskLocationFieldIcon} text-t2`} />
+        <AreaIcon className={`${desktopStyles.SelectionFieldIcon}`} />
       ) : (
         <ProjectStatusBox
           progress={parentDisplayData.icon.progress}
           status={parentDisplayData.icon.status}
           color="t2"
-          className={desktopStyles.TaskLocationFieldIcon}
+          className={desktopStyles.SelectionFieldIcon}
         />
       )}
       <span className={desktopStyles.TaskLocationFieldLocationText}>{parentDisplayData.title}</span>

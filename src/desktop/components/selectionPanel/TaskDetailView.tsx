@@ -13,6 +13,7 @@ import { SubtaskList } from './SubtaskList';
 import { TaskDateField } from './components/TaskDateField';
 import { TaskLocationField } from './components/TaskLocationField';
 import { useDatePickerHandlers } from './hooks/useDatePickerHandlers';
+import { RemindersField } from './components/RemindersField';
 
 interface TaskDetailViewProps {
   task: TaskInfo;
@@ -81,7 +82,13 @@ export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task, onClearSel
             isDue={true}
           />
           <TagsField itemId={task.id} />
+          <RemindersField
+            label={localize('tasks.reminders', 'Reminders')}
+            reminders={task.reminders}
+            itemId={task.id}
+          />
           <div className={desktopStyles.DetailViewDivider}></div>
+
           <SubtaskList task={task} />
         </div>
       </div>

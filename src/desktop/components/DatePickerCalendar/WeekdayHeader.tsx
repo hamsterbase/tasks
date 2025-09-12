@@ -14,9 +14,9 @@ export const WeekdayHeader: React.FC = () => {
   ];
 
   return (
-    <div className={desktopStyles.DatePickerOverlayWeekdayGrid}>
+    <div className={desktopStyles.DatePickerCalendarWeekdayGrid}>
       {weekdays.map((day) => (
-        <div key={day} className={desktopStyles.DatePickerOverlayWeekdayCell}>
+        <div key={day} className={desktopStyles.DatePickerCalendarWeekdayCell}>
           {day}
         </div>
       ))}

@@ -1,5 +1,6 @@
 import type { TreeID } from 'loro-crdt';
-import { ItemStatus, TaskObjectSchema } from '../type.ts';
+import { ITaskModelData, ItemStatus, ReminderWithId } from '../type.ts';
+export type { ITaskModelData };
 
 export interface ProjectInfoState {
   type: 'project';
@@ -58,6 +59,7 @@ export interface TaskInfo {
   isSubTask: boolean;
   projectTitle: string;
   completionAt?: number;
+  reminders: ReminderWithId[];
 }
 
 export interface ProjectHeadingInfo {
@@ -65,15 +67,6 @@ export interface ProjectHeadingInfo {
   parentId: TreeID;
   title: string;
   tasks: TaskInfo[];
-}
-
-export interface ITaskModelData {
-  version: Record<string, number>;
-  taskList: TaskObjectSchema[];
-  taskObjectMap: Map<string, TaskObjectSchema>;
-  taskObjectUidMap: Map<string, TaskObjectSchema>;
-  rootObjectIdList: TreeID[];
-  dateAssignedList: TreeID[];
 }
 
 export function isTask(modelData: ITaskModelData, id: TreeID) {

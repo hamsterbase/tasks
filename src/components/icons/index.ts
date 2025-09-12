@@ -40,6 +40,7 @@ import {
   User,
   X,
   PanelLeft,
+  AlarmClock,
 } from 'lucide-react';
 
 export const AreaExpandedIcon = ChevronRight;
@@ -88,4 +89,5 @@ export const CalendarXIcon = CalendarX;
 export const CopyIcon = Copy;
 export const ChevronDownIcon = ChevronDown;
 export { CalendarDays };
+export const AlarmIcon = AlarmClock;
 export const PanelLeftIcon = PanelLeft;
