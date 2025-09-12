@@ -54,7 +54,7 @@ const ProjectDetailPanelContent: React.FC<IProjectDetailPanelContentProps> = ({ 
   ) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const position = {
-      x: rect.left - 280 - 10,
+      x: rect.left,
       y: rect.top,
     };
     showDatePicker(currentDate, onDateSelect, position);

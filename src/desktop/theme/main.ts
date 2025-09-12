@@ -486,7 +486,7 @@ export const desktopStyles = {
   TimePickerOverlayTimeSection: 'w-36 h-83 border-l border-line-regular flex',
   TimePickerScrollColumn: 'flex-1 overflow-y-auto relative p-3',
   TimePickerScrollItem:
-    'h-9 flex items-center justify-center text-sm hover:bg-bg2 transition-all cursor-pointer flex-shrink-0 w-full rounded',
+    'h-9 flex items-center justify-center text-sm hover:bg-bg2 transition-all flex-shrink-0 w-full rounded',
   TimePickerScrollItemSelected: 'bg-brand text-white font-medium scale-105 hover:bg-brand',
   TimePickerScrollColumnWrapper: 'w-18 h-83 overflow-y-auto',
   TimePickerOverlayFooter: 'flex justify-between gap-2 px-3 py-3 border-t border-line-regular',
