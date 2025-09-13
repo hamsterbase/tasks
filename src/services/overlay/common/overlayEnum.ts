@@ -1,5 +1,6 @@
 export enum OverlayEnum {
   datePicker = 'datePicker',
+  timePicker = 'timePicker',
   tagEditor = 'tagEditor',
   popupAction = 'popupAction',
   dialog = 'dialog',

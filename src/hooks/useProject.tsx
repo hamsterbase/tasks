@@ -4,7 +4,7 @@ import { ItemStatus } from '@/core/type';
 import { useBack } from '@/hooks/useBack.ts';
 import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox.tsx';
 import { TaskStatusBox } from '@/mobile/components/taskItem/TaskStatusBox';
-import { useDatepicker } from '@/mobile/overlay/datePicker/useDatepicker';
+import { useMobileDatepicker } from '@/mobile/overlay/datePicker/useDatepicker';
 import { useDialog } from '@/mobile/overlay/dialog/useDialog.ts';
 import { PopupActionItem } from '@/mobile/overlay/popupAction/PopupActionController';
 import { usePopupAction } from '@/mobile/overlay/popupAction/usePopupAction';
@@ -21,7 +21,7 @@ const useProject = (project: ProjectInfoState | null) => {
 
   const popupAction = usePopupAction();
   const tagEditor = useTagEditor();
-  const datepicker = useDatepicker();
+  const mobileDatepicker = useMobileDatepicker();
   const projectAreaSelector = useProjectAreaSelector();
 
   const handleEditTag = () => {
@@ -33,15 +33,21 @@ const useProject = (project: ProjectInfoState | null) => {
 
   const handleEditStartDate = () => {
     if (!project) return;
-    datepicker(project.startDate, (date) => {
-      todoService.updateProject(project!.id, { startDate: date });
+    mobileDatepicker.showDatePicker({
+      initialDate: project.startDate,
+      onDateSelected: (date) => {
+        todoService.updateProject(project!.id, { startDate: date });
+      },
     });
   };
 
   const handleEditDueDate = () => {
     if (!project) return;
-    datepicker(project.dueDate, (date) => {
-      todoService.updateProject(project!.id, { dueDate: date });
+    mobileDatepicker.showDatePicker({
+      initialDate: project.dueDate,
+      onDateSelected: (date) => {
+        todoService.updateProject(project!.id, { dueDate: date });
+      },
     });
   };
 

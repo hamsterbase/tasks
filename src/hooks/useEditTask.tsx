@@ -1,24 +1,27 @@
-import { DeleteIcon, DueIcon, MoveIcon, ScheduledIcon, SubtaskIcon, TagIcon } from '@/components/icons';
+import { mergeDateAndTime } from '@/base/common/time';
+import { AlarmIcon, DeleteIcon, DueIcon, MoveIcon, ScheduledIcon, SubtaskIcon, TagIcon } from '@/components/icons';
+import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox.tsx';
 import { TaskInfo } from '@/core/state/type';
 import { ItemStatus } from '@/core/type';
-import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox.tsx';
-import { DatePickerActionSheetController } from '@/mobile/overlay/datePicker/DatePickerActionSheetController';
+import { DueDateInfoItem, DueDateInfoItemIcon } from '@/mobile/components/infoItem/dueDate';
+import { StartDateInfoItem } from '@/mobile/components/infoItem/startDate';
+import { useMobileDatepicker } from '@/mobile/overlay/datePicker/useDatepicker';
 import { useDialog } from '@/mobile/overlay/dialog/useDialog';
 import { PopupActionItem } from '@/mobile/overlay/popupAction/PopupActionController';
 import { usePopupAction } from '@/mobile/overlay/popupAction/usePopupAction';
+import { useProjectAreaSelector } from '@/mobile/overlay/projectAreaSelector/useProjectAreaSelector';
 import { TagEditorActionSheetController } from '@/mobile/overlay/tagEditor/TagEditorActionSheetController';
+import { useTimePicker } from '@/mobile/overlay/timePicker/useTimePicker';
 import { styles } from '@/mobile/theme';
 import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService';
-import { IInstantiationService } from 'vscf/platform/instantiation/common';
 import { DragEndEvent } from '@dnd-kit/core';
+import dayjs from 'dayjs';
 import { TreeID } from 'loro-crdt';
 import React, { useRef } from 'react';
+import { IInstantiationService } from 'vscf/platform/instantiation/common';
 import { useService } from './use-service';
 import { useWatchEvent } from './use-watch-event';
-import { StartDateInfoItem } from '@/mobile/components/infoItem/startDate';
-import { DueDateInfoItem, DueDateInfoItemIcon } from '@/mobile/components/infoItem/dueDate';
-import { useProjectAreaSelector } from '@/mobile/overlay/projectAreaSelector/useProjectAreaSelector';
 
 export const useEditTaskHooks = (taskInfo: TaskInfo) => {
   const subtaskInputRefs = useRef<Record<string, HTMLInputElement>>({});
@@ -28,6 +31,9 @@ export const useEditTaskHooks = (taskInfo: TaskInfo) => {
   const dialog = useDialog();
   const projectAreaSelector = useProjectAreaSelector();
   const instantiationService = useService(IInstantiationService);
+  const mobileDatepicker = useMobileDatepicker();
+
+  const timePicker = useTimePicker();
 
   const handleDeleteTask = () => {
     dialog({
@@ -101,15 +107,11 @@ export const useEditTaskHooks = (taskInfo: TaskInfo) => {
       show: !taskInfo.startDate,
       icon: <ScheduledIcon className={styles.taskDetailBottomActionIconStyle} />,
       onClick: () => {
-        return new Promise<void>((resolve) => {
-          DatePickerActionSheetController.create(
-            taskInfo.startDate,
-            (ds) => {
-              todoService.updateTask(taskInfo.id, { startDate: ds });
-              resolve();
-            },
-            instantiationService
-          );
+        mobileDatepicker.showDatePicker({
+          initialDate: taskInfo.startDate,
+          onDateSelected: (ds) => {
+            todoService.updateTask(taskInfo.id, { startDate: ds });
+          },
         });
       },
     },
@@ -118,15 +120,11 @@ export const useEditTaskHooks = (taskInfo: TaskInfo) => {
       show: !taskInfo.dueDate,
       icon: <DueIcon className={styles.taskDetailBottomActionIconStyle} />,
       onClick: () => {
-        return new Promise<void>((resolve) => {
-          DatePickerActionSheetController.create(
-            taskInfo.dueDate,
-            (ds) => {
-              todoService.updateTask(taskInfo.id, { dueDate: ds });
-              resolve();
-            },
-            instantiationService
-          );
+        mobileDatepicker.showDatePicker({
+          initialDate: taskInfo.dueDate,
+          onDateSelected: (date) => {
+            todoService.updateTask(taskInfo.id, { dueDate: date });
+          },
         });
       },
     },
@@ -154,6 +152,21 @@ export const useEditTaskHooks = (taskInfo: TaskInfo) => {
       onClick: () => {
         createSubtask();
         return Promise.resolve();
+      },
+    },
+    {
+      key: 'reminder',
+      show: true,
+      icon: <AlarmIcon className={styles.taskDetailBottomActionIconStyle} />,
+      onClick: () => {
+        mobileDatepicker.showDatePicker({
+          initialDate: Date.now(),
+          onDateSelected: async (date) => {
+            const time = await timePicker.showTimePickerPromise(Date.now());
+            const mergedDateTime = mergeDateAndTime(date, time);
+            todoService.addReminder({ itemId: taskInfo.id, time: mergedDateTime.getTime() });
+          },
+        });
       },
     },
   ].filter((action) => action.show);
@@ -248,6 +261,28 @@ export const useEditTaskHooks = (taskInfo: TaskInfo) => {
     }
   };
 
+  const reminders = taskInfo.reminders.map((reminder) => {
+    return {
+      itemKey: 'reminder' + reminder.reminderId,
+      show: true,
+      icon: <AlarmIcon></AlarmIcon>,
+      content: <div>{dayjs(reminder.time).format('YYYY-MM-DD HH:mm')}</div>,
+      onClick: () => {
+        mobileDatepicker.showDatePicker({
+          initialDate: reminder.time,
+          onDateSelected: async (date) => {
+            const time = await timePicker.showTimePickerPromise(reminder.time);
+            const mergedDateTime = mergeDateAndTime(date, time);
+            todoService.updateReminder(reminder.reminderId, { time: mergedDateTime.getTime() });
+          },
+        });
+      },
+      onClear: () => {
+        todoService.deleteReminder(reminder.reminderId);
+      },
+    };
+  });
+
   const taskDetailItems = [
     {
       itemKey: 'tags',
@@ -279,13 +314,12 @@ export const useEditTaskHooks = (taskInfo: TaskInfo) => {
       icon: <ScheduledIcon />,
       content: <StartDateInfoItem startDate={taskInfo.startDate} />,
       onClick: () => {
-        DatePickerActionSheetController.create(
-          taskInfo.startDate,
-          (ds) => {
+        mobileDatepicker.showDatePicker({
+          initialDate: taskInfo.startDate,
+          onDateSelected: (ds) => {
             todoService.updateTask(taskInfo.id, { startDate: ds });
           },
-          instantiationService
-        );
+        });
       },
       onClear: () => {
         todoService.updateTask(taskInfo.id, { startDate: null });
@@ -297,19 +331,19 @@ export const useEditTaskHooks = (taskInfo: TaskInfo) => {
       icon: <DueDateInfoItemIcon dueDate={taskInfo.dueDate} />,
       content: <DueDateInfoItem dueDate={taskInfo.dueDate} />,
       onClick: () => {
-        DatePickerActionSheetController.create(
-          taskInfo.dueDate,
-          (ds) => {
+        mobileDatepicker.showDatePicker({
+          initialDate: taskInfo.dueDate,
+          onDateSelected: (ds) => {
             todoService.updateTask(taskInfo.id, { dueDate: ds });
           },
-          instantiationService
-        );
+        });
       },
       onClear: () => {
         todoService.updateTask(taskInfo.id, { dueDate: null });
         todoService.editItem(taskInfo.id);
       },
     },
+    ...reminders,
   ];
 
   return {

@@ -11,6 +11,11 @@ interface CreateTaskCheckList {
   status: ItemStatus;
 }
 
+interface CreateTaskReminder {
+  id: string;
+  time: number;
+}
+
 export interface CreateTaskPayload extends Partial<CreateTaskSchema> {
   onCreate?: (taskId: TreeID) => void;
 }
@@ -29,6 +34,7 @@ export function useCreateTask(initialPayload: CreateTaskPayload = {}) {
     initialPayload.dueDate === null ? undefined : initialPayload.dueDate
   );
   const [subtasks, setSubtasks] = useState<CreateTaskCheckList[]>([]);
+  const [reminders, setReminders] = useState<CreateTaskReminder[]>([]);
 
   // Refs
   const focusSubtaskCallbackRef = useRef<((id: string) => void) | null>(null);
@@ -143,6 +149,27 @@ export function useCreateTask(initialPayload: CreateTaskPayload = {}) {
     setSubtasks(newSubtasks);
   }, []);
 
+  const addReminder = useCallback((time: number) => {
+    const newReminder = { id: generateUuid(), time };
+    setReminders((prevReminders) => [...prevReminders, newReminder]);
+  }, []);
+
+  const updateReminder = useCallback((id: string, time: number) => {
+    setReminders((prevReminders) => {
+      const index = prevReminders.findIndex((reminder) => reminder.id === id);
+      if (index >= 0) {
+        const newReminders = [...prevReminders];
+        newReminders[index] = { ...newReminders[index], time };
+        return newReminders;
+      }
+      return prevReminders;
+    });
+  }, []);
+
+  const deleteReminder = useCallback((id: string) => {
+    setReminders((prevReminders) => prevReminders.filter((reminder) => reminder.id !== id));
+  }, []);
+
   const confirmTask = useCallback(() => {
     const newTaskId = todoService.addTask({
       title,
@@ -159,8 +186,16 @@ export function useCreateTask(initialPayload: CreateTaskPayload = {}) {
         position: { type: 'firstElement', parentId: newTaskId },
       });
     });
+
+    reminders.forEach((reminder) => {
+      todoService.addReminder({
+        itemId: newTaskId,
+        time: reminder.time,
+      });
+    });
+
     return newTaskId;
-  }, [title, notes, initialPayload.position, tags, startDate, dueDate, subtasks, todoService]);
+  }, [title, notes, initialPayload.position, tags, startDate, dueDate, subtasks, reminders, todoService]);
 
   const setFocusSubtaskCallback = useCallback((callback: (id: string) => void) => {
     focusSubtaskCallbackRef.current = callback;
@@ -174,6 +209,7 @@ export function useCreateTask(initialPayload: CreateTaskPayload = {}) {
     startDate,
     dueDate,
     subtasks,
+    reminders,
 
     // Update methods
     updateTitle,
@@ -190,6 +226,11 @@ export function useCreateTask(initialPayload: CreateTaskPayload = {}) {
     updateSubtaskStatus,
     deleteSubtask,
     updateSubtaskOrder,
+
+    // Reminder methods
+    addReminder,
+    updateReminder,
+    deleteReminder,
 
     // Task creation
     confirmTask,

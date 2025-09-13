@@ -1,6 +1,13 @@
 import { HttpError } from '@/packages/cloud/error.ts';
 import { localize } from '@/nls.ts';
 
+export class CancelError extends Error {
+  constructor(message = 'Operation was cancelled') {
+    super(message);
+    this.name = 'CancelError';
+  }
+}
+
 const otherError = localize('otherError', 'An error occurred');
 
 export function getLoginErrorMessage(error: Error) {

@@ -2,6 +2,7 @@ import { useService } from '@/hooks/use-service';
 import { useCloudSync } from '@/hooks/useCloudSync';
 import { useSafeArea } from '@/hooks/useSafeArea';
 import { DatePickerActionSheet } from '@/mobile/overlay/datePicker/DatePickerActionSheet.tsx';
+import { TimePickerActionSheet } from '@/mobile/overlay/timePicker/TimePickerActionSheet';
 import { Dialog } from '@/mobile/overlay/dialog/Dialog';
 import { PopupActionSheet } from '@/mobile/overlay/popupAction/PopupActionSheet';
 import { TagEditorActionSheet } from '@/mobile/overlay/tagEditor/TagEditorActionSheet';
@@ -61,6 +62,7 @@ export const App = () => {
   return (
     <div>
       <DatePickerActionSheet></DatePickerActionSheet>
+      <TimePickerActionSheet></TimePickerActionSheet>
       <Dialog></Dialog>
       <Toast></Toast>
       <TagEditorActionSheet></TagEditorActionSheet>

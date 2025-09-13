@@ -1,4 +1,5 @@
-import { DueIcon, ScheduledIcon, SubtaskIcon, TagIcon } from '@/components/icons';
+import { mergeDateAndTime } from '@/base/common/time';
+import { AlarmIcon, DueIcon, ScheduledIcon, SubtaskIcon, TagIcon } from '@/components/icons';
 import { useBack } from '@/hooks/useBack';
 import { useCreateTask } from '@/hooks/useCreateTask';
 import { useDragSensors } from '@/hooks/useDragSensors';
@@ -6,6 +7,7 @@ import { localize } from '@/nls';
 import { closestCenter, DndContext, DragEndEvent, Modifier } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import classNames from 'classnames';
+import dayjs from 'dayjs';
 import TextArea from 'rc-textarea';
 import React, { useLayoutEffect, useRef } from 'react';
 import { InfoItemGroup, InfoItemProps } from '../components/InfoItem';
@@ -13,9 +15,11 @@ import { DueDateInfoItem, DueDateInfoItemIcon } from '../components/infoItem/due
 import { StartDateInfoItem } from '../components/infoItem/startDate';
 import { InfoItemTags } from '../components/infoItem/tags';
 import { SubtaskItem } from '../components/todo/SubtaskItem';
-import { useDatepicker } from '../overlay/datePicker/useDatepicker';
+import { useMobileDatepicker } from '../overlay/datePicker/useDatepicker';
 import { useTagEditor } from '../overlay/tagEditor/useTagEditor';
+import { useTimePicker } from '../overlay/timePicker/useTimePicker';
 import { styles } from '../theme';
+
 const restrictToVerticalAxis: Modifier = ({ transform, ...res }) => {
   if (!res.containerNodeRect || !res.draggingNodeRect) return { ...transform, x: 0 };
 
@@ -47,8 +51,9 @@ export const CreateTaskActionSheet: React.FC = () => {
   const sensors = useDragSensors();
   const titleRef = useRef<HTMLInputElement>(null);
   const subtaskInputRefs = useRef<Record<string, HTMLInputElement>>({});
-  const datePicker = useDatepicker();
+  const mobileDatepicker = useMobileDatepicker();
   const tagEditor = useTagEditor();
+  const timePicker = useTimePicker();
 
   useLayoutEffect(() => {
     if (titleRef.current) {
@@ -76,8 +81,11 @@ export const CreateTaskActionSheet: React.FC = () => {
       visible: !taskManager.startDate,
       icon: <ScheduledIcon />,
       onClick: () => {
-        datePicker(taskManager.startDate, (date) => {
-          taskManager.updateStartDate(date);
+        mobileDatepicker.showDatePicker({
+          initialDate: taskManager.startDate,
+          onDateSelected: (date) => {
+            taskManager.updateStartDate(date);
+          },
         });
       },
     },
@@ -85,8 +93,11 @@ export const CreateTaskActionSheet: React.FC = () => {
       visible: !taskManager.dueDate,
       icon: <DueIcon />,
       onClick: () => {
-        datePicker(taskManager.dueDate, (date) => {
-          taskManager.updateDueDate(date);
+        mobileDatepicker.showDatePicker({
+          initialDate: taskManager.dueDate,
+          onDateSelected: (date) => {
+            taskManager.updateDueDate(date);
+          },
         });
       },
     },
@@ -103,6 +114,20 @@ export const CreateTaskActionSheet: React.FC = () => {
       visible: taskManager.subtasks.length === 0,
       icon: <SubtaskIcon />,
       onClick: () => taskManager.createSubtask(),
+    },
+    {
+      visible: taskManager.reminders.length === 0,
+      icon: <AlarmIcon />,
+      onClick: () => {
+        mobileDatepicker.showDatePicker({
+          initialDate: Date.now(),
+          onDateSelected: async (date) => {
+            const time = await timePicker.showTimePickerPromise(Date.now());
+            const mergedDateTime = mergeDateAndTime(date, time);
+            taskManager.addReminder(mergedDateTime.getTime());
+          },
+        });
+      },
     },
   ];
 
@@ -151,8 +176,11 @@ export const CreateTaskActionSheet: React.FC = () => {
       icon: <ScheduledIcon />,
       content: <StartDateInfoItem startDate={taskManager.startDate} />,
       onClick: () => {
-        datePicker(taskManager.startDate, (date) => {
-          taskManager.updateStartDate(date);
+        mobileDatepicker.showDatePicker({
+          initialDate: taskManager.startDate,
+          onDateSelected: (date) => {
+            taskManager.updateStartDate(date);
+          },
         });
       },
       onClear: () => taskManager.clearStartDate(),
@@ -163,12 +191,33 @@ export const CreateTaskActionSheet: React.FC = () => {
       icon: <DueDateInfoItemIcon dueDate={taskManager.dueDate} />,
       content: <DueDateInfoItem dueDate={taskManager.dueDate} />,
       onClick: () => {
-        datePicker(taskManager.dueDate, (date) => {
-          taskManager.updateDueDate(date);
+        mobileDatepicker.showDatePicker({
+          initialDate: taskManager.dueDate,
+          onDateSelected: (date) => {
+            taskManager.updateDueDate(date);
+          },
         });
       },
       onClear: () => taskManager.clearDueDate(),
     },
+    // Map reminders to InfoItemProps
+    ...taskManager.reminders.map((reminder) => ({
+      itemKey: `reminder-${reminder.id}`,
+      show: true,
+      icon: <AlarmIcon />,
+      content: <div>{dayjs(reminder.time).format('YYYY-MM-DD HH:mm')}</div>,
+      onClick: () => {
+        mobileDatepicker.showDatePicker({
+          initialDate: reminder.time,
+          onDateSelected: async (date) => {
+            const time = await timePicker.showTimePickerPromise(reminder.time);
+            const mergedDateTime = mergeDateAndTime(date, time);
+            taskManager.updateReminder(reminder.id, mergedDateTime.getTime());
+          },
+        });
+      },
+      onClear: () => taskManager.deleteReminder(reminder.id),
+    })),
   ];
 
   return (
@@ -226,7 +275,8 @@ export const CreateTaskActionSheet: React.FC = () => {
                 taskManager.subtasks.length === 0 &&
                 !taskManager.startDate &&
                 !taskManager.dueDate &&
-                taskManager.tags.length === 0,
+                taskManager.tags.length === 0 &&
+                taskManager.reminders.length === 0,
             }
           )}
         >

@@ -26,14 +26,21 @@ interface MonthData {
 export class DatePickerActionSheetController extends Disposable {
   static create(
     initialDate: number | undefined,
-    onDateSelected: (date: number) => void,
+    onDateSelected: (date: number) => Promise<void> | void,
+    onCancel: () => void,
     instantiationService: IInstantiationService
   ) {
     const workbenchOverlayService = instantiationService.invokeFunction((accessor) => {
       return accessor.get(IWorkbenchOverlayService);
     });
     return workbenchOverlayService.createOverlay('action-sheet', OverlayEnum.datePicker, (options) => {
-      return instantiationService.createInstance(DatePickerActionSheetController, options, initialDate, onDateSelected);
+      return instantiationService.createInstance(
+        DatePickerActionSheetController,
+        options,
+        initialDate,
+        onDateSelected,
+        onCancel
+      );
     });
   }
 
@@ -51,7 +58,8 @@ export class DatePickerActionSheetController extends Disposable {
   constructor(
     public option: OverlayInitOptions,
     initialDate: number | undefined,
-    private onDateSelected: (date: number) => void,
+    private onDateSelected: (date: number) => Promise<void> | void,
+    private onCancel: () => void,
     @IWorkbenchOverlayService private readonly workbenchOverlayService: IWorkbenchOverlayService
   ) {
     super();
@@ -140,9 +148,17 @@ export class DatePickerActionSheetController extends Disposable {
     );
   }
 
-  selectDate(date: Date) {
-    this._selectedDate = date;
-    this.onDateSelected(getUtcDayjsFromDateStr(dayjs(date).format('YYYY-MM-DD')).valueOf());
+  async selectDate(date: Date) {
+    try {
+      await this.onDateSelected(getUtcDayjsFromDateStr(dayjs(date).format('YYYY-MM-DD')).valueOf());
+      this.dispose();
+    } catch (error) {
+      console.error('Error selecting date:', error);
+    }
+  }
+
+  cancel() {
+    this.onCancel();
     this.dispose();
   }
 
