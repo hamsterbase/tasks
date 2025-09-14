@@ -104,6 +104,7 @@
   },
   "packageManager": "pnpm@10.15.0",
   "dependencies": {
+    "@capacitor/local-notifications": "^7.0.3",
     "@electron/notarize": "^3.0.1",
     "cac": "^6.7.14",
     "lint-staged": "^16.1.2"
