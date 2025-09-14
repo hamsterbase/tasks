@@ -8,7 +8,13 @@ import { IndexdbDatabaseService } from '@/services/database/browser/indexdbDatab
 import { IDatabaseService } from '@/services/database/common/database.ts';
 import { FsDatabaseService } from '@/services/database/native/fsDatabaseService.ts';
 import { INavigationService, NavigationService } from '@/services/navigationService/common/navigationService.ts';
+import { IReminderService } from '@/services/reminders/common/reminderService.ts';
+import { MobileReminderService } from '@/services/reminders/native/mobileReminderService.ts';
+import { ISwitchService, SwitchService } from '@/services/switchService/common/switchService.ts';
 import { ITodoService } from '@/services/todo/common/todoService.ts';
+import { WorkbenchWebLoggerService } from '@/services/weblogger/browser/workbenchWebLoggerService.ts';
+import { IWebLoggerService } from '@/services/weblogger/common/webloggerService.ts';
+import { Directory } from '@capacitor/filesystem';
 import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { InstantiationService, ServiceCollection, SyncDescriptor } from 'vscf/platform/instantiation/common.ts';
@@ -18,12 +24,8 @@ import {
   WorkbenchOverlayService,
 } from '../services/overlay/common/WorkbenchOverlayService.ts';
 import { WorkbenchTodoService } from '../services/todo/browser/workbenchTodoService.ts';
-import { App } from './App.tsx';
 import '../styles/main.css';
-import { Directory } from '@capacitor/filesystem';
-import { ISwitchService, SwitchService } from '@/services/switchService/common/switchService.ts';
-import { IWebLoggerService } from '@/services/weblogger/common/webloggerService.ts';
-import { WorkbenchWebLoggerService } from '@/services/weblogger/browser/workbenchWebLoggerService.ts';
+import { App } from './App.tsx';
 
 export const startMobile = async () => {
   initializeTheme();
@@ -36,6 +38,7 @@ export const startMobile = async () => {
   serviceCollection.set(INavigationService, new SyncDescriptor(NavigationService));
   serviceCollection.set(ICloudService, new SyncDescriptor(CloudService));
   serviceCollection.set(IWebLoggerService, new SyncDescriptor(WorkbenchWebLoggerService));
+  serviceCollection.set(IReminderService, new SyncDescriptor(MobileReminderService));
   if (checkPlatform().isNative) {
     serviceCollection.set(IDatabaseService, new SyncDescriptor(FsDatabaseService, [Directory.Data]));
   } else {
@@ -51,6 +54,9 @@ export const startMobile = async () => {
   });
   await instantiationService.invokeFunction(async (dss) => {
     await dss.get(ICloudService).init();
+  });
+  await instantiationService.invokeFunction(async (dss) => {
+    await dss.get(IReminderService).start();
   });
 
   const globalContext = {

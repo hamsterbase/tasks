@@ -16,6 +16,8 @@ import { StandaloneKeybindingService } from '@/services/keybinding/browser/stand
 import { IListService, ListService } from '@/services/list/common/listService';
 import { INavigationService, NavigationService } from '@/services/navigationService/common/navigationService';
 import { IWorkbenchOverlayService, WorkbenchOverlayService } from '@/services/overlay/common/WorkbenchOverlayService';
+import { IReminderService } from '@/services/reminders/common/reminderService';
+import { DesktopReminderService } from '@/services/reminders/electron/DesktopReminderService';
 import { ISwitchService, SwitchService } from '@/services/switchService/common/switchService';
 import { WorkbenchTodoService } from '@/services/todo/browser/workbenchTodoService';
 import { ITodoService } from '@/services/todo/common/todoService';
@@ -56,6 +58,7 @@ export async function startDesktop() {
   serviceCollection.set(IEditService, new SyncDescriptor(EditService));
   serviceCollection.set(IWorkbenchInstanceService, new SyncDescriptor(WorkbenchInstanceService));
   serviceCollection.set(IWebLoggerService, new SyncDescriptor(WorkbenchWebLoggerService));
+  serviceCollection.set(IReminderService, new SyncDescriptor(DesktopReminderService));
   const instantiationService = new InstantiationService(serviceCollection, true);
 
   await instantiationService.invokeFunction(async (dss) => {
@@ -66,6 +69,9 @@ export async function startDesktop() {
   });
   await instantiationService.invokeFunction(async (dss) => {
     await dss.get(ICloudService).init();
+  });
+  await instantiationService.invokeFunction(async (dss) => {
+    await dss.get(IReminderService).start();
   });
 
   instantiationService.invokeFunction(async (dss) => {
