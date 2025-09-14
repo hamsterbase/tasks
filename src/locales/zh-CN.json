@@ -490,7 +490,7 @@
   },
   "invalid.date": {
     "defaultMessage": "Invalid date format",
-    "content": ""
+    "content": "日期格式无效"
   },
   "keyNotFound": {
     "defaultMessage": "Key not found",
@@ -594,7 +594,7 @@
   },
   "notification.permission.denied": {
     "defaultMessage": "Notification permission denied",
-    "content": ""
+    "content": "通知权限被拒绝"
   },
   "offline.database": {
     "defaultMessage": "Offline Database",
@@ -790,7 +790,7 @@
   },
   "reminder.expired.title": {
     "defaultMessage": "Task Reminder",
-    "content": ""
+    "content": "任务提醒"
   },
   "schedule": {
     "defaultMessage": "Schedule",
@@ -1170,11 +1170,11 @@
   },
   "tasks.reminders": {
     "defaultMessage": "Reminders",
-    "content": ""
+    "content": "提醒"
   },
   "tasks.reminders_placeholder": {
     "defaultMessage": "Add reminders",
-    "content": ""
+    "content": "添加提醒"
   },
   "tasks.select_task": {
     "defaultMessage": "Select a task to view details",
@@ -1210,27 +1210,27 @@
   },
   "time_picker.cancel": {
     "defaultMessage": "Cancel",
-    "content": ""
+    "content": "取消"
   },
   "time_picker.confirm": {
     "defaultMessage": "Confirm",
-    "content": ""
+    "content": "确认"
   },
   "time_picker.remove": {
     "defaultMessage": "Remove",
-    "content": ""
+    "content": "移除"
   },
   "time-picker.done": {
     "defaultMessage": "Done",
-    "content": ""
+    "content": "完成"
   },
   "time-picker.presets": {
     "defaultMessage": "Presets",
-    "content": ""
+    "content": "预设"
   },
   "time.tomorrow": {
     "defaultMessage": "tomorrow",
-    "content": ""
+    "content": "明天"
   },
   "today": {
     "defaultMessage": "Today",
