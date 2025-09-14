@@ -488,6 +488,10 @@
     "defaultMessage": "dbName and storeName are required",
     "content": "dbName and storeName are required"
   },
+  "invalid.date": {
+    "defaultMessage": "Invalid date format",
+    "content": "Invalid date format"
+  },
   "keyNotFound": {
     "defaultMessage": "Key not found",
     "content": "Key not found"
@@ -587,6 +591,10 @@
   "not_login": {
     "defaultMessage": "Account is logged out",
     "content": "Account is logged out"
+  },
+  "notification.permission.denied": {
+    "defaultMessage": "Notification permission denied",
+    "content": "Notification permission denied"
   },
   "offline.database": {
     "defaultMessage": "Offline Database",
@@ -779,6 +787,10 @@
   "register.title": {
     "defaultMessage": "Create Account",
     "content": "Create Account"
+  },
+  "reminder.expired.title": {
+    "defaultMessage": "Task Reminder",
+    "content": "Task Reminder"
   },
   "schedule": {
     "defaultMessage": "Schedule",
@@ -1156,6 +1168,14 @@
     "defaultMessage": "Add notes...",
     "content": "Add notes..."
   },
+  "tasks.reminders": {
+    "defaultMessage": "Reminders",
+    "content": "Reminders"
+  },
+  "tasks.reminders_placeholder": {
+    "defaultMessage": "Add reminders",
+    "content": "Add reminders"
+  },
   "tasks.select_task": {
     "defaultMessage": "Select a task to view details",
     "content": "Select a task to view details"
@@ -1187,6 +1207,30 @@
   "tasks.untitled": {
     "defaultMessage": "New Task",
     "content": "New Task"
+  },
+  "time_picker.cancel": {
+    "defaultMessage": "Cancel",
+    "content": "Cancel"
+  },
+  "time_picker.confirm": {
+    "defaultMessage": "Confirm",
+    "content": "Confirm"
+  },
+  "time_picker.remove": {
+    "defaultMessage": "Remove",
+    "content": "Remove"
+  },
+  "time-picker.done": {
+    "defaultMessage": "Done",
+    "content": "Done"
+  },
+  "time-picker.presets": {
+    "defaultMessage": "Presets",
+    "content": "Presets"
+  },
+  "time.tomorrow": {
+    "defaultMessage": "tomorrow",
+    "content": "tomorrow"
   },
   "today": {
     "defaultMessage": "Today",

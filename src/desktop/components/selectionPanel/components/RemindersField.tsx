@@ -1,11 +1,13 @@
 import { AlarmIcon } from '@/components/icons';
+import { formatReminderTime } from '@/core/time/formatReminderTime';
+import { isPast } from '@/core/time/isPast';
 import { ReminderWithId } from '@/core/type';
 import { useTimepicker } from '@/desktop/overlay/timePicker/useTimepicker';
 import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
 import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService';
-import dayjs from 'dayjs';
+import classNames from 'classnames';
 import { TreeID } from 'loro-crdt';
 import React from 'react';
 
@@ -78,17 +80,40 @@ export const RemindersField: React.FC<RemindersFieldProps> = ({ reminders, itemI
           {localize('tasks.reminders_placeholder', 'Add reminders')}
         </span>
       </button>
-      <div className={'ml-7'}>
-        {reminders.map((reminder) => (
-          <div
-            key={reminder.reminderId}
-            className={desktopStyles.SelectionFieldButton}
-            onClick={(e) => handleReminderClick(reminder, e)}
-          >
-            <span className="text-t1 text-base leading-5">{dayjs(reminder.time).format('MMM D, YYYY')}</span>
-            <span className="text-t2 text-sm leading-5">{dayjs(reminder.time).format('HH:mm')}</span>
-          </div>
-        ))}
+      <div className={desktopStyles.RemindersFieldContainer}>
+        {reminders
+          .sort((a, b) => -a.time + b.time)
+          .map((reminder) => {
+            const { date, time } = formatReminderTime(reminder.time);
+            const isReminderPast = isPast(reminder.time);
+            const displayDate = date;
+            const displayTime = time;
+
+            return (
+              <div
+                key={reminder.reminderId}
+                className={desktopStyles.SelectionFieldButton}
+                onClick={(e) => handleReminderClick(reminder, e)}
+              >
+                {displayDate && (
+                  <span
+                    className={classNames(desktopStyles.RemindersFieldDateText, {
+                      [desktopStyles.RemindersFieldPastText]: isReminderPast,
+                    })}
+                  >
+                    {displayDate}
+                  </span>
+                )}
+                <span
+                  className={classNames(desktopStyles.RemindersFieldTimeText, {
+                    [desktopStyles.RemindersFieldPastText]: isReminderPast,
+                  })}
+                >
+                  {displayTime}
+                </span>
+              </div>
+            );
+          })}
       </div>
     </div>
   );

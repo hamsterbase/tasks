@@ -20,7 +20,7 @@ export const DueDateInfoItem: React.FC<DueDateInfoItemProps> = ({ dueDate }) => 
       >
         {localize('create_task_page.due_date', 'Due Date')}: {formatDate(dueDate)}
       </span>
-      <span className="text-xs text-t2"> {formatRemainingDays(dueDate)}</span>
+      <span className="text-sm text-t2"> {formatRemainingDays(dueDate)}</span>
     </p>
   );
 };

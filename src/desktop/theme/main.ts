@@ -65,6 +65,11 @@ export const desktopStyles = {
   SelectionFieldIcon: 'size-5 shrink-0 flex items-center justify-center',
   SelectionFieldPlaceholderText: 'text-base leading-5',
 
+  RemindersFieldContainer: 'ml-7',
+  RemindersFieldDateText: 'text-t1 text-base leading-5',
+  RemindersFieldTimeText: 'text-t2 text-sm leading-5',
+  RemindersFieldPastText: 'line-through',
+
   TaskLocationFieldLocationText: 'text-base leading-5 text-t1 truncate',
 
   TaskDateFieldDateContainer: 'flex items-baseline gap-1.5 text-base leading-5',

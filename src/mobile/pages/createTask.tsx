@@ -7,11 +7,11 @@ import { localize } from '@/nls';
 import { closestCenter, DndContext, DragEndEvent, Modifier } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import classNames from 'classnames';
-import dayjs from 'dayjs';
 import TextArea from 'rc-textarea';
 import React, { useLayoutEffect, useRef } from 'react';
 import { InfoItemGroup, InfoItemProps } from '../components/InfoItem';
 import { DueDateInfoItem, DueDateInfoItemIcon } from '../components/infoItem/dueDate';
+import { ReminderTimeInfoItem } from '../components/infoItem/reminderTime';
 import { StartDateInfoItem } from '../components/infoItem/startDate';
 import { InfoItemTags } from '../components/infoItem/tags';
 import { SubtaskItem } from '../components/todo/SubtaskItem';
@@ -116,7 +116,7 @@ export const CreateTaskActionSheet: React.FC = () => {
       onClick: () => taskManager.createSubtask(),
     },
     {
-      visible: taskManager.reminders.length === 0,
+      visible: true,
       icon: <AlarmIcon />,
       onClick: () => {
         mobileDatepicker.showDatePicker({
@@ -205,7 +205,7 @@ export const CreateTaskActionSheet: React.FC = () => {
       itemKey: `reminder-${reminder.id}`,
       show: true,
       icon: <AlarmIcon />,
-      content: <div>{dayjs(reminder.time).format('YYYY-MM-DD HH:mm')}</div>,
+      content: <ReminderTimeInfoItem reminderTime={reminder.time} />,
       onClick: () => {
         mobileDatepicker.showDatePicker({
           initialDate: reminder.time,

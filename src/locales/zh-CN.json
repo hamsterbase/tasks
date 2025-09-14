@@ -488,6 +488,10 @@
     "defaultMessage": "dbName and storeName are required",
     "content": "dbName和storeName为必填项"
   },
+  "invalid.date": {
+    "defaultMessage": "Invalid date format",
+    "content": ""
+  },
   "keyNotFound": {
     "defaultMessage": "Key not found",
     "content": "未找到密钥"
@@ -587,6 +591,10 @@
   "not_login": {
     "defaultMessage": "Account is logged out",
     "content": "账户已登出"
+  },
+  "notification.permission.denied": {
+    "defaultMessage": "Notification permission denied",
+    "content": ""
   },
   "offline.database": {
     "defaultMessage": "Offline Database",
@@ -779,6 +787,10 @@
   "register.title": {
     "defaultMessage": "Create Account",
     "content": "创建账户"
+  },
+  "reminder.expired.title": {
+    "defaultMessage": "Task Reminder",
+    "content": ""
   },
   "schedule": {
     "defaultMessage": "Schedule",
@@ -1156,6 +1168,14 @@
     "defaultMessage": "Add notes...",
     "content": "添加笔记..."
   },
+  "tasks.reminders": {
+    "defaultMessage": "Reminders",
+    "content": ""
+  },
+  "tasks.reminders_placeholder": {
+    "defaultMessage": "Add reminders",
+    "content": ""
+  },
   "tasks.select_task": {
     "defaultMessage": "Select a task to view details",
     "content": "选择一个任务以查看详情"
@@ -1187,6 +1207,30 @@
   "tasks.untitled": {
     "defaultMessage": "New Task",
     "content": "新任务"
+  },
+  "time_picker.cancel": {
+    "defaultMessage": "Cancel",
+    "content": ""
+  },
+  "time_picker.confirm": {
+    "defaultMessage": "Confirm",
+    "content": ""
+  },
+  "time_picker.remove": {
+    "defaultMessage": "Remove",
+    "content": ""
+  },
+  "time-picker.done": {
+    "defaultMessage": "Done",
+    "content": ""
+  },
+  "time-picker.presets": {
+    "defaultMessage": "Presets",
+    "content": ""
+  },
+  "time.tomorrow": {
+    "defaultMessage": "tomorrow",
+    "content": ""
   },
   "today": {
     "defaultMessage": "Today",

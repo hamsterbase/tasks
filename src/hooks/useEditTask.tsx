@@ -4,6 +4,7 @@ import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox.tsx';
 import { TaskInfo } from '@/core/state/type';
 import { ItemStatus } from '@/core/type';
 import { DueDateInfoItem, DueDateInfoItemIcon } from '@/mobile/components/infoItem/dueDate';
+import { ReminderTimeInfoItem } from '@/mobile/components/infoItem/reminderTime';
 import { StartDateInfoItem } from '@/mobile/components/infoItem/startDate';
 import { useMobileDatepicker } from '@/mobile/overlay/datePicker/useDatepicker';
 import { useDialog } from '@/mobile/overlay/dialog/useDialog';
@@ -16,7 +17,6 @@ import { styles } from '@/mobile/theme';
 import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService';
 import { DragEndEvent } from '@dnd-kit/core';
-import dayjs from 'dayjs';
 import { TreeID } from 'loro-crdt';
 import React, { useRef } from 'react';
 import { IInstantiationService } from 'vscf/platform/instantiation/common';
@@ -266,7 +266,7 @@ export const useEditTaskHooks = (taskInfo: TaskInfo) => {
       itemKey: 'reminder' + reminder.reminderId,
       show: true,
       icon: <AlarmIcon></AlarmIcon>,
-      content: <div>{dayjs(reminder.time).format('YYYY-MM-DD HH:mm')}</div>,
+      content: <ReminderTimeInfoItem reminderTime={reminder.time}></ReminderTimeInfoItem>,
       onClick: () => {
         mobileDatepicker.showDatePicker({
           initialDate: reminder.time,
