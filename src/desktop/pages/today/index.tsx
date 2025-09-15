@@ -9,10 +9,10 @@ import { DesktopPage } from '@/desktop/components/DesktopPage';
 import { DesktopProjectList } from '@/desktop/components/DesktopProjectList/DesktopProjectList';
 import { DragOverlayItem } from '@/desktop/components/drag/DragOverlayItem';
 import { InboxTaskInput } from '@/desktop/components/inboxTaskInput/InboxTaskInput';
-import { CreateTaskEvent } from '@/desktop/components/inboxTaskInput/InboxTaskInputController';
 import { TitleContentSection } from '@/desktop/components/TitleContentSection';
 import { TaskListItem } from '@/desktop/components/todo/TaskListItem';
 import { useDesktopTaskDisplaySettings } from '@/desktop/hooks/useDesktopTaskDisplaySettings.ts';
+import { useTaskCommands } from '@/desktop/hooks/useTaskCommands';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { useRegisterEvent } from '@/hooks/useRegisterEvent';
@@ -104,6 +104,8 @@ export const Today = () => {
     });
   });
 
+  useTaskCommands({ createTask: { startDate: getTodayTimestampInUtc() } });
+
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
 
@@ -143,17 +145,7 @@ export const Today = () => {
         />
       </TitleContentSection>
       <TitleContentSection title={localize('today.tasks', 'Tasks')}>
-        <InboxTaskInput
-          onCreateTask={(event: CreateTaskEvent) => {
-            todoService.addTask({
-              title: event.title,
-              startDate: getTodayTimestampInUtc(),
-              position: {
-                type: 'firstElement',
-              },
-            });
-          }}
-        />
+        <InboxTaskInput />
         <div tabIndex={1} onFocus={setFocus} onBlur={clearFocus}>
           <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
             <SortableContext items={tasks.map((task) => task.id)} strategy={verticalListSortingStrategy}>

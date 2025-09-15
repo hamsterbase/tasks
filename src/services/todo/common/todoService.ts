@@ -1,10 +1,10 @@
-import { ITaskModelData } from '@/core/type.ts';
 import {
   CreateAreaSchema,
   CreateProjectHeadingSchema,
   CreateProjectSchema,
   CreateReminderSchema,
   CreateTaskSchema,
+  ITaskModelData,
   ItemMovePosition,
   ProjectStatusTransition,
   ReminderWithId,
@@ -14,14 +14,27 @@ import {
   UpdateReminderSchema,
   UpdateTaskSchema,
 } from '@/core/type.ts';
+import { IDatabaseStorage } from '@/services/database/common/database';
 import type { TreeID } from 'loro-crdt';
 import { Event } from 'vs/base/common/event.ts';
 import { createDecorator } from 'vs/platform/instantiation/common/instantiation.ts';
-import { IDatabaseStorage } from '@/services/database/common/database';
 
 export interface EditingContent {
   id: TreeID;
 }
+
+export type TaskCommand =
+  | {
+      type: 'createTask';
+      title?: string;
+      disableAutoFocus?: boolean;
+    }
+  | {
+      type: 'createProject';
+    }
+  | {
+      type: 'setStartDateToToday';
+    };
 
 export interface ITodoService {
   storageId: string;
@@ -65,6 +78,10 @@ export interface ITodoService {
   updateReminder(reminderId: string, data: UpdateReminderSchema): void;
   deleteReminder(reminderId: string): void;
   getReminders(): Map<TreeID, ReminderWithId[]>;
+
+  onTaskCommands: Event<TaskCommand>;
+
+  fireTaskCommand(command: TaskCommand): void;
 }
 
 export const ITodoService = createDecorator<ITodoService>('todoService');

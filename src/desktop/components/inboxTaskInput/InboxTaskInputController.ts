@@ -2,6 +2,7 @@ import { IWorkbenchInstance } from '@/services/instance/common/instanceService';
 import { Emitter, Event } from 'vscf/base/common/event';
 import { IContextKey, IContextKeyService } from 'vscf/platform/contextkey/common';
 import { InboxTaskInputFocus } from './contextKey';
+import { ITodoService } from '@/services/todo/common/todoService';
 
 export const INBOX_TASK_INPUT_CONTROLLER_KEY = 'inbox-task-input-controller';
 
@@ -16,8 +17,6 @@ export class InboxTaskInputController implements IWorkbenchInstance {
 
   private readonly _onInputValueChange = new Emitter<string>();
 
-  private readonly _onCreateTask = new Emitter<CreateTaskEvent>();
-
   get onInputValueChange(): Event<string> {
     if (this._dispose) {
       throw new Error('InboxTaskInputController is disposed');
@@ -25,18 +24,14 @@ export class InboxTaskInputController implements IWorkbenchInstance {
     return this._onInputValueChange.event;
   }
 
-  get onCreateTask(): Event<CreateTaskEvent> {
-    if (this._dispose) {
-      throw new Error('InboxTaskInputController is disposed');
-    }
-    return this._onCreateTask.event;
-  }
-
   private _inputValue: string = '';
   private _contextKey: IContextKey<boolean>;
   private _dispose = false;
 
-  constructor(@IContextKeyService contextKeyService: IContextKeyService) {
+  constructor(
+    @IContextKeyService contextKeyService: IContextKeyService,
+    @ITodoService private todoService: ITodoService
+  ) {
     this._contextKey = InboxTaskInputFocus.bindTo(contextKeyService);
   }
 
@@ -57,7 +52,11 @@ export class InboxTaskInputController implements IWorkbenchInstance {
 
   createTask(): void {
     if (this._inputValue.trim()) {
-      this._onCreateTask.fire({ title: this._inputValue.trim() });
+      this.todoService.fireTaskCommand({
+        type: 'createTask',
+        title: this._inputValue.trim(),
+        disableAutoFocus: true,
+      });
       this.updateInputValue('');
     }
   }

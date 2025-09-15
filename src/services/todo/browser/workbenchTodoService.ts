@@ -17,12 +17,12 @@ import {
   UpdateTaskSchema,
 } from '@/core/type.ts';
 import { IDatabaseStorage } from '@/services/database/common/database';
-import { EditingContent, ITodoService } from '@/services/todo/common/todoService.ts';
-import { decodeBase64, encodeBase64, VSBuffer } from 'vscf/base/common/buffer';
-import { DisposableStore } from 'vscf/base/common/lifecycle';
+import { EditingContent, ITodoService, TaskCommand } from '@/services/todo/common/todoService.ts';
 import type { TreeID } from 'loro-crdt';
 import { debounceTime, Subject } from 'rxjs';
+import { decodeBase64, encodeBase64, VSBuffer } from 'vscf/base/common/buffer';
 import { Emitter } from 'vscf/base/common/event.ts';
+import { DisposableStore } from 'vscf/base/common/lifecycle';
 
 interface DateModel {
   taskModel: TaskModel;
@@ -244,4 +244,10 @@ export class WorkbenchTodoService implements ITodoService {
   getReminders(): Map<TreeID, ReminderWithId[]> {
     return this.taskModel.getReminders();
   }
+
+  fireTaskCommand(command: TaskCommand): void {
+    this._onTaskCommands.fire(command);
+  }
+  private _onTaskCommands: Emitter<TaskCommand> = new Emitter();
+  public onTaskCommands = this._onTaskCommands.event;
 }

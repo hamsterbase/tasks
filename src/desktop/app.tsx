@@ -33,7 +33,7 @@ export const App = () => {
   useCloudSync();
   useEffect(() => {
     const originalFontSize = document.documentElement.style.fontSize;
-    document.documentElement.style.fontSize = '16px';
+    document.documentElement.style.fontSize = '14px';
     return () => {
       document.documentElement.style.fontSize = originalFontSize;
     };

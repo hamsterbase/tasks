@@ -83,7 +83,7 @@ export const desktopStyles = {
   TagsFieldIconWithTags: 'size-5 flex-shrink-0',
   TagsFieldText: 'text-base leading-5',
   TagsFieldTagsContainer: 'flex flex-wrap gap-3 justify-start',
-  TagsFieldTag: 'text-brand rounded-sm text-xs px-2 py-0.5 h-5 flex items-center bg-brand/15',
+  TagsFieldTag: 'text-brand rounded-sm text-base px-2 h-5 flex items-center bg-brand/15',
 
   SubtaskListTitle: 'flex items-center px-3 gap-2.5 h-14',
   SubtaskListTitleIcon: 'size-5 flex-shrink-0 text-t1 flex items-center justify-center',
@@ -101,9 +101,9 @@ export const desktopStyles = {
   InboxAreaHeadingBadge: 'absolute top-5.5 right-2.5 w-2 h-2 bg-primary rounded-full flex items-center justify-center',
   InboxAreaHeadingBadgeIcon: 'text-t3 text-xs leading-none',
 
-  ItemTagContainer: 'flex text-xs leading-4 h-5 items-center px-2 gap-1 rounded-sm max-w-30 text-t2',
-  ItemTagSelected: 'bg-bg1',
-  ItemTagUnselected: 'bg-bg3',
+  ItemTagContainer: 'flex text-sm leading-5 h-5 items-center gap-0.5 rounded-sm max-w-30 text-t2',
+  ItemTagSelected: '',
+  ItemTagUnselected: '',
   ItemTagIcon: 'size-3 flex items-center content-center flex-shrink-0',
   ItemTagLabel: 'truncate',
 
@@ -268,7 +268,7 @@ export const desktopStyles = {
   SubtaskItemDragHandleIcon: 'size-5 text-t3',
   SubtaskItemDragging: 'flex items-center h-8 bg-bg3 rounded opacity-50',
 
-  ItemTagsListContainer: 'flex gap-2 items-center',
+  ItemTagsListContainer: 'flex gap-3 items-center',
 
   DesktopProjectListItemLink:
     'min-h-11 no-underline flex items-start gap-3 px-3 py-3 rounded-lg group relative cursor-default',

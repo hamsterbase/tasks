@@ -33,6 +33,7 @@ import { IContextKeyService } from 'vscf/platform/contextkey/common';
 import { InstantiationService, ServiceCollection, SyncDescriptor } from 'vscf/platform/instantiation/common';
 import { IKeybindingService } from 'vscf/platform/keybinding/common';
 import { App } from './app';
+import '@/services/todo/browser/commonds';
 
 export async function startDesktop() {
   initializeTheme();

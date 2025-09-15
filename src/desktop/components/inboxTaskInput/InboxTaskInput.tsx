@@ -1,25 +1,19 @@
 import { PlusIcon } from '@/components/icons';
+import { desktopStyles } from '@/desktop/theme/main';
 import { useWorkbenchInstance } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
-import { useRegisterEvent } from '@/hooks/useRegisterEvent';
 import { localize } from '@/nls';
 import React, { useCallback } from 'react';
-import { CreateTaskEvent, INBOX_TASK_INPUT_CONTROLLER_KEY, InboxTaskInputController } from './InboxTaskInputController';
-import { desktopStyles } from '@/desktop/theme/main';
 import './commands';
+import { INBOX_TASK_INPUT_CONTROLLER_KEY, InboxTaskInputController } from './InboxTaskInputController';
 
-interface InboxTaskInputProps {
-  onCreateTask: (event: CreateTaskEvent) => void;
-}
-
-export const InboxTaskInput: React.FC<InboxTaskInputProps> = ({ onCreateTask }) => {
+export const InboxTaskInput: React.FC = () => {
   const controller = useWorkbenchInstance<InboxTaskInputController>(
     INBOX_TASK_INPUT_CONTROLLER_KEY,
     InboxTaskInputController
   );
 
   useWatchEvent(controller.onInputValueChange);
-  useRegisterEvent(controller.onCreateTask, onCreateTask);
 
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {

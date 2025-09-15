@@ -1,5 +1,5 @@
 import { getTodayTimestampInUtc } from '@/base/common/time';
-import { areaPageTitleInputId, projectPageTitleInputId } from '@/components/edit/inputId';
+import { areaPageTitleInputId } from '@/components/edit/inputId';
 import { areaTitleInputKey } from '@/components/edit/inputKeys';
 import { AreaIcon } from '@/components/icons';
 import { getAreaDetail } from '@/core/state/getArea';
@@ -8,9 +8,9 @@ import { EntityHeader } from '@/desktop/components/common/EntityHeader';
 import { DesktopPage } from '@/desktop/components/DesktopPage';
 import { DesktopProjectList } from '@/desktop/components/DesktopProjectList/DesktopProjectList';
 import { InboxTaskInput } from '@/desktop/components/inboxTaskInput/InboxTaskInput';
-import { CreateTaskEvent } from '@/desktop/components/inboxTaskInput/InboxTaskInputController';
 import { TitleContentSection } from '@/desktop/components/TitleContentSection';
 import { useDesktopTaskDisplaySettings } from '@/desktop/hooks/useDesktopTaskDisplaySettings';
+import { useTaskCommands } from '@/desktop/hooks/useTaskCommands';
 import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
@@ -22,8 +22,7 @@ import { IListService } from '@/services/list/common/listService';
 import { ITodoService } from '@/services/todo/common/todoService';
 import type { TreeID } from 'loro-crdt';
 import React, { useEffect } from 'react';
-import { flushSync } from 'react-dom';
-import { useLocation, useNavigate, useParams } from 'react-router';
+import { useLocation, useParams } from 'react-router';
 import { TaskListSection } from './components/TaskListSection';
 
 const useAreaId = (): TreeID => {
@@ -47,7 +46,6 @@ interface AreaPageContentProps {
 const AreaPageContent: React.FC<AreaPageContentProps> = ({ area, areaId }) => {
   const todoService = useService(ITodoService);
   const listService = useService(IListService);
-  const navigate = useNavigate();
   const { areaDetail } = useArea(areaId);
   const editService = useService(IEditService);
   const location = useLocation();
@@ -65,37 +63,21 @@ const AreaPageContent: React.FC<AreaPageContentProps> = ({ area, areaId }) => {
   useWatchEvent(listService.onMainListChange);
 
   const handleCreateProject = () => {
-    const projectId = flushSync(() => {
-      return todoService.addProject({
-        title: '',
-        position: {
-          type: 'firstElement',
-          parentId: areaId,
-        },
-      });
-    });
-
-    if (projectId) {
-      const projectUid = todoService.modelState.taskObjectMap.get(projectId)?.uid;
-      if (projectUid) {
-        navigate(`/desktop/project/${projectUid}`, {
-          state: {
-            focusInput: projectPageTitleInputId(projectId),
-          },
-        });
-      }
-    }
+    todoService.fireTaskCommand({ type: 'createProject' });
   };
 
-  const handleCreateTask = (event: CreateTaskEvent) => {
-    todoService.addTask({
-      title: event.title,
+  useTaskCommands({
+    createTask: {
       position: {
         type: 'firstElement',
         parentId: area.id,
       },
-    });
-  };
+    },
+    createProject: {
+      position: { type: 'firstElement', parentId: area.id },
+    },
+    setStartDateToToday: true,
+  });
 
   const { showCompletedTasks, showFutureTasks, completedAfter } = useTaskDisplaySettings(`area-${areaId}`);
 
@@ -163,7 +145,7 @@ const AreaPageContent: React.FC<AreaPageContentProps> = ({ area, areaId }) => {
         />
       </TitleContentSection>
       <TitleContentSection title={localize('area.tasks', 'Tasks')}>
-        <InboxTaskInput onCreateTask={handleCreateTask} />
+        <InboxTaskInput />
         <TaskListSection tasks={tasks} willDisappearObjectIdSet={willDisappearObjectIdSet} areaId={area.id} />
       </TitleContentSection>
     </DesktopPage>

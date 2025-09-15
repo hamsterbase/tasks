@@ -7,9 +7,9 @@ import { EntityHeader } from '@/desktop/components/common/EntityHeader';
 import { DesktopPage } from '@/desktop/components/DesktopPage';
 import { DragOverlayItem } from '@/desktop/components/drag/DragOverlayItem';
 import { InboxTaskInput } from '@/desktop/components/inboxTaskInput/InboxTaskInput';
-import { CreateTaskEvent } from '@/desktop/components/inboxTaskInput/InboxTaskInputController';
 import { TaskListItem } from '@/desktop/components/todo/TaskListItem';
 import { useDesktopTaskDisplaySettings } from '@/desktop/hooks/useDesktopTaskDisplaySettings.ts';
+import { useTaskCommands } from '@/desktop/hooks/useTaskCommands';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { useRegisterEvent } from '@/hooks/useRegisterEvent';
@@ -95,6 +95,8 @@ export const Inbox = () => {
     }
   });
 
+  useTaskCommands({ createTask: {}, setStartDateToToday: true });
+
   useRegisterEvent(listService.mainList?.onCreateNewOne, (event) => {
     const afterId = event.afterId;
     if (!afterId) {
@@ -149,16 +151,7 @@ export const Inbox = () => {
 
   return (
     <DesktopPage header={header}>
-      <InboxTaskInput
-        onCreateTask={(event: CreateTaskEvent) => {
-          todoService.addTask({
-            title: event.title,
-            position: {
-              type: 'firstElement',
-            },
-          });
-        }}
-      />
+      <InboxTaskInput />
       <div tabIndex={1} onFocus={setFocus} onBlur={clearFocus}>
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
           <SortableContext items={inboxTasks.map((task) => task.id)} strategy={verticalListSortingStrategy}>

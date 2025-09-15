@@ -7,8 +7,8 @@ import { ProjectHeadingInfo, TaskInfo } from '@/core/state/type';
 import { DesktopHeadingListItem } from '@/desktop/components/desktopHeadingListItem/desktopHeadingListItem';
 import { DragOverlayItem } from '@/desktop/components/drag/DragOverlayItem';
 import { InboxTaskInput } from '@/desktop/components/inboxTaskInput/InboxTaskInput';
-import { CreateTaskEvent } from '@/desktop/components/inboxTaskInput/InboxTaskInputController';
 import { TaskListItem } from '@/desktop/components/todo/TaskListItem';
+import { useTaskCommands } from '@/desktop/hooks/useTaskCommands';
 import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
 import { IListService } from '@/services/list/common/listService';
@@ -87,15 +87,12 @@ export const ProjectTaskArea: React.FC<ProjectTaskAreaProps> = ({
     listService.mainList?.setFocus(false);
   }, [listService]);
 
-  const handleCreateTask = (event: CreateTaskEvent) => {
-    todoService.addTask({
-      title: event.title,
-      position: {
-        type: 'firstElement',
-        parentId: project.id,
-      },
-    });
-  };
+  useTaskCommands({
+    createTask: {
+      position: { type: 'firstElement', parentId: project.id },
+    },
+    setStartDateToToday: true,
+  });
 
   const handleAddHeading = () => {
     const headingId = flushSync(() => {
@@ -121,7 +118,7 @@ export const ProjectTaskArea: React.FC<ProjectTaskAreaProps> = ({
     <div className={desktopStyles.ProjectTaskAreaContainer}>
       <div className={desktopStyles.InboxAreaContainer}>
         <div className={desktopStyles.InboxAreaInputWrapper}>
-          <InboxTaskInput onCreateTask={handleCreateTask} />
+          <InboxTaskInput />
         </div>
         <div className={desktopStyles.InboxAreaHeadingButton} onClick={handleAddHeading}>
           <HeadingIcon className={desktopStyles.InboxAreaHeadingIcon} />

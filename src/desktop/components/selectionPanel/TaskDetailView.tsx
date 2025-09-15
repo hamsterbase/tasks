@@ -87,8 +87,7 @@ export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task, onClearSel
             reminders={task.reminders}
             itemId={task.id}
           />
-          <div className={desktopStyles.DetailViewDivider}></div>
-
+          <div className={desktopStyles.DetailViewDivider} />
           <SubtaskList task={task} />
         </div>
       </div>
