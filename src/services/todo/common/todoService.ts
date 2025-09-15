@@ -33,6 +33,9 @@ export type TaskCommand =
       type: 'createProject';
     }
   | {
+      type: 'createHeader';
+    }
+  | {
       type: 'setStartDateToToday';
     };
 

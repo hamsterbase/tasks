@@ -79,6 +79,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
     if (taskList.cursorId === task.id) {
       if (taskList.cursorOffset !== null) {
         if (isInputFocused) {
+          taskList.updateCursor(cursor);
           return;
         }
       }

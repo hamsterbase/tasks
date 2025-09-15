@@ -19,6 +19,7 @@ import { IWorkbenchOverlayService, WorkbenchOverlayService } from '@/services/ov
 import { IReminderService } from '@/services/reminders/common/reminderService';
 import { DesktopReminderService } from '@/services/reminders/electron/DesktopReminderService';
 import { ISwitchService, SwitchService } from '@/services/switchService/common/switchService';
+import '@/services/todo/browser/desktopCommands';
 import { WorkbenchTodoService } from '@/services/todo/browser/workbenchTodoService';
 import { ITodoService } from '@/services/todo/common/todoService';
 import { WorkbenchWebLoggerService } from '@/services/weblogger/browser/workbenchWebLoggerService';
@@ -33,7 +34,6 @@ import { IContextKeyService } from 'vscf/platform/contextkey/common';
 import { InstantiationService, ServiceCollection, SyncDescriptor } from 'vscf/platform/instantiation/common';
 import { IKeybindingService } from 'vscf/platform/keybinding/common';
 import { App } from './app';
-import '@/services/todo/browser/commonds';
 
 export async function startDesktop() {
   initializeTheme();

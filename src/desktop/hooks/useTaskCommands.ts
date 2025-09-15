@@ -16,6 +16,9 @@ interface UseTaskCommands {
   createProject?: {
     position: ItemPosition;
   };
+  createHeader?: {
+    position: ItemPosition;
+  };
   setStartDateToToday?: boolean;
 }
 
@@ -61,6 +64,23 @@ export const useTaskCommands = (options: UseTaskCommands) => {
               },
             });
           }
+        }
+        break;
+      }
+      case 'createHeader': {
+        if (!options.createHeader) return;
+        const headerId = flushSync(() => {
+          return todoService.addProjectHeading({
+            title: '',
+            position: options.createHeader?.position ?? { type: 'firstElement' },
+          });
+        });
+        if (headerId) {
+          listService.mainList?.select(headerId, {
+            multipleMode: false,
+            offset: 0,
+            fireEditEvent: true,
+          });
         }
         break;
       }

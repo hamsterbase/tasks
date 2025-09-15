@@ -31,6 +31,19 @@ KeybindingsRegistry.registerCommandAndKeybindingRule({
 });
 
 KeybindingsRegistry.registerCommandAndKeybindingRule({
+  id: 'CreateHeader',
+  weight: KeybindingWeight.WorkbenchContrib + 5,
+  when: ContextKeyExpr.not(InputFocusedContextKey),
+  primary: KeyCode.KeyH,
+  handler: (acc) => {
+    const currentList = acc.get(ITodoService);
+    if (currentList) {
+      currentList.fireTaskCommand({ type: 'createHeader' });
+    }
+  },
+});
+
+KeybindingsRegistry.registerCommandAndKeybindingRule({
   id: 'SetStartDateToToday',
   weight: KeybindingWeight.WorkbenchContrib + 5,
   when: ContextKeyExpr.not(InputFocusedContextKey),

@@ -18,7 +18,6 @@ import { DndContext, DragEndEvent } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import type { TreeID } from 'loro-crdt';
 import React, { useCallback } from 'react';
-import { flushSync } from 'react-dom';
 
 interface ProjectTaskListProps {
   items: FlattenedItem<ProjectHeadingInfo, TaskInfo>[];
@@ -92,26 +91,13 @@ export const ProjectTaskArea: React.FC<ProjectTaskAreaProps> = ({
       position: { type: 'firstElement', parentId: project.id },
     },
     setStartDateToToday: true,
+    createHeader: { position: { type: 'firstElement', parentId: project.id } },
   });
 
   const handleAddHeading = () => {
-    const headingId = flushSync(() => {
-      return todoService.addProjectHeading({
-        title: '',
-        position: {
-          type: 'firstElement',
-          parentId: project.id,
-        },
-      });
+    todoService.fireTaskCommand({
+      type: 'createHeader',
     });
-
-    if (headingId) {
-      listService.mainList?.select(headingId, {
-        multipleMode: false,
-        offset: 0,
-        fireEditEvent: true,
-      });
-    }
   };
 
   return (

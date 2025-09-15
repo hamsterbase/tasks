@@ -61,6 +61,7 @@ export const DesktopHeadingListItem: React.FC<DesktopHeadingListItemProps> = ({
     if (taskList.cursorId === projectHeadingInfo.id) {
       if (taskList.cursorOffset !== null) {
         if (isInputFocused) {
+          taskList.updateCursor(cursor);
           return;
         }
       }
