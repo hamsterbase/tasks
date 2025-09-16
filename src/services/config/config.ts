@@ -61,3 +61,11 @@ export function detailPanelConfigKey(): ConfigKey<number[]> {
       Array.isArray(value) && value.length === 2 && value.every((item) => typeof item === 'number'),
   };
 }
+
+export function notesMarkdownRenderConfigKey(): ConfigKey<boolean> {
+  return {
+    key: 'notesMarkdownRender',
+    default: true,
+    check: (value: boolean) => typeof value === 'boolean',
+  };
+}

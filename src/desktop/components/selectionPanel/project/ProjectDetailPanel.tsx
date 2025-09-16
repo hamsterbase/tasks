@@ -12,6 +12,7 @@ import type { TreeID } from 'loro-crdt';
 import React from 'react';
 import { useParams } from 'react-router';
 import { TagsField } from '../../TagsField';
+import { NotesField } from '../components/NotesField';
 import { TaskDateField } from '../components/TaskDateField';
 import { TaskLocationField } from '../components/TaskLocationField';
 import { useDesktopProjectMenu } from './useDesktopProjectMenu';
@@ -107,14 +108,7 @@ const ProjectDetailPanelContent: React.FC<IProjectDetailPanelContentProps> = ({ 
 
       <div className={desktopStyles.DetailViewContent}>
         <div className={desktopStyles.DetailViewContentInner}>
-          <EditableTextArea
-            inputKey={`project-${projectId}-notes`}
-            defaultValue={project.notes || ''}
-            onSave={handleNotesSave}
-            className={desktopStyles.DetailViewNotesTextarea}
-            placeholder={localize('project.detail.notesPlaceholder', 'Enter project notes...')}
-            autoSize={{ minRows: 1 }}
-          />
+          <NotesField value={project.notes || ''} onSave={handleNotesSave} />
           <TaskLocationField itemId={projectId} />
           <TaskDateField
             label={localize('project.start_date', 'Start Date')}

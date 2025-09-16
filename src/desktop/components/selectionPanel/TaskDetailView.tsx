@@ -1,6 +1,6 @@
 import { useTaskItemActions } from '@/base/hooks/useTaskItemActions';
 import { EditableTextArea } from '@/components/edit/EditableTextArea.tsx';
-import { taskNotesInputKey, taskTitleInputKey } from '@/components/edit/inputKeys.ts';
+import { taskTitleInputKey } from '@/components/edit/inputKeys.ts';
 import { DueIcon, MenuIcon, ScheduledIcon } from '@/components/icons';
 import { TaskInfo } from '@/core/state/type.ts';
 import { useTaskMenu } from '@/desktop/hooks/useTaskMenu.ts';
@@ -14,6 +14,7 @@ import { TaskDateField } from './components/TaskDateField';
 import { TaskLocationField } from './components/TaskLocationField';
 import { useDatePickerHandlers } from './hooks/useDatePickerHandlers';
 import { RemindersField } from './components/RemindersField';
+import { NotesField } from './components/NotesField';
 
 interface TaskDetailViewProps {
   task: TaskInfo;
@@ -57,13 +58,11 @@ export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task, onClearSel
       </div>
       <div className={desktopStyles.DetailViewContent}>
         <div className={desktopStyles.DetailViewContentInner}>
-          <EditableTextArea
-            inputKey={taskNotesInputKey(task.id)}
-            defaultValue={task.notes || ''}
+          <NotesField
+            value={task.notes || ''}
             onSave={handleNotesSave}
             className={desktopStyles.DetailViewNotesTextarea}
             placeholder={localize('tasks.notes_placeholder', 'Add notes...')}
-            autoSize={{ minRows: 1 }}
           />
           <TaskLocationField itemId={task.id} />
           <TaskDateField

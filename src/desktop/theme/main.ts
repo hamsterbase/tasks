@@ -193,8 +193,7 @@ export const desktopStyles = {
   DetailViewHeaderMenuIcon: 'size-6 text-t3',
   DetailViewContent: 'flex-1 overflow-y-auto',
   DetailViewContentInner: 'p-5 space-y-2',
-  DetailViewNotesTextarea:
-    'w-full p-3 bg-bg2 rounded-lg outline-none resize-none text-base leading-5 placeholder:text-t3',
+  DetailViewNotesTextarea: 'w-full p-3 outline-none resize-none text-base leading-5 placeholder:text-t3 caret-brand',
   DetailViewDivider: 'h-px bg-line-regular',
 
   MarkdownPageLoading: 'text-t2',
@@ -495,6 +494,21 @@ export const desktopStyles = {
   TimePickerScrollItemSelected: 'bg-brand text-white font-medium scale-105 hover:bg-brand',
   TimePickerScrollColumnWrapper: 'w-18 h-83 overflow-y-auto',
   TimePickerOverlayFooter: 'flex justify-between gap-2 px-3 py-3 border-t border-line-regular',
+
+  // NotesField Markdown styles
+  NotesMarkdownH1: 'text-lg font-bold mb-2 mt-4 first:mt-0',
+  NotesMarkdownH2: 'text-base font-bold mb-2 mt-3 first:mt-0',
+  NotesMarkdownH3: 'text-sm font-bold mb-1 mt-2 first:mt-0',
+  NotesMarkdownH4: 'text-sm font-semibold mb-1 mt-2 first:mt-0',
+  NotesMarkdownP: 'leading-relaxed',
+  NotesMarkdownOl: 'list-decimal ml-4 mb-2 space-y-1',
+  NotesMarkdownUl: 'list-disc ml-4 mb-2 space-y-1',
+  NotesMarkdownLi: 'leading-relaxed',
+  NotesMarkdownLink: 'text-brand underline break-all hover:text-brand/80 transition-colors',
+  NotesMarkdownBlockquote: 'pl-4 border-l-4 border-line-light bg-bg2/50 py-2 mb-2 rounded-r',
+  NotesMarkdownCode: 'bg-bg2 px-1 py-0.5 rounded text-sm font-mono',
+  NotesMarkdownPre: 'bg-bg2 p-3 rounded mb-2 overflow-x-auto text-sm',
+  NotesFieldContainer: 'overflow-y-auto max-h-80',
 };
 
 export type DesktopThemeDefinition = typeof desktopStyles;

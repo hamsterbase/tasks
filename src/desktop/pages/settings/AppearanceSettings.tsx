@@ -4,8 +4,10 @@ import { SettingsContent } from '@/desktop/components/Settings/SettingsContent/S
 import { SettingsItem } from '@/desktop/components/Settings/SettingsItem';
 import { SettingsTitle } from '@/desktop/components/Settings/SettingsTitle';
 import { Space } from '@/desktop/components/Space/Space';
+import { useConfig } from '@/hooks/useConfig';
 import { useGlobalTaskDisplaySettings } from '@/hooks/useGlobalTaskDisplaySettings';
 import { localize } from '@/nls';
+import { notesMarkdownRenderConfigKey } from '@/services/config/config';
 import React, { useState } from 'react';
 
 export const AppearanceSettings: React.FC = () => {
@@ -20,6 +22,8 @@ export const AppearanceSettings: React.FC = () => {
     setCompletedTasksRange,
     settingOptions,
   } = useGlobalTaskDisplaySettings();
+
+  const { value: notesMarkdownRender, setValue: setNotesMarkdownRender } = useConfig(notesMarkdownRenderConfigKey());
 
   const changeTheme = (theme: string) => {
     localStorage.setItem('theme', theme);
@@ -76,6 +80,22 @@ export const AppearanceSettings: React.FC = () => {
           }}
         />
       </ItemGroup>
+      <Space size="large"></Space>
+      <SettingsTitle title={localize('settings.notes', 'Notes')} />
+      <SettingsItem
+        title={localize('settings.render_markdown', 'Render Markdown')}
+        description={localize(
+          'settings.render_markdown.description',
+          'Render notes as markdown in task and project details.'
+        )}
+        action={{
+          type: 'switch',
+          currentValue: notesMarkdownRender,
+          onChange: () => {
+            setNotesMarkdownRender(!notesMarkdownRender);
+          },
+        }}
+      ></SettingsItem>
       <Space size="large"></Space>
       <SettingsTitle title={settingOptions.title} description={settingOptions.description} level={2} />
       <ItemGroup>
