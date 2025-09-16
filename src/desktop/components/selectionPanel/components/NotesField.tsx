@@ -82,6 +82,7 @@ export const NotesField: React.FC<NotesFieldProps> = ({
           onChange={handleChange}
           onBlur={handleBlur}
           className={className}
+          style={{ width: '100%' }}
           placeholder={placeholder}
           autoSize={{ minRows: 1 }}
         />
