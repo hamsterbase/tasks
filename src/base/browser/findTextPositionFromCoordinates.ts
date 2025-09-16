@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 interface FindTextPositionOptions {
   x: number;
   y: number;
@@ -10,8 +11,8 @@ interface FindTextPositionOptions {
 export function findTextPositionFromCoordinates({ x, y, originalText }: FindTextPositionOptions): number {
   let range: Range | null = null;
 
-  if (document.caretPositionFromPoint) {
-    const caretPosition = document.caretPositionFromPoint(x, y);
+  if ((document as any).caretPositionFromPoint) {
+    const caretPosition = (document as any).caretPositionFromPoint(x, y);
     if (caretPosition) {
       range = document.createRange();
       range.setStart(caretPosition.offsetNode, caretPosition.offset);
