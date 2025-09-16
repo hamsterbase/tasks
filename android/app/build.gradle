@@ -77,6 +77,25 @@ android {
             }
         }
     }
+    
+    flavorDimensions "store"
+    productFlavors {
+        xiaomi {
+            dimension "store"
+        }
+        standard {
+            dimension "store"
+        }
+    }
+    
+    // Set default flavor based on androidSource
+    def defaultFlavor = androidSourceValue == 'xiaomi' ? 'xiaomi' : 'standard'
+    project.ext.set("defaultFlavor", defaultFlavor)
+}
+
+// Add task to build based on androidSource value
+task buildRelease {
+    dependsOn androidSourceValue == 'xiaomi' ? 'assembleXiaomiRelease' : 'assembleStandardRelease'
 }
 
 repositories {
@@ -98,6 +117,7 @@ dependencies {
 }
 
 apply from: 'capacitor.build.gradle'
+
 
 try {
     def servicesJSON = file('google-services.json')
