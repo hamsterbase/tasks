@@ -68,6 +68,14 @@
     "defaultMessage": "ID",
     "content": "ID"
   },
+  "account.lifetime.link": {
+    "defaultMessage": "https://hamsterbase.com/store/?product=cloud-lifetime",
+    "content": "https://mbd.pub/o/bread/mbd-YZWWmp5saA=="
+  },
+  "account.lifetime.title": {
+    "defaultMessage": "Purchase HamsterBase Cloud Lifetime",
+    "content": "购买终身会员"
+  },
   "account.logout": {
     "defaultMessage": "Log out",
     "content": "登出"
@@ -83,6 +91,10 @@
   "account.logout.title": {
     "defaultMessage": "Logout",
     "content": "登出"
+  },
+  "account.pro.link": {
+    "defaultMessage": "https://hamsterbase.com/store/?product=cloud",
+    "content": "https://mbd.pub/o/bread/mbd-YZWWmp5uZA=="
   },
   "account.pro.title": {
     "defaultMessage": "Subscribe 1 Year Cloud Pro",

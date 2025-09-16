@@ -21,7 +21,18 @@ export const OtherPurchase = () => {
             align: 'center',
           },
           onClick: async () => {
-            window.open('https://hamsterbase.com/store/?product=cloud');
+            window.open(localize('account.pro.link', 'https://hamsterbase.com/store/?product=cloud'));
+          },
+        },
+        {
+          title: localize('account.lifetime.title', 'Purchase HamsterBase Cloud Lifetime'),
+          mode: {
+            type: 'button',
+            theme: 'primary',
+            align: 'center',
+          },
+          onClick: async () => {
+            window.open(localize('account.lifetime.link', 'https://hamsterbase.com/store/?product=cloud-lifetime'));
           },
         },
       ]}
