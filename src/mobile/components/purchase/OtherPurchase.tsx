@@ -6,7 +6,7 @@ import React from 'react';
 
 export const OtherPurchase = () => {
   const switchService = useService(ISwitchService);
-  if (!switchService.getLocalSwitch('showIOSPurchaseButton')) {
+  if (!switchService.getLocalSwitch('showNormalPurchaseButton')) {
     return null;
   }
   return (
