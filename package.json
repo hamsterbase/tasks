@@ -16,7 +16,8 @@
     "web:build": "tsx scripts/tasks.ts webBuild",
     "electron:dev": "tsx scripts/tasks.ts electronDev",
     "electron:build": "tsx scripts/tasks.ts electronBuild",
-    "electron:pack": "tsx scripts/tasks.ts electronPack"
+    "electron:pack": "tsx scripts/tasks.ts electronPack",
+    "docker:build": "tsx scripts/tasks.ts dockerBuild"
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged",

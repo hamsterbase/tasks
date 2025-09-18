@@ -5,6 +5,7 @@ import { webBuildCommand } from './commands/webBuild';
 import { electronDevCommand } from './commands/electronDev';
 import { electronBuildCommand } from './commands/electronBuild';
 import { electronPackCommand } from './commands/electronPack';
+import { dockerBuildCommand } from './commands/dockerBuild';
 
 // Handle termination
 process.on('SIGINT', () => {
@@ -45,6 +46,15 @@ cli
   .option('-t, --target <target>', 'Target platform (required)')
   .action(async (options) => {
     await electronPackCommand(options);
+  });
+
+cli
+  .command('dockerBuild', 'Build Docker image')
+  .option('--tag <tag>', 'Docker image tag')
+  .option('--platform <platform>', 'Target platform (default: linux/amd64)')
+  .option('--release', 'Enable release mode')
+  .action(async (options) => {
+    await dockerBuildCommand(options);
   });
 
 cli.help();
