@@ -53,7 +53,7 @@ export class LocalServerClient {
         'Content-Type': 'application/json',
         authorization: this.options.authToken,
       },
-      body: data ? JSON.stringify(data) : undefined,
+      body: data !== undefined ? JSON.stringify(data) : undefined,
     });
 
     if (response.status !== 200) {

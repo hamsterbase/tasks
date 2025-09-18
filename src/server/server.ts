@@ -18,7 +18,7 @@ export function createServer(staticPath: string, storagePath: string, authToken:
   };
 
   // Middleware
-  app.use(express.json());
+  app.use(express.json({ limit: '10mb' }));
   app.use(express.static(staticPath));
 
   // Apply auth validation middleware globally to all API routes
@@ -113,7 +113,7 @@ export function createServer(staticPath: string, storagePath: string, authToken:
       await ensureDirectoryExists(folderPath);
 
       const filePath = path.join(folderPath, key);
-      await fs.writeFile(filePath, JSON.stringify(data), 'utf-8');
+      await fs.writeFile(filePath, data!, 'utf-8');
 
       res.json({ success: true, key });
     } catch {
@@ -122,7 +122,7 @@ export function createServer(staticPath: string, storagePath: string, authToken:
   });
 
   // Catch-all route for SPA - must be last
-  app.get('*', (_req, res) => {
+  app.use('/*splat', (_req, res) => {
     res.sendFile(path.join(staticPath, 'index.html'));
   });
 

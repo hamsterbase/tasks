@@ -22,11 +22,11 @@ export function isValidKey(key: string): boolean {
 export interface RequestBody {
   folder?: string;
   key?: string;
-  data?: unknown;
+  data?: string;
 }
 
 // Generic validation function
-export function validateParams(body: RequestBody, requiredKeys: string[]): { error?: string; [key: string]: unknown } {
+export function validateParams(body: RequestBody, requiredKeys: string[]): { error?: string } & RequestBody {
   const result: { [key: string]: unknown } = {};
 
   // Check required parameters
@@ -46,8 +46,8 @@ export function validateParams(body: RequestBody, requiredKeys: string[]): { err
       }
     }
 
-    if (key === 'data' && value === undefined) {
-      return { error: 'data parameter is required' };
+    if (key === 'data' && typeof value !== 'string') {
+      return { error: 'data parameter must be a string' };
     }
 
     result[key] = value;
