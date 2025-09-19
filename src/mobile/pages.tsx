@@ -23,6 +23,7 @@ import { PrivacyPage } from '@/mobile/pages/settings/privacy.tsx';
 import { EULAPage } from '@/mobile/pages/settings/eula.tsx';
 import { AboutPage } from '@/mobile/pages/settings/about.tsx';
 import { FeedbackPage } from '@/mobile/pages/settings/feedback.tsx';
+import { ThirdPartySyncPage } from '@/mobile/pages/settings/sync/thirdPartySync.tsx';
 
 interface IPage {
   url: string;
@@ -125,5 +126,9 @@ export const pages: IPage[] = [
   {
     url: '/settings/about',
     content: <AboutPage />,
+  },
+  {
+    url: '/settings/sync/third-party',
+    content: <ThirdPartySyncPage />,
   },
 ];

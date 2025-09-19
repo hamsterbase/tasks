@@ -6,6 +6,7 @@ import { electronDevCommand } from './commands/electronDev';
 import { electronBuildCommand } from './commands/electronBuild';
 import { electronPackCommand } from './commands/electronPack';
 import { dockerBuildCommand } from './commands/dockerBuild';
+import { debugServerCommand } from './commands/debugServer';
 
 // Handle termination
 process.on('SIGINT', () => {
@@ -55,6 +56,13 @@ cli
   .option('--release', 'Enable release mode')
   .action(async (options) => {
     await dockerBuildCommand(options);
+  });
+
+cli
+  .command('debugServer', 'Start debug server')
+  .option('--port <port>', 'Server port (default: 3000)')
+  .action((options) => {
+    debugServerCommand(options);
   });
 
 cli.help();

@@ -6,6 +6,19 @@ import { getSHA256Hash, validateParams, getFolderPath, ensureDirectoryExists } f
 export function createServer(staticPath: string, storagePath: string, authToken: string): express.Application {
   const app = express();
 
+  // CORS middleware
+  app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+
+    if (req.method === 'OPTIONS') {
+      res.sendStatus(200);
+    } else {
+      next();
+    }
+  });
+
   // Middleware to validate auth token header
   const validateAuthMiddleware = (req: express.Request, res: express.Response, next: express.NextFunction) => {
     const clientAuthToken = req.headers['authorization'] as string;

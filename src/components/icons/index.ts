@@ -31,6 +31,7 @@ import {
   Palette,
   PenLine,
   Plus,
+  RefreshCw,
   SendToBack,
   Settings,
   SlidersHorizontal,
@@ -91,3 +92,4 @@ export const ChevronDownIcon = ChevronDown;
 export { CalendarDays };
 export const AlarmIcon = AlarmClock;
 export const PanelLeftIcon = PanelLeft;
+export const SyncIcon = RefreshCw;

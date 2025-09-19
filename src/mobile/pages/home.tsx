@@ -1,5 +1,5 @@
 import { getTodayTimestampInUtc } from '@/base/common/time.ts';
-import { AreaIcon, HomeIcon, SettingsIcon } from '@/components/icons';
+import { AreaIcon, HomeIcon, SettingsIcon, SyncIcon } from '@/components/icons';
 import { flattenRootCollections } from '@/core/state/home/getFlattenRootCollections.ts';
 import { getFutureProjects } from '@/core/state/home/getFutureProjects.ts';
 import { FlattenedResult } from '@/core/state/home/flattenedItemsToResult.ts';
@@ -16,6 +16,7 @@ import { localize } from '@/nls.ts';
 import { toggleAreaConfigKey } from '@/services/config/config.ts';
 import { INavigationService } from '@/services/navigationService/common/navigationService.ts';
 import { ITodoService } from '@/services/todo/common/todoService.ts';
+import { IThirdpartySyncService } from '@/services/thirdpartySync/common/thirdpartySyncService.ts';
 import { DragDropElements } from '@/utils/dnd/dragDropCollision.ts';
 import { getFlattenedItemsCollisionDetectionStrategy } from '@/utils/dnd/flattenedItemsCollisionDetectionStrategy.ts';
 import { getFlattenedItemsDragEndPosition } from '@/utils/dnd/flattenedItemsDragPosition.ts';
@@ -31,6 +32,7 @@ import { AreaHeader } from '../components/todo/AreaHeader.tsx';
 import { usePopupAction } from '../overlay/popupAction/usePopupAction.ts';
 import { styles } from '../theme.ts';
 import { MobileHomeTopMenu } from './home/TopMenu';
+import { useToast } from '../overlay/toast/useToast.ts';
 
 interface HomeProjectAndAreaProps {
   flattenedResult: FlattenedResult<AreaInfoState, ProjectInfoState>;
@@ -98,8 +100,10 @@ export const MobileHome = () => {
   const navigationService = useService(INavigationService);
   const popupAction = usePopupAction();
   const todoService = useService(ITodoService);
+  const thirdpartySyncService = useService(IThirdpartySyncService);
   const navigate = useNavigate();
   useWatchEvent(todoService.onStateChange);
+  useWatchEvent(thirdpartySyncService.onStateChange);
   const unstartedProjects = getFutureProjects(todoService.modelState, getTodayTimestampInUtc());
   const { value: config, setValue } = useConfig(toggleAreaConfigKey());
   const flattenedItemsResult = flattenRootCollections(todoService.modelState, {
@@ -108,6 +112,19 @@ export const MobileHome = () => {
   });
   const sensors = useDragSensors();
   useScrollPosition('homeScrollPosition');
+  const toast = useToast();
+
+  const handleSync = async () => {
+    if (thirdpartySyncService.hasServer && !thirdpartySyncService.syncing) {
+      try {
+        await thirdpartySyncService.sync();
+        // toast success message
+        toast({ message: localize('sync.success', 'Sync successful') });
+      } catch (error) {
+        toast({ message: (error as Error).message });
+      }
+    }
+  };
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
@@ -159,6 +176,15 @@ export const MobileHome = () => {
       header={{
         renderIcon: (className: string) => <HomeIcon className={className} />,
         title: localize('home.title', 'Home'),
+        actions: thirdpartySyncService.showSyncIcon ? (
+          <button
+            onClick={handleSync}
+            disabled={thirdpartySyncService.syncing}
+            className="flex items-center rounded text-t2 disabled:opacity-50"
+          >
+            <SyncIcon className={`w-5 h-5 ${thirdpartySyncService.syncing ? 'animate-spin' : ''}`} />
+          </button>
+        ) : undefined,
       }}
       bottomMenu={{
         left: {

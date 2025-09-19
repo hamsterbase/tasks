@@ -90,6 +90,13 @@ export const MobileSettings = () => {
             },
           },
           {
+            title: localize('sync.thirdParty', 'Third-Party Sync'),
+            onClick: () => navigate({ path: '/settings/sync/third-party' }),
+            mode: {
+              type: 'navigation',
+            },
+          },
+          {
             hidden: switchService.getLocalSwitch('showNativeAboutButton'),
             title: localize('settings.about', 'About'),
             onClick: () => navigate({ path: '/settings/about' }),

@@ -26,6 +26,8 @@ import {
 import { WorkbenchTodoService } from '../services/todo/browser/workbenchTodoService.ts';
 import '../styles/main.css';
 import { App } from './App.tsx';
+import { IThirdpartySyncService } from '@/services/thirdpartySync/common/thirdpartySyncService.ts';
+import { WorkbenchThirdpartySyncService } from '@/services/thirdpartySync/common/workbenchThirdpartySyncService.ts';
 
 export const startMobile = async () => {
   initializeTheme();
@@ -39,6 +41,7 @@ export const startMobile = async () => {
   serviceCollection.set(ICloudService, new SyncDescriptor(CloudService));
   serviceCollection.set(IWebLoggerService, new SyncDescriptor(WorkbenchWebLoggerService));
   serviceCollection.set(IReminderService, new SyncDescriptor(MobileReminderService));
+  serviceCollection.set(IThirdpartySyncService, new SyncDescriptor(WorkbenchThirdpartySyncService));
   if (checkPlatform().isNative) {
     serviceCollection.set(IDatabaseService, new SyncDescriptor(FsDatabaseService, [Directory.Data]));
   } else {
@@ -54,6 +57,9 @@ export const startMobile = async () => {
   });
   await instantiationService.invokeFunction(async (dss) => {
     await dss.get(ICloudService).init();
+  });
+  await instantiationService.invokeFunction(async (dss) => {
+    await dss.get(IThirdpartySyncService).init();
   });
   await instantiationService.invokeFunction(async (dss) => {
     await dss.get(IReminderService).start();

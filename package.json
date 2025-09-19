@@ -12,6 +12,7 @@
     "lint": "eslint src --no-warn-ignored",
     "check": "tsc -b && npm run lint",
     "format": "prettier -w src",
+    "debug:start-server": "tsx scripts/tasks.ts debugServer",
     "web:dev": "tsx scripts/tasks.ts webDev",
     "web:build": "tsx scripts/tasks.ts webBuild",
     "electron:dev": "tsx scripts/tasks.ts electronDev",

@@ -1,4 +1,5 @@
 import { TimeAfterEnum } from '@/core/time/getTimeAfter';
+import { IThirdpartySyncServerConfig } from '../thirdpartySync/common/thirdpartySyncService.ts';
 import { ConfigKey } from './configService.ts';
 
 export function showFutureTasksConfigKey(page: string, defaultValue?: boolean): ConfigKey<boolean> {
@@ -67,5 +68,16 @@ export function notesMarkdownRenderConfigKey(): ConfigKey<boolean> {
     key: 'notesMarkdownRender',
     default: true,
     check: (value: boolean) => typeof value === 'boolean',
+  };
+}
+
+export function thirdpartySyncServersConfigKey(): ConfigKey<IThirdpartySyncServerConfig | null> {
+  return {
+    key: 'thirdpartySyncServers',
+    default: null,
+    check: (value: IThirdpartySyncServerConfig | null) => {
+      if (value === null) return true;
+      return typeof value === 'object' && typeof value.id === 'string';
+    },
   };
 }
