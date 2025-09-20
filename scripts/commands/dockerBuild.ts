@@ -1,8 +1,8 @@
 import { buildDocker } from '../utils/buildDocker.js';
+import { getLatestVersionForTarget } from '../utils/getLatestVersionForTarget.js';
 import { checkUncommittedChanges } from '../utils/git.js';
 
 interface DockerBuildOptions {
-  tag?: string;
   platform?: string;
   release?: boolean;
 }
@@ -12,8 +12,9 @@ export async function dockerBuildCommand(options: DockerBuildOptions = {}): Prom
     console.log('[docker] Starting Docker build process...');
 
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5);
-    const defaultTag = `hamsterbase/tasks:debug-${timestamp}`;
-    const { tag = defaultTag, platform = 'linux/amd64', release = false } = options;
+    let tag = `hamsterbase/tasks:debug-${timestamp}`;
+    const platform = 'linux/amd64';
+    const { release = false } = options;
 
     if (release) {
       console.log('[docker] Release mode enabled');
@@ -24,7 +25,12 @@ export async function dockerBuildCommand(options: DockerBuildOptions = {}): Prom
         );
         process.exit(1);
       }
-
+      const latestTag = getLatestVersionForTarget('docker-amd64');
+      if (!latestTag) {
+        console.error('[docker] Error: Unable to fetch the latest version tag for docker-amd64.');
+        process.exit(1);
+      }
+      tag = `hamsterbase/tasks:${latestTag}`;
       console.log('[docker] Working directory is clean');
     }
 

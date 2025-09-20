@@ -51,8 +51,6 @@ cli
 
 cli
   .command('dockerBuild', 'Build Docker image')
-  .option('--tag <tag>', 'Docker image tag')
-  .option('--platform <platform>', 'Target platform (default: linux/amd64)')
   .option('--release', 'Enable release mode')
   .action(async (options) => {
     await dockerBuildCommand(options);
