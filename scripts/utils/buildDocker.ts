@@ -27,7 +27,7 @@ export async function buildDocker(options: BuildDockerOptions): Promise<void> {
   try {
     // Step 2: Build frontend with webBuildCommand
     console.log('[docker] Building frontend...');
-    await webBuildCommand({ useRelativeBase: true, release });
+    await webBuildCommand({ useRelativeBase: false, release });
 
     // Step 3: Build server with rollup
     console.log('[docker] Building server with rollup...');
