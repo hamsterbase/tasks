@@ -1,16 +1,17 @@
+import { getTheme } from '@/base/browser/initializeTheme';
+import { taskDisplaySettingOptions } from '@/base/common/TaskDisplaySettings';
 import { HomeIcon, SettingsIcon } from '@/components/icons';
+import { useAbout } from '@/hooks/use-about';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import useNavigate from '@/hooks/useNavigate';
 import { localize } from '@/nls';
 import { ICloudService } from '@/services/cloud/common/cloudService';
+import { selfhostedSyncPageTitle } from '@/services/selfhostedSync/browser/useAddSelfhostedServer';
+import { ISwitchService } from '@/services/switchService/common/switchService';
 import React from 'react';
 import { ListItemGroup } from '../components/listItem/listItem';
 import { PageLayout } from '../components/PageLayout';
-import { useAbout } from '@/hooks/use-about';
-import { ISwitchService } from '@/services/switchService/common/switchService';
-import { getTheme } from '@/base/browser/initializeTheme';
-import { taskDisplaySettingOptions } from '@/base/common/TaskDisplaySettings';
 
 export const MobileSettings = () => {
   const navigate = useNavigate();
@@ -90,8 +91,8 @@ export const MobileSettings = () => {
             },
           },
           {
-            title: localize('sync.thirdParty', 'Third-Party Sync'),
-            onClick: () => navigate({ path: '/settings/sync/third-party' }),
+            title: selfhostedSyncPageTitle,
+            onClick: () => navigate({ path: '/settings/selfhosted-sync' }),
             mode: {
               type: 'navigation',
             },

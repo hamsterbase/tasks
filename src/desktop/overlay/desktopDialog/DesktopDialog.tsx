@@ -1,49 +1,23 @@
+import { DialogButtonAction } from '@/base/common/componentsType/dialog';
+import { InputField } from '@/desktop/components/Form/InputField/InputField';
+import { Overlay } from '@/desktop/components/Overlay/Overlay';
+import { SettingButton } from '@/desktop/components/Settings/Button/Button';
+import { desktopStyles } from '@/desktop/theme/main';
 import { localize } from '@/nls';
 import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
-import React, { useState } from 'react';
+import React from 'react';
 import { useService } from '../../../hooks/use-service';
 import { useWatchEvent } from '../../../hooks/use-watch-event';
 import { IWorkbenchOverlayService } from '../../../services/overlay/common/WorkbenchOverlayService';
-import { Overlay } from '@/desktop/components/Overlay/Overlay';
-import { InputField } from '@/desktop/components/Form/InputField/InputField';
-import { DesktopDialogController, DialogButtonAction } from './DesktopDialogController';
-import { desktopStyles } from '@/desktop/theme/main';
-import { SettingButton } from '@/desktop/components/Settings/Button/Button';
+import { DesktopDialogController } from './DesktopDialogController';
 
 const DesktopDialogContent: React.FC<{ controller: DesktopDialogController }> = ({ controller }) => {
-  const [actionValues, setActionValues] = useState<Record<string, string | boolean>>(() => {
-    const initialValues: Record<string, string | boolean> = {};
-    controller?.actions?.forEach((action) => {
-      if (action.type === 'input') {
-        initialValues[action.key] = action.value || '';
-      }
-    });
-    return initialValues;
-  });
-
   const handleConfirm = () => {
-    controller.handleConfirm(actionValues);
+    controller.handleConfirm();
   };
 
   const handleButtonClick = (action: DialogButtonAction) => {
-    if (action.onclick) {
-      try {
-        const result = action.onclick(actionValues);
-        if (result instanceof Promise) {
-          result
-            .then(() => {
-              controller.handleCancel();
-            })
-            .catch(() => {});
-        } else {
-          controller.handleCancel();
-        }
-      } catch {
-        // do nothing
-      }
-    } else {
-      controller.handleCancel();
-    }
+    controller.handleButtonClick(action);
   };
 
   return (
@@ -61,14 +35,23 @@ const DesktopDialogContent: React.FC<{ controller: DesktopDialogController }> = 
       <div className={desktopStyles.DesktopDialogActionsContainer}>
         {controller.actions?.map((action) => {
           if (action.type === 'input') {
+            const error = controller.errors[action.key];
             return (
-              <InputField
-                key={action.key}
-                type="text"
-                placeholder={action.placeholder || ''}
-                value={(actionValues[action.key] as string) || ''}
-                onChange={(e) => setActionValues((prev) => ({ ...prev, [action.key]: e.target.value }))}
-              />
+              <div key={action.key} className="flex flex-col space-y-1">
+                {action.label && (
+                  <label className="text-sm font-medium text-t1">
+                    {action.label}
+                    {action.required && <span className="text-stress-red ml-1">*</span>}
+                  </label>
+                )}
+                <InputField
+                  type={action.inputType}
+                  placeholder={action.placeholder || ''}
+                  value={(controller.actionValues[action.key] as string) || ''}
+                  onChange={(e) => controller.updateActionValue(action.key, e.target.value)}
+                />
+                {error && <span className="text-sm text-stress-red">{error}</span>}
+              </div>
             );
           } else if (action.type === 'button') {
             return (

@@ -21,6 +21,7 @@ import { SyncSettings } from '@/desktop/pages/settings/databases/SyncSettings.ts
 import { ImportExportSettings } from '@/desktop/pages/settings/ImportExportSettings';
 import { LoginPage } from '@/desktop/pages/settings/Login/LoginPage.tsx';
 import { RegisterPage } from '@/desktop/pages/settings/Register/RegisterPage.tsx';
+import { SelfHostedSyncSettings } from '@/desktop/pages/settings/sync/SelfHostedSyncSettings.tsx';
 import { Today } from '@/desktop/pages/today/index.tsx';
 import { useInputFocused } from '@/hooks/global/useInputFocused';
 import { useCloudSync } from '@/hooks/useCloudSync.ts';
@@ -108,6 +109,10 @@ export const App = () => {
                 {
                   path: 'sync',
                   element: <SyncSettings />,
+                },
+                {
+                  path: 'selfhosted-sync',
+                  element: <SelfHostedSyncSettings />,
                 },
                 {
                   path: 'account',

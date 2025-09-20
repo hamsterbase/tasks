@@ -3,29 +3,7 @@ import { IDisposable } from 'vscf/internal/base/common/lifecycle';
 import { IWorkbenchOverlayService, OverlayInitOptions } from '../../../services/overlay/common/WorkbenchOverlayService';
 import { IInstantiationService } from 'vscf/platform/instantiation/common';
 import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
-
-type DialogAction = DialogInputAction | DialogButtonAction;
-
-export interface DialogInputAction {
-  key: string;
-  type: 'input';
-  placeholder?: string;
-  value?: string;
-  inputType?: 'text' | 'url' | 'password';
-  label?: string;
-  required?: boolean;
-  validation?: (value: string) => string | undefined;
-}
-
-export interface DialogButtonAction {
-  key: string;
-  type: 'button';
-  label: string;
-  theme?: 'primary' | 'danger';
-  onclick?: (actionValues: DialogActionValue) => void | Promise<void>;
-}
-
-export type DialogActionValue = Record<string, string | boolean>;
+import { DialogAction, DialogActionValue, DialogButtonAction } from '@/base/common/componentsType/dialog';
 
 export interface DialogOptions {
   title: string;

@@ -1,17 +1,20 @@
 import { getTodayTimestampInUtc } from '@/base/common/time';
 import { areaPageTitleInputId, projectPageTitleInputId } from '@/components/edit/inputId';
-import { PlusIcon, SettingsIcon } from '@/components/icons';
+import { PlusIcon, SettingsIcon, SyncIcon } from '@/components/icons';
 import { FlattenedResult } from '@/core/state/home/flattenedItemsToResult';
 import { flattenRootCollections } from '@/core/state/home/getFlattenRootCollections';
 import { getFutureProjects } from '@/core/state/home/getFutureProjects';
 import { AreaInfoState, ProjectInfoState } from '@/core/state/type';
+import { useShouldShowOnDesktopMac } from '@/desktop/hooks/useShouldShowOnDesktopMac.ts';
 import { DesktopMenuController } from '@/desktop/overlay/desktopMenu/DesktopMenuController';
+import { useDesktopMessage } from '@/desktop/overlay/desktopMessage/useDesktopMessage.ts';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { useConfig } from '@/hooks/useConfig';
 import { useDragSensors } from '@/hooks/useDragSensors';
 import { localize } from '@/nls';
 import { toggleAreaConfigKey } from '@/services/config/config';
+import { ISelfhostedSyncService } from '@/services/selfhostedSync/common/selfhostedSyncService.ts';
 import { ITodoService } from '@/services/todo/common/todoService';
 import { DragDropElements } from '@/utils/dnd/dragDropCollision';
 import { getFlattenedItemsCollisionDetectionStrategy } from '@/utils/dnd/flattenedItemsCollisionDetectionStrategy';
@@ -30,7 +33,6 @@ import { SidebarAreaItem } from './SidebarAreaItem/SidebarAreaItem.tsx';
 import { SidebarFutureProjectsItem } from './SidebarFutureProjectsItem/SidebarFutureProjectsItem.tsx';
 import { SidebarMenu } from './SidebarMenu/SidebarMenu.tsx';
 import { SidebarProjectItem as SidebarProjectItemComponent } from './SidebarProjectItem/SidebarProjectItem.tsx';
-import { useShouldShowOnDesktopMac } from '@/desktop/hooks/useShouldShowOnDesktopMac.ts';
 
 interface SidebarProjectAndAreaProps {
   flattenedResult: FlattenedResult<AreaInfoState, ProjectInfoState>;
@@ -70,10 +72,30 @@ export const SidebarContent: React.FC = () => {
   const todoService = useService(ITodoService);
   const sidebarContainerNoPaddingTop = useShouldShowOnDesktopMac();
   const instantiationService = useService(IInstantiationService);
+  const selfhostedSyncService = useService(ISelfhostedSyncService);
   const navigate = useNavigate();
   useWatchEvent(todoService.onStateChange);
+  useWatchEvent(selfhostedSyncService.onStateChange);
   const { value: config, setValue } = useConfig(toggleAreaConfigKey());
   const sensors = useDragSensors();
+  const desktopMessage = useDesktopMessage();
+
+  const handleSync = async () => {
+    if (selfhostedSyncService.hasServer && !selfhostedSyncService.syncing) {
+      try {
+        await selfhostedSyncService.sync();
+        desktopMessage({
+          type: 'success',
+          message: localize('sync.sync_success', 'Sync completed successfully.'),
+        });
+      } catch (error) {
+        desktopMessage({
+          type: 'error',
+          message: (error as Error).message,
+        });
+      }
+    }
+  };
 
   const rootCollections = flattenRootCollections(todoService.modelState, {
     currentDate: getTodayTimestampInUtc(),
@@ -199,9 +221,18 @@ export const SidebarContent: React.FC = () => {
           <PlusIcon className={desktopStyles.SidebarCreateButtonIcon} />
           <span>{localize('sidebar.create_menu', 'Create New')}</span>
         </button>
+
         <Link to="/desktop/settings" className={desktopStyles.SidebarSettingsButton}>
           <SettingsIcon className={desktopStyles.SidebarSettingsButtonIcon} />
         </Link>
+
+        {selfhostedSyncService.showSyncIcon && (
+          <button onClick={handleSync} className={desktopStyles.SidebarSettingsButton}>
+            <SyncIcon
+              className={`${desktopStyles.SidebarSettingsButtonIcon} ${selfhostedSyncService.syncing ? 'animate-spin' : ''}`}
+            />
+          </button>
+        )}
       </div>
     </div>
   );

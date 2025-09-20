@@ -604,6 +604,10 @@
     "defaultMessage": "Account is logged out",
     "content": "Account is logged out"
   },
+  "notes_placeholder": {
+    "defaultMessage": "Add notes...",
+    "content": "Add notes..."
+  },
   "notification.permission.denied": {
     "defaultMessage": "Notification permission denied",
     "content": "Notification permission denied"
@@ -1024,6 +1028,18 @@
     "defaultMessage": "Local Database",
     "content": "Local Database"
   },
+  "settings.notes": {
+    "defaultMessage": "Notes",
+    "content": "Notes"
+  },
+  "settings.render_markdown": {
+    "defaultMessage": "Render Markdown",
+    "content": "Render Markdown"
+  },
+  "settings.render_markdown.description": {
+    "defaultMessage": "Render notes as markdown in task and project details.",
+    "content": "Render notes as markdown in task and project details."
+  },
   "settings.showCompletedTasks": {
     "defaultMessage": "Show Completed Tasks",
     "content": "Show Completed Tasks"
@@ -1083,6 +1099,82 @@
   "subtask.placeholder": {
     "defaultMessage": "Add subtask...",
     "content": "Add subtask..."
+  },
+  "sync.addServerSuccess": {
+    "defaultMessage": "Server added successfully",
+    "content": "Server added successfully"
+  },
+  "sync.authToken": {
+    "defaultMessage": "Auth Token",
+    "content": "Auth Token"
+  },
+  "sync.authTokenPlaceholder": {
+    "defaultMessage": "Enter your authentication token",
+    "content": "Enter your authentication token"
+  },
+  "sync.deleteConfigSuccess": {
+    "defaultMessage": "Configuration deleted successfully",
+    "content": "Configuration deleted successfully"
+  },
+  "sync.deleteServer": {
+    "defaultMessage": "Delete Server",
+    "content": "Delete Server"
+  },
+  "sync.endpoint": {
+    "defaultMessage": "Endpoint",
+    "content": "Endpoint"
+  },
+  "sync.error.invalidEndpoint": {
+    "defaultMessage": "Please enter a valid URL",
+    "content": "Please enter a valid URL"
+  },
+  "sync.folderName": {
+    "defaultMessage": "Folder Name",
+    "content": "Folder Name"
+  },
+  "sync.folderNamePlaceholder": {
+    "defaultMessage": "tasks",
+    "content": "tasks"
+  },
+  "sync.selfHosted.add": {
+    "defaultMessage": "Add Selfhosted Server",
+    "content": "Add Selfhosted Server"
+  },
+  "sync.selfHostedNoConfigDescription": {
+    "defaultMessage": "Add a selfhosted sync server to sync your data with your own server.",
+    "content": "Add a selfhosted sync server to sync your data with your own server."
+  },
+  "sync.selfHostedOnlyLocalDatabase": {
+    "defaultMessage": "Selfhosted sync is only available for local database.",
+    "content": "Selfhosted sync is only available for local database."
+  },
+  "sync.selfHostedServer": {
+    "defaultMessage": "Selfhosted Server",
+    "content": "Selfhosted Server"
+  },
+  "sync.selfHostedSync": {
+    "defaultMessage": "Selfhosted Sync",
+    "content": "Selfhosted Sync"
+  },
+  "sync.serverType": {
+    "defaultMessage": "Server Type",
+    "content": "Server Type"
+  },
+  "sync.success": {
+    "defaultMessage": "Sync successful",
+    "content": "Sync successful"
+  },
+  "sync.syncing": {
+    "defaultMessage": "Syncing...",
+    "content": "Syncing..."
+  },
+  "sync.syncNow": {
+    "defaultMessage": "Sync Now",
+    "content": "Sync Now"
+  },
+  "sync.syncSuccess": {
+    "defaultMessage": "Sync Successful",
+    "content": "Sync Successful"
   },
   "tag_editor.create_new_tag": {
     "defaultMessage": "Create tag \"#{0}\"",

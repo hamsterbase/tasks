@@ -604,6 +604,10 @@
     "defaultMessage": "Account is logged out",
     "content": "账户已登出"
   },
+  "notes_placeholder": {
+    "defaultMessage": "Add notes...",
+    "content": "添加笔记..."
+  },
   "notification.permission.denied": {
     "defaultMessage": "Notification permission denied",
     "content": "通知权限被拒绝"
@@ -1024,6 +1028,18 @@
     "defaultMessage": "Local Database",
     "content": "本地数据库"
   },
+  "settings.notes": {
+    "defaultMessage": "Notes",
+    "content": "笔记"
+  },
+  "settings.render_markdown": {
+    "defaultMessage": "Render Markdown",
+    "content": "渲染 Markdown"
+  },
+  "settings.render_markdown.description": {
+    "defaultMessage": "Render notes as markdown in task and project details.",
+    "content": "在任务和项目详情中将笔记渲染为 Markdown 格式。"
+  },
   "settings.showCompletedTasks": {
     "defaultMessage": "Show Completed Tasks",
     "content": "显示已完成任务"
@@ -1083,6 +1099,82 @@
   "subtask.placeholder": {
     "defaultMessage": "Add subtask...",
     "content": "添加子任务..."
+  },
+  "sync.addServerSuccess": {
+    "defaultMessage": "Server added successfully",
+    "content": "服务器添加成功"
+  },
+  "sync.authToken": {
+    "defaultMessage": "Auth Token",
+    "content": "认证令牌"
+  },
+  "sync.authTokenPlaceholder": {
+    "defaultMessage": "Enter your authentication token",
+    "content": "输入您的认证令牌"
+  },
+  "sync.deleteConfigSuccess": {
+    "defaultMessage": "Configuration deleted successfully",
+    "content": "配置删除成功"
+  },
+  "sync.deleteServer": {
+    "defaultMessage": "Delete Server",
+    "content": "删除服务器"
+  },
+  "sync.endpoint": {
+    "defaultMessage": "Endpoint",
+    "content": "端点"
+  },
+  "sync.error.invalidEndpoint": {
+    "defaultMessage": "Please enter a valid URL",
+    "content": "请输入有效的 URL"
+  },
+  "sync.folderName": {
+    "defaultMessage": "Folder Name",
+    "content": "文件夹名称"
+  },
+  "sync.folderNamePlaceholder": {
+    "defaultMessage": "tasks",
+    "content": "tasks"
+  },
+  "sync.selfHosted.add": {
+    "defaultMessage": "Add Selfhosted Server",
+    "content": "添加自托管服务器"
+  },
+  "sync.selfHostedNoConfigDescription": {
+    "defaultMessage": "Add a selfhosted sync server to sync your data with your own server.",
+    "content": "添加自托管同步服务器，将您的数据与您自己的服务器同步。"
+  },
+  "sync.selfHostedOnlyLocalDatabase": {
+    "defaultMessage": "Selfhosted sync is only available for local database.",
+    "content": "自托管同步仅适用于本地数据库。"
+  },
+  "sync.selfHostedServer": {
+    "defaultMessage": "Selfhosted Server",
+    "content": "自托管服务器"
+  },
+  "sync.selfHostedSync": {
+    "defaultMessage": "Selfhosted Sync",
+    "content": "自托管同步"
+  },
+  "sync.serverType": {
+    "defaultMessage": "Server Type",
+    "content": "服务器类型"
+  },
+  "sync.success": {
+    "defaultMessage": "Sync successful",
+    "content": "同步成功"
+  },
+  "sync.syncing": {
+    "defaultMessage": "Syncing...",
+    "content": "同步中..."
+  },
+  "sync.syncNow": {
+    "defaultMessage": "Sync Now",
+    "content": "立即同步"
+  },
+  "sync.syncSuccess": {
+    "defaultMessage": "Sync Successful",
+    "content": "同步成功"
   },
   "tag_editor.create_new_tag": {
     "defaultMessage": "Create tag \"#{0}\"",

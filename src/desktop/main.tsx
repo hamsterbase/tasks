@@ -18,6 +18,8 @@ import { INavigationService, NavigationService } from '@/services/navigationServ
 import { IWorkbenchOverlayService, WorkbenchOverlayService } from '@/services/overlay/common/WorkbenchOverlayService';
 import { IReminderService } from '@/services/reminders/common/reminderService';
 import { DesktopReminderService } from '@/services/reminders/electron/DesktopReminderService';
+import { ISelfhostedSyncService } from '@/services/selfhostedSync/common/selfhostedSyncService';
+import { WorkbenchSelfhostedSyncService } from '@/services/selfhostedSync/common/workbenchSelfhostedSyncService';
 import { ISwitchService, SwitchService } from '@/services/switchService/common/switchService';
 import '@/services/todo/browser/desktopCommands';
 import { WorkbenchTodoService } from '@/services/todo/browser/workbenchTodoService';
@@ -60,6 +62,7 @@ export async function startDesktop() {
   serviceCollection.set(IWorkbenchInstanceService, new SyncDescriptor(WorkbenchInstanceService));
   serviceCollection.set(IWebLoggerService, new SyncDescriptor(WorkbenchWebLoggerService));
   serviceCollection.set(IReminderService, new SyncDescriptor(DesktopReminderService));
+  serviceCollection.set(ISelfhostedSyncService, new SyncDescriptor(WorkbenchSelfhostedSyncService));
   const instantiationService = new InstantiationService(serviceCollection, true);
 
   await instantiationService.invokeFunction(async (dss) => {
@@ -72,11 +75,15 @@ export async function startDesktop() {
     await dss.get(ICloudService).init();
   });
   await instantiationService.invokeFunction(async (dss) => {
+    await dss.get(ISelfhostedSyncService).init();
+  });
+  await instantiationService.invokeFunction(async (dss) => {
     await dss.get(IReminderService).start();
   });
 
   instantiationService.invokeFunction(async (dss) => {
-    console.log(`Found ${await dss.get(IKeybindingService).getKeybindings().length} keybindings`);
+    const keybindings = dss.get(IKeybindingService).getKeybindings();
+    console.log(`Found ${keybindings.length} keybindings`);
   });
 
   const globalContext = {

@@ -42,6 +42,7 @@ import {
   X,
   PanelLeft,
   AlarmClock,
+  ServerIcon,
 } from 'lucide-react';
 
 export const AreaExpandedIcon = ChevronRight;
@@ -70,6 +71,7 @@ export const EditIcon = PenLine;
 export const NavIcon = ChevronRight;
 export const DeleteIcon = X;
 export const CloudIcon = Cloud;
+export const SelfHostedSyncIcon = ServerIcon;
 export const CloudOffIcon = CloudAlert;
 export const DatabaseIcon = Database;
 export const UserIcon = User;

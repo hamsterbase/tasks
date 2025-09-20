@@ -71,9 +71,9 @@ const DialogContent: React.FC<{ controller: DialogController }> = ({ controller 
                     <button
                       key={action.key}
                       className={classNames('w-full py-2 px-4 rounded-md text-center font-medium', {
-                        'bg-brand text-white': action.theme === 'primary',
-                        'bg-stress-red text-white': action.theme === 'danger',
-                        'bg-bg2 text-t1': !action.theme,
+                        'bg-brand text-white': action.color === 'primary',
+                        'bg-stress-red text-white': action.color === 'danger',
+                        'bg-bg2 text-t1': !action.color,
                       })}
                       onClick={() => controller.handleButtonClick(action)}
                     >

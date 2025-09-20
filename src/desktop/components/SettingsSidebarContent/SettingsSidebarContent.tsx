@@ -1,4 +1,4 @@
-import { CloudIcon, PaletteIcon, SettingsIcon, UserIcon } from '@/components/icons';
+import { CloudIcon, PaletteIcon, SelfHostedSyncIcon, SettingsIcon, UserIcon } from '@/components/icons';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { localize } from '@/nls';
@@ -35,6 +35,12 @@ const tabs = [
     label: localize('settings.sync', 'Sync'),
     path: '/desktop/settings/sync',
     icon: <CloudIcon />,
+  },
+  {
+    id: 'selfhosted-sync',
+    label: localize('sync.selfHostedSync', 'Selfhosted Sync'),
+    path: '/desktop/settings/selfhosted-sync',
+    icon: <SelfHostedSyncIcon />,
   },
 ];
 
