@@ -9,6 +9,7 @@ import esbuild from 'rollup-plugin-esbuild';
 import { webBuildCommand } from '../commands/webBuild.js';
 import { createTempDir } from './createTempDir.js';
 import { resolveRoot } from './paths.js';
+import packageJSON from '../../package.json';
 
 interface BuildDockerOptions {
   tag: string;
@@ -60,8 +61,9 @@ export async function buildDocker(options: BuildDockerOptions): Promise<void> {
     console.log(`[docker] Successfully built Docker image: ${tag}`);
   } finally {
     // Clean up temp directory
+    console.log(tempDir);
     console.log('[docker] Cleaning up temp directory...');
-    await fs.rm(tempDir, { recursive: true, force: true });
+    // await fs.rm(tempDir, { recursive: true, force: true });
   }
 }
 
@@ -154,7 +156,7 @@ async function createPackageJson(tempDir: string, tag: string): Promise<void> {
     type: 'commonjs',
     main: 'server.js',
     dependencies: {
-      express: '^4.18.2',
+      express: packageJSON.devDependencies.express,
     },
   };
 
