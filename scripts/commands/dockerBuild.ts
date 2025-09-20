@@ -12,7 +12,7 @@ export async function dockerBuildCommand(options: DockerBuildOptions = {}): Prom
     console.log('[docker] Starting Docker build process...');
 
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5);
-    let tag = `hamsterbase/tasks:debug-${timestamp}`;
+    let tag = `hamsterbase/tasks-dev:debug-${timestamp}`;
     const platform = 'linux/amd64';
     const { release = false } = options;
 
