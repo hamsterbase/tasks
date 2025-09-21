@@ -3,6 +3,7 @@ import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { localize } from '@/nls';
 import { ISelfhostedSyncService } from '../common/selfhostedSyncService';
+import { ISwitchService } from '@/services/switchService/common/switchService';
 
 interface AddServerDialog {
   title: string;
@@ -20,6 +21,8 @@ export const selfhostedSyncPageTitle = localize('sync.selfHostedSync', 'Selfhost
 export const useAddSelfhostedServer = (options: UseAddSelfhostedServerOptions) => {
   const selfhostedSyncService = useService(ISelfhostedSyncService);
   useWatchEvent(selfhostedSyncService.onStateChange);
+  const switchService = useService(ISwitchService);
+
   const title = localize('sync.selfHosted.add', 'Add Selfhosted Server');
   const isValidUrl = (url: string): string | undefined => {
     try {
@@ -122,6 +125,15 @@ export const useAddSelfhostedServer = (options: UseAddSelfhostedServerOptions) =
 
   const deleteButtonLabel = localize('sync.deleteServer', 'Delete Server');
 
+  const documentationLink = switchService.getLocalSwitch('showOfficialWebsiteURL')
+    ? {
+        text: localize('sync.selfHosted.documentationLink', 'View documentation'),
+        href: localize(
+          'sync.selfHosted.documentationURL',
+          'https://tasks.hamsterbase.com/guide/download/selfhosted.html'
+        ),
+      }
+    : null;
   return {
     title,
     actions,
@@ -135,5 +147,6 @@ export const useAddSelfhostedServer = (options: UseAddSelfhostedServerOptions) =
     handleDeleteServer,
     handleSync,
     onAddServer,
+    documentationLink,
   };
 };

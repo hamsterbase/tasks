@@ -30,6 +30,7 @@ export const SelfHostedSyncSettings: React.FC = () => {
     handleDeleteServer,
     handleSync,
     deleteButtonLabel,
+    documentationLink,
   } = useAddSelfhostedServer({
     toast(type, message) {
       showMessage({
@@ -68,7 +69,7 @@ export const SelfHostedSyncSettings: React.FC = () => {
       } else {
         return (
           <ItemGroup>
-            <EmptyStateMessage message={emptyStateMessage} />
+            <EmptyStateMessage message={emptyStateMessage} link={documentationLink} />
           </ItemGroup>
         );
       }

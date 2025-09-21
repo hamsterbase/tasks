@@ -1140,6 +1140,14 @@
     "defaultMessage": "Add Selfhosted Server",
     "content": "添加自托管服务器"
   },
+  "sync.selfHosted.documentationLink": {
+    "defaultMessage": "View documentation",
+    "content": "查看文档"
+  },
+  "sync.selfHosted.documentationURL": {
+    "defaultMessage": "https://tasks.hamsterbase.com/guide/download/selfhosted.html",
+    "content": "https://tasks.hamsterbase.com/zh/guide/download/selfhosted.html"
+  },
   "sync.selfHostedNoConfigDescription": {
     "defaultMessage": "Add a selfhosted sync server to sync your data with your own server.",
     "content": "添加自托管同步服务器，将您的数据与您自己的服务器同步。"
@@ -1163,6 +1171,10 @@
   "sync.success": {
     "defaultMessage": "Sync successful",
     "content": "同步成功"
+  },
+  "sync.sync_success": {
+    "defaultMessage": "Sync completed successfully.",
+    "content": ""
   },
   "sync.syncing": {
     "defaultMessage": "Syncing...",

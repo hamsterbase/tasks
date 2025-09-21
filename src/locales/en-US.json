@@ -1140,6 +1140,14 @@
     "defaultMessage": "Add Selfhosted Server",
     "content": "Add Selfhosted Server"
   },
+  "sync.selfHosted.documentationLink": {
+    "defaultMessage": "View documentation",
+    "content": "View documentation"
+  },
+  "sync.selfHosted.documentationURL": {
+    "defaultMessage": "https://tasks.hamsterbase.com/guide/download/selfhosted.html",
+    "content": "https://tasks.hamsterbase.com/guide/download/selfhosted.html"
+  },
   "sync.selfHostedNoConfigDescription": {
     "defaultMessage": "Add a selfhosted sync server to sync your data with your own server.",
     "content": "Add a selfhosted sync server to sync your data with your own server."
@@ -1163,6 +1171,10 @@
   "sync.success": {
     "defaultMessage": "Sync successful",
     "content": "Sync successful"
+  },
+  "sync.sync_success": {
+    "defaultMessage": "Sync completed successfully.",
+    "content": "Sync completed successfully."
   },
   "sync.syncing": {
     "defaultMessage": "Syncing...",

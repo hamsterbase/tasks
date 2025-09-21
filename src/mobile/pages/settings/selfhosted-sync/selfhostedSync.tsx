@@ -28,6 +28,7 @@ export const SelfhostedSync = () => {
     handleDeleteServer,
     handleSync,
     onAddServer,
+    documentationLink,
   } = useAddSelfhostedServer({
     toast(_type, message) {
       toast({ message });
@@ -116,7 +117,7 @@ export const SelfhostedSync = () => {
 
     return (
       <div className="flex flex-col space-y-4">
-        <PageState label={emptyStateMessage} />
+        <PageState label={emptyStateMessage} link={documentationLink} />
         <ListItemGroup items={[createItem]} />
       </div>
     );

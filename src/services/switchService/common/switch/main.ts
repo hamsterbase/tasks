@@ -4,6 +4,7 @@ import { shouldIgnoreSafeBottom } from './shouldIgnoreSafeBottom';
 import { showIOSPurchaseButton } from './showIOSPurchaseButton';
 import { showNativeAboutButton } from './showNativeAboutButton';
 import { showNormalPurchaseButton } from './showNormalPurchaseButton';
+import { showOfficialWebsiteURL } from './showOfficialWebsiteURL';
 
 export const switchKeys = {
   showIOSPurchaseButton,
@@ -12,6 +13,7 @@ export const switchKeys = {
   showNativeAboutButton,
   shouldIgnoreSafeBottom,
   showNormalPurchaseButton,
+  showOfficialWebsiteURL,
 } as const;
 
 export type SwitchKeyType = keyof typeof switchKeys;
