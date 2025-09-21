@@ -30,6 +30,8 @@ Plan, organize, build and ship - all as planned
 
 To download the latest version of HamsterBase Tasks, visit the [official page](https://tasks.hamsterbase.com/).
 
+For self-hosted deployment instructions, see the [self-hosted guide](https://tasks.hamsterbase.com/guide/download/selfhosted.html).
+
 ## Contributing
 
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details on how to get started.
