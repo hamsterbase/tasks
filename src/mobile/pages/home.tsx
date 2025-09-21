@@ -16,7 +16,6 @@ import { localize } from '@/nls.ts';
 import { toggleAreaConfigKey } from '@/services/config/config.ts';
 import { INavigationService } from '@/services/navigationService/common/navigationService.ts';
 import { ITodoService } from '@/services/todo/common/todoService.ts';
-import { IThirdpartySyncService } from '@/services/thirdpartySync/common/thirdpartySyncService.ts';
 import { DragDropElements } from '@/utils/dnd/dragDropCollision.ts';
 import { getFlattenedItemsCollisionDetectionStrategy } from '@/utils/dnd/flattenedItemsCollisionDetectionStrategy.ts';
 import { getFlattenedItemsDragEndPosition } from '@/utils/dnd/flattenedItemsDragPosition.ts';
@@ -33,6 +32,7 @@ import { usePopupAction } from '../overlay/popupAction/usePopupAction.ts';
 import { styles } from '../theme.ts';
 import { MobileHomeTopMenu } from './home/TopMenu';
 import { useToast } from '../overlay/toast/useToast.ts';
+import { ISelfhostedSyncService } from '@/services/selfhostedSync/common/selfhostedSyncService.ts';
 
 interface HomeProjectAndAreaProps {
   flattenedResult: FlattenedResult<AreaInfoState, ProjectInfoState>;
@@ -100,7 +100,7 @@ export const MobileHome = () => {
   const navigationService = useService(INavigationService);
   const popupAction = usePopupAction();
   const todoService = useService(ITodoService);
-  const thirdpartySyncService = useService(IThirdpartySyncService);
+  const thirdpartySyncService = useService(ISelfhostedSyncService);
   const navigate = useNavigate();
   useWatchEvent(todoService.onStateChange);
   useWatchEvent(thirdpartySyncService.onStateChange);

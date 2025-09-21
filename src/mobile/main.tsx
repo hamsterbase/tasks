@@ -10,6 +10,8 @@ import { FsDatabaseService } from '@/services/database/native/fsDatabaseService.
 import { INavigationService, NavigationService } from '@/services/navigationService/common/navigationService.ts';
 import { IReminderService } from '@/services/reminders/common/reminderService.ts';
 import { MobileReminderService } from '@/services/reminders/native/mobileReminderService.ts';
+import { ISelfhostedSyncService } from '@/services/selfhostedSync/common/selfhostedSyncService.ts';
+import { WorkbenchSelfhostedSyncService } from '@/services/selfhostedSync/common/workbenchSelfhostedSyncService.ts';
 import { ISwitchService, SwitchService } from '@/services/switchService/common/switchService.ts';
 import { ITodoService } from '@/services/todo/common/todoService.ts';
 import { WorkbenchWebLoggerService } from '@/services/weblogger/browser/workbenchWebLoggerService.ts';
@@ -26,8 +28,6 @@ import {
 import { WorkbenchTodoService } from '../services/todo/browser/workbenchTodoService.ts';
 import '../styles/main.css';
 import { App } from './App.tsx';
-import { IThirdpartySyncService } from '@/services/thirdpartySync/common/thirdpartySyncService.ts';
-import { WorkbenchThirdpartySyncService } from '@/services/thirdpartySync/common/workbenchThirdpartySyncService.ts';
 
 export const startMobile = async () => {
   initializeTheme();
@@ -41,7 +41,7 @@ export const startMobile = async () => {
   serviceCollection.set(ICloudService, new SyncDescriptor(CloudService));
   serviceCollection.set(IWebLoggerService, new SyncDescriptor(WorkbenchWebLoggerService));
   serviceCollection.set(IReminderService, new SyncDescriptor(MobileReminderService));
-  serviceCollection.set(IThirdpartySyncService, new SyncDescriptor(WorkbenchThirdpartySyncService));
+  serviceCollection.set(ISelfhostedSyncService, new SyncDescriptor(WorkbenchSelfhostedSyncService));
   if (checkPlatform().isNative) {
     serviceCollection.set(IDatabaseService, new SyncDescriptor(FsDatabaseService, [Directory.Data]));
   } else {
@@ -59,7 +59,7 @@ export const startMobile = async () => {
     await dss.get(ICloudService).init();
   });
   await instantiationService.invokeFunction(async (dss) => {
-    await dss.get(IThirdpartySyncService).init();
+    await dss.get(ISelfhostedSyncService).init();
   });
   await instantiationService.invokeFunction(async (dss) => {
     await dss.get(IReminderService).start();
