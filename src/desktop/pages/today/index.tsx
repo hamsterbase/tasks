@@ -9,6 +9,7 @@ import { DesktopPage } from '@/desktop/components/DesktopPage';
 import { DesktopProjectList } from '@/desktop/components/DesktopProjectList/DesktopProjectList';
 import { DragOverlayItem } from '@/desktop/components/drag/DragOverlayItem';
 import { InboxTaskInput } from '@/desktop/components/inboxTaskInput/InboxTaskInput';
+import { ListContainer } from '@/desktop/components/listContainer/ListContainer';
 import { TitleContentSection } from '@/desktop/components/TitleContentSection';
 import { TaskListItem } from '@/desktop/components/todo/TaskListItem';
 import { useDesktopTaskDisplaySettings } from '@/desktop/hooks/useDesktopTaskDisplaySettings.ts';
@@ -22,7 +23,7 @@ import { ITodoService } from '@/services/todo/common/todoService';
 import { closestCenter, DndContext, DragEndEvent } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import type { TreeID } from 'loro-crdt';
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { flushSync } from 'react-dom';
 
 export const Today = () => {
@@ -55,14 +56,6 @@ export const Today = () => {
       listService.setMainList(new TaskList('Today', itemIds, [], null, null));
     }
   }, [listService, itemIds]);
-
-  const setFocus = useCallback(() => {
-    listService.mainList?.setFocus(true);
-  }, [listService]);
-
-  const clearFocus = useCallback(() => {
-    listService.mainList?.setFocus(false);
-  }, [listService]);
 
   useRegisterEvent(listService.mainList?.onListOperation, (event) => {
     switch (event.type) {
@@ -146,7 +139,7 @@ export const Today = () => {
       </TitleContentSection>
       <TitleContentSection title={localize('today.tasks', 'Tasks')}>
         <InboxTaskInput />
-        <div tabIndex={1} onFocus={setFocus} onBlur={clearFocus}>
+        <ListContainer taskList={mainList}>
           <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
             <SortableContext items={tasks.map((task) => task.id)} strategy={verticalListSortingStrategy}>
               {tasks.map((task) => {
@@ -156,7 +149,7 @@ export const Today = () => {
             </SortableContext>
             <DragOverlayItem />
           </DndContext>
-        </div>
+        </ListContainer>
       </TitleContentSection>
     </DesktopPage>
   );
