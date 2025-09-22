@@ -75,8 +75,9 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
   });
   const isInputFocused = useContextKeyValue(InputFocusedContext);
 
-  const handleStartEdit = (_value: string, cursor: number) => {
+  const handleStartEdit = (value: string, cursor: number) => {
     if (taskList.cursorId === task.id) {
+      taskList.updateInputValue(value);
       if (taskList.cursorOffset !== null) {
         if (isInputFocused) {
           taskList.updateCursor(cursor);

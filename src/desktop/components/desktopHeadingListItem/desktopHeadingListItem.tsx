@@ -54,11 +54,12 @@ export const DesktopHeadingListItem: React.FC<DesktopHeadingListItemProps> = ({
   const isFocused = taskList?.isFocused ?? false;
 
   const isInputFocused = useContextKeyValue(InputFocusedContext);
-  const handleStartEdit = (_value: string, cursor: number) => {
+  const handleStartEdit = (value: string, cursor: number) => {
     if (!taskList) {
       return;
     }
     if (taskList.cursorId === projectHeadingInfo.id) {
+      taskList.updateInputValue(value);
       if (taskList.cursorOffset !== null) {
         if (isInputFocused) {
           taskList.updateCursor(cursor);
