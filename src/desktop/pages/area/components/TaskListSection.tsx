@@ -4,7 +4,9 @@ import { calculateDragPosition } from '@/core/dnd/calculateDragPosition';
 import { TaskInfo } from '@/core/state/type';
 import { EmptyState } from '@/desktop/components/EmptyState';
 import { DragOverlayItem } from '@/desktop/components/drag/DragOverlayItem';
+import { ListContainer } from '@/desktop/components/listContainer/ListContainer';
 import { TaskListItem } from '@/desktop/components/todo/TaskListItem';
+import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
 import { useRegisterEvent } from '@/hooks/useRegisterEvent';
 import { IListService } from '@/services/list/common/listService';
@@ -14,7 +16,6 @@ import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { TreeID } from 'loro-crdt';
 import React, { useEffect } from 'react';
 import { flushSync } from 'react-dom';
-import { desktopStyles } from '@/desktop/theme/main';
 
 interface TaskListSectionProps {
   tasks: TaskInfo[];
@@ -52,13 +53,6 @@ export const TaskListSection: React.FC<TaskListSectionProps> = ({ tasks, willDis
   }, [listService, areaId, tasks]);
 
   const taskList = listService.mainList;
-
-  const setFocus = () => {
-    listService.mainList?.setFocus(true);
-  };
-  const clearFocus = () => {
-    listService.mainList?.setFocus(false);
-  };
 
   useRegisterEvent(listService.mainList?.onListOperation, (event) => {
     switch (event.type) {
@@ -104,7 +98,7 @@ export const TaskListSection: React.FC<TaskListSectionProps> = ({ tasks, willDis
   }
 
   return (
-    <div tabIndex={1} onFocus={setFocus} onBlur={clearFocus}>
+    <ListContainer taskList={taskList}>
       <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
         <SortableContext items={tasks.map((task) => task.id)} strategy={verticalListSortingStrategy}>
           <div className={desktopStyles.TaskListSectionItemsContainer}>
@@ -121,6 +115,6 @@ export const TaskListSection: React.FC<TaskListSectionProps> = ({ tasks, willDis
         </SortableContext>
         <DragOverlayItem />
       </DndContext>
-    </div>
+    </ListContainer>
   );
 };
