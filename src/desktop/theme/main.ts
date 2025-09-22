@@ -192,8 +192,9 @@ export const desktopStyles = {
   DetailViewHeaderMenuButton: 'size-6 h-7.6 flex items-center',
   DetailViewHeaderMenuIcon: 'size-6 text-t3',
   DetailViewContent: 'flex-1 overflow-y-auto',
-  DetailViewContentInner: 'p-5 space-y-2',
-  DetailViewNotesTextarea: 'w-full p-3 outline-none resize-none text-base leading-5 placeholder:text-t3 caret-brand',
+  DetailViewContentInner: 'p-2 space-y-2',
+  DetailViewNotesTextarea:
+    'w-full p-3 outline-none resize-none text-base leading-5 placeholder:text-t3 caret-brand break-all',
   DetailViewDivider: 'h-px bg-line-regular',
 
   MarkdownPageLoading: 'text-t2',

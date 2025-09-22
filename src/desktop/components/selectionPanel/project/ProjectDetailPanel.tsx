@@ -108,7 +108,11 @@ const ProjectDetailPanelContent: React.FC<IProjectDetailPanelContentProps> = ({ 
 
       <div className={desktopStyles.DetailViewContent}>
         <div className={desktopStyles.DetailViewContentInner}>
-          <NotesField value={project.notes || ''} onSave={handleNotesSave} />
+          <NotesField
+            value={project.notes || ''}
+            onSave={handleNotesSave}
+            className={desktopStyles.DetailViewNotesTextarea}
+          />
           <TaskLocationField itemId={projectId} />
           <TaskDateField
             label={localize('project.start_date', 'Start Date')}
