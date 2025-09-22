@@ -81,14 +81,12 @@ export const Today = () => {
       return;
     }
     const newTaskId = flushSync(() => {
-      return todoService.addTask({
+      const newTask = todoService.addTask({
         title: '',
         startDate: getTodayTimestampInUtc(),
-        position: {
-          type: 'afterElement',
-          previousElementId: afterId,
-        },
       });
+      todoService.moveDateAssignedList(newTask, { previousElementId: afterId, type: 'afterElement' });
+      return newTask;
     });
     listService.mainList?.select(newTaskId, {
       multipleMode: false,
