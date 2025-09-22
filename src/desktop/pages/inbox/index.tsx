@@ -7,6 +7,7 @@ import { EntityHeader } from '@/desktop/components/common/EntityHeader';
 import { DesktopPage } from '@/desktop/components/DesktopPage';
 import { DragOverlayItem } from '@/desktop/components/drag/DragOverlayItem';
 import { InboxTaskInput } from '@/desktop/components/inboxTaskInput/InboxTaskInput';
+import { ListContainer } from '@/desktop/components/listContainer/ListContainer';
 import { TaskListItem } from '@/desktop/components/todo/TaskListItem';
 import { useDesktopTaskDisplaySettings } from '@/desktop/hooks/useDesktopTaskDisplaySettings.ts';
 import { useTaskCommands } from '@/desktop/hooks/useTaskCommands';
@@ -27,7 +28,7 @@ import {
 } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import type { TreeID } from 'loro-crdt';
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { flushSync } from 'react-dom';
 
 export const Inbox = () => {
@@ -68,14 +69,6 @@ export const Inbox = () => {
       listService.setMainList(new TaskList('Inbox', inboxTaskIds, [], null, null));
     }
   }, [listService, inboxTaskIds]);
-
-  const setFocus = useCallback(() => {
-    listService.mainList?.setFocus(true);
-  }, [listService]);
-
-  const clearFocus = useCallback(() => {
-    listService.mainList?.setFocus(false);
-  }, [listService]);
 
   useRegisterEvent(listService.mainList?.onListOperation, (event) => {
     switch (event.type) {
@@ -152,7 +145,7 @@ export const Inbox = () => {
   return (
     <DesktopPage header={header}>
       <InboxTaskInput />
-      <div tabIndex={1} onFocus={setFocus} onBlur={clearFocus}>
+      <ListContainer taskList={listService.mainList}>
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
           <SortableContext items={inboxTasks.map((task) => task.id)} strategy={verticalListSortingStrategy}>
             {inboxTasks.map((task) => (
@@ -166,7 +159,7 @@ export const Inbox = () => {
           </SortableContext>
           <DragOverlayItem />
         </DndContext>
-      </div>
+      </ListContainer>
     </DesktopPage>
   );
 };

@@ -7,17 +7,17 @@ import { ProjectHeadingInfo, TaskInfo } from '@/core/state/type';
 import { DesktopHeadingListItem } from '@/desktop/components/desktopHeadingListItem/desktopHeadingListItem';
 import { DragOverlayItem } from '@/desktop/components/drag/DragOverlayItem';
 import { InboxTaskInput } from '@/desktop/components/inboxTaskInput/InboxTaskInput';
+import { ListContainer } from '@/desktop/components/listContainer/ListContainer';
 import { TaskListItem } from '@/desktop/components/todo/TaskListItem';
 import { useTaskCommands } from '@/desktop/hooks/useTaskCommands';
 import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
-import { IListService } from '@/services/list/common/listService';
 import { ITodoService } from '@/services/todo/common/todoService';
 import { getFlattenedItemsCollisionDetectionStrategy } from '@/utils/dnd/flattenedItemsCollisionDetectionStrategy';
 import { DndContext, DragEndEvent } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import type { TreeID } from 'loro-crdt';
-import React, { useCallback } from 'react';
+import React from 'react';
 
 interface ProjectTaskListProps {
   items: FlattenedItem<ProjectHeadingInfo, TaskInfo>[];
@@ -75,16 +75,7 @@ export const ProjectTaskArea: React.FC<ProjectTaskAreaProps> = ({
   onDragEnd,
 }) => {
   const todoService = useService(ITodoService);
-  const listService = useService(IListService);
   const sensors = useDesktopDndSensors();
-
-  const setFocus = useCallback(() => {
-    listService.mainList?.setFocus(true);
-  }, [listService]);
-
-  const clearFocus = useCallback(() => {
-    listService.mainList?.setFocus(false);
-  }, [listService]);
 
   useTaskCommands({
     createTask: {
@@ -113,7 +104,7 @@ export const ProjectTaskArea: React.FC<ProjectTaskAreaProps> = ({
           </div>
         </div>
       </div>
-      <div tabIndex={1} onFocus={setFocus} onBlur={clearFocus}>
+      <ListContainer taskList={taskList}>
         <DndContext
           sensors={sensors}
           collisionDetection={getFlattenedItemsCollisionDetectionStrategy(flattenedItemsResult)}
@@ -129,7 +120,7 @@ export const ProjectTaskArea: React.FC<ProjectTaskAreaProps> = ({
           </SortableContext>
           <DragOverlayItem taskProps={{ hideProjectTitle: true }} />
         </DndContext>
-      </div>
+      </ListContainer>
     </div>
   );
 };
