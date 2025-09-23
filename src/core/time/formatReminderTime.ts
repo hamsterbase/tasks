@@ -69,7 +69,7 @@ export function formatReminderTime(timestamp?: number, currentDate?: number): Se
     currentDate = getTodayTimestampInUtc();
   }
 
-  const targetDate = getDateFromUTCTimeStamp(timestamp);
+  const targetDate = timestamp;
   const currentDateObj = getDateFromUTCTimeStamp(currentDate);
   const locale = getCurrentLocale() as keyof typeof dateFormats.sameDay;
   const dateFnsLocale = getDateFnsLocale();

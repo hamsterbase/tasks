@@ -1,6 +1,6 @@
 import { AlarmIcon } from '@/components/icons';
 import { formatReminderTime } from '@/core/time/formatReminderTime';
-import { isPast } from '@/core/time/isPast';
+import { isTimestampInPast } from '@/core/time/isPast';
 import { ReminderWithId } from '@/core/type';
 import { useTimepicker } from '@/desktop/overlay/timePicker/useTimepicker';
 import { desktopStyles } from '@/desktop/theme/main';
@@ -85,7 +85,7 @@ export const RemindersField: React.FC<RemindersFieldProps> = ({ reminders, itemI
           .sort((a, b) => -a.time + b.time)
           .map((reminder) => {
             const { date, time } = formatReminderTime(reminder.time);
-            const isReminderPast = isPast(reminder.time);
+            const isReminderPast = isTimestampInPast(reminder.time);
             const displayDate = date;
             const displayTime = time;
 
