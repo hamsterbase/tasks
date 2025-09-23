@@ -592,6 +592,66 @@
     "defaultMessage": "This Week",
     "content": "本周"
   },
+  "menu.about": {
+    "defaultMessage": "About HamsterBase Tasks",
+    "content": "关于 HamsterBase Tasks"
+  },
+  "menu.copy": {
+    "defaultMessage": "Copy",
+    "content": "复制"
+  },
+  "menu.cut": {
+    "defaultMessage": "Cut",
+    "content": "剪切"
+  },
+  "menu.developer": {
+    "defaultMessage": "Developer",
+    "content": "开发者"
+  },
+  "menu.edit": {
+    "defaultMessage": "Edit",
+    "content": "编辑"
+  },
+  "menu.forceReload": {
+    "defaultMessage": "Force Reload",
+    "content": "强制重新加载"
+  },
+  "menu.githubIssue": {
+    "defaultMessage": "Github Issue",
+    "content": "GitHub 问题"
+  },
+  "menu.help": {
+    "defaultMessage": "Help",
+    "content": "帮助"
+  },
+  "menu.paste": {
+    "defaultMessage": "Paste",
+    "content": "粘贴"
+  },
+  "menu.quit": {
+    "defaultMessage": "Quit HamsterBase Tasks",
+    "content": "退出 HamsterBase Tasks"
+  },
+  "menu.reload": {
+    "defaultMessage": "Reload",
+    "content": "重新加载"
+  },
+  "menu.selectAll": {
+    "defaultMessage": "Select All",
+    "content": "全选"
+  },
+  "menu.toggleDevTools": {
+    "defaultMessage": "Developer Tools",
+    "content": "开发者工具"
+  },
+  "menu.toggleFullscreen": {
+    "defaultMessage": "Toggle Full Screen",
+    "content": "切换全屏"
+  },
+  "menu.view": {
+    "defaultMessage": "View",
+    "content": "视图"
+  },
   "message.undo": {
     "defaultMessage": "Undo",
     "content": "撤销"
@@ -1174,7 +1234,7 @@
   },
   "sync.sync_success": {
     "defaultMessage": "Sync completed successfully.",
-    "content": ""
+    "content": "同步成功完成。"
   },
   "sync.syncing": {
     "defaultMessage": "Syncing...",

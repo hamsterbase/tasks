@@ -14,6 +14,8 @@ import { EditService, IEditService } from '@/services/edit/common/editService';
 import { IWorkbenchInstanceService, WorkbenchInstanceService } from '@/services/instance/common/instanceService';
 import { StandaloneKeybindingService } from '@/services/keybinding/browser/standaloneKeybindingService';
 import { IListService, ListService } from '@/services/list/common/listService';
+import { IMenuService } from '@/services/menu/common/menuService';
+import { ElectronMenuService } from '@/services/menu/native/electronMenuService';
 import { INavigationService, NavigationService } from '@/services/navigationService/common/navigationService';
 import { IWorkbenchOverlayService, WorkbenchOverlayService } from '@/services/overlay/common/WorkbenchOverlayService';
 import { IReminderService } from '@/services/reminders/common/reminderService';
@@ -63,6 +65,7 @@ export async function startDesktop() {
   serviceCollection.set(IWebLoggerService, new SyncDescriptor(WorkbenchWebLoggerService));
   serviceCollection.set(IReminderService, new SyncDescriptor(DesktopReminderService));
   serviceCollection.set(ISelfhostedSyncService, new SyncDescriptor(WorkbenchSelfhostedSyncService));
+  serviceCollection.set(IMenuService, new SyncDescriptor(ElectronMenuService));
   const instantiationService = new InstantiationService(serviceCollection, true);
 
   await instantiationService.invokeFunction(async (dss) => {

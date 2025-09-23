@@ -592,6 +592,66 @@
     "defaultMessage": "This Week",
     "content": "This Week"
   },
+  "menu.about": {
+    "defaultMessage": "About HamsterBase Tasks",
+    "content": "About HamsterBase Tasks"
+  },
+  "menu.copy": {
+    "defaultMessage": "Copy",
+    "content": "Copy"
+  },
+  "menu.cut": {
+    "defaultMessage": "Cut",
+    "content": "Cut"
+  },
+  "menu.developer": {
+    "defaultMessage": "Developer",
+    "content": "Developer"
+  },
+  "menu.edit": {
+    "defaultMessage": "Edit",
+    "content": "Edit"
+  },
+  "menu.forceReload": {
+    "defaultMessage": "Force Reload",
+    "content": "Force Reload"
+  },
+  "menu.githubIssue": {
+    "defaultMessage": "Github Issue",
+    "content": "Github Issue"
+  },
+  "menu.help": {
+    "defaultMessage": "Help",
+    "content": "Help"
+  },
+  "menu.paste": {
+    "defaultMessage": "Paste",
+    "content": "Paste"
+  },
+  "menu.quit": {
+    "defaultMessage": "Quit HamsterBase Tasks",
+    "content": "Quit HamsterBase Tasks"
+  },
+  "menu.reload": {
+    "defaultMessage": "Reload",
+    "content": "Reload"
+  },
+  "menu.selectAll": {
+    "defaultMessage": "Select All",
+    "content": "Select All"
+  },
+  "menu.toggleDevTools": {
+    "defaultMessage": "Developer Tools",
+    "content": "Developer Tools"
+  },
+  "menu.toggleFullscreen": {
+    "defaultMessage": "Toggle Full Screen",
+    "content": "Toggle Full Screen"
+  },
+  "menu.view": {
+    "defaultMessage": "View",
+    "content": "View"
+  },
   "message.undo": {
     "defaultMessage": "Undo",
     "content": "Undo"

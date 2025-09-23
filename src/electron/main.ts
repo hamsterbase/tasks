@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, shell } from 'electron';
+import { app, BrowserWindow, ipcMain, shell, Menu } from 'electron';
 import * as os from 'os';
 import * as path from 'path';
 import { ElectronDatabaseService } from './databaseService';
@@ -79,9 +79,19 @@ ipcMain.handle('is-fullscreen', () => {
   return mainWindow?.isFullScreen() || false;
 });
 
+class ElectronMenuService {
+  setApplicationMenu(template: Electron.MenuItemConstructorOptions[]) {
+    const menu = Menu.buildFromTemplate(template);
+    Menu.setApplicationMenu(menu);
+  }
+}
+
+const menuService = new ElectronMenuService();
+
 // Service registry
 const services: Record<string, unknown> = {
   databaseService: databaseService,
+  menuService: menuService,
 };
 
 // Generic service handler

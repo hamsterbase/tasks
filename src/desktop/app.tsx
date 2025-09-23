@@ -26,12 +26,20 @@ import { Today } from '@/desktop/pages/today/index.tsx';
 import { useInputFocused } from '@/hooks/global/useInputFocused';
 import { useCloudSync } from '@/hooks/useCloudSync.ts';
 import { useSafeArea } from '@/hooks/useSafeArea';
+import { useService } from '@/hooks/use-service';
+import { IMenuService } from '@/services/menu/common/menuService';
 import React, { useEffect } from 'react';
 import { Navigate, useRoutes } from 'react-router';
 
 export const App = () => {
   useInputFocused();
   useCloudSync();
+
+  const menuService = useService(IMenuService);
+  useEffect(() => {
+    menuService.updateMenu();
+  }, [menuService]);
+
   useEffect(() => {
     const originalFontSize = document.documentElement.style.fontSize;
     document.documentElement.style.fontSize = '14px';
