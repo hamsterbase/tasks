@@ -113,7 +113,7 @@ export const TaskListSection: React.FC<TaskListSectionProps> = ({ tasks, willDis
             ))}
           </div>
         </SortableContext>
-        <DragOverlayItem />
+        <DragOverlayItem taskProps={{ hideProjectTitle: true }} />
       </DndContext>
     </ListContainer>
   );
