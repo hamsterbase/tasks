@@ -21,15 +21,21 @@ interface TaskProps {
   hideProjectTitle: boolean;
 }
 
+interface ProjectProps {
+  hideProjectTitle?: boolean;
+}
+
 export interface DragOverlayItemProps {
   isSubtask?: boolean;
   taskProps?: TaskProps;
   projectVariant?: 'sidebar' | 'desktop';
+  projectProps?: ProjectProps;
 }
 
 export const DragOverlayItem: React.FC<DragOverlayItemProps> = ({
   isSubtask,
   taskProps,
+  projectProps,
   projectVariant = 'sidebar',
 }) => {
   const { active } = useDndContext();
@@ -74,7 +80,7 @@ export const DragOverlayItem: React.FC<DragOverlayItemProps> = ({
       case 'project': {
         const projectInfo = getProject(modelState, activeId as string);
         return projectVariant === 'desktop' ? (
-          <DesktopProjectListItem project={projectInfo} />
+          <DesktopProjectListItem project={projectInfo} hideProjectTitle={projectProps?.hideProjectTitle} />
         ) : (
           <SidebarProjectItem projectInfo={projectInfo} />
         );
@@ -82,7 +88,7 @@ export const DragOverlayItem: React.FC<DragOverlayItemProps> = ({
       default:
         return null;
     }
-  }, [activeId, modelState, isSubtask, taskProps, projectVariant]);
+  }, [activeId, modelState, isSubtask, taskProps, projectVariant, projectProps]);
 
   return (
     <DragOverlay>

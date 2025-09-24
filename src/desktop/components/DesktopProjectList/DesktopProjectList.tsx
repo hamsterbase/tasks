@@ -57,7 +57,7 @@ export const DesktopProjectList: React.FC<DesktopProjectListProps> = ({
           <DesktopProjectListItem hideProjectTitle={hideProjectTitle} key={project.id} project={project} />
         ))}
       </SortableContext>
-      <DragOverlayItem projectVariant="desktop" />
+      <DragOverlayItem projectVariant="desktop" projectProps={{ hideProjectTitle }} />
     </DndContext>
   );
 };
