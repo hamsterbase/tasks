@@ -41,6 +41,12 @@ export const SidebarAreaItem: React.FC<SidebarAreaItemProps> = ({ areaInfo }) =>
     }
   };
 
+  const handleAreaClick = (e: React.MouseEvent) => {
+    if (isActive) {
+      handleToggle(e);
+    }
+  };
+
   const sidebarAreaClass = classNames(desktopStyles.SidebarMenuItem, {
     [desktopStyles.SidebarMenuItemActive]: isActive,
     [desktopStyles.SidebarMenuItemInactive]: !isActive,
@@ -53,7 +59,7 @@ export const SidebarAreaItem: React.FC<SidebarAreaItemProps> = ({ areaInfo }) =>
   });
 
   return (
-    <div className={desktopStyles.SidebarAreaGap}>
+    <div className={desktopStyles.SidebarAreaGap} onClick={handleAreaClick}>
       <Link
         ref={setNodeRef}
         style={style}

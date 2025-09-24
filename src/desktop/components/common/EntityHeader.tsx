@@ -67,6 +67,7 @@ export const EntityHeader: React.FC<EntityHeaderProps> = ({
             inputId={inputId}
             defaultValue={title}
             onSave={handleSave}
+            enableEnterToSave
             placeholder={placeholder || localize('common.untitled', 'Untitled')}
             className={desktopStyles.EntityHeaderEditableTextArea}
             autoSize={{ minRows: 1 }}

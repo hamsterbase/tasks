@@ -98,6 +98,7 @@ const ProjectDetailPanelContent: React.FC<IProjectDetailPanelContentProps> = ({ 
           defaultValue={project.title}
           placeholder={localize('project.untitled', 'New Project')}
           onSave={handleTitleSave}
+          enableEnterToSave
           className={desktopStyles.DetailViewHeaderTitle}
           autoSize={{ minRows: 1 }}
         />

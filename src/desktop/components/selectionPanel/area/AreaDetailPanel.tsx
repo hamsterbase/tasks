@@ -52,6 +52,7 @@ const AreaDetailPanelContent: React.FC<IAreaDetailPanelContentProps> = ({ areaId
           defaultValue={area.title}
           placeholder={localize('area.untitled', 'New Area')}
           onSave={handleTitleSave}
+          enableEnterToSave
           className={desktopStyles.DetailViewHeaderTitle}
           autoSize={{ minRows: 1 }}
         />
