@@ -14,12 +14,14 @@ export function getTaskInfo(modelData: ITaskModelData, taskId: TreeID): TaskInfo
   const isSubTask = !!o.parentId && modelData.taskObjectMap.get(o.parentId)?.type === 'task';
 
   let projectTitle = '';
+  let isParentArchived = false;
   if (o.parentId) {
     const parentNode = modelData.taskObjectMap.get(o.parentId);
     if (parentNode?.type === 'project') {
       projectTitle = parentNode.title;
     } else if (parentNode?.type === 'projectHeading') {
       projectTitle = modelData.taskObjectMap.get(parentNode.parentId)?.title ?? '';
+      isParentArchived = parentNode.isArchived;
     }
   }
 
@@ -34,6 +36,7 @@ export function getTaskInfo(modelData: ITaskModelData, taskId: TreeID): TaskInfo
     dueDate: o.dueDate,
     status: o.status,
     parentId: o.parentId,
+    isParentArchived,
     projectTitle,
     completionAt: o.completionAt,
     isSubTask,

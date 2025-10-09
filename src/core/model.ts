@@ -171,7 +171,12 @@ export class TaskModel {
     if (payload.position) {
       this.moveNode(projectHeadingId, payload.position);
     }
-    patch(projectHeading, payload, map as unknown as LoroMap<Record<string, unknown>>, ['title']);
+    patch(
+      projectHeading,
+      payload,
+      map as unknown as LoroMap<Record<string, unknown>>,
+      ['title', 'archivedDate'] as const
+    );
     this.doc.commit();
   }
 
@@ -503,6 +508,8 @@ export class TaskModel {
       uid: map.get(ModelKeys.uid),
       type: ModelTypes.projectHeading,
       title: map.get(ModelKeys.title),
+      isArchived: !!map.get(ModelKeys.archivedDate),
+      archivedDate: map.get(ModelKeys.archivedDate),
       children: children,
     };
   }

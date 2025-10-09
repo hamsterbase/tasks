@@ -1,16 +1,15 @@
 import { taskDisplaySettingOptions } from '@/base/common/TaskDisplaySettings';
 import { getTimeAfter, TimeAfterEnum } from '@/core/time/getTimeAfter.ts';
 import { DesktopMenuController, IMenuConfig } from '@/desktop/overlay/desktopMenu/DesktopMenuController.ts';
+import { useService } from '@/hooks/use-service.ts';
+import { useConfig } from '@/hooks/useConfig.ts';
+import { useGlobalTaskDisplaySettings } from '@/hooks/useGlobalTaskDisplaySettings';
 import {
   completedTasksRangeConfigKey,
   showCompletedTasksConfigKey,
   showFutureTasksConfigKey,
 } from '@/services/config/config.ts';
-import { useGlobalTaskDisplaySettings } from '@/hooks/useGlobalTaskDisplaySettings';
-import { localize } from '@/nls.ts';
 import { IInstantiationService } from 'vscf/platform/instantiation/common.ts';
-import { useService } from '@/hooks/use-service.ts';
-import { useConfig } from '@/hooks/useConfig.ts';
 
 interface UseDesktopTaskDisplaySettingsOption {
   hideShowFutureTasks?: boolean;
@@ -35,14 +34,14 @@ export const useDesktopTaskDisplaySettings = (page: string, option?: UseDesktopT
 
     if (!option?.hideShowFutureTasks) {
       menuItems.push({
-        label: localize('display_settings.future_tasks', 'Future Tasks'),
+        label: globalSettings.settingOptions.showFutureTasks.title,
         checked: showFutureTasks,
         onSelect: () => setShowFutureTasks(!showFutureTasks),
       });
     }
 
     menuItems.push({
-      label: localize('display_settings.completed_tasks', 'Completed Tasks'),
+      label: globalSettings.settingOptions.showCompletedTasks.title,
       checked: showCompletedTasks,
       onSelect: () => setShowCompletedTasks(!showCompletedTasks),
     });
@@ -56,7 +55,7 @@ export const useDesktopTaskDisplaySettings = (page: string, option?: UseDesktopT
     ];
 
     menuItems.push({
-      label: localize('display_settings.completed_tasks_range', 'Completed Tasks Range'),
+      label: globalSettings.settingOptions.completedTasksRange.title,
       submenu: completedRangeSubmenu,
     });
 

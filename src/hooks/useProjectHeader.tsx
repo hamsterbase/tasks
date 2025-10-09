@@ -1,4 +1,4 @@
-import { DeleteIcon, EditIcon, MoveIcon } from '@/components/icons';
+import { ArchiveIcon, DeleteIcon, EditIcon, MoveIcon } from '@/components/icons';
 import { ProjectHeadingInfo } from '@/core/state/type';
 import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox.tsx';
 import { useDialog } from '@/mobile/overlay/dialog/useDialog';
@@ -70,6 +70,13 @@ export const useProjectHeader = (options: IUseProjectHeaderOptions) => {
     });
   };
 
+  function handleArchiveHeading() {
+    const isArchived = projectHeadingInfo.isArchived;
+    todoService.updateProjectHeading(projectHeadingInfo.id, {
+      archivedDate: isArchived ? null : Date.now(),
+    });
+  }
+
   function handleMenuClick() {
     popupAction({
       items: [
@@ -89,6 +96,13 @@ export const useProjectHeader = (options: IUseProjectHeaderOptions) => {
           icon: <MoveIcon />,
           name: localize('project_heading.move', 'Move'),
           onClick: handleMoveToProject,
+        },
+        {
+          icon: <ArchiveIcon />,
+          name: projectHeadingInfo.isArchived
+            ? localize('project_heading.unarchive', 'Unarchive Heading')
+            : localize('project_heading.archive', 'Archive Heading'),
+          onClick: handleArchiveHeading,
         },
         {
           icon: <DeleteIcon />,

@@ -22,8 +22,21 @@ export const useDesktopProjectHeader = (options: IUseDesktopProjectHeaderOptions
     todoService.covertToProject(projectHeadingInfo.id);
   };
 
+  const handleArchiveHeading = () => {
+    const isArchived = projectHeadingInfo.isArchived;
+    todoService.updateProjectHeading(projectHeadingInfo.id, {
+      archivedDate: isArchived ? null : Date.now(),
+    });
+  };
+
   function createMenuConfig(): IMenuConfig[] {
     return [
+      {
+        label: projectHeadingInfo.isArchived
+          ? localize('project_heading.unarchive', 'Unarchive Heading')
+          : localize('project_heading.archive', 'Archive Heading'),
+        onSelect: handleArchiveHeading,
+      },
       {
         label: localize('project_heading.convert_to_project', 'Convert to Project'),
         onSelect: handleConvertToProject,

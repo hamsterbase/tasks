@@ -692,6 +692,10 @@
     "defaultMessage": "Search projects and areas...",
     "content": "Search projects and areas..."
   },
+  "project_heading.archive": {
+    "defaultMessage": "Archive Heading",
+    "content": "Archive Heading"
+  },
   "project_heading.convert": {
     "defaultMessage": "Convert",
     "content": "Convert"
@@ -727,6 +731,10 @@
   "project_heading.placeholder": {
     "defaultMessage": "New Heading",
     "content": "New Heading"
+  },
+  "project_heading.unarchive": {
+    "defaultMessage": "Unarchive Heading",
+    "content": "Unarchive Heading"
   },
   "project.add_heading": {
     "defaultMessage": "Add Heading",

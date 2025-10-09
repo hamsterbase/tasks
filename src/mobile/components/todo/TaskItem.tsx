@@ -27,6 +27,7 @@ interface TaskItemProps {
   overlay?: boolean;
   hideStartDate?: boolean;
   className?: string;
+  followParentArchiveState?: boolean;
 }
 
 export const TaskItem: React.FC<TaskItemProps> = ({
@@ -34,6 +35,7 @@ export const TaskItem: React.FC<TaskItemProps> = ({
   hideProjectTitle = false,
   hideStartDate = false,
   className,
+  followParentArchiveState,
 }) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging, node } = useSortable({
     id: taskInfo.id,
@@ -110,6 +112,7 @@ export const TaskItem: React.FC<TaskItemProps> = ({
         [styles.taskItemEditingRound]: isEditing,
         [styles.taskItemPaddingX]: true,
         [styles.taskItemGap]: true,
+        'opacity-50!': followParentArchiveState && taskInfo.isParentArchived,
       })}
       onClick={handleTaskClick}
       ref={setNodeRef}

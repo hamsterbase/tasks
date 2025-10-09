@@ -1,5 +1,5 @@
 import { TreeID } from 'loro-crdt';
-import { ProjectInfoState, TaskInfo } from '../state/type';
+import { ProjectHeadingInfo, ProjectInfoState, TaskInfo } from '../state/type';
 
 export interface FilterOption {
   showCompletedTasks: boolean;
@@ -33,6 +33,29 @@ export function isTaskVisible(task: TaskInfo | ProjectInfoState, option?: Filter
   if (!option.showFutureTasks) {
     if (task.startDate && task.startDate > option.currentDate) {
       if (option.recentChangedTaskSet.has(task.id)) {
+        return 'recentChanged';
+      }
+      return 'invalid';
+    }
+  }
+  return 'valid';
+}
+
+export function isHeadingVisible(heading: ProjectHeadingInfo, option?: FilterOption): Res {
+  if (!option) {
+    return 'valid';
+  }
+
+  if (!option.showCompletedTasks) {
+    const everyTaskInvalid = heading.tasks.every((task) => {
+      return isTaskVisible(task, option) === 'invalid';
+    });
+
+    if (!everyTaskInvalid) {
+      return 'valid';
+    }
+    if (heading.isArchived && heading.archivedDate && heading.archivedDate < option.completedAfter) {
+      if (option.recentChangedTaskSet.has(heading.id)) {
         return 'recentChanged';
       }
       return 'invalid';

@@ -56,6 +56,7 @@ export interface TaskInfo {
   status: ItemStatus;
   children: SubTaskInfo[];
   parentId?: string;
+  isParentArchived?: boolean;
   isSubTask: boolean;
   projectTitle: string;
   completionAt?: number;
@@ -67,6 +68,8 @@ export interface ProjectHeadingInfo {
   parentId: TreeID;
   title: string;
   tasks: TaskInfo[];
+  isArchived: boolean;
+  archivedDate?: number | null;
 }
 
 export function isTask(modelData: ITaskModelData, id: TreeID) {

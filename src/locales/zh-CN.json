@@ -692,6 +692,10 @@
     "defaultMessage": "Search projects and areas...",
     "content": "搜索项目和区域..."
   },
+  "project_heading.archive": {
+    "defaultMessage": "Archive Heading",
+    "content": "归档标题"
+  },
   "project_heading.convert": {
     "defaultMessage": "Convert",
     "content": "转换"
@@ -727,6 +731,10 @@
   "project_heading.placeholder": {
     "defaultMessage": "New Heading",
     "content": "新的标题"
+  },
+  "project_heading.unarchive": {
+    "defaultMessage": "Unarchive Heading",
+    "content": "取消归档标题"
   },
   "project.add_heading": {
     "defaultMessage": "Add Heading",
@@ -1102,7 +1110,7 @@
   },
   "settings.showCompletedTasks": {
     "defaultMessage": "Show Completed Tasks",
-    "content": "显示已完成任务"
+    "content": ""
   },
   "settings.showCompletedTasks.description": {
     "defaultMessage": "Display finished tasks in all views.",

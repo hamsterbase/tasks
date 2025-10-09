@@ -13,6 +13,8 @@ export function getProjectHeadingInfo(modelData: ITaskModelData, projectHeadingI
     title: objectData.title,
     parentId: objectData.parentId,
     tasks: getTaskInfoList(modelData, objectData.children),
+    isArchived: objectData.isArchived,
+    archivedDate: objectData.archivedDate,
   };
 }
 

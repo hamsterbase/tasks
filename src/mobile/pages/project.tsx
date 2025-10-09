@@ -61,6 +61,7 @@ const Files: React.FC<{
                   key={item.id}
                   taskInfo={item.content}
                   hideProjectTitle={true}
+                  followParentArchiveState
                   className={classNames(styles.taskItemGroupBackground, {
                     [styles.taskItemGroupTopRound]: result.borderTop(item.id),
                     [styles.taskItemGroupBottomRound]: result.borderBottom(item.id),

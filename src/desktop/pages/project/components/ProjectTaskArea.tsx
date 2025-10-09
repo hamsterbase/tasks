@@ -48,6 +48,7 @@ const ProjectTaskList: React.FC<ProjectTaskListProps> = ({ items, willDisappearO
               task={item.content}
               willDisappear={willDisappearObjectIdSet.has(item.id)}
               taskList={taskList}
+              followParentArchiveState
             />
           );
         }

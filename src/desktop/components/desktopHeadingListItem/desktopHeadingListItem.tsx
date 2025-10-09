@@ -116,6 +116,7 @@ export const DesktopHeadingListItem: React.FC<DesktopHeadingListItemProps> = ({
       className={classNames(desktopStyles.DesktopHeadingListItemContainer, {
         [desktopStyles.DesktopHeadingListItemContainerDragging]: isDragging,
         [desktopStyles.DesktopHeadingListItemContainerPadding]: !hideDividers,
+        [desktopStyles.DesktopHeadingListItemArchived]: projectHeadingInfo.isArchived,
       })}
     >
       {!hideDividers && (

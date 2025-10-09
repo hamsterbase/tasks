@@ -1,6 +1,7 @@
 // eslint-disable-next-line custom/no-restricted-packages
 import {
   AlertCircle,
+  Archive,
   ArrowLeft,
   ArrowRight,
   CalendarCheck,
@@ -95,3 +96,4 @@ export { CalendarDays };
 export const AlarmIcon = AlarmClock;
 export const PanelLeftIcon = PanelLeft;
 export const SyncIcon = RefreshCw;
+export const ArchiveIcon = Archive;

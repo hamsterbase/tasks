@@ -102,6 +102,8 @@ export type ProjectHeadingSchema = {
   title: string;
   parentId: TreeID;
   children: TreeID[];
+  isArchived: boolean;
+  archivedDate?: number | null;
 };
 
 export type CreateProjectHeadingSchema = {
@@ -112,6 +114,7 @@ export type CreateProjectHeadingSchema = {
 export type UpdateProjectHeadingSchema = {
   title?: string;
   position?: ItemPosition;
+  archivedDate?: number | null;
 };
 
 export type ItemStatus = 'created' | 'completed' | 'canceled';

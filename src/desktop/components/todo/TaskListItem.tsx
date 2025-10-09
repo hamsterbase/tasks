@@ -29,6 +29,7 @@ export interface TaskListItemProps {
   taskList: ITaskList;
   hideProjectTitle?: boolean;
   disableDrag?: boolean;
+  followParentArchiveState?: boolean;
 }
 
 export const TaskListItem: React.FC<TaskListItemProps> = ({
@@ -37,6 +38,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
   taskList,
   hideProjectTitle = false,
   disableDrag,
+  followParentArchiveState,
 }) => {
   const isCompleted = task.status === 'completed';
   const inputRef = useRef<HTMLInputElement>(null);
@@ -138,6 +140,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
       (isFocused && isSelected && !isDragging && !isInputFocused) || isDragging,
     [desktopStyles.TaskListItemContainerSelectedInactive]: !isFocused && isSelected && !isDragging,
     [desktopStyles.TaskListItemContainerEditing]: isFocused && isSelected && !isDragging && isInputFocused,
+    [desktopStyles.TaskListItemContainerArchived]: followParentArchiveState && task.isParentArchived,
   });
 
   const todoService = useService(ITodoService);

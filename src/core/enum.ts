@@ -11,7 +11,7 @@ export const ModelKeys = {
   parentId: 'parentId',
   completion: 'completion',
   status: 'status',
-  isDeleted: 'isDeleted',
+  archivedDate: 'archivedDate',
 } as const;
 
 export const ModelTypes = {

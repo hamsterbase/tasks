@@ -78,6 +78,7 @@ export const PathTypeMap = {
   dueDate: 'date-time',
   startDate: 'date-time',
   tags: 'array',
+  archivedDate: 'date-time',
 } as const;
 
 export function patch<A, B, C extends Record<string, unknown>>(

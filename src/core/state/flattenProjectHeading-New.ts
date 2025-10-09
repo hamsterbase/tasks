@@ -1,9 +1,9 @@
 import { DragDropElements } from '@/utils/dnd/dragDropCollision';
 import type { TreeID } from 'loro-crdt';
+import { FilterOption, isHeadingVisible, isTaskVisible } from '../time/filterProjectAndTask';
 import { getProject } from './getProject';
 import { FlattenedItem, flattenedItemsToResult, FlattenedResult } from './home/flattenedItemsToResult.ts';
 import { ITaskModelData, ProjectHeadingInfo, TaskInfo } from './type';
-import { FilterOption, isTaskVisible } from '../time/filterProjectAndTask';
 
 export function flattenProjectTaskNew({
   modelData,
@@ -41,6 +41,13 @@ export function flattenProjectTaskNew({
     index++;
   });
   project.projectHeadings.forEach((projectHeading) => {
+    const headingVisible = isHeadingVisible(projectHeading, option);
+    if (headingVisible === 'invalid') {
+      return;
+    }
+    if (headingVisible === 'recentChanged') {
+      willDisappearObjectIdSet.add(projectHeading.id);
+    }
     flattenedItems.push({
       type: 'header',
       content: projectHeading,

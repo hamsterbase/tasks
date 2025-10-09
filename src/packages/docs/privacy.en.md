@@ -1,6 +1,6 @@
 # Privacy Policy
 
-*Effective Date: September 3, 2025*
+_Effective Date: September 3, 2025_
 
 ## Who We Are
 

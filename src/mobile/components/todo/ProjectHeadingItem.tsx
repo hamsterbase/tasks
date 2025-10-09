@@ -51,6 +51,7 @@ export const ProjectHeadingItem: React.FC<ProjectHeadingItemProps> = ({ projectH
           itemClassName,
           'flex items-center gap-2 justify-between text-lg',
           {
+            ['line-through opacity-50']: projectHeadingInfo.isArchived,
             [styles.listItemEditingBackground]: isEditing,
           },
           className
