@@ -42,7 +42,7 @@ export function isTaskVisible(task: TaskInfo | ProjectInfoState, option?: Filter
 }
 
 export function isHeadingVisible(heading: ProjectHeadingInfo, option?: FilterOption): Res {
-  if (!option) {
+  if (!option || !heading.isArchived || !heading.archivedDate) {
     return 'valid';
   }
 
@@ -54,7 +54,9 @@ export function isHeadingVisible(heading: ProjectHeadingInfo, option?: FilterOpt
     if (!everyTaskInvalid) {
       return 'valid';
     }
-    if (heading.isArchived && heading.archivedDate && heading.archivedDate < option.completedAfter) {
+    return 'invalid';
+  } else {
+    if (heading.archivedDate < option.completedAfter) {
       if (option.recentChangedTaskSet.has(heading.id)) {
         return 'recentChanged';
       }
