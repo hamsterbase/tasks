@@ -5,7 +5,7 @@ import { getProject } from './getProject';
 import { FlattenedItem, flattenedItemsToResult, FlattenedResult } from './home/flattenedItemsToResult.ts';
 import { ITaskModelData, ProjectHeadingInfo, TaskInfo } from './type';
 
-export function flattenProjectTaskNew({
+export function getProjectHeadingAndTasks({
   modelData,
   projectId,
   option,

@@ -1,6 +1,6 @@
 import { getTodayTimestampInUtc } from '@/base/common/time';
 import { TaskList } from '@/components/taskList/taskList.ts';
-import { flattenProjectTaskNew } from '@/core/state/flattenProjectHeading-New';
+import { getProjectHeadingAndTasks } from '@/core/state/getProjectHeadingAndTasks';
 import { getProject } from '@/core/state/getProject';
 import { DesktopPage } from '@/desktop/components/DesktopPage';
 import { desktopStyles } from '@/desktop/theme/main';
@@ -32,7 +32,7 @@ const ProjectContent: React.FC<ProjectContentProps> = ({ project, projectId }) =
 
   const { showCompletedTasks, showFutureTasks, completedAfter } = useTaskDisplaySettings(`project-${projectId}`);
 
-  const { flattenedItemsResult, willDisappearObjectIdSet } = flattenProjectTaskNew({
+  const { flattenedItemsResult, willDisappearObjectIdSet } = getProjectHeadingAndTasks({
     modelData: todoService.modelState,
     projectId: project.id,
     option: {

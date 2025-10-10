@@ -1,6 +1,6 @@
 import { getTodayTimestampInUtc } from '@/base/common/time.ts';
 import { MenuIcon } from '@/components/icons';
-import { flattenProjectTaskNew } from '@/core/state/flattenProjectHeading-New';
+import { getProjectHeadingAndTasks } from '@/core/state/getProjectHeadingAndTasks.ts';
 import { getProject } from '@/core/state/getProject';
 import { FlattenedItem, FlattenedResult } from '@/core/state/home/flattenedItemsToResult.ts';
 import { ProjectHeadingInfo, TaskInfo } from '@/core/state/type';
@@ -127,7 +127,7 @@ export const ProjectPage = () => {
       </PageLayout>
     );
   }
-  const { flattenedItemsResult, willDisappearObjectIdSet } = flattenProjectTaskNew({
+  const { flattenedItemsResult, willDisappearObjectIdSet } = getProjectHeadingAndTasks({
     modelData: todoService.modelState,
     projectId: project.id,
     option: {
