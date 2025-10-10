@@ -105,16 +105,16 @@ export class TaskModel {
   }
 
   addArea(area: CreateAreaSchema) {
-    const noode = this.createNodeInPosition(
+    const node = this.createNodeInPosition(
       ModelTypes.area,
       area.position ?? { type: 'firstElement', parentId: undefined }
     );
-    const map = noode.data;
+    const map = node.data;
     map.set(ModelKeys.title, area.title);
     map.set(ModelKeys.createdAt, Date.now());
     map.setContainer(ModelKeys.tags, new LoroMovableList());
     this.doc.commit();
-    return noode.id;
+    return node.id;
   }
 
   updateArea(areaId: TreeID, newArea: UpdateAreaSchema) {
@@ -408,20 +408,7 @@ export class TaskModel {
             map.set(ModelKeys.completion, JSON.stringify({ type: 'created', timestamp: completion.timestamp }));
           }
           if (parentId) {
-            try {
-              const parentNode = this.getParentNode<ProjectLoroSchema>(parentId, ModelTypes.project);
-              if (parentNode) {
-                if (parentNode.map.get(ModelKeys.completion)) {
-                  const completion = JSON.parse(parentNode.map.get(ModelKeys.completion) as string);
-                  parentNode.map.set(
-                    ModelKeys.completion,
-                    JSON.stringify({ type: 'created', timestamp: completion.timestamp })
-                  );
-                }
-              }
-            } catch (error) {
-              console.error(error);
-            }
+            this.resetNearestProjectToCreated(parentId);
           }
           break;
         }
@@ -554,17 +541,24 @@ export class TaskModel {
     };
   }
 
-  private getParentNode<T extends Record<string, unknown>>(parentId: TreeID, expectedParentType: string) {
-    const node = this.getTree().getNodeByID(parentId);
-    if (!node || node.data.get(ModelKeys.type) !== expectedParentType) {
-      return null;
+  private resetNearestProjectToCreated(parentId: TreeID) {
+    const parentNode = this.getTree().getNodeByID(parentId);
+    if (!parentNode) return;
+
+    const parentType = parentNode.data.get(ModelKeys.type) as string;
+
+    if (parentType === ModelTypes.project) {
+      const projectMap = parentNode.data as unknown as LoroMap<ProjectLoroSchema>;
+      if (projectMap.get(ModelKeys.completion)) {
+        const completion = JSON.parse(projectMap.get(ModelKeys.completion) as string);
+        projectMap.set(ModelKeys.completion, JSON.stringify({ type: 'created', timestamp: completion.timestamp }));
+      }
+    } else if (parentType === ModelTypes.projectHeading) {
+      const headingParentId = parentNode.parent()?.id;
+      if (headingParentId) {
+        this.resetNearestProjectToCreated(headingParentId);
+      }
     }
-    return {
-      node,
-      map: node.data as unknown as LoroMap<T>,
-      children: (node.children() ?? []).map((p) => p.id),
-      parentId: node.parent()?.id,
-    };
   }
 
   private createNodeInPosition(type: string, position: ItemPosition) {
@@ -589,6 +583,8 @@ export class TaskModel {
         node = this.getTree().createNode(nextElement.parent()?.id, index);
         break;
       }
+      default:
+        throw new Error('invalid position type');
     }
     node.data.set('type', type);
     node.data.set('uid', nanoid(12));
@@ -628,20 +624,7 @@ export class TaskModel {
   private handleCreateTask(payload: CreateTaskSchema, itemId: TreeID) {
     const { parentId } = this.getTreeNode<TaskLoroSchema>(itemId, ModelTypes.task);
     if (parentId) {
-      try {
-        const parentNode = this.getParentNode<ProjectLoroSchema>(parentId, ModelTypes.project);
-        if (parentNode) {
-          if (parentNode.map.get(ModelKeys.completion)) {
-            const completion = JSON.parse(parentNode.map.get(ModelKeys.completion) as string);
-            parentNode.map.set(
-              ModelKeys.completion,
-              JSON.stringify({ type: 'created', timestamp: completion.timestamp })
-            );
-          }
-        }
-      } catch (error) {
-        console.error(error);
-      }
+      this.resetNearestProjectToCreated(parentId);
     }
     this.handleFilterConditions(payload, itemId, (condition, payload) => condition.meetTaskCreationCriteria(payload));
   }
