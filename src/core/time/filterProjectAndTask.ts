@@ -50,9 +50,11 @@ export function isHeadingVisible(heading: ProjectHeadingInfo, option?: FilterOpt
     const everyTaskInvalid = heading.tasks.every((task) => {
       return isTaskVisible(task, option) === 'invalid';
     });
-
     if (!everyTaskInvalid) {
       return 'valid';
+    }
+    if (option.recentChangedTaskSet.has(heading.id)) {
+      return 'recentChanged';
     }
     return 'invalid';
   } else {
