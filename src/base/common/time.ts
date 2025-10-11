@@ -16,10 +16,6 @@ export function getTodayTimestampInUtc() {
   return getUtcDayjsFromDateStr(getCurrentDateStr()).valueOf();
 }
 
-export function isDateBeforeOrEqualToday(timestamp: number) {
-  return timestamp <= getTodayTimestampInUtc();
-}
-
 /**
  * 将 "YYYY-MM-DD" 格式的日期字符串转换为 UTC（零时区）的时间戳（毫秒）
  * @param {string} dateStr - 例如 "2023-10-07"

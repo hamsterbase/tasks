@@ -4,6 +4,7 @@ import { nanoid } from 'nanoid';
 import { Emitter } from 'vscf/base/common/event.ts';
 import { dateAssigned, FilterCondition, filterConditions } from './list.ts';
 import { getInvalidTaskData } from './state/getInvalidTaskData.ts';
+import { createRecurringTask } from './state/createRecurringTask.ts';
 import {
   AreaSchema,
   CreateAreaSchema,
@@ -196,6 +197,9 @@ export class TaskModel {
     if (task.dueDate) {
       map.set(ModelKeys.dueDate, task.dueDate);
     }
+    if (task.recurringRule) {
+      map.set(ModelKeys.recurringRule, JSON.stringify(task.recurringRule));
+    }
     map.set(ModelKeys.createdAt, Date.now());
     const tags = new LoroMovableList();
     if (Array.isArray(task.tags)) {
@@ -230,6 +234,9 @@ export class TaskModel {
       'dueDate',
       'startDate',
     ]);
+    if (newTask.recurringRule) {
+      map.set(ModelKeys.recurringRule, JSON.stringify(newTask.recurringRule));
+    }
     this.handleUpdateTask(newTask, taskId);
     this.doc.commit();
   }
@@ -412,12 +419,22 @@ export class TaskModel {
           }
           break;
         }
-        case ItemStatusEnum.completed:
+        case ItemStatusEnum.completed: {
           map.set(ModelKeys.completion, JSON.stringify({ type: 'completed', timestamp: completionAt ?? Date.now() }));
+          const newTask = createRecurringTask(map, completionAt);
+          if (newTask) {
+            this.addTask(newTask);
+          }
           break;
-        case ItemStatusEnum.canceled:
+        }
+        case ItemStatusEnum.canceled: {
           map.set(ModelKeys.completion, JSON.stringify({ type: 'canceled', timestamp: completionAt ?? Date.now() }));
+          const newTask = createRecurringTask(map, completionAt);
+          if (newTask) {
+            this.addTask(newTask);
+          }
           break;
+        }
         default:
           throw new Error('invalid status');
       }
@@ -510,6 +527,7 @@ export class TaskModel {
       status = JSON.parse(completion).type;
       completionAt = JSON.parse(completion).timestamp;
     }
+    const recurringRuleStr = map.get(ModelKeys.recurringRule);
     const res: TaskSchema = {
       id,
       uid: map.get(ModelKeys.uid),
@@ -524,6 +542,7 @@ export class TaskModel {
       createdAt: map.get(ModelKeys.createdAt),
       startDate: map.get(ModelKeys.startDate),
       dueDate: map.get(ModelKeys.dueDate),
+      recurringRule: recurringRuleStr ? JSON.parse(recurringRuleStr as string) : undefined,
     };
     return res as TaskSchema;
   }

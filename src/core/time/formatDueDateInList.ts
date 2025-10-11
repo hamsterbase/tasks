@@ -3,14 +3,11 @@ import { localize } from '@/nls';
 import { differenceInDays, format, isSameYear } from 'date-fns';
 import { getDateFromUTCTimeStamp } from './getDateFromUTCTimeStamp';
 
-export function formatDueDateInList(dueDate?: number, currentDate?: number) {
+export function formatDueDateInList(dueDate?: number) {
   if (!dueDate) {
-    return '';
+    throw new Error('dueDate is undefined or null');
   }
-  if (!currentDate) {
-    currentDate = getTodayTimestampInUtc();
-  }
-
+  const currentDate = getTodayTimestampInUtc();
   const dueDateInUtc = getDateFromUTCTimeStamp(dueDate);
   const currentDateInUtc = getDateFromUTCTimeStamp(currentDate);
 

@@ -1,4 +1,5 @@
 import { LoroMovableList, TreeID } from 'loro-crdt';
+import { RecurringDateRule } from './time/parseRecurringRule';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export type EmptyObject = {};
@@ -149,6 +150,8 @@ export type TaskSchema = {
    * 格式为日期, 一律为 0 时区的 YYYY-MM-DD
    */
   dueDate?: number;
+
+  recurringRule?: RecurringRule;
 };
 
 export type TaskLoroSchemaPatch = {
@@ -159,6 +162,7 @@ export type TaskLoroSchemaPatch = {
    * { type: 'canceled', timestamp: 1717977600000 }
    */
   completion?: string;
+  recurringRule?: string;
 };
 
 export type TaskLoroSchema = ToLoro<TaskSchema, TaskLoroSchemaPatch>;
@@ -170,7 +174,15 @@ export type CreateTaskSchema = {
   dueDate?: number | null;
   tags?: string[];
   position?: ItemPosition;
+  recurringRule?: RecurringRule;
 };
+
+export interface RecurringRule {
+  startDate?: RecurringDateRule | null;
+  startDateBase?: 'completion' | 'due' | 'start';
+  dueDate?: RecurringDateRule | null;
+  dueDateBase?: 'completion' | 'due' | 'start';
+}
 
 export type UpdateTaskSchema = {
   status?: ItemStatus;
@@ -183,6 +195,7 @@ export type UpdateTaskSchema = {
   previousTaskId?: TreeID | null;
   position?: ItemPosition;
   completionAt?: number;
+  recurringRule?: RecurringRule;
 };
 
 export type TaskObjectSchema = AreaSchema | ProjectSchema | ProjectHeadingSchema | TaskSchema;

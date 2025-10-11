@@ -12,6 +12,7 @@ export const ModelKeys = {
   completion: 'completion',
   status: 'status',
   archivedDate: 'archivedDate',
+  recurringRule: 'recurringRule',
 } as const;
 
 export const ModelTypes = {
