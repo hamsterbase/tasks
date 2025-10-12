@@ -421,7 +421,7 @@ export class TaskModel {
         }
         case ItemStatusEnum.completed: {
           map.set(ModelKeys.completion, JSON.stringify({ type: 'completed', timestamp: completionAt ?? Date.now() }));
-          const newTask = createRecurringTask(map, completionAt);
+          const newTask = createRecurringTask(taskId, map, completionAt);
           if (newTask) {
             this.addTask(newTask);
           }
@@ -429,7 +429,7 @@ export class TaskModel {
         }
         case ItemStatusEnum.canceled: {
           map.set(ModelKeys.completion, JSON.stringify({ type: 'canceled', timestamp: completionAt ?? Date.now() }));
-          const newTask = createRecurringTask(map, completionAt);
+          const newTask = createRecurringTask(taskId, map, completionAt);
           if (newTask) {
             this.addTask(newTask);
           }

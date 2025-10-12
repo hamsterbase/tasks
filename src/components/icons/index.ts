@@ -33,6 +33,7 @@ import {
   PenLine,
   Plus,
   RefreshCw,
+  Repeat,
   SendToBack,
   Settings,
   SlidersHorizontal,
@@ -97,3 +98,4 @@ export const AlarmIcon = AlarmClock;
 export const PanelLeftIcon = PanelLeft;
 export const SyncIcon = RefreshCw;
 export const ArchiveIcon = Archive;
+export const RepeatIcon = Repeat;

@@ -2,6 +2,9 @@ import { localize } from '@/nls';
 import { RecurringDateRule } from './parseRecurringRule';
 
 const labels = {
+  due: localize('recurring_task.due_prefix', 'From due date:'),
+  start: localize('recurring_task.start_prefix', 'From start date:'),
+  completion: localize('recurring_task.base_prefix', 'From completion date:'),
   nextYearJan1: localize('recurringDate.nextYearJan1', 'Next year January 1st'),
   nextMonth1st: localize('recurringDate.nextMonth1st', 'Next month 1st'),
   nextMonday: localize('recurringDate.nextMonday', 'Next Monday'),
@@ -40,6 +43,9 @@ function formatYear(num: number): string {
  * - "// Next year + 2 months + 5 days"
  */
 export function explanationRecurringDate(rule: RecurringDateRule): string {
+  if (!rule.valid) {
+    return localize('recurring_task.invalid_rule', 'Invalid rule');
+  }
   const { years = 0, months = 0, weeks = 0, days = 0 } = rule;
   const parts: string[] = [];
 

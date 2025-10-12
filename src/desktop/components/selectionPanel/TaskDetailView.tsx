@@ -10,11 +10,12 @@ import React from 'react';
 import { TagsField } from '../TagsField';
 import { ClearSelectionButton } from './ClearSelectionButton';
 import { SubtaskList } from './SubtaskList';
+import { NotesField } from './components/NotesField';
+import { RecurringRuleField } from './components/RecurringRuleField';
+import { RemindersField } from './components/RemindersField';
 import { TaskDateField } from './components/TaskDateField';
 import { TaskLocationField } from './components/TaskLocationField';
 import { useDatePickerHandlers } from './hooks/useDatePickerHandlers';
-import { RemindersField } from './components/RemindersField';
-import { NotesField } from './components/NotesField';
 
 interface TaskDetailViewProps {
   task: TaskInfo;
@@ -23,7 +24,7 @@ interface TaskDetailViewProps {
 
 export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task, onClearSelection }) => {
   const taskItemActions = useTaskItemActions(task);
-  const { openTaskMenu } = useTaskMenu(task.id);
+  const { openTaskMenu } = useTaskMenu(task.id, task);
   const { handleStartDateClick, handleDueDateClick } = useDatePickerHandlers({
     task,
   });
@@ -86,6 +87,7 @@ export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task, onClearSel
             reminders={task.reminders}
             itemId={task.id}
           />
+          <RecurringRuleField recurringRule={task.recurringRule} taskId={task.id} />
           <div className={desktopStyles.DetailViewDivider} />
           <SubtaskList task={task} />
         </div>

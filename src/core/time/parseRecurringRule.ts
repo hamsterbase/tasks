@@ -1,14 +1,30 @@
 export interface RecurringDateRule {
+  valid: boolean;
+  from?: string;
   years?: number;
   months?: number;
   weeks?: number;
   days?: number;
 }
 
-/**
- * Parse recurring rule string like "1y2m3w4d" into RecurringDateRule object
- */
-export function parseRecurringRule(input: string): RecurringDateRule & { valid: boolean } {
+export function parseRecurringRule(input: string): RecurringDateRule {
+  if (!input) {
+    return { valid: false };
+  }
+
+  const parts = input.split(':');
+  if (parts.length > 2) {
+    return { valid: false };
+  }
+
+  if (parts.length === 1) {
+    return { ..._parseRecurringRule(parts[0]) };
+  }
+
+  return { ..._parseRecurringRule(parts[1]), from: parts[0] };
+}
+
+function _parseRecurringRule(input: string): RecurringDateRule {
   const rule = input.trim().toLowerCase();
   if (!rule) {
     return { valid: false };

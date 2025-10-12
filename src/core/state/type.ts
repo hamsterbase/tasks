@@ -1,5 +1,5 @@
 import type { TreeID } from 'loro-crdt';
-import { ITaskModelData, ItemStatus, ReminderWithId } from '../type.ts';
+import { ITaskModelData, ItemStatus, ReminderWithId, RecurringRule } from '../type.ts';
 export type { ITaskModelData };
 
 export interface ProjectInfoState {
@@ -61,6 +61,7 @@ export interface TaskInfo {
   projectTitle: string;
   completionAt?: number;
   reminders: ReminderWithId[];
+  recurringRule?: RecurringRule;
 }
 
 export interface ProjectHeadingInfo {

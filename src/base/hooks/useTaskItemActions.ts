@@ -1,4 +1,5 @@
 import { TaskInfo } from '@/core/state/type';
+import { RecurringRule } from '@/core/type';
 import { useService } from '@/hooks/use-service';
 import { ITodoService } from '@/services/todo/common/todoService';
 
@@ -65,6 +66,13 @@ export const useTaskItemActions = (taskInfo: TaskInfo | null) => {
     todoService.updateTask(taskInfo.id, { status: 'canceled' });
   };
 
+  const updateRecurringRule = (recurringRule: RecurringRule | undefined) => {
+    if (!taskInfo) {
+      return;
+    }
+    todoService.updateTask(taskInfo.id, { recurringRule });
+  };
+
   return {
     toggleTask,
     updateTaskTitle,
@@ -74,5 +82,6 @@ export const useTaskItemActions = (taskInfo: TaskInfo | null) => {
     updateStartDate,
     updateDueDate,
     cancelTask,
+    updateRecurringRule,
   };
 };

@@ -1,6 +1,5 @@
 import { DialogButtonAction } from '@/base/common/componentsType/dialog';
 import { InputField } from '@/desktop/components/Form/InputField/InputField';
-import { Overlay } from '@/desktop/components/Overlay/Overlay';
 import { SettingButton } from '@/desktop/components/Settings/Button/Button';
 import { desktopStyles } from '@/desktop/theme/main';
 import { localize } from '@/nls';
@@ -10,6 +9,7 @@ import { useService } from '../../../hooks/use-service';
 import { useWatchEvent } from '../../../hooks/use-watch-event';
 import { IWorkbenchOverlayService } from '../../../services/overlay/common/WorkbenchOverlayService';
 import { DesktopDialogController } from './DesktopDialogController';
+import { Overlay } from '@/desktop/components/Overlay/Overlay';
 
 const DesktopDialogContent: React.FC<{ controller: DesktopDialogController }> = ({ controller }) => {
   const handleConfirm = () => {

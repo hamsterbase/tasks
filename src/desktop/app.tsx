@@ -7,21 +7,22 @@ import { DesktopMessage } from '@/desktop/overlay/desktopMessage/DesktopMessage'
 import { TagEditorOverlay } from '@/desktop/overlay/tagEditor/TagEditorOverlay';
 import { TimePickerOverlay } from '@/desktop/overlay/timePicker/TimePickerOverlay';
 import { TreeSelectOverlay } from '@/desktop/overlay/treeSelect/TreeSelectOverlay';
+import { RecurringTaskSettingsOverlay } from '@/desktop/overlay/recurringTaskSettings/RecurringTaskSettingsOverlay';
 import { AreaPage } from '@/desktop/pages/area';
 import { Completed } from '@/desktop/pages/completed';
 import { FutureProjects } from '@/desktop/pages/futureProjects';
 import { Inbox } from '@/desktop/pages/inbox';
 import { ProjectPage } from '@/desktop/pages/project';
 import { Schedule } from '@/desktop/pages/schedule';
-import { EULA } from '@/desktop/pages/settings/account/eula/EULA.tsx';
-import { Privacy } from '@/desktop/pages/settings/account/Privacy.tsx';
-import { AccountSettings } from '@/desktop/pages/settings/AccountSettings';
-import { AppearanceSettings } from '@/desktop/pages/settings/AppearanceSettings';
-import { SyncSettings } from '@/desktop/pages/settings/databases/SyncSettings.tsx';
-import { ImportExportSettings } from '@/desktop/pages/settings/ImportExportSettings';
-import { LoginPage } from '@/desktop/pages/settings/Login/LoginPage.tsx';
-import { RegisterPage } from '@/desktop/pages/settings/Register/RegisterPage.tsx';
-import { SelfHostedSyncSettings } from '@/desktop/pages/settings/sync/SelfHostedSyncSettings.tsx';
+import { EULA } from '@/desktop/pages/settings-page/account/eula/EULA.tsx';
+import { Privacy } from '@/desktop/pages/settings-page/account/Privacy.tsx';
+import { AccountSettings } from '@/desktop/pages/settings-page/AccountSettings';
+import { AppearanceSettings } from '@/desktop/pages/settings-page/AppearanceSettings';
+import { SyncSettings } from '@/desktop/pages/settings-page/databases/SyncSettings.tsx';
+import { ImportExportSettings } from '@/desktop/pages/settings-page/ImportExportSettings';
+import { LoginPage } from '@/desktop/pages/settings-page/Login/LoginPage.tsx';
+import { RegisterPage } from '@/desktop/pages/settings-page/Register/RegisterPage.tsx';
+import { SelfHostedSyncSettings } from '@/desktop/pages/settings-page/sync/SelfHostedSyncSettings.tsx';
 import { Today } from '@/desktop/pages/today/index.tsx';
 import { useInputFocused } from '@/hooks/global/useInputFocused';
 import { useCloudSync } from '@/hooks/useCloudSync.ts';
@@ -174,6 +175,7 @@ export const App = () => {
       <DatePickerOverlay />
       <TimePickerOverlay />
       <TagEditorOverlay />
+      <RecurringTaskSettingsOverlay />
       <DesktopDialog />
       <DesktopMessage />
       <CreateDatabaseOverlay />

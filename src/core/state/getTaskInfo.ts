@@ -41,6 +41,7 @@ export function getTaskInfo(modelData: ITaskModelData, taskId: TreeID): TaskInfo
     completionAt: o.completionAt,
     isSubTask,
     reminders: modelData.remindersMap.get(taskId) || [],
+    recurringRule: o.recurringRule,
     children: o.children.map((child) => {
       const childTask = modelData.taskObjectMap.get(child) as TaskSchema;
       return {

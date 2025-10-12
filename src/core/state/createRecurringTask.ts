@@ -1,12 +1,12 @@
-import { LoroMap } from 'loro-crdt';
+import { LoroMap, TreeID } from 'loro-crdt';
 import { ModelKeys } from '../enum';
 import { calculateRecurringDate } from '../time/calculateRecurringDate';
-import { CreateTaskSchema, RecurringRule, TaskLoroSchema } from '../type';
-import { formatUTCTimeStampToDate } from '../time/formatUTCTimeStamp';
 import { formatTimeStampToDate } from '../time/formatTimeStampToDate';
+import { formatUTCTimeStampToDate } from '../time/formatUTCTimeStamp';
+import { CreateTaskSchema, RecurringRule, TaskLoroSchema } from '../type';
 
 function calculateBaseTime(
-  dateBase: 'completion' | 'due' | 'start' | undefined,
+  dateBase: string | undefined,
   completionAt: number | undefined,
   map: LoroMap<TaskLoroSchema>
 ): string {
@@ -21,7 +21,11 @@ function calculateBaseTime(
   return formatTimeStampToDate(defaultTime);
 }
 
-export function createRecurringTask(map: LoroMap<TaskLoroSchema>, completionAt?: number): CreateTaskSchema | null {
+export function createRecurringTask(
+  id: TreeID,
+  map: LoroMap<TaskLoroSchema>,
+  completionAt?: number
+): CreateTaskSchema | null {
   const recurringRuleString = map.get(ModelKeys.recurringRule) as string;
 
   if (!recurringRuleString) {
@@ -43,7 +47,7 @@ export function createRecurringTask(map: LoroMap<TaskLoroSchema>, completionAt?:
   if (recurringRule.startDate) {
     calculatedStartDate = calculateRecurringDate(
       recurringRule.startDate,
-      calculateBaseTime(recurringRule.startDateBase, completionAt, map)
+      calculateBaseTime(recurringRule.startDate.from, completionAt, map)
     ).getTime();
   }
 
@@ -51,7 +55,7 @@ export function createRecurringTask(map: LoroMap<TaskLoroSchema>, completionAt?:
   if (recurringRule.dueDate) {
     calculatedDueDate = calculateRecurringDate(
       recurringRule.dueDate,
-      calculateBaseTime(recurringRule.dueDateBase, completionAt, map)
+      calculateBaseTime(recurringRule.dueDate.from, completionAt, map)
     ).getTime();
   }
 
@@ -62,5 +66,9 @@ export function createRecurringTask(map: LoroMap<TaskLoroSchema>, completionAt?:
     startDate: calculatedStartDate,
     dueDate: calculatedDueDate,
     recurringRule,
+    position: {
+      type: 'afterElement',
+      previousElementId: id,
+    },
   };
 }

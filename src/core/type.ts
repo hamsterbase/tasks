@@ -179,9 +179,7 @@ export type CreateTaskSchema = {
 
 export interface RecurringRule {
   startDate?: RecurringDateRule | null;
-  startDateBase?: 'completion' | 'due' | 'start';
   dueDate?: RecurringDateRule | null;
-  dueDateBase?: 'completion' | 'due' | 'start';
 }
 
 export type UpdateTaskSchema = {

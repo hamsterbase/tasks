@@ -71,6 +71,8 @@ export const desktopStyles = {
   RemindersFieldTimeText: /*tw*/ 'text-t2 text-sm leading-5',
   RemindersFieldPastText: /*tw*/ 'line-through',
 
+  RecurringRuleContent: /*tw*/ 'flex flex-col items-start gap-6 text-base leading-5',
+
   TaskLocationFieldLocationText: /*tw*/ 'text-base leading-5 text-t1 truncate',
 
   TaskDateFieldDateContainer: /*tw*/ 'flex items-baseline gap-1.5 text-base leading-5',
@@ -455,6 +457,13 @@ export const desktopStyles = {
   TagEditorOverlayTagCheckboxSelected: /*tw*/ 'text-brand',
   TagEditorOverlayTagCheckboxUnselected: /*tw*/ 'text-t3',
   TagEditorOverlayEmptyHint: /*tw*/ 'px-3 py-2 text-sm text-t3 text-center',
+
+  RecurringTaskSettingsOverlayField: /*tw*/ 'mb-4',
+  RecurringTaskSettingsOverlayLabel: /*tw*/ 'block text-sm font-medium text-t2 mb-2',
+  RecurringTaskSettingsOverlayInput:
+    /*tw*/ 'w-full px-3 py-2 border border-line-regular rounded bg-bg1 text-t1 focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand',
+  RecurringTaskSettingsOverlayExplanation: /*tw*/ 'text-sm text-t3 mt-1',
+  RecurringTaskSettingsOverlayCalculation: /*tw*/ 'text-sm text-brand mt-1',
 
   TreeSelectOverlayContainer: /*tw*/ 'w-80',
   TreeSelectOverlayContentArea: /*tw*/ 'max-h-76 overflow-y-auto py-3',

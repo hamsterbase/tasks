@@ -1,8 +1,8 @@
 import { CloseIcon } from '@/components/icons';
 import { desktopStyles } from '@/desktop/theme/main';
 import React from 'react';
-import { SettingButton } from '../Settings/Button/Button';
 import { Space } from '../Space/Space';
+import { SettingButton } from '../Settings/Button/Button';
 
 interface OverlayProps {
   title: string;
