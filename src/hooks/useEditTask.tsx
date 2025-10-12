@@ -1,8 +1,18 @@
 import { mergeDateAndTime } from '@/base/common/time';
-import { AlarmIcon, DeleteIcon, DueIcon, MoveIcon, ScheduledIcon, SubtaskIcon, TagIcon } from '@/components/icons';
+import {
+  AlarmIcon,
+  DeleteIcon,
+  DueIcon,
+  MoveIcon,
+  RepeatIcon,
+  ScheduledIcon,
+  SubtaskIcon,
+  TagIcon,
+} from '@/components/icons';
 import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox.tsx';
 import { TaskInfo } from '@/core/state/type';
-import { ItemStatus } from '@/core/type';
+import { recurringToString } from '@/core/time/recurringToString';
+import { ItemStatus, RecurringRule } from '@/core/type';
 import { DueDateInfoItem, DueDateInfoItemIcon } from '@/mobile/components/infoItem/dueDate';
 import { ReminderTimeInfoItem } from '@/mobile/components/infoItem/reminderTime';
 import { StartDateInfoItem } from '@/mobile/components/infoItem/startDate';
@@ -11,6 +21,7 @@ import { useDialog } from '@/mobile/overlay/dialog/useDialog';
 import { PopupActionItem } from '@/mobile/overlay/popupAction/PopupActionController';
 import { usePopupAction } from '@/mobile/overlay/popupAction/usePopupAction';
 import { useProjectAreaSelector } from '@/mobile/overlay/projectAreaSelector/useProjectAreaSelector';
+import { useRecurringTaskSettings } from '@/mobile/overlay/recurringTaskSettings/useRecurringTaskSettings';
 import { TagEditorActionSheetController } from '@/mobile/overlay/tagEditor/TagEditorActionSheetController';
 import { useTimePicker } from '@/mobile/overlay/timePicker/useTimePicker';
 import { styles } from '@/mobile/theme';
@@ -23,6 +34,24 @@ import { IInstantiationService } from 'vscf/platform/instantiation/common';
 import { useService } from './use-service';
 import { useWatchEvent } from './use-watch-event';
 
+function formatRecurringRule(rule?: RecurringRule): string[] {
+  if (!rule) {
+    return [];
+  }
+
+  const parts: string[] = [];
+
+  if (rule.startDate) {
+    parts.push(localize('tasks.recurring_start_date', 'StartDate: {0}', recurringToString(rule.startDate)));
+  }
+
+  if (rule.dueDate) {
+    parts.push(localize('tasks.recurring_due_date', 'DueDate: {0}', recurringToString(rule.dueDate)));
+  }
+
+  return parts;
+}
+
 export const useEditTaskHooks = (taskInfo: TaskInfo) => {
   const subtaskInputRefs = useRef<Record<string, HTMLInputElement>>({});
   const todoService = useService(ITodoService);
@@ -32,6 +61,7 @@ export const useEditTaskHooks = (taskInfo: TaskInfo) => {
   const projectAreaSelector = useProjectAreaSelector();
   const instantiationService = useService(IInstantiationService);
   const mobileDatepicker = useMobileDatepicker();
+  const openRecurringTaskSettings = useRecurringTaskSettings();
 
   const timePicker = useTimePicker();
 
@@ -53,6 +83,17 @@ export const useEditTaskHooks = (taskInfo: TaskInfo) => {
     e.preventDefault();
     popupAction({
       items: [
+        {
+          icon: <RepeatIcon />,
+          name: localize('task.recurring_settings', 'Recurring Settings'),
+          onClick: () => {
+            openRecurringTaskSettings(taskInfo.recurringRule || {}, (settings) => {
+              todoService.updateTask(taskInfo.id, {
+                recurringRule: settings,
+              });
+            });
+          },
+        },
         {
           icon: <DeleteIcon />,
           name: localize('task.delete_task', 'Delete Task'),
@@ -283,6 +324,8 @@ export const useEditTaskHooks = (taskInfo: TaskInfo) => {
     };
   });
 
+  const recurringRuleDisplay = formatRecurringRule(taskInfo.recurringRule);
+
   const taskDetailItems = [
     {
       itemKey: 'tags',
@@ -341,6 +384,30 @@ export const useEditTaskHooks = (taskInfo: TaskInfo) => {
       onClear: () => {
         todoService.updateTask(taskInfo.id, { dueDate: null });
         todoService.editItem(taskInfo.id);
+      },
+    },
+    {
+      itemKey: 'recurring',
+      show: recurringRuleDisplay.length > 0,
+      icon: <RepeatIcon />,
+      content: (
+        <div className="flex flex-col gap-1">
+          {recurringRuleDisplay.map((text) => (
+            <span key={text} className="text-sm text-t2">
+              {text}
+            </span>
+          ))}
+        </div>
+      ),
+      onClick: () => {
+        openRecurringTaskSettings(taskInfo.recurringRule || {}, (settings) => {
+          todoService.updateTask(taskInfo.id, {
+            recurringRule: settings,
+          });
+        });
+      },
+      onClear: () => {
+        todoService.updateTask(taskInfo.id, { recurringRule: undefined });
       },
     },
     ...reminders,

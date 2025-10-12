@@ -188,6 +188,10 @@
     "defaultMessage": "OK",
     "content": "确定"
   },
+  "common.save": {
+    "defaultMessage": "Save",
+    "content": "保存"
+  },
   "common.untitled": {
     "defaultMessage": "Untitled",
     "content": "无标题"
@@ -828,6 +832,94 @@
     "defaultMessage": "New Project",
     "content": "新项目"
   },
+  "recurring_task.base_prefix": {
+    "defaultMessage": "From completion date:",
+    "content": "从完成日期："
+  },
+  "recurring_task.due_date_rule": {
+    "defaultMessage": "Due Date Rule",
+    "content": "截止日期规则"
+  },
+  "recurring_task.due_prefix": {
+    "defaultMessage": "From due date:",
+    "content": "从截止日期："
+  },
+  "recurring_task.invalid_rule": {
+    "defaultMessage": "Invalid rule",
+    "content": "无效规则"
+  },
+  "recurring_task.next_date": {
+    "defaultMessage": "Next date: {0}",
+    "content": "下次日期：{0}"
+  },
+  "recurring_task.rule_placeholder": {
+    "defaultMessage": "e.g. 1w, 2m, 1y3d, due:1d, start:2d",
+    "content": "例如：1w, 2m, 1y3d, due:1d, start:2d"
+  },
+  "recurring_task.settings_title": {
+    "defaultMessage": "Set Recurring Task Rules",
+    "content": "设置循环任务规则"
+  },
+  "recurring_task.start_date_rule": {
+    "defaultMessage": "Start Date Rule",
+    "content": "开始日期规则"
+  },
+  "recurring_task.start_prefix": {
+    "defaultMessage": "From start date:",
+    "content": "从开始日期："
+  },
+  "recurringDate.day": {
+    "defaultMessage": "day",
+    "content": "天"
+  },
+  "recurringDate.days": {
+    "defaultMessage": "days",
+    "content": "天"
+  },
+  "recurringDate.month": {
+    "defaultMessage": "month",
+    "content": "个月"
+  },
+  "recurringDate.months": {
+    "defaultMessage": "months",
+    "content": "个月"
+  },
+  "recurringDate.nextMonday": {
+    "defaultMessage": "Next Monday",
+    "content": "下周一"
+  },
+  "recurringDate.nextMonth1st": {
+    "defaultMessage": "Next month 1st",
+    "content": "下月1号"
+  },
+  "recurringDate.nextYearJan1": {
+    "defaultMessage": "Next year January 1st",
+    "content": "明年1月1日"
+  },
+  "recurringDate.then": {
+    "defaultMessage": "→",
+    "content": "→"
+  },
+  "recurringDate.tomorrow": {
+    "defaultMessage": "Tomorrow",
+    "content": "明天"
+  },
+  "recurringDate.week": {
+    "defaultMessage": "week",
+    "content": "周"
+  },
+  "recurringDate.weeks": {
+    "defaultMessage": "weeks",
+    "content": "周"
+  },
+  "recurringDate.year": {
+    "defaultMessage": "year",
+    "content": "年"
+  },
+  "recurringDate.years": {
+    "defaultMessage": "years",
+    "content": "年"
+  },
   "register.agree": {
     "defaultMessage": "I agree to",
     "content": "我同意"
@@ -1110,7 +1202,7 @@
   },
   "settings.showCompletedTasks": {
     "defaultMessage": "Show Completed Tasks",
-    "content": ""
+    "content": "显示已完成任务"
   },
   "settings.showCompletedTasks.description": {
     "defaultMessage": "Display finished tasks in all views.",
@@ -1308,6 +1400,14 @@
     "defaultMessage": "Move",
     "content": "移动"
   },
+  "task.recurring_settings": {
+    "defaultMessage": "Recurring Settings",
+    "content": "循环设置"
+  },
+  "task.set_recurring": {
+    "defaultMessage": "Set Recurring",
+    "content": "设置循环"
+  },
   "tasks.add.tags": {
     "defaultMessage": "Add Tags",
     "content": "添加标签"
@@ -1351,6 +1451,14 @@
   "tasks.notes_placeholder": {
     "defaultMessage": "Add notes...",
     "content": "添加笔记..."
+  },
+  "tasks.recurring_due_date": {
+    "defaultMessage": "DueDate: {0}",
+    "content": "截止日期：{0}"
+  },
+  "tasks.recurring_start_date": {
+    "defaultMessage": "StartDate: {0}",
+    "content": "开始日期：{0}"
   },
   "tasks.reminders": {
     "defaultMessage": "Reminders",

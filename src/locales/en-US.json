@@ -188,6 +188,10 @@
     "defaultMessage": "OK",
     "content": "OK"
   },
+  "common.save": {
+    "defaultMessage": "Save",
+    "content": "Save"
+  },
   "common.untitled": {
     "defaultMessage": "Untitled",
     "content": "Untitled"
@@ -828,6 +832,94 @@
     "defaultMessage": "New Project",
     "content": "New Project"
   },
+  "recurring_task.base_prefix": {
+    "defaultMessage": "From completion date:",
+    "content": "From completion date:"
+  },
+  "recurring_task.due_date_rule": {
+    "defaultMessage": "Due Date Rule",
+    "content": "Due Date Rule"
+  },
+  "recurring_task.due_prefix": {
+    "defaultMessage": "From due date:",
+    "content": "From due date:"
+  },
+  "recurring_task.invalid_rule": {
+    "defaultMessage": "Invalid rule",
+    "content": "Invalid rule"
+  },
+  "recurring_task.next_date": {
+    "defaultMessage": "Next date: {0}",
+    "content": "Next date: {0}"
+  },
+  "recurring_task.rule_placeholder": {
+    "defaultMessage": "e.g. 1w, 2m, 1y3d, due:1d, start:2d",
+    "content": "e.g. 1w, 2m, 1y3d, due:1d, start:2d"
+  },
+  "recurring_task.settings_title": {
+    "defaultMessage": "Set Recurring Task Rules",
+    "content": "Set Recurring Task Rules"
+  },
+  "recurring_task.start_date_rule": {
+    "defaultMessage": "Start Date Rule",
+    "content": "Start Date Rule"
+  },
+  "recurring_task.start_prefix": {
+    "defaultMessage": "From start date:",
+    "content": "From start date:"
+  },
+  "recurringDate.day": {
+    "defaultMessage": "day",
+    "content": "day"
+  },
+  "recurringDate.days": {
+    "defaultMessage": "days",
+    "content": "days"
+  },
+  "recurringDate.month": {
+    "defaultMessage": "month",
+    "content": "month"
+  },
+  "recurringDate.months": {
+    "defaultMessage": "months",
+    "content": "months"
+  },
+  "recurringDate.nextMonday": {
+    "defaultMessage": "Next Monday",
+    "content": "Next Monday"
+  },
+  "recurringDate.nextMonth1st": {
+    "defaultMessage": "Next month 1st",
+    "content": "Next month 1st"
+  },
+  "recurringDate.nextYearJan1": {
+    "defaultMessage": "Next year January 1st",
+    "content": "Next year January 1st"
+  },
+  "recurringDate.then": {
+    "defaultMessage": "→",
+    "content": "→"
+  },
+  "recurringDate.tomorrow": {
+    "defaultMessage": "Tomorrow",
+    "content": "Tomorrow"
+  },
+  "recurringDate.week": {
+    "defaultMessage": "week",
+    "content": "week"
+  },
+  "recurringDate.weeks": {
+    "defaultMessage": "weeks",
+    "content": "weeks"
+  },
+  "recurringDate.year": {
+    "defaultMessage": "year",
+    "content": "year"
+  },
+  "recurringDate.years": {
+    "defaultMessage": "years",
+    "content": "years"
+  },
   "register.agree": {
     "defaultMessage": "I agree to",
     "content": "I agree to"
@@ -1308,6 +1400,14 @@
     "defaultMessage": "Move",
     "content": "Move"
   },
+  "task.recurring_settings": {
+    "defaultMessage": "Recurring Settings",
+    "content": "Recurring Settings"
+  },
+  "task.set_recurring": {
+    "defaultMessage": "Set Recurring",
+    "content": "Set Recurring"
+  },
   "tasks.add.tags": {
     "defaultMessage": "Add Tags",
     "content": "Add Tags"
@@ -1351,6 +1451,14 @@
   "tasks.notes_placeholder": {
     "defaultMessage": "Add notes...",
     "content": "Add notes..."
+  },
+  "tasks.recurring_due_date": {
+    "defaultMessage": "DueDate: {0}",
+    "content": "DueDate: {0}"
+  },
+  "tasks.recurring_start_date": {
+    "defaultMessage": "StartDate: {0}",
+    "content": "StartDate: {0}"
   },
   "tasks.reminders": {
     "defaultMessage": "Reminders",

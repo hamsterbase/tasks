@@ -7,6 +7,7 @@ import { Dialog } from '@/mobile/overlay/dialog/Dialog';
 import { PopupActionSheet } from '@/mobile/overlay/popupAction/PopupActionSheet';
 import { TagEditorActionSheet } from '@/mobile/overlay/tagEditor/TagEditorActionSheet';
 import { TaskDisplaySettings } from '@/mobile/overlay/taskDisplaySettings/TaskDisplaySettings';
+import { RecurringTaskSettings } from '@/mobile/overlay/recurringTaskSettings/RecurringTaskSettings';
 import { pages } from '@/mobile/pages.tsx';
 import { INavigationService } from '@/services/navigationService/common/navigationService';
 import React, { useEffect, useRef } from 'react';
@@ -69,6 +70,7 @@ export const App = () => {
       <PopupActionSheet></PopupActionSheet>
       <TaskDisplaySettings></TaskDisplaySettings>
       <ProjectAreaSelector></ProjectAreaSelector>
+      <RecurringTaskSettings></RecurringTaskSettings>
       <BrowserRouter>
         <Routes>
           <Route element={<ContentNavigation></ContentNavigation>}>

@@ -15,4 +15,5 @@ export enum OverlayEnum {
   createDatabase = 'createDatabase',
   treeSelect = 'treeSelect',
   desktopRecurringTaskSettings = 'desktopRecurringTaskSettings',
+  mobileRecurringTaskSettings = 'mobileRecurringTaskSettings',
 }

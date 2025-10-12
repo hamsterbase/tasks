@@ -12,6 +12,8 @@ export function explanationRecurringRuleWithFrom(dateRule: string) {
   };
   const explanation = explanationRecurringDate(parsedRule);
   return (
-    prefix[parsedRule.from || ''] || localize('recurring_task.base_prefix', 'From completion date:') + ' ' + explanation
+    (prefix[parsedRule.from || ''] || localize('recurring_task.base_prefix', 'From completion date:')) +
+    ' ' +
+    explanation
   );
 }
