@@ -1401,12 +1401,12 @@
     "content": "移动"
   },
   "task.recurring_settings": {
-    "defaultMessage": "Recurring Settings",
+    "defaultMessage": "Recurring Config",
     "content": "循环设置"
   },
   "task.set_recurring": {
-    "defaultMessage": "Set Recurring",
-    "content": "设置循环"
+    "defaultMessage": "Recurring Config",
+    "content": "循环设置"
   },
   "tasks.add.tags": {
     "defaultMessage": "Add Tags",

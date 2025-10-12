@@ -85,7 +85,7 @@ export const useEditTaskHooks = (taskInfo: TaskInfo) => {
       items: [
         {
           icon: <RepeatIcon />,
-          name: localize('task.recurring_settings', 'Recurring Settings'),
+          name: localize('task.set_recurring', 'Recurring Config'),
           onClick: () => {
             openRecurringTaskSettings(taskInfo.recurringRule || {}, (settings) => {
               todoService.updateTask(taskInfo.id, {

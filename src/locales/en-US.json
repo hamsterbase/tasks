@@ -1401,12 +1401,12 @@
     "content": "Move"
   },
   "task.recurring_settings": {
-    "defaultMessage": "Recurring Settings",
-    "content": "Recurring Settings"
+    "defaultMessage": "Recurring Config",
+    "content": "Recurring Config"
   },
   "task.set_recurring": {
-    "defaultMessage": "Set Recurring",
-    "content": "Set Recurring"
+    "defaultMessage": "Recurring Config",
+    "content": "Recurring Config"
   },
   "tasks.add.tags": {
     "defaultMessage": "Add Tags",

@@ -38,7 +38,7 @@ export const useTaskMenu = (taskId: TreeID, task: TaskInfo) => {
         onSelect: handleConvertToProject,
       },
       {
-        label: localize('task.set_recurring', 'Set Recurring'),
+        label: localize('task.set_recurring', 'Recurring Config'),
         onSelect: handleSetRecurringTask,
       },
       {
