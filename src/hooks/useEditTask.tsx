@@ -33,6 +33,7 @@ import React, { useRef } from 'react';
 import { IInstantiationService } from 'vscf/platform/instantiation/common';
 import { useService } from './use-service';
 import { useWatchEvent } from './use-watch-event';
+import { flushSync } from 'react-dom';
 
 function formatRecurringRule(rule?: RecurringRule): string[] {
   if (!rule) {
@@ -241,11 +242,15 @@ export const useEditTaskHooks = (taskInfo: TaskInfo) => {
     const currentIndex = taskInfo.children.findIndex((item) => item.id === id);
     if (currentIndex === -1) return;
     if (currentIndex === 0) {
-      toFocusId = taskInfo.children[1].id;
+      if (taskInfo.children.length !== 1) {
+        toFocusId = taskInfo.children[1].id;
+      }
     } else {
       toFocusId = taskInfo.children[currentIndex - 1].id;
     }
-    todoService.deleteItem(id);
+    flushSync(() => {
+      todoService.deleteItem(id);
+    });
     if (subtaskInputRefs.current[toFocusId]) {
       subtaskInputRefs.current[toFocusId].focus();
     }

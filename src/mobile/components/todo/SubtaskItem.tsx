@@ -71,6 +71,7 @@ export const SubtaskItem: React.FC<SubtaskItemProps> = ({
     }
     if (e.key === 'Backspace' && inputValue === '') {
       onDelete(id);
+      e.preventDefault();
     }
   };
 
