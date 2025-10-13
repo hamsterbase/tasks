@@ -1,4 +1,4 @@
-import { getTodayTimestampInUtc } from '@/base/common/time';
+import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc';
 import { InboxIcon } from '@/components/icons';
 import { getInboxTasks } from '@/core/state/inbox/getInboxTasks';
 import { useService } from '@/hooks/use-service.ts';

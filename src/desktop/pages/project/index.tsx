@@ -1,4 +1,4 @@
-import { getTodayTimestampInUtc } from '@/base/common/time';
+import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc';
 import { TaskList } from '@/components/taskList/taskList.ts';
 import { getProjectHeadingAndTasks } from '@/core/state/getProjectHeadingAndTasks';
 import { getProject } from '@/core/state/getProject';

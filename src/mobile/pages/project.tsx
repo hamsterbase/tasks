@@ -1,4 +1,4 @@
-import { getTodayTimestampInUtc } from '@/base/common/time.ts';
+import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc.ts';
 import { MenuIcon } from '@/components/icons';
 import { getProjectHeadingAndTasks } from '@/core/state/getProjectHeadingAndTasks.ts';
 import { getProject } from '@/core/state/getProject';
@@ -6,7 +6,7 @@ import { FlattenedItem, FlattenedResult } from '@/core/state/home/flattenedItems
 import { ProjectHeadingInfo, TaskInfo } from '@/core/state/type';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
-import useProject from '@/hooks/useProject';
+import useProject from '@/mobile/hooks/useProject.tsx';
 import { useTaskDisplaySettings } from '@/hooks/useTaskDisplaySettings.ts';
 import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox.tsx';
 import { localize } from '@/nls';

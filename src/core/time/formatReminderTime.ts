@@ -1,4 +1,4 @@
-import { getTodayTimestampInUtc } from '@/base/common/time';
+import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc';
 import { getCurrentLocale, getDateFnsLocale } from '@/locales/common/locale';
 import { localize } from '@/nls';
 import { format, isSameWeek, isSameMonth, isSameYear, isSameDay, addDays } from 'date-fns';

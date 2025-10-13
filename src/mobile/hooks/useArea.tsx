@@ -1,23 +1,26 @@
-import { EditIcon, TagIcon } from '@/components/icons';
+import { DeleteIcon, EditIcon, TagIcon } from '@/components/icons';
+import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox.tsx';
 import { getAreaDetail } from '@/core/state/getArea';
 import { AreaDetailState } from '@/core/state/type';
 import { ItemPosition } from '@/core/type';
-import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox.tsx';
 import { PopupActionItem } from '@/mobile/overlay/popupAction/PopupActionController';
 import { usePopupAction } from '@/mobile/overlay/popupAction/usePopupAction';
 import { useTagEditor } from '@/mobile/overlay/tagEditor/useTagEditor';
-import { ITodoService } from '@/services/todo/common/todoService';
 import { localize } from '@/nls';
+import { ITodoService } from '@/services/todo/common/todoService';
 import type { TreeID } from 'loro-crdt';
 import React from 'react';
-import { useService } from './use-service';
-import { useWatchEvent } from './use-watch-event';
+import { useService } from '../../hooks/use-service';
+import { useWatchEvent } from '../../hooks/use-watch-event';
+import { useDialog } from '../overlay/dialog/useDialog';
+import { useBack } from '@/hooks/useBack';
 
 export const useArea = (areaId?: TreeID) => {
   const todoService = useService(ITodoService);
   useWatchEvent(todoService.onStateChange);
   const popupAction = usePopupAction();
   const tagEditor = useTagEditor();
+  const back = useBack();
 
   let areaDetail: AreaDetailState | null = null;
   try {
@@ -64,6 +67,23 @@ export const useArea = (areaId?: TreeID) => {
     if (!areaDetail) return;
     todoService.editItem(areaDetail.id);
   }
+  const dialog = useDialog();
+  const handleDeleteArea = () => {
+    if (!areaDetail) return;
+    dialog({
+      title: localize('area.delete', 'Delete Area'),
+      description: localize(
+        'area.delete_description',
+        'Are you sure you want to delete this area? This action cannot be undone.'
+      ),
+      confirmText: localize('area.delete_confirm', 'Delete'),
+      onConfirm: () => {
+        todoService.deleteItem(areaDetail.id);
+        back();
+      },
+      onCancel: () => {},
+    });
+  };
 
   const handleMoreOptions = () => {
     popupAction({
@@ -82,6 +102,11 @@ export const useArea = (areaId?: TreeID) => {
           icon: <TagIcon />,
           name: localize('project.edit_tags', 'Edit Tags'),
           onClick: handleEditTag,
+        },
+        {
+          icon: <DeleteIcon />,
+          name: localize('area.delete', 'Delete Area'),
+          onClick: handleDeleteArea,
         },
       ] as PopupActionItem[],
     });

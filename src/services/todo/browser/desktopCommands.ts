@@ -1,4 +1,4 @@
-import { KeyCode } from 'vscf/internal/base/common/keyCodes';
+import { KeyCode, KeyMod } from 'vscf/internal/base/common/keyCodes';
 import { ContextKeyExpr, InputFocusedContextKey } from 'vscf/platform/contextkey/common';
 import { KeybindingsRegistry, KeybindingWeight } from 'vscf/platform/keybinding/common';
 import { ITodoService } from '../common/todoService';
@@ -53,5 +53,27 @@ KeybindingsRegistry.registerCommandAndKeybindingRule({
     if (currentList) {
       currentList.fireTaskCommand({ type: 'setStartDateToToday' });
     }
+  },
+});
+
+KeybindingsRegistry.registerCommandAndKeybindingRule({
+  id: 'undo',
+  weight: KeybindingWeight.WorkbenchContrib + 5,
+  when: ContextKeyExpr.not(InputFocusedContextKey),
+  primary: KeyCode.KeyZ | KeyMod.CtrlCmd,
+  handler: (acc) => {
+    const todoService = acc.get(ITodoService);
+    todoService.undo();
+  },
+});
+
+KeybindingsRegistry.registerCommandAndKeybindingRule({
+  id: 'redo',
+  weight: KeybindingWeight.WorkbenchContrib + 5,
+  when: ContextKeyExpr.not(InputFocusedContextKey),
+  primary: KeyCode.KeyZ | KeyMod.CtrlCmd | KeyMod.Shift,
+  handler: (acc) => {
+    const todoService = acc.get(ITodoService);
+    todoService.redo();
   },
 });

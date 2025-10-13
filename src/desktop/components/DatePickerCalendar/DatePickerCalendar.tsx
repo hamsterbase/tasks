@@ -1,15 +1,14 @@
-import { getCurrentDateStr } from '@/base/common/time';
 import { CircleSmallIcon, LeftIcon, RightIcon } from '@/components/icons';
 import { formatShortMonth } from '@/core/time/formatCalendarMonth';
+import { isUtcTimestampToday } from '@/core/time/isUtcTimestampToday';
+import { calculateElementHeight } from '@/desktop/overlay/datePicker/constant';
 import { desktopStyles } from '@/desktop/theme/main';
 import { localize } from '@/nls';
 import classNames from 'classnames';
-import dayjs from 'dayjs';
 import React, { useRef } from 'react';
 import { VariableSizeList } from 'react-window';
 import { WeekdayHeader } from './WeekdayHeader';
 import { useDatePickerCalendar } from './useDatePickerCalendar';
-import { calculateElementHeight } from '@/desktop/overlay/datePicker/constant';
 
 interface MonthGridProps {
   days: Array<{
@@ -25,7 +24,7 @@ const MonthGrid: React.FC<MonthGridProps> = ({ days, onSelectDate }) => {
   return (
     <div className={desktopStyles.DatePickerCalendarMonthGrid}>
       {days.map((day) => {
-        const isToday = getCurrentDateStr() === dayjs(day.date).format('YYYY-MM-DD');
+        const isToday = isUtcTimestampToday(day.date.getTime());
         return (
           <button
             key={day.date.toString()}

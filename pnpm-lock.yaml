@@ -162,8 +162,8 @@ importers:
         specifier: ^16.1.2
         version: 16.1.5
       loro-crdt:
-        specifier: ^1.4.0
-        version: 1.6.0
+        specifier: ^1.8.3
+        version: 1.8.3
       lucide-react:
         specifier: ^0.475.0
         version: 0.475.0(react@18.3.1)
@@ -3118,8 +3118,8 @@ packages:
     resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
     hasBin: true
 
-  loro-crdt@1.6.0:
-    resolution: {integrity: sha512-Jdtjo3GITCncKxFU9LbK1ykGwZ4zOmlhPtJFA1vzRYuy3tYpuu/gU6rXx0nZ3pSuDNv0ZklS+7mm1cSEjouOqQ==}
+  loro-crdt@1.8.3:
+    resolution: {integrity: sha512-eJpeH29aNZQRPSx7x5wfS+d+lFT/WVEMA0+KLrBA+K1mWrBplbZjBNvVRv/i1DQHg8TTAwMphGeVauNDb9qfPw==}
 
   lowercase-keys@2.0.0:
     resolution: {integrity: sha512-tqNXrS78oMOE73NMxK4EMLQsQowWf8jKooH9g7xPavRT706R6bkQJ6DY2Te7QukaZsulxa30wQ7bk0pm4XiHmA==}
@@ -7934,7 +7934,7 @@ snapshots:
     dependencies:
       js-tokens: 4.0.0
 
-  loro-crdt@1.6.0: {}
+  loro-crdt@1.8.3: {}
 
   lowercase-keys@2.0.0: {}
 

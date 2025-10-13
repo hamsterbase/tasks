@@ -250,4 +250,14 @@ export class WorkbenchTodoService implements ITodoService {
   }
   private _onTaskCommands: Emitter<TaskCommand> = new Emitter();
   public onTaskCommands = this._onTaskCommands.event;
+
+  undo(): void {
+    this.taskModel.undo();
+  }
+  redo(): void {
+    this.taskModel.redo();
+  }
+  clearUndoHistory(): void {
+    this.taskModel.clearUndoHistory();
+  }
 }

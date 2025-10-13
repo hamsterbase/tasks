@@ -1,5 +1,5 @@
 import { ItemStatusEnum, ModelKeys, ModelTypes } from '@/core/enum.ts';
-import { LoroDoc, LoroMap, LoroMovableList, LoroTreeNode, PeerID, TreeID, VersionVector } from 'loro-crdt';
+import { LoroDoc, LoroMap, LoroMovableList, LoroTreeNode, PeerID, TreeID, UndoManager, VersionVector } from 'loro-crdt';
 import { nanoid } from 'nanoid';
 import { Emitter } from 'vscf/base/common/event.ts';
 import { dateAssigned, FilterCondition, filterConditions } from './list.ts';
@@ -49,11 +49,17 @@ export class TaskModel {
     return this.doc.version();
   }
 
+  private undoManager: UndoManager;
+
   private _onModelChange: Emitter<void> = new Emitter();
   public onModelChange = this._onModelChange.event;
 
   constructor() {
     this.doc = new LoroDoc();
+    this.undoManager = new UndoManager(this.doc, {
+      maxUndoSteps: 1000,
+      mergeInterval: 0,
+    });
     this.doc.subscribeLocalUpdates(() => {
       this._onModelChange.fire();
     });
@@ -730,5 +736,17 @@ export class TaskModel {
         projectStatus: 'created',
       });
     });
+  }
+
+  undo() {
+    this.undoManager.undo();
+  }
+
+  redo() {
+    this.undoManager.redo();
+  }
+
+  clearUndoHistory() {
+    this.undoManager.clear();
   }
 }

@@ -85,6 +85,11 @@ export interface ITodoService {
   onTaskCommands: Event<TaskCommand>;
 
   fireTaskCommand(command: TaskCommand): void;
+
+  undo(): void;
+  redo(): void;
+
+  clearUndoHistory(): void;
 }
 
 export const ITodoService = createDecorator<ITodoService>('todoService');

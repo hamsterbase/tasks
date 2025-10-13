@@ -1,9 +1,9 @@
-import { getTodayTimestampInUtc } from '@/base/common/time';
+import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc';
 import { AreaIcon, MenuIcon, TagIcon } from '@/components/icons';
 import { isTaskVisible } from '@/core/time/filterProjectAndTask';
 import { useService } from '@/hooks/use-service';
-import { useArea } from '@/hooks/useArea';
 import { useTaskDisplaySettings } from '@/hooks/useTaskDisplaySettings';
+import { useArea } from '@/mobile/hooks/useArea';
 import { styles } from '@/mobile/theme';
 import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService';

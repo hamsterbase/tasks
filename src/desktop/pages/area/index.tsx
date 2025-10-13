@@ -1,4 +1,4 @@
-import { getTodayTimestampInUtc } from '@/base/common/time';
+import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc';
 import { areaPageTitleInputId } from '@/components/edit/inputId';
 import { areaTitleInputKey } from '@/components/edit/inputKeys';
 import { AreaIcon } from '@/components/icons';
@@ -14,7 +14,7 @@ import { useTaskCommands } from '@/desktop/hooks/useTaskCommands';
 import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
-import { useArea } from '@/hooks/useArea';
+import { useArea } from '@/mobile/hooks/useArea';
 import { useTaskDisplaySettings } from '@/hooks/useTaskDisplaySettings';
 import { localize } from '@/nls';
 import { IEditService } from '@/services/edit/common/editService';

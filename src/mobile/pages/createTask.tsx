@@ -1,4 +1,4 @@
-import { mergeDateAndTime } from '@/base/common/time';
+import { mergeDateAndTime } from '@/core/time/mergeDateAndTime';
 import { AlarmIcon, DueIcon, ScheduledIcon, SubtaskIcon, TagIcon } from '@/components/icons';
 import { useBack } from '@/hooks/useBack';
 import { useCreateTask } from '@/hooks/useCreateTask';

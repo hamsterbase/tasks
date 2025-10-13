@@ -1,6 +1,6 @@
 import { ScheduledIcon, TagIcon } from '@/components/icons';
 import { ProjectInfoState } from '@/core/state/type';
-import useProject from '@/hooks/useProject';
+import useProject from '@/mobile/hooks/useProject';
 import { styles } from '@/mobile/theme';
 import { localize } from '@/nls';
 import classNames from 'classnames';

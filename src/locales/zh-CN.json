@@ -116,17 +116,29 @@
     "defaultMessage": "Add Project",
     "content": "添加项目"
   },
+  "area.delete": {
+    "defaultMessage": "Delete Area",
+    "content": "删除领域"
+  },
   "area.delete_area": {
     "defaultMessage": "Delete Area",
-    "content": "删除区域"
+    "content": "删除领域"
   },
   "area.delete_area_confirm_description": {
     "defaultMessage": "Are you sure you want to delete this area? This action cannot be undone.",
-    "content": "您确定要删除此区域吗？此操作无法撤销。"
+    "content": "您确定要删除此领域吗？此操作无法撤销。"
   },
   "area.delete_area_confirm_title": {
     "defaultMessage": "Delete Area",
-    "content": "删除区域"
+    "content": "删除领域"
+  },
+  "area.delete_confirm": {
+    "defaultMessage": "Delete",
+    "content": "删除"
+  },
+  "area.delete_description": {
+    "defaultMessage": "Are you sure you want to delete this area? This action cannot be undone.",
+    "content": "您确定要删除此领域吗？此操作无法撤销。"
   },
   "area.edit_title": {
     "defaultMessage": "Edit Title",
@@ -142,11 +154,11 @@
   },
   "area.noProjects": {
     "defaultMessage": "No projects in this area",
-    "content": "此区域没有项目"
+    "content": "此领域没有项目"
   },
   "area.notFound": {
     "defaultMessage": "Area not found",
-    "content": "未找到区域"
+    "content": "未找到领域"
   },
   "area.projects": {
     "defaultMessage": "Projects",
@@ -694,7 +706,7 @@
   },
   "project_area_selector.search": {
     "defaultMessage": "Search projects and areas...",
-    "content": "搜索项目和区域..."
+    "content": "搜索项目和领域..."
   },
   "project_heading.archive": {
     "defaultMessage": "Archive Heading",
@@ -1130,7 +1142,7 @@
   },
   "settings.displaySettings.description": {
     "defaultMessage": "Control which tasks are visible across all views (Today, Projects, Areas). These settings apply everywhere unless overridden in specific views.",
-    "content": "控制在所有视图（今天、项目、区域）中显示哪些任务。这些设置适用于所有位置，除非在特定视图中被覆盖。"
+    "content": "控制在所有视图（今天、项目、领域）中显示哪些任务。这些设置适用于所有位置，除非在特定视图中被覆盖。"
   },
   "settings.export": {
     "defaultMessage": "Export",
@@ -1401,12 +1413,12 @@
     "content": "移动"
   },
   "task.recurring_settings": {
-    "defaultMessage": "Recurring Config",
+    "defaultMessage": "Recurring Settings",
     "content": "循环设置"
   },
   "task.set_recurring": {
-    "defaultMessage": "Recurring Config",
-    "content": "循环设置"
+    "defaultMessage": "Set Recurring",
+    "content": "设置循环"
   },
   "tasks.add.tags": {
     "defaultMessage": "Add Tags",

@@ -1,4 +1,4 @@
-import { getTodayTimestampInUtc } from '@/base/common/time';
+import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc';
 import { TodayIcon } from '@/components/icons';
 import { getTodayItems } from '@/core/state/today/getTodayItems';
 import { ItemPosition } from '@/core/type';

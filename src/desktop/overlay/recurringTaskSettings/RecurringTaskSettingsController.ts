@@ -1,4 +1,3 @@
-import { getCurrentDateStr } from '@/base/common/time';
 import { calculateRecurringDate } from '@/core/time/calculateRecurringDate';
 import { explanationRecurringRuleWithFrom } from '@/core/time/explanationRecurringDateWithFrom';
 import { formatUTCTimeStampToDate } from '@/core/time/formatUTCTimeStamp';
@@ -10,6 +9,7 @@ import { Emitter } from 'vscf/base/common/event';
 import { Disposable } from 'vscf/base/common/lifecycle';
 import { IInstantiationService } from 'vscf/platform/instantiation/common';
 import { IWorkbenchOverlayService, OverlayInitOptions } from '../../../services/overlay/common/WorkbenchOverlayService';
+import { getCurrentDateStr } from '@/core/time/getCurrentDateStr';
 
 export class RecurringTaskSettingsController extends Disposable {
   static create(

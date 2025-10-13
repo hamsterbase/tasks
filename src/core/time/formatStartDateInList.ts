@@ -1,5 +1,6 @@
-import dayjs from 'dayjs';
+import { format } from 'date-fns';
+import { getDateFromUTCTimeStamp } from './getDateFromUTCTimeStamp';
 
 export function formatStartDateInList(startDate: number) {
-  return dayjs(startDate).format('MM/DD');
+  return format(getDateFromUTCTimeStamp(startDate), 'MM/dd');
 }

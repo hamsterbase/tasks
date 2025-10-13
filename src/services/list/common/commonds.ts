@@ -60,7 +60,13 @@ KeybindingsRegistry.registerCommandAndKeybindingRule({
   primary: KeyCode.Enter,
   handler: (acc) => {
     const currentList = acc.get(IListService).mainList;
+
     if (currentList) {
+      // Blur any focused textarea or input elements
+      const activeElement = document.activeElement as HTMLElement;
+      if (activeElement && (activeElement.tagName === 'TEXTAREA' || activeElement.tagName === 'INPUT')) {
+        activeElement.blur();
+      }
       currentList.createNewOne();
     }
   },
@@ -114,6 +120,11 @@ KeybindingsRegistry.registerCommandAndKeybindingRule({
     console.log('SubListSelectCreateNewOne');
     const currentList = acc.get(IListService).subList;
     if (currentList) {
+      // Blur any focused textarea or input elements
+      const activeElement = document.activeElement as HTMLElement;
+      if (activeElement && (activeElement.tagName === 'TEXTAREA' || activeElement.tagName === 'INPUT')) {
+        activeElement.blur();
+      }
       currentList.createNewOne();
     }
   },

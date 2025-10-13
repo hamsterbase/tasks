@@ -13,7 +13,7 @@ import { useTagEditor } from '@/mobile/overlay/tagEditor/useTagEditor';
 import { ITodoService } from '@/services/todo/common/todoService';
 import { localize } from '@/nls';
 import React from 'react';
-import { useService } from './use-service';
+import { useService } from '../../hooks/use-service';
 
 const useProject = (project: ProjectInfoState | null) => {
   const todoService = useService(ITodoService);

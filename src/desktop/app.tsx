@@ -4,10 +4,10 @@ import { DatePickerOverlay } from '@/desktop/overlay/datePicker/DatePickerOverla
 import { DesktopDialog } from '@/desktop/overlay/desktopDialog/DesktopDialog';
 import { DesktopMenu } from '@/desktop/overlay/desktopMenu/DesktopMenu.tsx';
 import { DesktopMessage } from '@/desktop/overlay/desktopMessage/DesktopMessage';
+import { RecurringTaskSettingsOverlay } from '@/desktop/overlay/recurringTaskSettings/RecurringTaskSettingsOverlay';
 import { TagEditorOverlay } from '@/desktop/overlay/tagEditor/TagEditorOverlay';
 import { TimePickerOverlay } from '@/desktop/overlay/timePicker/TimePickerOverlay';
 import { TreeSelectOverlay } from '@/desktop/overlay/treeSelect/TreeSelectOverlay';
-import { RecurringTaskSettingsOverlay } from '@/desktop/overlay/recurringTaskSettings/RecurringTaskSettingsOverlay';
 import { AreaPage } from '@/desktop/pages/area';
 import { Completed } from '@/desktop/pages/completed';
 import { FutureProjects } from '@/desktop/pages/futureProjects';
@@ -25,18 +25,25 @@ import { RegisterPage } from '@/desktop/pages/settings-page/Register/RegisterPag
 import { SelfHostedSyncSettings } from '@/desktop/pages/settings-page/sync/SelfHostedSyncSettings.tsx';
 import { Today } from '@/desktop/pages/today/index.tsx';
 import { useInputFocused } from '@/hooks/global/useInputFocused';
+import { useService } from '@/hooks/use-service';
 import { useCloudSync } from '@/hooks/useCloudSync.ts';
 import { useSafeArea } from '@/hooks/useSafeArea';
-import { useService } from '@/hooks/use-service';
 import { IMenuService } from '@/services/menu/common/menuService';
+import { ITodoService } from '@/services/todo/common/todoService';
 import React, { useEffect } from 'react';
-import { Navigate, useRoutes } from 'react-router';
+import { Navigate, useRoutes, useLocation } from 'react-router';
 
 export const App = () => {
   useInputFocused();
   useCloudSync();
 
+  const location = useLocation();
   const menuService = useService(IMenuService);
+  const todoService = useService(ITodoService);
+  useEffect(() => {
+    todoService.clearUndoHistory();
+  }, [location.pathname, todoService]);
+
   useEffect(() => {
     menuService.updateMenu();
   }, [menuService]);

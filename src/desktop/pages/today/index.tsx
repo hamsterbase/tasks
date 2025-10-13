@@ -1,4 +1,4 @@
-import { getTodayTimestampInUtc } from '@/base/common/time';
+import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc';
 import { useDesktopDndSensors } from '@/base/hooks/useDesktopDndSensors';
 import { TodayIcon } from '@/components/icons';
 import { TaskList } from '@/components/taskList/taskList.ts';

@@ -1,4 +1,4 @@
-import { getTodayTimestampInUtc } from '@/base/common/time';
+import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc.ts';
 import { areaPageTitleInputId, projectPageTitleInputId } from '@/components/edit/inputId';
 import { PlusIcon, SettingsIcon, SyncIcon } from '@/components/icons';
 import { FlattenedResult } from '@/core/state/home/flattenedItemsToResult';

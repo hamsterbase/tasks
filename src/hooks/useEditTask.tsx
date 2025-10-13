@@ -1,4 +1,4 @@
-import { mergeDateAndTime } from '@/base/common/time';
+import { mergeDateAndTime } from '@/core/time/mergeDateAndTime';
 import {
   AlarmIcon,
   DeleteIcon,
@@ -85,7 +85,7 @@ export const useEditTaskHooks = (taskInfo: TaskInfo) => {
       items: [
         {
           icon: <RepeatIcon />,
-          name: localize('task.set_recurring', 'Recurring Config'),
+          name: localize('task.recurring_settings', 'Recurring Settings'),
           onClick: () => {
             openRecurringTaskSettings(taskInfo.recurringRule || {}, (settings) => {
               todoService.updateTask(taskInfo.id, {

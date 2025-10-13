@@ -1,4 +1,4 @@
-import { getTodayTimestampInUtc } from '@/base/common/time.ts';
+import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc.ts';
 import { AreaIcon, HomeIcon, SettingsIcon, SyncIcon } from '@/components/icons';
 import { flattenRootCollections } from '@/core/state/home/getFlattenRootCollections.ts';
 import { getFutureProjects } from '@/core/state/home/getFutureProjects.ts';

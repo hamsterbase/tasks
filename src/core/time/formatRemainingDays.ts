@@ -1,4 +1,4 @@
-import { getTodayTimestampInUtc } from '@/base/common/time';
+import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc';
 import { localize } from '@/nls';
 import { differenceInDays } from 'date-fns';
 import { getDateFromUTCTimeStamp } from './getDateFromUTCTimeStamp';

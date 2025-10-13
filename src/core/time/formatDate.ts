@@ -1,4 +1,4 @@
-import { getTodayTimestampInUtc } from '@/base/common/time';
+import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc';
 import { getCurrentLocale, getDateFnsLocale } from '@/locales/common/locale';
 import { format, isSameYear } from 'date-fns';
 import { getDateFromUTCTimeStamp } from './getDateFromUTCTimeStamp';
