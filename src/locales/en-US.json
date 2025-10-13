@@ -1417,8 +1417,8 @@
     "content": "Recurring Settings"
   },
   "task.set_recurring": {
-    "defaultMessage": "Set Recurring",
-    "content": "Set Recurring"
+    "defaultMessage": "Recurring Config",
+    "content": "Recurring Config"
   },
   "tasks.add.tags": {
     "defaultMessage": "Add Tags",
