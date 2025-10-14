@@ -120,13 +120,7 @@ export class ElectronDatabaseService {
   async deleteFromStorage(databaseId: string, key: string): Promise<void> {
     const storagePath = this.getStoragePath(databaseId);
     const filePath = path.join(storagePath, `${key}${this.fileExt}`);
-
-    try {
-      await fs.unlink(filePath);
-    } catch (error) {
-      console.error('Error deleting file:', error);
-      throw error;
-    }
+    await fs.unlink(filePath);
   }
 
   async listStorageKeys(databaseId: string): Promise<string[]> {

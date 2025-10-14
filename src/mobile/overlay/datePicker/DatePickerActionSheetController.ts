@@ -1,9 +1,9 @@
-import { getUtcDayjsFromDateStr } from '@/base/common/time';
+import { getUTCTimeStampFromDateStr } from '@/core/time/getUTCTimeStampFromDateStr';
 import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
+import { startOfMonth, endOfMonth, differenceInMonths, addMonths, format } from 'date-fns';
 import { Emitter } from 'vscf/base/common/event';
 import { Disposable } from 'vscf/base/common/lifecycle';
 import { IInstantiationService } from 'vscf/platform/instantiation/common';
-import dayjs from 'dayjs';
 import { IWorkbenchOverlayService, OverlayInitOptions } from '../../../services/overlay/common/WorkbenchOverlayService';
 
 interface CalendarDay {
@@ -65,10 +65,10 @@ export class DatePickerActionSheetController extends Disposable {
     super();
     this._selectedDate = initialDate ? new Date(initialDate) : null;
 
-    const fiffMonth = dayjs()
-      .startOf('month')
-      .diff(dayjs(this._selectedDate ?? new Date()).endOf('month'), 'month');
-    this._currentMonthIndex = 500 - fiffMonth;
+    const currentMonth = startOfMonth(new Date());
+    const selectedMonth = endOfMonth(this._selectedDate ?? new Date());
+    const diffMonth = differenceInMonths(currentMonth, selectedMonth);
+    this._currentMonthIndex = 500 - diffMonth;
   }
 
   get currentMonth() {
@@ -87,10 +87,7 @@ export class DatePickerActionSheetController extends Disposable {
   }
 
   getMonthData(index: number): MonthData {
-    const date = dayjs()
-      .startOf('month')
-      .add(index - 500, 'month')
-      .toDate();
+    const date = addMonths(startOfMonth(new Date()), index - 500);
     const days = this.calculateDaysForMonth(date);
     return {
       date,
@@ -101,8 +98,8 @@ export class DatePickerActionSheetController extends Disposable {
   private calculateDaysForMonth(monthDate: Date): MonthData['days'] {
     const year = monthDate.getFullYear();
     const month = monthDate.getMonth();
-    const firstDay = dayjs(monthDate).startOf('month').toDate();
-    const lastDay = dayjs(monthDate).endOf('month').toDate();
+    const firstDay = startOfMonth(monthDate);
+    const lastDay = endOfMonth(monthDate);
     const days: MonthData['days'] = [];
     const firstDayOfWeek = firstDay.getDay() || 7;
     for (let i = 1; i < firstDayOfWeek; i++) {
@@ -150,7 +147,7 @@ export class DatePickerActionSheetController extends Disposable {
 
   async selectDate(date: Date) {
     try {
-      await this.onDateSelected(getUtcDayjsFromDateStr(dayjs(date).format('YYYY-MM-DD')).valueOf());
+      await this.onDateSelected(getUTCTimeStampFromDateStr(format(date, 'yyyy-MM-dd')).valueOf());
       this.dispose();
     } catch (error) {
       console.error('Error selecting date:', error);

@@ -1,6 +1,6 @@
 import { getCurrentDateStr } from '@/core/time/getCurrentDateStr';
-import { getUtcDayjsFromDateStr } from './time';
+import { getUTCTimeStampFromDateStr } from '@/core/time/getUTCTimeStampFromDateStr';
 
 export function getTodayTimestampInUtc() {
-  return getUtcDayjsFromDateStr(getCurrentDateStr()).valueOf();
+  return getUTCTimeStampFromDateStr(getCurrentDateStr()).valueOf();
 }

@@ -1,6 +1,6 @@
 import { localize } from '@/nls';
 import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
-import dayjs from 'dayjs';
+import { format, isValid, parse, setHours, setMinutes, getHours, getMinutes } from 'date-fns';
 import { Emitter } from 'vscf/base/common/event';
 import { Disposable } from 'vscf/base/common/lifecycle';
 import { IContextKey, IContextKeyService } from 'vscf/platform/contextkey/common';
@@ -66,8 +66,7 @@ export class TimePickerOverlayController extends Disposable {
     this._selectedDate = initialDate ? new Date(initialDate) : new Date();
     this._timePickerFocusContext = TimePickerFocus.bindTo(contextKeyService);
 
-    const selectedDayjs = dayjs(this._selectedDate);
-    this._currentInputValue = selectedDayjs.format('YYYY-MM-DD HH:mm');
+    this._currentInputValue = format(this._selectedDate, 'yyyy-MM-dd HH:mm');
     this._timePickerFocusContext.set(true);
   }
 
@@ -86,9 +85,9 @@ export class TimePickerOverlayController extends Disposable {
   updateInputValue(value: string) {
     this._currentInputValue = value;
     if (value && value.trim() !== '') {
-      const parsedDate = dayjs(value);
-      if (parsedDate.isValid()) {
-        this._selectedDate = parsedDate.toDate();
+      const parsedDate = parse(value, 'yyyy-MM-dd HH:mm', new Date());
+      if (isValid(parsedDate)) {
+        this._selectedDate = parsedDate;
       }
     }
     this._onStatusChange.fire();
@@ -104,15 +103,15 @@ export class TimePickerOverlayController extends Disposable {
   }
 
   getCurrentTimeValue(): string {
-    return dayjs(this._selectedDate).format('HH:mm');
+    return format(this._selectedDate, 'HH:mm');
   }
 
   getCurrentHour(): number {
-    return dayjs(this._selectedDate).hour();
+    return getHours(this._selectedDate);
   }
 
   getCurrentMinute(): number {
-    return dayjs(this._selectedDate).minute();
+    return getMinutes(this._selectedDate);
   }
 
   updateHour(hour: number) {
@@ -125,8 +124,8 @@ export class TimePickerOverlayController extends Disposable {
 
   confirmSelection() {
     if (this._currentInputValue) {
-      const parsedDate = dayjs(this._currentInputValue);
-      if (parsedDate.isValid()) {
+      const parsedDate = parse(this._currentInputValue, 'yyyy-MM-dd HH:mm', new Date());
+      if (isValid(parsedDate)) {
         this.onDateSelected(this._selectedDate?.valueOf());
       } else {
         throw new Error(localize('invalid.date', 'Invalid date format'));
@@ -143,21 +142,21 @@ export class TimePickerOverlayController extends Disposable {
   }
 
   private updateTime(schema: UpdateTimeSchema) {
-    let dateWithTime = dayjs(this._selectedDate);
+    let dateWithTime = this._selectedDate;
     if (schema.date) {
-      dateWithTime = dayjs(schema.date).minute(dateWithTime.minute()).hour(dateWithTime.hour());
+      dateWithTime = setHours(setMinutes(schema.date, getMinutes(this._selectedDate)), getHours(this._selectedDate));
     }
     if (typeof schema.hour === 'number') {
-      dateWithTime = dateWithTime.hour(schema.hour);
+      dateWithTime = setHours(dateWithTime, schema.hour);
     }
     if (typeof schema.minute === 'number') {
-      dateWithTime = dateWithTime.minute(schema.minute);
+      dateWithTime = setMinutes(dateWithTime, schema.minute);
     }
-    this.updateSelectDate(dateWithTime.toDate());
+    this.updateSelectDate(dateWithTime);
   }
 
   private updateSelectDate(dateWithTime: Date) {
-    this._currentInputValue = dayjs(dateWithTime).format('YYYY-MM-DD HH:mm');
+    this._currentInputValue = format(dateWithTime, 'yyyy-MM-dd HH:mm');
     this._selectedDate = dateWithTime;
     this._onStatusChange.fire();
   }

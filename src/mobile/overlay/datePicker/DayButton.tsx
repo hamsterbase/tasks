@@ -1,4 +1,4 @@
-import { isUtcTimestampToday } from '@/core/time/isUtcTimestampToday';
+import { isTimestampToday } from '@/core/time/isTimestampToday';
 import { styles } from '@/mobile/theme';
 import { localize } from '@/nls';
 import classNames from 'classnames';
@@ -15,7 +15,7 @@ interface DayButtonProps {
 }
 
 export const DayButton: React.FC<DayButtonProps> = ({ day, onSelect }) => {
-  const isTodayValue = isUtcTimestampToday(day.date.getTime());
+  const isTodayValue = isTimestampToday(day.date.getTime());
   return (
     <button
       onClick={() => day.value && onSelect(day.date)}

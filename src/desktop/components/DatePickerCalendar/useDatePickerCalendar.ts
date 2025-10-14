@@ -1,8 +1,5 @@
 export function getMonthData(index: number, _selectedDate: Date | null): MonthData {
-  const date = dayjs()
-    .startOf('month')
-    .add(index - 500, 'month')
-    .toDate();
+  const date = addMonths(startOfMonth(new Date()), index - 500);
   const days = calculateDaysForMonth(date, _selectedDate);
   return {
     date,
@@ -20,8 +17,8 @@ export function isSameDate(date1: Date | null, date2: Date | null): boolean {
 export function calculateDaysForMonth(monthDate: Date, _selectedDate: Date | null): MonthData['days'] {
   const year = monthDate.getFullYear();
   const month = monthDate.getMonth();
-  const firstDay = dayjs(monthDate).startOf('month').toDate();
-  const lastDay = dayjs(monthDate).endOf('month').toDate();
+  const firstDay = startOfMonth(monthDate);
+  const lastDay = endOfMonth(monthDate);
   const days: MonthData['days'] = [];
   const firstDayOfWeek = firstDay.getDay() || 7;
 
@@ -62,7 +59,7 @@ export function calculateDaysForMonth(monthDate: Date, _selectedDate: Date | nul
   return days;
 }
 import { formatCalendarMonth } from '@/core/time/formatCalendarMonth';
-import dayjs from 'dayjs';
+import { startOfMonth, endOfMonth, addMonths, differenceInMonths } from 'date-fns';
 import { useEffect, useState } from 'react';
 import { VariableSizeList } from 'react-window';
 
@@ -81,7 +78,7 @@ export function useDatePickerCalendar(selectedDate: Date | null, listRef: React.
 
   useEffect(() => {
     if (selectedDate) {
-      const diffMonth = dayjs().startOf('month').diff(dayjs(selectedDate).startOf('month'), 'month');
+      const diffMonth = differenceInMonths(startOfMonth(new Date()), startOfMonth(selectedDate));
       const targetIndex = 500 - diffMonth;
       setVisibleMonthIndex(targetIndex);
       listRef.current?.scrollToItem(targetIndex, 'start');

@@ -125,9 +125,6 @@ importers:
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
-      dayjs:
-        specifier: ^1.11.13
-        version: 1.11.18
       electron:
         specifier: ^37.2.3
         version: 37.4.0
@@ -2014,9 +2011,6 @@ packages:
 
   dateformat@3.0.3:
     resolution: {integrity: sha512-jyCETtSl3VMZMWeRo7iY1FL19ges1t55hMo5yaam4Jrsm5EPL89UQkoQRyiI+Yf4k8r2ZpdngkV8hr1lIdjb3Q==}
-
-  dayjs@1.11.18:
-    resolution: {integrity: sha512-zFBQ7WFRvVRhKcWoUh+ZA1g2HVgUbsZm9sbddh8EC5iv93sui8DVVz1Npvz+r6meo9VKfa8NyLWBsQK1VvIKPA==}
 
   debug@4.3.4:
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
@@ -6715,8 +6709,6 @@ snapshots:
   date-fns@4.1.0: {}
 
   dateformat@3.0.3: {}
-
-  dayjs@1.11.18: {}
 
   debug@4.3.4:
     dependencies:

@@ -1,6 +1,7 @@
-import { getTodayDayjsUtc, getUtcDayjsFromDateStr } from '@/base/common/time';
+import { formatTimeStampToDate } from '@/core/time/formatTimeStampToDate';
+import { getUTCTimeStampFromDateStr } from '@/core/time/getUTCTimeStampFromDateStr';
 import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
-import dayjs from 'dayjs';
+import { format, isValid, parse } from 'date-fns';
 import { Emitter } from 'vscf/base/common/event';
 import { Disposable } from 'vscf/base/common/lifecycle';
 import { IContextKey, IContextKeyService } from 'vscf/platform/contextkey/common';
@@ -61,10 +62,8 @@ export class DatePickerOverlayController extends Disposable {
     this._datePickerFocusContext = DatePickerFocus.bindTo(contextKeyService);
 
     if (this._selectedDate) {
-      const selectedDayjs = dayjs(this._selectedDate);
-      this._currentInputValue = selectedDayjs.format('YYYY-MM-DD');
+      this._currentInputValue = formatTimeStampToDate(this._selectedDate.valueOf());
     }
-
     this._datePickerFocusContext.set(true);
   }
 
@@ -78,19 +77,18 @@ export class DatePickerOverlayController extends Disposable {
 
   selectDate(date: Date) {
     this._selectedDate = date;
-    this._currentInputValue = dayjs(date).format('YYYY-MM-DD');
-    this.onDateSelected(getUtcDayjsFromDateStr(dayjs(date).format('YYYY-MM-DD')).valueOf());
-
+    this._currentInputValue = formatTimeStampToDate(date.getTime());
+    this.onDateSelected(getUTCTimeStampFromDateStr(this._currentInputValue));
     this.dispose();
   }
 
   selectToday() {
-    const todayDate = getTodayDayjsUtc().toDate();
+    const todayDate = new Date();
     this.selectDate(todayDate);
   }
 
   selectTomorrow() {
-    const tomorrowDate = getTodayDayjsUtc().add(1, 'day').toDate();
+    const tomorrowDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
     this.selectDate(tomorrowDate);
   }
 
@@ -112,13 +110,11 @@ export class DatePickerOverlayController extends Disposable {
 
   saveCurrentDate() {
     if (this._currentInputValue) {
-      const selectedDateStr = this._selectedDate ? dayjs(this._selectedDate).format('YYYY-MM-DD') : '';
-
+      const selectedDateStr = this._selectedDate ? formatTimeStampToDate(this._selectedDate.valueOf()) : '';
       if (this._currentInputValue !== selectedDateStr) {
-        const parsedDate = dayjs(this._currentInputValue);
-        if (parsedDate.isValid()) {
-          this.onDateSelected(getUtcDayjsFromDateStr(parsedDate.format('YYYY-MM-DD')).valueOf());
-
+        const parsedDate = parse(this._currentInputValue, 'yyyy-MM-dd', new Date());
+        if (isValid(parsedDate)) {
+          this.onDateSelected(getUTCTimeStampFromDateStr(format(parsedDate, 'yyyy-MM-dd')));
           this.dispose();
           return;
         }
@@ -126,7 +122,7 @@ export class DatePickerOverlayController extends Disposable {
     }
 
     if (this._selectedDate) {
-      this.onDateSelected(getUtcDayjsFromDateStr(dayjs(this._selectedDate).format('YYYY-MM-DD')).valueOf());
+      this.onDateSelected(getUTCTimeStampFromDateStr(format(this._selectedDate, 'yyyy-MM-dd')));
       this.dispose();
       return;
     }

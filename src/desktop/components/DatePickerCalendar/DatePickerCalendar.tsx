@@ -1,6 +1,6 @@
 import { CircleSmallIcon, LeftIcon, RightIcon } from '@/components/icons';
 import { formatShortMonth } from '@/core/time/formatCalendarMonth';
-import { isUtcTimestampToday } from '@/core/time/isUtcTimestampToday';
+import { isTimestampToday } from '@/core/time/isTimestampToday';
 import { calculateElementHeight } from '@/desktop/overlay/datePicker/constant';
 import { desktopStyles } from '@/desktop/theme/main';
 import { localize } from '@/nls';
@@ -24,7 +24,7 @@ const MonthGrid: React.FC<MonthGridProps> = ({ days, onSelectDate }) => {
   return (
     <div className={desktopStyles.DatePickerCalendarMonthGrid}>
       {days.map((day) => {
-        const isToday = isUtcTimestampToday(day.date.getTime());
+        const isToday = isTimestampToday(day.date.getTime());
         return (
           <button
             key={day.date.toString()}

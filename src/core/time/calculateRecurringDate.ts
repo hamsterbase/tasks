@@ -1,4 +1,4 @@
-import { getUtcDayjsFromDateStr } from '@/base/common/time';
+import { getUTCTimeStampFromDateStr } from './getUTCTimeStampFromDateStr';
 import { RecurringDateRule } from './parseRecurringRule';
 
 export interface RecurringDateResult {
@@ -25,7 +25,7 @@ export function calculateRecurringDate(rule: RecurringDateRule, baseDate: string
   }
 
   // Calculate next date with proper unit boundaries and priority
-  const nextDate = getUtcDayjsFromDateStr(baseDate).toDate();
+  const nextDate = new Date(getUTCTimeStampFromDateStr(baseDate).valueOf());
 
   if (years > 0) {
     // Go to next year's first day, then add remaining years

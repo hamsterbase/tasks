@@ -7,7 +7,7 @@ import { useWatchEvent } from '@/hooks/use-watch-event';
 import { localize } from '@/nls';
 import { IWorkbenchOverlayService } from '@/services/overlay/common/WorkbenchOverlayService';
 import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
-import dayjs from 'dayjs';
+import { format } from 'date-fns';
 import React, { useEffect } from 'react';
 import { DatePickerOverlayController } from './DatePickerOverlayController';
 import { calculateElementWidth } from './constant';
@@ -23,7 +23,7 @@ export const DatePickerOverlay: React.FC = () => {
   useEffect(() => {
     if (!controller) return;
     if (controller.selectedDate) {
-      const dateStr = dayjs(controller.selectedDate).format('YYYY-MM-DD');
+      const dateStr = format(controller.selectedDate, 'yyyy-MM-dd');
       controller.updateInputValue(dateStr);
     }
   }, [controller]);

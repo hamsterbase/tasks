@@ -1,7 +1,7 @@
 import { ItemStatusEnum, ModelTypes } from '@/core/enum';
 import { TaskObjectSchema } from '@/core/type';
 import { localize } from '@/nls';
-import dayjs from 'dayjs';
+import { format, isSameWeek, isSameYear } from 'date-fns';
 import { getProject } from '../getProject';
 import { getTaskInfo } from '../getTaskInfo';
 import { ITaskModelData, ProjectInfoState, TaskInfo } from '../type';
@@ -71,16 +71,16 @@ export function getCompletedItems(modelData: ITaskModelData, options: GetComplet
   });
 
   const groups: CompletedTaskGroup[] = [];
-  const now = dayjs(options.currentDate);
+  const now = new Date(options.currentDate);
   completedTasks.forEach((task: TaskInfo | ProjectInfoState) => {
-    const completedDate = dayjs(task.completionAt!);
+    const completedDate = task.completionAt ? new Date(task.completionAt) : new Date();
     let label: string;
-    if (completedDate.isSame(now, 'week')) {
+    if (isSameWeek(completedDate, now)) {
       label = localize('logs.thisWeek', 'This Week');
-    } else if (completedDate.isSame(now, 'year')) {
-      label = completedDate.format('MMMM');
+    } else if (isSameYear(completedDate, now)) {
+      label = format(completedDate, 'MMMM');
     } else {
-      label = completedDate.format('MMMM YYYY');
+      label = format(completedDate, 'MMMM yyyy');
     }
     const existingGroup = groups.find((g) => g.label === label);
     if (existingGroup) {

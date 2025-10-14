@@ -3,7 +3,7 @@ import { Emitter } from 'vscf/base/common/event';
 import { Disposable } from 'vscf/base/common/lifecycle';
 import { IInstantiationService } from 'vscf/platform/instantiation/common';
 import { IWorkbenchOverlayService, OverlayInitOptions } from '../../../services/overlay/common/WorkbenchOverlayService';
-import dayjs from 'dayjs';
+import { format, setHours, setMinutes, getHours, getMinutes } from 'date-fns';
 
 export interface TimeValue {
   date: string;
@@ -48,31 +48,34 @@ export class TimePickerActionSheetController extends Disposable {
     @IWorkbenchOverlayService private readonly workbenchOverlayService: IWorkbenchOverlayService
   ) {
     super();
-
-    // Set timestamp to provided time or current time
     this._timestamp = initialTime || Date.now();
   }
 
   get selectedTime(): TimeValue {
-    const time = dayjs(this._timestamp);
-    const hour = time.hour();
-    const minute = time.minute();
+    const date = new Date(this._timestamp);
+    const hour = getHours(date);
+    const minute = getMinutes(date);
 
-    return { hour, minute, date: time.format('YYYY-MM-DD') };
+    return { hour, minute, date: format(date, 'yyyy-MM-dd') };
   }
 
   updateHour(hour: number) {
-    this._timestamp = dayjs(this._timestamp).hour(hour).valueOf();
+    const date = new Date(this._timestamp);
+    this._timestamp = setHours(date, hour).getTime();
     this._onStatusChange.fire();
   }
 
   updateMinute(minute: number) {
-    this._timestamp = dayjs(this._timestamp).minute(minute).valueOf();
+    const date = new Date(this._timestamp);
+    this._timestamp = setMinutes(date, minute).getTime();
     this._onStatusChange.fire();
   }
 
   setPresetTime(hour: number, minute: number = 0) {
-    this._timestamp = dayjs(this._timestamp).hour(hour).minute(minute).valueOf();
+    let date = new Date(this._timestamp);
+    date = setHours(date, hour);
+    date = setMinutes(date, minute);
+    this._timestamp = date.getTime();
     this._onStatusChange.fire();
   }
 
