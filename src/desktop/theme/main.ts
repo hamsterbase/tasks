@@ -301,7 +301,7 @@ export const desktopStyles = {
 
   SubtaskListContainer: /*tw*/ 'space-y-0.25 group',
 
-  SettingsContentContainer: /*tw*/ 'w-full flex flex-col',
+  SettingsContentContainer: /*tw*/ 'w-full flex flex-col h-full',
   SettingsContentBackButton: /*tw*/ 'p-3',
 
   AreaPageNotFoundContainer: /*tw*/ 'h-full w-full bg-bg1 flex items-center justify-center',

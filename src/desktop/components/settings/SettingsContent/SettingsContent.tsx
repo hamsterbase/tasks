@@ -19,8 +19,8 @@ export const SettingsContent: React.FC<SettingsContentProps> = (props) => {
       </div>
       <div
         className={classNames('flex-1 w-full max-w-160 overflow-y-scroll m-auto', {
-          'pt-6': !!props.back,
-          'pt-18': !props.back,
+          'py-6': !!props.back,
+          'py-18': !props.back,
         })}
       >
         {props.children}

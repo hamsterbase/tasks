@@ -82,20 +82,22 @@ export const AppearanceSettings: React.FC = () => {
       </ItemGroup>
       <Space size="large"></Space>
       <SettingsTitle title={localize('settings.notes', 'Notes')} />
-      <SettingsItem
-        title={localize('settings.render_markdown', 'Render Markdown')}
-        description={localize(
-          'settings.render_markdown.description',
-          'Render notes as markdown in task and project details.'
-        )}
-        action={{
-          type: 'switch',
-          currentValue: notesMarkdownRender,
-          onChange: () => {
-            setNotesMarkdownRender(!notesMarkdownRender);
-          },
-        }}
-      ></SettingsItem>
+      <ItemGroup>
+        <SettingsItem
+          title={localize('settings.render_markdown', 'Render Markdown')}
+          description={localize(
+            'settings.render_markdown.description',
+            'Render notes as markdown in task and project details.'
+          )}
+          action={{
+            type: 'switch',
+            currentValue: notesMarkdownRender,
+            onChange: () => {
+              setNotesMarkdownRender(!notesMarkdownRender);
+            },
+          }}
+        ></SettingsItem>
+      </ItemGroup>
       <Space size="large"></Space>
       <SettingsTitle title={settingOptions.title} description={settingOptions.description} level={2} />
       <ItemGroup>
