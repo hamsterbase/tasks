@@ -16,4 +16,5 @@ export enum OverlayEnum {
   treeSelect = 'treeSelect',
   desktopRecurringTaskSettings = 'desktopRecurringTaskSettings',
   mobileRecurringTaskSettings = 'mobileRecurringTaskSettings',
+  commandPalette = 'commandPalette',
 }

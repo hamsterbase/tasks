@@ -4,6 +4,7 @@ import { DatePickerOverlay } from '@/desktop/overlay/datePicker/DatePickerOverla
 import { DesktopDialog } from '@/desktop/overlay/desktopDialog/DesktopDialog';
 import { DesktopMenu } from '@/desktop/overlay/desktopMenu/DesktopMenu.tsx';
 import { DesktopMessage } from '@/desktop/overlay/desktopMessage/DesktopMessage';
+import { CommandPaletteOverlay } from '@/desktop/overlay/commandPalette/CommandPaletteOverlay';
 import { RecurringTaskSettingsOverlay } from '@/desktop/overlay/recurringTaskSettings/RecurringTaskSettingsOverlay';
 import { TagEditorOverlay } from '@/desktop/overlay/tagEditor/TagEditorOverlay';
 import { TimePickerOverlay } from '@/desktop/overlay/timePicker/TimePickerOverlay';
@@ -187,6 +188,7 @@ export const App = () => {
       <DesktopMessage />
       <CreateDatabaseOverlay />
       <TreeSelectOverlay />
+      <CommandPaletteOverlay />
     </div>
   );
 };

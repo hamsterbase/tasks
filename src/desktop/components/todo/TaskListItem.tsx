@@ -166,6 +166,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
       {...dragListeners}
       className={taskClassName}
       onClickCapture={handleClickCapture}
+      data-task-id={task.id}
     >
       {!disableDrag && <DragHandleIcon className={desktopStyles.TaskListItemDragHandle} />}
       <button

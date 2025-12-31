@@ -3,6 +3,7 @@ import { TaskList } from '@/components/taskList/taskList.ts';
 import { getProjectHeadingAndTasks } from '@/core/state/getProjectHeadingAndTasks';
 import { getProject } from '@/core/state/getProject';
 import { DesktopPage } from '@/desktop/components/DesktopPage';
+import { useScrollToTask } from '@/desktop/hooks/useScrollToTask';
 import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
@@ -12,6 +13,7 @@ import { IListService } from '@/services/list/common/listService';
 import { ITodoService } from '@/services/todo/common/todoService';
 import type { TreeID } from 'loro-crdt';
 import React, { useEffect } from 'react';
+import { useLocation } from 'react-router';
 import { ProjectHeader } from './components/ProjectHeader';
 import { ProjectTaskArea } from './components/ProjectTaskArea';
 import { useProjectDragAndDrop } from './hooks/useProjectDragAndDrop';
@@ -26,11 +28,21 @@ interface ProjectContentProps {
 const ProjectContent: React.FC<ProjectContentProps> = ({ project, projectId }) => {
   const todoService = useService(ITodoService);
   const listService = useService(IListService);
+  const location = useLocation();
 
   useWatchEvent(todoService.onStateChange);
   useWatchEvent(listService.onMainListChange);
+  useScrollToTask();
 
   const { showCompletedTasks, showFutureTasks, completedAfter } = useTaskDisplaySettings(`project-${projectId}`);
+
+  const state = location.state as { highlightTaskId?: string };
+  const highlightTaskId = state?.highlightTaskId;
+
+  const recentChangedTaskSet = new Set<TreeID>(todoService.keepAliveElements as TreeID[]);
+  if (highlightTaskId) {
+    recentChangedTaskSet.add(highlightTaskId as TreeID);
+  }
 
   const { flattenedItemsResult, willDisappearObjectIdSet } = getProjectHeadingAndTasks({
     modelData: todoService.modelState,
@@ -40,7 +52,7 @@ const ProjectContent: React.FC<ProjectContentProps> = ({ project, projectId }) =
       showFutureTasks,
       completedAfter,
       currentDate: getTodayTimestampInUtc(),
-      recentChangedTaskSet: new Set<TreeID>(todoService.keepAliveElements as TreeID[]),
+      recentChangedTaskSet,
     },
     disableCreateTask: true,
   });

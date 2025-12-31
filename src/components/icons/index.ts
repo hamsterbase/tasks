@@ -34,6 +34,7 @@ import {
   Plus,
   RefreshCw,
   Repeat,
+  Search,
   SendToBack,
   Settings,
   SlidersHorizontal,
@@ -99,3 +100,4 @@ export const PanelLeftIcon = PanelLeft;
 export const SyncIcon = RefreshCw;
 export const ArchiveIcon = Archive;
 export const RepeatIcon = Repeat;
+export const SearchIcon = Search;

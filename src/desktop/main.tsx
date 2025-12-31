@@ -2,6 +2,7 @@ import { checkPlatform } from '@/base/browser/checkPlatform';
 import { initializeTheme, watchThemeChange } from '@/base/browser/initializeTheme';
 import { initKeyboardListeners } from '@/base/browser/initKeyboardListeners';
 import '@/base/commands/desktop';
+import '@/desktop/overlay/commandPalette/commands';
 import { GlobalContext } from '@/components/GlobalContext/GlobalContext';
 import { CloudService, ICloudService } from '@/services/cloud/common/cloudService';
 import { StandaloneCommandService } from '@/services/command/common/standaloneCommandService';

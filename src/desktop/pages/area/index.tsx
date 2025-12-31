@@ -10,6 +10,7 @@ import { DesktopProjectList } from '@/desktop/components/DesktopProjectList/Desk
 import { InboxTaskInput } from '@/desktop/components/inboxTaskInput/InboxTaskInput';
 import { TitleContentSection } from '@/desktop/components/TitleContentSection';
 import { useDesktopTaskDisplaySettings } from '@/desktop/hooks/useDesktopTaskDisplaySettings';
+import { useScrollToTask } from '@/desktop/hooks/useScrollToTask';
 import { useTaskCommands } from '@/desktop/hooks/useTaskCommands';
 import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
@@ -51,8 +52,11 @@ const AreaPageContent: React.FC<AreaPageContentProps> = ({ area, areaId }) => {
   const location = useLocation();
 
   const { openTaskDisplaySettings } = useDesktopTaskDisplaySettings(`area-${areaId}`);
+  useScrollToTask();
 
-  const state = location.state as { focusInput?: string };
+  const state = location.state as { focusInput?: string; highlightTaskId?: string };
+  const highlightTaskId = state?.highlightTaskId;
+
   useEffect(() => {
     if (state?.focusInput && !area.title) {
       editService.focusInput(state.focusInput);
@@ -82,6 +86,9 @@ const AreaPageContent: React.FC<AreaPageContentProps> = ({ area, areaId }) => {
   const { showCompletedTasks, showFutureTasks, completedAfter } = useTaskDisplaySettings(`area-${areaId}`);
 
   const recentChangedTaskSet = new Set<TreeID>(todoService.keepAliveElements as TreeID[]);
+  if (highlightTaskId) {
+    recentChangedTaskSet.add(highlightTaskId as TreeID);
+  }
   const willDisappearObjectIdSet = new Set<string>();
 
   if (!areaDetail) {

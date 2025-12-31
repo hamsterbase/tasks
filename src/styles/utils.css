@@ -27,3 +27,18 @@
 .editing-border {
   @apply shadow-[inset_2px_0_0_var(--color-brand)];
 }
+
+@keyframes highlight {
+  0% {
+    background-color: transparent;
+  }
+  10% {
+    background-color: color-mix(in srgb, var(--color-brand) 25%, transparent);
+  }
+  30% {
+    background-color: color-mix(in srgb, var(--color-brand) 20%, transparent);
+  }
+  100% {
+    background-color: transparent;
+  }
+}

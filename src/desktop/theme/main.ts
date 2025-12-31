@@ -8,6 +8,11 @@ export const desktopStyles = {
   SidebarMaxWidth: /*tw*/ 'w-128',
   SidebarPreferredWidth: /*tw*/ 'w-60',
 
+  SidebarHeaderContainer: /*tw*/ 'flex justify-end h-9 mb-2',
+  SidebarHeaderSearchButton:
+    'flex items-center justify-center hover:bg-bg1 hover:text-brand rounded-md transition-colors size-9 text-t3',
+  SidebarHeaderSearchButtonIcon: /*tw*/ 'size-5',
+
   SidebarMenuItemContainer: /*tw*/ 'space-y-2',
   SidebarMenuItem: /*tw*/ 'h-9 px-3 flex rounded-lg text-base leading-5 items-center gap-3 group',
   SidebarMenuItemActive: /*tw*/ 'bg-brand text-white',
@@ -527,6 +532,19 @@ export const desktopStyles = {
   NotesMarkdownCode: /*tw*/ 'bg-bg2 px-1 py-0.5 rounded text-sm font-mono',
   NotesMarkdownPre: /*tw*/ 'bg-bg2 p-3 rounded mb-2 overflow-x-auto text-sm',
   NotesFieldContainer: /*tw*/ 'overflow-y-auto max-h-80',
+
+  // CommandPalette styles
+  CommandPaletteOverlayBackdrop: /*tw*/ 'fixed inset-0 flex items-start justify-center pt-30',
+  CommandPaletteOverlayBackgroundMask: /*tw*/ 'absolute inset-0 bg-black opacity-45',
+  CommandPaletteOverlayContainer: /*tw*/ 'bg-bg1-float rounded-lg shadow-2xl flex flex-col w-150 mx-4 relative',
+  CommandPaletteInputContainer: /*tw*/ 'flex items-center gap-3 px-6 h-14',
+  CommandPaletteInput: /*tw*/ 'flex-1 bg-transparent text-base text-t1 placeholder-t3 focus:outline-none font-normal',
+  CommandPaletteResultsContainer: /*tw*/ 'max-h-96 overflow-y-auto p-3',
+  CommandPaletteResultsEmpty: /*tw*/ 'flex items-center justify-center h-24 text-t3 text-base',
+  CommandPaletteResultItem: /*tw*/ 'flex items-center gap-3 px-3 h-11 hover:bg-bg2 cursor-pointer transition-colors',
+  CommandPaletteResultItemSelected: /*tw*/ 'bg-bg2',
+  CommandPaletteResultItemIcon: /*tw*/ 'size-5 text-t2 flex-shrink-0',
+  CommandPaletteResultItemTitle: /*tw*/ 'text-base text-t1 truncate',
 };
 
 export type DesktopThemeDefinition = typeof desktopStyles;
