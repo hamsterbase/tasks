@@ -30,9 +30,34 @@ import { useService } from '@/hooks/use-service';
 import { useCloudSync } from '@/hooks/useCloudSync.ts';
 import { useSafeArea } from '@/hooks/useSafeArea';
 import { IMenuService } from '@/services/menu/common/menuService';
+import { INavigationService } from '@/services/navigationService/common/navigationService';
 import { ITodoService } from '@/services/todo/common/todoService';
 import React, { useEffect } from 'react';
-import { Navigate, useRoutes, useLocation } from 'react-router';
+import { Navigate, useRoutes, useLocation, useNavigate } from 'react-router';
+
+const DesktopNavigationBridge: React.FC = () => {
+  const navigate = useNavigate();
+  const navigationService = useService(INavigationService);
+
+  useEffect(() => {
+    const backDisposable = navigationService.onGoBack(() => {
+      if (window.history.state && window.history.state.idx > 0) {
+        navigate(-1);
+      }
+    });
+
+    const forwardDisposable = navigationService.onGoForward(() => {
+      navigate(1);
+    });
+
+    return () => {
+      backDisposable.dispose();
+      forwardDisposable.dispose();
+    };
+  }, [navigate, navigationService]);
+
+  return null;
+};
 
 export const App = () => {
   useInputFocused();
@@ -178,6 +203,7 @@ export const App = () => {
 
   return (
     <div>
+      <DesktopNavigationBridge />
       {element}
       <DesktopMenu />
       <DatePickerOverlay />

@@ -25,6 +25,26 @@ export interface INavigationService {
   navigate(options: NavigateOptions): void;
 
   listenBackButton(callback: () => void): IDisposable;
+
+  /**
+   * Navigate backward in history
+   */
+  goBack(): void;
+
+  /**
+   * Navigate forward in history
+   */
+  goForward(): void;
+
+  /**
+   * Event that fires when back navigation is requested
+   */
+  readonly onGoBack: Event<void>;
+
+  /**
+   * Event that fires when forward navigation is requested
+   */
+  readonly onGoForward: Event<void>;
 }
 
 type BackForwardGestures = {
@@ -38,6 +58,8 @@ export class NavigationService implements INavigationService {
   public readonly _serviceBrand: undefined;
 
   private readonly _onNavigate = new Emitter<NavigateOptions>();
+  private readonly _onGoBack = new Emitter<void>();
+  private readonly _onGoForward = new Emitter<void>();
 
   private backButtonListener: Array<() => void> = [];
 
@@ -77,10 +99,26 @@ export class NavigationService implements INavigationService {
     return this._onNavigate.event;
   }
 
+  get onGoBack(): Event<void> {
+    return this._onGoBack.event;
+  }
+
+  get onGoForward(): Event<void> {
+    return this._onGoForward.event;
+  }
+
   navigate(options: NavigateOptions): void {
     this.enableBackForwardGestures().then(() => {
       this._onNavigate.fire(options);
     });
+  }
+
+  goBack(): void {
+    this._onGoBack.fire();
+  }
+
+  goForward(): void {
+    this._onGoForward.fire();
   }
 
   listenBackButton(callback: () => void): IDisposable {
