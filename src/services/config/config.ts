@@ -81,3 +81,14 @@ export function thirdpartySyncServersConfigKey(): ConfigKey<ISelfhostedSyncServe
     },
   };
 }
+
+export type DockBadgeCountType = 'none' | 'overdue' | 'overdue_and_today' | 'overdue_today_and_inbox';
+
+export function dockBadgeCountTypeConfigKey(): ConfigKey<DockBadgeCountType> {
+  return {
+    key: 'dockBadgeCountType',
+    default: 'overdue_and_today',
+    check: (value: DockBadgeCountType) =>
+      typeof value === 'string' && ['none', 'overdue', 'overdue_and_today', 'overdue_today_and_inbox'].includes(value),
+  };
+}

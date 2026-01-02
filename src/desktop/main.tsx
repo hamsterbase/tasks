@@ -21,6 +21,8 @@ import { INavigationService, NavigationService } from '@/services/navigationServ
 import { IWorkbenchOverlayService, WorkbenchOverlayService } from '@/services/overlay/common/WorkbenchOverlayService';
 import { IReminderService } from '@/services/reminders/common/reminderService';
 import { DesktopReminderService } from '@/services/reminders/electron/DesktopReminderService';
+import { IDockBadgeService } from '@/services/dockBadge/common/dockBadgeService';
+import { ElectronDockBadgeService } from '@/services/dockBadge/native/electronDockBadgeService';
 import { ISelfhostedSyncService } from '@/services/selfhostedSync/common/selfhostedSyncService';
 import { WorkbenchSelfhostedSyncService } from '@/services/selfhostedSync/common/workbenchSelfhostedSyncService';
 import { ISwitchService, SwitchService } from '@/services/switchService/common/switchService';
@@ -67,6 +69,7 @@ export async function startDesktop() {
   serviceCollection.set(IReminderService, new SyncDescriptor(DesktopReminderService));
   serviceCollection.set(ISelfhostedSyncService, new SyncDescriptor(WorkbenchSelfhostedSyncService));
   serviceCollection.set(IMenuService, new SyncDescriptor(ElectronMenuService));
+  serviceCollection.set(IDockBadgeService, new SyncDescriptor(ElectronDockBadgeService));
   const instantiationService = new InstantiationService(serviceCollection, true);
 
   await instantiationService.invokeFunction(async (dss) => {
@@ -83,6 +86,9 @@ export async function startDesktop() {
   });
   await instantiationService.invokeFunction(async (dss) => {
     await dss.get(IReminderService).start();
+  });
+  await instantiationService.invokeFunction(async (dss) => {
+    await dss.get(IDockBadgeService).start();
   });
 
   instantiationService.invokeFunction(async (dss) => {

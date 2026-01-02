@@ -88,10 +88,29 @@ class ElectronMenuService {
 
 const menuService = new ElectronMenuService();
 
+class ElectronDockBadgeService {
+  setBadge(count: number) {
+    if (process.platform !== 'darwin') {
+      return;
+    }
+
+    if (!app.dock) {
+      console.warn('app.dock is not available');
+      return;
+    }
+
+    const badgeString = count > 0 ? String(count) : '';
+    app.dock.setBadge(badgeString);
+  }
+}
+
+const dockBadgeService = new ElectronDockBadgeService();
+
 // Service registry
 const services: Record<string, unknown> = {
   databaseService: databaseService,
   menuService: menuService,
+  dockBadgeService: dockBadgeService,
 };
 
 // Generic service handler

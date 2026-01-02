@@ -127,7 +127,7 @@ export const desktopStyles = {
 
   SelectContainer: /*tw*/ 'relative',
   SelectTrigger:
-    'box-border flex flex-row justify-between items-center p-3 gap-3 w-44 h-11 border border-line-regular rounded-lg cursor-pointer bg-bg1 hover:border-brand focus-within:border-brand',
+    'box-border flex flex-row justify-between items-center p-3 gap-3 min-w-44 h-11 border border-line-regular rounded-lg cursor-pointer bg-bg1 hover:border-brand focus-within:border-brand',
   SelectTriggerText: /*tw*/ 'flex-none order-0 flex-grow-0 w-auto h-5 font-normal text-base leading-5 text-t1',
   SelectTriggerIcon: /*tw*/ 'flex-none order-1 flex-grow-0 w-5 h-5 text-t3 transition-transform',
 

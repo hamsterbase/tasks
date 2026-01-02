@@ -7,7 +7,11 @@ import { Space } from '@/desktop/components/Space/Space';
 import { useConfig } from '@/hooks/useConfig';
 import { useGlobalTaskDisplaySettings } from '@/hooks/useGlobalTaskDisplaySettings';
 import { localize } from '@/nls';
-import { notesMarkdownRenderConfigKey } from '@/services/config/config';
+import {
+  dockBadgeCountTypeConfigKey,
+  notesMarkdownRenderConfigKey,
+  type DockBadgeCountType,
+} from '@/services/config/config';
 import React, { useState } from 'react';
 
 export const AppearanceSettings: React.FC = () => {
@@ -24,6 +28,7 @@ export const AppearanceSettings: React.FC = () => {
   } = useGlobalTaskDisplaySettings();
 
   const { value: notesMarkdownRender, setValue: setNotesMarkdownRender } = useConfig(notesMarkdownRenderConfigKey());
+  const { value: dockBadgeCountType, setValue: setDockBadgeCountType } = useConfig(dockBadgeCountTypeConfigKey());
 
   const changeTheme = (theme: string) => {
     localStorage.setItem('theme', theme);
@@ -97,6 +102,30 @@ export const AppearanceSettings: React.FC = () => {
             },
           }}
         ></SettingsItem>
+      </ItemGroup>
+      <Space size="large"></Space>
+      <SettingsTitle title={localize('settings.dock_badge', 'Dock Badge')} />
+      <ItemGroup>
+        <SettingsItem
+          title={localize('settings.dock_badge.count_type', 'Badge Count Type')}
+          action={{
+            type: 'select',
+            options: [
+              { value: 'none', label: localize('settings.dock_badge.count_type.none', 'None') },
+              { value: 'overdue', label: localize('settings.dock_badge.count_type.overdue', 'Overdue') },
+              {
+                value: 'overdue_and_today',
+                label: localize('settings.dock_badge.count_type.overdue_and_today', 'Overdue + Today'),
+              },
+              {
+                value: 'overdue_today_and_inbox',
+                label: localize('settings.dock_badge.count_type.overdue_today_and_inbox', 'Overdue + Today + Inbox'),
+              },
+            ],
+            currentValue: dockBadgeCountType,
+            onChange: (value: string) => setDockBadgeCountType(value as DockBadgeCountType),
+          }}
+        />
       </ItemGroup>
       <Space size="large"></Space>
       <SettingsTitle title={settingOptions.title} description={settingOptions.description} level={2} />
