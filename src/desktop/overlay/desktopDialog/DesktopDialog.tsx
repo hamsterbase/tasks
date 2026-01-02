@@ -4,6 +4,7 @@ import { SettingButton } from '@/desktop/components/Settings/Button/Button';
 import { desktopStyles } from '@/desktop/theme/main';
 import { localize } from '@/nls';
 import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
+import { TestIds } from '@/testIds';
 import React from 'react';
 import { useService } from '../../../hooks/use-service';
 import { useWatchEvent } from '../../../hooks/use-watch-event';
@@ -31,7 +32,11 @@ const DesktopDialogContent: React.FC<{ controller: DesktopDialogController }> = 
       confirmText={controller.confirmText || localize('confirm', 'Confirm')}
       zIndex={controller.zIndex}
     >
-      {controller.description && <p className={desktopStyles.DesktopDialogDescription}>{controller.description}</p>}
+      {controller.description && (
+        <p className={desktopStyles.DesktopDialogDescription} data-test-id={TestIds.DesktopDialog.Description}>
+          {controller.description}
+        </p>
+      )}
       <div className={desktopStyles.DesktopDialogActionsContainer}>
         {controller.actions?.map((action) => {
           if (action.type === 'input') {
@@ -61,6 +66,8 @@ const DesktopDialogContent: React.FC<{ controller: DesktopDialogController }> = 
                 variant={action.variant}
                 color={action.color}
                 onClick={() => handleButtonClick(action)}
+                data-test-id={TestIds.DesktopDialog.ActionButton}
+                data-test-key={action.key}
               >
                 {action.label}
               </SettingButton>

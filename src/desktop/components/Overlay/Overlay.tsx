@@ -1,5 +1,6 @@
 import { CloseIcon } from '@/components/icons';
 import { desktopStyles } from '@/desktop/theme/main';
+import { TestIds } from '@/testIds';
 import React from 'react';
 import { Space } from '../Space/Space';
 import { SettingButton } from '../Settings/Button/Button';
@@ -40,9 +41,11 @@ export const Overlay: React.FC<OverlayProps> = ({
       }}
     >
       <div className={desktopStyles.OverlayBackgroundMask} />
-      <div className={desktopStyles.OverlayContainer}>
+      <div className={desktopStyles.OverlayContainer} data-test-id={TestIds.DesktopDialog.Container}>
         <div className={desktopStyles.OverlayHeader}>
-          <h3 className={desktopStyles.OverlayTitle}>{title}</h3>
+          <h3 className={desktopStyles.OverlayTitle} data-test-id={TestIds.DesktopDialog.Title}>
+            {title}
+          </h3>
           <button onClick={onClose} className={desktopStyles.OverlayCloseButton}>
             <CloseIcon />
           </button>

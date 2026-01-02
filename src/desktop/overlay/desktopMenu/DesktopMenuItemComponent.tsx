@@ -1,6 +1,7 @@
 import { CheckIcon, ChevronRightIcon } from '@/components/icons';
 import type { IMenuConfig } from '@/desktop/overlay/desktopMenu/DesktopMenuController.ts';
 import { desktopStyles } from '@/desktop/theme/main';
+import { TestIds } from '@/testIds';
 import classNames from 'classnames';
 import React, { useRef } from 'react';
 
@@ -37,6 +38,8 @@ export const DesktopMenuItemComponent: React.FC<DesktopMenuItemComponentProps> =
       onClick={handleClick}
       onMouseEnter={onMouseEnter}
       disabled={item.disabled}
+      data-test-id={TestIds.DesktopMenu.Item}
+      data-test-label={item.label}
     >
       <div className={desktopStyles.DesktopMenuItemContent}>
         {showCheckmarks && (

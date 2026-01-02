@@ -8,6 +8,7 @@ import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService';
+import { TestIds } from '@/testIds';
 import type { TreeID } from 'loro-crdt';
 import React from 'react';
 import { useParams } from 'react-router';
@@ -102,7 +103,11 @@ const ProjectDetailPanelContent: React.FC<IProjectDetailPanelContentProps> = ({ 
           className={desktopStyles.DetailViewHeaderTitle}
           autoSize={{ minRows: 1 }}
         />
-        <button onClick={handleMenuClick} className={desktopStyles.DetailViewHeaderMenuButton}>
+        <button
+          onClick={handleMenuClick}
+          className={desktopStyles.DetailViewHeaderMenuButton}
+          data-test-id={TestIds.ProjectDetailPanel.MenuButton}
+        >
           <MenuIcon className={desktopStyles.DetailViewHeaderMenuIcon} />
         </button>
       </div>

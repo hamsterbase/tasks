@@ -8,6 +8,7 @@ import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
 import { IWorkbenchOverlayService } from '@/services/overlay/common/WorkbenchOverlayService';
+import { TestIds } from '@/testIds';
 import React, { useCallback, useEffect, useRef } from 'react';
 import { DesktopMenuItemComponent } from './DesktopMenuItemComponent';
 import { DesktopSubmenuComponent } from './DesktopSubmenuComponent';
@@ -57,6 +58,7 @@ const DesktopMenuContent: React.FC<IDesktopMenuContentProps> = ({ controller }) 
           menuWidth: calculateElementWidth(desktopStyles.DesktopMenuContainer),
         })}
         tabIndex={0}
+        data-test-id={TestIds.DesktopMenu.Container}
       >
         <div className={desktopStyles.DesktopMenuContent}>
           {controller.menuConfig.map((item, index) => (

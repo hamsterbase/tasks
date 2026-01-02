@@ -21,4 +21,24 @@ export const TestIds = {
     /** No results message */
     NoResults: 'command-palette-no-results',
   },
+  ProjectDetailPanel: {
+    /** Menu button in project detail panel header */
+    MenuButton: 'project-detail-menu-button',
+  },
+  DesktopMenu: {
+    /** Desktop menu container */
+    Container: 'desktop-menu-container',
+    /** Desktop menu item - use with label for specific items */
+    Item: 'desktop-menu-item',
+  },
+  DesktopDialog: {
+    /** Dialog container */
+    Container: 'desktop-dialog-container',
+    /** Dialog title */
+    Title: 'desktop-dialog-title',
+    /** Dialog description */
+    Description: 'desktop-dialog-description',
+    /** Dialog action button - use with key for specific buttons */
+    ActionButton: 'desktop-dialog-action-button',
+  },
 } as const;
