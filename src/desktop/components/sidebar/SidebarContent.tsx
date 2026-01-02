@@ -196,8 +196,8 @@ export const SidebarContent: React.FC = () => {
         [desktopStyles.sidebarContainerNoPaddingTop]: sidebarContainerNoPaddingTop,
       })}
     >
-      <DragHandle></DragHandle>
       <div className={desktopStyles.SidebarHeaderContainer}>
+        <DragHandle />
         <button
           onClick={() => CommandPaletteController.create(instantiationService)}
           className={desktopStyles.SidebarHeaderSearchButton}

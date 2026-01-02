@@ -8,7 +8,7 @@ export const desktopStyles = {
   SidebarMaxWidth: /*tw*/ 'w-128',
   SidebarPreferredWidth: /*tw*/ 'w-60',
 
-  SidebarHeaderContainer: /*tw*/ 'flex justify-end h-9 mb-2',
+  SidebarHeaderContainer: /*tw*/ 'flex items-end justify-end h-11 mb-2',
   SidebarHeaderSearchButton:
     'flex items-center justify-center hover:bg-bg1 hover:text-brand rounded-md transition-colors size-9 text-t3',
   SidebarHeaderSearchButtonIcon: /*tw*/ 'size-5',
@@ -397,7 +397,7 @@ export const desktopStyles = {
   DesktopHeadingListItemIcon: /*tw*/ 'size-5 text-t1 flex-shrink-0',
   DesktopHeadingListItemInput: /*tw*/ 'flex-1 bg-transparent outline-none text-t1 font-medium',
 
-  DragHandleContainer: /*tw*/ 'w-full',
+  DragHandleContainer: /*tw*/ 'flex-1 h-full',
 
   DesktopMessageContainer: /*tw*/ 'fixed top-6 right-6 flex flex-col items-end pointer-events-none',
   DesktopMessageContent:

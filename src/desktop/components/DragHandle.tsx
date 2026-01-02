@@ -8,17 +8,14 @@ export const DragHandle: React.FC = () => {
     return null;
   }
   return (
-    <div>
-      <div
-        className={desktopStyles.DragHandleContainer}
-        style={
-          {
-            WebkitAppRegion: 'drag',
-            cursor: 'move',
-            height: 44,
-          } as React.CSSProperties
-        }
-      />
-    </div>
+    <div
+      className={desktopStyles.DragHandleContainer}
+      style={
+        {
+          WebkitAppRegion: 'drag',
+          cursor: 'move',
+        } as React.CSSProperties
+      }
+    />
   );
 };
