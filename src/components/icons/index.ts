@@ -33,6 +33,7 @@ import {
   ListTree,
   LocateFixed,
   MessageSquare,
+  MessageSquareReply,
   MoreVerticalIcon,
   Palette,
   PenLine,
@@ -110,6 +111,7 @@ export const RepeatIcon = Repeat;
 export const SearchIcon = Search;
 export const AIIcon = Bot;
 export const ChatIcon = MessageSquare;
+export const ReplyIcon = MessageSquareReply;
 export const LinkIcon = Link;
 export const BrainIcon = Brain;
 export const TrashIcon = Trash2;

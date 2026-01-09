@@ -1,4 +1,4 @@
-import { RepeatIcon, ChevronDownIcon, ChevronRightIcon, BrainIcon } from '@/components/icons';
+import { ReplyIcon, ChevronDownIcon, ChevronRightIcon, BrainIcon } from '@/components/icons';
 import { localize } from '@/nls';
 import React, { useState } from 'react';
 import { ChatMessageItem, ContentBlock } from '@/services/ai/browser/types';
@@ -201,7 +201,7 @@ const ChatMessageItemComponent: React.FC<ChatMessageItemComponentProps> = ({
             className="mt-1 p-1 text-t3 hover:bg-bg3 rounded transition-colors"
             title={localize('ai_chat.reply_to_this', 'Reply to this')}
           >
-            <RepeatIcon className="size-4" />
+            <ReplyIcon className="size-4" />
           </button>
         )}
       </div>

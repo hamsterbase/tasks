@@ -1,4 +1,4 @@
-import { ArrowUpIcon, CloseIcon, RepeatIcon, StopIcon } from '@/components/icons';
+import { ArrowUpIcon, CloseIcon, ReplyIcon, StopIcon } from '@/components/icons';
 import { localize } from '@/nls';
 import React, { useCallback, useState } from 'react';
 import { Link } from 'react-router';
@@ -68,7 +68,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
             .join('\n');
           return (
             <div className="flex items-center gap-2 mb-2 px-3 py-2 bg-bg2 rounded-lg">
-              <RepeatIcon className="size-4 text-t3" />
+              <ReplyIcon className="size-4 text-t3" />
               <span className="text-sm text-t2 font-medium">#{linkedMessage.id}</span>
               <span className="flex-1 text-sm text-t2 truncate">
                 {textContent.slice(0, 50)}
