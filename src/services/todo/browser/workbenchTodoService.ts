@@ -1,5 +1,12 @@
 import { getPeerId, resetPeerId } from '@/base/browser/getPeerId';
 import { TaskModel } from '@/core/model.ts';
+import {
+  batchEdit as executeBatchEdit,
+  BatchEditParams,
+  BatchEditResult,
+} from '@/core/state/tasks/batchEdit/batchEdit';
+import { createProjectWithChildren } from '@/core/state/tasks/createProject/createProjectWithChildren';
+import { CreateProjectWithChildrenParams } from '@/core/state/tasks/createProject/types';
 import { ITaskModelData } from '@/core/type';
 import {
   CreateAreaSchema,
@@ -259,5 +266,13 @@ export class WorkbenchTodoService implements ITodoService {
   }
   clearUndoHistory(): void {
     this.taskModel.clearUndoHistory();
+  }
+
+  createProjectWithChildren(params: CreateProjectWithChildrenParams): TreeID {
+    return createProjectWithChildren(this.taskModel, params);
+  }
+
+  batchEdit(params: BatchEditParams): BatchEditResult {
+    return executeBatchEdit(this.taskModel, params);
   }
 }

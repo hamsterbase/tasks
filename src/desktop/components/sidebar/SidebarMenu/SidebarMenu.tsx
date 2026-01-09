@@ -1,5 +1,5 @@
 import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc.ts';
-import { InboxIcon, LogIcon, ScheduledIcon, TodayIcon } from '@/components/icons';
+import { ChatIcon, InboxIcon, LogIcon, ScheduledIcon, TodayIcon } from '@/components/icons';
 import { getInboxTasks } from '@/core/state/inbox/getInboxTasks';
 import { getTodayItems } from '@/core/state/today/getTodayItems';
 import { useService } from '@/hooks/use-service';
@@ -12,6 +12,7 @@ import { desktopStyles } from '../../../theme/main';
 import { MenuItem } from '../../MenuItem/MenuItem.tsx';
 
 const links = [
+  { to: '/desktop/ai-chat', text: localize('ai_chat', 'AI Chat'), icon: <ChatIcon /> },
   { to: '/desktop/inbox', text: localize('inbox', 'Inbox'), icon: <InboxIcon /> },
   { to: '/desktop/today', text: localize('today', 'Today'), icon: <TodayIcon /> },
   { to: '/desktop/schedule', text: localize('schedule', 'Schedule'), icon: <ScheduledIcon /> },

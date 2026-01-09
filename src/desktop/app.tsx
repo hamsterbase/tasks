@@ -24,7 +24,9 @@ import { ImportExportSettings } from '@/desktop/pages/settings-page/ImportExport
 import { LoginPage } from '@/desktop/pages/settings-page/Login/LoginPage.tsx';
 import { RegisterPage } from '@/desktop/pages/settings-page/Register/RegisterPage.tsx';
 import { SelfHostedSyncSettings } from '@/desktop/pages/settings-page/sync/SelfHostedSyncSettings.tsx';
+import { AISettings } from '@/desktop/pages/settings-page/AISettings';
 import { Today } from '@/desktop/pages/today/index.tsx';
+import { AIChat } from '@/desktop/pages/ai-chat';
 import { useInputFocused } from '@/hooks/global/useInputFocused';
 import { useService } from '@/hooks/use-service';
 import { useCloudSync } from '@/hooks/useCloudSync.ts';
@@ -94,6 +96,10 @@ export const App = () => {
             {
               index: true,
               element: <Navigate to="inbox" replace />,
+            },
+            {
+              path: 'ai-chat',
+              element: <AIChat />,
             },
             {
               path: 'inbox',
@@ -188,6 +194,10 @@ export const App = () => {
                 {
                   path: 'import-export',
                   element: <ImportExportSettings />,
+                },
+                {
+                  path: 'ai',
+                  element: <AISettings />,
                 },
               ],
             },

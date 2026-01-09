@@ -1,3 +1,5 @@
+import { BatchEditParams, BatchEditResult } from '@/core/state/tasks/batchEdit/batchEdit';
+import { CreateProjectWithChildrenParams } from '@/core/state/tasks/createProject/types';
 import {
   CreateAreaSchema,
   CreateProjectHeadingSchema,
@@ -90,6 +92,20 @@ export interface ITodoService {
   redo(): void;
 
   clearUndoHistory(): void;
+
+  /**
+   * 创建带子项的 project
+   * @param params 创建参数
+   * @returns 创建的 project ID
+   */
+  createProjectWithChildren(params: CreateProjectWithChildrenParams): TreeID;
+
+  /**
+   * 批量编辑操作
+   * @param params 批量编辑参数
+   * @returns 执行结果
+   */
+  batchEdit(params: BatchEditParams): BatchEditResult;
 }
 
 export const ITodoService = createDecorator<ITodoService>('todoService');

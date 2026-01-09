@@ -9,10 +9,20 @@ import { calculateElementWidth } from '../overlay/datePicker/constant';
 interface DesktopPageProps {
   header: ReactNode;
   children: ReactNode;
+  showDetailPanel?: boolean;
 }
 
-export const DesktopPage: React.FC<DesktopPageProps> = ({ header, children }) => {
+export const DesktopPage: React.FC<DesktopPageProps> = ({ header, children, showDetailPanel = true }) => {
   const detailPanelConfig = useConfig(detailPanelConfigKey());
+
+  if (!showDetailPanel) {
+    return (
+      <div className={desktopStyles.DesktopPageContainer}>
+        {header}
+        <div className={desktopStyles.DesktopPageMainContent}>{children}</div>
+      </div>
+    );
+  }
 
   return (
     <div className={desktopStyles.DesktopPageContainer}>

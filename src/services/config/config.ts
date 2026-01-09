@@ -92,3 +92,29 @@ export function dockBadgeCountTypeConfigKey(): ConfigKey<DockBadgeCountType> {
       typeof value === 'string' && ['none', 'overdue', 'overdue_and_today', 'overdue_today_and_inbox'].includes(value),
   };
 }
+
+// AI Configuration Keys
+
+export function aiApiUrlConfigKey(): ConfigKey<string> {
+  return {
+    key: 'aiApiUrl',
+    default: 'https://api.deepseek.com',
+    check: (value: string) => typeof value === 'string',
+  };
+}
+
+export function aiApiTokenConfigKey(): ConfigKey<string> {
+  return {
+    key: 'aiApiToken',
+    default: '',
+    check: (value: string) => typeof value === 'string',
+  };
+}
+
+export function aiModelNameConfigKey(): ConfigKey<string> {
+  return {
+    key: 'aiModelName',
+    default: 'deepseek-chat',
+    check: (value: string) => typeof value === 'string',
+  };
+}

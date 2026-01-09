@@ -25,6 +25,8 @@ import { IDockBadgeService } from '@/services/dockBadge/common/dockBadgeService'
 import { ElectronDockBadgeService } from '@/services/dockBadge/native/electronDockBadgeService';
 import { ISelfhostedSyncService } from '@/services/selfhostedSync/common/selfhostedSyncService';
 import { WorkbenchSelfhostedSyncService } from '@/services/selfhostedSync/common/workbenchSelfhostedSyncService';
+import { IAIService } from '@/services/ai/common/aiService';
+import { WorkbenchAIService } from '@/services/ai/browser/workbenchAIService';
 import { ISwitchService, SwitchService } from '@/services/switchService/common/switchService';
 import '@/services/todo/browser/desktopCommands';
 import { WorkbenchTodoService } from '@/services/todo/browser/workbenchTodoService';
@@ -70,6 +72,7 @@ export async function startDesktop() {
   serviceCollection.set(ISelfhostedSyncService, new SyncDescriptor(WorkbenchSelfhostedSyncService));
   serviceCollection.set(IMenuService, new SyncDescriptor(ElectronMenuService));
   serviceCollection.set(IDockBadgeService, new SyncDescriptor(ElectronDockBadgeService));
+  serviceCollection.set(IAIService, new SyncDescriptor(WorkbenchAIService));
   const instantiationService = new InstantiationService(serviceCollection, true);
 
   await instantiationService.invokeFunction(async (dss) => {

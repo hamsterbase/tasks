@@ -5,6 +5,13 @@ import { localize } from '@/nls';
 import { TextAreaRef } from 'rc-textarea';
 import React, { ReactNode, useRef } from 'react';
 
+interface HeaderAction {
+  icon: ReactNode;
+  handleClick: (e: React.MouseEvent) => void;
+  label: string;
+  title: string;
+}
+
 interface EntityHeaderProps {
   renderIcon: () => ReactNode;
   title: string;
@@ -13,6 +20,7 @@ interface EntityHeaderProps {
   onSave?: (value: string) => void;
   placeholder?: string;
   editable?: boolean;
+  extraActions?: HeaderAction[];
 
   internalActions?: {
     displaySettings?: {
@@ -29,6 +37,7 @@ export const EntityHeader: React.FC<EntityHeaderProps> = ({
   onSave,
   placeholder,
   editable = false,
+  extraActions,
   internalActions,
 }) => {
   const textAreaRef = useRef<TextAreaRef>(null);
@@ -36,7 +45,7 @@ export const EntityHeader: React.FC<EntityHeaderProps> = ({
     onSave?.(value);
   };
 
-  const allActions = [];
+  const allActions: HeaderAction[] = [];
   if (internalActions?.displaySettings) {
     const handleOpenTaskDisplaySettings = (e: React.MouseEvent) => {
       const rect = e.currentTarget.getBoundingClientRect();
@@ -49,6 +58,10 @@ export const EntityHeader: React.FC<EntityHeaderProps> = ({
       label: localize('inbox.display', 'Display'),
       title: localize('inbox.taskDisplaySettings', 'Task Display Settings'),
     });
+  }
+
+  if (extraActions && extraActions.length > 0) {
+    allActions.push(...extraActions);
   }
 
   return (

@@ -1,4 +1,4 @@
-import { CloudIcon, PaletteIcon, SelfHostedSyncIcon, SettingsIcon, UserIcon } from '@/components/icons';
+import { AIIcon, CloudIcon, PaletteIcon, SelfHostedSyncIcon, SettingsIcon, UserIcon } from '@/components/icons';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { localize } from '@/nls';
@@ -41,6 +41,12 @@ const tabs = [
     label: localize('sync.selfHostedSync', 'Selfhosted Sync'),
     path: '/desktop/settings/selfhosted-sync',
     icon: <SelfHostedSyncIcon />,
+  },
+  {
+    id: 'ai',
+    label: localize('settings.ai', 'AI Assistant'),
+    path: '/desktop/settings/ai',
+    icon: <AIIcon />,
   },
 ];
 

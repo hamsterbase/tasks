@@ -4,6 +4,9 @@ import {
   Archive,
   ArrowLeft,
   ArrowRight,
+  ArrowUp,
+  Bot,
+  Brain,
   CalendarCheck,
   CalendarClock,
   CalendarDays,
@@ -26,8 +29,10 @@ import {
   Inbox,
   Info,
   Layers,
+  Link,
   ListTree,
   LocateFixed,
+  MessageSquare,
   MoreVerticalIcon,
   Palette,
   PenLine,
@@ -38,8 +43,10 @@ import {
   SendToBack,
   Settings,
   SlidersHorizontal,
+  Square,
   Sun,
   Tag,
+  Trash2,
   TypeIcon,
   User,
   X,
@@ -101,3 +108,10 @@ export const SyncIcon = RefreshCw;
 export const ArchiveIcon = Archive;
 export const RepeatIcon = Repeat;
 export const SearchIcon = Search;
+export const AIIcon = Bot;
+export const ChatIcon = MessageSquare;
+export const LinkIcon = Link;
+export const BrainIcon = Brain;
+export const TrashIcon = Trash2;
+export const ArrowUpIcon = ArrowUp;
+export const StopIcon = Square;
