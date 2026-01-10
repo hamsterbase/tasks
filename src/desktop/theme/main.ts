@@ -243,10 +243,6 @@ export const desktopStyles = {
   SettingsTitleDescription: /*tw*/ 'text-base font-normal text-t3 leading-5',
   SettingsTitleActionContainer: /*tw*/ 'flex items-center',
 
-  SettingsInputGroup: /*tw*/ 'flex flex-col gap-2',
-  SettingsInputLabel: /*tw*/ 'text-base font-medium text-t1 leading-6',
-  SettingsInputDescription: /*tw*/ 'text-sm font-normal text-t3 leading-4.5',
-
   TaskListItemContainer: /*tw*/ 'group relative flex items-start gap-3 px-3 py-3 rounded-md outline-none',
   TaskListItemContainerWillDisappear: /*tw*/ 'opacity-50',
   TaskListItemContainerSelected: /*tw*/ 'bg-bg3',

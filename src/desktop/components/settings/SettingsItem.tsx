@@ -1,10 +1,11 @@
 import { desktopStyles } from '@/desktop/theme/main';
 import React from 'react';
+import { InputField } from '../Form/InputField/InputField';
 import { Select } from '../Form/Select/Select';
 import { Switch } from '../Switch';
 import { SettingButton } from './Button/Button';
 
-export type ActionType = 'select' | 'switch' | 'button';
+export type ActionType = 'select' | 'switch' | 'button' | 'input';
 
 export interface SelectAction {
   type: 'select';
@@ -26,7 +27,15 @@ export interface ButtonAction {
   disabled?: boolean;
 }
 
-export type Action = SelectAction | SwitchAction | ButtonAction;
+export interface InputAction {
+  type: 'input';
+  inputType?: 'text' | 'password' | 'url';
+  placeholder?: string;
+  currentValue: string;
+  onChange: (value: string) => void;
+}
+
+export type Action = SelectAction | SwitchAction | ButtonAction | InputAction;
 
 export interface SettingsItemProps {
   title: string;
@@ -46,6 +55,16 @@ export const SettingsItem: React.FC<SettingsItemProps> = ({ title, description, 
           <SettingButton onClick={action.onClick} disabled={action.disabled} inline size="medium">
             {action.label}
           </SettingButton>
+        );
+      case 'input':
+        return (
+          <InputField
+            type={action.inputType}
+            placeholder={action.placeholder}
+            value={action.currentValue}
+            onChange={(e) => action.onChange(e.target.value)}
+            className="w-80 px-3 py-3 h-11 border border-line-regular rounded-lg bg-bg1 text-t1 text-base font-normal leading-5 placeholder-t3 focus:outline-none focus:border-brand"
+          />
         );
     }
   };
