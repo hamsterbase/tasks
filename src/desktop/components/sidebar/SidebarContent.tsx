@@ -1,6 +1,6 @@
 import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc.ts';
 import { areaPageTitleInputId, projectPageTitleInputId } from '@/components/edit/inputId';
-import { PlusIcon, SearchIcon, SettingsIcon, SyncIcon } from '@/components/icons';
+import { PlusIcon, SquareTerminalIcon, SettingsIcon, SyncIcon } from '@/components/icons';
 import { FlattenedResult } from '@/core/state/home/flattenedItemsToResult';
 import { flattenRootCollections } from '@/core/state/home/getFlattenRootCollections';
 import { getFutureProjects } from '@/core/state/home/getFutureProjects';
@@ -202,7 +202,7 @@ export const SidebarContent: React.FC = () => {
           onClick={() => CommandPaletteController.create(instantiationService)}
           className={desktopStyles.SidebarHeaderSearchButton}
         >
-          <SearchIcon className={desktopStyles.SidebarHeaderSearchButtonIcon} />
+          <SquareTerminalIcon className={desktopStyles.SidebarHeaderSearchButtonIcon} />
         </button>
       </div>
       <SidebarMenu />

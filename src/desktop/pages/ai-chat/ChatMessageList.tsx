@@ -1,4 +1,4 @@
-import { ReplyIcon, ChevronDownIcon, ChevronRightIcon, BrainIcon } from '@/components/icons';
+import { ReplyIcon, ChevronDownIcon, ChevronRightIcon, BrainIcon, SyncIcon, StopIcon } from '@/components/icons';
 import { localize } from '@/nls';
 import React, { useState } from 'react';
 import { ChatMessageItem, ContentBlock } from '@/services/ai/browser/types';
@@ -111,26 +111,25 @@ interface MessageStatusBadgeProps {
 }
 
 const MessageStatusBadge: React.FC<MessageStatusBadgeProps> = ({ status }) => {
-  const statusConfig = {
-    generating: {
-      text: localize('ai_chat.status_generating', 'Generating'),
-      className: 'text-brand',
-      icon: <span className="animate-pulse">●</span>,
-    },
-    stopped: {
-      text: localize('ai_chat.status_stopped', 'Stopped'),
-      className: 'text-t3',
-      icon: '■',
-    },
-  };
+  if (status === 'generating') {
+    return (
+      <span className="flex items-center gap-1 text-xs text-t3">
+        <SyncIcon className="size-3 animate-spin" />
+        {localize('ai_chat.status_responding', 'Responding...')}
+      </span>
+    );
+  }
 
-  const config = statusConfig[status];
+  if (status === 'stopped') {
+    return (
+      <span className="flex items-center gap-1 text-xs text-t3">
+        <StopIcon className="size-3" />
+        {localize('ai_chat.status_stopped', 'Stopped')}
+      </span>
+    );
+  }
 
-  return (
-    <span className={`text-xs ml-2 ${config.className}`}>
-      {config.icon} {config.text}
-    </span>
-  );
+  return null;
 };
 
 const ContentBlockRenderer: React.FC<{
@@ -174,7 +173,7 @@ const ChatMessageItemComponent: React.FC<ChatMessageItemComponentProps> = ({
     <div className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}>
       <div className={isUser ? 'min-w-[200px] max-w-2xl' : 'w-[80%]'}>
         <div className={`rounded-lg p-3 ${isUser ? 'bg-brand text-white' : 'bg-bg2 text-t1'}`}>
-          <div className="text-xs opacity-70 mb-1 flex items-center">
+          <div className="text-xs opacity-70 mb-1 flex items-center justify-between">
             <span>
               #{message.id}
               {message.linkedMessageId && ` → #${message.linkedMessageId}`}

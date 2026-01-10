@@ -145,7 +145,7 @@ export function executeGetData(instantiationService: IInstantiationService, para
 
   const modelData = todoService.modelState;
   const today = Date.now();
-  const includeCompleted = params.includeCompleted ?? true;
+  const includeCompleted = params.includeCompleted ?? false;
 
   // Get inbox tasks
   const inboxResult = getInboxTasks(modelData, {
@@ -224,8 +224,8 @@ export const GET_DATA_TOOL = {
   },
 } satisfies OpenAI.Chat.Completions.ChatCompletionTool;
 
-function formatGetDataArguments(): string {
-  return 'Fetching task data overview';
+function formatGetDataArguments(params: GetDataToolParams): string {
+  return 'Fetching task data overview. Include completed items: ' + (params.includeCompleted ? 'Yes' : 'No') + '.';
 }
 
 export const getDataToolConfig: ToolConfig = {

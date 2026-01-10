@@ -45,6 +45,7 @@ import {
   Settings,
   SlidersHorizontal,
   Square,
+  SquareTerminal,
   Sun,
   Tag,
   Trash2,
@@ -109,6 +110,7 @@ export const SyncIcon = RefreshCw;
 export const ArchiveIcon = Archive;
 export const RepeatIcon = Repeat;
 export const SearchIcon = Search;
+export const SquareTerminalIcon = SquareTerminal;
 export const AIIcon = Bot;
 export const ChatIcon = MessageSquare;
 export const ReplyIcon = MessageSquareReply;

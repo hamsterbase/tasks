@@ -1,10 +1,4 @@
-import { AreaIcon } from '@/components/icons';
-import { TaskList } from '@/components/taskList/taskList.ts';
 import { TaskObjectSchema } from '@/core/type';
-import { getProject } from '@/core/state/getProject';
-import { getTaskInfo } from '@/core/state/getTaskInfo';
-import { DesktopProjectListItem } from '@/desktop/components/todo/DesktopProjectListItem';
-import { TaskListItem } from '@/desktop/components/todo/TaskListItem';
 import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
@@ -14,8 +8,10 @@ import { IWorkbenchOverlayService } from '@/services/overlay/common/WorkbenchOve
 import { ITodoService } from '@/services/todo/common/todoService';
 import { TestIds } from '@/testIds';
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
-import { Link, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import { CommandPaletteController } from './CommandPaletteController';
+import { SearchResultItem } from './SearchResultItem';
+import { getNavigationPath } from '@/core/route/getNavigationPath';
 
 interface SearchResult {
   item: TaskObjectSchema;
@@ -31,10 +27,19 @@ function searchItems(items: TaskObjectSchema[], query: string): SearchResult[] {
   const results: SearchResult[] = [];
 
   for (const item of items) {
+    // 排除 projectHeading
     if (item.type === 'projectHeading') {
       continue;
     }
 
+    // 状态过滤：排除已完成和已取消的项目和任务
+    if (item.type === 'project' || item.type === 'task') {
+      if (item.status === 'completed' || item.status === 'canceled') {
+        continue;
+      }
+    }
+
+    // 搜索匹配
     if (item.title.toLowerCase().includes(lowerQuery)) {
       results.push({ item, matchedField: 'title' });
     } else if ('notes' in item && item.notes && item.notes.toLowerCase().includes(lowerQuery)) {
@@ -42,7 +47,15 @@ function searchItems(items: TaskObjectSchema[], query: string): SearchResult[] {
     }
   }
 
-  return results.slice(0, 20);
+  // 按类型排序：area → project → task
+  const typeOrder: Record<string, number> = { area: 1, project: 2, task: 3 };
+  results.sort((a, b) => {
+    const orderA = typeOrder[a.item.type] || 999;
+    const orderB = typeOrder[b.item.type] || 999;
+    return orderA - orderB;
+  });
+
+  return results;
 }
 
 interface CommandPaletteContentProps {
@@ -61,9 +74,6 @@ const CommandPaletteContent: React.FC<CommandPaletteContentProps> = ({ controlle
   const searchResults = useMemo(() => {
     return searchItems(todoService.modelState.taskList, controller.searchQuery);
   }, [todoService.modelState.taskList, controller.searchQuery]);
-
-  // Create a dummy task list for TaskListItem - it only needs to provide basic interface
-  const dummyTaskList = useMemo(() => new TaskList('search', [], [], null, null), []);
 
   useEffect(() => {
     controller.setResultsCount(searchResults.length);
@@ -90,39 +100,10 @@ const CommandPaletteContent: React.FC<CommandPaletteContentProps> = ({ controlle
     (item: TaskObjectSchema) => {
       controller.close();
 
-      switch (item.type) {
-        case 'area':
-          navigate(`/desktop/area/${item.uid}`);
-          break;
-        case 'project':
-          navigate(`/desktop/project/${item.uid}`);
-          break;
-        case 'task': {
-          const parentId = item.parentId;
-          if (parentId) {
-            const parent = todoService.modelState.taskObjectMap.get(parentId);
-            if (parent) {
-              if (parent.type === 'project' || parent.type === 'projectHeading') {
-                const projectId = parent.type === 'projectHeading' ? parent.parentId : parent.id;
-                const project = todoService.modelState.taskObjectMap.get(projectId);
-                if (project && project.type === 'project') {
-                  navigate(`/desktop/project/${project.uid}`, {
-                    state: { highlightTaskId: item.id },
-                  });
-                }
-              } else if (parent.type === 'area') {
-                navigate(`/desktop/area/${parent.uid}`, {
-                  state: { highlightTaskId: item.id },
-                });
-              }
-            }
-          } else {
-            navigate('/desktop/inbox', {
-              state: { highlightTaskId: item.id },
-            });
-          }
-          break;
-        }
+      const navigationPath = getNavigationPath(item, todoService.modelState.taskObjectMap);
+      if (navigationPath) {
+        navigate(navigationPath.path, { state: navigationPath.state });
+        return;
       }
     },
     [controller, navigate, todoService.modelState.taskObjectMap]
@@ -206,53 +187,14 @@ const CommandPaletteContent: React.FC<CommandPaletteContentProps> = ({ controlle
                   data-result-type={result.item.type}
                   data-selected={isSelected}
                 >
-                  {result.item.type === 'area' && (
-                    <Link
-                      to={`/desktop/area/${result.item.uid}`}
-                      className={`${desktopStyles.CommandPaletteResultItem} ${isSelected ? desktopStyles.CommandPaletteResultItemSelected : ''}`}
-                      onMouseDown={(e) => {
-                        e.preventDefault();
-                        handleResultClick(result.item);
-                      }}
-                    >
-                      <div className={desktopStyles.CommandPaletteResultItemIcon}>
-                        <AreaIcon />
-                      </div>
-                      <span className={desktopStyles.CommandPaletteResultItemTitle}>
-                        {result.item.title || localize('area.untitled', 'New Area')}
-                      </span>
-                    </Link>
-                  )}
-                  {result.item.type === 'project' && (
-                    <div
-                      className={isSelected ? desktopStyles.CommandPaletteResultItemSelected : ''}
-                      onMouseDown={(e) => {
-                        e.preventDefault();
-                        handleResultClick(result.item);
-                      }}
-                    >
-                      <DesktopProjectListItem
-                        project={getProject(todoService.modelState, result.item.id)}
-                        disableDrag={true}
-                      />
-                    </div>
-                  )}
-                  {result.item.type === 'task' && (
-                    <div
-                      className={isSelected ? desktopStyles.CommandPaletteResultItemSelected : ''}
-                      onMouseDown={(e) => {
-                        e.preventDefault();
-                        handleResultClick(result.item);
-                      }}
-                    >
-                      <TaskListItem
-                        task={getTaskInfo(todoService.modelState, result.item.id)}
-                        taskList={dummyTaskList}
-                        willDisappear={false}
-                        disableDrag={true}
-                      />
-                    </div>
-                  )}
+                  <SearchResultItem
+                    item={result.item}
+                    isSelected={isSelected}
+                    onMouseDown={(e) => {
+                      e.preventDefault();
+                      handleResultClick(result.item);
+                    }}
+                  />
                 </div>
               );
             })}

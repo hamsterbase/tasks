@@ -545,10 +545,11 @@ export const desktopStyles = {
   CommandPaletteInput: /*tw*/ 'flex-1 bg-transparent text-base text-t1 placeholder-t3 focus:outline-none font-normal',
   CommandPaletteResultsContainer: /*tw*/ 'max-h-96 overflow-y-auto p-3',
   CommandPaletteResultsEmpty: /*tw*/ 'flex items-center justify-center h-24 text-t3 text-base',
-  CommandPaletteResultItem: /*tw*/ 'flex items-center gap-3 px-3 h-11 hover:bg-bg2 cursor-pointer transition-colors',
+  CommandPaletteResultItem:
+    /*tw*/ 'flex items-start gap-3 px-3 py-3 rounded-md hover:bg-bg2 cursor-pointer transition-colors',
   CommandPaletteResultItemSelected: /*tw*/ 'bg-bg2',
-  CommandPaletteResultItemIcon: /*tw*/ 'size-5 text-t2 flex-shrink-0',
-  CommandPaletteResultItemTitle: /*tw*/ 'text-base text-t1 truncate',
+  CommandPaletteResultItemIcon: /*tw*/ 'size-5 text-t3 flex-shrink-0 flex items-center justify-center',
+  CommandPaletteResultItemTitle: /*tw*/ 'text-base text-t1 truncate leading-5',
 };
 
 export type DesktopThemeDefinition = typeof desktopStyles;

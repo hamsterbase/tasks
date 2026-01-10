@@ -22,6 +22,17 @@ function getTypeDisplayName(type: string): string {
 }
 
 /**
+ * 获取项目标题，如果获取不到则降级显示 ID
+ */
+function getItemTitle(modelState: ITaskModelData | undefined, itemId: string): string {
+  if (!modelState) {
+    return `[${itemId}]`;
+  }
+  const item = modelState.taskObjectMap.get(itemId);
+  return item ? `"${item.title}"` : `[${itemId}]`;
+}
+
+/**
  * 格式化单个 action 为可读字符串
  * @returns 格式化后的字符串，如果 action 应被忽略则返回 null
  */
@@ -58,13 +69,13 @@ export function formatAction(
         updates.push(`dueDate=${action.dueDate === null ? 'clear' : formatOptionalTimeStampToDate(action.dueDate)}`);
       }
       if (action.position) updates.push('position=moved');
-      return `  ~ Task [${action.taskId}]: ${updates.join(', ')}`;
+      return `  ~ Task ${getItemTitle(modelState, action.taskId)}: ${updates.join(', ')}`;
     }
     case 'updateHeading': {
       const updates: string[] = [];
       if (action.title) updates.push(`title="${action.title}"`);
       if (action.position) updates.push('position=moved');
-      return `  ~ Heading [${action.headingId}]: ${updates.join(', ')}`;
+      return `  ~ Heading ${getItemTitle(modelState, action.headingId)}: ${updates.join(', ')}`;
     }
     case 'updateProject': {
       const updates: string[] = [];
@@ -78,13 +89,13 @@ export function formatAction(
         updates.push(`dueDate=${action.dueDate === null ? 'clear' : formatOptionalTimeStampToDate(action.dueDate)}`);
       }
       if (action.position) updates.push('position=moved');
-      return `  ~ Project [${action.projectId}]: ${updates.join(', ')}`;
+      return `  ~ Project ${getItemTitle(modelState, action.projectId)}: ${updates.join(', ')}`;
     }
     case 'updateArea': {
       const updates: string[] = [];
       if (action.title) updates.push(`title="${action.title}"`);
       if (action.position) updates.push('position=moved');
-      return `  ~ Area [${action.areaId}]: ${updates.join(', ')}`;
+      return `  ~ Area ${getItemTitle(modelState, action.areaId)}: ${updates.join(', ')}`;
     }
     case 'deleteItem': {
       if (!modelState) {
