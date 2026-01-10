@@ -28,16 +28,15 @@ export const SearchResultItem: React.FC<SearchResultItemProps> = ({ item, isSele
   const renderIcon = () => {
     switch (item.type) {
       case 'area':
-        return <AreaIcon className="size-5" />;
+        return <AreaIcon className="size-4" />;
 
       case 'project':
         return (
-          <ProjectStatusBox progress={projectInfo?.progress || 0} status={item.status} color="t3" className="size-5" />
+          <ProjectStatusBox progress={projectInfo?.progress || 0} status={item.status} color="t3" className="size-4" />
         );
 
       case 'task':
-        return <TaskStatusBox status={item.status} className="size-5" />;
-
+        return <TaskStatusBox status={item.status} className="size-4" />;
       default:
         return null;
     }

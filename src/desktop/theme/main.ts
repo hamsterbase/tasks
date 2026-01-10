@@ -536,16 +536,17 @@ export const desktopStyles = {
   // CommandPalette styles
   CommandPaletteOverlayBackdrop: /*tw*/ 'fixed inset-0 flex items-start justify-center pt-30',
   CommandPaletteOverlayBackgroundMask: /*tw*/ 'absolute inset-0 bg-black opacity-45',
-  CommandPaletteOverlayContainer: /*tw*/ 'bg-bg1-float rounded-lg shadow-2xl flex flex-col w-150 mx-4 relative',
+  CommandPaletteOverlayContainer:
+    /*tw*/ 'bg-bg1-float rounded-lg shadow-2xl flex flex-col w-[720px] max-w-[calc(100vw-32px)] relative',
   CommandPaletteInputContainer: /*tw*/ 'flex items-center gap-3 px-6 h-14',
   CommandPaletteInput: /*tw*/ 'flex-1 bg-transparent text-base text-t1 placeholder-t3 focus:outline-none font-normal',
   CommandPaletteResultsContainer: /*tw*/ 'max-h-96 overflow-y-auto p-3',
   CommandPaletteResultsEmpty: /*tw*/ 'flex items-center justify-center h-24 text-t3 text-base',
   CommandPaletteResultItem:
-    /*tw*/ 'flex items-start gap-3 px-3 py-3 rounded-md hover:bg-bg2 cursor-pointer transition-colors',
+    /*tw*/ 'flex items-start gap-2 px-3 py-3 rounded-md hover:bg-bg2 cursor-pointer transition-colors',
   CommandPaletteResultItemSelected: /*tw*/ 'bg-bg2',
-  CommandPaletteResultItemIcon: /*tw*/ 'size-5 text-t3 flex-shrink-0 flex items-center justify-center',
-  CommandPaletteResultItemTitle: /*tw*/ 'text-base text-t1 truncate leading-5',
+  CommandPaletteResultItemIcon: /*tw*/ 'size-4 text-t3 flex-shrink-0 flex items-center justify-center',
+  CommandPaletteResultItemTitle: /*tw*/ 'text-sm text-t1 truncate leading-4 h-4',
 };
 
 export type DesktopThemeDefinition = typeof desktopStyles;
