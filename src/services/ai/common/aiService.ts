@@ -12,6 +12,7 @@ export interface AssistantMessage {
   role: 'assistant';
   content: string;
   toolCalls?: UIToolCallInfo[];
+  reasoningContent?: string;
 }
 
 export interface SystemMessage {
@@ -73,6 +74,7 @@ export type AIStreamEvent =
       type: 'done';
       content: string;
       toolCalls?: UIToolCallInfo[];
+      reasoningContent?: string;
     }
   | {
       type: 'error';

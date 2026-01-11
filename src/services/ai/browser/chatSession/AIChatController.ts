@@ -169,10 +169,15 @@ export class AIChatController implements IAIChatController {
       const context = this._buildContext(userMessage.linkedMessageId);
       let messages: ChatMessage[] = [...context, { role: 'user', content: content.trim() }];
 
-      const processStream = async (): Promise<{ toolCalls?: ToolCallInfo[]; content: string }> => {
+      const processStream = async (): Promise<{
+        toolCalls?: ToolCallInfo[];
+        content: string;
+        reasoningContent?: string;
+      }> => {
         return new Promise((resolve, reject) => {
           let finalContent = '';
           let finalToolCalls: ToolCallInfo[] | undefined;
+          let finalReasoningContent: string | undefined;
 
           const handleEvent = (event: AIStreamEvent) => {
             switch (event.type) {
@@ -275,7 +280,10 @@ export class AIChatController implements IAIChatController {
                 if (event.toolCalls) {
                   finalToolCalls = event.toolCalls;
                 }
-                resolve({ toolCalls: finalToolCalls, content: finalContent });
+                if (event.reasoningContent) {
+                  finalReasoningContent = event.reasoningContent;
+                }
+                resolve({ toolCalls: finalToolCalls, content: finalContent, reasoningContent: finalReasoningContent });
                 break;
 
               case 'error':
@@ -328,6 +336,7 @@ export class AIChatController implements IAIChatController {
                 role: 'assistant' as const,
                 content: result.content || '',
                 toolCalls: toolCallsForMessage,
+                reasoningContent: result.reasoningContent,
               },
             ];
 

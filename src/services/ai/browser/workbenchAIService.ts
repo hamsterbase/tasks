@@ -58,7 +58,9 @@ export class WorkbenchAIService implements IAIService {
         result.push({ role: 'system', content: msg.content });
       } else if (msg.role === 'assistant') {
         if (msg.toolCalls && msg.toolCalls.length > 0) {
-          result.push({
+          const assistantMessage: OpenAI.Chat.Completions.ChatCompletionAssistantMessageParam & {
+            reasoning_content?: string;
+          } = {
             role: 'assistant',
             content: msg.content || null,
             tool_calls: msg.toolCalls
@@ -71,9 +73,19 @@ export class WorkbenchAIService implements IAIService {
                   arguments: JSON.stringify(tc.arguments),
                 },
               })),
-          });
+          };
+          if (msg.reasoningContent) {
+            assistantMessage.reasoning_content = msg.reasoningContent;
+          }
+          result.push(assistantMessage);
         } else {
-          result.push({ role: 'assistant', content: msg.content });
+          const assistantMessage: OpenAI.Chat.Completions.ChatCompletionAssistantMessageParam & {
+            reasoning_content?: string;
+          } = { role: 'assistant', content: msg.content };
+          if (msg.reasoningContent) {
+            assistantMessage.reasoning_content = msg.reasoningContent;
+          }
+          result.push(assistantMessage);
         }
       } else if (msg.role === 'tool') {
         result.push({
@@ -119,6 +131,7 @@ export class WorkbenchAIService implements IAIService {
       let contentStarted = false;
       let thinkingStarted = false;
       let accumulatedContent = '';
+      let accumulatedReasoningContent = '';
       const toolCalls: Map<number, { id: string; name: string; arguments: string }> = new Map();
 
       for await (const chunk of stream) {
@@ -139,6 +152,7 @@ export class WorkbenchAIService implements IAIService {
             thinkingStarted = true;
             onEvent({ type: 'thinking_start' });
           }
+          accumulatedReasoningContent += reasoning;
           onEvent({ type: 'thinking_delta', content: reasoning });
         }
 
@@ -232,6 +246,7 @@ export class WorkbenchAIService implements IAIService {
         type: 'done',
         content: accumulatedContent,
         toolCalls: parsedToolCalls.length > 0 ? parsedToolCalls : undefined,
+        reasoningContent: accumulatedReasoningContent || undefined,
       });
     } catch (error) {
       if (signal?.aborted) {
