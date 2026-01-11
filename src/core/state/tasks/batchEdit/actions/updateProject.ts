@@ -2,7 +2,7 @@ import { TaskModel } from '@/core/model';
 import { ItemPosition } from '@/core/type';
 import { TreeID } from 'loro-crdt';
 import { UpdateProjectAction, ItemPosition as SchemaItemPosition } from '../types';
-import { validateItemExists, validatePosition, validateTimestamp, BatchEditValidationError } from '../validation';
+import { validateItemExists, validatePosition, convertDateString, BatchEditValidationError } from '../validation';
 
 /**
  * 将 schema 中的 ItemPosition 转换为核心类型的 ItemPosition
@@ -29,19 +29,11 @@ export function executeUpdateProject(model: TaskModel, action: UpdateProjectActi
     validatePosition(modelData, action.position);
   }
 
-  // 校验时间戳
-  if (action.startDate !== undefined) {
-    validateTimestamp(action.startDate, 'startDate');
-  }
-  if (action.dueDate !== undefined) {
-    validateTimestamp(action.dueDate, 'dueDate');
-  }
-
   // 执行更新
   model.updateProject(action.projectId as TreeID, {
     title: action.title,
-    startDate: action.startDate,
-    dueDate: action.dueDate,
+    startDate: convertDateString(action.startDate),
+    dueDate: convertDateString(action.dueDate),
     position: toItemPosition(action.position),
   });
 }

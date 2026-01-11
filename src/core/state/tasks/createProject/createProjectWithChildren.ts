@@ -1,4 +1,5 @@
 import { TaskModel } from '@/core/model';
+import { getUTCTimeStampFromDateStr } from '@/core/time/getUTCTimeStampFromDateStr';
 import { ItemPosition } from '@/core/type';
 import { TreeID } from 'loro-crdt';
 import {
@@ -9,22 +10,11 @@ import {
 } from './types';
 
 /**
- * 校验日期是否为有效的 UTC 午夜时间戳
- * 日期必须是 0 时区日期的毫秒数（即 UTC 时间的 00:00:00.000）
+ * 将日期字符串转换为 UTC 时间戳
  */
-function validateDate(timestamp: number | undefined, fieldName: string): void {
-  if (timestamp === undefined) return;
-
-  // 检查是否为有效数字
-  if (!Number.isFinite(timestamp) || timestamp < 0) {
-    throw new Error(`Invalid ${fieldName}: must be a positive number`);
-  }
-
-  // 检查是否为 UTC 午夜时间戳（毫秒数应该能被 86400000 整除）
-  const msInDay = 24 * 60 * 60 * 1000;
-  if (timestamp % msInDay !== 0) {
-    throw new Error(`Invalid ${fieldName}: must be a UTC midnight timestamp (divisible by 86400000)`);
-  }
+function convertDateStr(dateStr: string | undefined): number | undefined {
+  if (dateStr === undefined) return undefined;
+  return getUTCTimeStampFromDateStr(dateStr);
 }
 
 /**
@@ -60,29 +50,8 @@ function validatePosition(model: TaskModel, position: ItemPosition | undefined):
  * 校验所有参数
  */
 function validateParams(model: TaskModel, params: CreateProjectWithChildrenParams): void {
-  // 校验 project 日期
-  validateDate(params.startDate, 'project startDate');
-  validateDate(params.dueDate, 'project dueDate');
-
   // 校验 position
   validatePosition(model, params.position as ItemPosition | undefined);
-
-  // 校验 children 中的日期
-  if (params.children) {
-    for (const child of params.children) {
-      if (child.type === 'task') {
-        validateDate(child.startDate, 'task startDate');
-        validateDate(child.dueDate, 'task dueDate');
-      } else if (child.type === 'heading') {
-        if (child.children) {
-          for (const task of child.children) {
-            validateDate(task.startDate, 'heading task startDate');
-            validateDate(task.dueDate, 'heading task dueDate');
-          }
-        }
-      }
-    }
-  }
 }
 
 /**
@@ -109,8 +78,8 @@ function addTask(model: TaskModel, parentId: TreeID, task: CreateTaskItem, after
 
   const taskId = model.addTask({
     title: task.title,
-    startDate: task.startDate,
-    dueDate: task.dueDate,
+    startDate: convertDateStr(task.startDate),
+    dueDate: convertDateStr(task.dueDate),
     position,
   });
 
@@ -141,8 +110,8 @@ function addHeading(model: TaskModel, parentId: TreeID, heading: CreateHeadingIt
       const task = heading.children[i];
       const taskId = model.addTask({
         title: task.title,
-        startDate: task.startDate,
-        dueDate: task.dueDate,
+        startDate: convertDateStr(task.startDate),
+        dueDate: convertDateStr(task.dueDate),
         position: { type: 'firstElement', parentId: headingId },
       });
 
@@ -195,8 +164,8 @@ export function createProjectWithChildren(model: TaskModel, params: CreateProjec
   // 更新 project 日期
   if (params.startDate || params.dueDate) {
     model.updateProject(projectId, {
-      startDate: params.startDate,
-      dueDate: params.dueDate,
+      startDate: convertDateStr(params.startDate),
+      dueDate: convertDateStr(params.dueDate),
     });
   }
 

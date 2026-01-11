@@ -1,4 +1,5 @@
 import { ITaskModelData, TaskObjectSchema } from '@/core/type';
+import { getUTCTimeStampFromDateStr } from '@/core/time/getUTCTimeStampFromDateStr';
 import { ItemPosition } from './types';
 
 export class BatchEditValidationError extends Error {
@@ -6,6 +7,16 @@ export class BatchEditValidationError extends Error {
     super(message);
     this.name = 'BatchEditValidationError';
   }
+}
+
+/**
+ * 将日期字符串转换为 UTC 时间戳
+ * 支持 null（用于清除日期）和 undefined（未提供）
+ */
+export function convertDateString(dateStr: string | null | undefined): number | null | undefined {
+  if (dateStr === null) return null;
+  if (dateStr === undefined) return undefined;
+  return getUTCTimeStampFromDateStr(dateStr);
 }
 
 /**
@@ -35,17 +46,5 @@ export function validatePosition(modelData: ITaskModelData, position: ItemPositi
     case 'beforeElement':
       validateItemExists(modelData, position.nextElementId, 'Next element');
       break;
-  }
-}
-
-/**
- * 校验时间戳格式
- */
-export function validateTimestamp(timestamp: number | null | undefined, fieldName: string): void {
-  if (timestamp === null || timestamp === undefined) {
-    return;
-  }
-  if (!Number.isInteger(timestamp) || timestamp < 0) {
-    throw new BatchEditValidationError(`${fieldName} must be a valid positive integer timestamp, got: ${timestamp}`);
   }
 }

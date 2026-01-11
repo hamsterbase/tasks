@@ -1,7 +1,7 @@
 import { TaskModel } from '@/core/model';
 import { ItemPosition } from '@/core/type';
 import { AddTaskAction, AddTaskInHeading, ItemPosition as SchemaItemPosition } from '../types';
-import { validatePosition, validateTimestamp } from '../validation';
+import { validatePosition, convertDateString } from '../validation';
 import { TreeID } from 'loro-crdt';
 
 /**
@@ -19,15 +19,13 @@ function toItemPosition(position: SchemaItemPosition): ItemPosition {
 export function executeAddTask(model: TaskModel, action: AddTaskAction): TreeID {
   // 参数校验
   validatePosition(model.toJSON(), action.position);
-  validateTimestamp(action.startDate, 'startDate');
-  validateTimestamp(action.dueDate, 'dueDate');
 
   // 创建任务
   const taskId = model.addTask({
     title: action.title,
     position: toItemPosition(action.position),
-    startDate: action.startDate,
-    dueDate: action.dueDate,
+    startDate: convertDateString(action.startDate),
+    dueDate: convertDateString(action.dueDate),
   });
 
   // 添加子任务（从后往前添加以保持顺序）
@@ -53,9 +51,6 @@ export function executeAddTaskInHeading(
   task: AddTaskInHeading,
   previousTaskId?: TreeID
 ): TreeID {
-  validateTimestamp(task.startDate, 'startDate');
-  validateTimestamp(task.dueDate, 'dueDate');
-
   const position = previousTaskId
     ? { type: 'afterElement' as const, previousElementId: previousTaskId }
     : { type: 'firstElement' as const, parentId: headingId };
@@ -63,8 +58,8 @@ export function executeAddTaskInHeading(
   const taskId = model.addTask({
     title: task.title,
     position,
-    startDate: task.startDate,
-    dueDate: task.dueDate,
+    startDate: convertDateString(task.startDate),
+    dueDate: convertDateString(task.dueDate),
   });
 
   // 添加子任务（从后往前添加以保持顺序）

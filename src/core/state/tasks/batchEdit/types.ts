@@ -19,8 +19,8 @@ export const ItemPositionSchema = z.discriminatedUnion('type', [
 // ===== Add Actions =====
 export const AddTaskInHeadingSchema = z.object({
   title: z.string().describe('Task title'),
-  startDate: z.number().optional().describe('Start date timestamp in milliseconds (UTC 0 timezone date)'),
-  dueDate: z.number().optional().describe('Due date timestamp in milliseconds (UTC 0 timezone date)'),
+  startDate: z.string().optional().describe('Start date in yyyy-MM-dd format'),
+  dueDate: z.string().optional().describe('Due date in yyyy-MM-dd format'),
   children: z.array(z.string()).optional().describe('Subtask titles'),
 });
 
@@ -28,8 +28,8 @@ export const AddTaskActionSchema = z.object({
   type: z.literal('addTask'),
   title: z.string().describe('Task title'),
   position: ItemPositionSchema.describe('Position where to add the task'),
-  startDate: z.number().optional().describe('Start date timestamp in milliseconds'),
-  dueDate: z.number().optional().describe('Due date timestamp in milliseconds'),
+  startDate: z.string().optional().describe('Start date in yyyy-MM-dd format'),
+  dueDate: z.string().optional().describe('Due date in yyyy-MM-dd format'),
   children: z.array(z.string()).optional().describe('Subtask titles'),
 });
 
@@ -45,8 +45,8 @@ export const UpdateTaskActionSchema = z.object({
   type: z.literal('updateTask'),
   taskId: z.string().describe('Task ID to update'),
   title: z.string().optional().describe('New task title'),
-  startDate: z.number().nullable().optional().describe('New start date (null to clear)'),
-  dueDate: z.number().nullable().optional().describe('New due date (null to clear)'),
+  startDate: z.string().nullable().optional().describe('New start date in yyyy-MM-dd format (null to clear)'),
+  dueDate: z.string().nullable().optional().describe('New due date in yyyy-MM-dd format (null to clear)'),
   status: z.enum(['completed', 'canceled', 'created']).optional().describe('New task status'),
   position: ItemPositionSchema.optional().describe('New position'),
 });
@@ -62,8 +62,8 @@ export const UpdateProjectActionSchema = z.object({
   type: z.literal('updateProject'),
   projectId: z.string().describe('Project ID to update'),
   title: z.string().optional().describe('New project title'),
-  startDate: z.number().nullable().optional().describe('New start date (null to clear)'),
-  dueDate: z.number().nullable().optional().describe('New due date (null to clear)'),
+  startDate: z.string().nullable().optional().describe('New start date in yyyy-MM-dd format (null to clear)'),
+  dueDate: z.string().nullable().optional().describe('New due date in yyyy-MM-dd format (null to clear)'),
   position: ItemPositionSchema.optional().describe('New position'),
 });
 

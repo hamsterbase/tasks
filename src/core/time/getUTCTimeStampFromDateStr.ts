@@ -1,7 +1,7 @@
 export function getUTCTimeStampFromDateStr(dateStr: string) {
   const parts = dateStr.split('-');
   if (parts.length !== 3) {
-    throw new Error('日期格式错误，应为 yyyy-MM-dd 格式');
+    throw new Error('Invalid date format, expected yyyy-MM-dd');
   }
   const year = parseInt(parts[0], 10);
   const month = parseInt(parts[1], 10);

@@ -26,8 +26,8 @@ export const itemPositionSchema = z.discriminatedUnion('type', [
 export const createTaskItemSchema = z.object({
   type: z.literal('task'),
   title: z.string().describe('Task title'),
-  startDate: z.number().optional().describe('Start date timestamp in milliseconds (UTC midnight)'),
-  dueDate: z.number().optional().describe('Due date timestamp in milliseconds (UTC midnight)'),
+  startDate: z.string().optional().describe('Start date in yyyy-MM-dd format'),
+  dueDate: z.string().optional().describe('Due date in yyyy-MM-dd format'),
   children: z.array(z.string()).optional().describe('Subtask titles'),
 });
 
@@ -47,8 +47,8 @@ export const childItemSchema = z.discriminatedUnion('type', [createTaskItemSchem
 // 创建 project 参数 schema
 export const createProjectWithChildrenParamsSchema = z.object({
   title: z.string().describe('Project title'),
-  startDate: z.number().optional().describe('Start date timestamp in milliseconds (UTC midnight)'),
-  dueDate: z.number().optional().describe('Due date timestamp in milliseconds (UTC midnight)'),
+  startDate: z.string().optional().describe('Start date in yyyy-MM-dd format'),
+  dueDate: z.string().optional().describe('Due date in yyyy-MM-dd format'),
   position: itemPositionSchema.optional().describe('Position to create the project'),
   children: z.array(childItemSchema).optional().describe('Tasks and headings in the project'),
 });

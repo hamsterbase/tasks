@@ -1,5 +1,14 @@
-import { formatOptionalTimeStampToDate } from '@/core/time/formatTimeStampToDate';
 import { CreateProjectToolParams } from './createProject';
+
+/**
+ * 格式化任务日期为可读字符串
+ */
+function formatTaskDates(startDate?: string, dueDate?: string): string {
+  const dates: string[] = [];
+  if (startDate) dates.push(`Start: ${startDate}`);
+  if (dueDate) dates.push(`Due: ${dueDate}`);
+  return dates.length > 0 ? ` (${dates.join(' | ')})` : '';
+}
 
 /**
  * 格式化 createProject 工具的参数为可读字符串
@@ -10,8 +19,8 @@ export function formatCreateProjectArguments(args: CreateProjectToolParams): str
 
   if (args.startDate || args.dueDate) {
     const dates: string[] = [];
-    if (args.startDate) dates.push(`Start: ${formatOptionalTimeStampToDate(args.startDate)}`);
-    if (args.dueDate) dates.push(`Due: ${formatOptionalTimeStampToDate(args.dueDate)}`);
+    if (args.startDate) dates.push(`Start: ${args.startDate}`);
+    if (args.dueDate) dates.push(`Due: ${args.dueDate}`);
     lines.push(dates.join(' | '));
   }
 
@@ -21,14 +30,14 @@ export function formatCreateProjectArguments(args: CreateProjectToolParams): str
     for (const child of args.children) {
       if (child.type === 'task') {
         let taskLine = `  - ${child.title}`;
-        if (child.dueDate) taskLine += ` (${formatOptionalTimeStampToDate(child.dueDate)})`;
+        taskLine += formatTaskDates(child.startDate, child.dueDate);
         lines.push(taskLine);
       } else {
         lines.push(`  [${child.title}]`);
         if (child.children) {
           for (const task of child.children) {
             let taskLine = `    - ${task.title}`;
-            if (task.dueDate) taskLine += ` (${formatOptionalTimeStampToDate(task.dueDate)})`;
+            taskLine += formatTaskDates(task.startDate, task.dueDate);
             lines.push(taskLine);
           }
         }

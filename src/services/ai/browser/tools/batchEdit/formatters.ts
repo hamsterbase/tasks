@@ -1,6 +1,5 @@
 import { BatchEditParams } from '@/core/state/tasks/batchEdit/types';
 import { BatchEditResult } from '@/core/state/tasks/batchEdit/batchEdit';
-import { formatOptionalTimeStampToDate } from '@/core/time/formatTimeStampToDate';
 import { ITaskModelData } from '@/core/type';
 
 /**
@@ -43,7 +42,12 @@ export function formatAction(
   switch (action.type) {
     case 'addTask': {
       let line = `  + Task: ${action.title}`;
-      if (action.dueDate) line += ` (due: ${formatOptionalTimeStampToDate(action.dueDate)})`;
+      if (action.startDate || action.dueDate) {
+        const dates: string[] = [];
+        if (action.startDate) dates.push(`start: ${action.startDate}`);
+        if (action.dueDate) dates.push(`due: ${action.dueDate}`);
+        line += ` (${dates.join(' | ')})`;
+      }
       if (action.children && action.children.length > 0) {
         line += `\n    Subtasks: ${action.children.join(', ')}`;
       }
@@ -61,12 +65,10 @@ export function formatAction(
       if (action.title) updates.push(`title="${action.title}"`);
       if (action.status) updates.push(`status=${action.status}`);
       if (action.startDate !== undefined) {
-        updates.push(
-          `startDate=${action.startDate === null ? 'clear' : formatOptionalTimeStampToDate(action.startDate)}`
-        );
+        updates.push(`startDate=${action.startDate === null ? 'clear' : action.startDate}`);
       }
       if (action.dueDate !== undefined) {
-        updates.push(`dueDate=${action.dueDate === null ? 'clear' : formatOptionalTimeStampToDate(action.dueDate)}`);
+        updates.push(`dueDate=${action.dueDate === null ? 'clear' : action.dueDate}`);
       }
       if (action.position) updates.push('position=moved');
       return `  ~ Task ${getItemTitle(modelState, action.taskId)}: ${updates.join(', ')}`;
@@ -81,12 +83,10 @@ export function formatAction(
       const updates: string[] = [];
       if (action.title) updates.push(`title="${action.title}"`);
       if (action.startDate !== undefined) {
-        updates.push(
-          `startDate=${action.startDate === null ? 'clear' : formatOptionalTimeStampToDate(action.startDate)}`
-        );
+        updates.push(`startDate=${action.startDate === null ? 'clear' : action.startDate}`);
       }
       if (action.dueDate !== undefined) {
-        updates.push(`dueDate=${action.dueDate === null ? 'clear' : formatOptionalTimeStampToDate(action.dueDate)}`);
+        updates.push(`dueDate=${action.dueDate === null ? 'clear' : action.dueDate}`);
       }
       if (action.position) updates.push('position=moved');
       return `  ~ Project ${getItemTitle(modelState, action.projectId)}: ${updates.join(', ')}`;
