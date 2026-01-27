@@ -31,16 +31,16 @@ const DialogContent: React.FC<{ controller: DialogController }> = ({ controller 
                   {action.label && (
                     <label className="block text-sm font-medium text-t1 mb-2">
                       {action.label}
-                      {action.required && <span className="text-stress-red ml-1">*</span>}
+                      {action.required && <span className="text-accent-danger ml-1">*</span>}
                     </label>
                   )}
                   <input
                     type={action.inputType || 'text'}
                     className={classNames(
-                      'w-full px-3 py-2 border bg-bg2-float rounded-md text-t1 outline-none transition-colors',
+                      'w-full px-3 py-2 border bg-bg2 rounded-md text-t1 outline-none transition-colors',
                       {
-                        'border-bg2-float focus:border-brand': !controller.errors[action.key],
-                        'border-stress-red': controller.errors[action.key],
+                        'border-bg2 focus:border-brand': !controller.errors[action.key],
+                        'border-accent-danger': controller.errors[action.key],
                       }
                     )}
                     placeholder={action.placeholder || ''}
@@ -48,7 +48,7 @@ const DialogContent: React.FC<{ controller: DialogController }> = ({ controller 
                     onChange={(e) => controller.updateActionValue(action.key, e.target.value)}
                   />
                   {controller.errors[action.key] && (
-                    <p className="text-xs text-stress-red mt-1">{controller.errors[action.key]}</p>
+                    <p className="text-xs text-accent-danger mt-1">{controller.errors[action.key]}</p>
                   )}
                 </div>
               );
@@ -58,7 +58,7 @@ const DialogContent: React.FC<{ controller: DialogController }> = ({ controller 
                   key={action.key}
                   className={classNames('w-full py-2 px-4 rounded-md text-center font-medium', {
                     'bg-brand text-white': action.color === 'primary',
-                    'bg-stress-red text-white': action.color === 'danger',
+                    'bg-accent-danger text-white': action.color === 'danger',
                     'bg-bg2 text-t1': !action.color,
                   })}
                   onClick={() => controller.handleButtonClick(action)}

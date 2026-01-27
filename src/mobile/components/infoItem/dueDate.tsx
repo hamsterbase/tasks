@@ -15,7 +15,7 @@ export const DueDateInfoItem: React.FC<DueDateInfoItemProps> = ({ dueDate }) => 
     <p className="flex items-baseline gap-2">
       <span
         className={classNames({
-          'text-stress-red': isPastOrToday(dueDate),
+          'text-accent-danger': isPastOrToday(dueDate),
         })}
       >
         {localize('create_task_page.due_date', 'Due Date')}: {formatDate(dueDate)}
@@ -29,7 +29,7 @@ export const DueDateInfoItemIcon: React.FC<DueDateInfoItemProps> = ({ dueDate })
   return (
     <DueIcon
       className={classNames({
-        'text-stress-red': isPastOrToday(dueDate),
+        'text-accent-danger': isPastOrToday(dueDate),
       })}
     />
   );

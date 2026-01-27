@@ -5,8 +5,8 @@ import { getTodayItems } from '@/core/state/today/getTodayItems';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import useNavigate from '@/hooks/useNavigate';
-import { useTaskDisplaySettings } from '@/hooks/useTaskDisplaySettings';
 import { StatCard } from '@/mobile/components/StatCard';
+import { useTaskDisplaySettingsMobile } from '@/mobile/hooks/useTaskDisplaySettings';
 import { styles } from '@/mobile/theme';
 import { localize } from '@/nls';
 import { INavigationService } from '@/services/navigationService/common/navigationService';
@@ -19,7 +19,7 @@ export const MobileHomeTopMenu = () => {
   useWatchEvent(todoService.onStateChange);
   const todayItems = getTodayItems(todoService.modelState, getTodayTimestampInUtc());
   const navigationService = useService(INavigationService);
-  const { showFutureTasks, showCompletedTasks, completedAfter } = useTaskDisplaySettings('inbox');
+  const { showFutureTasks, showCompletedTasks, completedAfter } = useTaskDisplaySettingsMobile('inbox');
   const { uncompletedTasksCount } = getInboxTasks(todoService.modelState, {
     currentDate: getTodayTimestampInUtc(),
     showFutureTasks,

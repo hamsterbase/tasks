@@ -2,7 +2,6 @@ import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc';
 import { AreaIcon, MenuIcon, TagIcon } from '@/components/icons';
 import { isTaskVisible } from '@/core/time/filterProjectAndTask';
 import { useService } from '@/hooks/use-service';
-import { useTaskDisplaySettings } from '@/hooks/useTaskDisplaySettings';
 import { useArea } from '@/mobile/hooks/useArea';
 import { styles } from '@/mobile/theme';
 import { localize } from '@/nls';
@@ -21,6 +20,7 @@ import { PageLayout } from '../components/PageLayout';
 import TaskItemWrapper from '../components/taskItem/TaskItemWrapper';
 import { HomeProjectItem } from '../components/todo/HomeProjectItem';
 import { TaskItem } from '../components/todo/TaskItem';
+import { useTaskDisplaySettingsMobile } from '../hooks/useTaskDisplaySettings';
 
 const useAreaId = (): TreeID => {
   const todoService = useService(ITodoService);
@@ -39,7 +39,7 @@ export const AreaPage = () => {
   const todoService = useService(ITodoService);
   const areaId = useAreaId();
   const { areaDetail, handleMoreOptions, handleAddTask, isTask, isProject, handleEditTag } = useArea(areaId);
-  const { showCompletedTasks, showFutureTasks, openTaskDisplaySettings, completedAfter } = useTaskDisplaySettings(
+  const { showCompletedTasks, showFutureTasks, openTaskDisplaySettings, completedAfter } = useTaskDisplaySettingsMobile(
     `area-${areaId}`
   );
 

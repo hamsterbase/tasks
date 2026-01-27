@@ -20,7 +20,7 @@ export const desktopStyles = {
   SidebarMenuItemIcon: /*tw*/ 'size-5 flex items-center justify-center flex-shrink-0',
   SidebarMenuItemLabel: /*tw*/ 'flex-1 truncate min-w-0',
   SidebarMenuItemBadgePrimary:
-    'bg-stress-red min-w-5 text-sm leading-3.5 h-5 rounded-full text-white flex items-center justify-center px-1.5',
+    'bg-accent-danger min-w-5 text-sm leading-3.5 h-5 rounded-full text-white flex items-center justify-center px-1.5',
   SidebarMenuItemBadgeSecondaryActive: /*tw*/ 'text-white',
   SidebarMenuItemBadgeSecondary: /*tw*/ 'text-t3',
   SidebarMenuDivider: /*tw*/ 'bg-line-bold h-0.25',
@@ -36,7 +36,7 @@ export const desktopStyles = {
 
   SidebarProjectItemActive: /*tw*/ 'bg-brand text-white',
   SidebarProjectItemInactive: /*tw*/ 'text-t2 hover:bg-bg1',
-  SidebarProjectItemDueDateDanger: /*tw*/ 'text-stress-red',
+  SidebarProjectItemDueDateDanger: /*tw*/ 'text-accent-danger',
   SidebarProjectItemDueDateActive: /*tw*/ 'text-white',
   SidebarProjectItemDueDateInactive: /*tw*/ 'text-t3',
 
@@ -82,7 +82,7 @@ export const desktopStyles = {
 
   TaskDateFieldDateContainer: /*tw*/ 'flex items-baseline gap-1.5 text-base leading-5',
   TaskDateFieldDateNormal: /*tw*/ 'text-t1',
-  TaskDateFieldDateOverdue: /*tw*/ 'text-stress-red',
+  TaskDateFieldDateOverdue: /*tw*/ 'text-accent-danger',
   TaskDateFieldRemainingText: /*tw*/ 'text-t3',
 
   TagsFieldEmptyButton: /*tw*/ 'flex items-center py-2 gap-2 text-t2 h-11 hover:bg-bg3 px-3 rounded-lg w-full',
@@ -118,7 +118,7 @@ export const desktopStyles = {
 
   AuthFormContainer: /*tw*/ 'flex flex-col gap-9',
   AuthFormSection: /*tw*/ 'flex flex-col gap-3',
-  AuthFormErrorMessage: /*tw*/ 'text-stress-red text-base',
+  AuthFormErrorMessage: /*tw*/ 'text-accent-danger text-base',
   AuthFormButtonSection: /*tw*/ 'flex flex-col gap-3',
   AuthFormFooterContainer: /*tw*/ 'flex items-center gap-2 justify-center',
   AuthFormFooterText: /*tw*/ 'text-base font-normal text-t3 leading-5',
@@ -158,19 +158,20 @@ export const desktopStyles = {
   SettingButtonFullWidth: /*tw*/ 'w-full',
 
   SettingButtonSolidPrimary: /*tw*/ 'bg-brand text-white hover:bg-brand/90',
-  SettingButtonSolidDanger: /*tw*/ 'bg-stress-red text-white hover:bg-stress-red/90',
+  SettingButtonSolidDanger: /*tw*/ 'bg-accent-danger text-white hover:bg-accent-danger/90',
   SettingButtonSolidDefault: /*tw*/ 'bg-bg3 text-white hover:bg-bg3/90',
 
   SettingButtonFilledPrimary: /*tw*/ 'bg-brand/10 text-brand hover:bg-brand/20',
-  SettingButtonFilledDanger: /*tw*/ 'bg-stress-red/10 text-stress-red hover:bg-stress-red/20',
+  SettingButtonFilledDanger: /*tw*/ 'bg-accent-danger/10 text-accent-danger hover:bg-accent-danger/20',
   SettingButtonFilledDefault: /*tw*/ 'bg-bg2 text-t1 hover:bg-bg3',
 
   SettingButtonDefaultPrimary: /*tw*/ 'bg-transparent text-brand border border-brand hover:bg-brand/10',
-  SettingButtonDefaultDanger: /*tw*/ 'bg-transparent text-stress-red border border-stress-red hover:bg-stress-red/10',
+  SettingButtonDefaultDanger:
+    /*tw*/ 'bg-transparent text-accent-danger border border-accent-danger hover:bg-accent-danger/10',
   SettingButtonDefaultDefault: /*tw*/ 'bg-transparent text-t1 border border-line-regular hover:bg-bg2',
 
   SettingButtonTextPrimary: /*tw*/ 'bg-transparent text-brand hover:bg-brand/10',
-  SettingButtonTextDanger: /*tw*/ 'bg-transparent text-stress-red hover:bg-stress-red/10',
+  SettingButtonTextDanger: /*tw*/ 'bg-transparent text-accent-danger hover:bg-accent-danger/10',
   SettingButtonTextDefault: /*tw*/ 'bg-transparent text-t1 hover:bg-bg2',
 
   SettingButtonDisabled: /*tw*/ 'opacity-50 cursor-not-allowed pointer-events-none',
@@ -179,7 +180,7 @@ export const desktopStyles = {
   DatabaseListLoadingContainer: /*tw*/ 'text-center py-4',
   DatabaseListLoadingText: /*tw*/ 'text-t2',
   DatabaseListErrorContainer: /*tw*/ 'text-center py-4',
-  DatabaseListErrorText: /*tw*/ 'text-stress-red',
+  DatabaseListErrorText: /*tw*/ 'text-accent-danger',
   DatabaseListEmptyContainer: /*tw*/ 'text-center py-4',
   DatabaseListEmptyText: /*tw*/ 'text-t2',
 
@@ -406,8 +407,8 @@ export const desktopStyles = {
   DesktopMessageHidden: /*tw*/ 'translate-x-full opacity-0',
   DesktopMessageInner: /*tw*/ 'flex items-start gap-3',
   DesktopMessageIcon: /*tw*/ 'flex-shrink-0 mt-0.5 size-5 flex items-center justify-center',
-  DesktopMessageIconSuccess: /*tw*/ 'text-success-green',
-  DesktopMessageIconError: /*tw*/ 'text-stress-red',
+  DesktopMessageIconSuccess: /*tw*/ 'text-accent-success',
+  DesktopMessageIconError: /*tw*/ 'text-accent-danger',
   DesktopMessageIconInfo: /*tw*/ 'text-brand',
   DesktopMessageTextContainer: /*tw*/ 'flex-1 min-w-0 gap-1 flex flex-col',
   DesktopMessageText: /*tw*/ 'text-medium font-medium leading-5 break-words',
@@ -436,12 +437,12 @@ export const desktopStyles = {
 
   OverlayBackdrop: /*tw*/ 'fixed inset-0 flex items-center justify-center',
   OverlayBackgroundMask: /*tw*/ 'absolute inset-0 bg-black opacity-45',
-  OverlayContainer: /*tw*/ 'bg-bg1-float rounded-lg shadow-2xl flex flex-col min-w-130 mx-4 relative p-5',
+  OverlayContainer: /*tw*/ 'bg-bg1 rounded-lg shadow-2xl flex flex-col min-w-130 mx-4 relative p-5',
 
   OverlayContainerBackdrop: /*tw*/ 'fixed inset-0',
   OverlayContainerContent: /*tw*/ 'fixed bg-bg1 rounded-lg shadow-xl border border-line-light',
   OverlayContainerFilterWrapper: /*tw*/ 'border-b border-line-regular p-3',
-  OverlayHeader: /*tw*/ 'flex items-center justify-between order-b border-bg2-float mb-6',
+  OverlayHeader: /*tw*/ 'flex items-center justify-between order-b border-bg2 mb-6',
   OverlayTitle: /*tw*/ 'text-xl leading-6 font-medium text-t1',
   OverlayCloseButton: /*tw*/ 'text-t3 transition-colors size-6',
   OverlayContent: /*tw*/ '',
@@ -480,7 +481,7 @@ export const desktopStyles = {
   TreeSelectOverlayText: /*tw*/ 'text-base leading-5 truncate',
 
   CreateDatabaseOverlayFormContainer: /*tw*/ 'flex flex-col gap-3',
-  CreateDatabaseOverlayErrorText: /*tw*/ 'text-stress-red text-sm',
+  CreateDatabaseOverlayErrorText: /*tw*/ 'text-accent-danger text-sm',
 
   DatePickerOverlayContainer: /*tw*/ 'w-76',
   DatePickerCalendarHeaderContainer: /*tw*/ 'flex justify-between items-center p-3 h-13',
@@ -537,7 +538,7 @@ export const desktopStyles = {
   CommandPaletteOverlayBackdrop: /*tw*/ 'fixed inset-0 flex items-start justify-center pt-30',
   CommandPaletteOverlayBackgroundMask: /*tw*/ 'absolute inset-0 bg-black opacity-45',
   CommandPaletteOverlayContainer:
-    /*tw*/ 'bg-bg1-float rounded-lg shadow-2xl flex flex-col w-[720px] max-w-[calc(100vw-32px)] relative',
+    /*tw*/ 'bg-bg1 rounded-lg shadow-2xl flex flex-col w-[720px] max-w-[calc(100vw-32px)] relative',
   CommandPaletteInputContainer: /*tw*/ 'flex items-center gap-3 px-6 h-14',
   CommandPaletteInput: /*tw*/ 'flex-1 bg-transparent text-base text-t1 placeholder-t3 focus:outline-none font-normal',
   CommandPaletteResultsContainer: /*tw*/ 'max-h-96 overflow-y-auto p-3',

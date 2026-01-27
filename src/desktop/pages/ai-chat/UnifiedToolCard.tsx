@@ -63,7 +63,7 @@ const StatusBadge: React.FC<{ toolCall: UIToolCallInfo }> = ({ toolCall }) => {
   if (toolCall.type === 'confirm') {
     if (toolCall.status === 'confirmed') {
       return (
-        <span className="flex items-center gap-1 text-xs text-success-green">
+        <span className="flex items-center gap-1 text-xs text-accent-success">
           <CircleCheckIcon className="size-3" />
           {localize('ai_chat.executed_success', 'Executed')}
         </span>
@@ -97,14 +97,14 @@ const StatusBadge: React.FC<{ toolCall: UIToolCallInfo }> = ({ toolCall }) => {
     if (toolCall.status === 'executed' && toolCall.result) {
       if (toolCall.result.success) {
         return (
-          <span className="flex items-center gap-1 text-xs text-success-green">
+          <span className="flex items-center gap-1 text-xs text-accent-success">
             <CircleCheckIcon className="size-3" />
             {localize('ai_chat.executed_success', 'Executed')}
           </span>
         );
       } else {
         return (
-          <span className="flex items-center gap-1 text-xs text-stress-red">
+          <span className="flex items-center gap-1 text-xs text-accent-danger">
             <CloseIcon className="size-3" />
             {localize('ai_chat.failed', 'Failed')}
           </span>

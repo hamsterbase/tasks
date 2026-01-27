@@ -3,7 +3,6 @@ import { InboxIcon } from '@/components/icons';
 import { getInboxTasks } from '@/core/state/inbox/getInboxTasks';
 import { useService } from '@/hooks/use-service.ts';
 import { useWatchEvent } from '@/hooks/use-watch-event.ts';
-import { useTaskDisplaySettings } from '@/hooks/useTaskDisplaySettings';
 import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService.ts';
 import { calculateDragDropAction } from '@/utils/dnd/calculateDragDropAction';
@@ -18,13 +17,14 @@ import { PageLayout } from '../components/PageLayout';
 import TaskItemWrapper from '../components/taskItem/TaskItemWrapper';
 import { TaskItem } from '../components/todo/TaskItem';
 import { styles } from '../theme';
+import { useTaskDisplaySettingsMobile } from '../hooks/useTaskDisplaySettings';
 
 export const InboxPage = () => {
   const todoService = useService(ITodoService);
   useWatchEvent(todoService.onStateChange);
 
   const { showFutureTasks, showCompletedTasks, openTaskDisplaySettings, completedAfter } =
-    useTaskDisplaySettings('inbox');
+    useTaskDisplaySettingsMobile('inbox');
 
   const { inboxTasks, willDisappearObjectIdSet } = getInboxTasks(todoService.modelState, {
     currentDate: getTodayTimestampInUtc(),

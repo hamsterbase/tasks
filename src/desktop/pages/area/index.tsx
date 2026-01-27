@@ -15,7 +15,6 @@ import { useTaskCommands } from '@/desktop/hooks/useTaskCommands';
 import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
-import { useArea } from '@/mobile/hooks/useArea';
 import { useTaskDisplaySettings } from '@/hooks/useTaskDisplaySettings';
 import { localize } from '@/nls';
 import { IEditService } from '@/services/edit/common/editService';
@@ -25,6 +24,7 @@ import type { TreeID } from 'loro-crdt';
 import React, { useEffect } from 'react';
 import { useLocation, useParams } from 'react-router';
 import { TaskListSection } from './components/TaskListSection';
+import { useAreaDetail } from '@/hooks/useAreaDetail';
 
 const useAreaId = (): TreeID => {
   const todoService = useService(ITodoService);
@@ -47,7 +47,7 @@ interface AreaPageContentProps {
 const AreaPageContent: React.FC<AreaPageContentProps> = ({ area, areaId }) => {
   const todoService = useService(ITodoService);
   const listService = useService(IListService);
-  const { areaDetail } = useArea(areaId);
+  const { areaDetail } = useAreaDetail(areaId);
   const editService = useService(IEditService);
   const location = useLocation();
 

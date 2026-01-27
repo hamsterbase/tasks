@@ -58,7 +58,7 @@ const ListItem: React.FC<ListItemProps> = (props) => {
       >
         <div
           className={classNames(`font-normal text-base`, {
-            'text-stress-red': mode.theme === 'danger',
+            'text-accent-danger': mode.theme === 'danger',
             'text-brand': mode.theme === 'primary',
           })}
         >

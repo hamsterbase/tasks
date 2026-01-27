@@ -45,7 +45,7 @@ export const BaseDialog: React.FC<BaseDialogProps> = ({
       <div
         className={classNames(
           styles.dialogBorder,
-          'bg-bg1-float rounded-lg flex flex-col w-80 absolute max-h-[80vh] overflow-y-auto'
+          'bg-bg1 rounded-lg flex flex-col w-80 absolute max-h-[80vh] overflow-y-auto'
         )}
       >
         <div className="flex flex-col p-6 space-y-4">
@@ -54,7 +54,7 @@ export const BaseDialog: React.FC<BaseDialogProps> = ({
         </div>
 
         {showFooter && (
-          <div className="border-t border-bg1-float rounded-b-lg" style={{ height: '44px' }}>
+          <div className="border-t border-bg1 rounded-b-lg" style={{ height: '44px' }}>
             <div className="flex flex-row justify-center items-center h-full px-4">
               <button className="flex-1 text-base text-center text-t1" onClick={onCancel}>
                 {cancelText || localize('cancel', 'Cancel')}

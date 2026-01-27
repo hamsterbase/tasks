@@ -120,7 +120,7 @@ export const CloudSettings = () => {
           )}
 
           {error && (
-            <div className="p-4 text-center text-stress-red">
+            <div className="p-4 text-center text-accent-danger">
               {localize('settings.cloud.error', 'Failed to load databases')}
             </div>
           )}

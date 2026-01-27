@@ -1,65 +1,31 @@
 @theme {
-  /* Background colors */
   --color-bg1: #ffffff;
   --color-bg2: #f6f7f8;
   --color-bg3: #f1f2f3;
+  --color-bg4: #ecedef;
 
-  /* Text colors */
   --color-t1: #18191c;
   --color-t2: #61666d;
   --color-t3: #9499a0;
   --color-t4: #c9ccd0;
   --color-text-white: #ffffff;
   --color-text-link: #57d9d4;
-  --color-text-notice: #e58900;
 
-  /* Line colors */
   --color-line-light: #f1f2f3;
   --color-line-regular: #e3e5e7;
   --color-line-bold: #c9ccd0;
 
-  /* Float background colors */
-  --color-bg1-float: #ffffff;
-  --color-bg2-float: #f6f7f8;
-  --color-bg3-float: #f1f2f3;
-
-  /* Graph background colors */
-  --color-graph-bg-thin-float: #f6f7f8;
-  --color-graph-bg-regular-float: #f1f2f3;
-  --color-graph-white: #ffffff;
-  --color-graph-bg-white: #ffffff;
-  --color-graph-bg-thin: #f6f7f8;
-  --color-graph-bg-regular: #f1f2f3;
-  --color-graph-bg-thick: #c9ccd0;
-
-  /* Graph colors */
-  --color-graph-weak: #9499a0;
-  --color-graph-medium: #61666d;
-  --color-graph-icon: #757a81;
-
-  /* Status colors */
-  --color-stress-red: #f85a54;
-  --color-success-green: #2ac864;
-
   --color-brand: #30cccc;
   --color-brand-light: #e6fffb;
 
-  /* Button colors */
-  --color-btn-primary-bg: var(--color-brand);
-  --color-btn-primary-text: var(--color-text-white);
-  --color-btn-primary-hover: rgba(48, 204, 204, 0.9);
-  --color-btn-primary-focus: var(--color-brand);
-
-  --color-btn-secondary-bg: var(--color-bg3);
-  --color-btn-secondary-text: var(--color-t3);
-  --color-btn-secondary-hover: rgba(241, 242, 243, 0.9);
-  --color-btn-secondary-focus: var(--color-bg3);
-
-  --color-btn-danger-bg: transparent;
-  --color-btn-danger-text: var(--color-stress-red);
-  --color-btn-danger-border: var(--color-line-regular);
-  --color-btn-danger-hover: rgba(248, 90, 84, 0.1);
-  --color-btn-danger-focus: var(--color-stress-red);
+  --color-accent-danger: #f85a54;
+  --color-accent-success: #2ac864;
 
   --color-toast-bg: #2f3238;
+  --shadow-soft: 0 4px 16px rgba(0, 0, 0, 0.03);
+
+  --color-module-today: #b8860b;
+  --color-module-inbox: #4a7ab8;
+  --color-module-scheduled: #8b6ba8;
+  --color-module-completed: #5a9a64;
 }

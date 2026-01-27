@@ -4,7 +4,6 @@ import { getTodayItems } from '@/core/state/today/getTodayItems';
 import { ItemPosition } from '@/core/type';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
-import { useTaskDisplaySettings } from '@/hooks/useTaskDisplaySettings';
 import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService';
 import { calculateDragDropAction } from '@/utils/dnd/calculateDragDropAction';
@@ -20,12 +19,13 @@ import TaskItemWrapper from '../components/taskItem/TaskItemWrapper';
 import { HomeProjectItem } from '../components/todo/HomeProjectItem';
 import { TaskItem } from '../components/todo/TaskItem';
 import { styles } from '../theme';
+import { useTaskDisplaySettingsMobile } from '../hooks/useTaskDisplaySettings';
 
 export const TodayPage = () => {
   const todoService = useService(ITodoService);
   useWatchEvent(todoService.onStateChange);
 
-  const { showCompletedTasks, openTaskDisplaySettings } = useTaskDisplaySettings('today', {
+  const { showCompletedTasks, openTaskDisplaySettings } = useTaskDisplaySettingsMobile('today', {
     hideShowFutureTasks: true,
   });
 

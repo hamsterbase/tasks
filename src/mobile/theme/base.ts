@@ -4,7 +4,7 @@ export const baseStyles = {
   homeMenuItemPadding: /*tw*/ 'px-3 py-2',
   homePageItemGap: /*tw*/ 'gap-2',
   homeMenuNumberColor: /*tw*/ 'text-sm font-medium text-t3',
-  homeMenuDueTaskNumberColor: /*tw*/ 'text-sm font-medium text-white bg-stress-red rounded-full h-4 min-w-4',
+  homeMenuDueTaskNumberColor: /*tw*/ 'text-sm font-medium text-white bg-accent-danger rounded-full h-4 min-w-4',
   homeMenuIconStyle: /*tw*/ 'w-5 h-5 text-brand',
 
   headerFooterPadding: /*tw*/ 'px-6',
@@ -62,7 +62,7 @@ export const baseStyles = {
   actionSheetPadding: /*tw*/ 'p-4 pt-0',
   actionSheetRound: /*tw*/ 'rounded-t-lg',
   actionSheetBorder: /*tw*/ '',
-  actionSheetBackground: /*tw*/ 'bg-bg2-float',
+  actionSheetBackground: /*tw*/ 'bg-bg2',
 
   actionSheetActionGroupRound: /*tw*/ 'rounded-lg',
   actionSheetActionGroupBackground: /*tw*/ 'bg-bg1',
@@ -94,7 +94,7 @@ export const baseStyles = {
   datePickerDaySelectedBackground: /*tw*/ 'bg-brand',
   datePickerDaySelectedTextColor: /*tw*/ 'text-white',
   datePickerTodayTextColor: /*tw*/ 'text-brand',
-  datePickerHeaderBackground: /*tw*/ 'bg-graph-bg-regular',
+  datePickerHeaderBackground: /*tw*/ 'bg-bg3',
   datePickerHeaderPadding: /*tw*/ 'py-2 -mx-4 px-4',
   datePickerWeekdayTextColor: /*tw*/ 'text-t1',
   datePickerWeekdayTextSize: /*tw*/ 'text-sm',

@@ -46,7 +46,7 @@ const DesktopDialogContent: React.FC<{ controller: DesktopDialogController }> = 
                 {action.label && (
                   <label className="text-sm font-medium text-t1">
                     {action.label}
-                    {action.required && <span className="text-stress-red ml-1">*</span>}
+                    {action.required && <span className="text-accent-danger ml-1">*</span>}
                   </label>
                 )}
                 <InputField
@@ -55,7 +55,7 @@ const DesktopDialogContent: React.FC<{ controller: DesktopDialogController }> = 
                   value={(controller.actionValues[action.key] as string) || ''}
                   onChange={(e) => controller.updateActionValue(action.key, e.target.value)}
                 />
-                {error && <span className="text-sm text-stress-red">{error}</span>}
+                {error && <span className="text-sm text-accent-danger">{error}</span>}
               </div>
             );
           } else if (action.type === 'button') {

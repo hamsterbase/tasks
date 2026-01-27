@@ -6,6 +6,7 @@ import wasm from 'vite-plugin-wasm';
 import { defineConfig } from 'vite';
 import { execSync } from 'child_process';
 import IstanbulPlugin from './src/packages/vite-plugin-istanbul/index';
+import { commonFilesPlugin } from './src/packages/vite-plugin-common-files';
 
 function getGitCommitHash() {
   try {
@@ -47,6 +48,39 @@ export default defineConfig({
       enabled: process.env.VITE_COVERAGE === 'true',
       exclude: ['**/node_modules/**', '**/vscf/**'],
       include: ['**/*.ts', '**/*.tsx'],
+    }),
+    commonFilesPlugin({
+      entries: ['src/desktop/main.tsx', 'src/mobile/main.tsx'],
+      exclude: [
+        'src/nls.ts',
+        'src/core/**',
+        'src/packages/vscf/**',
+        'src/services/**/*.ts',
+        'src/packages/cloud/**',
+        'src/packages/server-sdk/**',
+        'src/base/common/**',
+        'src/hooks/**',
+        'src/plugins/**',
+        'src/utils/dnd/**',
+        'src/locales/**',
+        'src/base/browser/**',
+        'src/components/icons/index.ts',
+        'src/components/GlobalContext/GlobalContext.tsx',
+        'src/components/icons/ProjectStatusBox.tsx',
+      ],
+      validate: (files) => {
+        console.log('\n┌─────────────────────────────────────────────────┐');
+        console.log(`│ Common files between desktop and mobile: ${String(files.length).padEnd(5)} │`);
+        console.log('└─────────────────────────────────────────────────┘');
+        if (files.length > 0) {
+          files.forEach((file, index) => {
+            const prefix = index === files.length - 1 ? '└──' : '├──';
+            console.log(`${prefix} ${file}`);
+          });
+          console.log('');
+          throw new Error('Found common files between desktop and mobile!');
+        }
+      },
     }),
   ],
   css: {

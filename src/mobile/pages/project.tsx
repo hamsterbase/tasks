@@ -7,7 +7,6 @@ import { ProjectHeadingInfo, TaskInfo } from '@/core/state/type';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import useProject from '@/mobile/hooks/useProject.tsx';
-import { useTaskDisplaySettings } from '@/hooks/useTaskDisplaySettings.ts';
 import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox.tsx';
 import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService';
@@ -28,6 +27,7 @@ import { ProjectHeadingItem } from '../components/todo/ProjectHeadingItem';
 import { TaskItem } from '../components/todo/TaskItem';
 import { styles } from '../theme.ts';
 import ProjectMeta from './project/ProjectMeta';
+import { useTaskDisplaySettingsMobile } from '../hooks/useTaskDisplaySettings.ts';
 
 const Files: React.FC<{
   items: FlattenedItem<ProjectHeadingInfo, TaskInfo>[];
@@ -104,7 +104,7 @@ export const ProjectPage = () => {
   } catch {
     // do nothing
   }
-  const { showCompletedTasks, showFutureTasks, openTaskDisplaySettings, completedAfter } = useTaskDisplaySettings(
+  const { showCompletedTasks, showFutureTasks, openTaskDisplaySettings, completedAfter } = useTaskDisplaySettingsMobile(
     `project-${projectId}`
   );
 
