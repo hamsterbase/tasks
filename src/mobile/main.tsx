@@ -26,7 +26,7 @@ import {
   WorkbenchOverlayService,
 } from '../services/overlay/common/WorkbenchOverlayService.ts';
 import { WorkbenchTodoService } from '../services/todo/browser/workbenchTodoService.ts';
-import '../styles/main.css';
+import './styles/main.css';
 import { App } from './App.tsx';
 
 export const startMobile = async () => {

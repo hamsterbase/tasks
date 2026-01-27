@@ -1,0 +1,24 @@
+[data-theme='dark'] {
+  /* Background colors */
+  --color-bg1: #17171a;
+  --color-bg2: #0d0d0e;
+  --color-bg3: #000000;
+
+  /* Text colors */
+  --color-t1: #e7e9eb;
+  --color-t2: #a2a7ae;
+  --color-t3: #757a81;
+  --color-text-white: #ffffff;
+  --color-text-link: #1fa1a6;
+
+  /* Line colors */
+  --color-line-light: #232527;
+  --color-line-regular: #2f3134;
+  --color-line-bold: #46494d;
+
+  /* Status colors */
+  --color-accent-danger: #d1403e;
+  --color-accent-success: #1fa251;
+
+  --color-toast-bg: #2f3238;
+}

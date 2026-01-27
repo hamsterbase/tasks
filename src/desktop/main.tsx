@@ -1,6 +1,7 @@
 import { checkPlatform } from '@/base/browser/checkPlatform';
 import { initializeTheme, watchThemeChange } from '@/base/browser/initializeTheme';
 import { initKeyboardListeners } from '@/base/browser/initKeyboardListeners';
+import './styles/main.css';
 import '@/base/commands/desktop';
 import '@/desktop/overlay/commandPalette/commands';
 import { GlobalContext } from '@/components/GlobalContext/GlobalContext';

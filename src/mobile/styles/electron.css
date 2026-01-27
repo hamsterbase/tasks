@@ -1,0 +1,6 @@
+/* Electron window dragging styles */
+
+/* Make sure drag regions work properly */
+[style*="WebkitAppRegion: 'drag'"] {
+  -webkit-app-region: drag;
+}

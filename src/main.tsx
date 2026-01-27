@@ -3,7 +3,6 @@ import 'large-small-dynamic-viewport-units-polyfill';
 
 import { startDesktop } from './desktop/main';
 import { startMobile } from './mobile/main';
-import './styles/main.css';
 import { checkPlatform } from './base/browser/checkPlatform';
 
 function shouldLoadDesktop() {

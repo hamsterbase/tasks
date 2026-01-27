@@ -1,0 +1,44 @@
+.safe-bottom {
+  padding-bottom: var(--safe-area-inset-bottom);
+}
+
+.safe-top {
+  padding-top: var(--safe-area-inset-top);
+}
+
+.polyfill-min-h-dvh {
+  min-height: 100vh;
+  min-height: calc(var(--1dvh, 1vh) * 100);
+  min-height: 100dvh;
+}
+
+.shadow-border {
+  box-shadow: 0 0 0 1px black !important;
+}
+
+.half-top {
+  top: calc(var(--1dvh, 1vh) * 50);
+}
+
+.border-thin {
+  border-width: 0.5px;
+}
+
+.editing-border {
+  @apply shadow-[inset_2px_0_0_var(--color-brand)];
+}
+
+@keyframes highlight {
+  0% {
+    background-color: transparent;
+  }
+  10% {
+    background-color: color-mix(in srgb, var(--color-brand) 25%, transparent);
+  }
+  30% {
+    background-color: color-mix(in srgb, var(--color-brand) 20%, transparent);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
