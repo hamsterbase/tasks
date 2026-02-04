@@ -195,38 +195,34 @@ export const MobileHome = () => {
           </React.Fragment>
         ),
       }}
-      bottomMenu={{
-        mid: {
-          onClick: () => {
-            popupAction({
-              items: [
-                {
-                  icon: <TaskStatusBox status={'completed'} />,
-                  name: localize('create_popup.create_task', 'Create Task'),
-                  onClick: () => {
-                    navigationService.navigate({ path: '/create_task' });
-                  },
-                },
-                {
-                  icon: <ProjectStatusBox progress={0.6} status={'created'} />,
-                  name: localize('create_popup.create_project', 'Create Project'),
-                  onClick: () => {
-                    const id = todoService.addProject({ title: '' });
-                    todoService.editItem(id);
-                  },
-                },
-                {
-                  icon: <AreaIcon />,
-                  name: localize('create_popup.create_area', 'Create Area'),
-                  onClick: () => {
-                    const id = todoService.addArea({ title: '' });
-                    todoService.editItem(id);
-                  },
-                },
-              ],
-            });
-          },
-        },
+      onFabClick={() => {
+        popupAction({
+          items: [
+            {
+              icon: <TaskStatusBox status={'completed'} />,
+              name: localize('create_popup.create_task', 'Create Task'),
+              onClick: () => {
+                navigationService.navigate({ path: '/create_task' });
+              },
+            },
+            {
+              icon: <ProjectStatusBox progress={0.6} status={'created'} />,
+              name: localize('create_popup.create_project', 'Create Project'),
+              onClick: () => {
+                const id = todoService.addProject({ title: '' });
+                todoService.editItem(id);
+              },
+            },
+            {
+              icon: <AreaIcon />,
+              name: localize('create_popup.create_area', 'Create Area'),
+              onClick: () => {
+                const id = todoService.addArea({ title: '' });
+                todoService.editItem(id);
+              },
+            },
+          ],
+        });
       }}
       meta={<MobileHomeTopMenu></MobileHomeTopMenu>}
       dragOption={{

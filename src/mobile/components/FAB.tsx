@@ -5,25 +5,11 @@ import { CreateIcon } from './dnd/CreateIcon.tsx';
 import { useService } from '@/hooks/use-service.ts';
 import { ISwitchService } from '@/services/switchService/common/switchService.ts';
 
-type MenuItemStatus = 'normal' | 'active' | 'inactive';
-
-interface MenuItemProps {
-  icon: React.ReactNode;
-  status: MenuItemStatus;
+export interface FABProps {
   onClick?: () => void;
 }
 
-interface CreateIconProps {
-  onClick: () => void;
-}
-
-export interface FABProps {
-  left?: MenuItemProps | 'back';
-  right?: MenuItemProps;
-  mid?: CreateIconProps;
-}
-
-export const FAB: React.FC<FABProps> = ({ mid }) => {
+export const FAB: React.FC<FABProps> = ({ onClick }) => {
   const switchService = useService(ISwitchService);
   const hideFABWhenKeyboardShow = switchService.getLocalSwitch('hideFABWhenKeyboardShow');
 
@@ -34,13 +20,7 @@ export const FAB: React.FC<FABProps> = ({ mid }) => {
         display: hideFABWhenKeyboardShow ? 'var(--fab-display, block)' : 'block',
       }}
     >
-      {mid && (
-        <CreateIcon
-          onClick={() => {
-            mid.onClick();
-          }}
-        />
-      )}
+      {onClick && <CreateIcon onClick={onClick} />}
       <CancelDropZone />
     </div>
   );

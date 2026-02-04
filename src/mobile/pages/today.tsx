@@ -103,14 +103,11 @@ export const TodayPage = () => {
         },
         onDragEnd: handleDragEnd,
       }}
-      bottomMenu={{
-        mid: {
-          onClick: () =>
-            handleCreateTask({
-              type: 'firstElement',
-            }),
-        },
-      }}
+      onFabClick={() =>
+        handleCreateTask({
+          type: 'firstElement',
+        })
+      }
     >
       <div className={classNames(styles.taskItemGroupBackground, styles.taskItemGroupRound)}>
         {items.map((item) => {

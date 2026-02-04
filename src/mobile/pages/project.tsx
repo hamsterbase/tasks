@@ -17,7 +17,6 @@ import classNames from 'classnames';
 import type { TreeID } from 'loro-crdt';
 import React from 'react';
 import { useParams } from 'react-router';
-import { FABProps } from '../components/FAB.tsx';
 import { LastPlacement } from '../components/dnd/lastPlacement.tsx';
 import { PageHeaderProps } from '../components/PageHeader.tsx';
 import { PageLayout } from '../components/PageLayout.tsx';
@@ -180,12 +179,6 @@ export const ProjectPage = () => {
     },
   };
 
-  const bottomMenu: FABProps = {
-    mid: {
-      onClick: handleAddTask,
-    },
-  };
-
   const header: PageHeaderProps = {
     showBack: true,
     id: project.id,
@@ -199,7 +192,7 @@ export const ProjectPage = () => {
       meta={<ProjectMeta project={project} />}
       header={header}
       dragOption={dragOption}
-      bottomMenu={bottomMenu}
+      onFabClick={handleAddTask}
     >
       <Files
         items={flattenedItems}

@@ -1,9 +1,8 @@
 import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc';
-import { BackIcon, LaterProjectsIcon } from '@/components/icons';
+import { LaterProjectsIcon } from '@/components/icons';
 import { getFutureProjects } from '@/core/state/home/getFutureProjects';
 import { useService } from '@/hooks/use-service.ts';
 import { useWatchEvent } from '@/hooks/use-watch-event.ts';
-import { useBack } from '@/hooks/useBack';
 import { HomeProjectItem } from '@/mobile/components/todo/HomeProjectItem';
 import { ITodoService } from '@/services/todo/common/todoService.ts';
 import { localize } from '@/nls';
@@ -17,21 +16,14 @@ export const FutureProjectsPage = () => {
   useWatchEvent(todoService.onStateChange);
 
   const futureProjects = getFutureProjects(todoService.modelState, getTodayTimestampInUtc());
-  const handleBack = useBack();
 
   return (
     <PageLayout
       header={{
+        showBack: true,
         title: localize('futureProjects', 'Future Projects'),
         renderIcon: (className) => <LaterProjectsIcon className={className} />,
         id: 'future-projects',
-      }}
-      bottomMenu={{
-        left: {
-          icon: <BackIcon />,
-          status: 'normal',
-          onClick: handleBack,
-        },
       }}
     >
       <div className={classNames(styles.taskItemGroupBackground, styles.taskItemGroupRound)}>

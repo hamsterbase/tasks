@@ -28,13 +28,6 @@ export const MobileSettings = () => {
         title: localize('settings.title', 'Settings'),
         renderIcon: (className: string) => <SettingsIcon className={className} />,
       }}
-      bottomMenu={{
-        mid: {
-          onClick: () => {
-            navigate({ path: '/create_task' });
-          },
-        },
-      }}
     >
       <ListItemGroup
         items={[
