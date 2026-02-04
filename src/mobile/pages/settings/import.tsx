@@ -63,12 +63,10 @@ export const ImportPage = () => {
   return (
     <PageLayout
       header={{
+        showBack: true,
         id: 'import',
         title: localize('settings.import', 'Import'),
         renderIcon: (className: string) => <SettingsIcon className={className} />,
-      }}
-      bottomMenu={{
-        left: 'back',
       }}
     >
       <ListItemGroup

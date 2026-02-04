@@ -66,10 +66,8 @@ export const DatabaseDetailPage = () => {
 
   return (
     <PageLayout
-      bottomMenu={{
-        left: 'back',
-      }}
       header={{
+        showBack: true,
         id: 'databaseDetail',
         title: localize('settings.database.detail', 'Database Details'),
         renderIcon: (className: string) => <SettingsIcon className={className} />,

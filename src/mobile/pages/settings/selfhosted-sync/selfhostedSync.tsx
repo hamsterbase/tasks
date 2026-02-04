@@ -126,12 +126,10 @@ export const SelfhostedSync = () => {
   return (
     <PageLayout
       header={{
+        showBack: true,
         id: 'selfhosted-sync-settings',
         title: pageTitle,
         renderIcon: (className: string) => <SettingsIcon className={className} />,
-      }}
-      bottomMenu={{
-        left: 'back',
       }}
     >
       {renderPageContent()}

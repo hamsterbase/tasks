@@ -80,6 +80,7 @@ export const TodayPage = () => {
   return (
     <PageLayout
       header={{
+        showBack: true,
         id: 'today',
         title: localize('today', 'Today'),
         renderIcon: (className: string) => <TodayIcon className={className} />,
@@ -103,7 +104,6 @@ export const TodayPage = () => {
         onDragEnd: handleDragEnd,
       }}
       bottomMenu={{
-        left: 'back',
         mid: {
           onClick: () =>
             handleCreateTask({

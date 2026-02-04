@@ -7,12 +7,10 @@ export const FeedbackPage = () => {
   return (
     <PageLayout
       header={{
+        showBack: true,
         id: 'feedback',
         title: localize('settings.feedback', 'Customer Feedback'),
         renderIcon: (className: string) => <SettingsIcon className={className} />,
-      }}
-      bottomMenu={{
-        left: 'back',
       }}
     >
       <div className="p-4">

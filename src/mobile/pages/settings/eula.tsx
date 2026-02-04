@@ -25,8 +25,8 @@ export const EULAPage: React.FC = () => {
 
   return (
     <PageLayout
-      bottomMenu={{
-        left: 'back',
+      header={{
+        showBack: true,
       }}
     >
       <div className={classnames(styles.eula, 'p-4 bg-bg1 text-t1')}>

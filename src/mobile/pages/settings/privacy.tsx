@@ -24,8 +24,8 @@ export const PrivacyPage: React.FC = () => {
 
   return (
     <PageLayout
-      bottomMenu={{
-        left: 'back',
+      header={{
+        showBack: true,
       }}
     >
       <div className={classnames(styles.privacy, 'p-4 bg-bg1 text-t1')}>

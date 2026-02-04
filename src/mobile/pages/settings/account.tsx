@@ -111,12 +111,10 @@ export const AccountPage = () => {
   return (
     <PageLayout
       header={{
+        showBack: true,
         id: 'account',
         title: localize('account.title', 'Account'),
         renderIcon: (className: string) => <SettingsIcon className={className} />,
-      }}
-      bottomMenu={{
-        left: 'back',
       }}
     >
       <ListItemGroup

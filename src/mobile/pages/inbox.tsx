@@ -72,12 +72,12 @@ export const InboxPage = () => {
   return (
     <PageLayout
       bottomMenu={{
-        left: 'back',
         mid: {
           onClick: handleCreateTask,
         },
       }}
       header={{
+        showBack: true,
         id: 'inbox',
         title: localize('inbox', 'Inbox'),
         renderIcon: (className: string) => <InboxIcon className={className} />,

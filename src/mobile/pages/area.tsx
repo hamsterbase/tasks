@@ -121,6 +121,7 @@ export const AreaPage = () => {
   return (
     <PageLayout
       header={{
+        showBack: true,
         handleClickTaskDisplaySettings: openTaskDisplaySettings,
         id: areaDetail.id,
         title: '',
@@ -140,7 +141,6 @@ export const AreaPage = () => {
         },
       }}
       bottomMenu={{
-        left: 'back',
         mid: {
           onClick: handleAddTask,
         },

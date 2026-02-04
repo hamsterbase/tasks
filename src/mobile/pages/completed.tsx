@@ -26,12 +26,10 @@ export const MobileCompleted = () => {
   return (
     <PageLayout
       header={{
+        showBack: true,
         id: 'completed_tasks',
         title: localize('completed_tasks.title', 'Completed'),
         renderIcon: (className: string) => <LogIcon className={className} />,
-      }}
-      bottomMenu={{
-        left: 'back',
       }}
     >
       {completedTaskGroups.groups.length === 0 ? (

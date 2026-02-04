@@ -15,12 +15,10 @@ export const LanguageSettings = () => {
   return (
     <PageLayout
       header={{
+        showBack: true,
         id: 'language',
         title: localize('settings.language', 'Language'),
         renderIcon: (className: string) => <SettingsIcon className={className} />,
-      }}
-      bottomMenu={{
-        left: 'back',
       }}
     >
       <ListItemGroup

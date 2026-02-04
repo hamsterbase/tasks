@@ -41,12 +41,10 @@ export const CreateDatabasePage = () => {
   return (
     <PageLayout
       header={{
+        showBack: true,
         id: 'createDatabase',
         title: localize('settings.createDatabase.title', 'Create Cloud Database'),
         renderIcon: (className: string) => <SettingsIcon className={className} />,
-      }}
-      bottomMenu={{
-        left: 'back',
       }}
     >
       <div className="flex flex-col gap-3">

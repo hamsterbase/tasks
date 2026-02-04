@@ -19,12 +19,10 @@ export const TaskDisplaySettings = () => {
   return (
     <PageLayout
       header={{
+        showBack: true,
         id: 'taskDisplaySettings',
         title: settingOptions.title,
         renderIcon: (className: string) => <SettingsIcon className={className} />,
-      }}
-      bottomMenu={{
-        left: 'back',
       }}
     >
       <ListItemGroup

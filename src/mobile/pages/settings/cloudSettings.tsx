@@ -103,12 +103,10 @@ export const CloudSettings = () => {
   return (
     <PageLayout
       header={{
+        showBack: true,
         id: 'cloud',
         title: localize('settings.cloud', 'Cloud'),
         renderIcon: (className: string) => <SettingsIcon className={className} />,
-      }}
-      bottomMenu={{
-        left: 'back',
       }}
     >
       <div className="flex flex-col space-y-4">

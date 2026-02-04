@@ -62,12 +62,10 @@ export const AboutPage = () => {
   return (
     <PageLayout
       header={{
+        showBack: true,
         id: 'about',
         title: localize('settings.about', 'About'),
         renderIcon: (className: string) => <SettingsIcon className={className} />,
-      }}
-      bottomMenu={{
-        left: 'back',
       }}
     >
       <ListItemGroup items={items} />

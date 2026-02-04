@@ -16,12 +16,10 @@ export const ThemeSettings = () => {
   return (
     <PageLayout
       header={{
+        showBack: true,
         id: 'theme',
         title: localize('settings.theme', 'Theme'),
         renderIcon: (className: string) => <SettingsIcon className={className} />,
-      }}
-      bottomMenu={{
-        left: 'back',
       }}
     >
       <ListItemGroup

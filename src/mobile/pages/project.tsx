@@ -113,11 +113,11 @@ export const ProjectPage = () => {
     return (
       <PageLayout
         header={{
+          showBack: true,
           id: '',
           renderIcon: () => null,
           title: localize('project.notFound', 'Project not found'),
         }}
-        bottomMenu={{ left: 'back' }}
       >
         <div className="flex h-100 items-center justify-center text-t3">
           {localize('project.notFound', 'Project not found')}
@@ -181,13 +181,13 @@ export const ProjectPage = () => {
   };
 
   const bottomMenu: FABProps = {
-    left: 'back',
     mid: {
       onClick: handleAddTask,
     },
   };
 
   const header: PageHeaderProps = {
+    showBack: true,
     id: project.id,
     handleClickTaskDisplaySettings: openTaskDisplaySettings,
     title: '',

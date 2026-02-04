@@ -63,12 +63,10 @@ export const LoginPage: React.FC = () => {
   return (
     <PageLayout
       header={{
+        showBack: true,
         renderIcon: (className) => <UserIcon className={className} />,
         id: 'login',
         title: localize('login.title', 'Login & Register'),
-      }}
-      bottomMenu={{
-        left: 'back',
       }}
     >
       <div className="flex flex-col gap-3">

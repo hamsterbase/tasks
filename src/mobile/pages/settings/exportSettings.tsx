@@ -66,12 +66,10 @@ export const ExportSettings = () => {
   return (
     <PageLayout
       header={{
+        showBack: true,
         id: 'export',
         title: localize('settings.export', 'Export'),
         renderIcon: (className: string) => <SettingsIcon className={className} />,
-      }}
-      bottomMenu={{
-        left: 'back',
       }}
     >
       <ListItemGroup

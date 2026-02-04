@@ -30,12 +30,10 @@ export const ScheduledPage = () => {
   return (
     <PageLayout
       header={{
+        showBack: true,
         id: 'scheduled',
         title: localize('scheduled.title', 'Scheduled'),
         renderIcon: (className: string) => <ScheduledIcon className={className} />,
-      }}
-      bottomMenu={{
-        left: 'back',
       }}
     >
       <div className="flex flex-col gap-2">
