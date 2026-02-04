@@ -7,7 +7,7 @@ import { useDragSensors } from '@/hooks/useDragSensors';
 import { SortableContext, SortingStrategy, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { LastPlacement } from './dnd/lastPlacement';
 import { DragOverlayItemProps, OverlayItem } from './dnd/DragOverlayItem';
-import { FAB } from './FAB';
+import { FABProps, FAB } from './FAB';
 
 interface PageLayoutDragOption {
   overlayItem?: DragOverlayItemProps;
@@ -28,7 +28,8 @@ interface PageLayoutProps {
   meta?: React.ReactNode;
   children?: React.ReactNode;
   dragOption?: PageLayoutDragOption;
-  onFabClick?: () => void;
+  bottomMenu?: FABProps;
+  disableSticky?: boolean;
 }
 
 export const PageLayout: React.FC<PageLayoutProps> = (props: PageLayoutProps) => {
@@ -39,7 +40,7 @@ export const PageLayout: React.FC<PageLayoutProps> = (props: PageLayoutProps) =>
   let children = (
     <React.Fragment>
       <div className={childrenContainerPadding}>{props.children}</div>
-      {props.onFabClick && <FAB onClick={props.onFabClick} />}
+      {props.bottomMenu && <FAB {...props.bottomMenu} />}
     </React.Fragment>
   );
   if (props.dragOption) {
@@ -59,7 +60,7 @@ export const PageLayout: React.FC<PageLayoutProps> = (props: PageLayoutProps) =>
               {props.children}
               {props.dragOption.sortable.lastPlacement && <LastPlacement />}
             </div>
-            {props.onFabClick && <FAB onClick={props.onFabClick} />}
+            {props.bottomMenu && <FAB {...props.bottomMenu} />}
           </SortableContext>
         </DndContext>
       );
@@ -71,7 +72,7 @@ export const PageLayout: React.FC<PageLayoutProps> = (props: PageLayoutProps) =>
           onDragEnd={props.dragOption.onDragEnd}
         >
           <div className={childrenContainerPadding}>{props.children}</div>
-          {props.onFabClick && <FAB onClick={props.onFabClick} />}
+          {props.bottomMenu && <FAB {...props.bottomMenu} />}
         </DndContext>
       );
     }
@@ -84,15 +85,25 @@ export const PageLayout: React.FC<PageLayoutProps> = (props: PageLayoutProps) =>
       })}
       id="page-content"
     >
+      {props.header && props.disableSticky && (
+        <div className={classNames('sticky top-0 z-100 safe-top', styles.headerBackground)} />
+      )}
       {props.header && (
-        <div className={classNames('sticky top-0 z-100 mb-2 safe-top', styles.headerBackground)}>
+        <div
+          className={classNames('top-0 z-100 mb-2', styles.headerBackground, {
+            sticky: !props.disableSticky,
+            'safe-top': !props.disableSticky,
+          })}
+        >
           <PageHeader
             id={props.header.id}
             title={props.header.title}
             renderIcon={props.header.renderIcon}
             icon={props.header.icon}
             actions={props.header.actions}
-            showBack={props.header.showBack}
+            showBack={
+              typeof props.header.showBack === 'boolean' ? props.header.showBack : props.bottomMenu?.left === 'back'
+            }
             headerPlaceholder={props.header.headerPlaceholder}
             onSave={props.header.onSave}
             handleClickTaskDisplaySettings={props.header.handleClickTaskDisplaySettings}
