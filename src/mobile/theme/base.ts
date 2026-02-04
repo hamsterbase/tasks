@@ -7,13 +7,10 @@ export const baseStyles = {
   homeMenuDueTaskNumberColor: /*tw*/ 'text-sm font-medium text-white bg-accent-danger rounded-full h-4 min-w-4',
   homeMenuIconStyle: /*tw*/ 'w-5 h-5 text-brand',
 
-  headerFooterPadding: /*tw*/ 'px-6',
   screenEdgePadding: /*tw*/ 'px-3',
 
   bottomMenuHeight: /*tw*/ 'h-11',
-  bottomMenuBackground: /*tw*/ 'bg-bg2',
   bottomMenuBorder: /*tw*/ 'border-t border-line-light',
-  bottomMenuItemHeight: /*tw*/ 'h-11',
   bottomMenuTextNormal: /*tw*/ 'text-t2',
   bottomMenuTextActive: /*tw*/ 'text-brand',
   bottomMenuTextInactive: /*tw*/ 'text-t3',
@@ -103,7 +100,7 @@ export const baseStyles = {
   datePickerTitlePadding: /*tw*/ 'px-6',
   datePickerActionSheetPadding: /*tw*/ 'px-0!',
 
-  midButtonStyle: /*tw*/ 'w-10 h-8 rounded-lg flex items-center justify-center text-text-white',
+  fabButton: /*tw*/ 'size-14 bg-brand rounded-full flex items-center justify-center z-[1000] text-white',
 
   taskDetailBottomActionStyle: /*tw*/ 'flex items-center justify-center size-9 rounded-lg  text-t2',
   taskDetailBottomActionIconStyle: /*tw*/ 'size-5',

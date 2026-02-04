@@ -1,4 +1,5 @@
-import { ScheduledIcon, TagIcon } from '@/components/icons';
+import { NotebookIcon, ScheduledIcon, TagIcon } from '@/components/icons';
+import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox';
 import { ProjectInfoState } from '@/core/state/type';
 import useProject from '@/mobile/hooks/useProject';
 import { styles } from '@/mobile/theme';
@@ -19,7 +20,15 @@ const ProjectMeta: React.FC<{ project: ProjectInfoState }> = ({ project }) => {
     handleClearStartDate,
     handleClearDueDate,
     handleUpdateNotes,
+    handleUpdateTitle,
+    handleToggleProjectStatus,
+    handleLongPressStatusIcon,
   } = useProject(project);
+
+  const [title, setTitle] = useState(project?.title);
+  useEffect(() => {
+    setTitle(project?.title);
+  }, [project?.title]);
 
   const [notes, setNotes] = useState(project?.notes);
   useEffect(() => {
@@ -27,6 +36,44 @@ const ProjectMeta: React.FC<{ project: ProjectInfoState }> = ({ project }) => {
   }, [project?.notes]);
 
   const projectDetailItems = [
+    {
+      itemKey: 'title',
+      show: true,
+      icon: (
+        <ProjectStatusBox
+          className="shrink-0 size-4"
+          onLongPress={handleLongPressStatusIcon}
+          progress={project.progress}
+          status={project.status}
+          color="t3"
+          onClick={handleToggleProjectStatus}
+        />
+      ),
+      content: (
+        <Textarea
+          className={classNames('leading-4 text-sm font-medium text-t1 bg-transparent flex-1 break-all', 'flex-1')}
+          autoSize={{ minRows: 1 }}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          onBlur={() => handleUpdateTitle(title ?? '')}
+        />
+      ),
+    },
+    {
+      itemKey: 'notes',
+      show: true,
+      icon: <NotebookIcon />,
+      content: (
+        <Textarea
+          className={''}
+          autoSize={{ minRows: 2 }}
+          placeholder={localize('project.notes', 'Notes')}
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
+          onBlur={() => handleUpdateNotes(notes)}
+        />
+      ),
+    },
     {
       itemKey: 'tags',
       show: project.tags && project.tags.length > 0,
@@ -54,14 +101,6 @@ const ProjectMeta: React.FC<{ project: ProjectInfoState }> = ({ project }) => {
 
   return (
     <div className={classNames(styles.screenEdgePadding, 'flex flex-col gap-2')}>
-      <Textarea
-        className={styles.textAreaItemStyle}
-        autoSize={{ minRows: 2 }}
-        placeholder={localize('project.notes', 'Notes')}
-        value={notes}
-        onChange={(e) => setNotes(e.target.value)}
-        onBlur={() => handleUpdateNotes(notes)}
-      />
       <InfoItemGroup items={projectDetailItems} className={'bg-bg1 p-1 rounded-lg'} />
     </div>
   );

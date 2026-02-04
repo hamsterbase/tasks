@@ -267,6 +267,11 @@ const useProject = (project: ProjectInfoState | null) => {
     todoService.updateProject(project!.id, { notes });
   };
 
+  const handleUpdateTitle = (title: string) => {
+    if (!project) return;
+    todoService.updateProject(project!.id, { title });
+  };
+
   return {
     project,
     handleLongPressStatusIcon,
@@ -278,6 +283,7 @@ const useProject = (project: ProjectInfoState | null) => {
     handleClearDueDate,
     handleMoreOptions,
     handleUpdateNotes,
+    handleUpdateTitle,
     handleAddTask,
   };
 };

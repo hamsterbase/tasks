@@ -1,6 +1,6 @@
 import { getTheme } from '@/base/browser/initializeTheme';
 import { taskDisplaySettingOptions } from '@/base/common/TaskDisplaySettings';
-import { HomeIcon, SettingsIcon } from '@/components/icons';
+import { SettingsIcon } from '@/components/icons';
 import { useAbout } from '@/hooks/use-about';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
@@ -23,26 +23,16 @@ export const MobileSettings = () => {
   return (
     <PageLayout
       header={{
+        showBack: true,
         id: 'settings',
         title: localize('settings.title', 'Settings'),
         renderIcon: (className: string) => <SettingsIcon className={className} />,
       }}
       bottomMenu={{
-        left: {
-          icon: <HomeIcon className="w-6 h-6" />,
-          status: 'inactive',
-          onClick: () => {
-            navigate({ path: '/', replace: true });
-          },
-        },
         mid: {
           onClick: () => {
             navigate({ path: '/create_task' });
           },
-        },
-        right: {
-          icon: <SettingsIcon className="w-6 h-6" />,
-          status: 'active',
         },
       }}
     >

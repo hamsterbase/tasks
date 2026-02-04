@@ -67,6 +67,11 @@ export const useArea = (areaId?: TreeID) => {
     if (!areaDetail) return;
     todoService.editItem(areaDetail.id);
   }
+
+  const handleUpdateTitle = (title: string) => {
+    if (!areaDetail) return;
+    todoService.updateArea(areaDetail.id, { title });
+  };
   const dialog = useDialog();
   const handleDeleteArea = () => {
     if (!areaDetail) return;
@@ -126,5 +131,6 @@ export const useArea = (areaId?: TreeID) => {
     handleEditTag,
     handleMoreOptions,
     handleAddTask,
+    handleUpdateTitle,
   };
 };

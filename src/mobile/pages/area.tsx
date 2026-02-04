@@ -4,7 +4,6 @@ import { isTaskVisible } from '@/core/time/filterProjectAndTask';
 import { useService } from '@/hooks/use-service';
 import { useArea } from '@/mobile/hooks/useArea';
 import { styles } from '@/mobile/theme';
-import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService';
 import { getAreaDragEndPositionAction } from '@/utils/dnd/area';
 import { areaCollisionDetectionStrategyFactory } from '@/utils/dnd/areaCollisionDetchtionStrawe';
@@ -12,7 +11,7 @@ import { DragDropElements } from '@/utils/dnd/dragDropCollision';
 import { DragEndEvent } from '@dnd-kit/core';
 import classNames from 'classnames';
 import type { TreeID } from 'loro-crdt';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { InfoItemGroup } from '../components/InfoItem';
 import { InfoItemTags } from '../components/infoItem/tags';
@@ -20,6 +19,7 @@ import { PageLayout } from '../components/PageLayout';
 import TaskItemWrapper from '../components/taskItem/TaskItemWrapper';
 import { HomeProjectItem } from '../components/todo/HomeProjectItem';
 import { TaskItem } from '../components/todo/TaskItem';
+import TextArea from 'rc-textarea';
 import { useTaskDisplaySettingsMobile } from '../hooks/useTaskDisplaySettings';
 
 const useAreaId = (): TreeID => {
@@ -38,10 +38,16 @@ const useAreaId = (): TreeID => {
 export const AreaPage = () => {
   const todoService = useService(ITodoService);
   const areaId = useAreaId();
-  const { areaDetail, handleMoreOptions, handleAddTask, isTask, isProject, handleEditTag } = useArea(areaId);
+  const { areaDetail, handleMoreOptions, handleAddTask, isTask, isProject, handleEditTag, handleUpdateTitle } =
+    useArea(areaId);
   const { showCompletedTasks, showFutureTasks, openTaskDisplaySettings, completedAfter } = useTaskDisplaySettingsMobile(
     `area-${areaId}`
   );
+
+  const [title, setTitle] = useState(areaDetail?.title);
+  useEffect(() => {
+    setTitle(areaDetail?.title);
+  }, [areaDetail?.title]);
 
   if (!areaDetail) {
     return <div>Area not found</div>;
@@ -117,12 +123,8 @@ export const AreaPage = () => {
       header={{
         handleClickTaskDisplaySettings: openTaskDisplaySettings,
         id: areaDetail.id,
-        title: areaDetail.title,
-        headerPlaceholder: localize('area.title_placeholder', 'New Area'),
-        renderIcon: (className: string) => <AreaIcon className={className} />,
-        onSave: (title: string) => {
-          todoService.updateArea(areaDetail.id, { title });
-        },
+        title: '',
+        actions: <MenuIcon onClick={handleMoreOptions} />,
       }}
       dragOption={{
         overlayItem: {
@@ -142,14 +144,19 @@ export const AreaPage = () => {
         mid: {
           onClick: handleAddTask,
         },
-        right: {
-          icon: <MenuIcon />,
-          status: 'normal',
-          onClick: handleMoreOptions,
-        },
       }}
     >
       <div className="flex flex-col gap-2">
+        <div className="flex items-start gap-2 px-3 py-2 bg-white rounded-lg">
+          <AreaIcon className="size-5 text-t3"></AreaIcon>
+          <TextArea
+            className={classNames('leading-5 text-lg font-medium text-t1 bg-transparent flex-1 break-all', 'flex-1')}
+            autoSize={{ minRows: 1 }}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            onBlur={() => handleUpdateTitle(title ?? '')}
+          />
+        </div>
         <InfoItemGroup
           className={classNames(
             `px-1 ${styles.infoItemGroupGap} ${styles.infoItemGroupRound} ${styles.infoItemGroupBackground}`,

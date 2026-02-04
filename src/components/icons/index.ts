@@ -1,5 +1,6 @@
 // eslint-disable-next-line custom/no-restricted-packages
 import {
+  AlarmClock,
   AlertCircle,
   Archive,
   ArrowLeft,
@@ -15,13 +16,13 @@ import {
   Check,
   ChevronDown,
   ChevronLeft,
-  Copy,
   ChevronRight,
   Circle,
   CircleCheck,
   CircleSmall,
   Cloud,
   CloudAlert,
+  Copy,
   Database,
   FileText,
   GripVertical,
@@ -35,13 +36,16 @@ import {
   MessageSquare,
   MessageSquareReply,
   MoreVerticalIcon,
+  Notebook,
   Palette,
+  PanelLeft,
   PenLine,
   Plus,
   RefreshCw,
   Repeat,
   Search,
   SendToBack,
+  ServerIcon,
   Settings,
   SlidersHorizontal,
   Square,
@@ -52,9 +56,6 @@ import {
   TypeIcon,
   User,
   X,
-  PanelLeft,
-  AlarmClock,
-  ServerIcon,
 } from 'lucide-react';
 
 export const AreaExpandedIcon = ChevronRight;
@@ -119,3 +120,4 @@ export const BrainIcon = Brain;
 export const TrashIcon = Trash2;
 export const ArrowUpIcon = ArrowUp;
 export const StopIcon = Square;
+export const NotebookIcon = Notebook;

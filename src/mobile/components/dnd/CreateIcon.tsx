@@ -51,7 +51,7 @@ export const CreateIcon: React.FC<ICreateIconProps> = (props: ICreateIconProps) 
       }}
       data-id={DragDropElements.create}
       ref={setNodeRef}
-      className={classNames(styles.midButtonStyle, 'bg-brand')}
+      className={classNames(styles.fabButton, 'bg-brand')}
       style={style}
       {...listeners}
       {...attributes}

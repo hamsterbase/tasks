@@ -1,4 +1,4 @@
-import { hideBottomMenuWhenKeyboardShow } from './hideBottomMenuWhenKeyboardShow';
+import { hideFABWhenKeyboardShow } from './hideFABWhenKeyboardShow';
 import { iOSBackForwardNavigationGestures } from './iOSBackForwardNavigationGestures';
 import { shouldIgnoreSafeBottom } from './shouldIgnoreSafeBottom';
 import { showIOSPurchaseButton } from './showIOSPurchaseButton';
@@ -9,7 +9,7 @@ import { showOfficialWebsiteURL } from './showOfficialWebsiteURL';
 export const switchKeys = {
   showIOSPurchaseButton,
   iOSBackForwardNavigationGestures,
-  hideBottomMenuWhenKeyboardShow,
+  hideFABWhenKeyboardShow,
   showNativeAboutButton,
   shouldIgnoreSafeBottom,
   showNormalPurchaseButton,

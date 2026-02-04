@@ -7,13 +7,13 @@ export async function initKeyboardListeners() {
     await Keyboard.addListener('keyboardWillShow', (info: KeyboardInfo) => {
       setTimeout(() => {
         document.documentElement.style.setProperty('--keyboard-height', `${info.keyboardHeight}px`);
-        document.documentElement.style.setProperty('--bottom-menu-display', `none`);
+        document.documentElement.style.setProperty('--fab-display', `none`);
       }, 5);
     });
 
     await Keyboard.addListener('keyboardWillHide', () => {
       document.documentElement.style.setProperty('--keyboard-height', '0px');
-      document.documentElement.style.setProperty('--bottom-menu-display', 'block');
+      document.documentElement.style.setProperty('--fab-display', 'block');
     });
   }
 }

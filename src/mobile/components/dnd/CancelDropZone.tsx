@@ -17,7 +17,7 @@ export const CancelDropZone = () => {
   return (
     <div
       ref={setNodeRef}
-      className={classNames(styles.midButtonStyle, isOver ? 'opacity-100' : 'opacity-40', 'bg-accent-danger')}
+      className={classNames(styles.fabButton, isOver ? 'opacity-100' : 'opacity-40', 'bg-accent-danger')}
     >
       <CloseIcon size={20} />
     </div>

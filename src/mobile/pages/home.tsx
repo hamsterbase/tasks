@@ -175,29 +175,27 @@ export const MobileHome = () => {
     <PageLayout
       header={{
         renderIcon: (className: string) => <HomeIcon className={className} />,
-        title: localize('home.title', 'Home'),
-        actions: thirdpartySyncService.showSyncIcon ? (
-          <button
-            onClick={handleSync}
-            disabled={thirdpartySyncService.syncing}
-            className="flex items-center rounded text-t2 disabled:opacity-50"
-          >
-            <SyncIcon className={`w-5 h-5 ${thirdpartySyncService.syncing ? 'animate-spin' : ''}`} />
-          </button>
-        ) : undefined,
+        actions: (
+          <React.Fragment>
+            <button
+              onClick={() => navigate({ path: '/settings', replace: true })}
+              className="flex items-center rounded text-t1"
+            >
+              <SettingsIcon className="w-5 h-5" />
+            </button>
+            {thirdpartySyncService.showSyncIcon && (
+              <button
+                onClick={handleSync}
+                disabled={thirdpartySyncService.syncing}
+                className="flex items-center rounded text-t2 disabled:opacity-50"
+              >
+                <SyncIcon className={`w-5 h-5 ${thirdpartySyncService.syncing ? 'animate-spin' : ''}`} />
+              </button>
+            )}
+          </React.Fragment>
+        ),
       }}
       bottomMenu={{
-        left: {
-          icon: <HomeIcon className="w-6 h-6" />,
-          status: 'active',
-        },
-        right: {
-          icon: <SettingsIcon className="w-6 h-6" data-testid="settings-icon" />,
-          status: 'inactive',
-          onClick: () => {
-            navigate({ path: '/settings', replace: true });
-          },
-        },
         mid: {
           onClick: () => {
             popupAction({

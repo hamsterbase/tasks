@@ -32,7 +32,7 @@ export const InfoItem = ({ itemKey, icon, content, onClick, onClear, className }
     <div
       key={itemKey}
       className={classNames(
-        'flex items-center justify-between',
+        'flex items-start justify-between',
         styles.infoItemGap,
         styles.infoItemPadding,
         styles.infoItemRound,
@@ -42,7 +42,11 @@ export const InfoItem = ({ itemKey, icon, content, onClick, onClear, className }
       onClick={handleClick}
     >
       <button
-        className={classNames('flex items-center justify-center', styles.infoItemIconColor, styles.infoItemIconSize)}
+        className={classNames(
+          'flex items-center justify-center mt-0.5',
+          styles.infoItemIconColor,
+          styles.infoItemIconSize
+        )}
       >
         {icon}
       </button>

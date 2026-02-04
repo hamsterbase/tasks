@@ -7,7 +7,6 @@ import { ProjectHeadingInfo, TaskInfo } from '@/core/state/type';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import useProject from '@/mobile/hooks/useProject.tsx';
-import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox.tsx';
 import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService';
 import { getFlattenedItemsCollisionDetectionStrategy } from '@/utils/dnd/flattenedItemsCollisionDetectionStrategy';
@@ -18,7 +17,7 @@ import classNames from 'classnames';
 import type { TreeID } from 'loro-crdt';
 import React from 'react';
 import { useParams } from 'react-router';
-import { BottomMenuProps } from '../components/BottomMenu.tsx';
+import { FABProps } from '../components/FAB.tsx';
 import { LastPlacement } from '../components/dnd/lastPlacement.tsx';
 import { PageHeaderProps } from '../components/PageHeader.tsx';
 import { PageLayout } from '../components/PageLayout.tsx';
@@ -108,8 +107,7 @@ export const ProjectPage = () => {
     `project-${projectId}`
   );
 
-  const { handleMoreOptions, handleAddTask, handleToggleProjectStatus, handleLongPressStatusIcon } =
-    useProject(project);
+  const { handleMoreOptions, handleAddTask } = useProject(project);
 
   if (!project) {
     return (
@@ -182,36 +180,18 @@ export const ProjectPage = () => {
     },
   };
 
-  const bottomMenu: BottomMenuProps = {
+  const bottomMenu: FABProps = {
     left: 'back',
     mid: {
       onClick: handleAddTask,
-    },
-    right: {
-      icon: <MenuIcon />,
-      status: 'normal',
-      onClick: handleMoreOptions,
     },
   };
 
   const header: PageHeaderProps = {
     id: project.id,
     handleClickTaskDisplaySettings: openTaskDisplaySettings,
-    renderIcon: (className: string) => (
-      <ProjectStatusBox
-        className={className}
-        onLongPress={handleLongPressStatusIcon}
-        progress={project.progress}
-        status={project.status}
-        color="brand"
-        onClick={handleToggleProjectStatus}
-      />
-    ),
-    title: project.title,
-    headerPlaceholder: localize('project.headerPlaceholder', 'New Project'),
-    onSave: (title: string) => {
-      todoService.updateProject(project.id, { title });
-    },
+    title: '',
+    actions: <MenuIcon onClick={handleMoreOptions} />,
   };
 
   return (

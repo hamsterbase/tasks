@@ -7,7 +7,7 @@ import { useDragSensors } from '@/hooks/useDragSensors';
 import { SortableContext, SortingStrategy, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { LastPlacement } from './dnd/lastPlacement';
 import { DragOverlayItemProps, OverlayItem } from './dnd/DragOverlayItem';
-import { BottomMenuProps, BottomMenu } from './BottomMenu';
+import { FABProps, FAB } from './FAB';
 
 interface PageLayoutDragOption {
   overlayItem?: DragOverlayItemProps;
@@ -28,7 +28,7 @@ interface PageLayoutProps {
   meta?: React.ReactNode;
   children?: React.ReactNode;
   dragOption?: PageLayoutDragOption;
-  bottomMenu?: BottomMenuProps;
+  bottomMenu?: FABProps;
 }
 
 export const PageLayout: React.FC<PageLayoutProps> = (props: PageLayoutProps) => {
@@ -39,7 +39,7 @@ export const PageLayout: React.FC<PageLayoutProps> = (props: PageLayoutProps) =>
   let children = (
     <React.Fragment>
       <div className={childrenContainerPadding}>{props.children}</div>
-      {props.bottomMenu && <BottomMenu {...props.bottomMenu} />}
+      {props.bottomMenu && <FAB {...props.bottomMenu} />}
     </React.Fragment>
   );
   if (props.dragOption) {
@@ -59,7 +59,7 @@ export const PageLayout: React.FC<PageLayoutProps> = (props: PageLayoutProps) =>
               {props.children}
               {props.dragOption.sortable.lastPlacement && <LastPlacement />}
             </div>
-            {props.bottomMenu && <BottomMenu {...props.bottomMenu} />}
+            {props.bottomMenu && <FAB {...props.bottomMenu} />}
           </SortableContext>
         </DndContext>
       );
@@ -71,7 +71,7 @@ export const PageLayout: React.FC<PageLayoutProps> = (props: PageLayoutProps) =>
           onDragEnd={props.dragOption.onDragEnd}
         >
           <div className={childrenContainerPadding}>{props.children}</div>
-          {props.bottomMenu && <BottomMenu {...props.bottomMenu} />}
+          {props.bottomMenu && <FAB {...props.bottomMenu} />}
         </DndContext>
       );
     }
@@ -92,6 +92,9 @@ export const PageLayout: React.FC<PageLayoutProps> = (props: PageLayoutProps) =>
             renderIcon={props.header.renderIcon}
             icon={props.header.icon}
             actions={props.header.actions}
+            showBack={
+              typeof props.header.showBack === 'boolean' ? props.header.showBack : props.bottomMenu?.left === 'back'
+            }
             headerPlaceholder={props.header.headerPlaceholder}
             onSave={props.header.onSave}
             handleClickTaskDisplaySettings={props.header.handleClickTaskDisplaySettings}

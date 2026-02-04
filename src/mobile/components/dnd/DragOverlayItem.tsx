@@ -75,12 +75,10 @@ export const OverlayItem: React.FC<DragOverlayItemProps> = ({ textProps, project
   return (
     <DragOverlay>
       <div
-        className={classNames(
-          styles.taskItemOverlayBackground,
-          styles.taskItemOverlayRound,
-          styles.taskItemOverlayShadow,
-          className
-        )}
+        className={classNames(styles.taskItemOverlayBackground, styles.taskItemOverlayShadow, className, {
+          'rounded-full': activeId === DragDropElements.create,
+          [styles.taskItemOverlayRound]: activeId !== DragDropElements.create,
+        })}
       >
         {overLay}
       </div>
