@@ -71,11 +71,7 @@ export const InboxPage = () => {
 
   return (
     <PageLayout
-      bottomMenu={{
-        mid: {
-          onClick: handleCreateTask,
-        },
-      }}
+      onFabClick={handleCreateTask}
       header={{
         showBack: true,
         id: 'inbox',

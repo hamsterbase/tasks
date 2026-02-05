@@ -142,11 +142,7 @@ export const AreaPage = () => {
           lastPlacement: true,
         },
       }}
-      bottomMenu={{
-        mid: {
-          onClick: handleAddTask,
-        },
-      }}
+      onFabClick={handleAddTask}
     >
       <div className="flex flex-col gap-2">
         <div className="flex items-start gap-2 px-3 py-2 bg-white rounded-lg">
