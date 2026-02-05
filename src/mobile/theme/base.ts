@@ -24,8 +24,14 @@ export const baseStyles = {
 
   itemRound: /*tw*/ 'rounded-md',
 
-  headerBackground: /*tw*/ 'bg-bg1',
-  headerPadding: /*tw*/ 'px-6 py-2',
+  headerBackground: /*tw*/ 'bg-bg2',
+  headerRoot: /*tw*/ 'w-full h-15 px-5 py-3 relative',
+  headerLeftContainer: /*tw*/ 'flex gap-2 absolute left-5.5 top-1/2 -translate-y-1/2',
+  headerRightContainer: /*tw*/ 'flex gap-2 absolute right-5 top-1/2 -translate-y-1/2',
+  headerTitle: /*tw*/ 'text-base font-medium text-t1 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2',
+  headerActionButton:
+    /*tw*/ 'size-9 flex items-center justify-center border-none bg-bg1 cursor-pointer rounded-full shadow-soft text-t2',
+  headerActionButtonIcon: /*tw*/ 'size-5 flex items-center justify-center',
 
   taskItemGroupRound: /*tw*/ 'rounded-md',
   taskItemGroupBackground: /*tw*/ 'bg-bg1',

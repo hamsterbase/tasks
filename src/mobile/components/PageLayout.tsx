@@ -106,7 +106,6 @@ export const PageLayout: React.FC<PageLayoutProps> = (props: PageLayoutProps) =>
             }
             headerPlaceholder={props.header.headerPlaceholder}
             onSave={props.header.onSave}
-            handleClickTaskDisplaySettings={props.header.handleClickTaskDisplaySettings}
           />
         </div>
       )}

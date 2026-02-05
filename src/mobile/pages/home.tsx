@@ -176,25 +176,17 @@ export const MobileHome = () => {
       disableSticky
       header={{
         renderIcon: (className: string) => <HomeIcon className={className} />,
-        actions: (
-          <React.Fragment>
-            <button
-              onClick={() => navigate({ path: '/settings', replace: true })}
-              className="flex items-center rounded text-t1"
-            >
-              <SettingsIcon className="w-5 h-5" />
-            </button>
-            {thirdpartySyncService.showSyncIcon && (
-              <button
-                onClick={handleSync}
-                disabled={thirdpartySyncService.syncing}
-                className="flex items-center rounded text-t2 disabled:opacity-50"
-              >
-                <SyncIcon className={`w-5 h-5 ${thirdpartySyncService.syncing ? 'animate-spin' : ''}`} />
-              </button>
-            )}
-          </React.Fragment>
-        ),
+        actions: [
+          { icon: <SettingsIcon />, onClick: () => navigate({ path: '/settings', replace: true }) },
+          ...(thirdpartySyncService.showSyncIcon
+            ? [
+                {
+                  icon: <SyncIcon className={thirdpartySyncService.syncing ? 'animate-spin' : ''} />,
+                  onClick: handleSync,
+                },
+              ]
+            : []),
+        ],
       }}
       bottomMenu={{
         mid: {

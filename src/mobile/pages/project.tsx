@@ -1,5 +1,5 @@
 import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc.ts';
-import { MenuIcon } from '@/components/icons';
+import { MenuIcon, TaskDisplaySettingsIcon } from '@/components/icons';
 import { getProjectHeadingAndTasks } from '@/core/state/getProjectHeadingAndTasks.ts';
 import { getProject } from '@/core/state/getProject';
 import { FlattenedItem, FlattenedResult } from '@/core/state/home/flattenedItemsToResult.ts';
@@ -17,6 +17,7 @@ import classNames from 'classnames';
 import type { TreeID } from 'loro-crdt';
 import React from 'react';
 import { useParams } from 'react-router';
+import { FABProps } from '../components/FAB.tsx';
 import { LastPlacement } from '../components/dnd/lastPlacement.tsx';
 import { PageHeaderProps } from '../components/PageHeader.tsx';
 import { PageLayout } from '../components/PageLayout.tsx';
@@ -179,12 +180,20 @@ export const ProjectPage = () => {
     },
   };
 
+  const bottomMenu: FABProps = {
+    mid: {
+      onClick: handleAddTask,
+    },
+  };
+
   const header: PageHeaderProps = {
     showBack: true,
     id: project.id,
-    handleClickTaskDisplaySettings: openTaskDisplaySettings,
     title: '',
-    actions: <MenuIcon onClick={handleMoreOptions} />,
+    actions: [
+      { icon: <TaskDisplaySettingsIcon />, onClick: openTaskDisplaySettings },
+      { icon: <MenuIcon />, onClick: handleMoreOptions },
+    ],
   };
 
   return (
@@ -192,7 +201,7 @@ export const ProjectPage = () => {
       meta={<ProjectMeta project={project} />}
       header={header}
       dragOption={dragOption}
-      onFabClick={handleAddTask}
+      bottomMenu={bottomMenu}
     >
       <Files
         items={flattenedItems}

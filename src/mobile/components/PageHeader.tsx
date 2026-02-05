@@ -1,38 +1,33 @@
-import { LeftIcon, TaskDisplaySettingsIcon } from '@/components/icons';
+import { LeftIcon } from '@/components/icons';
 import { useBack } from '@/hooks/useBack';
 import { useCancelEdit } from '@/hooks/useCancelEdit';
 import classNames from 'classnames';
 import React, { useRef } from 'react';
 import { styles } from '../theme';
+
+export interface HeaderAction {
+  icon: React.ReactNode;
+  onClick: () => void;
+}
+
 export interface PageHeaderProps {
   title?: string;
   headerPlaceholder?: string;
   id?: string;
   icon?: React.ReactNode;
   renderIcon?: (className: string) => React.ReactNode;
-  actions?: React.ReactNode;
+  actions?: HeaderAction[];
   showBack?: boolean;
   onSave?: (title: string) => void;
-  handleClickTaskDisplaySettings?: () => void;
 }
 
-export const PageHeader: React.FC<PageHeaderProps> = ({
-  title,
-  id,
-  actions,
-  showBack,
-  handleClickTaskDisplaySettings,
-}) => {
+export const PageHeader: React.FC<PageHeaderProps> = ({ title, id, actions, showBack }) => {
   const back = useBack();
   const headerContainerRef = useRef<HTMLDivElement>(null);
   const { itemClassName, shouldIgnoreClick } = useCancelEdit(headerContainerRef, id ?? '');
 
-  const headerContainerStyle = classNames(
-    styles.headerBackground,
-    styles.headerPadding,
-    'w-full h-auto box-border',
-    itemClassName
-  );
+  const headerContainerStyle = classNames(styles.headerBackground, styles.headerRoot, itemClassName);
+
   return (
     <div
       className={headerContainerStyle}
@@ -40,26 +35,25 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
       onClick={shouldIgnoreClick}
       data-testid="page-header"
     >
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          {showBack && (
-            <button onClick={back} className="flex items-center rounded text-t1">
-              <LeftIcon className="w-5 h-5" />
+      {showBack && (
+        <div className={styles.headerLeftContainer}>
+          <button onClick={back} className={styles.headerActionButton}>
+            <LeftIcon className={styles.headerActionButtonIcon} />
+          </button>
+        </div>
+      )}
+
+      {title && <span className={styles.headerTitle}>{title}</span>}
+
+      {actions && actions.length > 0 && (
+        <div className={styles.headerRightContainer}>
+          {actions.map((action, index) => (
+            <button key={index} onClick={action.onClick} className={styles.headerActionButton}>
+              <div className={styles.headerActionButtonIcon}>{action.icon}</div>
             </button>
-          )}
+          ))}
         </div>
-        <div className="flex items-center gap-2 flex-1 justify-center h-7">
-          <h1 className={classNames('text-lg font-medium text-t1 break-all whitespace-pre-wrap')}>{title}</h1>
-        </div>
-        <div className="flex items-center gap-2">
-          {handleClickTaskDisplaySettings && (
-            <button onClick={handleClickTaskDisplaySettings} className="flex items-center rounded text-t1">
-              <TaskDisplaySettingsIcon className="w-5 h-5" />
-            </button>
-          )}
-          {actions}
-        </div>
-      </div>
+      )}
     </div>
   );
 };

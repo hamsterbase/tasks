@@ -1,5 +1,5 @@
 import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc';
-import { TodayIcon } from '@/components/icons';
+import { TaskDisplaySettingsIcon, TodayIcon } from '@/components/icons';
 import { getTodayItems } from '@/core/state/today/getTodayItems';
 import { ItemPosition } from '@/core/type';
 import { useService } from '@/hooks/use-service';
@@ -84,7 +84,7 @@ export const TodayPage = () => {
         id: 'today',
         title: localize('today', 'Today'),
         renderIcon: (className: string) => <TodayIcon className={className} />,
-        handleClickTaskDisplaySettings: openTaskDisplaySettings,
+        actions: [{ icon: <TaskDisplaySettingsIcon />, onClick: openTaskDisplaySettings }],
       }}
       dragOption={{
         overlayItem: {
@@ -103,11 +103,14 @@ export const TodayPage = () => {
         },
         onDragEnd: handleDragEnd,
       }}
-      onFabClick={() =>
-        handleCreateTask({
-          type: 'firstElement',
-        })
-      }
+      bottomMenu={{
+        mid: {
+          onClick: () =>
+            handleCreateTask({
+              type: 'firstElement',
+            }),
+        },
+      }}
     >
       <div className={classNames(styles.taskItemGroupBackground, styles.taskItemGroupRound)}>
         {items.map((item) => {

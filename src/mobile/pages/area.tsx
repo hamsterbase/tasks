@@ -1,5 +1,5 @@
 import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc';
-import { AreaIcon, MenuIcon, TagIcon } from '@/components/icons';
+import { AreaIcon, MenuIcon, TagIcon, TaskDisplaySettingsIcon } from '@/components/icons';
 import { isTaskVisible } from '@/core/time/filterProjectAndTask';
 import { useService } from '@/hooks/use-service';
 import { useArea } from '@/mobile/hooks/useArea';
@@ -122,10 +122,12 @@ export const AreaPage = () => {
     <PageLayout
       header={{
         showBack: true,
-        handleClickTaskDisplaySettings: openTaskDisplaySettings,
         id: areaDetail.id,
         title: '',
-        actions: <MenuIcon onClick={handleMoreOptions} />,
+        actions: [
+          { icon: <TaskDisplaySettingsIcon />, onClick: openTaskDisplaySettings },
+          { icon: <MenuIcon />, onClick: handleMoreOptions },
+        ],
       }}
       dragOption={{
         overlayItem: {
@@ -140,7 +142,11 @@ export const AreaPage = () => {
           lastPlacement: true,
         },
       }}
-      onFabClick={handleAddTask}
+      bottomMenu={{
+        mid: {
+          onClick: handleAddTask,
+        },
+      }}
     >
       <div className="flex flex-col gap-2">
         <div className="flex items-start gap-2 px-3 py-2 bg-white rounded-lg">

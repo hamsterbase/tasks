@@ -1,5 +1,5 @@
 import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc';
-import { InboxIcon } from '@/components/icons';
+import { InboxIcon, TaskDisplaySettingsIcon } from '@/components/icons';
 import { getInboxTasks } from '@/core/state/inbox/getInboxTasks';
 import { useService } from '@/hooks/use-service.ts';
 import { useWatchEvent } from '@/hooks/use-watch-event.ts';
@@ -71,13 +71,17 @@ export const InboxPage = () => {
 
   return (
     <PageLayout
-      onFabClick={handleCreateTask}
+      bottomMenu={{
+        mid: {
+          onClick: handleCreateTask,
+        },
+      }}
       header={{
         showBack: true,
         id: 'inbox',
         title: localize('inbox', 'Inbox'),
         renderIcon: (className: string) => <InboxIcon className={className} />,
-        handleClickTaskDisplaySettings: openTaskDisplaySettings,
+        actions: [{ icon: <TaskDisplaySettingsIcon />, onClick: openTaskDisplaySettings }],
       }}
       dragOption={{
         overlayItem: {},
