@@ -2,7 +2,6 @@ import { DeleteIcon, DueIcon, EditIcon, HeadingIcon, MoveIcon, ScheduledIcon, Ta
 import { ProjectInfoState } from '@/core/state/type';
 import { ItemStatus } from '@/core/type';
 import { useBack } from '@/hooks/useBack.ts';
-import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox.tsx';
 import { TaskStatusBox } from '@/mobile/components/taskItem/TaskStatusBox';
 import { useMobileDatepicker } from '@/mobile/overlay/datePicker/useDatepicker';
 import { useDialog } from '@/mobile/overlay/dialog/useDialog.ts';
@@ -10,10 +9,11 @@ import { PopupActionItem } from '@/mobile/overlay/popupAction/PopupActionControl
 import { usePopupAction } from '@/mobile/overlay/popupAction/usePopupAction';
 import { useProjectAreaSelector } from '@/mobile/overlay/projectAreaSelector/useProjectAreaSelector';
 import { useTagEditor } from '@/mobile/overlay/tagEditor/useTagEditor';
-import { ITodoService } from '@/services/todo/common/todoService';
 import { localize } from '@/nls';
+import { ITodoService } from '@/services/todo/common/todoService';
 import React from 'react';
 import { useService } from '../../hooks/use-service';
+import { MobileProjectCheckbox } from '../components/icon/MobileProjectCheckbox';
 
 const useProject = (project: ProjectInfoState | null) => {
   const todoService = useService(ITodoService);
@@ -132,43 +132,47 @@ const useProject = (project: ProjectInfoState | null) => {
 
   const handleMoreOptions = () => {
     popupAction({
-      items: [
+      groups: [
         {
-          icon: <EditIcon />,
-          name: localize('project.edit_title', 'Edit Title'),
-          onClick: handleEditTitle,
+          items: [
+            {
+              icon: <EditIcon />,
+              name: localize('project.edit_title', 'Edit Title'),
+              onClick: handleEditTitle,
+            },
+            {
+              icon: <HeadingIcon />,
+              name: localize('project.add_heading', 'Add Heading'),
+              onClick: handleAddHeading,
+            },
+            {
+              icon: <ScheduledIcon />,
+              name: localize('project.edit_start_date', 'Edit Start Date'),
+              onClick: handleEditStartDate,
+            },
+            {
+              icon: <DueIcon />,
+              name: localize('project.edit_due_date', 'Edit Due Date'),
+              onClick: handleEditDueDate,
+            },
+            {
+              icon: <TagIcon />,
+              name: localize('project.edit_tags', 'Edit Tags'),
+              onClick: handleEditTag,
+            },
+            {
+              icon: <MoveIcon />,
+              name: localize('project.move_project', 'Move Project'),
+              onClick: handleMoveProject,
+            },
+            {
+              icon: <DeleteIcon />,
+              name: localize('project.delete_project', 'Delete Project'),
+              onClick: handleDeleteProject,
+            },
+          ] as PopupActionItem[],
         },
-        {
-          icon: <HeadingIcon />,
-          name: localize('project.add_heading', 'Add Heading'),
-          onClick: handleAddHeading,
-        },
-        {
-          icon: <ScheduledIcon />,
-          name: localize('project.edit_start_date', 'Edit Start Date'),
-          onClick: handleEditStartDate,
-        },
-        {
-          icon: <DueIcon />,
-          name: localize('project.edit_due_date', 'Edit Due Date'),
-          onClick: handleEditDueDate,
-        },
-        {
-          icon: <TagIcon />,
-          name: localize('project.edit_tags', 'Edit Tags'),
-          onClick: handleEditTag,
-        },
-        {
-          icon: <MoveIcon />,
-          name: localize('project.move_project', 'Move Project'),
-          onClick: handleMoveProject,
-        },
-        {
-          icon: <DeleteIcon />,
-          name: localize('project.delete_project', 'Delete Project'),
-          onClick: handleDeleteProject,
-        },
-      ] as PopupActionItem[],
+      ],
     });
   };
 
@@ -186,30 +190,34 @@ const useProject = (project: ProjectInfoState | null) => {
         'There are {0} tasks left, what do you want to do?',
         leftProject
       ),
-      items: [
+      groups: [
         {
-          icon: <TaskStatusBox status={'completed'} />,
-          name: localize('tasks.mark_as_completed', 'Mark as Completed'),
-          onClick: () => {
-            todoService.transitionProjectState({
-              projectId: project.id,
-              projectStatus: tragetStatus,
-              taskStatus: 'completed',
-            });
-          },
+          items: [
+            {
+              icon: <TaskStatusBox status={'completed'} />,
+              name: localize('tasks.mark_as_completed', 'Mark as Completed'),
+              onClick: () => {
+                todoService.transitionProjectState({
+                  projectId: project.id,
+                  projectStatus: tragetStatus,
+                  taskStatus: 'completed',
+                });
+              },
+            },
+            {
+              icon: <TaskStatusBox status={'canceled'} />,
+              name: localize('tasks.mark_as_canceled', 'Mark as Canceled'),
+              onClick: () => {
+                todoService.transitionProjectState({
+                  projectId: project.id,
+                  projectStatus: tragetStatus,
+                  taskStatus: 'canceled',
+                });
+              },
+            },
+          ] as PopupActionItem[],
         },
-        {
-          icon: <TaskStatusBox status={'canceled'} />,
-          name: localize('tasks.mark_as_canceled', 'Mark as Canceled'),
-          onClick: () => {
-            todoService.transitionProjectState({
-              projectId: project.id,
-              projectStatus: tragetStatus,
-              taskStatus: 'canceled',
-            });
-          },
-        },
-      ] as PopupActionItem[],
+      ],
     });
   }
 
@@ -234,32 +242,36 @@ const useProject = (project: ProjectInfoState | null) => {
   const handleLongPressStatusIcon = () => {
     if (!project) return;
     popupAction({
-      items: [
+      groups: [
         {
-          condition: project.status !== 'created',
-          icon: <ProjectStatusBox status={'created'} progress={project.progress} />,
-          name: localize('project.mark_as_created', 'Mark as Created'),
-          onClick: () => {
-            todoService.transitionProjectState({ projectId: project.id, projectStatus: 'created' });
-          },
+          items: [
+            {
+              condition: project.status !== 'created',
+              icon: <MobileProjectCheckbox status={'created'} progress={project.progress * 100} />,
+              name: localize('project.mark_as_created', 'Mark as Created'),
+              onClick: () => {
+                todoService.transitionProjectState({ projectId: project.id, projectStatus: 'created' });
+              },
+            },
+            {
+              condition: project.status !== 'completed',
+              icon: <MobileProjectCheckbox status={'completed'} progress={project.progress * 100} />,
+              name: localize('project.mark_as_completed', 'Mark as Completed'),
+              onClick: () => {
+                updateTaskStatus('completed');
+              },
+            },
+            {
+              condition: project.status !== 'canceled',
+              icon: <MobileProjectCheckbox status={'canceled'} progress={project.progress * 100} />,
+              name: localize('project.mark_as_canceled', 'Mark as Canceled'),
+              onClick: () => {
+                updateTaskStatus('canceled');
+              },
+            },
+          ] as PopupActionItem[],
         },
-        {
-          condition: project.status !== 'completed',
-          icon: <ProjectStatusBox status={'completed'} progress={project.progress} />,
-          name: localize('project.mark_as_completed', 'Mark as Completed'),
-          onClick: () => {
-            updateTaskStatus('completed');
-          },
-        },
-        {
-          condition: project.status !== 'canceled',
-          icon: <ProjectStatusBox status={'canceled'} progress={project.progress} />,
-          name: localize('project.mark_as_canceled', 'Mark as Canceled'),
-          onClick: () => {
-            updateTaskStatus('canceled');
-          },
-        },
-      ] as PopupActionItem[],
+      ],
     });
   };
   const handleUpdateNotes = (notes?: string) => {

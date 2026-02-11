@@ -64,6 +64,7 @@ export default defineConfig({
         'src/utils/dnd/**',
         'src/locales/**',
         'src/base/browser/**',
+        'src/testIds.ts',
         'src/components/icons/index.ts',
         'src/components/GlobalContext/GlobalContext.tsx',
         'src/components/icons/ProjectStatusBox.tsx',

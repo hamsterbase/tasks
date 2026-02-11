@@ -3,16 +3,16 @@ import { getFilteredProjectsAndAreas } from '@/core/state/getFilteredProjectsAnd
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { ActionSheet } from '@/mobile/components/ActionSheet';
-import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox.tsx';
+import { MobileProjectCheckbox } from '@/mobile/components/icon/MobileProjectCheckbox';
 import { styles } from '@/mobile/theme';
 import { localize } from '@/nls';
 import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
 import { IWorkbenchOverlayService } from '@/services/overlay/common/WorkbenchOverlayService';
 import { ITodoService } from '@/services/todo/common/todoService';
 import classNames from 'classnames';
+import { TreeID } from 'loro-crdt';
 import React, { useState } from 'react';
 import { ProjectAreaSelectorController } from './ProjectAreaSelectorController';
-import { TreeID } from 'loro-crdt';
 
 const ProjectAreaSelectorImpl: React.FC<{ controller: ProjectAreaSelectorController }> = ({ controller }) => {
   const todoService = useService(ITodoService);
@@ -58,7 +58,7 @@ const ProjectAreaSelectorImpl: React.FC<{ controller: ProjectAreaSelectorControl
                   onClick={() => handleConfirmSelection(project.id)}
                 >
                   <div className={styles.projectAreaSelectorItemIcon}>
-                    <ProjectStatusBox progress={project.progress} status={project.status} color="t3" />
+                    <MobileProjectCheckbox progress={project.progress * 100} status={project.status} />
                   </div>
                   <span className={project.isPlaceholder ? 'text-t3' : ''}>{project.displayTitle}</span>
                 </button>
@@ -93,7 +93,7 @@ const ProjectAreaSelectorImpl: React.FC<{ controller: ProjectAreaSelectorControl
                       onClick={() => handleConfirmSelection(project.id)}
                     >
                       <div className={styles.projectAreaSelectorItemIcon}>
-                        <ProjectStatusBox progress={project.progress} status={project.status} color="t3" />
+                        <MobileProjectCheckbox progress={project.progress * 100} status={project.status} />
                       </div>
                       <span className={project.isPlaceholder ? 'text-t3' : ''}>{project.displayTitle}</span>
                     </button>

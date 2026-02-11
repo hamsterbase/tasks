@@ -1,5 +1,6 @@
 import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc.ts';
 import { MenuIcon, TaskDisplaySettingsIcon } from '@/components/icons';
+import { TestIds } from '@/testIds';
 import { getProjectHeadingAndTasks } from '@/core/state/getProjectHeadingAndTasks.ts';
 import { getProject } from '@/core/state/getProject';
 import { FlattenedItem, FlattenedResult } from '@/core/state/home/flattenedItemsToResult.ts';
@@ -185,7 +186,7 @@ export const ProjectPage = () => {
     title: '',
     actions: [
       { icon: <TaskDisplaySettingsIcon />, onClick: openTaskDisplaySettings },
-      { icon: <MenuIcon />, onClick: handleMoreOptions },
+      { icon: <MenuIcon />, onClick: handleMoreOptions, testId: TestIds.PageHeader.MenuButton },
     ],
   };
 

@@ -8,6 +8,7 @@ import { styles } from '../theme';
 export interface HeaderAction {
   icon: React.ReactNode;
   onClick: () => void;
+  testId?: string;
 }
 
 export interface PageHeaderProps {
@@ -43,12 +44,17 @@ export const PageHeader: React.FC<PageHeaderProps> = ({ title, id, actions, show
         </div>
       )}
 
-      {title && <span className={styles.headerTitle}>{title}</span>}
+      {title && <h1 className={styles.headerTitle}>{title}</h1>}
 
       {actions && actions.length > 0 && (
         <div className={styles.headerRightContainer}>
           {actions.map((action, index) => (
-            <button key={index} onClick={action.onClick} className={styles.headerActionButton}>
+            <button
+              key={index}
+              onClick={action.onClick}
+              className={styles.headerActionButton}
+              data-test-id={action.testId}
+            >
               <div className={styles.headerActionButtonIcon}>{action.icon}</div>
             </button>
           ))}

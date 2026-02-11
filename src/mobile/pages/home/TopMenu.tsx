@@ -11,7 +11,6 @@ import { styles } from '@/mobile/theme';
 import { localize } from '@/nls';
 import { INavigationService } from '@/services/navigationService/common/navigationService';
 import { ITodoService } from '@/services/todo/common/todoService.ts';
-import classNames from 'classnames';
 import React from 'react';
 
 export const MobileHomeTopMenu = () => {
@@ -29,42 +28,36 @@ export const MobileHomeTopMenu = () => {
   });
   const navigate = useNavigate();
   return (
-    <div className={styles.screenEdgePadding + ' pt-3'}>
-      <div className={classNames(styles.homeMenuBackground, styles.homeMenuRound)}>
-        <button
-          onClick={() => {
-            navigationService.navigate({ path: '/inbox' });
-          }}
-          className="w-full"
-        >
-          <StatCard
-            icon={<InboxIcon className={styles.homeMenuIconStyle} />}
-            title={localize('inbox', 'Inbox')}
-            value={uncompletedTasksCount}
-          />
-        </button>
-        <button onClick={() => navigate({ path: '/today' })} className="w-full">
-          <StatCard
-            icon={<TodayIcon className={styles.homeMenuIconStyle} />}
-            title={localize('today', 'Today')}
-            value={todayItems.startDateItemsCount}
-            badge={todayItems.dueDateItemsCount}
-          />
-        </button>
-
-        <button onClick={() => navigate({ path: '/scheduled' })} className="w-full">
-          <StatCard
-            icon={<ScheduledIcon className={styles.homeMenuIconStyle} />}
-            title={localize('schedule', 'Schedule')}
-          />
-        </button>
-        <button onClick={() => navigate({ path: '/completed' })} className="w-full">
-          <StatCard
-            icon={<LogIcon className={styles.homeMenuIconStyle} />}
-            title={localize('completed_tasks.title', 'Completed')}
-          />
-        </button>
-      </div>
+    <div className={styles.screenEdgePadding}>
+      <nav className={styles.statCardContainer}>
+        <StatCard
+          icon={<TodayIcon className={styles.statCardIcon} />}
+          label={localize('today', 'Today')}
+          variant="Today"
+          count={todayItems.startDateItemsCount}
+          overdueCount={todayItems.dueDateItemsCount}
+          onClick={() => navigate({ path: '/today' })}
+        />
+        <StatCard
+          icon={<InboxIcon className={styles.statCardIcon} />}
+          label={localize('inbox', 'Inbox')}
+          variant="Inbox"
+          count={uncompletedTasksCount}
+          onClick={() => navigationService.navigate({ path: '/inbox' })}
+        />
+        <StatCard
+          icon={<ScheduledIcon className={styles.statCardIcon} />}
+          label={localize('schedule', 'Schedule')}
+          variant="Scheduled"
+          onClick={() => navigate({ path: '/scheduled' })}
+        />
+        <StatCard
+          icon={<LogIcon className={styles.statCardIcon} />}
+          label={localize('completed_tasks.title', 'Completed')}
+          variant="Completed"
+          onClick={() => navigate({ path: '/completed' })}
+        />
+      </nav>
     </div>
   );
 };

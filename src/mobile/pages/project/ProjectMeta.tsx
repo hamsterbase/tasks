@@ -1,5 +1,4 @@
 import { NotebookIcon, ScheduledIcon, TagIcon } from '@/components/icons';
-import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox';
 import { ProjectInfoState } from '@/core/state/type';
 import useProject from '@/mobile/hooks/useProject';
 import { styles } from '@/mobile/theme';
@@ -11,6 +10,7 @@ import { InfoItemGroup } from '@/mobile/components/InfoItem';
 import { InfoItemTags } from '@/mobile/components/infoItem/tags';
 import { StartDateInfoItem } from '@/mobile/components/infoItem/startDate';
 import { DueDateInfoItem, DueDateInfoItemIcon } from '@/mobile/components/infoItem/dueDate';
+import { MobileProjectCheckbox } from '@/mobile/components/icon/MobileProjectCheckbox';
 
 const ProjectMeta: React.FC<{ project: ProjectInfoState }> = ({ project }) => {
   const {
@@ -40,12 +40,10 @@ const ProjectMeta: React.FC<{ project: ProjectInfoState }> = ({ project }) => {
       itemKey: 'title',
       show: true,
       icon: (
-        <ProjectStatusBox
-          className="shrink-0 size-4"
+        <MobileProjectCheckbox
           onLongPress={handleLongPressStatusIcon}
-          progress={project.progress}
+          progress={project.progress * 100}
           status={project.status}
-          color="t3"
           onClick={handleToggleProjectStatus}
         />
       ),

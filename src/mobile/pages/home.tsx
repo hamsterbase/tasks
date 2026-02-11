@@ -1,8 +1,8 @@
 import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc.ts';
 import { AreaIcon, HomeIcon, SettingsIcon, SyncIcon } from '@/components/icons';
+import { FlattenedResult } from '@/core/state/home/flattenedItemsToResult.ts';
 import { flattenRootCollections } from '@/core/state/home/getFlattenRootCollections.ts';
 import { getFutureProjects } from '@/core/state/home/getFutureProjects.ts';
-import { FlattenedResult } from '@/core/state/home/flattenedItemsToResult.ts';
 import { AreaInfoState, ProjectInfoState } from '@/core/state/type.ts';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
@@ -15,6 +15,7 @@ import { HomeProjectItem } from '@/mobile/components/todo/HomeProjectItem.tsx';
 import { localize } from '@/nls.ts';
 import { toggleAreaConfigKey } from '@/services/config/config.ts';
 import { INavigationService } from '@/services/navigationService/common/navigationService.ts';
+import { ISelfhostedSyncService } from '@/services/selfhostedSync/common/selfhostedSyncService.ts';
 import { ITodoService } from '@/services/todo/common/todoService.ts';
 import { DragDropElements } from '@/utils/dnd/dragDropCollision.ts';
 import { getFlattenedItemsCollisionDetectionStrategy } from '@/utils/dnd/flattenedItemsCollisionDetectionStrategy.ts';
@@ -24,15 +25,14 @@ import classNames from 'classnames';
 import React from 'react';
 import { InboxDropZone } from '../components/dnd/InboxDropZone.tsx';
 import { LastPlacement } from '../components/dnd/lastPlacement.tsx';
+import { MobileProjectCheckbox } from '../components/icon/MobileProjectCheckbox.tsx';
 import { PageLayout } from '../components/PageLayout.tsx';
-import { ProjectStatusBox } from '../../components/icons/ProjectStatusBox.tsx';
 import { TaskStatusBox } from '../components/taskItem/TaskStatusBox.tsx';
 import { AreaHeader } from '../components/todo/AreaHeader.tsx';
 import { usePopupAction } from '../overlay/popupAction/usePopupAction.ts';
+import { useToast } from '../overlay/toast/useToast.ts';
 import { styles } from '../theme.ts';
 import { MobileHomeTopMenu } from './home/TopMenu';
-import { useToast } from '../overlay/toast/useToast.ts';
-import { ISelfhostedSyncService } from '@/services/selfhostedSync/common/selfhostedSyncService.ts';
 
 interface HomeProjectAndAreaProps {
   flattenedResult: FlattenedResult<AreaInfoState, ProjectInfoState>;
@@ -190,29 +190,33 @@ export const MobileHome = () => {
       }}
       onFabClick={() => {
         popupAction({
-          items: [
+          groups: [
             {
-              icon: <TaskStatusBox status={'completed'} />,
-              name: localize('create_popup.create_task', 'Create Task'),
-              onClick: () => {
-                navigationService.navigate({ path: '/create_task' });
-              },
-            },
-            {
-              icon: <ProjectStatusBox progress={0.6} status={'created'} />,
-              name: localize('create_popup.create_project', 'Create Project'),
-              onClick: () => {
-                const id = todoService.addProject({ title: '' });
-                todoService.editItem(id);
-              },
-            },
-            {
-              icon: <AreaIcon />,
-              name: localize('create_popup.create_area', 'Create Area'),
-              onClick: () => {
-                const id = todoService.addArea({ title: '' });
-                todoService.editItem(id);
-              },
+              items: [
+                {
+                  icon: <TaskStatusBox status={'completed'} />,
+                  name: localize('create_popup.create_task', 'Create Task'),
+                  onClick: () => {
+                    navigationService.navigate({ path: '/create_task' });
+                  },
+                },
+                {
+                  icon: <MobileProjectCheckbox progress={60} status={'created'} />,
+                  name: localize('create_popup.create_project', 'Create Project'),
+                  onClick: () => {
+                    const id = todoService.addProject({ title: '' });
+                    todoService.editItem(id);
+                  },
+                },
+                {
+                  icon: <AreaIcon />,
+                  name: localize('create_popup.create_area', 'Create Area'),
+                  onClick: () => {
+                    const id = todoService.addArea({ title: '' });
+                    todoService.editItem(id);
+                  },
+                },
+              ],
             },
           ],
         });

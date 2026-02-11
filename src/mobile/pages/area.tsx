@@ -1,5 +1,6 @@
 import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc';
 import { AreaIcon, MenuIcon, TagIcon, TaskDisplaySettingsIcon } from '@/components/icons';
+import { TestIds } from '@/testIds';
 import { isTaskVisible } from '@/core/time/filterProjectAndTask';
 import { useService } from '@/hooks/use-service';
 import { useArea } from '@/mobile/hooks/useArea';
@@ -126,7 +127,7 @@ export const AreaPage = () => {
         title: '',
         actions: [
           { icon: <TaskDisplaySettingsIcon />, onClick: openTaskDisplaySettings },
-          { icon: <MenuIcon />, onClick: handleMoreOptions },
+          { icon: <MenuIcon />, onClick: handleMoreOptions, testId: TestIds.PageHeader.MenuButton },
         ],
       }}
       dragOption={{

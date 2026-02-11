@@ -7,6 +7,16 @@ export const baseStyles = {
   homeMenuDueTaskNumberColor: /*tw*/ 'text-sm font-medium text-white bg-accent-danger rounded-full h-4 min-w-4',
   homeMenuIconStyle: /*tw*/ 'w-5 h-5 text-brand',
 
+  statCardContainer: /*tw*/ 'grid grid-cols-2 gap-3',
+  statCardRoot: /*tw*/ 'px-4 pt-4.5 pb-4 flex flex-col gap-3.5 ui-card-glass',
+  statCardHeader: /*tw*/ 'flex justify-between items-start',
+  statCardIconContainer: /*tw*/ 'size-9 rounded-xl flex items-center justify-center',
+  statCardIcon: /*tw*/ 'size-4.5',
+  statCardCountContainer: /*tw*/ 'flex items-baseline gap-2 text-xl font-semibold',
+  statCardOverdueCount: /*tw*/ 'text-accent-danger',
+  statCardCount: /*tw*/ 'text-t2',
+  statCardLabel: /*tw*/ 'text-sm text-t2',
+
   screenEdgePadding: /*tw*/ 'px-3',
 
   bottomMenuHeight: /*tw*/ 'h-11',
@@ -187,6 +197,39 @@ export const baseStyles = {
   switchOuterBorder: /*tw*/ '',
 
   dialogBorder: /*tw*/ '',
+
+  // SettingsListItem styles
+  settingsListItemRoot:
+    /*tw*/ 'flex items-center justify-between py-3.5 px-4 cursor-pointer transition-colors duration-200',
+  settingsListItemIconContainer: /*tw*/ 'mr-4 shrink-0 size-6',
+  settingsListItemIconDanger: /*tw*/ 'text-accent-danger',
+  settingsListItemIconNormal: /*tw*/ 'text-t2',
+  settingsListItemContent: /*tw*/ 'flex flex-col gap-0.5 flex-1 min-w-0',
+  settingsListItemTitle: /*tw*/ 'text-base font-medium',
+  settingsListItemTitleDanger: /*tw*/ 'text-accent-danger',
+  settingsListItemTitleNormal: /*tw*/ 'text-t1',
+  settingsListItemDescription: /*tw*/ 'text-xs text-t2',
+  settingsListItemCheckContainer: /*tw*/ 'size-5 flex items-center justify-center',
+  settingsListItemCheckIcon: /*tw*/ 'text-brand',
+  settingsListItemCheckIconSize: /*tw*/ 'size-4.5',
+  settingsListItemNavContainer: /*tw*/ 'flex items-center',
+  settingsListItemNavLabel: /*tw*/ 'text-xs text-t3 mr-1',
+  settingsListItemNavIcon: /*tw*/ 'size-4 text-t3',
+  settingsListItemLabelText: /*tw*/ 'text-xs text-t3',
+  settingsListItemButtonRoot: /*tw*/ 'flex items-center py-3 px-4 cursor-pointer transition-colors duration-200',
+  settingsListItemButtonAlignLeft: /*tw*/ 'justify-start',
+  settingsListItemButtonAlignRight: /*tw*/ 'justify-end',
+  settingsListItemButtonAlignCenter: /*tw*/ 'justify-center',
+  settingsListItemButtonText: /*tw*/ 'text-base font-medium',
+  settingsListItemButtonTextDanger: /*tw*/ 'text-accent-danger',
+  settingsListItemButtonTextPrimary: /*tw*/ 'text-brand',
+
+  // SettingsListGroup styles
+  settingsListGroupRoot: /*tw*/ 'flex flex-col w-full',
+  settingsListGroupTitle: /*tw*/ 'text-sm text-t2 ml-4 pb-3',
+  settingsListGroupContainer: /*tw*/ 'flex flex-col rounded-2xl overflow-hidden bg-bg1 shadow-soft',
+  settingsListGroupSubtitle: /*tw*/ 'text-xs text-t3 ml-4 pt-2',
+  settingsListGroupDivider: /*tw*/ 'h-[1px] bg-line-light',
 
   // font-size 14px
   baseButtonStyle: /*tw*/ 'flex items-center justify-center text-center rounded-full w-full',

@@ -41,4 +41,8 @@ export const TestIds = {
     /** Dialog action button - use with key for specific buttons */
     ActionButton: 'desktop-dialog-action-button',
   },
+  PageHeader: {
+    /** Menu button in mobile page header */
+    MenuButton: 'page-header-menu-button',
+  },
 } as const;

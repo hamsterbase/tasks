@@ -2,7 +2,6 @@ import { ProjectInfoState } from '@/core/state/type.ts';
 import { useService } from '@/hooks/use-service';
 import { useCancelEdit } from '@/hooks/useCancelEdit';
 import { useEdit } from '@/hooks/useEdit';
-import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox.tsx';
 import { styles } from '@/mobile/theme';
 import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService';
@@ -19,6 +18,7 @@ import { TaskItemSubtitle } from '../taskItem/TaskItemSubtitle';
 import { TaskItemTitle } from '../taskItem/taskItemTitle';
 import { TaskItemTitleAndSubtitle } from '../taskItem/TaskItemTitleAndSubtitle';
 import useNavigate from '@/hooks/useNavigate';
+import { MobileProjectCheckbox } from '../icon/MobileProjectCheckbox';
 
 interface ProjectItemProps {
   hideStartDate?: boolean;
@@ -86,11 +86,7 @@ export const HomeProjectItem: React.FC<ProjectItemProps> = ({
       }}
     >
       <button className={classNames(styles.taskItemIconSize)}>
-        <ProjectStatusBox
-          color={projectInfo.status === 'completed' ? 'brand' : 't3'}
-          status={projectInfo.status}
-          progress={projectInfo.progress}
-        />
+        <MobileProjectCheckbox status={projectInfo.status} progress={projectInfo.progress} />
       </button>
       <TaskItemCompletionAt completionAt={projectInfo.completionAt} status={projectInfo.status} />
       <TaskItemStartDate

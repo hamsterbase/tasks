@@ -54,30 +54,34 @@ export const TaskItem: React.FC<TaskItemProps> = ({
 
   const handleLongPress = () => {
     popupAction({
-      items: [
+      groups: [
         {
-          condition: taskInfo.status !== 'created',
-          icon: <TaskStatusBox status={'created'} />,
-          name: localize('tasks.mark_as_created', 'Mark as Created'),
-          onClick: () => {
-            todoService.updateTask(taskInfo.id, { status: 'created' });
-          },
-        },
-        {
-          condition: taskInfo.status !== 'completed',
-          icon: <TaskStatusBox status={'completed'} />,
-          name: localize('tasks.mark_as_completed', 'Mark as Completed'),
-          onClick: () => {
-            todoService.updateTask(taskInfo.id, { status: 'completed' });
-          },
-        },
-        {
-          condition: taskInfo.status !== 'canceled',
-          icon: <TaskStatusBox status={'canceled'} />,
-          name: localize('tasks.mark_as_canceled', 'Mark as Canceled'),
-          onClick: () => {
-            todoService.updateTask(taskInfo.id, { status: 'canceled' });
-          },
+          items: [
+            {
+              condition: taskInfo.status !== 'created',
+              icon: <TaskStatusBox status={'created'} />,
+              name: localize('tasks.mark_as_created', 'Mark as Created'),
+              onClick: () => {
+                todoService.updateTask(taskInfo.id, { status: 'created' });
+              },
+            },
+            {
+              condition: taskInfo.status !== 'completed',
+              icon: <TaskStatusBox status={'completed'} />,
+              name: localize('tasks.mark_as_completed', 'Mark as Completed'),
+              onClick: () => {
+                todoService.updateTask(taskInfo.id, { status: 'completed' });
+              },
+            },
+            {
+              condition: taskInfo.status !== 'canceled',
+              icon: <TaskStatusBox status={'canceled'} />,
+              name: localize('tasks.mark_as_canceled', 'Mark as Canceled'),
+              onClick: () => {
+                todoService.updateTask(taskInfo.id, { status: 'canceled' });
+              },
+            },
+          ],
         },
       ],
     });

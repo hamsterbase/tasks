@@ -2,30 +2,41 @@ import classNames from 'classnames';
 import React from 'react';
 import { styles } from '../theme';
 
+type Variant = 'Today' | 'Inbox' | 'Scheduled' | 'Completed';
+
 interface StatCardProps {
   icon: React.ReactNode;
-  title: string;
-  value?: number;
-  badge?: number;
+  label: string;
+  variant: Variant;
+  count?: number;
+  overdueCount?: number;
+  onClick?: () => void;
 }
 
-export const StatCard: React.FC<StatCardProps> = ({ icon, title, value, badge }) => {
+const iconContainerClasses: Record<Variant, string> = {
+  Today: 'ui-icon-container-today',
+  Inbox: 'ui-icon-container-inbox',
+  Scheduled: 'ui-icon-container-scheduled',
+  Completed: 'ui-icon-container-completed',
+};
+
+export const StatCard: React.FC<StatCardProps> = ({ icon, label, variant, count, overdueCount, onClick }) => {
+  const showCount = count !== undefined || overdueCount !== undefined;
+
   return (
-    <div className={classNames('flex items-center justify-between', styles.homeMenuItemPadding)}>
-      <div className={classNames('flex items-center', styles.homePageItemGap)}>
-        <div>{icon}</div>
-        <div className="flex flex-col justify-center">
-          <span className="text-lg text-t1 font-medium">{title}</span>
-        </div>
-      </div>
-      <div className={classNames('flex items-center', styles.homePageItemGap)}>
-        {typeof badge === 'number' && badge > 0 && (
-          <span className={classNames('inline-flex items-center justify-center', styles.homeMenuDueTaskNumberColor)}>
-            {badge}
-          </span>
+    <button onClick={onClick} className={classNames(styles.statCardRoot, 'w-full text-left')}>
+      <div className={styles.statCardHeader}>
+        <span className={classNames(styles.statCardIconContainer, iconContainerClasses[variant])}>{icon}</span>
+        {showCount && (
+          <div className={styles.statCardCountContainer}>
+            {overdueCount !== undefined && overdueCount > 0 && (
+              <span className={styles.statCardOverdueCount}>{overdueCount}</span>
+            )}
+            {count !== undefined && <span className={styles.statCardCount}>{count}</span>}
+          </div>
         )}
-        {typeof value === 'number' && value > 0 && <span className={styles.homeMenuNumberColor}>{value}</span>}
       </div>
-    </div>
+      <span className={styles.statCardLabel}>{label}</span>
+    </button>
   );
 };

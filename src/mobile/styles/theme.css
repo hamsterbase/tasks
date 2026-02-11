@@ -1,25 +1,25 @@
 @theme {
   --color-bg1: #ffffff;
-  --color-bg2: #f6f7f8;
-  --color-bg3: #f1f2f3;
-  --color-bg4: #ecedef;
+  --color-bg2: #faf9f7;
+  --color-bg3: #f5f4f2;
+  --color-bg4: #f8f7f5;
 
-  --color-t1: #18191c;
-  --color-t2: #61666d;
-  --color-t3: #9499a0;
-  --color-t4: #c9ccd0;
+  --color-t1: #2d2a26;
+  --color-t2: #6b6660;
+  --color-t3: #9c9690;
+  --color-t4: #c4c0ba;
   --color-text-white: #ffffff;
-  --color-text-link: #57d9d4;
+  --color-text-link: #4a7ab8;
 
-  --color-line-light: #f1f2f3;
-  --color-line-regular: #e3e5e7;
-  --color-line-bold: #c9ccd0;
+  --color-line-light: rgba(45, 42, 38, 0.08);
+  --color-line-regular: rgba(45, 42, 38, 0.12);
+  --color-line-bold: rgba(45, 42, 38, 0.2);
 
-  --color-brand: #30cccc;
-  --color-brand-light: #e6fffb;
+  --color-brand: #4db6ac;
+  --color-brand-light: #e0f2f1;
 
-  --color-accent-danger: #f85a54;
-  --color-accent-success: #2ac864;
+  --color-accent-danger: #e07b67;
+  --color-accent-success: #5a9a64;
 
   --color-toast-bg: #2f3238;
   --shadow-soft: 0 4px 16px rgba(0, 0, 0, 0.03);

@@ -2,6 +2,7 @@ import { CheckIcon, ChevronRightIcon } from '@/components/icons';
 import classNames from 'classnames';
 import React from 'react';
 import { Switch } from '../switch';
+import { baseStyles } from '@/mobile/theme/base';
 
 export interface ListItemOption {
   testId?: string;
@@ -33,6 +34,9 @@ export interface ListItemOption {
     | {
         type: 'switch';
         checked: boolean;
+      }
+    | {
+        type: 'plain';
       };
   onClick?: () => void;
 }
@@ -49,51 +53,51 @@ const ListItem: React.FC<ListItemProps> = (props) => {
     return (
       <div
         data-testid={testId}
-        className={classNames('flex flex-row items-center p-3 gap-5 relative w-full bg-bg1 isolation-isolate', {
-          'justify-start': align === 'left',
-          'justify-end': align === 'right',
-          'justify-center': align === 'center',
+        className={classNames(baseStyles.settingsListItemButtonRoot, {
+          [baseStyles.settingsListItemButtonAlignLeft]: align === 'left',
+          [baseStyles.settingsListItemButtonAlignRight]: align === 'right',
+          [baseStyles.settingsListItemButtonAlignCenter]: align === 'center',
         })}
         onClick={onClick}
       >
-        <div
-          className={classNames(`font-normal text-base`, {
-            'text-accent-danger': mode.theme === 'danger',
-            'text-brand': mode.theme === 'primary',
+        <span
+          className={classNames(baseStyles.settingsListItemButtonText, {
+            [baseStyles.settingsListItemButtonTextDanger]: mode.theme === 'danger',
+            [baseStyles.settingsListItemButtonTextPrimary]: mode.theme === 'primary',
           })}
         >
           {title}
-        </div>
+        </span>
       </div>
     );
   }
 
   return (
-    <div
-      data-testid={testId}
-      className="flex flex-row justify-center items-center p-3 gap-5 relative w-full bg-bg1 isolation-isolate"
-      onClick={onClick}
-    >
-      <div className="flex flex-row items-center flex-grow gap-2">
-        {icon && <div className="size-6">{icon}</div>}
-        <div className="flex flex-col gap-0.5">
-          <div className="font-normal text-base text-t1 line-clamp-1">{title}</div>
-          {description && <div className="font-normal text-xs text-t3 line-clamp-1">{description}</div>}
+    <div data-testid={testId} className={baseStyles.settingsListItemRoot} onClick={onClick}>
+      {icon && <div className={baseStyles.settingsListItemIconContainer}>{icon}</div>}
+      <div className={baseStyles.settingsListItemContent}>
+        <span className={classNames(baseStyles.settingsListItemTitle, baseStyles.settingsListItemTitleNormal)}>
+          {title}
+        </span>
+        {description && <span className={baseStyles.settingsListItemDescription}>{description}</span>}
+      </div>
+      {mode.type === 'navigation' && (
+        <div className={baseStyles.settingsListItemNavContainer}>
+          {mode.label && <span className={baseStyles.settingsListItemNavLabel}>{mode.label}</span>}
+          <ChevronRightIcon className={baseStyles.settingsListItemNavIcon} />
         </div>
-      </div>
-      <div className="flex items-center">
-        {mode.type === 'navigation' && (
-          <>
-            {mode.label && <div className="text-xs text-right text-t3 mr-0.5 line-clamp-1">{mode.label}</div>}
-            <ChevronRightIcon className="size-4 text-t3" />
-          </>
-        )}
-        {mode.type === 'check' && (
-          <div className="size-4">{mode.checked && <CheckIcon className="size-4 text-primary" />}</div>
-        )}
-        {mode.type === 'label' && <div className="text-xs text-right text-t3">{mode.label}</div>}
-        {mode.type === 'switch' && <Switch checked={mode.checked} />}
-      </div>
+      )}
+      {mode.type === 'check' && (
+        <div className={baseStyles.settingsListItemCheckContainer}>
+          {mode.checked && (
+            <CheckIcon
+              className={classNames(baseStyles.settingsListItemCheckIconSize, baseStyles.settingsListItemCheckIcon)}
+            />
+          )}
+        </div>
+      )}
+      {mode.type === 'label' && <span className={baseStyles.settingsListItemLabelText}>{mode.label}</span>}
+      {mode.type === 'switch' && <Switch checked={mode.checked} />}
     </div>
   );
 };
@@ -107,27 +111,20 @@ export interface ListItemGroupProps {
 
 export const ListItemGroup: React.FC<ListItemGroupProps> = (props) => {
   const { title, items, subtitle, className } = props;
+  const visibleItems = items.filter((item) => !item.hidden);
 
   return (
-    <div className={classNames('flex flex-col w-full rounded-md overflow-hidden', className)}>
-      {title && <div className="px-3 pt-2 pb-1 text-sm font-medium text-t3">{title}</div>}
-      <div className="flex flex-col">
-        {items
-          .filter((item) => !item.hidden)
-          .map((item, index) => (
-            <React.Fragment key={index}>
-              <div
-                className={classNames('h-[1px] bg-line-light', {
-                  hidden: index === 0,
-                  'ml-3  w-[calc(100%-0.75rem)]': !item.icon && item.mode.type !== 'button',
-                  'ml-11  w-[calc(100%-2.75rem)]': item.icon,
-                })}
-              />
-              <ListItem key={index} {...item} />
-            </React.Fragment>
-          ))}
+    <div className={classNames(baseStyles.settingsListGroupRoot, className)}>
+      {title && <span className={baseStyles.settingsListGroupTitle}>{title}</span>}
+      <div className={baseStyles.settingsListGroupContainer}>
+        {visibleItems.map((item, index) => (
+          <React.Fragment key={index}>
+            {index > 0 && <div className={baseStyles.settingsListGroupDivider} />}
+            <ListItem {...item} />
+          </React.Fragment>
+        ))}
       </div>
-      {subtitle && <div className="px-3 py-2 text-xs text-t3">{subtitle}</div>}
+      {subtitle && <span className={baseStyles.settingsListGroupSubtitle}>{subtitle}</span>}
     </div>
   );
 };

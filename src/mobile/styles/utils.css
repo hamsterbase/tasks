@@ -42,3 +42,48 @@
     background-color: transparent;
   }
 }
+
+.ui-card-glass {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--color-line-light);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-soft);
+  @apply bg-bg1/60;
+}
+
+.ui-icon-container-today {
+  background: linear-gradient(
+    to bottom right,
+    color-mix(in srgb, var(--color-module-today) 8%, white),
+    color-mix(in srgb, var(--color-module-today) 15%, white)
+  );
+  color: var(--color-module-today);
+}
+
+.ui-icon-container-inbox {
+  background: linear-gradient(
+    to bottom right,
+    color-mix(in srgb, var(--color-module-inbox) 8%, white),
+    color-mix(in srgb, var(--color-module-inbox) 15%, white)
+  );
+  color: var(--color-module-inbox);
+}
+
+.ui-icon-container-scheduled {
+  background: linear-gradient(
+    to bottom right,
+    color-mix(in srgb, var(--color-module-scheduled) 8%, white),
+    color-mix(in srgb, var(--color-module-scheduled) 15%, white)
+  );
+  color: var(--color-module-scheduled);
+}
+
+.ui-icon-container-completed {
+  background: linear-gradient(
+    to bottom right,
+    color-mix(in srgb, var(--color-module-completed) 8%, white),
+    color-mix(in srgb, var(--color-module-completed) 15%, white)
+  );
+  color: var(--color-module-completed);
+}

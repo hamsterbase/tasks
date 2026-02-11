@@ -4,12 +4,10 @@ import { TimeAfterEnum } from '@/core/time/getTimeAfter';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { ActionSheet } from '@/mobile/components/ActionSheet';
-import { Switch } from '@/mobile/components/switch';
+import { ListItemGroup } from '@/mobile/components/listItem/listItem';
 import { usePopupAction } from '@/mobile/overlay/popupAction/usePopupAction';
-import { styles } from '@/mobile/theme';
 import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
 import { IWorkbenchOverlayService } from '@/services/overlay/common/WorkbenchOverlayService';
-import classNames from 'classnames';
 import React from 'react';
 import { TaskDisplaySettingsController } from './TaskDisplaySettingsController';
 
@@ -26,11 +24,15 @@ export const TaskDisplaySettings: React.FC = () => {
 
   const handleCompleteRangeClick = () => {
     popupAction({
-      items: taskDisplaySettingOptions.completedTasksRange.options.map((option) => ({
-        name: option.label,
-        description: option.description,
-        onClick: () => controller.changeCompletedTasksRange(option.value as TimeAfterEnum),
-      })),
+      groups: [
+        {
+          items: taskDisplaySettingOptions.completedTasksRange.options.map((option) => ({
+            name: option.label,
+            description: option.description,
+            onClick: () => controller.changeCompletedTasksRange(option.value as TimeAfterEnum),
+          })),
+        },
+      ],
     });
   };
 
@@ -41,66 +43,29 @@ export const TaskDisplaySettings: React.FC = () => {
 
   return (
     <ActionSheet zIndex={controller.zIndex} onClose={() => controller.dispose()}>
-      <div
-        className={classNames('w-full', styles.actionSheetActionGroupRound, styles.actionSheetActionGroupBackground)}
-      >
-        {!controller.hideShowFutureTasks && (
-          <button
-            className={classNames(
-              'w-full flex items-center justify-between',
-              styles.actionSheetActionGroupItemPadding,
-              styles.actionSheetActionGroupItemGap
-            )}
-            onClick={() => controller.toggleShowFutureTasks()}
-          >
-            <div className="flex items-center gap-2">
-              <span className="flex-shrink-0 size-5 flex items-center justify-center text-t1">
-                <ScheduledIcon className="w-5 h-5" />
-              </span>
-              <span className="text-sm text-t1">{taskDisplaySettingOptions.showFutureTasks.title}</span>
-            </div>
-            <Switch checked={controller.showFutureTasks} />
-          </button>
-        )}
-        <div className="w-[calc(100%-2.5rem)] h-px bg-line-light ml-auto" />
-        <button
-          className={classNames(
-            'w-full flex items-center justify-between',
-            styles.actionSheetActionGroupItemPadding,
-            styles.actionSheetActionGroupItemGap
-          )}
-          onClick={() => controller.toggleShowCompletedTasks()}
-        >
-          <div className="flex items-center gap-2">
-            <span className="flex-shrink-0 size-5 flex items-center justify-center text-t1">
-              <LogIcon className="w-5 h-5" />
-            </span>
-            <span className="text-sm text-t1">{taskDisplaySettingOptions.showCompletedTasks.title}</span>
-          </div>
-          <Switch checked={controller.showCompletedTasks} />
-        </button>
-        {
-          <>
-            <div className="w-[calc(100%-2.5rem)] h-px bg-line-light ml-auto" />
-            <button
-              className={classNames(
-                'w-full flex items-center justify-between',
-                styles.actionSheetActionGroupItemPadding,
-                styles.actionSheetActionGroupItemGap
-              )}
-              onClick={handleCompleteRangeClick}
-            >
-              <div className="flex items-center gap-2">
-                <span className="flex-shrink-0 size-5 flex items-center justify-center text-t1">
-                  <CalendarRangeIcon className="w-5 h-5" />
-                </span>
-                <span className="text-sm text-t1">{taskDisplaySettingOptions.completedTasksRange.title}</span>
-              </div>
-              <span className="text-sm text-t3">{getCompletedRangeText(controller.completedTasksRange)}</span>
-            </button>
-          </>
-        }
-      </div>
+      <ListItemGroup
+        items={[
+          {
+            hidden: controller.hideShowFutureTasks,
+            icon: <ScheduledIcon />,
+            title: taskDisplaySettingOptions.showFutureTasks.title,
+            mode: { type: 'switch', checked: controller.showFutureTasks },
+            onClick: () => controller.toggleShowFutureTasks(),
+          },
+          {
+            icon: <LogIcon />,
+            title: taskDisplaySettingOptions.showCompletedTasks.title,
+            mode: { type: 'switch', checked: controller.showCompletedTasks },
+            onClick: () => controller.toggleShowCompletedTasks(),
+          },
+          {
+            icon: <CalendarRangeIcon />,
+            title: taskDisplaySettingOptions.completedTasksRange.title,
+            mode: { type: 'label', label: getCompletedRangeText(controller.completedTasksRange) },
+            onClick: handleCompleteRangeClick,
+          },
+        ]}
+      />
     </ActionSheet>
   );
 };

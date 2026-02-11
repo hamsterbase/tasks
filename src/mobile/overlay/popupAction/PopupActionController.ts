@@ -14,7 +14,9 @@ export interface PopupActionItem {
 
 export interface PopupActionControllerOptions {
   description?: string;
-  items: PopupActionItem[];
+  groups: {
+    items: PopupActionItem[];
+  }[];
 }
 
 export class PopupActionController implements IDisposable {
@@ -44,13 +46,15 @@ export class PopupActionController implements IDisposable {
     return this.initOptions.description;
   }
 
-  get items() {
-    return this.initOptions.items.filter((item) => {
-      if (typeof item.condition === 'boolean') {
-        return item.condition;
-      }
-      return true;
-    });
+  get groups() {
+    return this.initOptions.groups.map((group) => ({
+      items: group.items.filter((item) => {
+        if (typeof item.condition === 'boolean') {
+          return item.condition;
+        }
+        return true;
+      }),
+    }));
   }
 
   dispose(): void {

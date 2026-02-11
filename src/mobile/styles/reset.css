@@ -23,7 +23,10 @@ body::-webkit-scrollbar {
 }
 
 body {
-  background-color: var(--color-bg1);
+  background: var(--color-bg2);
+  color: var(--color-t1);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
 }
 
 *:focus:not(:focus-visible) {

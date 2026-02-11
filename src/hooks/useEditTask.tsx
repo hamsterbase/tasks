@@ -83,47 +83,51 @@ export const useEditTaskHooks = (taskInfo: TaskInfo) => {
     e.stopPropagation();
     e.preventDefault();
     popupAction({
-      items: [
+      groups: [
         {
-          icon: <RepeatIcon />,
-          name: localize('task.recurring_settings', 'Recurring Settings'),
-          onClick: () => {
-            openRecurringTaskSettings(taskInfo.recurringRule || {}, (settings) => {
-              todoService.updateTask(taskInfo.id, {
-                recurringRule: settings,
-              });
-            });
-          },
-        },
-        {
-          icon: <DeleteIcon />,
-          name: localize('task.delete_task', 'Delete Task'),
-          onClick: handleDeleteTask,
-        },
-        {
-          icon: <ProjectStatusBox status={'created'} progress={0.6} />,
-          name: localize('task.convert_to_project', 'Convert to Project'),
-          onClick: handleConvertToProject,
-        },
-        {
-          icon: <MoveIcon />,
-          name: localize('task.move', 'Move'),
-          onClick: () => {
-            projectAreaSelector({
-              currentItemId: taskInfo.id,
-              onConfirm: (id: TreeID | null) => {
-                if (!id) {
+          items: [
+            {
+              icon: <RepeatIcon />,
+              name: localize('task.recurring_settings', 'Recurring Settings'),
+              onClick: () => {
+                openRecurringTaskSettings(taskInfo.recurringRule || {}, (settings) => {
                   todoService.updateTask(taskInfo.id, {
-                    position: { type: 'firstElement' },
+                    recurringRule: settings,
                   });
-                  return;
-                }
-                todoService.updateTask(taskInfo.id, { parentId: id as TreeID });
+                });
               },
-            });
-          },
+            },
+            {
+              icon: <DeleteIcon />,
+              name: localize('task.delete_task', 'Delete Task'),
+              onClick: handleDeleteTask,
+            },
+            {
+              icon: <ProjectStatusBox status={'created'} progress={0.6} />,
+              name: localize('task.convert_to_project', 'Convert to Project'),
+              onClick: handleConvertToProject,
+            },
+            {
+              icon: <MoveIcon />,
+              name: localize('task.move', 'Move'),
+              onClick: () => {
+                projectAreaSelector({
+                  currentItemId: taskInfo.id,
+                  onConfirm: (id: TreeID | null) => {
+                    if (!id) {
+                      todoService.updateTask(taskInfo.id, {
+                        position: { type: 'firstElement' },
+                      });
+                      return;
+                    }
+                    todoService.updateTask(taskInfo.id, { parentId: id as TreeID });
+                  },
+                });
+              },
+            },
+          ] as PopupActionItem[],
         },
-      ] as PopupActionItem[],
+      ],
     });
   };
 

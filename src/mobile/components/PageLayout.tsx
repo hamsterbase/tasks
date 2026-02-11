@@ -85,14 +85,11 @@ export const PageLayout: React.FC<PageLayoutProps> = (props: PageLayoutProps) =>
       })}
       id="page-content"
     >
-      {props.header && props.disableSticky && (
-        <div className={classNames('sticky top-0 z-100 safe-top', styles.headerBackground)} />
-      )}
+      {props.header && <div className={classNames('sticky top-0 z-100 safe-top', styles.headerBackground)} />}
       {props.header && (
         <div
-          className={classNames('top-0 z-100 mb-2', styles.headerBackground, {
+          className={classNames('top-0 z-100', styles.headerBackground, {
             sticky: !props.disableSticky,
-            'safe-top': !props.disableSticky,
           })}
         >
           <PageHeader

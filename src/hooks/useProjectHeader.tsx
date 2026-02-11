@@ -79,35 +79,39 @@ export const useProjectHeader = (options: IUseProjectHeaderOptions) => {
 
   function handleMenuClick() {
     popupAction({
-      items: [
+      groups: [
         {
-          icon: <EditIcon />,
-          name: localize('project_heading.edit_title', 'Edit Title'),
-          onClick: () => {
-            todoService.editItem(projectHeadingInfo.id);
-          },
-        },
-        {
-          icon: <ProjectStatusBox status={'created'} progress={1} />,
-          name: localize('project_heading.convert_to_project', 'Convert to Project'),
-          onClick: handleConvertToProject,
-        },
-        {
-          icon: <MoveIcon />,
-          name: localize('project_heading.move', 'Move'),
-          onClick: handleMoveToProject,
-        },
-        {
-          icon: <ArchiveIcon />,
-          name: projectHeadingInfo.isArchived
-            ? localize('project_heading.unarchive', 'Unarchive Heading')
-            : localize('project_heading.archive', 'Archive Heading'),
-          onClick: handleArchiveHeading,
-        },
-        {
-          icon: <DeleteIcon />,
-          name: localize('project_heading.delete_heading', 'Delete Heading'),
-          onClick: handleDeleteHeading,
+          items: [
+            {
+              icon: <EditIcon />,
+              name: localize('project_heading.edit_title', 'Edit Title'),
+              onClick: () => {
+                todoService.editItem(projectHeadingInfo.id);
+              },
+            },
+            {
+              icon: <ProjectStatusBox status={'created'} progress={1} />,
+              name: localize('project_heading.convert_to_project', 'Convert to Project'),
+              onClick: handleConvertToProject,
+            },
+            {
+              icon: <MoveIcon />,
+              name: localize('project_heading.move', 'Move'),
+              onClick: handleMoveToProject,
+            },
+            {
+              icon: <ArchiveIcon />,
+              name: projectHeadingInfo.isArchived
+                ? localize('project_heading.unarchive', 'Unarchive Heading')
+                : localize('project_heading.archive', 'Archive Heading'),
+              onClick: handleArchiveHeading,
+            },
+            {
+              icon: <DeleteIcon />,
+              name: localize('project_heading.delete_heading', 'Delete Heading'),
+              onClick: handleDeleteHeading,
+            },
+          ],
         },
       ],
     });
