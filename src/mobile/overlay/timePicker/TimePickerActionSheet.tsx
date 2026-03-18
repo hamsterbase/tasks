@@ -9,15 +9,28 @@ import React, { useRef, useEffect } from 'react';
 import { TimePickerActionSheetController } from './TimePickerActionSheetController';
 import { PRESET_TIMES, HOURS, MINUTES } from './constant';
 import { MobileButton } from '@/mobile/components/MobileButton';
+import {
+  getMobileTimePickerHourTestId,
+  getMobileTimePickerMinuteTestId,
+  getMobileTimePickerPresetTestId,
+  MobileTestIds,
+} from '@/mobile/testids';
 
 interface TimeWheelProps {
   value: number;
   onChange: (value: number) => void;
   options: number[];
   formatValue?: (value: number) => string;
+  getOptionTestId?: (value: number) => string;
 }
 
-const TimeWheel: React.FC<TimeWheelProps> = ({ value, onChange, options, formatValue = (v) => v.toString() }) => {
+const TimeWheel: React.FC<TimeWheelProps> = ({
+  value,
+  onChange,
+  options,
+  formatValue = (v) => v.toString(),
+  getOptionTestId,
+}) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const preventEvent = useRef(false);
@@ -63,6 +76,7 @@ const TimeWheel: React.FC<TimeWheelProps> = ({ value, onChange, options, formatV
         {options.map((option) => (
           <div
             key={option}
+            data-testid={getOptionTestId?.(option)}
             className={`h-8 flex items-center justify-center cursor-pointer text-lg ${
               value === option ? 'text-brand font-semibold' : 'text-t2'
             }`}
@@ -112,6 +126,7 @@ export const TimePickerActionSheet: React.FC = () => {
             onChange={(hour) => controller.updateHour(hour)}
             options={HOURS}
             formatValue={(h) => h.toString().padStart(2, '0')}
+            getOptionTestId={getMobileTimePickerHourTestId}
           />
 
           <div className="text-2xl text-t1 h-8 flex items-center leading-8">-</div>
@@ -121,6 +136,7 @@ export const TimePickerActionSheet: React.FC = () => {
             onChange={(minute) => controller.updateMinute(minute)}
             options={MINUTES}
             formatValue={(m) => m.toString().padStart(2, '0')}
+            getOptionTestId={getMobileTimePickerMinuteTestId}
           />
         </div>
 
@@ -130,6 +146,7 @@ export const TimePickerActionSheet: React.FC = () => {
             {PRESET_TIMES.map((preset) => (
               <button
                 key={preset.label}
+                data-testid={getMobileTimePickerPresetTestId(preset.label)}
                 className="flex-1 py-2 px-3 rounded-lg bg-bg2 text-t1 text-sm font-medium hover:bg-bg3 transition-colors"
                 onClick={() => controller.setPresetTime(preset.hour, preset.minute)}
               >
@@ -139,7 +156,11 @@ export const TimePickerActionSheet: React.FC = () => {
           </div>
         </div>
 
-        <MobileButton size="large" onClick={() => controller.selectTime()}>
+        <MobileButton
+          size="large"
+          onClick={() => controller.selectTime()}
+          data-testid={MobileTestIds.TimePicker.DoneButton}
+        >
           {localize('time-picker.done', 'Done')}
         </MobileButton>
       </div>

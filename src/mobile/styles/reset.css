@@ -27,6 +27,11 @@ body {
   color: var(--color-t1);
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.015em;
+}
+
+body svg {
+  stroke-width: 1.5;
 }
 
 *:focus:not(:focus-visible) {

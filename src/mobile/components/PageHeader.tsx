@@ -39,7 +39,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({ title, id, actions, show
       {showBack && (
         <div className={styles.headerLeftContainer}>
           <button onClick={back} className={styles.headerActionButton}>
-            <LeftIcon className={styles.headerActionButtonIcon} />
+            <LeftIcon className={styles.headerActionButtonIcon} strokeWidth={1.5} />
           </button>
         </div>
       )}

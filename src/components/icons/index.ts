@@ -2,12 +2,15 @@
 import {
   AlarmClock,
   AlertCircle,
+  AlignLeft,
   Archive,
   ArrowLeft,
   ArrowRight,
   ArrowUp,
+  Bell,
   Bot,
   Brain,
+  Calendar,
   CalendarCheck,
   CalendarClock,
   CalendarDays,
@@ -25,12 +28,14 @@ import {
   Copy,
   Database,
   FileText,
+  Flag,
   GripVertical,
   Home,
   Inbox,
   Info,
   Layers,
   Link,
+  ListChecks,
   ListTree,
   LocateFixed,
   MessageSquare,
@@ -121,3 +126,8 @@ export const TrashIcon = Trash2;
 export const ArrowUpIcon = ArrowUp;
 export const StopIcon = Square;
 export const NotebookIcon = Notebook;
+export const NotesIcon = AlignLeft;
+export const CalendarIcon = Calendar;
+export const FlagIcon = Flag;
+export const ListChecksIcon = ListChecks;
+export const BellIcon = Bell;

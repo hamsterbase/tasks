@@ -17,7 +17,7 @@ export const baseStyles = {
   statCardCount: /*tw*/ 'text-t2',
   statCardLabel: /*tw*/ 'text-sm text-t2',
 
-  screenEdgePadding: /*tw*/ 'px-3',
+  screenEdgePadding: /*tw*/ 'px-4',
 
   bottomMenuHeight: /*tw*/ 'h-11',
   bottomMenuBorder: /*tw*/ 'border-t border-line-light',
@@ -141,30 +141,41 @@ export const baseStyles = {
   editingTaskSubtaskContainerMargin: /*tw*/ 'mb-2 mt-1.5',
   editingTaskSubtaskContainerSpacing: /*tw*/ 'space-y-0.5',
 
-  createTaskSubtaskContainerBackground: /*tw*/ 'bg-bg2',
-  createTaskSubtaskContainerPadding: /*tw*/ 'px-2',
-
-  createTaskToolbarStyle: /*tw*/ 'size-10 bg-bg1 rounded-lg flex items-center justify-center text-t2',
-  createTaskToolbarIconStyle: /*tw*/ 'inline-flex items-center justify-center size-5',
-  createTaskToolbarGap: /*tw*/ 'gap-2',
-  metaDataBackground: /*tw*/ 'bg-bg1',
-  metaDataGap: /*tw*/ 'gap-2',
-  metaDataPadding: /*tw*/ 'p-2',
-  metaDataRound: /*tw*/ 'rounded-lg',
+  // Create Task - Card & AttrRow styles
+  createTaskCardRoot: /*tw*/ 'ui-card-glass flex flex-col gap-3 p-4',
+  createTaskAttrRow: /*tw*/ 'flex items-start gap-3',
+  createTaskAttrIconContainer: /*tw*/ 'h-6 w-5 flex items-center justify-center shrink-0 text-t3',
+  createTaskAttrIcon: /*tw*/ 'size-4',
+  createTaskAttrContent: /*tw*/ 'flex-1 min-w-0 flex w-full',
+  createTaskAttrPlaceholder: /*tw*/ 'text-sm leading-6 text-t4 cursor-pointer',
+  createTaskTitleInput:
+    /*tw*/ 'w-full text-lg font-medium text-t1 placeholder:text-t4 bg-transparent border-none outline-none p-0',
+  createTaskNotesTextarea:
+    /*tw*/ 'w-full text-sm leading-6 text-t2 bg-transparent border-none outline-none resize-none p-0 placeholder:text-t4',
+  createTaskTagsContainer: /*tw*/ 'flex flex-wrap gap-2',
+  createTaskTag:
+    /*tw*/ 'text-xs leading-6 h-6 text-brand font-medium bg-bg4 rounded-full px-2 flex items-center justify-center',
+  createTaskSubtaskList: /*tw*/ 'flex flex-col gap-1 w-full',
+  createTaskSubtaskItem: /*tw*/ 'flex items-center gap-2 -ml-1',
+  createTaskSubtaskItemIcon: /*tw*/ 'text-t3',
+  createTaskSubtaskInput:
+    /*tw*/ 'flex-1 text-sm leading-6 text-t1 bg-transparent border-none outline-none p-0 placeholder:text-t4',
+  createTaskSubtaskDragHandle: /*tw*/ 'size-4 cursor-grab text-t3 opacity-40',
+  createTaskAddButton: /*tw*/ 'text-sm leading-6 text-t4 cursor-pointer text-left',
+  createTaskReminderItem: /*tw*/ 'flex items-center justify-between',
+  createTaskReminderText: /*tw*/ 'flex-1 min-w-0 border-none bg-transparent p-0 text-left text-t2',
+  createTaskReminderContent: /*tw*/ 'flex items-baseline gap-2',
+  createTaskReminderTitle: /*tw*/ 'text-sm leading-6 text-t1',
+  createTaskReminderSubtitle: /*tw*/ 'text-sm text-t2',
+  createTaskReminderRemoveBtn:
+    /*tw*/ 'size-4 flex items-center justify-center border-none bg-transparent p-0 text-t4 cursor-pointer',
 
   inputItemStyle: /*tw*/ 'bg-bg1 rounded-lg focus:outline-none px-3 py-2 w-full border-0 text-base',
   textAreaItemStyle: /*tw*/ 'bg-bg1 rounded-lg focus:outline-none px-3 py-2 w-full border-0 text-sm',
   itemEditTaskNotesTextAreaStyle:
     /*tw*/ 'bg-bg1 rounded-lg focus:outline-none px-0 py-0 w-full border-0 text-sm text-t2',
 
-  createTaskPageStyle: /*tw*/ 'min-h-dvh flex flex-col gap-2 bg-bg2 text-t1',
-  createTaskPageHeaderStyle:
-    'flex justify-between items-center border-b border-line-regular flex-shrink-0 safe-top sticky top-0 bg-bg2',
-  createTaskPageButtonStyle: /*tw*/ 'text-sm h-12 font-medium',
-  createTaskPageConfirmButtonColor: /*tw*/ 'text-brand',
-  createTaskPageCancelButtonColor: /*tw*/ 'text-t2',
-  createTaskPageTitleStyle: /*tw*/ 'text-base font-semibold text-t1 h-12 flex items-center',
-  createTaskPageContentGap: /*tw*/ 'gap-2',
+  createTaskPageStyle: /*tw*/ 'min-h-dvh w-full bg-bg2 text-t1',
 
   tabbarBackground: /*tw*/ 'bg-bg1',
   tabbarHeight: /*tw*/ 'h-10',

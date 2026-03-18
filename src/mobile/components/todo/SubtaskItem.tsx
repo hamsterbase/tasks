@@ -1,7 +1,7 @@
 import { handleFocusAndScroll } from '@/base/browser/commonFocusHandler';
 import { DragHandleIcon } from '@/components/icons';
 import { ItemStatus } from '@/core/type.ts';
-import { TaskStatusBox } from '@/mobile/components/taskItem/TaskStatusBox';
+import { TaskCheckbox } from '@/mobile/components/icon/TaskCheckbox';
 import { localize } from '@/nls';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
@@ -19,6 +19,10 @@ interface SubtaskItemProps {
   inputRef?: (el: HTMLInputElement | null) => void;
   className?: string;
   disableDragStyle?: boolean;
+  inputTestId?: string;
+  statusButtonClassName?: string;
+  inputClassName?: string;
+  dragHandleClassName?: string;
 }
 
 export const SubtaskItem: React.FC<SubtaskItemProps> = ({
@@ -32,6 +36,10 @@ export const SubtaskItem: React.FC<SubtaskItemProps> = ({
   inputRef,
   className,
   disableDragStyle = false,
+  inputTestId,
+  statusButtonClassName,
+  inputClassName,
+  dragHandleClassName,
 }) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id });
 
@@ -51,6 +59,8 @@ export const SubtaskItem: React.FC<SubtaskItemProps> = ({
       onStatusChange(id, 'canceled');
     }
   };
+
+  const checkboxStatus = status === 'completed' ? 'completed' : status === 'canceled' ? 'cancelled' : 'unchecked';
 
   const [inputValue, setInputValue] = React.useState(title);
 
@@ -76,28 +86,22 @@ export const SubtaskItem: React.FC<SubtaskItemProps> = ({
   };
 
   if (isDragging && !disableDragStyle) {
-    return <div className="flex items-center h-10 bg-bg3 rounded-lg w-full" ref={setNodeRef} style={style}></div>;
+    return (
+      <div className="flex items-center gap-2 -ml-1 bg-bg3 rounded-lg w-full" ref={setNodeRef} style={style}></div>
+    );
   }
 
   return (
-    <div className={classNames('flex items-center h-10  rounded-lg', className)} ref={setNodeRef} style={style}>
-      <button
-        onClick={handleClick}
+    <div className={classNames('flex items-center gap-2 -ml-1', className)} ref={setNodeRef} style={style}>
+      <div
         onContextMenu={(e) => {
           e.preventDefault();
           handleLongPress();
         }}
-        className={classNames('size-4 flex items-center justify-center')}
+        className={classNames('flex items-center justify-center text-t3', statusButtonClassName)}
       >
-        <TaskStatusBox
-          className={classNames('w-4 h-4', {
-            'text-t2': status === 'created',
-            'text-brand': status === 'completed',
-            'text-t3': status === 'canceled',
-          })}
-          status={status}
-        />
-      </button>
+        <TaskCheckbox size="small" status={checkboxStatus} onClick={handleClick} />
+      </div>
       <input
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
@@ -105,16 +109,22 @@ export const SubtaskItem: React.FC<SubtaskItemProps> = ({
         onKeyDown={handleKeyDown}
         onFocus={handleFocusAndScroll}
         className={classNames(
-          'flex-1 px-2 py-0 text-sm border-0 focus:outline-none bg-transparent h-8 resize-none leading-8',
+          'flex-1 text-sm leading-6 text-t1 bg-transparent border-none outline-none p-0 placeholder:text-t4',
+          inputClassName,
           {
             'line-through': status === 'canceled',
           }
         )}
-        style={{ display: 'flex', alignItems: 'center' }}
-        placeholder={localize('subtask.placeholder', 'Add subtask...')}
+        placeholder={localize('mobile.subtask.placeholder', 'Subtask')}
         ref={inputRef}
+        data-testid={inputTestId}
       />
-      <DragHandleIcon className="w-5 h-5 text-t3 cursor-move outline-none" {...attributes} {...listeners} />
+      <DragHandleIcon
+        className={classNames('size-4 cursor-grab text-t3 opacity-40', dragHandleClassName)}
+        strokeWidth={1.5}
+        {...attributes}
+        {...listeners}
+      />
     </div>
   );
 };

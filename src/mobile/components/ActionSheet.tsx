@@ -123,6 +123,7 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({ zIndex, children, onCl
     <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
       <div className={`fixed inset-0 text-t1`} style={{ zIndex }}>
         <div
+          data-testid="mobile-action-sheet-backdrop"
           className={classNames(styles.overlayBackground, 'absolute inset-0 transition-opacity', {
             'opacity-0': !isVisible,
             [styles.overlayBackgroundOpacity]: isVisible,

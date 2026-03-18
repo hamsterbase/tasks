@@ -1,4 +1,5 @@
 import { isTimestampToday } from '@/core/time/isTimestampToday';
+import { getMobileDatePickerDayTestId } from '@/mobile/testids';
 import { styles } from '@/mobile/theme';
 import { localize } from '@/nls';
 import classNames from 'classnames';
@@ -19,6 +20,7 @@ export const DayButton: React.FC<DayButtonProps> = ({ day, onSelect }) => {
   return (
     <button
       onClick={() => day.value && onSelect(day.date)}
+      data-testid={day.value ? getMobileDatePickerDayTestId(day.date.toISOString().slice(0, 10)) : undefined}
       className={classNames(`${styles.datePickerDayButtonHeight} ${styles.datePickerDayButtonRound} text-sm relative`, {
         [`${styles.datePickerDaySelectedBackground} ${styles.datePickerDaySelectedTextColor}`]: day.isSelected,
         'opacity-0': !day.isCurrentMonth,

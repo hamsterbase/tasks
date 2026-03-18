@@ -6,6 +6,7 @@ import { useService } from '../../../hooks/use-service';
 import { useWatchEvent } from '../../../hooks/use-watch-event';
 import { IWorkbenchOverlayService } from '../../../services/overlay/common/WorkbenchOverlayService';
 import { ActionSheet } from '../../components/ActionSheet';
+import { MobileTestIds } from '../../testids';
 import { styles } from '../../theme';
 import { TagEditorActionSheetController } from './TagEditorActionSheetController';
 
@@ -136,6 +137,7 @@ export const TagEditorActionSheet: React.FC = () => {
             onKeyDown={handleTagKeyDown}
             placeholder={tagInputPlaceholder}
             className={inputStyles}
+            data-testid={MobileTestIds.TagEditor.Input}
           />
         </div>
         <div className={`h-50 overflow-y-scroll flex flex-col ${styles.tagEditorSmallGap}`}>
