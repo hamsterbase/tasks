@@ -1,7 +1,6 @@
 import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc';
 import { TaskDisplaySettingsIcon, TodayIcon } from '@/components/icons';
 import { getTodayItems } from '@/core/state/today/getTodayItems';
-import { ItemPosition } from '@/core/type';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { localize } from '@/nls';
@@ -12,6 +11,7 @@ import { singleListCollisionDetectionStrategy } from '@/utils/dnd/singleListColl
 import { DragEndEvent } from '@dnd-kit/core';
 import { verticalListSortingStrategy } from '@dnd-kit/sortable';
 import classNames from 'classnames';
+import { format } from 'date-fns';
 import type { TreeID } from 'loro-crdt';
 import React from 'react';
 import { PageLayout } from '../components/PageLayout';
@@ -20,6 +20,7 @@ import { HomeProjectItem } from '../components/todo/HomeProjectItem';
 import { TaskItem } from '../components/todo/TaskItem';
 import { styles } from '../theme';
 import { useTaskDisplaySettingsMobile } from '../hooks/useTaskDisplaySettings';
+import { ItemPosition } from '@/core/type';
 
 export const TodayPage = () => {
   const todoService = useService(ITodoService);
@@ -82,9 +83,11 @@ export const TodayPage = () => {
       header={{
         showBack: true,
         id: 'today',
-        title: localize('today', 'Today'),
+        title: `${localize('today', 'Today')} (${format(getTodayTimestampInUtc(), 'MMM d')})`,
         renderIcon: (className: string) => <TodayIcon className={className} />,
-        actions: [{ icon: <TaskDisplaySettingsIcon />, onClick: openTaskDisplaySettings }],
+        actions: [
+          { icon: <TaskDisplaySettingsIcon className="size-5" strokeWidth={1.5} />, onClick: openTaskDisplaySettings },
+        ],
       }}
       dragOption={{
         overlayItem: {
@@ -113,7 +116,7 @@ export const TodayPage = () => {
         {items.map((item) => {
           const willDisappear = todayItems.willDisappearObjectIdSet.has(item.id);
           if (item.type === 'project') {
-            return <HomeProjectItem key={item.id} projectInfo={item} hideStartDate={true} />;
+            return <HomeProjectItem key={item.id} projectInfo={item} hideStartDate={true} hideSubtitle />;
           }
           return (
             <TaskItemWrapper key={item.id} willDisappear={willDisappear} id={item.id}>

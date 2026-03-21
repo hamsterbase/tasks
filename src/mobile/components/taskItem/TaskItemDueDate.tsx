@@ -14,12 +14,12 @@ export const TaskItemDueDate: React.FC<TaskItemDueDateProps> = ({ dueDate }) => 
   }
   return (
     <div
-      className={classNames('text-xs flex items-center gap-0.5 flex-shrink-0', {
+      className={classNames('text-xs font-semibold leading-6 flex items-center gap-1 flex-shrink-0', {
         'text-accent-danger': isPastOrToday(dueDate),
-        'text-t3': !isPastOrToday(dueDate),
+        'text-t2': !isPastOrToday(dueDate),
       })}
     >
-      <DueIcon className="size-3"></DueIcon>
+      <DueIcon className="size-3" strokeWidth={1.5} />
       {formatDueDateInList(dueDate)}
     </div>
   );

@@ -1,12 +1,12 @@
 import classNames from 'classnames';
 import React, { useMemo } from 'react';
+import { ItemStatus } from '@/core/type.ts';
 
 type CheckboxSize = 'small' | 'medium';
-type CheckboxStatus = 'unchecked' | 'completed' | 'cancelled';
 
 interface TaskCheckboxProps {
   size?: CheckboxSize;
-  status?: CheckboxStatus;
+  status?: ItemStatus;
   onClick?: () => void;
   className?: string;
 }
@@ -33,7 +33,7 @@ const SIZE_CONFIG = {
 
 export const TaskCheckbox: React.FC<TaskCheckboxProps> = ({
   size = 'medium',
-  status = 'unchecked',
+  status = 'created',
   onClick,
   className,
 }) => {
@@ -92,8 +92,8 @@ export const TaskCheckbox: React.FC<TaskCheckboxProps> = ({
             strokeLinejoin="round"
           />
         )}
-        {/* X mark for cancelled */}
-        {status === 'cancelled' && (
+        {/* X mark for canceled */}
+        {status === 'canceled' && (
           <path
             d={crossPath}
             fill="none"

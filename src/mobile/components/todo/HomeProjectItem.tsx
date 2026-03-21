@@ -16,9 +16,9 @@ import { TaskItemIcons } from '../taskItem/TaskItemIcons';
 import { TaskItemStartDate } from '../taskItem/taskItemStartDate';
 import { TaskItemSubtitle } from '../taskItem/TaskItemSubtitle';
 import { TaskItemTitle } from '../taskItem/taskItemTitle';
-import { TaskItemTitleAndSubtitle } from '../taskItem/TaskItemTitleAndSubtitle';
 import useNavigate from '@/hooks/useNavigate';
 import { MobileProjectCheckbox } from '../icon/MobileProjectCheckbox';
+import { NavIcon } from '@/components/icons';
 
 interface ProjectItemProps {
   hideStartDate?: boolean;
@@ -55,6 +55,19 @@ export const HomeProjectItem: React.FC<ProjectItemProps> = ({
     transition,
     opacity: isDragging ? 0.5 : 1,
   };
+  const titleNode = isEditing ? (
+    <input
+      {...textAreaProps}
+      className="flex-1 overflow-hidden text-ellipsis whitespace-nowrap bg-transparent text-base leading-6 font-medium outline-none"
+    />
+  ) : (
+    <TaskItemTitle
+      title={projectInfo.title}
+      isCanceled={projectInfo.status === 'canceled'}
+      isCompleted={projectInfo.status === 'completed'}
+      emptyText={localize('project.untitled', 'New Project')}
+    />
+  );
 
   if (isDragging) {
     return <DragItem ref={setNodeRef} attributes={attributes} listeners={listeners} style={style} />;
@@ -67,7 +80,7 @@ export const HomeProjectItem: React.FC<ProjectItemProps> = ({
       {...attributes}
       {...listeners}
       className={classNames(
-        'flex items-center',
+        'flex items-start',
         styles.taskItemPaddingX,
         styles.taskItemHeight,
         styles.taskItemGap,
@@ -88,35 +101,27 @@ export const HomeProjectItem: React.FC<ProjectItemProps> = ({
       <button className={classNames(styles.taskItemIconSize)}>
         <MobileProjectCheckbox status={projectInfo.status} progress={projectInfo.progress} />
       </button>
-      <TaskItemCompletionAt completionAt={projectInfo.completionAt} status={projectInfo.status} />
       <TaskItemStartDate
         hide={hideStartDate}
         startDate={projectInfo.startDate}
         isCompleted={projectInfo.status === 'completed'}
       />
-      <TaskItemTitleAndSubtitle
-        hideSubtitle={hideSubtitle}
-        status={projectInfo.status}
-        dueDate={<TaskItemDueDate dueDate={projectInfo.dueDate} />}
-        title={
-          isEditing ? (
-            <input
-              {...textAreaProps}
-              className="flex-1 overflow-hidden text-ellipsis whitespace-nowrap bg-transparent text-lg outline-none"
-            />
-          ) : (
-            <span className="flex-1 overflow-hidden text-ellipsis whitespace-nowrap text-lg flex items-baseline gap-1">
-              <TaskItemTitle
-                title={projectInfo.title}
-                isCanceled={projectInfo.status === 'canceled'}
-                emptyText={localize('project.untitled', 'New Project')}
-              />
-              {!hideNavIcon && <TaskItemIcons tags={projectInfo.tags} notes={projectInfo.notes} navIcon={true} />}
-            </span>
-          )
-        }
-        subtitle={projectInfo.areaTitle ? <TaskItemSubtitle title={projectInfo.areaTitle} /> : null}
-      />
+      <div className="flex-1 flex flex-col gap-0.5 min-w-0">
+        <div className="flex items-center gap-1.5 min-w-0">
+          {titleNode}
+          {!isEditing && (
+            <>
+              <div className="flex items-center gap-1 text-t3 shrink-0">
+                <TaskItemIcons tags={projectInfo.tags} notes={projectInfo.notes} navIcon={false} />
+              </div>
+              {!hideNavIcon && <NavIcon className="size-4 text-t3 flex-shrink-0" strokeWidth={1.5} />}
+            </>
+          )}
+        </div>
+        {!hideSubtitle && projectInfo.areaTitle && <TaskItemSubtitle title={projectInfo.areaTitle} />}
+      </div>
+      <TaskItemCompletionAt completionAt={projectInfo.completionAt} status={projectInfo.status} />
+      {projectInfo.status === 'created' && <TaskItemDueDate dueDate={projectInfo.dueDate} />}
     </div>
   );
 };

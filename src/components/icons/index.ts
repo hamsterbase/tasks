@@ -22,7 +22,9 @@ import {
   ChevronRight,
   Circle,
   CircleCheck,
+  CircleCheckBig,
   CircleSmall,
+  CircleX,
   Cloud,
   CloudAlert,
   Copy,
@@ -104,7 +106,7 @@ export const RightIcon = ChevronRight;
 export const CircleIcon = Circle;
 export const InfoIcon = Info;
 export const AlertCircleIcon = AlertCircle;
-export const CircleCheckIcon = CircleCheck;
+export const CircleCheckIcon = CircleCheckBig;
 export const CalendarCheckIcon = CalendarCheck;
 export const CalendarXIcon = CalendarX;
 export const CopyIcon = Copy;
@@ -131,3 +133,4 @@ export const CalendarIcon = Calendar;
 export const FlagIcon = Flag;
 export const ListChecksIcon = ListChecks;
 export const BellIcon = Bell;
+export const CircleXIcon = CircleX;

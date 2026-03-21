@@ -10,10 +10,10 @@ import { CSS } from '@dnd-kit/utilities';
 import classNames from 'classnames';
 import React from 'react';
 import { DragItem } from '../dnd/DragItem';
+import { TaskCheckbox } from '../icon/TaskCheckbox';
 import { TaskItemDueDate } from '../taskItem/TaskItemDueDate';
 import { TaskItemIcons } from '../taskItem/TaskItemIcons';
 import { TaskItemSubtitle } from '../taskItem/TaskItemSubtitle';
-import { TaskItemTitleAndSubtitle } from '../taskItem/TaskItemTitleAndSubtitle';
 import { TaskStatusBox } from '../taskItem/TaskStatusBox';
 import { TaskItemCompletionAt } from '../taskItem/taskItemCompletionAt';
 import { TaskItemStartDate } from '../taskItem/taskItemStartDate';
@@ -109,7 +109,7 @@ export const TaskItem: React.FC<TaskItemProps> = ({
   return (
     <div
       data-testid="task-item"
-      className={classNames('flex items-center', className, {
+      className={classNames('flex items-start', className, {
         [styles.listItemRound]: true,
         [styles.taskItemHeight]: true,
         [styles.listItemEditingBackground]: isEditing,
@@ -134,7 +134,7 @@ export const TaskItem: React.FC<TaskItemProps> = ({
         {...longPressEvents}
         className={classNames(styles.taskItemIconSize)}
       >
-        <TaskStatusBox
+        <TaskCheckbox
           className={classNames({
             'text-brand': isCompleted,
             'text-t3': !isCompleted,
@@ -142,28 +142,26 @@ export const TaskItem: React.FC<TaskItemProps> = ({
           status={taskInfo.status}
         />
       </button>
-      <TaskItemCompletionAt completionAt={taskInfo.completionAt} status={taskInfo.status} />
       <TaskItemStartDate hide={hideStartDate} startDate={taskInfo.startDate} isCompleted={isCompleted} />
-      <TaskItemTitleAndSubtitle
-        status={taskInfo.status}
-        dueDate={<TaskItemDueDate dueDate={taskInfo.dueDate} />}
-        title={
-          <div className="flex items-center gap-1 flex-1 overflow-hidden">
-            <TaskItemTitle
-              testId={'task-item-title'}
-              title={taskInfo.title}
-              isCanceled={isCanceled}
-              emptyText={localize('tasks.untitled', 'New Task')}
-            />
+      <div className="flex-1 flex flex-col gap-1 min-w-0">
+        <div className="flex items-center gap-2 min-w-0">
+          <TaskItemTitle
+            testId={'task-item-title'}
+            title={taskInfo.title}
+            isCanceled={isCanceled}
+            isCompleted={isCompleted}
+            emptyText={localize('tasks.untitled', 'New Task')}
+          />
+          <div className="flex items-center gap-1 text-t3 shrink-0">
             <TaskItemIcons tags={taskInfo.tags} notes={taskInfo.notes} subtasks={taskInfo.children} navIcon={false} />
           </div>
-        }
-        subtitle={
-          taskInfo.projectTitle && !hideProjectTitle ? (
-            <TaskItemSubtitle title={taskInfo.projectTitle} hide={hideProjectTitle} />
-          ) : null
-        }
-      />
+        </div>
+        {taskInfo.projectTitle && !hideProjectTitle && (
+          <TaskItemSubtitle title={taskInfo.projectTitle} hide={hideProjectTitle} />
+        )}
+      </div>
+      <TaskItemCompletionAt completionAt={taskInfo.completionAt} status={taskInfo.status} />
+      {taskInfo.status === 'created' && <TaskItemDueDate dueDate={taskInfo.dueDate} />}
     </div>
   );
 };

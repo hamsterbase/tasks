@@ -1,3 +1,4 @@
+import { CalendarIcon } from '@/components/icons';
 import { formatStartDateInList } from '@/core/time/formatStartDateInList';
 import { isPastOrToday } from '@/core/time/isPast';
 import React from 'react';
@@ -12,5 +13,10 @@ export const TaskItemStartDate: React.FC<TaskItemStartDateProps> = ({ startDate,
   if (!startDate || isPastOrToday(startDate) || isCompleted || hide) {
     return null;
   }
-  return <span className="text-xs text-t3 bg-bg2 p-1 rounded-sm">{formatStartDateInList(startDate)}</span>;
+  return (
+    <span className="flex items-center gap-1 text-xs font-medium text-t3 shrink-0">
+      <CalendarIcon className="size-3" strokeWidth={1.5} />
+      {formatStartDateInList(startDate)}
+    </span>
+  );
 };

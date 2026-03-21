@@ -43,30 +43,30 @@ export const baseStyles = {
     /*tw*/ 'size-9 flex items-center justify-center border-none bg-bg1 cursor-pointer rounded-full shadow-soft text-t2',
   headerActionButtonIcon: /*tw*/ 'size-5 flex items-center justify-center',
 
-  taskItemGroupRound: /*tw*/ 'rounded-md',
+  taskItemGroupRound: /*tw*/ 'rounded-2xl shadow-soft',
   taskItemGroupBackground: /*tw*/ 'bg-bg1',
   taskItemGroupHeaderPadding: /*tw*/ 'pt-2',
-  taskItemGroupTopRound: /*tw*/ 'rounded-t-lg',
-  taskItemGroupBottomRound: /*tw*/ 'rounded-b-lg',
+  taskItemGroupTopRound: /*tw*/ 'rounded-t-2xl',
+  taskItemGroupBottomRound: /*tw*/ 'rounded-b-2xl',
 
   taskItemGroupPaddingBottomWhenDragging: /*tw*/ 'pb-11',
 
-  taskItemHeight: /*tw*/ 'h-11',
-  taskItemPaddingX: /*tw*/ 'px-3',
+  taskItemHeight: /*tw*/ 'min-h-[3.25rem] py-3.5',
+  taskItemPaddingX: /*tw*/ 'px-4',
   taskItemPlaceholderColor: /*tw*/ 'text-t3',
-  taskItemGap: /*tw*/ 'gap-2',
-  taskItemIconSize: /*tw*/ 'size-5 flex-shrink-0 flex items-center justify-center',
+  taskItemGap: /*tw*/ 'gap-3',
+  taskItemIconSize: /*tw*/ 'h-6 w-6 flex-shrink-0 flex items-center justify-center text-t3',
 
-  taskItemEditingRound: /*tw*/ 'rounded-md',
+  taskItemEditingRound: /*tw*/ 'rounded-2xl',
   taskItemEditingShadow: /*tw*/ 'shadow-sm',
 
   taskItemOverlayBackground: /*tw*/ 'bg-bg1',
-  taskItemOverlayRound: /*tw*/ 'rounded-md',
+  taskItemOverlayRound: /*tw*/ 'rounded-2xl',
   taskItemOverlayShadow: /*tw*/ 'inset-shadow-sm shadow-sm',
 
-  taskItemDraggingRound: /*tw*/ 'rounded-md',
+  taskItemDraggingRound: /*tw*/ 'rounded-2xl',
 
-  pageContentPaddingX: /*tw*/ 'px-3',
+  pageContentPaddingX: /*tw*/ 'px-4',
   pageContentPaddingY: /*tw*/ 'pb-15',
 
   overlayBackground: /*tw*/ 'bg-black',

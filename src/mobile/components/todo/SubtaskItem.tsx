@@ -60,8 +60,6 @@ export const SubtaskItem: React.FC<SubtaskItemProps> = ({
     }
   };
 
-  const checkboxStatus = status === 'completed' ? 'completed' : status === 'canceled' ? 'cancelled' : 'unchecked';
-
   const [inputValue, setInputValue] = React.useState(title);
 
   React.useEffect(() => {
@@ -100,7 +98,7 @@ export const SubtaskItem: React.FC<SubtaskItemProps> = ({
         }}
         className={classNames('flex items-center justify-center text-t3', statusButtonClassName)}
       >
-        <TaskCheckbox size="small" status={checkboxStatus} onClick={handleClick} />
+        <TaskCheckbox size="small" status={status} onClick={handleClick} />
       </div>
       <input
         value={inputValue}

@@ -56,7 +56,7 @@ export const CreateIcon: React.FC<ICreateIconProps> = (props: ICreateIconProps) 
       {...listeners}
       {...attributes}
     >
-      <PlusIcon size={20} />
+      <PlusIcon className="size-6" strokeWidth={1.5} />
     </button>
   );
 };
