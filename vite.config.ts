@@ -7,6 +7,7 @@ import { defineConfig } from 'vite';
 import { execSync } from 'child_process';
 import IstanbulPlugin from './src/packages/vite-plugin-istanbul/index';
 import { commonFilesPlugin } from './src/packages/vite-plugin-common-files';
+import { unusedFilesPlugin } from './src/packages/eslint-plugin/detect-unused-files';
 
 function getGitCommitHash() {
   try {
@@ -48,6 +49,20 @@ export default defineConfig({
       enabled: process.env.VITE_COVERAGE === 'true',
       exclude: ['**/node_modules/**', '**/vscf/**'],
       include: ['**/*.ts', '**/*.tsx'],
+    }),
+    unusedFilesPlugin({
+      exclude: [
+        'src/packages/vscf/**',
+        'src/packages/cloud/**',
+        'src/packages/eslint-plugin/**',
+        'src/packages/vite-plugin-*/**',
+        'src/packages/server-sdk/**',
+        'src/packages/docs/**',
+        'src/third-party/**',
+        'src/electron/**',
+        'src/server/**',
+        '**/*.d.ts',
+      ],
     }),
     commonFilesPlugin({
       entries: ['src/desktop/main.tsx', 'src/mobile/main.tsx'],
