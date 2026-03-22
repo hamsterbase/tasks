@@ -14,7 +14,7 @@ export const TaskItemCompletionAt: React.FC<TaskItemCompletionAtProps> = ({ comp
   }
   const isCompleted = status === 'completed';
   return (
-    <div className="flex items-center gap-1 text-xs font-semibold leading-6 text-t3 shrink-0">
+    <div className="flex items-center gap-1 text-xs font-semibold leading-6 text-t3">
       {isCompleted ? (
         <CircleCheckIcon className="size-3" strokeWidth={1.5} />
       ) : (

@@ -114,7 +114,7 @@ export const HomeProjectItem: React.FC<ProjectItemProps> = ({
               <div className="flex items-center gap-1 text-t3 shrink-0">
                 <TaskItemIcons tags={projectInfo.tags} notes={projectInfo.notes} navIcon={false} />
               </div>
-              {!hideNavIcon && <NavIcon className="size-4 text-t3 flex-shrink-0" strokeWidth={1.5} />}
+              {!hideNavIcon && <NavIcon className="size-4 text-t3 ml-auto" strokeWidth={1.5} />}
             </>
           )}
         </div>

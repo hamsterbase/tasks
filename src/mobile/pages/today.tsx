@@ -116,7 +116,7 @@ export const TodayPage = () => {
         {items.map((item) => {
           const willDisappear = todayItems.willDisappearObjectIdSet.has(item.id);
           if (item.type === 'project') {
-            return <HomeProjectItem key={item.id} projectInfo={item} hideStartDate={true} hideSubtitle />;
+            return <HomeProjectItem key={item.id} projectInfo={item} hideStartDate={true} />;
           }
           return (
             <TaskItemWrapper key={item.id} willDisappear={willDisappear} id={item.id}>

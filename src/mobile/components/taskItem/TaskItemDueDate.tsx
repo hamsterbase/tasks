@@ -14,7 +14,7 @@ export const TaskItemDueDate: React.FC<TaskItemDueDateProps> = ({ dueDate }) => 
   }
   return (
     <div
-      className={classNames('text-xs font-semibold leading-6 flex items-center gap-1 flex-shrink-0', {
+      className={classNames('text-xs font-semibold leading-6 flex items-center gap-1', {
         'text-accent-danger': isPastOrToday(dueDate),
         'text-t2': !isPastOrToday(dueDate),
       })}

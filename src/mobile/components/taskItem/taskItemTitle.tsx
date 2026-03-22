@@ -21,7 +21,7 @@ export const TaskItemTitle: React.FC<TaskItemTitleProps> = ({
     <span
       data-testid={testId}
       className={classNames(
-        'flex-1 text-base leading-6 font-medium overflow-hidden text-ellipsis whitespace-nowrap min-w-0',
+        'text-base leading-6 font-medium overflow-hidden text-ellipsis whitespace-nowrap min-w-0',
         { 'line-through': isCanceled },
         isCanceled || isCompleted ? 'text-t3' : title ? 'text-t1' : styles.taskItemPlaceholderColor
       )}
