@@ -66,15 +66,13 @@ const useTagInteraction = (controller: TagEditorActionSheetController | null) =>
     }
   };
 
-  const handleTagTouchStart = (e: React.TouchEvent<HTMLSpanElement> | React.MouseEvent<HTMLSpanElement>) => {
+  const handleTagMouseDown = (e: React.MouseEvent<HTMLSpanElement>) => {
     e.preventDefault();
   };
 
   const getTagProps = (tag: string) => {
     return {
-      onTouchStart: (e: React.TouchEvent<HTMLSpanElement> | React.MouseEvent<HTMLSpanElement>) =>
-        handleTagTouchStart(e),
-      onMouseDown: (e: React.TouchEvent<HTMLSpanElement> | React.MouseEvent<HTMLSpanElement>) => handleTagTouchStart(e),
+      onMouseDown: (e: React.MouseEvent<HTMLSpanElement>) => handleTagMouseDown(e),
       onClick: () => handleTagClick(tag),
     };
   };
@@ -89,10 +87,7 @@ export const TagEditorActionSheet: React.FC = () => {
   useWatchEvent(controller?.onStatusChange);
   const inputRef = useRef<HTMLInputElement>(null);
   const tagProps = useTagInteraction(controller);
-  const handleContainerTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
+
   const handleClose = () => {
     controller?.saveTags();
     controller?.dispose();
@@ -121,10 +116,10 @@ export const TagEditorActionSheet: React.FC = () => {
 
   return (
     <ActionSheet zIndex={controller.zIndex} onClose={handleClose}>
-      <div className="space-y-4" onTouchStart={handleContainerTouchStart}>
+      <div className="space-y-4">
         <div className={inputContainerStyles}>
           {controller.selectedTags.map((tag) => (
-            <span className={selectedTagsStyle} {...tagProps(tag)}>
+            <span key={tag} className={selectedTagsStyle} {...tagProps(tag)}>
               #{tag}
             </span>
           ))}

@@ -66,8 +66,10 @@ type AttrRowTasks = {
   key: string;
   icon: React.ReactNode;
   children: React.ReactNode;
-  addButtonLabel: string;
-  onAdd: () => void;
+  totalCount?: number;
+  completedCount?: number;
+  addButtonLabel?: string;
+  onAdd?: () => void;
   testId?: string;
   addButtonTestId?: string;
 };
@@ -125,6 +127,8 @@ function renderAttrRow(item: AttrRowItem): React.ReactNode {
         <AttrTasks
           key={item.key}
           icon={item.icon}
+          totalCount={item.totalCount}
+          completedCount={item.completedCount}
           addButtonLabel={item.addButtonLabel}
           onAdd={item.onAdd}
           testId={item.testId}

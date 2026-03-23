@@ -1,4 +1,7 @@
 export const MobileTestIds = {
+  Home: {
+    CreateTaskButton: 'mobile-home-create-task-button',
+  },
   CreateTask: {
     TitleInput: 'mobile-create-task-title-input',
     DueDateRow: 'mobile-create-task-due-date-row',

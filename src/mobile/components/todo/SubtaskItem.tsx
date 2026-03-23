@@ -84,13 +84,11 @@ export const SubtaskItem: React.FC<SubtaskItemProps> = ({
   };
 
   if (isDragging && !disableDragStyle) {
-    return (
-      <div className="flex items-center gap-2 -ml-1 bg-bg3 rounded-lg w-full" ref={setNodeRef} style={style}></div>
-    );
+    return <div className="flex items-center gap-1.5 bg-bg3 rounded-lg w-full" ref={setNodeRef} style={style}></div>;
   }
 
   return (
-    <div className={classNames('flex items-center gap-2 -ml-1', className)} ref={setNodeRef} style={style}>
+    <div className={classNames('flex items-center gap-1.5', className)} ref={setNodeRef} style={style}>
       <div
         onContextMenu={(e) => {
           e.preventDefault();
@@ -107,11 +105,9 @@ export const SubtaskItem: React.FC<SubtaskItemProps> = ({
         onKeyDown={handleKeyDown}
         onFocus={handleFocusAndScroll}
         className={classNames(
-          'flex-1 text-sm leading-6 text-t1 bg-transparent border-none outline-none p-0 placeholder:text-t4',
+          'flex-1 text-sm leading-6 bg-transparent border-none outline-none p-0 placeholder:text-t4',
           inputClassName,
-          {
-            'line-through': status === 'canceled',
-          }
+          status === 'canceled' ? 'text-t3 line-through' : status === 'completed' ? 'text-t3' : 'text-t1'
         )}
         placeholder={localize('mobile.subtask.placeholder', 'Subtask')}
         ref={inputRef}

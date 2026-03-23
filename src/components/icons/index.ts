@@ -50,6 +50,7 @@ import {
   Plus,
   RefreshCw,
   Repeat,
+  Repeat2,
   Search,
   SendToBack,
   ServerIcon,
@@ -117,6 +118,7 @@ export const PanelLeftIcon = PanelLeft;
 export const SyncIcon = RefreshCw;
 export const ArchiveIcon = Archive;
 export const RepeatIcon = Repeat;
+export const Repeat2Icon = Repeat2;
 export const SearchIcon = Search;
 export const SquareTerminalIcon = SquareTerminal;
 export const AIIcon = Bot;

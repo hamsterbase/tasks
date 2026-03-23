@@ -453,8 +453,8 @@
     "content": "Future Tasks"
   },
   "edit_task_item.task_notes_placeholder": {
-    "defaultMessage": "Add Notes...",
-    "content": "Add Notes..."
+    "defaultMessage": "Add Notes",
+    "content": "Add Notes"
   },
   "errorCreatingDirectory": {
     "defaultMessage": "Error creating directory:",
@@ -1532,9 +1532,13 @@
     "defaultMessage": "Presets",
     "content": "Presets"
   },
+  "time.today": {
+    "defaultMessage": "Today",
+    "content": "Today"
+  },
   "time.tomorrow": {
-    "defaultMessage": "tomorrow",
-    "content": "tomorrow"
+    "defaultMessage": "Tomorrow",
+    "content": "Tomorrow"
   },
   "today": {
     "defaultMessage": "Today",

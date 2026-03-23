@@ -1,6 +1,21 @@
 import { CloseIcon } from '@/components/icons';
-import React from 'react';
+import React, { useContext } from 'react';
 import { styles } from '../../theme';
+
+export interface AttrStyles {
+  row: string;
+  iconContainer: string;
+  content: string;
+  labelTitleColor?: string;
+}
+
+const defaultAttrStyles: AttrStyles = {
+  row: styles.editTaskAttrRow,
+  iconContainer: styles.editTaskAttrIconContainer,
+  content: styles.editTaskAttrContent,
+};
+
+export const AttrStyleContext = React.createContext<AttrStyles>(defaultAttrStyles);
 
 interface AttrContainerProps {
   icon: React.ReactNode;
@@ -11,10 +26,11 @@ interface AttrContainerProps {
 }
 
 export const AttrContainer: React.FC<AttrContainerProps> = ({ icon, children, onClick, onClear, testId }) => {
+  const attrStyles = useContext(AttrStyleContext);
   return (
-    <div className={styles.createTaskAttrRow} onClick={onClick} data-testid={testId}>
-      <div className={styles.createTaskAttrIconContainer}>{icon}</div>
-      <div className={styles.createTaskAttrContent}>
+    <div className={attrStyles.row} onClick={onClick} data-testid={testId}>
+      <div className={attrStyles.iconContainer}>{icon}</div>
+      <div className={attrStyles.content}>
         {onClear ? (
           <div className="flex w-full items-center justify-between">
             {children}
@@ -25,7 +41,7 @@ export const AttrContainer: React.FC<AttrContainerProps> = ({ icon, children, on
                 onClear();
               }}
             >
-              <CloseIcon className="size-4" strokeWidth={1.5} />
+              <CloseIcon className={styles.createTaskRemoveIcon} strokeWidth={1.5} />
             </button>
           </div>
         ) : (

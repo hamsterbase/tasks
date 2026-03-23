@@ -77,12 +77,19 @@ export function formatReminderTime(timestamp?: number, currentDate?: number): Se
   // Get time string
   const timeStr = format(targetDate, timeFormat[locale], { locale: dateFnsLocale });
 
-  // Same day - no date needed
+  // Same day
   if (isSameDay(targetDate, currentDateObj)) {
-    return {
-      date: dateFormats.sameDay[locale],
-      time: timeStr,
-    };
+    if (locale === 'zh-CN') {
+      return {
+        date: '今天',
+        time: timeStr,
+      };
+    } else {
+      return {
+        date: localize('time.today', 'Today'),
+        time: timeStr,
+      };
+    }
   }
 
   // Tomorrow
@@ -95,7 +102,7 @@ export function formatReminderTime(timestamp?: number, currentDate?: number): Se
       };
     } else {
       return {
-        date: localize('time.tomorrow', 'tomorrow'),
+        date: localize('time.tomorrow', 'Tomorrow'),
         time: timeStr,
       };
     }

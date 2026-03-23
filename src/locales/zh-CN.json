@@ -453,7 +453,7 @@
     "content": "未来任务"
   },
   "edit_task_item.task_notes_placeholder": {
-    "defaultMessage": "Add Notes...",
+    "defaultMessage": "Add Notes",
     "content": "添加笔记..."
   },
   "errorCreatingDirectory": {
@@ -1532,8 +1532,12 @@
     "defaultMessage": "Presets",
     "content": "预设"
   },
+  "time.today": {
+    "defaultMessage": "Today",
+    "content": "今天"
+  },
   "time.tomorrow": {
-    "defaultMessage": "tomorrow",
+    "defaultMessage": "Tomorrow",
     "content": "明天"
   },
   "today": {

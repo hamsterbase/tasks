@@ -137,6 +137,8 @@ export const CreateTaskActionSheet: React.FC = () => {
       type: 'tasks',
       key: 'subtasks',
       icon: <ListChecksIcon className={styles.createTaskAttrIcon} />,
+      totalCount: taskManager.subtasks.length,
+      completedCount: taskManager.subtasks.filter((s) => s.status === 'completed' || s.status === 'canceled').length,
       children: (
         <DndContext
           sensors={sensors}

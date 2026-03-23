@@ -1,4 +1,20 @@
-import { MenuIcon } from '@/components/icons';
+import {
+  AlarmIcon,
+  BellIcon,
+  CalendarIcon,
+  FlagIcon,
+  ListChecksIcon,
+  MenuIcon,
+  NotesIcon,
+  Repeat2Icon,
+  RepeatIcon,
+  SubtaskIcon,
+  TagIcon,
+} from '@/components/icons';
+import { mergeDateAndTime } from '@/core/time/mergeDateAndTime';
+import { formatReminderTime } from '@/core/time/formatReminderTime';
+import { recurringToString } from '@/core/time/recurringToString';
+import { getTaskInfo } from '@/core/state/getTaskInfo';
 import { TaskInfo } from '@/core/state/type';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
@@ -7,7 +23,11 @@ import { useEdit } from '@/hooks/useEdit';
 import { useEditTaskHooks } from '@/hooks/useEditTask.tsx';
 import { useLongPress } from '@/hooks/useLongPress';
 import { SubtaskItem } from '@/mobile/components/todo/SubtaskItem';
+import { useMobileDatepicker } from '@/mobile/overlay/datePicker/useDatepicker';
 import { usePopupAction } from '@/mobile/overlay/popupAction/usePopupAction';
+import { useRecurringTaskSettings } from '@/mobile/overlay/recurringTaskSettings/useRecurringTaskSettings';
+import { TagEditorActionSheetController } from '@/mobile/overlay/tagEditor/TagEditorActionSheetController';
+import { useTimePicker } from '@/mobile/overlay/timePicker/useTimePicker';
 import { styles } from '@/mobile/theme';
 import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService';
@@ -16,16 +36,77 @@ import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import classNames from 'classnames';
 import TextArea from 'rc-textarea';
 import React, { useRef } from 'react';
+import { ItemStatus } from '@/core/type';
+import { IInstantiationService } from 'vscf/platform/instantiation/common';
 import { OverlayItem } from '../dnd/DragOverlayItem';
-import { InfoItemGroup } from '../InfoItem';
 import { TaskStatusBox } from '../taskItem/TaskStatusBox';
+import { AttrList, AttrRowItem } from '../attr/AttrList';
+import { AttrContainer, AttrStyleContext } from '../attr/AttrContainer';
+
+const editTaskAttrStyles = {
+  row: styles.editTaskAttrRow,
+  iconContainer: styles.editTaskAttrIconContainer,
+  content: styles.editTaskAttrContent,
+  labelTitleColor: 'text-t2',
+};
+
 interface EditTaskItemProps {
   taskInfo: TaskInfo;
 }
 
-export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo }) => {
+function formatDateISO(timestamp?: number): string {
+  if (!timestamp) return '';
+  return new Date(timestamp).toISOString().split('T')[0];
+}
+
+const TaskCheckboxSvg: React.FC<{ status: ItemStatus }> = ({ status }) => {
+  const s = 18;
+  const r = 5;
+  const checkmarkPath = `M ${s * 0.25} ${s * 0.5} L ${s * 0.45} ${s * 0.7} L ${s * 0.75} ${s * 0.35}`;
+  const crossPath = `M ${s * 0.3} ${s * 0.3} L ${s * 0.7} ${s * 0.7} M ${s * 0.7} ${s * 0.3} L ${s * 0.3} ${s * 0.7}`;
+
+  return (
+    <svg width={s} height={s} viewBox={`0 0 ${s} ${s}`}>
+      <rect
+        x="1"
+        y="1"
+        width={s - 2}
+        height={s - 2}
+        rx={r}
+        ry={r}
+        fill={status === 'completed' ? 'var(--color-brand)' : 'transparent'}
+        stroke={status === 'completed' ? 'var(--color-brand)' : 'currentColor'}
+        strokeWidth="1.5"
+      />
+      {status === 'completed' && (
+        <path
+          d={checkmarkPath}
+          fill="none"
+          stroke="white"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      )}
+      {status === 'canceled' && (
+        <path
+          d={crossPath}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      )}
+    </svg>
+  );
+};
+
+export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoProp }) => {
   const todoService = useService(ITodoService);
   useWatchEvent(todoService.onStateChange);
+  // Get fresh taskInfo from service state to reflect latest changes (reminders, recurring, etc.)
+  const taskInfo = getTaskInfo(todoService.modelState, taskInfoProp.id);
   const isEditing = taskInfo.id === todoService.editingContent?.id;
   const taskActions = useEditTaskHooks(taskInfo);
   useWatchEvent(todoService.onEditingContentChange, (data) => {
@@ -69,6 +150,84 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo }) => {
   });
 
   const popupAction = usePopupAction();
+  const mobileDatepicker = useMobileDatepicker();
+  const openRecurringTaskSettings = useRecurringTaskSettings();
+  const timePicker = useTimePicker();
+  const instantiationService = useService(IInstantiationService);
+
+  const handleMenuClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    e.preventDefault();
+    popupAction({
+      groups: [
+        {
+          items: [
+            {
+              icon: <SubtaskIcon />,
+              name: localize('edit_task_item.add_subtask', 'Add Subtask'),
+              onClick: () => {
+                taskActions.createSubtask();
+              },
+            },
+            {
+              icon: <AlarmIcon />,
+              name: localize('edit_task_item.set_reminder', 'Set Reminder'),
+              onClick: () => {
+                mobileDatepicker.showDatePicker({
+                  initialDate: Date.now(),
+                  onDateSelected: async (date) => {
+                    const time = await timePicker.showTimePickerPromise(Date.now());
+                    const mergedDateTime = mergeDateAndTime(date, time);
+                    todoService.addReminder({ itemId: taskInfo.id, time: mergedDateTime.getTime() });
+                  },
+                });
+              },
+            },
+            {
+              icon: <RepeatIcon />,
+              name: localize('task.recurring_settings', 'Recurring Settings'),
+              onClick: () => {
+                openRecurringTaskSettings(taskInfo.recurringRule || {}, (settings) => {
+                  todoService.updateTask(taskInfo.id, { recurringRule: settings });
+                });
+              },
+            },
+            {
+              icon: <TagIcon />,
+              name: localize('edit_task_item.set_tags', 'Set Tags'),
+              onClick: () => {
+                TagEditorActionSheetController.create(
+                  taskInfo.tags,
+                  (tags) => {
+                    todoService.updateTask(taskInfo.id, { tags });
+                  },
+                  instantiationService
+                );
+              },
+            },
+          ],
+        },
+      ],
+    });
+  };
+
+  const handleStartDateClick = () => {
+    mobileDatepicker.showDatePicker({
+      initialDate: taskInfo.startDate,
+      onDateSelected: (ds) => {
+        todoService.updateTask(taskInfo.id, { startDate: ds });
+      },
+    });
+  };
+
+  const handleDueDateClick = () => {
+    mobileDatepicker.showDatePicker({
+      initialDate: taskInfo.dueDate,
+      onDateSelected: (date) => {
+        todoService.updateTask(taskInfo.id, { dueDate: date });
+      },
+    });
+  };
 
   const { longPressEvents } = useLongPress(() => {
     popupAction({
@@ -105,113 +264,216 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo }) => {
     });
   });
 
+  const attrRows: AttrRowItem[] = [
+    {
+      type: 'label',
+      key: 'startDate',
+      icon: <CalendarIcon className={styles.editTaskAttrIcon} />,
+      placeholder: localize('edit_task_item.set_start_date', 'Set Start Date'),
+      value: taskInfo.startDate ? { title: formatDateISO(taskInfo.startDate) } : undefined,
+      onClick: handleStartDateClick,
+      testId: 'edit-task-start-date',
+    },
+    {
+      type: 'label',
+      key: 'dueDate',
+      icon: <FlagIcon className={styles.editTaskAttrIcon} />,
+      placeholder: localize('edit_task_item.set_due_date', 'Set Due Date'),
+      value: taskInfo.dueDate ? { title: formatDateISO(taskInfo.dueDate) } : undefined,
+      onClick: handleDueDateClick,
+      testId: 'edit-task-due-date',
+    },
+    ...(taskInfo.tags.length > 0
+      ? [
+          {
+            type: 'tags' as const,
+            key: 'tags',
+            icon: <TagIcon className={styles.editTaskAttrIcon} />,
+            placeholder: localize('edit_task_item.set_tags', 'Set Tags'),
+            tags: taskInfo.tags,
+            onClick: () => {
+              TagEditorActionSheetController.create(
+                taskInfo.tags,
+                (tags) => {
+                  todoService.updateTask(taskInfo.id, { tags });
+                },
+                instantiationService
+              );
+            },
+          },
+        ]
+      : []),
+    ...(taskInfo.children.length > 0
+      ? [
+          {
+            type: 'tasks' as const,
+            key: 'subtasks',
+            icon: <ListChecksIcon className={styles.editTaskAttrIcon} />,
+            children: (
+              <>
+                <div className={styles.editingTaskSubtaskHeader}>
+                  <span>
+                    {taskInfo.children.filter((c) => c.status === 'completed' || c.status === 'canceled').length} /{' '}
+                    {taskInfo.children.length}
+                  </span>
+                  <div className={styles.editingTaskSubtaskProgressBar}>
+                    <div
+                      className={styles.editingTaskSubtaskProgressFill}
+                      style={{
+                        width: `${(taskInfo.children.filter((c) => c.status === 'completed' || c.status === 'canceled').length / taskInfo.children.length) * 100}%`,
+                      }}
+                    />
+                  </div>
+                </div>
+                <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={taskActions.handleDragEnd}>
+                  <SortableContext
+                    items={taskInfo.children.map((item) => item.id)}
+                    strategy={verticalListSortingStrategy}
+                  >
+                    <OverlayItem
+                      isSubtask={true}
+                      className={`${styles.editingTaskSubtaskPadding} ${styles.editingTaskSubtaskContainerBackground}`}
+                    />
+                    {taskInfo.children.map((child) => (
+                      <SubtaskItem
+                        key={child.id}
+                        id={child.id}
+                        title={child.title}
+                        status={child.status}
+                        className={styles.createTaskSubtaskItem}
+                        onStatusChange={taskActions.updateSubtaskStatus}
+                        onTitleChange={taskActions.updateSubtaskTitle}
+                        onCreate={() => taskActions.createSubtask(child.id)}
+                        onDelete={taskActions.deleteSubtask}
+                        inputRef={(el: HTMLInputElement | null) => {
+                          if (el) taskActions.subtaskInputRefs.current[child.id] = el;
+                        }}
+                      />
+                    ))}
+                  </SortableContext>
+                </DndContext>
+              </>
+            ),
+          },
+        ]
+      : []),
+    ...(taskInfo.reminders.length > 0
+      ? [
+          {
+            type: 'simple' as const,
+            key: 'reminders',
+            icon: <BellIcon className={styles.editTaskAttrIcon} />,
+            placeholder: '',
+            items: [...taskInfo.reminders]
+              .sort((a, b) => a.time - b.time)
+              .map((reminder) => {
+                const { date, time } = formatReminderTime(reminder.time);
+                return { title: date, subtitle: time };
+              }),
+            testId: 'edit-task-reminders',
+          },
+        ]
+      : []),
+    ...(taskInfo.recurringRule && (taskInfo.recurringRule.startDate || taskInfo.recurringRule.dueDate)
+      ? [
+          {
+            type: 'simple' as const,
+            key: 'recurring',
+            icon: <Repeat2Icon className={styles.editTaskAttrIcon} />,
+            placeholder: '',
+            items: [
+              ...(taskInfo.recurringRule.startDate
+                ? [
+                    {
+                      title: localize('tasks.start_date_label', 'Start Date'),
+                      subtitle: recurringToString(taskInfo.recurringRule.startDate),
+                    },
+                  ]
+                : []),
+              ...(taskInfo.recurringRule.dueDate
+                ? [
+                    {
+                      title: localize('tasks.due_date_label', 'Due Date'),
+                      subtitle: recurringToString(taskInfo.recurringRule.dueDate),
+                    },
+                  ]
+                : []),
+            ],
+            testId: 'edit-task-recurring',
+          },
+        ]
+      : []),
+  ];
+
   return (
     <div
       ref={divRef}
       onClick={shouldIgnoreClick}
       className={classNames(
-        'flex flex-col gap-y-2',
         styles.taskItemPaddingX,
         styles.listItemEditingBackground,
         styles.taskItemEditingShadow,
         styles.taskItemEditingRound,
         itemClassName,
-        'py-2'
+        'py-3.5'
       )}
     >
-      <div className="flex items-start gap-2">
-        <div className="flex-shrink-0 flex pt-1">
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              taskActions.toggleTask();
-            }}
-            {...longPressEvents}
-            className="flex-shrink-0 size-5 flex items-center justify-center text-t3"
-          >
-            <TaskStatusBox className={classNames('size-5 rounded-sm')} status={taskInfo.status} />
-          </button>
-        </div>
-        <div className="flex-1 min-w-0 flex items-center">
-          <TextArea
-            {...textAreaProps}
-            ref={(el) => {
-              if (el) {
-                textAreaProps.ref.current = el.nativeElement as HTMLInputElement;
-              }
-            }}
-            autoSize={{ minRows: 1 }}
-            className="text-lg flex-1 overflow-hidden text-ellipsis bg-transparent  text-t1 outline-none w-full"
-          />
-        </div>
-      </div>
-      <div className="pl-7">
-        <TextArea
-          {...notesProps}
-          ref={(el) => {
-            if (el) {
-              notesProps.ref.current = el.nativeElement as HTMLInputElement;
-            }
+      {/* Title row */}
+      <div className="flex items-start gap-3">
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            taskActions.toggleTask();
           }}
-          className={`${styles.itemEditTaskNotesTextAreaStyle}`}
-          autoSize={{ minRows: 1, maxRows: 5 }}
-          placeholder={localize('edit_task_item.task_notes_placeholder', 'Add Notes...')}
-        />
+          {...longPressEvents}
+          className="size-6 shrink-0 flex items-center justify-center text-t3"
+        >
+          <TaskCheckboxSvg status={taskInfo.status} />
+        </button>
+        <div className="flex-1 min-w-0 flex flex-col gap-1">
+          <div className="flex items-center gap-2 min-w-0">
+            <TextArea
+              {...textAreaProps}
+              ref={(el) => {
+                if (el) {
+                  textAreaProps.ref.current = el.nativeElement as HTMLInputElement;
+                }
+              }}
+              autoSize={{ minRows: 1 }}
+              className="min-w-0 overflow-hidden text-ellipsis text-base leading-6 font-medium text-t1 bg-transparent outline-none w-full"
+            />
+          </div>
+        </div>
+        <button
+          data-testid="edit-task-menu-button"
+          className="size-6 shrink-0 flex items-center justify-end text-t3"
+          onClick={handleMenuClick}
+        >
+          <MenuIcon className="size-4" />
+        </button>
       </div>
 
-      <div className={classNames('pl-6.5')}>
-        {
-          <div
-            className={classNames(
-              styles.editingTaskSubtaskContainerSpacing,
-              styles.editingTaskSubtaskContainerMargin,
-              styles.editingTaskSubtaskContainerRound,
-              'flex flex-col',
-              styles.editingTaskSubtaskContainerBackground,
-              {
-                hidden: taskInfo.children.length === 0,
-              }
-            )}
-          >
-            <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={taskActions.handleDragEnd}>
-              <SortableContext items={taskInfo.children.map((item) => item.id)} strategy={verticalListSortingStrategy}>
-                <OverlayItem
-                  isSubtask={true}
-                  className={`${styles.editingTaskSubtaskPadding} ${styles.editingTaskSubtaskContainerBackground}`}
-                />
-                {taskInfo.children.map((child) => (
-                  <SubtaskItem
-                    key={child.id}
-                    className={`${styles.editingTaskSubtaskPadding} ${styles.editingTaskSubtaskContainerBackground}`}
-                    id={child.id}
-                    title={child.title}
-                    status={child.status}
-                    onStatusChange={taskActions.updateSubtaskStatus}
-                    onTitleChange={taskActions.updateSubtaskTitle}
-                    onCreate={() => taskActions.createSubtask(child.id)}
-                    onDelete={taskActions.deleteSubtask}
-                    inputRef={(el: HTMLInputElement | null) => {
-                      if (el) taskActions.subtaskInputRefs.current[child.id] = el;
-                    }}
-                  />
-                ))}
-              </SortableContext>
-            </DndContext>
-          </div>
-        }
-        <InfoItemGroup items={taskActions.taskDetailItems} />
-        <div className={classNames('flex justify-end items-center pt-2')}>
-          <div className="flex justify-end">
-            {taskActions.bottomActions.map((action) => (
-              <button className={styles.taskDetailBottomActionStyle} key={action.key} onClick={action.onClick}>
-                {action.icon}
-              </button>
-            ))}
-            <button className={styles.taskDetailBottomActionStyle} onClick={(e) => taskActions.handleMoreOptions(e)}>
-              <MenuIcon className={styles.taskDetailBottomActionIconStyle} />
-            </button>
-          </div>
+      {/* Expanded content */}
+      <div className="flex gap-3 mt-2">
+        <div className="size-6 shrink-0 -ml-0.5"></div>
+        <div className="flex-1 min-w-0 flex flex-col gap-1">
+          <AttrStyleContext.Provider value={editTaskAttrStyles}>
+            <AttrContainer icon={<NotesIcon className={styles.editTaskAttrIcon} />}>
+              <TextArea
+                {...notesProps}
+                ref={(el) => {
+                  if (el) {
+                    notesProps.ref.current = el.nativeElement as HTMLInputElement;
+                  }
+                }}
+                className={styles.createTaskNotesTextarea}
+                autoSize={{ minRows: 2 }}
+                placeholder={localize('edit_task_item.task_notes_placeholder', 'Add Notes')}
+              />
+            </AttrContainer>
+            <AttrList items={attrRows} />
+          </AttrStyleContext.Provider>
         </div>
       </div>
     </div>

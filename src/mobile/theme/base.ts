@@ -58,7 +58,7 @@ export const baseStyles = {
   taskItemIconSize: /*tw*/ 'h-6 w-6 flex-shrink-0 flex items-center justify-center text-t3',
 
   taskItemEditingRound: /*tw*/ 'rounded-2xl',
-  taskItemEditingShadow: /*tw*/ 'shadow-sm',
+  taskItemEditingShadow: /*tw*/ 'shadow-soft',
 
   taskItemOverlayBackground: /*tw*/ 'bg-bg1',
   taskItemOverlayRound: /*tw*/ 'rounded-2xl',
@@ -140,6 +140,16 @@ export const baseStyles = {
   editingTaskSubtaskContainerRound: /*tw*/ 'rounded-lg',
   editingTaskSubtaskContainerMargin: /*tw*/ 'mb-2 mt-1.5',
   editingTaskSubtaskContainerSpacing: /*tw*/ 'space-y-0.5',
+  editingTaskSubtaskHeader: /*tw*/ 'flex items-center gap-2 text-t2 text-sm leading-6 ml-1',
+  editingTaskSubtaskProgressBar: /*tw*/ 'w-12 h-2 bg-bg3 rounded-full overflow-hidden',
+  editingTaskSubtaskProgressFill: /*tw*/ 'h-full bg-brand rounded-full',
+  editingTaskSubtaskList: /*tw*/ 'flex-1 flex flex-col gap-1 min-w-0 -ml-1',
+
+  // Edit Task - AttrRow styles (matches Vue TaskAttr)
+  editTaskAttrRow: /*tw*/ 'flex items-start gap-2',
+  editTaskAttrIconContainer: /*tw*/ 'h-6 w-4 flex items-center justify-center shrink-0 text-t3',
+  editTaskAttrContent: /*tw*/ 'flex-1 min-w-0 flex',
+  editTaskAttrIcon: /*tw*/ 'size-4',
 
   // Create Task - Card & AttrRow styles
   createTaskCardRoot: /*tw*/ 'ui-card-glass flex flex-col gap-3 p-4',
@@ -155,6 +165,9 @@ export const baseStyles = {
   createTaskTagsContainer: /*tw*/ 'flex flex-wrap gap-2',
   createTaskTag:
     /*tw*/ 'text-xs leading-6 h-6 text-brand font-medium bg-bg4 rounded-full px-2 flex items-center justify-center',
+  createTaskSubtaskHeader: /*tw*/ 'flex items-center gap-2 text-t2 text-sm leading-6 ml-1',
+  createTaskSubtaskProgressBar: /*tw*/ 'w-12 h-2 bg-bg3 rounded-full overflow-hidden',
+  createTaskSubtaskProgressFill: /*tw*/ 'h-full bg-brand rounded-full',
   createTaskSubtaskList: /*tw*/ 'flex flex-col gap-1 w-full',
   createTaskSubtaskItem: /*tw*/ 'flex items-center gap-2 -ml-1',
   createTaskSubtaskItemIcon: /*tw*/ 'text-t3',
@@ -169,6 +182,7 @@ export const baseStyles = {
   createTaskReminderSubtitle: /*tw*/ 'text-sm text-t2',
   createTaskReminderRemoveBtn:
     /*tw*/ 'size-4 flex items-center justify-center border-none bg-transparent p-0 text-t4 cursor-pointer',
+  createTaskRemoveIcon: /*tw*/ 'size-4 cursor-grab text-t3 opacity-40',
 
   inputItemStyle: /*tw*/ 'bg-bg1 rounded-lg focus:outline-none px-3 py-2 w-full border-0 text-base',
   textAreaItemStyle: /*tw*/ 'bg-bg1 rounded-lg focus:outline-none px-3 py-2 w-full border-0 text-sm',

@@ -5,6 +5,7 @@ import { useSortable } from '@dnd-kit/sortable';
 import { PlusIcon } from '@/components/icons';
 import classNames from 'classnames';
 import { styles } from '@/mobile/theme';
+import { MobileTestIds } from '@/mobile/testids.ts';
 
 export interface ICreateIconProps {
   onClick: () => void;
@@ -49,6 +50,7 @@ export const CreateIcon: React.FC<ICreateIconProps> = (props: ICreateIconProps) 
       onClick={() => {
         props.onClick();
       }}
+      data-testid={MobileTestIds.Home.CreateTaskButton}
       data-id={DragDropElements.create}
       ref={setNodeRef}
       className={classNames(styles.fabButton, 'bg-brand')}

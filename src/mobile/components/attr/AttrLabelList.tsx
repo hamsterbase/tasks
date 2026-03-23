@@ -83,7 +83,7 @@ export const AttrLabelList: React.FC<AttrLabelListProps> = (props) => {
             </button>
             {onRemove && (
               <button className={styles.createTaskReminderRemoveBtn} onClick={() => onRemove(index)}>
-                <CloseIcon className="size-4" strokeWidth={1.5} />
+                <CloseIcon className={styles.createTaskRemoveIcon} strokeWidth={1.5} />
               </button>
             )}
           </div>
