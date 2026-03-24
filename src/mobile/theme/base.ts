@@ -45,7 +45,7 @@ export const baseStyles = {
 
   taskItemGroupRound: /*tw*/ 'rounded-2xl shadow-soft',
   taskItemGroupBackground: /*tw*/ 'bg-bg1',
-  taskItemGroupHeaderPadding: /*tw*/ 'pt-2',
+  taskItemGroupHeaderPadding: /*tw*/ 'pt-3',
   taskItemGroupTopRound: /*tw*/ 'rounded-t-2xl',
   taskItemGroupBottomRound: /*tw*/ 'rounded-b-2xl',
 
@@ -262,4 +262,37 @@ export const baseStyles = {
   buttonSizeLargeStyle: /*tw*/ 'h-11 text-base',
   buttonShapeDefaultStyle: /*tw*/ 'bg-brand text-white hover:opacity-90',
   buttonShapeLightStyle: /*tw*/ 'border border-line-bold border-thin text-t2 hover:opacity-90',
+
+  // HomePageProjectItem styles (matching Vue HomeProjectItem spec)
+  homeProjectItemRoot: /*tw*/ 'flex items-start py-3.5 px-4 gap-3',
+  homeProjectItemCheckboxContainer: /*tw*/ 'h-7 flex items-center text-t3',
+  homeProjectItemContent: /*tw*/ 'flex-1 flex flex-col gap-0.5 min-w-0',
+  homeProjectItemTitleRow: /*tw*/ 'flex items-center gap-1.5 min-w-0',
+  homeProjectItemTitle:
+    /*tw*/ 'min-w-0 overflow-hidden text-ellipsis whitespace-nowrap text-base leading-7 font-medium transition-all duration-200',
+  homeProjectItemTitleCompleted: /*tw*/ 'line-through text-t3',
+  homeProjectItemTitleCanceled: /*tw*/ 'text-t3',
+  homeProjectItemTitleNormal: /*tw*/ 'text-t1',
+  homeProjectItemTitlePlaceholder: /*tw*/ 'text-t3',
+  homeProjectItemMetaIcons: /*tw*/ 'flex items-center gap-1 text-t3 shrink-0',
+  homeProjectItemMetaIconSize: /*tw*/ 'size-3.5',
+  homeProjectItemDueDate: /*tw*/ 'flex items-center gap-1 text-xs font-semibold leading-7',
+  homeProjectItemDueDateOverdue: /*tw*/ 'text-accent-danger',
+  homeProjectItemDueDateNormal: /*tw*/ 'text-t2',
+  homeProjectItemDueDateIconSize: /*tw*/ 'size-3',
+  homeProjectItemEditingInput:
+    /*tw*/ 'flex-1 overflow-hidden text-ellipsis whitespace-nowrap bg-transparent text-base leading-7 font-medium outline-none',
+
+  // AreaHeader styles (matching Vue AreaItem spec)
+  areaHeaderRoot: /*tw*/ 'flex items-center py-3.5 px-4',
+  areaHeaderIconContainer: /*tw*/ 'size-7 text-t3 flex items-center justify-center mr-3 flex-shrink-0',
+  areaHeaderIconSize: /*tw*/ 'size-5.5',
+  areaHeaderTitle: /*tw*/ 'text-base leading-7 font-medium text-t1 flex-1 min-w-0',
+  areaHeaderEditingInput:
+    /*tw*/ 'flex-1 overflow-hidden bg-transparent text-base leading-7 text-t1 outline-none font-medium',
+  areaHeaderArrowContainer: /*tw*/ 'size-7 text-t3 flex items-center justify-center',
+  areaHeaderArrowSize: /*tw*/ 'size-4.5',
+
+  // Home page styles
+  homeCardShadow: /*tw*/ 'shadow-soft',
 };

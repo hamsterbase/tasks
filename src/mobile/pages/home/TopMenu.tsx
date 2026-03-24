@@ -1,5 +1,5 @@
 import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc';
-import { InboxIcon, LogIcon, ScheduledIcon, TodayIcon } from '@/components/icons';
+import { CalendarIcon, CheckIcon, InboxIcon, TodayIcon } from '@/components/icons';
 import { getInboxTasks } from '@/core/state/inbox/getInboxTasks';
 import { getTodayItems } from '@/core/state/today/getTodayItems';
 import { useService } from '@/hooks/use-service';
@@ -31,7 +31,7 @@ export const MobileHomeTopMenu = () => {
     <div className={styles.screenEdgePadding}>
       <nav className={styles.statCardContainer}>
         <StatCard
-          icon={<TodayIcon className={styles.statCardIcon} />}
+          icon={<TodayIcon className={styles.statCardIcon} strokeWidth={1.5} />}
           label={localize('today', 'Today')}
           variant="Today"
           count={todayItems.startDateItemsCount}
@@ -39,20 +39,20 @@ export const MobileHomeTopMenu = () => {
           onClick={() => navigate({ path: '/today' })}
         />
         <StatCard
-          icon={<InboxIcon className={styles.statCardIcon} />}
+          icon={<InboxIcon className={styles.statCardIcon} strokeWidth={1.5} />}
           label={localize('inbox', 'Inbox')}
           variant="Inbox"
           count={uncompletedTasksCount}
           onClick={() => navigationService.navigate({ path: '/inbox' })}
         />
         <StatCard
-          icon={<ScheduledIcon className={styles.statCardIcon} />}
+          icon={<CalendarIcon className={styles.statCardIcon} strokeWidth={1.5} />}
           label={localize('schedule', 'Schedule')}
           variant="Scheduled"
           onClick={() => navigate({ path: '/scheduled' })}
         />
         <StatCard
-          icon={<LogIcon className={styles.statCardIcon} />}
+          icon={<CheckIcon className={styles.statCardIcon} strokeWidth={1.5} />}
           label={localize('completed_tasks.title', 'Completed')}
           variant="Completed"
           onClick={() => navigate({ path: '/completed' })}

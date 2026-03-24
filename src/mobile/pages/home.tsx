@@ -11,7 +11,7 @@ import { useDragSensors } from '@/hooks/useDragSensors.ts';
 import useNavigate from '@/hooks/useNavigate.ts';
 import { useScrollPosition } from '@/hooks/useScrollPosition.ts';
 import { FutureProjects } from '@/mobile/components/dnd/futureProjects.tsx';
-import { HomeProjectItem } from '@/mobile/components/todo/HomeProjectItem.tsx';
+import { HomePageProjectItem } from '@/mobile/components/todo/HomePageProjectItem.tsx';
 import { localize } from '@/nls.ts';
 import { toggleAreaConfigKey } from '@/services/config/config.ts';
 import { INavigationService } from '@/services/navigationService/common/navigationService.ts';
@@ -51,7 +51,7 @@ const HomeProjectAndArea: React.FC<HomeProjectAndAreaProps> = ({ flattenedResult
                 <FutureProjects
                   key={item.id}
                   unstartedProjects={unstartedProjects}
-                  className={classNames(styles.taskItemGroupBackground, {
+                  className={classNames(styles.taskItemGroupBackground, styles.homeCardShadow, {
                     [styles.taskItemGroupTopRound]: flattenedResult.borderTop(item.id),
                     [styles.taskItemGroupBottomRound]: flattenedResult.borderBottom(item.id),
                   })}
@@ -65,7 +65,7 @@ const HomeProjectAndArea: React.FC<HomeProjectAndAreaProps> = ({ flattenedResult
               <AreaHeader
                 key={item.content.id}
                 areaInfo={item.content}
-                className={classNames(styles.taskItemGroupBackground, {
+                className={classNames(styles.taskItemGroupBackground, styles.homeCardShadow, {
                   [styles.taskItemGroupTopRound]: flattenedResult.borderTop(item.id),
                   [styles.taskItemGroupBottomRound]: flattenedResult.borderBottom(item.id),
                 })}
@@ -76,13 +76,10 @@ const HomeProjectAndArea: React.FC<HomeProjectAndAreaProps> = ({ flattenedResult
               return null;
             }
             return (
-              <HomeProjectItem
+              <HomePageProjectItem
                 key={item.content.id}
                 projectInfo={item.content}
-                hideStartDate={true}
-                hideNavIcon={true}
-                hideSubtitle
-                className={classNames(styles.taskItemGroupBackground, {
+                className={classNames(styles.taskItemGroupBackground, styles.homeCardShadow, {
                   [styles.taskItemGroupTopRound]: flattenedResult.borderTop(item.id),
                   [styles.taskItemGroupBottomRound]: flattenedResult.borderBottom(item.id),
                 })}
@@ -177,7 +174,10 @@ export const MobileHome = () => {
       header={{
         renderIcon: (className: string) => <HomeIcon className={className} />,
         actions: [
-          { icon: <SettingsIcon />, onClick: () => navigate({ path: '/settings', replace: true }) },
+          {
+            icon: <SettingsIcon className={styles.headerActionButtonIcon} strokeWidth={1.5} />,
+            onClick: () => navigate({ path: '/settings', replace: true }),
+          },
           ...(thirdpartySyncService.showSyncIcon
             ? [
                 {

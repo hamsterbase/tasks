@@ -104,7 +104,7 @@ export const PageLayout: React.FC<PageLayoutProps> = (props: PageLayoutProps) =>
           />
         </div>
       )}
-      {props.meta && <div className="mb-4">{props.meta}</div>}
+      {props.meta && <div className="mb-6">{props.meta}</div>}
       <div className="safe-bottom">{children}</div>
       <div className="h-[var(--keyboard-height)] w-full"></div>
     </div>

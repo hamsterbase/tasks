@@ -14,7 +14,6 @@ import { CSS } from '@dnd-kit/utilities';
 import classNames from 'classnames';
 import React from 'react';
 import { DragItem } from '../dnd/DragItem';
-import { TaskItemTitle } from '../taskItem/taskItemTitle';
 import useNavigate from '@/hooks/useNavigate';
 
 interface AreaHeaderProps {
@@ -70,42 +69,34 @@ export const AreaHeader: React.FC<AreaHeaderProps> = ({ areaInfo, className }) =
     <div ref={setNodeRef} style={style} {...attributes} {...listeners} className={styles.taskItemGroupHeaderPadding}>
       <div
         onClick={handleClick}
-        className={classNames(
-          styles.taskItemHeight,
-          styles.taskItemPaddingX,
-          styles.listItemRound,
-          itemClassName,
-          className,
-          'w-full flex items-center gap-2',
-          {
-            [styles.taskItemEditingShadow]: isEditing,
-            [styles.taskItemEditingRound]: isEditing,
-          }
-        )}
+        className={classNames(styles.areaHeaderRoot, styles.listItemRound, itemClassName, className, {
+          [styles.taskItemEditingShadow]: isEditing,
+          [styles.taskItemEditingRound]: isEditing,
+        })}
       >
-        <button className={classNames(styles.taskItemIconSize)}>
-          <AreaIcon className="text-t3" />
-        </button>
-        <div className="flex-1 min-w-0">
+        <span className={styles.areaHeaderIconContainer}>
+          <AreaIcon className={styles.areaHeaderIconSize} strokeWidth={1.5} />
+        </span>
+        <div className={styles.areaHeaderTitle}>
           {isEditing ? (
-            <input
-              {...textAreaProps}
-              className="flex-1 overflow-hidden bg-transparent text-lg text-t1 outline-none font-medium"
-            />
+            <input {...textAreaProps} className={styles.areaHeaderEditingInput} />
           ) : (
-            <TaskItemTitle
-              title={areaInfo.title}
-              isCanceled={false}
-              emptyText={localize('area.untitled', 'New Area')}
-            />
+            <span
+              className={classNames(
+                styles.homeProjectItemTitle,
+                areaInfo.title ? styles.homeProjectItemTitleNormal : styles.homeProjectItemTitlePlaceholder
+              )}
+            >
+              {areaInfo.title || localize('area.untitled', 'New Area')}
+            </span>
           )}
         </div>
-        <AreaExpandedIcon
-          onClick={handleToggle}
-          className={classNames('size-6 text-t3 transition-transform', isExpanded ? 'rotate-90' : '', {
-            hidden: isEditing,
-          })}
-        />
+        <span onClick={handleToggle} className={classNames(styles.areaHeaderArrowContainer, { hidden: isEditing })}>
+          <AreaExpandedIcon
+            className={classNames(styles.areaHeaderArrowSize, 'transition-transform', isExpanded ? 'rotate-90' : '')}
+            strokeWidth={1.5}
+          />
+        </span>
       </div>
     </div>
   );
