@@ -1,6 +1,7 @@
 import { getProject } from '@/core/state/getProject.ts';
 import { getProjectHeadingInfo } from '@/core/state/getProjectHeadingInfo.ts';
 import { getTaskInfo } from '@/core/state/getTaskInfo.ts';
+import { ProjectInfoState } from '@/core/state/type.ts';
 import { useService } from '@/hooks/use-service.ts';
 import { useWatchEvent } from '@/hooks/use-watch-event.ts';
 import { CreateIcon } from '@/mobile/components/dnd/CreateIcon.tsx';
@@ -30,9 +31,16 @@ export interface DragOverlayItemProps {
     hideStartDate?: boolean;
     hideNavIcon?: boolean;
   };
+  renderProject?: (projectInfo: ProjectInfoState) => React.ReactNode;
 }
 
-export const OverlayItem: React.FC<DragOverlayItemProps> = ({ textProps, projectProps, isSubtask, className }) => {
+export const OverlayItem: React.FC<DragOverlayItemProps> = ({
+  textProps,
+  projectProps,
+  isSubtask,
+  className,
+  renderProject,
+}) => {
   const { active } = useDndContext();
   const activeId = active?.id;
   const todoService = useService(ITodoService);
@@ -67,10 +75,15 @@ export const OverlayItem: React.FC<DragOverlayItemProps> = ({ textProps, project
         return <ProjectHeadingItem projectHeadingInfo={getProjectHeadingInfo(modelState, activeId as TreeID)} />;
       case 'area':
         return <AreaHeader areaInfo={getArea(modelState, activeId as TreeID)!} />;
-      case 'project':
-        return <HomeProjectItem projectInfo={getProject(modelState, activeId as TreeID)} {...(projectProps ?? {})} />;
+      case 'project': {
+        const projectInfo = getProject(modelState, activeId as TreeID);
+        if (renderProject) {
+          return <>{renderProject(projectInfo)}</>;
+        }
+        return <HomeProjectItem projectInfo={projectInfo} {...(projectProps ?? {})} />;
+      }
     }
-  }, [activeId, modelState, textProps, projectProps, isSubtask]);
+  }, [activeId, modelState, textProps, projectProps, isSubtask, renderProject]);
 
   return (
     <DragOverlay>

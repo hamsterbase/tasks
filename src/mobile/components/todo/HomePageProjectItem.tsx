@@ -14,7 +14,7 @@ import React from 'react';
 import { DragItem } from '../dnd/DragItem';
 import { MobileProjectCheckbox } from '../icon/MobileProjectCheckbox';
 import useNavigate from '@/hooks/useNavigate';
-import { FlagIcon, NotesIcon, TagIcon } from '@/components/icons';
+import { FlagIcon } from '@/components/icons';
 
 interface HomePageProjectItemProps {
   projectInfo: ProjectInfoState;
@@ -70,8 +70,6 @@ export const HomePageProjectItem: React.FC<HomePageProjectItemProps> = ({ projec
     </span>
   );
 
-  const hasMetaIcons = !isEditing && (!!projectInfo.notes || (projectInfo.tags && projectInfo.tags.length > 0));
-
   return (
     <div
       ref={setNodeRef}
@@ -91,17 +89,7 @@ export const HomePageProjectItem: React.FC<HomePageProjectItemProps> = ({ projec
         <MobileProjectCheckbox size="large" status={projectInfo.status} progress={projectInfo.progress * 100} />
       </div>
       <div className={styles.homeProjectItemContent}>
-        <div className={styles.homeProjectItemTitleRow}>
-          {titleNode}
-          {hasMetaIcons && (
-            <div className={styles.homeProjectItemMetaIcons}>
-              {projectInfo.notes && <NotesIcon className={styles.homeProjectItemMetaIconSize} strokeWidth={1.5} />}
-              {projectInfo.tags && projectInfo.tags.length > 0 && (
-                <TagIcon className={styles.homeProjectItemMetaIconSize} strokeWidth={1.5} />
-              )}
-            </div>
-          )}
-        </div>
+        <div className={styles.homeProjectItemTitleRow}>{titleNode}</div>
       </div>
       {projectInfo.status === 'created' && projectInfo.dueDate && (
         <span

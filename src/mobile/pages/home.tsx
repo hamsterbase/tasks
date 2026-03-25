@@ -12,6 +12,7 @@ import useNavigate from '@/hooks/useNavigate.ts';
 import { useScrollPosition } from '@/hooks/useScrollPosition.ts';
 import { FutureProjects } from '@/mobile/components/dnd/futureProjects.tsx';
 import { HomePageProjectItem } from '@/mobile/components/todo/HomePageProjectItem.tsx';
+import { HomePageProjectOverlayItem } from '@/mobile/components/todo/HomePageProjectOverlayItem.tsx';
 import { localize } from '@/nls.ts';
 import { toggleAreaConfigKey } from '@/services/config/config.ts';
 import { INavigationService } from '@/services/navigationService/common/navigationService.ts';
@@ -79,7 +80,7 @@ const HomeProjectAndArea: React.FC<HomeProjectAndAreaProps> = ({ flattenedResult
               <HomePageProjectItem
                 key={item.content.id}
                 projectInfo={item.content}
-                className={classNames(styles.taskItemGroupBackground, styles.homeCardShadow, {
+                className={classNames(styles.taskItemGroupBackground, {
                   [styles.taskItemGroupTopRound]: flattenedResult.borderTop(item.id),
                   [styles.taskItemGroupBottomRound]: flattenedResult.borderBottom(item.id),
                 })}
@@ -227,7 +228,7 @@ export const MobileHome = () => {
           items: flattenedItemsResult.flattenedItems.map((item): string => item.id),
         },
         overlayItem: {
-          projectProps: { hideStartDate: true, hideNavIcon: true, hideSubtitle: true },
+          renderProject: (projectInfo) => <HomePageProjectOverlayItem projectInfo={projectInfo} />,
         },
         sensors,
         collisionDetection: getFlattenedItemsCollisionDetectionStrategy(flattenedItemsResult),
