@@ -27,7 +27,10 @@ export function formatDueDateInList(dueDate?: number) {
     return format(dueDateInUtc, 'yyyy');
   } else {
     if (-diffInDays < 30) {
-      return localize('tasks.daysAgo', '{0}d ago', -diffInDays);
+      if (-diffInDays === 1) {
+        return localize('tasks.oneDayAgo', '1 day ago');
+      }
+      return localize('tasks.daysAgo', '{0} days ago', -diffInDays);
     }
     if (-diffInDays < 90 || isSameYear(dueDateInUtc, currentDateInUtc)) {
       return format(dueDateInUtc, 'MM/dd');

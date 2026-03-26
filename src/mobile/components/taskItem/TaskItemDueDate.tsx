@@ -1,6 +1,6 @@
 import { isPastOrToday } from '@/core/time/isPast';
 import { formatDueDateInList } from '@/core/time/formatDueDateInList';
-import { DueIcon } from '@/components/icons';
+import { FlagIcon } from '@/components/icons';
 import classNames from 'classnames';
 import React from 'react';
 
@@ -19,7 +19,7 @@ export const TaskItemDueDate: React.FC<TaskItemDueDateProps> = ({ dueDate }) => 
         'text-t2': !isPastOrToday(dueDate),
       })}
     >
-      <DueIcon className="size-3" strokeWidth={1.5} />
+      <FlagIcon className="size-3" strokeWidth={1.5} />
       {formatDueDateInList(dueDate)}
     </div>
   );

@@ -1,4 +1,4 @@
-import { HeadingIcon, MenuIcon } from '@/components/icons';
+import { MenuIcon } from '@/components/icons';
 import { ProjectHeadingInfo } from '@/core/state/type.ts';
 import { useService } from '@/hooks/use-service';
 import { useCancelEdit } from '@/hooks/useCancelEdit';
@@ -42,14 +42,14 @@ export const ProjectHeadingItem: React.FC<ProjectHeadingItemProps> = ({ projectH
     return <DragItem ref={setNodeRef} attributes={attributes} listeners={listeners} style={style} />;
   }
   return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners} className={'pt-2'}>
+    <div ref={setNodeRef} style={style} {...attributes} {...listeners} className={'pt-3'}>
       <div
         className={classNames(
           styles.taskItemPaddingX,
           styles.taskItemHeight,
           styles.listItemRound,
           itemClassName,
-          'flex items-center gap-2 justify-between text-lg',
+          'flex items-center justify-between text-base font-medium',
           {
             ['line-through opacity-50']: projectHeadingInfo.isArchived,
             [styles.listItemEditingBackground]: isEditing,
@@ -58,18 +58,16 @@ export const ProjectHeadingItem: React.FC<ProjectHeadingItemProps> = ({ projectH
         )}
         onClick={shouldIgnoreClick}
       >
-        <button className="size-5">
-          <HeadingIcon className="size-5" />
-        </button>
         {isEditing ? (
           <input {...textAreaProps} className="flex-1 overflow-hidden bg-transparent outline-none" />
         ) : (
-          <span className="flex-1 overflow-hidden text-ellipsis whitespace-nowrap bg-transparent ">
+          <span className="flex-1 overflow-hidden text-ellipsis whitespace-nowrap bg-transparent text-t1 uppercase tracking-wider pl-1">
             {projectHeadingInfo.title}
           </span>
         )}
-
-        <MenuIcon onClick={handleMenuClick} />
+        <button className="flex items-center justify-center size-7 text-t3 opacity-40">
+          <MenuIcon className="size-4" strokeWidth={1.5} onClick={handleMenuClick} />
+        </button>
       </div>
     </div>
   );

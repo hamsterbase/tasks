@@ -43,6 +43,13 @@
   }
 }
 
+.ui-card-normal {
+  background: var(--color-bg1);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+
 .ui-card-glass {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);

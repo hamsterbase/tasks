@@ -121,6 +121,17 @@ export const baseStyles = {
   taskDetailBottomActionStyle: /*tw*/ 'flex items-center justify-center size-9 rounded-lg  text-t2',
   taskDetailBottomActionIconStyle: /*tw*/ 'size-5',
 
+  // Project Info styles (matches Vue Info component)
+  projectInfoRoot: /*tw*/ 'ui-card-glass flex items-start gap-3 px-4 py-3.5',
+  projectInfoLogoContainer: /*tw*/ 'size-6 flex items-center justify-center shrink-0',
+  projectInfoContent: /*tw*/ 'flex-1 min-w-0 gap-2 flex flex-col',
+  projectInfoTitle:
+    /*tw*/ 'w-full text-lg leading-6 font-medium text-t1 bg-transparent border-none outline-none resize-none p-0',
+  projectInfoAttrRow: /*tw*/ 'flex items-start gap-1.5',
+  projectInfoAttrIconContainer: /*tw*/ 'h-6 flex items-center justify-center shrink-0 text-t3',
+  projectInfoAttrContent: /*tw*/ 'flex-1 min-w-0 flex',
+  projectInfoMetaIcon: /*tw*/ 'size-4',
+
   infoItemRound: /*tw*/ 'rounded-md',
   infoItemPadding: /*tw*/ 'py-1.5 px-2',
   infoItemMargin: /*tw*/ 'mb-1.5',
