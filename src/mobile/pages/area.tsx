@@ -1,5 +1,5 @@
 import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc';
-import { AreaIcon, MenuIcon, TagIcon, TaskDisplaySettingsIcon } from '@/components/icons';
+import { MenuIcon, TaskDisplaySettingsIcon } from '@/components/icons';
 import { TestIds } from '@/testIds';
 import { isTaskVisible } from '@/core/time/filterProjectAndTask';
 import { useService } from '@/hooks/use-service';
@@ -12,16 +12,15 @@ import { DragDropElements } from '@/utils/dnd/dragDropCollision';
 import { DragEndEvent } from '@dnd-kit/core';
 import classNames from 'classnames';
 import type { TreeID } from 'loro-crdt';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router';
-import { InfoItemGroup } from '../components/InfoItem';
-import { InfoItemTags } from '../components/infoItem/tags';
 import { PageLayout } from '../components/PageLayout';
 import TaskItemWrapper from '../components/taskItem/TaskItemWrapper';
 import { HomeProjectItem } from '../components/todo/HomeProjectItem';
 import { TaskItem } from '../components/todo/TaskItem';
-import TextArea from 'rc-textarea';
 import { useTaskDisplaySettingsMobile } from '../hooks/useTaskDisplaySettings';
+import { localize } from '@/nls';
+import AreaMeta from './area/AreaMeta';
 
 const useAreaId = (): TreeID => {
   const todoService = useService(ITodoService);
@@ -44,11 +43,6 @@ export const AreaPage = () => {
   const { showCompletedTasks, showFutureTasks, openTaskDisplaySettings, completedAfter } = useTaskDisplaySettingsMobile(
     `area-${areaId}`
   );
-
-  const [title, setTitle] = useState(areaDetail?.title);
-  useEffect(() => {
-    setTitle(areaDetail?.title);
-  }, [areaDetail?.title]);
 
   if (!areaDetail) {
     return <div>Area not found</div>;
@@ -117,8 +111,6 @@ export const AreaPage = () => {
     DragDropElements.create,
   ];
 
-  const areaTags = areaDetail.tags || [];
-
   return (
     <PageLayout
       header={{
@@ -130,6 +122,7 @@ export const AreaPage = () => {
           { icon: <MenuIcon />, onClick: handleMoreOptions, testId: TestIds.PageHeader.MenuButton },
         ],
       }}
+      meta={<AreaMeta areaDetail={areaDetail} onUpdateTitle={handleUpdateTitle} onEditTag={handleEditTag} />}
       dragOption={{
         overlayItem: {
           projectProps: {
@@ -145,43 +138,24 @@ export const AreaPage = () => {
       }}
       onFabClick={handleAddTask}
     >
-      <div className="flex flex-col gap-2">
-        <div className="flex items-start gap-2 px-3 py-2 bg-white rounded-lg">
-          <AreaIcon className="size-5 text-t3"></AreaIcon>
-          <TextArea
-            className={classNames('leading-5 text-lg font-medium text-t1 bg-transparent flex-1 break-all', 'flex-1')}
-            autoSize={{ minRows: 1 }}
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            onBlur={() => handleUpdateTitle(title ?? '')}
-          />
-        </div>
-        <InfoItemGroup
-          className={classNames(
-            `px-1 ${styles.infoItemGroupGap} ${styles.infoItemGroupRound} ${styles.infoItemGroupBackground}`,
-            {
-              hidden: areaTags.length === 0,
-            }
-          )}
-          items={[
-            {
-              itemKey: 'tags',
-              show: areaTags.length > 0,
-              background: 'bg-bg1!',
-              icon: <TagIcon />,
-              content: <InfoItemTags tags={areaTags} />,
-              onClick: handleEditTag,
-            },
-          ]}
-        />
+      <div className="flex flex-col">
         {projects.length > 0 && (
-          <div className={classNames(styles.taskItemGroupBackground, styles.taskItemGroupRound)}>
-            {projects.map((project) => (
-              <HomeProjectItem key={project.id} projectInfo={project} hideSubtitle={true} />
-            ))}
-          </div>
+          <>
+            <div className={classNames(styles.areaDetailSectionHeader, styles.areaDetailSectionHeaderIndent)}>
+              <span className={styles.areaDetailSectionTitle}>{localize('area.projects', 'Projects')}</span>
+            </div>
+            <div className={styles.areaDetailSectionCard}>
+              {projects.map((project) => (
+                <HomeProjectItem key={project.id} projectInfo={project} hideSubtitle={true} />
+              ))}
+            </div>
+            <div className="h-3" />
+          </>
         )}
-        <div className={classNames(styles.taskItemGroupBackground, styles.taskItemGroupRound)}>
+        <div className={classNames(styles.areaDetailSectionHeader, styles.areaDetailSectionHeaderIndent)}>
+          <span className={styles.areaDetailSectionTitle}>{localize('area.tasks', 'Tasks')}</span>
+        </div>
+        <div className={styles.areaDetailSectionCard}>
           {tasks.map((task) => (
             <TaskItemWrapper key={task.id} willDisappear={willDisappearObjectIdSet.has(task.id)} id={task.id}>
               <TaskItem key={task.id} taskInfo={task} />

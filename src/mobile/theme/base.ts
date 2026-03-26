@@ -304,6 +304,12 @@ export const baseStyles = {
   areaHeaderArrowContainer: /*tw*/ 'size-7 text-t3 flex items-center justify-center',
   areaHeaderArrowSize: /*tw*/ 'size-4.5',
 
+  // Area detail section styles (matches Vue DetailPage spec)
+  areaDetailSectionHeader: /*tw*/ 'flex items-center justify-between mb-2',
+  areaDetailSectionHeaderIndent: /*tw*/ 'pl-4',
+  areaDetailSectionTitle: /*tw*/ 'text-sm font-medium text-t3 uppercase tracking-wide',
+  areaDetailSectionCard: /*tw*/ 'bg-bg1 rounded-2xl overflow-hidden',
+
   // Home page styles
   homeCardShadow: /*tw*/ 'shadow-soft',
 };
