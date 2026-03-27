@@ -8,12 +8,10 @@ import { useWatchEvent } from '@/hooks/use-watch-event.ts';
 import { TaskItem } from '@/mobile/components/todo/TaskItem.tsx';
 import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService.ts';
-import classNames from 'classnames';
 import React from 'react';
 import { PageLayout } from '../components/PageLayout';
 import TaskItemWrapper from '../components/taskItem/TaskItemWrapper';
 import { HomeProjectItem } from '../components/todo/HomeProjectItem';
-import { styles } from '../theme';
 
 export const ScheduledPage = () => {
   const todoService = useService(ITodoService);
@@ -36,26 +34,30 @@ export const ScheduledPage = () => {
         renderIcon: (className: string) => <ScheduledIcon className={className} />,
       }}
     >
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col">
         {scheduledGroups.map((group) => (
           <React.Fragment key={group.title}>
-            <div key={group.title} className={classNames(styles.taskItemGroupBackground, styles.taskItemGroupRound)}>
-              <div className={classNames('py-2 flex items-baseline gap-2', styles.taskItemPaddingX)}>
-                <div className="text-xl font-medium text-t1">{group.title}</div>
-                {group.subtitle && <div className="text-sm text-t3">{group.subtitle}</div>}
+            <div key={group.title} className="ui-card-normal mb-3">
+              <div className="flex items-baseline gap-3 px-4 py-3">
+                <span className="text-xl font-medium text-t1 leading-none">{group.title}</span>
+                {group.subtitle && <span className="text-sm text-t3">{group.subtitle}</span>}
               </div>
-              <div>
-                {group.items.map((item) => {
-                  if (item.type === ModelTypes.project) {
-                    return <HomeProjectItem key={item.id} projectInfo={item as ProjectInfoState}></HomeProjectItem>;
-                  }
+              {group.items.map((item) => {
+                if (item.type === ModelTypes.project) {
                   return (
-                    <TaskItemWrapper key={item.id} willDisappear={willDisappearObjectIdSet.has(item.id)} id={item.id}>
-                      <TaskItem taskInfo={item as TaskInfo}></TaskItem>
-                    </TaskItemWrapper>
+                    <HomeProjectItem
+                      key={item.id}
+                      projectInfo={item as ProjectInfoState}
+                      hideStartDate
+                    ></HomeProjectItem>
                   );
-                })}
-              </div>
+                }
+                return (
+                  <TaskItemWrapper key={item.id} willDisappear={willDisappearObjectIdSet.has(item.id)} id={item.id}>
+                    <TaskItem taskInfo={item as TaskInfo} hideStartDate></TaskItem>
+                  </TaskItemWrapper>
+                );
+              })}
             </div>
           </React.Fragment>
         ))}
