@@ -74,7 +74,11 @@ const ListItem: React.FC<ListItemProps> = (props) => {
 
   return (
     <div data-testid={testId} className={baseStyles.settingsListItemRoot} onClick={onClick}>
-      {icon && <div className={baseStyles.settingsListItemIconContainer}>{icon}</div>}
+      {icon && (
+        <div className={classNames(baseStyles.settingsListItemIconContainer, baseStyles.settingsListItemIconNormal)}>
+          {icon}
+        </div>
+      )}
       <div className={baseStyles.settingsListItemContent}>
         <span className={classNames(baseStyles.settingsListItemTitle, baseStyles.settingsListItemTitleNormal)}>
           {title}

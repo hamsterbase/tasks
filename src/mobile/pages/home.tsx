@@ -28,7 +28,7 @@ import { InboxDropZone } from '../components/dnd/InboxDropZone.tsx';
 import { LastPlacement } from '../components/dnd/lastPlacement.tsx';
 import { MobileProjectCheckbox } from '../components/icon/MobileProjectCheckbox.tsx';
 import { PageLayout } from '../components/PageLayout.tsx';
-import { TaskStatusBox } from '../components/taskItem/TaskStatusBox.tsx';
+import { TaskCheckbox } from '../components/icon/TaskCheckbox.tsx';
 import { AreaHeader } from '../components/todo/AreaHeader.tsx';
 import { usePopupAction } from '../overlay/popupAction/usePopupAction.ts';
 import { useToast } from '../overlay/toast/useToast.ts';
@@ -195,7 +195,7 @@ export const MobileHome = () => {
             {
               items: [
                 {
-                  icon: <TaskStatusBox status={'completed'} />,
+                  icon: <TaskCheckbox status={'completed'} />,
                   name: localize('create_popup.create_task', 'Create Task'),
                   onClick: () => {
                     navigationService.navigate({ path: '/create_task' });
@@ -210,7 +210,7 @@ export const MobileHome = () => {
                   },
                 },
                 {
-                  icon: <AreaIcon />,
+                  icon: <AreaIcon strokeWidth={1.5} />,
                   name: localize('create_popup.create_area', 'Create Area'),
                   onClick: () => {
                     const id = todoService.addArea({ title: '' });
