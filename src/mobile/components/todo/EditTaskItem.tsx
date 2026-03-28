@@ -41,14 +41,7 @@ import { IInstantiationService } from 'vscf/platform/instantiation/common';
 import { OverlayItem } from '../dnd/DragOverlayItem';
 import { TaskStatusBox } from '../taskItem/TaskStatusBox';
 import { AttrList, AttrRowItem } from '../attr/AttrList';
-import { AttrContainer, AttrStyleContext } from '../attr/AttrContainer';
-
-const editTaskAttrStyles = {
-  row: styles.editTaskAttrRow,
-  iconContainer: styles.editTaskAttrIconContainer,
-  content: styles.editTaskAttrContent,
-  labelTitleColor: 'text-t2',
-};
+import { AttrContainer } from '../attr/AttrContainer';
 
 interface EditTaskItemProps {
   taskInfo: TaskInfo;
@@ -273,6 +266,7 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
       value: taskInfo.startDate ? { title: formatDateISO(taskInfo.startDate) } : undefined,
       onClick: handleStartDateClick,
       testId: 'edit-task-start-date',
+      labelTitleColor: 'text-t2',
     },
     {
       type: 'label',
@@ -282,6 +276,7 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
       value: taskInfo.dueDate ? { title: formatDateISO(taskInfo.dueDate) } : undefined,
       onClick: handleDueDateClick,
       testId: 'edit-task-due-date',
+      labelTitleColor: 'text-t2',
     },
     ...(taskInfo.tags.length > 0
       ? [
@@ -458,22 +453,20 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
       <div className="flex gap-3 mt-2">
         <div className="size-6 shrink-0 -ml-0.5"></div>
         <div className="flex-1 min-w-0 flex flex-col gap-1">
-          <AttrStyleContext.Provider value={editTaskAttrStyles}>
-            <AttrContainer icon={<NotesIcon className={styles.editTaskAttrIcon} />}>
-              <TextArea
-                {...notesProps}
-                ref={(el) => {
-                  if (el) {
-                    notesProps.ref.current = el.nativeElement as HTMLInputElement;
-                  }
-                }}
-                className={styles.createTaskNotesTextarea}
-                autoSize={{ minRows: 2 }}
-                placeholder={localize('edit_task_item.task_notes_placeholder', 'Add Notes')}
-              />
-            </AttrContainer>
-            <AttrList items={attrRows} />
-          </AttrStyleContext.Provider>
+          <AttrContainer icon={<NotesIcon className={styles.editTaskAttrIcon} />}>
+            <TextArea
+              {...notesProps}
+              ref={(el) => {
+                if (el) {
+                  notesProps.ref.current = el.nativeElement as HTMLInputElement;
+                }
+              }}
+              className={styles.createTaskNotesTextarea}
+              autoSize={{ minRows: 2 }}
+              placeholder={localize('edit_task_item.task_notes_placeholder', 'Add Notes')}
+            />
+          </AttrContainer>
+          <AttrList items={attrRows} />
         </div>
       </div>
     </div>

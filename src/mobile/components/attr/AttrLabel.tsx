@@ -1,7 +1,7 @@
 import classNames from 'classnames';
-import React, { useContext } from 'react';
+import React from 'react';
 import { styles } from '../../theme';
-import { AttrContainer, AttrStyleContext } from './AttrContainer';
+import { AttrContainer, AttrStyles } from './AttrContainer';
 
 export interface AttrLabelValue {
   title: string;
@@ -16,19 +16,34 @@ interface AttrLabelProps {
   onClick?: () => void;
   onClear?: () => void;
   testId?: string;
+  attrStyles?: AttrStyles;
+  labelTitleColor?: string;
 }
 
-export const AttrLabel: React.FC<AttrLabelProps> = ({ icon, placeholder, value, onClick, onClear, testId }) => {
-  const attrStyles = useContext(AttrStyleContext);
-
+export const AttrLabel: React.FC<AttrLabelProps> = ({
+  icon,
+  placeholder,
+  value,
+  onClick,
+  onClear,
+  testId,
+  attrStyles,
+  labelTitleColor,
+}) => {
   return (
-    <AttrContainer icon={icon} onClick={onClick} onClear={value ? onClear : undefined} testId={testId}>
+    <AttrContainer
+      icon={icon}
+      onClick={onClick}
+      onClear={value ? onClear : undefined}
+      testId={testId}
+      attrStyles={attrStyles}
+    >
       {value ? (
         <p className="flex items-baseline gap-2">
           <span
             className={classNames(
               'text-sm leading-6',
-              value.titleType === 'danger' ? 'text-accent-danger' : attrStyles.labelTitleColor
+              value.titleType === 'danger' ? 'text-accent-danger' : (labelTitleColor ?? attrStyles?.labelTitleColor)
             )}
           >
             {value.title}

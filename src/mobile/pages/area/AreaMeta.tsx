@@ -4,7 +4,7 @@ import { styles } from '@/mobile/theme';
 import classNames from 'classnames';
 import Textarea from 'rc-textarea';
 import React, { useEffect, useState } from 'react';
-import { AttrStyleContext, AttrStyles } from '@/mobile/components/attr/AttrContainer';
+import { AttrStyles } from '@/mobile/components/attr/AttrContainer';
 import { AttrTags } from '@/mobile/components/attr/AttrTags';
 
 const areaInfoAttrStyles: AttrStyles = {
@@ -43,16 +43,15 @@ const AreaMeta: React.FC<AreaMetaProps> = ({ areaDetail, onUpdateTitle, onEditTa
             onBlur={() => onUpdateTitle(title ?? '')}
             style={{ border: 'none', padding: 0 }}
           />
-          <AttrStyleContext.Provider value={areaInfoAttrStyles}>
-            {areaTags.length > 0 && (
-              <AttrTags
-                icon={<TagIcon className={styles.projectInfoMetaIcon} strokeWidth={1.5} />}
-                placeholder=""
-                tags={areaTags}
-                onClick={onEditTag}
-              />
-            )}
-          </AttrStyleContext.Provider>
+          {areaTags.length > 0 && (
+            <AttrTags
+              icon={<TagIcon className={styles.projectInfoMetaIcon} strokeWidth={1.5} />}
+              placeholder=""
+              tags={areaTags}
+              onClick={onEditTag}
+              attrStyles={areaInfoAttrStyles}
+            />
+          )}
         </div>
       </div>
     </div>

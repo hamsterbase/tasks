@@ -9,7 +9,7 @@ import classNames from 'classnames';
 import { format } from 'date-fns';
 import Textarea from 'rc-textarea';
 import React, { useEffect, useState } from 'react';
-import { AttrContainer, AttrStyleContext, AttrStyles } from '@/mobile/components/attr/AttrContainer';
+import { AttrContainer, AttrStyles } from '@/mobile/components/attr/AttrContainer';
 import { AttrLabel } from '@/mobile/components/attr/AttrLabel';
 import { AttrTags } from '@/mobile/components/attr/AttrTags';
 import { MobileProjectCheckbox } from '@/mobile/components/icon/MobileProjectCheckbox';
@@ -68,43 +68,47 @@ const ProjectMeta: React.FC<{ project: ProjectInfoState }> = ({ project }) => {
             onBlur={() => handleUpdateTitle(title ?? '')}
             style={{ border: 'none', padding: 0 }}
           />
-          <AttrStyleContext.Provider value={projectInfoAttrStyles}>
-            {project.startDate && (
-              <AttrLabel
-                icon={<CalendarIcon className={styles.projectInfoMetaIcon} strokeWidth={1.5} />}
-                placeholder=""
-                value={{ title: formatDateLabel(project.startDate) }}
-                onClick={handleEditStartDate}
-              />
-            )}
-            {project.dueDate && (
-              <AttrLabel
-                icon={<FlagIcon className={styles.projectInfoMetaIcon} strokeWidth={1.5} />}
-                placeholder=""
-                value={{ title: formatDateLabel(project.dueDate), titleType: 'danger' }}
-                onClick={handleEditDueDate}
-              />
-            )}
-            {project.tags && project.tags.length > 0 && (
-              <AttrTags
-                icon={<TagIcon className={styles.projectInfoMetaIcon} strokeWidth={1.5} />}
-                placeholder=""
-                tags={project.tags}
-                onClick={handleEditTag}
-              />
-            )}
-            <AttrContainer icon={<NotesIcon className={styles.projectInfoMetaIcon} strokeWidth={1.5} />}>
-              <Textarea
-                autoSize={{ minRows: 2 }}
-                placeholder={localize('project.notes', 'Notes')}
-                value={notes}
-                onChange={(e) => setNotes(e.target.value)}
-                onBlur={() => handleUpdateNotes(notes)}
-                className={styles.createTaskNotesTextarea}
-                style={{ border: 'none', padding: 0 }}
-              />
-            </AttrContainer>
-          </AttrStyleContext.Provider>
+          {project.startDate && (
+            <AttrLabel
+              icon={<CalendarIcon className={styles.projectInfoMetaIcon} strokeWidth={1.5} />}
+              placeholder=""
+              value={{ title: formatDateLabel(project.startDate) }}
+              onClick={handleEditStartDate}
+              attrStyles={projectInfoAttrStyles}
+            />
+          )}
+          {project.dueDate && (
+            <AttrLabel
+              icon={<FlagIcon className={styles.projectInfoMetaIcon} strokeWidth={1.5} />}
+              placeholder=""
+              value={{ title: formatDateLabel(project.dueDate), titleType: 'danger' }}
+              onClick={handleEditDueDate}
+              attrStyles={projectInfoAttrStyles}
+            />
+          )}
+          {project.tags && project.tags.length > 0 && (
+            <AttrTags
+              icon={<TagIcon className={styles.projectInfoMetaIcon} strokeWidth={1.5} />}
+              placeholder=""
+              tags={project.tags}
+              onClick={handleEditTag}
+              attrStyles={projectInfoAttrStyles}
+            />
+          )}
+          <AttrContainer
+            icon={<NotesIcon className={styles.projectInfoMetaIcon} strokeWidth={1.5} />}
+            attrStyles={projectInfoAttrStyles}
+          >
+            <Textarea
+              autoSize={{ minRows: 2 }}
+              placeholder={localize('project.notes', 'Notes')}
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+              onBlur={() => handleUpdateNotes(notes)}
+              className={styles.createTaskNotesTextarea}
+              style={{ border: 'none', padding: 0 }}
+            />
+          </AttrContainer>
         </div>
       </div>
     </div>

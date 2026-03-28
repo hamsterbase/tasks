@@ -1,5 +1,5 @@
 import { CloseIcon } from '@/components/icons';
-import React, { useContext } from 'react';
+import React from 'react';
 import { styles } from '../../theme';
 
 export interface AttrStyles {
@@ -15,18 +15,23 @@ const defaultAttrStyles: AttrStyles = {
   content: styles.editTaskAttrContent,
 };
 
-export const AttrStyleContext = React.createContext<AttrStyles>(defaultAttrStyles);
-
 interface AttrContainerProps {
   icon: React.ReactNode;
   children: React.ReactNode;
   onClick?: () => void;
   onClear?: () => void;
   testId?: string;
+  attrStyles?: AttrStyles;
 }
 
-export const AttrContainer: React.FC<AttrContainerProps> = ({ icon, children, onClick, onClear, testId }) => {
-  const attrStyles = useContext(AttrStyleContext);
+export const AttrContainer: React.FC<AttrContainerProps> = ({
+  icon,
+  children,
+  onClick,
+  onClear,
+  testId,
+  attrStyles = defaultAttrStyles,
+}) => {
   return (
     <div className={attrStyles.row} onClick={onClick} data-testid={testId}>
       <div className={attrStyles.iconContainer}>{icon}</div>

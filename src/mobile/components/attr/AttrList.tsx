@@ -25,6 +25,7 @@ type AttrRowLabel = {
   onClick?: () => void;
   onClear?: () => void;
   testId?: string;
+  labelTitleColor?: string;
 };
 
 type AttrRowLabelListSimple = {
@@ -104,6 +105,7 @@ function renderAttrRow(item: AttrRowItem): React.ReactNode {
           onClick={item.onClick}
           onClear={item.onClear}
           testId={item.testId}
+          labelTitleColor={item.labelTitleColor}
         />
       );
     case 'simple':
