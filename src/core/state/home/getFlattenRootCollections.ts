@@ -75,7 +75,7 @@ export function flattenRootCollections(
       content: area,
       id: area.id,
       index,
-      items: area.projectList.map((project) => project.id),
+      items: area.projectList.filter((p) => p.status === 'created').map((project) => project.id),
     });
     index++;
     area.projectList.forEach((project) => {
