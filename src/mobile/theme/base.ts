@@ -73,7 +73,7 @@ export const baseStyles = {
   overlayBackgroundOpacity: /*tw*/ 'opacity-50',
   overlayAnimationDuration: /*tw*/ 'duration-250',
   actionSheetPadding: /*tw*/ 'p-4 pt-0',
-  actionSheetRound: /*tw*/ 'rounded-t-lg',
+  actionSheetRound: /*tw*/ 'rounded-t-[20px]',
   actionSheetBorder: /*tw*/ '',
   actionSheetBackground: /*tw*/ 'bg-bg2',
 

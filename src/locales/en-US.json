@@ -112,6 +112,110 @@
     "defaultMessage": "Add Task",
     "content": "Add Task"
   },
+  "ai_chat": {
+    "defaultMessage": "AI Chat",
+    "content": "AI Chat"
+  },
+  "ai_chat.awaiting_confirm": {
+    "defaultMessage": "Awaiting",
+    "content": "Awaiting"
+  },
+  "ai_chat.cancel": {
+    "defaultMessage": "Cancel",
+    "content": "Cancel"
+  },
+  "ai_chat.canceled": {
+    "defaultMessage": "Canceled",
+    "content": "Canceled"
+  },
+  "ai_chat.clear": {
+    "defaultMessage": "Clear",
+    "content": "Clear"
+  },
+  "ai_chat.clear_chat": {
+    "defaultMessage": "Clear chat",
+    "content": "Clear chat"
+  },
+  "ai_chat.confirm": {
+    "defaultMessage": "Confirm",
+    "content": "Confirm"
+  },
+  "ai_chat.empty": {
+    "defaultMessage": "Start a conversation with AI",
+    "content": "Start a conversation with AI"
+  },
+  "ai_chat.executed_success": {
+    "defaultMessage": "Executed",
+    "content": "Executed"
+  },
+  "ai_chat.executing": {
+    "defaultMessage": "Executing...",
+    "content": "Executing..."
+  },
+  "ai_chat.failed": {
+    "defaultMessage": "Failed",
+    "content": "Failed"
+  },
+  "ai_chat.generating": {
+    "defaultMessage": "Generating...",
+    "content": "Generating..."
+  },
+  "ai_chat.go_to_settings": {
+    "defaultMessage": "Go to Settings",
+    "content": "Go to Settings"
+  },
+  "ai_chat.not_configured": {
+    "defaultMessage": "Please configure your AI API settings first",
+    "content": "Please configure your AI API settings first"
+  },
+  "ai_chat.placeholder": {
+    "defaultMessage": "Type your message...",
+    "content": "Type your message..."
+  },
+  "ai_chat.preparing": {
+    "defaultMessage": "Preparing...",
+    "content": "Preparing..."
+  },
+  "ai_chat.reply_to_this": {
+    "defaultMessage": "Reply to this",
+    "content": "Reply to this"
+  },
+  "ai_chat.status_responding": {
+    "defaultMessage": "Responding...",
+    "content": "Responding..."
+  },
+  "ai_chat.status_stopped": {
+    "defaultMessage": "Stopped",
+    "content": "Stopped"
+  },
+  "ai_chat.thinking": {
+    "defaultMessage": "Thinking",
+    "content": "Thinking"
+  },
+  "ai_chat.tool_batchEdit": {
+    "defaultMessage": "Batch Edit",
+    "content": "Batch Edit"
+  },
+  "ai_chat.tool_createProject": {
+    "defaultMessage": "Create Project",
+    "content": "Create Project"
+  },
+  "ai_chat.tool_getData": {
+    "defaultMessage": "Get Data",
+    "content": "Get Data"
+  },
+  "ai_chat.tool_getProjectData": {
+    "defaultMessage": "Get Project Data",
+    "content": "Get Project Data"
+  },
+  "ai_chat.tool_requestReply": {
+    "defaultMessage": "Request Reply",
+    "content": "Request Reply"
+  },
+  "ai_chat.tool_runJavaScript": {
+    "defaultMessage": "Run JavaScript",
+    "content": "Run JavaScript"
+  },
   "area.create_project": {
     "defaultMessage": "Add Project",
     "content": "Add Project"
@@ -244,6 +348,26 @@
     "defaultMessage": "Task Title",
     "content": "Task Title"
   },
+  "create_task_page.add_due_date": {
+    "defaultMessage": "Set Due Date",
+    "content": "Set Due Date"
+  },
+  "create_task_page.add_reminder": {
+    "defaultMessage": "+ Add Reminder",
+    "content": "+ Add Reminder"
+  },
+  "create_task_page.add_start_date": {
+    "defaultMessage": "Set Start Date",
+    "content": "Set Start Date"
+  },
+  "create_task_page.add_subtask": {
+    "defaultMessage": "+ Add Subtask",
+    "content": "+ Add Subtask"
+  },
+  "create_task_page.add_tags": {
+    "defaultMessage": "Add Tags",
+    "content": "Add Tags"
+  },
   "create_task_page.cancel": {
     "defaultMessage": "Cancel",
     "content": "Cancel"
@@ -257,8 +381,8 @@
     "content": "Due Date"
   },
   "create_task_page.title": {
-    "defaultMessage": "Create Task",
-    "content": "Create Task"
+    "defaultMessage": "New Task",
+    "content": "New Task"
   },
   "database_not_found": {
     "defaultMessage": "Database not found",
@@ -451,6 +575,26 @@
   "display_settings.future_tasks": {
     "defaultMessage": "Future Tasks",
     "content": "Future Tasks"
+  },
+  "edit_task_item.add_subtask": {
+    "defaultMessage": "Add Subtask",
+    "content": "Add Subtask"
+  },
+  "edit_task_item.set_due_date": {
+    "defaultMessage": "Set Due Date",
+    "content": "Set Due Date"
+  },
+  "edit_task_item.set_reminder": {
+    "defaultMessage": "Set Reminder",
+    "content": "Set Reminder"
+  },
+  "edit_task_item.set_start_date": {
+    "defaultMessage": "Set Start Date",
+    "content": "Set Start Date"
+  },
+  "edit_task_item.set_tags": {
+    "defaultMessage": "Set Tags",
+    "content": "Set Tags"
   },
   "edit_task_item.task_notes_placeholder": {
     "defaultMessage": "Add Notes",
@@ -672,6 +816,10 @@
     "defaultMessage": "Undo",
     "content": "Undo"
   },
+  "mobile.subtask.placeholder": {
+    "defaultMessage": "Subtask",
+    "content": "Subtask"
+  },
   "move_success": {
     "defaultMessage": "Moved successfully",
     "content": "Moved successfully"
@@ -755,6 +903,10 @@
   "project.add_heading": {
     "defaultMessage": "Add Heading",
     "content": "Add Heading"
+  },
+  "project.cancel_project": {
+    "defaultMessage": "Cancel Project",
+    "content": "Cancel Project"
   },
   "project.delete": {
     "defaultMessage": "Delete",
@@ -996,6 +1148,14 @@
     "defaultMessage": "Tomorrow",
     "content": "Tomorrow"
   },
+  "search.no_results": {
+    "defaultMessage": "No results found",
+    "content": "No results found"
+  },
+  "search.placeholder": {
+    "defaultMessage": "Search tasks, projects, areas...",
+    "content": "Search tasks, projects, areas..."
+  },
   "selection.clear_selection": {
     "defaultMessage": "Clear Selection",
     "content": "Clear Selection"
@@ -1015,6 +1175,38 @@
   "settings.account.management": {
     "defaultMessage": "Account Management",
     "content": "Account Management"
+  },
+  "settings.ai": {
+    "defaultMessage": "AI Assistant",
+    "content": "AI Assistant"
+  },
+  "settings.ai.api_token": {
+    "defaultMessage": "API Token",
+    "content": "API Token"
+  },
+  "settings.ai.api_token.description": {
+    "defaultMessage": "Your API authentication token",
+    "content": "Your API authentication token"
+  },
+  "settings.ai.api_token.placeholder": {
+    "defaultMessage": "Enter your API token",
+    "content": "Enter your API token"
+  },
+  "settings.ai.api_url": {
+    "defaultMessage": "API URL",
+    "content": "API URL"
+  },
+  "settings.ai.api_url.description": {
+    "defaultMessage": "OpenAI compatible API endpoint URL",
+    "content": "OpenAI compatible API endpoint URL"
+  },
+  "settings.ai.model_name": {
+    "defaultMessage": "Model Name",
+    "content": "Model Name"
+  },
+  "settings.ai.model_name.description": {
+    "defaultMessage": "The AI model to use (e.g., deepseek-chat, gpt-4, gpt-4o)",
+    "content": "The AI model to use (e.g., deepseek-chat, gpt-4, gpt-4o)"
   },
   "settings.appearance": {
     "defaultMessage": "Appearance",
@@ -1143,6 +1335,30 @@
   "settings.displaySettings.description": {
     "defaultMessage": "Control which tasks are visible across all views (Today, Projects, Areas). These settings apply everywhere unless overridden in specific views.",
     "content": "Control which tasks are visible across all views (Today, Projects, Areas). These settings apply everywhere unless overridden in specific views."
+  },
+  "settings.dock_badge": {
+    "defaultMessage": "Dock Badge",
+    "content": "Dock Badge"
+  },
+  "settings.dock_badge.count_type": {
+    "defaultMessage": "Badge Count Type",
+    "content": "Badge Count Type"
+  },
+  "settings.dock_badge.count_type.none": {
+    "defaultMessage": "None",
+    "content": "None"
+  },
+  "settings.dock_badge.count_type.overdue": {
+    "defaultMessage": "Overdue",
+    "content": "Overdue"
+  },
+  "settings.dock_badge.count_type.overdue_and_today": {
+    "defaultMessage": "Overdue + Today",
+    "content": "Overdue + Today"
+  },
+  "settings.dock_badge.count_type.overdue_today_and_inbox": {
+    "defaultMessage": "Overdue + Today + Inbox",
+    "content": "Overdue + Today + Inbox"
   },
   "settings.export": {
     "defaultMessage": "Export",
@@ -1420,6 +1636,10 @@
     "defaultMessage": "Recurring Config",
     "content": "Recurring Config"
   },
+  "task.untitled": {
+    "defaultMessage": "New Task",
+    "content": "New Task"
+  },
   "tasks.add.tags": {
     "defaultMessage": "Add Tags",
     "content": "Add Tags"
@@ -1429,14 +1649,18 @@
     "content": "Click to create subtask"
   },
   "tasks.daysAgo": {
-    "defaultMessage": "{0}d ago",
-    "content": "{0}d ago"
+    "defaultMessage": "{0} days ago",
+    "content": "{0} days ago"
   },
   "tasks.daysLeft": {
     "defaultMessage": "{0} days left",
     "content": "{0} days left"
   },
   "tasks.due_date": {
+    "defaultMessage": "Due Date",
+    "content": "Due Date"
+  },
+  "tasks.due_date_label": {
     "defaultMessage": "Due Date",
     "content": "Due Date"
   },
@@ -1464,6 +1688,10 @@
     "defaultMessage": "Add notes...",
     "content": "Add notes..."
   },
+  "tasks.oneDayAgo": {
+    "defaultMessage": "1 day ago",
+    "content": "1 day ago"
+  },
   "tasks.recurring_due_date": {
     "defaultMessage": "DueDate: {0}",
     "content": "DueDate: {0}"
@@ -1489,6 +1717,10 @@
     "content": "Selected {0} items"
   },
   "tasks.start_date": {
+    "defaultMessage": "Start Date",
+    "content": "Start Date"
+  },
+  "tasks.start_date_label": {
     "defaultMessage": "Start Date",
     "content": "Start Date"
   },

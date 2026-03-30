@@ -66,8 +66,8 @@ const ActionSheetContent: React.FC<ActionSheetContentProps> = ({
         [styles.actionSheetContentBorder]: true,
       })}
     >
-      <div ref={setNodeRef} className="flex items-center justify-center h-5" {...attributes} {...listeners}>
-        <div className="w-8 h-0.75 bg-black opacity-20 rounded-full"></div>
+      <div ref={setNodeRef} className="flex items-center justify-center pt-3 pb-2" {...attributes} {...listeners}>
+        <div className="w-10 h-1 bg-t4 rounded-full"></div>
       </div>
       <div className={classNames(styles.actionSheetPadding, 'overflow-y-auto', contentClassName)}>{children}</div>
     </div>
