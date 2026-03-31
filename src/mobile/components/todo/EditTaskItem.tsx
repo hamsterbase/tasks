@@ -308,8 +308,7 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
               <>
                 <div className={styles.editingTaskSubtaskHeader}>
                   <span>
-                    {taskInfo.children.filter((c) => c.status === 'completed' || c.status === 'canceled').length} /{' '}
-                    {taskInfo.children.length}
+                    {`${taskInfo.children.filter((c) => c.status === 'completed' || c.status === 'canceled').length} / ${taskInfo.children.length}`}
                   </span>
                   <div className={styles.editingTaskSubtaskProgressBar}>
                     <div
@@ -450,23 +449,27 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
       </div>
 
       {/* Expanded content */}
-      <div className="flex gap-3 mt-2">
-        <div className="size-6 shrink-0 -ml-0.5"></div>
-        <div className="flex-1 min-w-0 flex flex-col gap-1">
-          <AttrContainer icon={<NotesIcon className={styles.editTaskAttrIcon} />}>
-            <TextArea
-              {...notesProps}
-              ref={(el) => {
-                if (el) {
-                  notesProps.ref.current = el.nativeElement as HTMLInputElement;
-                }
-              }}
-              className={styles.createTaskNotesTextarea}
-              autoSize={{ minRows: 2 }}
-              placeholder={localize('edit_task_item.task_notes_placeholder', 'Add Notes')}
-            />
-          </AttrContainer>
-          <AttrList items={attrRows} />
+      <div className="grid grid-rows-[1fr]">
+        <div className="overflow-hidden">
+          <div className="flex gap-3 mt-2">
+            <div className="size-6 shrink-0 -ml-0.5"></div>
+            <div className="flex-1 min-w-0 flex flex-col gap-1">
+              <AttrContainer icon={<NotesIcon className={styles.editTaskAttrIcon} />}>
+                <TextArea
+                  {...notesProps}
+                  ref={(el) => {
+                    if (el) {
+                      notesProps.ref.current = el.nativeElement as HTMLInputElement;
+                    }
+                  }}
+                  className={styles.createTaskNotesTextarea}
+                  autoSize={{ minRows: 2 }}
+                  placeholder={localize('edit_task_item.task_notes_placeholder', 'Add Notes')}
+                />
+              </AttrContainer>
+              <AttrList items={attrRows} />
+            </div>
+          </div>
         </div>
       </div>
     </div>

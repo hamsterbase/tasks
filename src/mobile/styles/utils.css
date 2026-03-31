@@ -46,7 +46,6 @@
 .ui-card-normal {
   background: var(--color-bg1);
   border-radius: 1rem;
-  box-shadow: var(--shadow-soft);
   overflow: hidden;
 }
 
@@ -55,7 +54,6 @@
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid var(--color-line-light);
   border-radius: 1rem;
-  box-shadow: var(--shadow-soft);
   @apply bg-bg1/60;
 }
 

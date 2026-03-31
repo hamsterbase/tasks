@@ -40,10 +40,10 @@ export const baseStyles = {
   headerRightContainer: /*tw*/ 'flex gap-2 absolute right-5 top-1/2 -translate-y-1/2',
   headerTitle: /*tw*/ 'text-base font-medium text-t1 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2',
   headerActionButton:
-    /*tw*/ 'size-9 flex items-center justify-center border-none bg-bg1 cursor-pointer rounded-full shadow-soft text-t2',
+    /*tw*/ 'size-9 flex items-center justify-center border-none bg-bg1 cursor-pointer rounded-full text-t2',
   headerActionButtonIcon: /*tw*/ 'size-5 flex items-center justify-center',
 
-  taskItemGroupRound: /*tw*/ 'rounded-2xl shadow-soft',
+  taskItemGroupRound: /*tw*/ 'rounded-2xl overflow-hidden',
   taskItemGroupBackground: /*tw*/ 'bg-bg1',
   taskItemGroupHeaderPadding: /*tw*/ 'pt-3',
   taskItemGroupTopRound: /*tw*/ 'rounded-t-2xl',
@@ -58,7 +58,7 @@ export const baseStyles = {
   taskItemIconSize: /*tw*/ 'h-6 w-6 flex-shrink-0 flex items-center justify-center text-t3',
 
   taskItemEditingRound: /*tw*/ 'rounded-2xl',
-  taskItemEditingShadow: /*tw*/ 'shadow-soft',
+  taskItemEditingShadow: /*tw*/ '',
 
   taskItemOverlayBackground: /*tw*/ 'bg-bg1',
   taskItemOverlayRound: /*tw*/ 'rounded-2xl',
@@ -263,7 +263,7 @@ export const baseStyles = {
   // SettingsListGroup styles
   settingsListGroupRoot: /*tw*/ 'flex flex-col w-full',
   settingsListGroupTitle: /*tw*/ 'text-sm text-t2 ml-4 pb-3',
-  settingsListGroupContainer: /*tw*/ 'flex flex-col rounded-2xl overflow-hidden bg-bg1 shadow-soft',
+  settingsListGroupContainer: /*tw*/ 'flex flex-col rounded-2xl overflow-hidden bg-bg1',
   settingsListGroupSubtitle: /*tw*/ 'text-xs text-t3 ml-4 pt-2',
   settingsListGroupDivider: /*tw*/ 'h-[1px] bg-line-light',
 
@@ -311,5 +311,5 @@ export const baseStyles = {
   areaDetailSectionCard: /*tw*/ 'bg-bg1 rounded-2xl overflow-hidden',
 
   // Home page styles
-  homeCardShadow: /*tw*/ 'shadow-soft',
+  homeCardShadow: /*tw*/ '',
 };
