@@ -38,7 +38,6 @@ import {
   Layers,
   Link,
   ListChecks,
-  ListTree,
   LocateFixed,
   MessageSquare,
   MessageSquareReply,
@@ -80,7 +79,7 @@ export const RightArrowIcon = ArrowRight;
 export const SettingsIcon = Settings;
 export const TagIcon = Tag;
 export const DragHandleIcon = GripVertical;
-export const SubtaskIcon = ListTree;
+export const SubtaskIcon = ListChecks;
 export const CloseIcon = X;
 export const CheckIcon = Check;
 export const CancelIcon = X;
@@ -112,7 +111,6 @@ export const CalendarCheckIcon = CalendarCheck;
 export const CalendarXIcon = CalendarX;
 export const CopyIcon = Copy;
 export const ChevronDownIcon = ChevronDown;
-export { CalendarDays };
 export const AlarmIcon = AlarmClock;
 export const PanelLeftIcon = PanelLeft;
 export const SyncIcon = RefreshCw;

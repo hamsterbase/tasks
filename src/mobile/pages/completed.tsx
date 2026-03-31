@@ -37,11 +37,14 @@ export const MobileCompleted = () => {
           {localize('completed_tasks.noCompletedTasks', 'No completed tasks or projects yet')}
         </div>
       ) : (
-        <div className={classNames(styles.taskItemGroupBackground, styles.taskItemGroupRound)}>
+        <>
           {completedTaskGroups.groups.map((group) => (
-            <div key={group.label}>
-              <div className={classNames('py-1.5 text-xl font-medium text-t1', styles.taskItemPaddingX)}>
-                {group.label}
+            <div
+              key={group.label}
+              className={classNames(styles.taskItemGroupBackground, styles.taskItemGroupRound, 'mb-3')}
+            >
+              <div className={classNames('flex items-baseline gap-3 py-3', styles.taskItemPaddingX)}>
+                <span className="text-xl font-medium text-t1 leading-none">{group.label}</span>
               </div>
               <div>
                 {group.tasks.map((taskInfo) => {
@@ -61,7 +64,7 @@ export const MobileCompleted = () => {
               </div>
             </div>
           ))}
-        </div>
+        </>
       )}
     </PageLayout>
   );

@@ -32,6 +32,7 @@ export const useCancelEdit = (elementRef: RefObject<HTMLElement>, itemId: string
     if (!ResizeObserver || !isEditing) {
       return;
     }
+    updateTaskItemSize();
     const resizeObserver = new ResizeObserver(() => {
       updateTaskItemSize();
     });

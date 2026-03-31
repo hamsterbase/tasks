@@ -1,4 +1,4 @@
-import { CalendarDays, CalendarXIcon, TodayIcon } from '@/components/icons';
+import { CalendarXIcon, ScheduledIcon, TodayIcon } from '@/components/icons';
 import { DatePickerCalendar } from '@/desktop/components/DatePickerCalendar/DatePickerCalendar';
 import { OverlayContainer } from '@/desktop/components/Overlay/OverlayContainer';
 import { desktopStyles } from '@/desktop/theme/main';
@@ -55,7 +55,7 @@ export const DatePickerOverlay: React.FC = () => {
           onClick={() => controller?.selectTomorrow()}
           className={desktopStyles.DatePickerOverlayQuickActionButton}
         >
-          <CalendarDays className={desktopStyles.DatePickerOverlayQuickActionIcon} />
+          <ScheduledIcon className={desktopStyles.DatePickerOverlayQuickActionIcon} />
           {localize('date_picker.tomorrow', 'Tomorrow')}
         </button>
         <button onClick={() => controller?.selectNoDate()} className={desktopStyles.DatePickerOverlayQuickActionButton}>
