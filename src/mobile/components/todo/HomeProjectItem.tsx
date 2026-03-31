@@ -18,11 +18,9 @@ import { TaskItemSubtitle } from '../taskItem/TaskItemSubtitle';
 import { TaskItemTitle } from '../taskItem/taskItemTitle';
 import useNavigate from '@/hooks/useNavigate';
 import { MobileProjectCheckbox } from '../icon/MobileProjectCheckbox';
-import { NavIcon } from '@/components/icons';
 
 interface ProjectItemProps {
   hideStartDate?: boolean;
-  hideNavIcon?: boolean;
   projectInfo: ProjectInfoState;
   hideSubtitle?: boolean;
   className?: string;
@@ -31,7 +29,6 @@ interface ProjectItemProps {
 export const HomeProjectItem: React.FC<ProjectItemProps> = ({
   projectInfo,
   hideStartDate,
-  hideNavIcon,
   hideSubtitle,
   className,
 }) => {
@@ -114,7 +111,6 @@ export const HomeProjectItem: React.FC<ProjectItemProps> = ({
               <div className="flex items-center gap-1 text-t3 shrink-0">
                 <TaskItemIcons tags={projectInfo.tags} notes={projectInfo.notes} navIcon={false} />
               </div>
-              {!hideNavIcon && <NavIcon className="size-4 text-t3 ml-auto" strokeWidth={1.5} />}
             </>
           )}
         </div>

@@ -29,7 +29,6 @@ export interface DragOverlayItemProps {
   projectProps?: {
     hideSubtitle?: boolean;
     hideStartDate?: boolean;
-    hideNavIcon?: boolean;
   };
   renderProject?: (projectInfo: ProjectInfoState) => React.ReactNode;
 }
