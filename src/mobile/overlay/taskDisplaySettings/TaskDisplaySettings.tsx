@@ -61,7 +61,7 @@ export const TaskDisplaySettings: React.FC = () => {
           {
             icon: <CalendarRangeIcon />,
             title: taskDisplaySettingOptions.completedTasksRange.title,
-            mode: { type: 'label', label: getCompletedRangeText(controller.completedTasksRange) },
+            mode: { type: 'navigation', label: getCompletedRangeText(controller.completedTasksRange) },
             onClick: handleCompleteRangeClick,
           },
         ]}

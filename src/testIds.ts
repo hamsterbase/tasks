@@ -44,5 +44,7 @@ export const TestIds = {
   PageHeader: {
     /** Menu button in mobile page header */
     MenuButton: 'page-header-menu-button',
+    /** Display settings button in mobile page header */
+    DisplaySettingsButton: 'page-header-display-settings-button',
   },
 } as const;

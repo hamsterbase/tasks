@@ -1,4 +1,12 @@
-import { DeleteIcon, DueIcon, EditIcon, HeadingIcon, MoveIcon, ScheduledIcon, TagIcon } from '@/components/icons';
+import {
+  DeleteIcon,
+  EditIcon,
+  FolderInputIcon,
+  HeadingIcon,
+  ScheduledIcon,
+  TagsIcon,
+  TargetIcon,
+} from '@/components/icons';
 import { ProjectInfoState } from '@/core/state/type';
 import { ItemStatus } from '@/core/type';
 import { useBack } from '@/hooks/useBack.ts';
@@ -132,6 +140,7 @@ const useProject = (project: ProjectInfoState | null) => {
 
   const handleMoreOptions = () => {
     popupAction({
+      mode: 'navigation',
       groups: [
         {
           items: [
@@ -141,33 +150,42 @@ const useProject = (project: ProjectInfoState | null) => {
               onClick: handleEditTitle,
             },
             {
-              icon: <HeadingIcon />,
-              name: localize('project.add_heading', 'Add Heading'),
-              onClick: handleAddHeading,
-            },
-            {
               icon: <ScheduledIcon />,
               name: localize('project.edit_start_date', 'Edit Start Date'),
               onClick: handleEditStartDate,
             },
             {
-              icon: <DueIcon />,
+              icon: <TargetIcon />,
               name: localize('project.edit_due_date', 'Edit Due Date'),
               onClick: handleEditDueDate,
             },
             {
-              icon: <TagIcon />,
+              icon: <TagsIcon />,
               name: localize('project.edit_tags', 'Edit Tags'),
               onClick: handleEditTag,
             },
+          ] as PopupActionItem[],
+        },
+        {
+          items: [
             {
-              icon: <MoveIcon />,
+              icon: <HeadingIcon />,
+              name: localize('project.add_heading', 'Add Heading'),
+              onClick: handleAddHeading,
+            },
+            {
+              icon: <FolderInputIcon />,
               name: localize('project.move_project', 'Move Project'),
               onClick: handleMoveProject,
             },
+          ] as PopupActionItem[],
+        },
+        {
+          items: [
             {
               icon: <DeleteIcon />,
               name: localize('project.delete_project', 'Delete Project'),
+              danger: true,
               onClick: handleDeleteProject,
             },
           ] as PopupActionItem[],

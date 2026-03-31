@@ -9,7 +9,7 @@ export interface SwitchProps {
 export const Switch: React.FC<SwitchProps> = ({ checked }) => {
   return (
     <div
-      className={classNames('w-10 h-6 rounded-full relative transition-colors', {
+      className={classNames('w-11 h-6.5 rounded-full relative shrink-0 transition-colors duration-200', {
         [styles.switchCheckedBackground]: checked,
         [styles.switchUncheckedBackground]: !checked,
         [styles.switchOuterBorder]: !checked,
@@ -17,8 +17,8 @@ export const Switch: React.FC<SwitchProps> = ({ checked }) => {
     >
       <div
         className={classNames(
-          'absolute top-1 w-4 h-4 rounded-full bg-white transition-all duration-200',
-          checked ? 'left-5' : 'left-1',
+          'absolute top-0.5 left-0.5 size-5.5 rounded-full bg-white transition-transform duration-200',
+          checked ? 'translate-x-4.5' : '',
           styles.switchInnerBorder
         )}
       ></div>

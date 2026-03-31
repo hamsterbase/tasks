@@ -185,7 +185,11 @@ export const ProjectPage = () => {
     id: project.id,
     title: '',
     actions: [
-      { icon: <TaskDisplaySettingsIcon />, onClick: openTaskDisplaySettings },
+      {
+        icon: <TaskDisplaySettingsIcon />,
+        onClick: openTaskDisplaySettings,
+        testId: TestIds.PageHeader.DisplaySettingsButton,
+      },
       {
         icon: <MenuIcon className={styles.headerActionButtonIcon} strokeWidth={1.5} />,
         onClick: handleMoreOptions,

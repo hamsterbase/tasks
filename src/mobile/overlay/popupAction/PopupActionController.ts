@@ -9,11 +9,13 @@ export interface PopupActionItem {
   name: string;
   description?: string;
   icon?: React.ReactNode;
+  danger?: boolean;
   onClick: () => void;
 }
 
 export interface PopupActionControllerOptions {
   description?: string;
+  mode?: 'plain' | 'navigation';
   groups: {
     items: PopupActionItem[];
   }[];
@@ -44,6 +46,10 @@ export class PopupActionController implements IDisposable {
 
   get description() {
     return this.initOptions.description;
+  }
+
+  get mode() {
+    return this.initOptions.mode || 'plain';
   }
 
   get groups() {

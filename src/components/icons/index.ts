@@ -52,6 +52,8 @@ import {
   Repeat2,
   Search,
   SendToBack,
+  Tags,
+  Target,
   ServerIcon,
   Settings,
   SlidersHorizontal,
@@ -63,6 +65,7 @@ import {
   TypeIcon,
   User,
   X,
+  FolderInput,
 } from 'lucide-react';
 
 export const AreaExpandedIcon = ChevronRight;
@@ -134,3 +137,6 @@ export const FlagIcon = Flag;
 export const ListChecksIcon = ListChecks;
 export const BellIcon = Bell;
 export const CircleXIcon = CircleX;
+export const TargetIcon = Target;
+export const TagsIcon = Tags;
+export const FolderInputIcon = FolderInput;

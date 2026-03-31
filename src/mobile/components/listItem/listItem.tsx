@@ -10,6 +10,7 @@ export interface ListItemOption {
   hidden?: boolean;
   title: string;
   description?: string;
+  danger?: boolean;
   mode:
     | {
         // 右边是一个箭头
@@ -46,7 +47,7 @@ interface ListItemProps extends ListItemOption {
 }
 
 const ListItem: React.FC<ListItemProps> = (props) => {
-  const { icon, title, description, mode, onClick, testId } = props;
+  const { icon, title, description, mode, onClick, testId, danger } = props;
 
   if (mode.type === 'button') {
     const align = mode.align || 'center';
@@ -75,12 +76,22 @@ const ListItem: React.FC<ListItemProps> = (props) => {
   return (
     <div data-testid={testId} className={baseStyles.settingsListItemRoot} onClick={onClick}>
       {icon && (
-        <div className={classNames(baseStyles.settingsListItemIconContainer, baseStyles.settingsListItemIconNormal)}>
+        <div
+          className={classNames(
+            baseStyles.settingsListItemIconContainer,
+            danger ? baseStyles.settingsListItemIconDanger : baseStyles.settingsListItemIconNormal
+          )}
+        >
           {icon}
         </div>
       )}
       <div className={baseStyles.settingsListItemContent}>
-        <span className={classNames(baseStyles.settingsListItemTitle, baseStyles.settingsListItemTitleNormal)}>
+        <span
+          className={classNames(
+            baseStyles.settingsListItemTitle,
+            danger ? baseStyles.settingsListItemTitleDanger : baseStyles.settingsListItemTitleNormal
+          )}
+        >
           {title}
         </span>
         {description && <span className={baseStyles.settingsListItemDescription}>{description}</span>}
