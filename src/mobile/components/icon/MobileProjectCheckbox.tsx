@@ -28,7 +28,7 @@ const SIZE_CONFIG = {
   },
   large: {
     visual: 5.5 * rate, // size-5.5 = 1.375rem
-    touch: 7 * rate, // size-7 = 1.75rem
+    touch: 6 * rate, // size-6 = 1.5rem
   },
 } as const;
 
