@@ -25,40 +25,42 @@ export const TaskDisplaySettings = () => {
         renderIcon: (className: string) => <SettingsIcon className={className} />,
       }}
     >
-      <ListItemGroup
-        items={[
-          {
-            title: settingOptions.showFutureTasks.title,
-            description: settingOptions.showFutureTasks.description,
-            mode: {
-              type: 'switch',
-              checked: showFutureTasks,
+      <div className="flex flex-col space-y-4">
+        <ListItemGroup
+          items={[
+            {
+              title: settingOptions.showFutureTasks.title,
+              description: settingOptions.showFutureTasks.description,
+              mode: {
+                type: 'switch',
+                checked: showFutureTasks,
+              },
+              onClick: () => setShowFutureTasks(!showFutureTasks),
             },
-            onClick: () => setShowFutureTasks(!showFutureTasks),
-          },
-          {
-            title: settingOptions.showCompletedTasks.title,
-            description: settingOptions.showCompletedTasks.description,
-            mode: {
-              type: 'switch',
-              checked: showCompletedTasks,
+            {
+              title: settingOptions.showCompletedTasks.title,
+              description: settingOptions.showCompletedTasks.description,
+              mode: {
+                type: 'switch',
+                checked: showCompletedTasks,
+              },
+              onClick: () => setShowCompletedTasks(!showCompletedTasks),
             },
-            onClick: () => setShowCompletedTasks(!showCompletedTasks),
-          },
-        ]}
-      />
-      <ListItemGroup
-        title={settingOptions.completedTasksRange.title}
-        items={settingOptions.completedTasksRange.options.map((option) => ({
-          title: option.label,
-          description: option.description,
-          mode: {
-            type: 'check',
-            checked: completedTasksRange === option.value,
-          },
-          onClick: () => setCompletedTasksRange(option.value as TimeAfterEnum),
-        }))}
-      />
+          ]}
+        />
+        <ListItemGroup
+          title={settingOptions.completedTasksRange.title}
+          items={settingOptions.completedTasksRange.options.map((option) => ({
+            title: option.label,
+            description: option.description,
+            mode: {
+              type: 'check',
+              checked: completedTasksRange === option.value,
+            },
+            onClick: () => setCompletedTasksRange(option.value as TimeAfterEnum),
+          }))}
+        />
+      </div>
     </PageLayout>
   );
 };
