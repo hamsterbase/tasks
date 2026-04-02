@@ -139,28 +139,34 @@ export const AreaPage = () => {
       onFabClick={handleAddTask}
     >
       <div className="flex flex-col">
-        {projects.length > 0 && (
-          <>
-            <div className={classNames(styles.areaDetailSectionHeader, styles.areaDetailSectionHeaderIndent)}>
-              <span className={styles.areaDetailSectionTitle}>{localize('area.projects', 'Projects')}</span>
+        <div className={classNames(styles.areaDetailSectionHeader, styles.areaDetailSectionHeaderIndent)}>
+          <span className={styles.areaDetailSectionTitle}>{localize('area.projects', 'Projects')}</span>
+        </div>
+        <div className={styles.areaDetailSectionCard}>
+          {projects.length === 0 ? (
+            <div className="flex items-center justify-center py-8 text-t3 text-sm">
+              {localize('area.noProjects', 'No projects')}
             </div>
-            <div className={styles.areaDetailSectionCard}>
-              {projects.map((project) => (
-                <HomeProjectItem key={project.id} projectInfo={project} hideSubtitle={true} />
-              ))}
-            </div>
-            <div className="h-3" />
-          </>
-        )}
+          ) : (
+            projects.map((project) => <HomeProjectItem key={project.id} projectInfo={project} hideSubtitle={true} />)
+          )}
+        </div>
+        <div className="h-3" />
         <div className={classNames(styles.areaDetailSectionHeader, styles.areaDetailSectionHeaderIndent)}>
           <span className={styles.areaDetailSectionTitle}>{localize('area.tasks', 'Tasks')}</span>
         </div>
         <div className={styles.areaDetailSectionCard}>
-          {tasks.map((task) => (
-            <TaskItemWrapper key={task.id} willDisappear={willDisappearObjectIdSet.has(task.id)} id={task.id}>
-              <TaskItem key={task.id} taskInfo={task} />
-            </TaskItemWrapper>
-          ))}
+          {tasks.length === 0 ? (
+            <div className="flex items-center justify-center py-8 text-t3 text-sm">
+              {localize('area.noTasks', 'No tasks')}
+            </div>
+          ) : (
+            tasks.map((task) => (
+              <TaskItemWrapper key={task.id} willDisappear={willDisappearObjectIdSet.has(task.id)} id={task.id}>
+                <TaskItem key={task.id} taskInfo={task} />
+              </TaskItemWrapper>
+            ))
+          )}
         </div>
       </div>
     </PageLayout>

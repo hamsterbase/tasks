@@ -1,12 +1,4 @@
-import {
-  DeleteIcon,
-  EditIcon,
-  FolderInputIcon,
-  HeadingIcon,
-  ScheduledIcon,
-  TagsIcon,
-  TargetIcon,
-} from '@/components/icons';
+import { DeleteIcon, HeadingIcon, MoveIcon, ScheduledIcon, TagsIcon, TargetIcon } from '@/components/icons';
 import { ProjectInfoState } from '@/core/state/type';
 import { ItemStatus } from '@/core/type';
 import { useBack } from '@/hooks/useBack.ts';
@@ -95,11 +87,6 @@ const useProject = (project: ProjectInfoState | null) => {
     }, 1);
   };
 
-  const handleEditTitle = () => {
-    if (!project) return;
-    todoService.editItem(project.id);
-  };
-
   const dialog = useDialog();
   function handleDeleteProject() {
     if (!project) return;
@@ -145,11 +132,6 @@ const useProject = (project: ProjectInfoState | null) => {
         {
           items: [
             {
-              icon: <EditIcon />,
-              name: localize('project.edit_title', 'Edit Title'),
-              onClick: handleEditTitle,
-            },
-            {
               icon: <ScheduledIcon />,
               name: localize('project.edit_start_date', 'Edit Start Date'),
               onClick: handleEditStartDate,
@@ -174,7 +156,7 @@ const useProject = (project: ProjectInfoState | null) => {
               onClick: handleAddHeading,
             },
             {
-              icon: <FolderInputIcon />,
+              icon: <MoveIcon />,
               name: localize('project.move_project', 'Move Project'),
               onClick: handleMoveProject,
             },

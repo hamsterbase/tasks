@@ -24,6 +24,8 @@
   --color-toast-bg: #2f3238;
   --shadow-soft: 0 4px 16px rgba(0, 0, 0, 0.03);
 
+  --color-bg-glass-mix: white;
+
   --color-module-today: #b8860b;
   --color-module-inbox: #4a7ab8;
   --color-module-scheduled: #8b6ba8;

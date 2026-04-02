@@ -1,6 +1,6 @@
-import { ArchiveIcon, DeleteIcon, EditIcon, MoveIcon } from '@/components/icons';
+import { ArchiveIcon, DeleteIcon, MoveIcon, EditIcon } from '@/components/icons';
 import { ProjectHeadingInfo } from '@/core/state/type';
-import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox.tsx';
+import { MobileProjectCheckbox } from '@/mobile/components/icon/MobileProjectCheckbox';
 import { useDialog } from '@/mobile/overlay/dialog/useDialog';
 import { usePopupAction } from '@/mobile/overlay/popupAction/usePopupAction';
 import { useProjectAreaSelector } from '@/mobile/overlay/projectAreaSelector/useProjectAreaSelector';
@@ -79,6 +79,7 @@ export const useProjectHeader = (options: IUseProjectHeaderOptions) => {
 
   function handleMenuClick() {
     popupAction({
+      mode: 'navigation',
       groups: [
         {
           items: [
@@ -90,7 +91,7 @@ export const useProjectHeader = (options: IUseProjectHeaderOptions) => {
               },
             },
             {
-              icon: <ProjectStatusBox status={'created'} progress={1} />,
+              icon: <MobileProjectCheckbox progress={60} status={'created'} size="large" />,
               name: localize('project_heading.convert_to_project', 'Convert to Project'),
               onClick: handleConvertToProject,
             },
@@ -106,9 +107,14 @@ export const useProjectHeader = (options: IUseProjectHeaderOptions) => {
                 : localize('project_heading.archive', 'Archive Heading'),
               onClick: handleArchiveHeading,
             },
+          ],
+        },
+        {
+          items: [
             {
               icon: <DeleteIcon />,
               name: localize('project_heading.delete_heading', 'Delete Heading'),
+              danger: true,
               onClick: handleDeleteHeading,
             },
           ],

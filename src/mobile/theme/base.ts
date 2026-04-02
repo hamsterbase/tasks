@@ -43,7 +43,7 @@ export const baseStyles = {
     /*tw*/ 'size-9 flex items-center justify-center border-none bg-bg1 cursor-pointer rounded-full text-t2',
   headerActionButtonIcon: /*tw*/ 'size-5 flex items-center justify-center',
 
-  taskItemGroupRound: /*tw*/ 'rounded-2xl overflow-hidden',
+  taskItemGroupRound: /*tw*/ 'rounded-2xl',
   taskItemGroupBackground: /*tw*/ 'bg-bg1',
   taskItemGroupHeaderPadding: /*tw*/ 'pt-3',
   taskItemGroupTopRound: /*tw*/ 'rounded-t-2xl',
@@ -108,12 +108,12 @@ export const baseStyles = {
   datePickerDaySelectedTextColor: /*tw*/ 'text-white',
   datePickerTodayTextColor: /*tw*/ 'text-brand',
   datePickerHeaderBackground: /*tw*/ 'bg-bg3',
-  datePickerHeaderPadding: /*tw*/ 'py-2 -mx-4 px-4',
+  datePickerHeaderPadding: /*tw*/ 'py-2 px-4',
   datePickerWeekdayTextColor: /*tw*/ 'text-t1',
   datePickerWeekdayTextSize: /*tw*/ 'text-sm',
   datePickerBackground: /*tw*/ 'bg-bg1!',
   datePickerContentPadding: /*tw*/ 'px-4',
-  datePickerTitlePadding: /*tw*/ 'px-6',
+  datePickerTitlePadding: /*tw*/ 'px-2',
   datePickerActionSheetPadding: /*tw*/ 'px-0!',
 
   fabButton: /*tw*/ 'size-14 bg-brand rounded-full flex items-center justify-center z-[1000] text-white',
@@ -200,7 +200,7 @@ export const baseStyles = {
   itemEditTaskNotesTextAreaStyle:
     /*tw*/ 'bg-bg1 rounded-lg focus:outline-none px-0 py-0 w-full border-0 text-sm text-t2',
 
-  createTaskPageStyle: /*tw*/ 'min-h-dvh w-full bg-bg2 text-t1',
+  createTaskPageStyle: /*tw*/ 'min-h-dvh w-full bg-bg2 text-t1 safe-top',
 
   tabbarBackground: /*tw*/ 'bg-bg1',
   tabbarHeight: /*tw*/ 'h-10',
@@ -298,7 +298,8 @@ export const baseStyles = {
   areaHeaderRoot: /*tw*/ 'flex items-center py-3.5 px-4',
   areaHeaderIconContainer: /*tw*/ 'size-6 text-t3 flex items-center justify-center mr-3 flex-shrink-0',
   areaHeaderIconSize: /*tw*/ 'size-5.5',
-  areaHeaderTitle: /*tw*/ 'text-base leading-6 font-medium text-t1 flex-1 min-w-0',
+  areaHeaderTitle:
+    /*tw*/ 'text-base leading-6 font-medium text-t1 flex-1 min-w-0 overflow-hidden text-ellipsis whitespace-nowrap',
   areaHeaderEditingInput:
     /*tw*/ 'flex-1 overflow-hidden bg-transparent text-base leading-6 text-t1 outline-none font-medium',
   areaHeaderArrowContainer: /*tw*/ 'size-6 text-t3 flex items-center justify-center',
@@ -308,7 +309,7 @@ export const baseStyles = {
   areaDetailSectionHeader: /*tw*/ 'flex items-center justify-between mb-2',
   areaDetailSectionHeaderIndent: /*tw*/ 'pl-4',
   areaDetailSectionTitle: /*tw*/ 'text-sm font-medium text-t3 uppercase tracking-wide',
-  areaDetailSectionCard: /*tw*/ 'bg-bg1 rounded-2xl overflow-hidden',
+  areaDetailSectionCard: /*tw*/ 'bg-bg1 rounded-2xl',
 
   // Home page styles
   homeCardShadow: /*tw*/ '',

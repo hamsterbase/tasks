@@ -1,4 +1,4 @@
-import { DeleteIcon, EditIcon, TagIcon } from '@/components/icons';
+import { DeleteIcon, TagsIcon } from '@/components/icons';
 import { getAreaDetail } from '@/core/state/getArea';
 import { AreaDetailState } from '@/core/state/type';
 import { ItemPosition } from '@/core/type';
@@ -63,11 +63,6 @@ export const useArea = (areaId?: TreeID) => {
     }, 100);
   };
 
-  function handleEditTitle() {
-    if (!areaDetail) return;
-    todoService.editItem(areaDetail.id);
-  }
-
   const handleUpdateTitle = (title: string) => {
     if (!areaDetail) return;
     todoService.updateArea(areaDetail.id, { title });
@@ -92,27 +87,28 @@ export const useArea = (areaId?: TreeID) => {
 
   const handleMoreOptions = () => {
     popupAction({
+      mode: 'navigation',
       groups: [
         {
           items: [
             {
-              icon: <EditIcon />,
-              name: localize('area.edit_title', 'Edit Title'),
-              onClick: handleEditTitle,
-            },
-            {
-              icon: <MobileProjectCheckbox progress={0.6} status={'created'} />,
+              icon: <MobileProjectCheckbox progress={60} status={'created'} size="large" />,
               name: localize('area.create_project', 'Add Project'),
               onClick: handleCreateProject,
             },
             {
-              icon: <TagIcon />,
+              icon: <TagsIcon />,
               name: localize('project.edit_tags', 'Edit Tags'),
               onClick: handleEditTag,
             },
+          ] as PopupActionItem[],
+        },
+        {
+          items: [
             {
               icon: <DeleteIcon />,
               name: localize('area.delete', 'Delete Area'),
+              danger: true,
               onClick: handleDeleteArea,
             },
           ] as PopupActionItem[],

@@ -26,12 +26,7 @@ interface ProjectItemProps {
   className?: string;
 }
 
-export const HomeProjectItem: React.FC<ProjectItemProps> = ({
-  projectInfo,
-  hideStartDate,
-  hideSubtitle,
-  className,
-}) => {
+export const HomeProjectItem: React.FC<ProjectItemProps> = ({ projectInfo, hideSubtitle, className }) => {
   const navigate = useNavigate();
   const todoService = useService(ITodoService);
   const { attributes, listeners, setNodeRef, transform, transition, isDragging, node } = useSortable({
@@ -99,7 +94,7 @@ export const HomeProjectItem: React.FC<ProjectItemProps> = ({
         <MobileProjectCheckbox status={projectInfo.status} progress={projectInfo.progress} />
       </button>
       <TaskItemStartDate
-        hide={hideStartDate}
+        hide={true}
         startDate={projectInfo.startDate}
         isCompleted={projectInfo.status === 'completed'}
       />

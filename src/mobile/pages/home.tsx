@@ -177,7 +177,7 @@ export const MobileHome = () => {
         actions: [
           {
             icon: <SettingsIcon className={styles.headerActionButtonIcon} strokeWidth={1.5} />,
-            onClick: () => navigate({ path: '/settings', replace: true }),
+            onClick: () => navigate({ path: '/settings' }),
           },
           ...(thirdpartySyncService.showSyncIcon
             ? [

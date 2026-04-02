@@ -114,107 +114,107 @@
   },
   "ai_chat": {
     "defaultMessage": "AI Chat",
-    "content": ""
+    "content": "AI 对话"
   },
   "ai_chat.awaiting_confirm": {
     "defaultMessage": "Awaiting",
-    "content": ""
+    "content": "等待确认"
   },
   "ai_chat.cancel": {
     "defaultMessage": "Cancel",
-    "content": ""
+    "content": "取消"
   },
   "ai_chat.canceled": {
     "defaultMessage": "Canceled",
-    "content": ""
+    "content": "已取消"
   },
   "ai_chat.clear": {
     "defaultMessage": "Clear",
-    "content": ""
+    "content": "清除"
   },
   "ai_chat.clear_chat": {
     "defaultMessage": "Clear chat",
-    "content": ""
+    "content": "清除对话"
   },
   "ai_chat.confirm": {
     "defaultMessage": "Confirm",
-    "content": ""
+    "content": "确认"
   },
   "ai_chat.empty": {
     "defaultMessage": "Start a conversation with AI",
-    "content": ""
+    "content": "开始与 AI 对话"
   },
   "ai_chat.executed_success": {
     "defaultMessage": "Executed",
-    "content": ""
+    "content": "已执行"
   },
   "ai_chat.executing": {
     "defaultMessage": "Executing...",
-    "content": ""
+    "content": "执行中..."
   },
   "ai_chat.failed": {
     "defaultMessage": "Failed",
-    "content": ""
+    "content": "失败"
   },
   "ai_chat.generating": {
     "defaultMessage": "Generating...",
-    "content": ""
+    "content": "生成中..."
   },
   "ai_chat.go_to_settings": {
     "defaultMessage": "Go to Settings",
-    "content": ""
+    "content": "前往设置"
   },
   "ai_chat.not_configured": {
     "defaultMessage": "Please configure your AI API settings first",
-    "content": ""
+    "content": "请先配置 AI API 设置"
   },
   "ai_chat.placeholder": {
     "defaultMessage": "Type your message...",
-    "content": ""
+    "content": "输入消息..."
   },
   "ai_chat.preparing": {
     "defaultMessage": "Preparing...",
-    "content": ""
+    "content": "准备中..."
   },
   "ai_chat.reply_to_this": {
     "defaultMessage": "Reply to this",
-    "content": ""
+    "content": "回复此消息"
   },
   "ai_chat.status_responding": {
     "defaultMessage": "Responding...",
-    "content": ""
+    "content": "回复中..."
   },
   "ai_chat.status_stopped": {
     "defaultMessage": "Stopped",
-    "content": ""
+    "content": "已停止"
   },
   "ai_chat.thinking": {
     "defaultMessage": "Thinking",
-    "content": ""
+    "content": "思考中"
   },
   "ai_chat.tool_batchEdit": {
     "defaultMessage": "Batch Edit",
-    "content": ""
+    "content": "批量编辑"
   },
   "ai_chat.tool_createProject": {
     "defaultMessage": "Create Project",
-    "content": ""
+    "content": "创建项目"
   },
   "ai_chat.tool_getData": {
     "defaultMessage": "Get Data",
-    "content": ""
+    "content": "获取数据"
   },
   "ai_chat.tool_getProjectData": {
     "defaultMessage": "Get Project Data",
-    "content": ""
+    "content": "获取项目数据"
   },
   "ai_chat.tool_requestReply": {
     "defaultMessage": "Request Reply",
-    "content": ""
+    "content": "请求回复"
   },
   "ai_chat.tool_runJavaScript": {
     "defaultMessage": "Run JavaScript",
-    "content": ""
+    "content": "运行 JavaScript"
   },
   "area.create_project": {
     "defaultMessage": "Add Project",
@@ -350,23 +350,23 @@
   },
   "create_task_page.add_due_date": {
     "defaultMessage": "Set Due Date",
-    "content": ""
+    "content": "设置截止日期"
   },
   "create_task_page.add_reminder": {
     "defaultMessage": "+ Add Reminder",
-    "content": ""
+    "content": "+ 添加提醒"
   },
   "create_task_page.add_start_date": {
     "defaultMessage": "Set Start Date",
-    "content": ""
+    "content": "设置开始日期"
   },
   "create_task_page.add_subtask": {
     "defaultMessage": "+ Add Subtask",
-    "content": ""
+    "content": "+ 添加子任务"
   },
   "create_task_page.add_tags": {
     "defaultMessage": "Add Tags",
-    "content": ""
+    "content": "添加标签"
   },
   "create_task_page.cancel": {
     "defaultMessage": "Cancel",
@@ -382,7 +382,7 @@
   },
   "create_task_page.title": {
     "defaultMessage": "New Task",
-    "content": ""
+    "content": "新任务"
   },
   "database_not_found": {
     "defaultMessage": "Database not found",
@@ -578,23 +578,23 @@
   },
   "edit_task_item.add_subtask": {
     "defaultMessage": "Add Subtask",
-    "content": ""
+    "content": "添加子任务"
   },
   "edit_task_item.set_due_date": {
     "defaultMessage": "Set Due Date",
-    "content": ""
+    "content": "设置截止日期"
   },
   "edit_task_item.set_reminder": {
     "defaultMessage": "Set Reminder",
-    "content": ""
+    "content": "设置提醒"
   },
   "edit_task_item.set_start_date": {
     "defaultMessage": "Set Start Date",
-    "content": ""
+    "content": "设置开始日期"
   },
   "edit_task_item.set_tags": {
     "defaultMessage": "Set Tags",
-    "content": ""
+    "content": "设置标签"
   },
   "edit_task_item.task_notes_placeholder": {
     "defaultMessage": "Add Notes",
@@ -818,7 +818,7 @@
   },
   "mobile.subtask.placeholder": {
     "defaultMessage": "Subtask",
-    "content": ""
+    "content": "子任务"
   },
   "move_success": {
     "defaultMessage": "Moved successfully",
@@ -906,7 +906,7 @@
   },
   "project.cancel_project": {
     "defaultMessage": "Cancel Project",
-    "content": ""
+    "content": "取消项目"
   },
   "project.delete": {
     "defaultMessage": "Delete",
@@ -1150,11 +1150,11 @@
   },
   "search.no_results": {
     "defaultMessage": "No results found",
-    "content": ""
+    "content": "未找到结果"
   },
   "search.placeholder": {
     "defaultMessage": "Search tasks, projects, areas...",
-    "content": ""
+    "content": "搜索任务、项目、领域..."
   },
   "selection.clear_selection": {
     "defaultMessage": "Clear Selection",
@@ -1178,35 +1178,35 @@
   },
   "settings.ai": {
     "defaultMessage": "AI Assistant",
-    "content": ""
+    "content": "AI 助手"
   },
   "settings.ai.api_token": {
     "defaultMessage": "API Token",
-    "content": ""
+    "content": "API 令牌"
   },
   "settings.ai.api_token.description": {
     "defaultMessage": "Your API authentication token",
-    "content": ""
+    "content": "您的 API 认证令牌"
   },
   "settings.ai.api_token.placeholder": {
     "defaultMessage": "Enter your API token",
-    "content": ""
+    "content": "输入您的 API 令牌"
   },
   "settings.ai.api_url": {
     "defaultMessage": "API URL",
-    "content": ""
+    "content": "API 地址"
   },
   "settings.ai.api_url.description": {
     "defaultMessage": "OpenAI compatible API endpoint URL",
-    "content": ""
+    "content": "兼容 OpenAI 的 API 端点地址"
   },
   "settings.ai.model_name": {
     "defaultMessage": "Model Name",
-    "content": ""
+    "content": "模型名称"
   },
   "settings.ai.model_name.description": {
     "defaultMessage": "The AI model to use (e.g., deepseek-chat, gpt-4, gpt-4o)",
-    "content": ""
+    "content": "使用的 AI 模型（例如 deepseek-chat、gpt-4、gpt-4o）"
   },
   "settings.appearance": {
     "defaultMessage": "Appearance",
@@ -1330,7 +1330,7 @@
   },
   "settings.displaySettings": {
     "defaultMessage": "Task Display",
-    "content": ""
+    "content": "任务显示"
   },
   "settings.displaySettings.description": {
     "defaultMessage": "Control which tasks are visible across all views (Today, Projects, Areas). These settings apply everywhere unless overridden in specific views.",
@@ -1338,27 +1338,27 @@
   },
   "settings.dock_badge": {
     "defaultMessage": "Dock Badge",
-    "content": ""
+    "content": "Dock 角标"
   },
   "settings.dock_badge.count_type": {
     "defaultMessage": "Badge Count Type",
-    "content": ""
+    "content": "角标计数类型"
   },
   "settings.dock_badge.count_type.none": {
     "defaultMessage": "None",
-    "content": ""
+    "content": "无"
   },
   "settings.dock_badge.count_type.overdue": {
     "defaultMessage": "Overdue",
-    "content": ""
+    "content": "已逾期"
   },
   "settings.dock_badge.count_type.overdue_and_today": {
     "defaultMessage": "Overdue + Today",
-    "content": ""
+    "content": "已逾期 + 今天"
   },
   "settings.dock_badge.count_type.overdue_today_and_inbox": {
     "defaultMessage": "Overdue + Today + Inbox",
-    "content": ""
+    "content": "已逾期 + 今天 + 收件箱"
   },
   "settings.export": {
     "defaultMessage": "Export",
@@ -1638,7 +1638,7 @@
   },
   "task.untitled": {
     "defaultMessage": "New Task",
-    "content": ""
+    "content": "新任务"
   },
   "tasks.add.tags": {
     "defaultMessage": "Add Tags",
@@ -1650,7 +1650,7 @@
   },
   "tasks.daysAgo": {
     "defaultMessage": "{0} days ago",
-    "content": ""
+    "content": "{0}天前"
   },
   "tasks.daysLeft": {
     "defaultMessage": "{0} days left",
@@ -1662,7 +1662,7 @@
   },
   "tasks.due_date_label": {
     "defaultMessage": "Due Date",
-    "content": ""
+    "content": "截止日期"
   },
   "tasks.due_date_placeholder": {
     "defaultMessage": "Select due date",
@@ -1690,7 +1690,7 @@
   },
   "tasks.oneDayAgo": {
     "defaultMessage": "1 day ago",
-    "content": ""
+    "content": "1天前"
   },
   "tasks.recurring_due_date": {
     "defaultMessage": "DueDate: {0}",
@@ -1722,7 +1722,7 @@
   },
   "tasks.start_date_label": {
     "defaultMessage": "Start Date",
-    "content": ""
+    "content": "开始日期"
   },
   "tasks.start_date_placeholder": {
     "defaultMessage": "Select start date",

@@ -46,7 +46,6 @@
 .ui-card-normal {
   background: var(--color-bg1);
   border-radius: 1rem;
-  overflow: hidden;
 }
 
 .ui-card-glass {
@@ -60,8 +59,8 @@
 .ui-icon-container-today {
   background: linear-gradient(
     to bottom right,
-    color-mix(in srgb, var(--color-module-today) 8%, white),
-    color-mix(in srgb, var(--color-module-today) 15%, white)
+    color-mix(in srgb, var(--color-module-today) 8%, var(--color-bg-glass-mix)),
+    color-mix(in srgb, var(--color-module-today) 15%, var(--color-bg-glass-mix))
   );
   color: var(--color-module-today);
 }
@@ -69,8 +68,8 @@
 .ui-icon-container-inbox {
   background: linear-gradient(
     to bottom right,
-    color-mix(in srgb, var(--color-module-inbox) 8%, white),
-    color-mix(in srgb, var(--color-module-inbox) 15%, white)
+    color-mix(in srgb, var(--color-module-inbox) 8%, var(--color-bg-glass-mix)),
+    color-mix(in srgb, var(--color-module-inbox) 15%, var(--color-bg-glass-mix))
   );
   color: var(--color-module-inbox);
 }
@@ -78,8 +77,8 @@
 .ui-icon-container-scheduled {
   background: linear-gradient(
     to bottom right,
-    color-mix(in srgb, var(--color-module-scheduled) 8%, white),
-    color-mix(in srgb, var(--color-module-scheduled) 15%, white)
+    color-mix(in srgb, var(--color-module-scheduled) 8%, var(--color-bg-glass-mix)),
+    color-mix(in srgb, var(--color-module-scheduled) 15%, var(--color-bg-glass-mix))
   );
   color: var(--color-module-scheduled);
 }
@@ -87,8 +86,8 @@
 .ui-icon-container-completed {
   background: linear-gradient(
     to bottom right,
-    color-mix(in srgb, var(--color-module-completed) 8%, white),
-    color-mix(in srgb, var(--color-module-completed) 15%, white)
+    color-mix(in srgb, var(--color-module-completed) 8%, var(--color-bg-glass-mix)),
+    color-mix(in srgb, var(--color-module-completed) 15%, var(--color-bg-glass-mix))
   );
   color: var(--color-module-completed);
 }

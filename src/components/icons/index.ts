@@ -51,7 +51,6 @@ import {
   Repeat,
   Repeat2,
   Search,
-  SendToBack,
   Tags,
   Target,
   ServerIcon,
@@ -102,7 +101,7 @@ export const ChevronRightIcon = ChevronRight;
 export const TaskDisplaySettingsIcon = SlidersHorizontal;
 export const PaletteIcon = Palette;
 export const CalendarRangeIcon = CalendarRange;
-export const MoveIcon = SendToBack;
+export const MoveIcon = FolderInput;
 export const CircleSmallIcon = CircleSmall;
 export const LeftIcon = ChevronLeft;
 export const RightIcon = ChevronRight;
@@ -139,4 +138,3 @@ export const BellIcon = Bell;
 export const CircleXIcon = CircleX;
 export const TargetIcon = Target;
 export const TagsIcon = Tags;
-export const FolderInputIcon = FolderInput;

@@ -59,7 +59,10 @@ export const ProjectHeadingItem: React.FC<ProjectHeadingItemProps> = ({ projectH
         onClick={shouldIgnoreClick}
       >
         {isEditing ? (
-          <input {...textAreaProps} className="flex-1 overflow-hidden bg-transparent outline-none" />
+          <input
+            {...textAreaProps}
+            className="flex-1 overflow-hidden bg-transparent outline-none pl-1 tracking-wider uppercase"
+          />
         ) : (
           <span className="flex-1 overflow-hidden text-ellipsis whitespace-nowrap bg-transparent text-t1 uppercase tracking-wider pl-1">
             {projectHeadingInfo.title}

@@ -11,7 +11,7 @@ import { singleListCollisionDetectionStrategy } from '@/utils/dnd/singleListColl
 import { DragEndEvent } from '@dnd-kit/core';
 import { verticalListSortingStrategy } from '@dnd-kit/sortable';
 import classNames from 'classnames';
-import { format } from 'date-fns';
+import { formatTodayTitle } from '@/core/time/formatTodayTitle';
 import type { TreeID } from 'loro-crdt';
 import React from 'react';
 import { PageLayout } from '../components/PageLayout';
@@ -83,7 +83,7 @@ export const TodayPage = () => {
       header={{
         showBack: true,
         id: 'today',
-        title: `${localize('today', 'Today')} (${format(getTodayTimestampInUtc(), 'MMM d')})`,
+        title: `${localize('today', 'Today')} (${formatTodayTitle()})`,
         renderIcon: (className: string) => <TodayIcon className={className} />,
         actions: [
           { icon: <TaskDisplaySettingsIcon className="size-5" strokeWidth={1.5} />, onClick: openTaskDisplaySettings },

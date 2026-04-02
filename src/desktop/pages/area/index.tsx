@@ -148,7 +148,7 @@ const AreaPageContent: React.FC<AreaPageContentProps> = ({ area, areaId }) => {
         <DesktopProjectList
           projects={projects}
           hideProjectTitle
-          emptyStateLabel={localize('area.noProjects', 'No projects in this area')}
+          emptyStateLabel={localize('area.noProjects', 'No projects')}
         />
       </TitleContentSection>
       <TitleContentSection title={localize('area.tasks', 'Tasks')}>
