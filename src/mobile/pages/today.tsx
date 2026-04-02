@@ -90,14 +90,6 @@ export const TodayPage = () => {
         ],
       }}
       dragOption={{
-        overlayItem: {
-          projectProps: {
-            hideStartDate: true,
-          },
-          textProps: {
-            hideStartDate: true,
-          },
-        },
         collisionDetection: singleListCollisionDetectionStrategy,
         sortable: {
           items: sortItems,
@@ -116,11 +108,11 @@ export const TodayPage = () => {
         {items.map((item) => {
           const willDisappear = todayItems.willDisappearObjectIdSet.has(item.id);
           if (item.type === 'project') {
-            return <HomeProjectItem key={item.id} projectInfo={item} hideStartDate={true} />;
+            return <HomeProjectItem key={item.id} projectInfo={item} />;
           }
           return (
             <TaskItemWrapper key={item.id} willDisappear={willDisappear} id={item.id}>
-              <TaskItem taskInfo={item} hideStartDate={true} />
+              <TaskItem taskInfo={item} />
             </TaskItemWrapper>
           );
         })}

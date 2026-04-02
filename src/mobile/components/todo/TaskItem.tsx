@@ -16,7 +16,6 @@ import { TaskItemIcons } from '../taskItem/TaskItemIcons';
 import { TaskItemSubtitle } from '../taskItem/TaskItemSubtitle';
 import { TaskStatusBox } from '../taskItem/TaskStatusBox';
 import { TaskItemCompletionAt } from '../taskItem/taskItemCompletionAt';
-import { TaskItemStartDate } from '../taskItem/taskItemStartDate';
 import { TaskItemTitle } from '../taskItem/taskItemTitle';
 import { EditTaskItem } from './EditTaskItem';
 import { useLongPress } from '@/hooks/useLongPress';
@@ -25,7 +24,6 @@ interface TaskItemProps {
   taskInfo: TaskInfo;
   hideProjectTitle?: boolean;
   overlay?: boolean;
-  hideStartDate?: boolean;
   className?: string;
   followParentArchiveState?: boolean;
 }
@@ -33,7 +31,6 @@ interface TaskItemProps {
 export const TaskItem: React.FC<TaskItemProps> = ({
   taskInfo,
   hideProjectTitle = false,
-  hideStartDate = false,
   className,
   followParentArchiveState,
 }) => {
@@ -142,7 +139,6 @@ export const TaskItem: React.FC<TaskItemProps> = ({
           status={taskInfo.status}
         />
       </button>
-      <TaskItemStartDate hide={hideStartDate} startDate={taskInfo.startDate} isCompleted={isCompleted} />
       <div className="flex-1 flex flex-col gap-1 min-w-0">
         <div className="flex items-center gap-2 min-w-0">
           <TaskItemTitle

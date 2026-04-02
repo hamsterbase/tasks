@@ -24,11 +24,9 @@ export interface DragOverlayItemProps {
   isSubtask?: boolean;
   textProps?: {
     hideProjectTitle?: boolean;
-    hideStartDate?: boolean;
   };
   projectProps?: {
     hideSubtitle?: boolean;
-    hideStartDate?: boolean;
   };
   renderProject?: (projectInfo: ProjectInfoState) => React.ReactNode;
 }

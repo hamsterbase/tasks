@@ -13,14 +13,12 @@ import { DragItem } from '../dnd/DragItem';
 import { TaskItemCompletionAt } from '../taskItem/taskItemCompletionAt';
 import { TaskItemDueDate } from '../taskItem/TaskItemDueDate';
 import { TaskItemIcons } from '../taskItem/TaskItemIcons';
-import { TaskItemStartDate } from '../taskItem/taskItemStartDate';
 import { TaskItemSubtitle } from '../taskItem/TaskItemSubtitle';
 import { TaskItemTitle } from '../taskItem/taskItemTitle';
 import useNavigate from '@/hooks/useNavigate';
 import { MobileProjectCheckbox } from '../icon/MobileProjectCheckbox';
 
 interface ProjectItemProps {
-  hideStartDate?: boolean;
   projectInfo: ProjectInfoState;
   hideSubtitle?: boolean;
   className?: string;
@@ -93,11 +91,6 @@ export const HomeProjectItem: React.FC<ProjectItemProps> = ({ projectInfo, hideS
       <button className={classNames(styles.taskItemIconSize)}>
         <MobileProjectCheckbox status={projectInfo.status} progress={projectInfo.progress} />
       </button>
-      <TaskItemStartDate
-        hide={true}
-        startDate={projectInfo.startDate}
-        isCompleted={projectInfo.status === 'completed'}
-      />
       <div className="flex-1 flex flex-col gap-0.5 min-w-0">
         <div className="flex items-center gap-1.5 min-w-0">
           {titleNode}

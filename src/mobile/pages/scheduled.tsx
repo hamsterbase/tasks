@@ -44,17 +44,11 @@ export const ScheduledPage = () => {
               </div>
               {group.items.map((item) => {
                 if (item.type === ModelTypes.project) {
-                  return (
-                    <HomeProjectItem
-                      key={item.id}
-                      projectInfo={item as ProjectInfoState}
-                      hideStartDate
-                    ></HomeProjectItem>
-                  );
+                  return <HomeProjectItem key={item.id} projectInfo={item as ProjectInfoState}></HomeProjectItem>;
                 }
                 return (
                   <TaskItemWrapper key={item.id} willDisappear={willDisappearObjectIdSet.has(item.id)} id={item.id}>
-                    <TaskItem taskInfo={item as TaskInfo} hideStartDate></TaskItem>
+                    <TaskItem taskInfo={item as TaskInfo}></TaskItem>
                   </TaskItemWrapper>
                 );
               })}
