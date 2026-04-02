@@ -13,7 +13,6 @@ import {
   Calendar,
   CalendarCheck,
   CalendarClock,
-  CalendarDays,
   CalendarRange,
   CalendarX,
   Check,
@@ -52,14 +51,12 @@ import {
   Repeat2,
   Search,
   Tags,
-  Target,
   ServerIcon,
   Settings,
   SlidersHorizontal,
   Square,
   SquareTerminal,
   Sun,
-  Tag,
   Trash2,
   TypeIcon,
   User,
@@ -76,10 +73,10 @@ export const InboxIcon = Inbox;
 export const LogIcon = CircleCheck;
 export const MenuIcon = MoreVerticalIcon;
 export const NoteIcon = FileText;
-export const ScheduledIcon = CalendarDays;
+export const ScheduledIcon = Calendar;
 export const RightArrowIcon = ArrowRight;
 export const SettingsIcon = Settings;
-export const TagIcon = Tag;
+export const TagIcon = Tags;
 export const DragHandleIcon = GripVertical;
 export const SubtaskIcon = ListChecks;
 export const CloseIcon = X;
@@ -136,5 +133,5 @@ export const FlagIcon = Flag;
 export const ListChecksIcon = ListChecks;
 export const BellIcon = Bell;
 export const CircleXIcon = CircleX;
-export const TargetIcon = Target;
+export const TargetIcon = FlagIcon;
 export const TagsIcon = Tags;
