@@ -30,7 +30,7 @@ export const FutureProjects: React.FC<FutureProjectsProps> = ({
   const navigate = useNavigate();
   return (
     <div
-      className={classNames('flex items-center gap-2', styles.taskItemPaddingX, styles.taskItemHeight, className)}
+      className={classNames(styles.homeProjectItemRoot, className)}
       {...attributes}
       {...listeners}
       style={style}
@@ -39,10 +39,10 @@ export const FutureProjects: React.FC<FutureProjectsProps> = ({
         navigate({ path: '/future_projects' });
       }}
     >
-      <button className={'w-5 text-t3'}>
-        <LaterProjectsIcon className="size-5"></LaterProjectsIcon>
-      </button>
-      <span className={'text-lg'}>
+      <div className={styles.homeProjectItemCheckboxContainer}>
+        <LaterProjectsIcon className="size-5.5"></LaterProjectsIcon>
+      </div>
+      <span className={classNames(styles.homeProjectItemTitle, styles.homeProjectItemTitleNormal)}>
         {unstartedProjects.length} {localize('home.futureProjects', 'Future Projects')}
       </span>
     </div>
