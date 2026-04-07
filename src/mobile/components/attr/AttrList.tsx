@@ -92,7 +92,6 @@ function renderAttrRow(item: AttrRowItem): React.ReactNode {
           labelTitleColor={item.labelTitleColor}
         />
       );
-    case 'simple':
     case 'interactive': {
       if (item.hidden) {
         return null;
