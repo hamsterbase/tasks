@@ -5,6 +5,7 @@ import { isPastOrToday } from '@/core/time/isPast';
 import { mergeDateAndTime } from '@/core/time/mergeDateAndTime';
 import { BellIcon, CalendarIcon, CheckIcon, FlagIcon, ListChecksIcon, NotesIcon, TagIcon } from '@/components/icons';
 import { useCreateTask } from '@/hooks/useCreateTask';
+import { useBack } from '@/hooks/useBack';
 import { useDragSensors } from '@/hooks/useDragSensors';
 import { localize } from '@/nls';
 import { closestCenter, DndContext, DragEndEvent } from '@dnd-kit/core';
@@ -22,6 +23,7 @@ import { restrictToVerticalAxis } from '@/utils/dnd/restrictToVerticalAxis';
 
 export const CreateTaskActionSheet: React.FC = () => {
   const taskManager = useCreateTask();
+  const back = useBack();
   const sensors = useDragSensors();
   const titleRef = useRef<HTMLInputElement>(null);
   const subtaskInputRefs = useRef<Record<string, HTMLInputElement>>({});
@@ -66,16 +68,8 @@ export const CreateTaskActionSheet: React.FC = () => {
   };
 
   function onConfirm() {
-    console.log('Confirm task creation - functionality not implemented yet.');
-    console.log('Task Details:', {
-      title: taskManager.title,
-      notes: taskManager.notes,
-      startDate: taskManager.startDate,
-      dueDate: taskManager.dueDate,
-      tags: taskManager.tags,
-      subtasks: taskManager.subtasks,
-      reminders: taskManager.reminders,
-    });
+    taskManager.confirmTask();
+    back();
   }
 
   const attrRows: AttrRowItem[] = [

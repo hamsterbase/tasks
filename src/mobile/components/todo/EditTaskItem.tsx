@@ -320,52 +320,100 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
           },
         ]
       : []),
-    ...(taskInfo.reminders.length > 0
-      ? [
-          {
-            type: 'simple' as const,
-            key: 'reminders',
-            icon: <BellIcon className={styles.editTaskAttrIcon} />,
-            placeholder: '',
-            items: [...taskInfo.reminders]
-              .sort((a, b) => a.time - b.time)
-              .map((reminder) => {
-                const { date, time } = formatReminderTime(reminder.time);
-                return { title: date, subtitle: time };
-              }),
-            testId: 'edit-task-reminders',
+    {
+      hidden: taskInfo.reminders.length === 0,
+      type: 'interactive' as const,
+      key: 'reminders',
+      icon: <BellIcon className={styles.editTaskAttrIcon} />,
+      placeholder: localize('edit_task_item.set_reminder', 'Set Reminder'),
+      items: [...taskInfo.reminders]
+        .sort((a, b) => a.time - b.time)
+        .map((reminder) => {
+          const { date, time } = formatReminderTime(reminder.time);
+          return { title: date, subtitle: time };
+        }),
+      testId: 'edit-task-reminders',
+      onLabelClick: (index: number) => {
+        const sorted = [...taskInfo.reminders].sort((a, b) => a.time - b.time);
+        const reminder = sorted[index];
+        if (!reminder) return;
+        mobileDatepicker.showDatePicker({
+          initialDate: reminder.time,
+          onDateSelected: async (date) => {
+            const time = await timePicker.showTimePickerPromise(reminder.time);
+            const mergedDateTime = mergeDateAndTime(date, time);
+            todoService.updateReminder(reminder.reminderId, { time: mergedDateTime.getTime() });
           },
-        ]
-      : []),
-    ...(taskInfo.recurringRule && (taskInfo.recurringRule.startDate || taskInfo.recurringRule.dueDate)
-      ? [
-          {
-            type: 'simple' as const,
-            key: 'recurring',
-            icon: <Repeat2Icon className={styles.editTaskAttrIcon} />,
-            placeholder: '',
-            items: [
-              ...(taskInfo.recurringRule.startDate
-                ? [
-                    {
-                      title: localize('tasks.start_date_label', 'Start Date'),
-                      subtitle: recurringToString(taskInfo.recurringRule.startDate),
-                    },
-                  ]
-                : []),
-              ...(taskInfo.recurringRule.dueDate
-                ? [
-                    {
-                      title: localize('tasks.due_date_label', 'Due Date'),
-                      subtitle: recurringToString(taskInfo.recurringRule.dueDate),
-                    },
-                  ]
-                : []),
-            ],
-            testId: 'edit-task-recurring',
+        });
+      },
+      onRemove: (index: number) => {
+        const sorted = [...taskInfo.reminders].sort((a, b) => a.time - b.time);
+        const reminder = sorted[index];
+        if (reminder) {
+          todoService.deleteReminder(reminder.reminderId);
+        }
+      },
+      onAdd: () => {
+        mobileDatepicker.showDatePicker({
+          initialDate: Date.now(),
+          onDateSelected: async (date) => {
+            const time = await timePicker.showTimePickerPromise(Date.now());
+            const mergedDateTime = mergeDateAndTime(date, time);
+            todoService.addReminder({ itemId: taskInfo.id, time: mergedDateTime.getTime() });
           },
-        ]
-      : []),
+        });
+      },
+    },
+    (() => {
+      const recurringItems: { type: 'startDate' | 'dueDate'; title: string; subtitle: string }[] = [];
+      if (taskInfo.recurringRule?.startDate) {
+        recurringItems.push({
+          type: 'startDate',
+          title: localize('tasks.start_date_label', 'Start Date'),
+          subtitle: recurringToString(taskInfo.recurringRule.startDate),
+        });
+      }
+      if (taskInfo.recurringRule?.dueDate) {
+        recurringItems.push({
+          type: 'dueDate',
+          title: localize('tasks.due_date_label', 'Due Date'),
+          subtitle: recurringToString(taskInfo.recurringRule.dueDate),
+        });
+      }
+      return {
+        hidden: recurringItems.length === 0,
+        type: 'interactive' as const,
+        key: 'recurring',
+        icon: <Repeat2Icon className={styles.editTaskAttrIcon} />,
+        placeholder: localize('task.recurring_settings', 'Recurring Settings'),
+        items: recurringItems.map(({ title, subtitle }) => ({ title, subtitle })),
+        testId: 'edit-task-recurring',
+        onLabelClick: (index: number) => {
+          const item = recurringItems[index];
+          if (!item) return;
+          const currentRule = taskInfo.recurringRule || {};
+          openRecurringTaskSettings(currentRule, (settings) => {
+            todoService.updateTask(taskInfo.id, { recurringRule: settings });
+          });
+        },
+        onRemove: (index: number) => {
+          const item = recurringItems[index];
+          if (!item) return;
+          const currentRule = { ...taskInfo.recurringRule };
+          if (item.type === 'startDate') {
+            delete currentRule.startDate;
+          } else {
+            delete currentRule.dueDate;
+          }
+          todoService.updateTask(taskInfo.id, { recurringRule: currentRule });
+        },
+        onAdd: () => {
+          openRecurringTaskSettings(taskInfo.recurringRule || {}, (settings) => {
+            todoService.updateTask(taskInfo.id, { recurringRule: settings });
+          });
+        },
+      };
+    })(),
   ];
 
   return (

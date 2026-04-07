@@ -16,13 +16,6 @@ type AttrLabelListBaseProps = {
   testId?: string;
 };
 
-type AttrLabelListSimpleProps = AttrLabelListBaseProps & {
-  type: 'simple';
-  items: AttrLabelListItem[];
-  onClick?: () => void;
-  onClear?: () => void;
-};
-
 type AttrLabelListInteractiveProps = AttrLabelListBaseProps & {
   type: 'interactive';
   items: AttrLabelListItem[];
@@ -32,7 +25,7 @@ type AttrLabelListInteractiveProps = AttrLabelListBaseProps & {
   onAdd: () => void;
 };
 
-export type AttrLabelListProps = AttrLabelListSimpleProps | AttrLabelListInteractiveProps;
+export type AttrLabelListProps = AttrLabelListInteractiveProps;
 
 const LabelItem: React.FC<{ item: AttrLabelListItem }> = ({ item }) => (
   <p className={styles.createTaskReminderContent}>
@@ -48,29 +41,7 @@ const LabelItem: React.FC<{ item: AttrLabelListItem }> = ({ item }) => (
 );
 
 export const AttrLabelList: React.FC<AttrLabelListProps> = (props) => {
-  const { icon, placeholder, items } = props;
-
-  if (props.type === 'simple') {
-    const { onClick, onClear } = props;
-    return (
-      <AttrContainer
-        icon={icon}
-        onClick={onClick}
-        onClear={items.length > 0 ? onClear : undefined}
-        testId={props.testId}
-      >
-        {items.length > 0 ? (
-          <div className="flex flex-col gap-1">
-            {items.map((item, index) => (
-              <LabelItem key={index} item={item} />
-            ))}
-          </div>
-        ) : (
-          <span className={styles.createTaskAttrPlaceholder}>{placeholder}</span>
-        )}
-      </AttrContainer>
-    );
-  }
+  const { icon, items } = props;
 
   const { onLabelClick, onRemove, addButtonLabel, onAdd } = props;
   return (
@@ -88,13 +59,15 @@ export const AttrLabelList: React.FC<AttrLabelListProps> = (props) => {
             )}
           </div>
         ))}
-        <span
-          className={styles.createTaskAddButton}
-          onClick={onAdd}
-          data-testid={props.testId ? `${props.testId}-add` : undefined}
-        >
-          {addButtonLabel}
-        </span>
+        {addButtonLabel && (
+          <span
+            className={styles.createTaskAddButton}
+            onClick={onAdd}
+            data-testid={props.testId ? `${props.testId}-add` : undefined}
+          >
+            {addButtonLabel}
+          </span>
+        )}
       </div>
     </AttrContainer>
   );

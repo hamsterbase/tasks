@@ -28,18 +28,8 @@ type AttrRowLabel = {
   labelTitleColor?: string;
 };
 
-type AttrRowLabelListSimple = {
-  type: 'simple';
-  key: string;
-  icon: React.ReactNode;
-  placeholder: string;
-  items: AttrLabelListItem[];
-  onClick?: () => void;
-  onClear?: () => void;
-  testId?: string;
-};
-
 type AttrRowLabelListInteractive = {
+  hidden?: boolean;
   type: 'interactive';
   key: string;
   icon: React.ReactNode;
@@ -47,7 +37,7 @@ type AttrRowLabelListInteractive = {
   items: AttrLabelListItem[];
   onLabelClick?: (index: number) => void;
   onRemove?: (index: number) => void;
-  addButtonLabel: string;
+  addButtonLabel?: string;
   onAdd: () => void;
   testId?: string;
 };
@@ -75,13 +65,7 @@ type AttrRowTasks = {
   addButtonTestId?: string;
 };
 
-export type AttrRowItem =
-  | AttrRowTextArea
-  | AttrRowLabel
-  | AttrRowLabelListSimple
-  | AttrRowLabelListInteractive
-  | AttrRowTags
-  | AttrRowTasks;
+export type AttrRowItem = AttrRowTextArea | AttrRowLabel | AttrRowLabelListInteractive | AttrRowTags | AttrRowTasks;
 
 function renderAttrRow(item: AttrRowItem): React.ReactNode {
   switch (item.type) {
@@ -110,6 +94,9 @@ function renderAttrRow(item: AttrRowItem): React.ReactNode {
       );
     case 'simple':
     case 'interactive': {
+      if (item.hidden) {
+        return null;
+      }
       const { key, ...labelListProps } = item;
       return <AttrLabelList key={key} {...(labelListProps as AttrLabelListProps)} />;
     }
