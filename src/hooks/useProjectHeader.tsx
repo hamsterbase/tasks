@@ -79,7 +79,6 @@ export const useProjectHeader = (options: IUseProjectHeaderOptions) => {
 
   function handleMenuClick() {
     popupAction({
-      mode: 'navigation',
       groups: [
         {
           items: [

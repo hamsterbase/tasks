@@ -10,6 +10,7 @@ import {
   RepeatIcon,
   SubtaskIcon,
   TagIcon,
+  DeleteIcon,
 } from '@/components/icons';
 import { mergeDateAndTime } from '@/core/time/mergeDateAndTime';
 import { formatReminderTime } from '@/core/time/formatReminderTime';
@@ -36,12 +37,11 @@ import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import classNames from 'classnames';
 import TextArea from 'rc-textarea';
 import React, { useRef } from 'react';
-import { ItemStatus } from '@/core/type';
 import { IInstantiationService } from 'vscf/platform/instantiation/common';
 import { OverlayItem } from '../dnd/DragOverlayItem';
-import { TaskStatusBox } from '../taskItem/TaskStatusBox';
 import { AttrList, AttrRowItem } from '../attr/AttrList';
 import { AttrContainer } from '../attr/AttrContainer';
+import { TaskCheckbox } from '../icon/TaskCheckbox';
 
 interface EditTaskItemProps {
   taskInfo: TaskInfo;
@@ -51,49 +51,6 @@ function formatDateISO(timestamp?: number): string {
   if (!timestamp) return '';
   return new Date(timestamp).toISOString().split('T')[0];
 }
-
-const TaskCheckboxSvg: React.FC<{ status: ItemStatus }> = ({ status }) => {
-  const s = 18;
-  const r = 5;
-  const checkmarkPath = `M ${s * 0.25} ${s * 0.5} L ${s * 0.45} ${s * 0.7} L ${s * 0.75} ${s * 0.35}`;
-  const crossPath = `M ${s * 0.3} ${s * 0.3} L ${s * 0.7} ${s * 0.7} M ${s * 0.7} ${s * 0.3} L ${s * 0.3} ${s * 0.7}`;
-
-  return (
-    <svg width={s} height={s} viewBox={`0 0 ${s} ${s}`}>
-      <rect
-        x="1"
-        y="1"
-        width={s - 2}
-        height={s - 2}
-        rx={r}
-        ry={r}
-        fill={status === 'completed' ? 'var(--color-brand)' : 'transparent'}
-        stroke={status === 'completed' ? 'var(--color-brand)' : 'currentColor'}
-        strokeWidth="1.5"
-      />
-      {status === 'completed' && (
-        <path
-          d={checkmarkPath}
-          fill="none"
-          stroke="white"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      )}
-      {status === 'canceled' && (
-        <path
-          d={crossPath}
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      )}
-    </svg>
-  );
-};
 
 export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoProp }) => {
   const todoService = useService(ITodoService);
@@ -200,6 +157,18 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
             },
           ],
         },
+        {
+          items: [
+            {
+              icon: <DeleteIcon />,
+              name: localize('edit_task_item.delete', 'Delete Task'),
+              danger: true,
+              onClick: () => {
+                todoService.deleteItem(taskInfo.id);
+              },
+            },
+          ],
+        },
       ],
     });
   };
@@ -229,7 +198,7 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
           items: [
             {
               condition: taskInfo.status !== 'created',
-              icon: <TaskStatusBox status={'created'} />,
+              icon: <TaskCheckbox status={'created'} />,
               name: localize('tasks.mark_as_created', 'Mark as Created'),
               onClick: () => {
                 todoService.updateTask(taskInfo.id, { status: 'created' });
@@ -237,7 +206,7 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
             },
             {
               condition: taskInfo.status !== 'completed',
-              icon: <TaskStatusBox status={'completed'} />,
+              icon: <TaskCheckbox status={'completed'} />,
               name: localize('tasks.mark_as_completed', 'Mark as Completed'),
               onClick: () => {
                 todoService.updateTask(taskInfo.id, { status: 'completed' });
@@ -245,7 +214,7 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
             },
             {
               condition: taskInfo.status !== 'canceled',
-              icon: <TaskStatusBox status={'canceled'} />,
+              icon: <TaskCheckbox status={'canceled'} />,
               name: localize('tasks.mark_as_canceled', 'Mark as Canceled'),
               onClick: () => {
                 todoService.updateTask(taskInfo.id, { status: 'canceled' });
@@ -423,7 +392,7 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
           {...longPressEvents}
           className="size-6 shrink-0 flex items-center justify-center text-t3"
         >
-          <TaskCheckboxSvg status={taskInfo.status} />
+          <TaskCheckbox status={taskInfo.status} />
         </button>
         <div className="flex-1 min-w-0 flex flex-col gap-1">
           <div className="flex items-center gap-2 min-w-0">
@@ -463,7 +432,7 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
                     }
                   }}
                   className={styles.createTaskNotesTextarea}
-                  autoSize={{ minRows: 2 }}
+                  autoSize={{ minRows: 2, maxRows: 4 }}
                   placeholder={localize('edit_task_item.task_notes_placeholder', 'Add Notes')}
                 />
               </AttrContainer>

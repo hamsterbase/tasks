@@ -12,6 +12,7 @@ interface ProjectCheckboxProps {
   onClick?: () => void;
   onLongPress?: () => void;
   className?: string;
+  'data-testid'?: string;
 }
 
 function getRemSize() {
@@ -39,6 +40,7 @@ export const MobileProjectCheckbox: React.FC<ProjectCheckboxProps> = ({
   onClick,
   onLongPress,
   className,
+  'data-testid': dataTestId,
 }) => {
   const sizeConfig = SIZE_CONFIG[size];
   const visualSize = sizeConfig.visual;
@@ -95,6 +97,7 @@ export const MobileProjectCheckbox: React.FC<ProjectCheckboxProps> = ({
         className
       )}
       style={{ width: touchSize, height: touchSize }}
+      data-testid={dataTestId}
       onClick={onClick}
       {...longPressEvents}
     >

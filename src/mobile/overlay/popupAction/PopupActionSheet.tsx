@@ -16,12 +16,11 @@ export const PopupActionSheet: React.FC = () => {
   if (!controller) return null;
 
   const groups = controller.groups;
-  const mode = controller.mode;
 
   return (
     <ActionSheet zIndex={controller.zIndex} onClose={() => controller.dispose()}>
       {controller.description && <div className="text-sm text-t3 mb-2">{controller.description}</div>}
-      <div className={mode === 'navigation' ? 'flex flex-col gap-3' : undefined}>
+      <div className={'flex flex-col gap-3'}>
         {groups.map((group, groupIndex) => (
           <ListItemGroup
             key={groupIndex}
@@ -30,7 +29,7 @@ export const PopupActionSheet: React.FC = () => {
               title: item.name,
               description: item.description,
               danger: item.danger,
-              mode: { type: mode },
+              mode: { type: item.mode ? item.mode : 'plain' },
               onClick: () => {
                 item.onClick();
                 controller.dispose();

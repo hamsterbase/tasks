@@ -2,7 +2,6 @@ import { DeleteIcon, HeadingIcon, MoveIcon, ScheduledIcon, TagsIcon, TargetIcon 
 import { ProjectInfoState } from '@/core/state/type';
 import { ItemStatus } from '@/core/type';
 import { useBack } from '@/hooks/useBack.ts';
-import { TaskStatusBox } from '@/mobile/components/taskItem/TaskStatusBox';
 import { useMobileDatepicker } from '@/mobile/overlay/datePicker/useDatepicker';
 import { useDialog } from '@/mobile/overlay/dialog/useDialog.ts';
 import { PopupActionItem } from '@/mobile/overlay/popupAction/PopupActionController';
@@ -14,6 +13,7 @@ import { ITodoService } from '@/services/todo/common/todoService';
 import React from 'react';
 import { useService } from '../../hooks/use-service';
 import { MobileProjectCheckbox } from '../components/icon/MobileProjectCheckbox';
+import { TaskCheckbox } from '../components/icon/TaskCheckbox';
 
 const useProject = (project: ProjectInfoState | null) => {
   const todoService = useService(ITodoService);
@@ -127,7 +127,6 @@ const useProject = (project: ProjectInfoState | null) => {
 
   const handleMoreOptions = () => {
     popupAction({
-      mode: 'navigation',
       groups: [
         {
           items: [
@@ -194,7 +193,7 @@ const useProject = (project: ProjectInfoState | null) => {
         {
           items: [
             {
-              icon: <TaskStatusBox status={'completed'} />,
+              icon: <TaskCheckbox status={'completed'} />,
               name: localize('tasks.mark_as_completed', 'Mark as Completed'),
               onClick: () => {
                 todoService.transitionProjectState({
@@ -205,7 +204,7 @@ const useProject = (project: ProjectInfoState | null) => {
               },
             },
             {
-              icon: <TaskStatusBox status={'canceled'} />,
+              icon: <TaskCheckbox status={'canceled'} />,
               name: localize('tasks.mark_as_canceled', 'Mark as Canceled'),
               onClick: () => {
                 todoService.transitionProjectState({

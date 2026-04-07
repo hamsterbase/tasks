@@ -68,8 +68,8 @@ export const ProjectHeadingItem: React.FC<ProjectHeadingItemProps> = ({ projectH
             {projectHeadingInfo.title}
           </span>
         )}
-        <button className="flex items-center justify-center size-7 text-t3 opacity-40">
-          <MenuIcon className="size-4" strokeWidth={1.5} onClick={handleMenuClick} />
+        <button className="flex items-center justify-center size-7 text-t3 opacity-40" onClick={handleMenuClick}>
+          <MenuIcon className="size-4" strokeWidth={1.5} />
         </button>
       </div>
     </div>

@@ -87,7 +87,6 @@ export const useArea = (areaId?: TreeID) => {
 
   const handleMoreOptions = () => {
     popupAction({
-      mode: 'navigation',
       groups: [
         {
           items: [

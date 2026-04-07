@@ -257,8 +257,12 @@
     "content": "新项目"
   },
   "area.noProjects": {
-    "defaultMessage": "No projects in this area",
-    "content": "此领域没有项目"
+    "defaultMessage": "No projects",
+    "content": "没有项目"
+  },
+  "area.noTasks": {
+    "defaultMessage": "No tasks",
+    "content": "没有任务"
   },
   "area.notFound": {
     "defaultMessage": "Area not found",
@@ -579,6 +583,10 @@
   "edit_task_item.add_subtask": {
     "defaultMessage": "Add Subtask",
     "content": "添加子任务"
+  },
+  "edit_task_item.delete": {
+    "defaultMessage": "Delete Task",
+    "content": "删除任务"
   },
   "edit_task_item.set_due_date": {
     "defaultMessage": "Set Due Date",

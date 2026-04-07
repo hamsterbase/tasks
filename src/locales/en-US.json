@@ -257,8 +257,12 @@
     "content": "New Project"
   },
   "area.noProjects": {
-    "defaultMessage": "No projects in this area",
-    "content": "No projects in this area"
+    "defaultMessage": "No projects",
+    "content": "No projects"
+  },
+  "area.noTasks": {
+    "defaultMessage": "No tasks",
+    "content": "No tasks"
   },
   "area.notFound": {
     "defaultMessage": "Area not found",
@@ -579,6 +583,10 @@
   "edit_task_item.add_subtask": {
     "defaultMessage": "Add Subtask",
     "content": "Add Subtask"
+  },
+  "edit_task_item.delete": {
+    "defaultMessage": "Delete Task",
+    "content": "Delete Task"
   },
   "edit_task_item.set_due_date": {
     "defaultMessage": "Set Due Date",

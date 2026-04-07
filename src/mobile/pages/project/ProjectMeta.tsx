@@ -53,6 +53,7 @@ const ProjectMeta: React.FC<{ project: ProjectInfoState }> = ({ project }) => {
         <div className={styles.projectInfoLogoContainer}>
           <MobileProjectCheckbox
             size="large"
+            data-testid="project-checkbox"
             onLongPress={handleLongPressStatusIcon}
             progress={project.progress * 100}
             status={project.status}
@@ -100,7 +101,7 @@ const ProjectMeta: React.FC<{ project: ProjectInfoState }> = ({ project }) => {
             attrStyles={projectInfoAttrStyles}
           >
             <Textarea
-              autoSize={{ minRows: 2 }}
+              autoSize={{ minRows: 2, maxRows: 4 }}
               placeholder={localize('project.notes', 'Notes')}
               value={notes}
               onChange={(e) => setNotes(e.target.value)}

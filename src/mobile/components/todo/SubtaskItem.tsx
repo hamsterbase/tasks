@@ -1,6 +1,7 @@
 import { handleFocusAndScroll } from '@/base/browser/commonFocusHandler';
 import { DragHandleIcon } from '@/components/icons';
 import { ItemStatus } from '@/core/type.ts';
+import { useLongPress } from '@/hooks/useLongPress';
 import { TaskCheckbox } from '@/mobile/components/icon/TaskCheckbox';
 import { localize } from '@/nls';
 import { useSortable } from '@dnd-kit/sortable';
@@ -52,13 +53,13 @@ export const SubtaskItem: React.FC<SubtaskItemProps> = ({
     onStatusChange(id, status === 'created' ? 'completed' : 'created');
   };
 
-  const handleLongPress = () => {
+  const { longPressEvents } = useLongPress(() => {
     if (status === 'canceled') {
       onStatusChange(id, 'created');
     } else {
       onStatusChange(id, 'canceled');
     }
-  };
+  });
 
   const [inputValue, setInputValue] = React.useState(title);
 
@@ -90,13 +91,11 @@ export const SubtaskItem: React.FC<SubtaskItemProps> = ({
   return (
     <div className={classNames('flex items-center gap-1.5', className)} ref={setNodeRef} style={style}>
       <div
-        onContextMenu={(e) => {
-          e.preventDefault();
-          handleLongPress();
-        }}
+        onClick={handleClick}
+        {...longPressEvents}
         className={classNames('flex items-center justify-center text-t3', statusButtonClassName)}
       >
-        <TaskCheckbox size="small" status={status} onClick={handleClick} />
+        <TaskCheckbox size="small" status={status} />
       </div>
       <input
         value={inputValue}

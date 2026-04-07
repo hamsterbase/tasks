@@ -14,7 +14,6 @@ import { TaskCheckbox } from '../icon/TaskCheckbox';
 import { TaskItemDueDate } from '../taskItem/TaskItemDueDate';
 import { TaskItemIcons } from '../taskItem/TaskItemIcons';
 import { TaskItemSubtitle } from '../taskItem/TaskItemSubtitle';
-import { TaskStatusBox } from '../taskItem/TaskStatusBox';
 import { TaskItemCompletionAt } from '../taskItem/taskItemCompletionAt';
 import { TaskItemTitle } from '../taskItem/taskItemTitle';
 import { EditTaskItem } from './EditTaskItem';
@@ -56,7 +55,7 @@ export const TaskItem: React.FC<TaskItemProps> = ({
           items: [
             {
               condition: taskInfo.status !== 'created',
-              icon: <TaskStatusBox status={'created'} />,
+              icon: <TaskCheckbox status={'created'} />,
               name: localize('tasks.mark_as_created', 'Mark as Created'),
               onClick: () => {
                 todoService.updateTask(taskInfo.id, { status: 'created' });
@@ -64,7 +63,7 @@ export const TaskItem: React.FC<TaskItemProps> = ({
             },
             {
               condition: taskInfo.status !== 'completed',
-              icon: <TaskStatusBox status={'completed'} />,
+              icon: <TaskCheckbox status={'completed'} />,
               name: localize('tasks.mark_as_completed', 'Mark as Completed'),
               onClick: () => {
                 todoService.updateTask(taskInfo.id, { status: 'completed' });
@@ -72,7 +71,7 @@ export const TaskItem: React.FC<TaskItemProps> = ({
             },
             {
               condition: taskInfo.status !== 'canceled',
-              icon: <TaskStatusBox status={'canceled'} />,
+              icon: <TaskCheckbox status={'canceled'} />,
               name: localize('tasks.mark_as_canceled', 'Mark as Canceled'),
               onClick: () => {
                 todoService.updateTask(taskInfo.id, { status: 'canceled' });
@@ -131,13 +130,7 @@ export const TaskItem: React.FC<TaskItemProps> = ({
         {...longPressEvents}
         className={classNames(styles.taskItemIconSize)}
       >
-        <TaskCheckbox
-          className={classNames({
-            'text-brand': isCompleted,
-            'text-t3': !isCompleted,
-          })}
-          status={taskInfo.status}
-        />
+        <TaskCheckbox status={taskInfo.status} />
       </button>
       <div className="flex-1 flex flex-col gap-1 min-w-0">
         <div className="flex items-center gap-2 min-w-0">
