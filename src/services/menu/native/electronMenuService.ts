@@ -43,6 +43,14 @@ export class ElectronMenuService implements IMenuService {
         ],
       },
       {
+        label: localize('menu.window', 'Window'),
+        submenu: [
+          { label: localize('menu.minimize', 'Minimize'), role: 'minimize' as const },
+          { label: localize('menu.zoom', 'Zoom'), role: 'zoom' as const },
+          { label: localize('menu.close', 'Close Window'), role: 'close' as const },
+        ],
+      },
+      {
         label: localize('menu.developer', 'Developer'),
         submenu: [{ label: localize('menu.toggleDevTools', 'Developer Tools'), role: 'toggleDevTools' as const }],
       },

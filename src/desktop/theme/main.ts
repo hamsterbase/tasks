@@ -2,7 +2,6 @@ import { formatTheme } from '@/base/common/formatTheme';
 
 export const desktopStyles = {
   sidebarContainerStyle: /*tw*/ 'w-full h-full pl-2 pt-2 pr-4 flex flex-col',
-  sidebarContainerNoPaddingTop: /*tw*/ 'pt-0!',
   sidebarBackground: /*tw*/ 'bg-bg3',
   SidebarMinWidth: /*tw*/ 'w-45',
   SidebarMaxWidth: /*tw*/ 'w-128',

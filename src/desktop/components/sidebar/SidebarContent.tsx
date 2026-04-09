@@ -5,7 +5,6 @@ import { FlattenedResult } from '@/core/state/home/flattenedItemsToResult';
 import { flattenRootCollections } from '@/core/state/home/getFlattenRootCollections';
 import { getFutureProjects } from '@/core/state/home/getFutureProjects';
 import { AreaInfoState, ProjectInfoState } from '@/core/state/type';
-import { useShouldShowOnDesktopMac } from '@/desktop/hooks/useShouldShowOnDesktopMac.ts';
 import { DesktopMenuController } from '@/desktop/overlay/desktopMenu/DesktopMenuController';
 import { useDesktopMessage } from '@/desktop/overlay/desktopMessage/useDesktopMessage.ts';
 import { useService } from '@/hooks/use-service';
@@ -71,7 +70,6 @@ const SidebarProjectsAndAreas: React.FC<SidebarProjectAndAreaProps> = ({ flatten
 
 export const SidebarContent: React.FC = () => {
   const todoService = useService(ITodoService);
-  const sidebarContainerNoPaddingTop = useShouldShowOnDesktopMac();
   const instantiationService = useService(IInstantiationService);
   const selfhostedSyncService = useService(ISelfhostedSyncService);
   const navigate = useNavigate();
@@ -191,11 +189,7 @@ export const SidebarContent: React.FC = () => {
     rootCollections.flattenedItems && rootCollections.flattenedItems[0]?.type === 'header';
 
   return (
-    <div
-      className={classNames(desktopStyles.sidebarBackground, desktopStyles.sidebarContainerStyle, {
-        [desktopStyles.sidebarContainerNoPaddingTop]: sidebarContainerNoPaddingTop,
-      })}
-    >
+    <div className={classNames(desktopStyles.sidebarBackground, desktopStyles.sidebarContainerStyle)}>
       <div className={desktopStyles.SidebarHeaderContainer}>
         <DragHandle />
         <button

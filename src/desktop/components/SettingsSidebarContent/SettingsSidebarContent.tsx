@@ -56,12 +56,12 @@ export const SettingsSidebarContent: React.FC = () => {
   const sidebarContainerNoPaddingTop = useShouldShowOnDesktopMac();
 
   return (
-    <div
-      className={classNames(desktopStyles.sidebarBackground, desktopStyles.sidebarContainerStyle, {
-        [desktopStyles.sidebarContainerNoPaddingTop]: sidebarContainerNoPaddingTop,
-      })}
-    >
-      <DragHandle></DragHandle>
+    <div className={classNames(desktopStyles.sidebarBackground, desktopStyles.sidebarContainerStyle)}>
+      {sidebarContainerNoPaddingTop && (
+        <div className={desktopStyles.SidebarHeaderContainer}>
+          <DragHandle />
+        </div>
+      )}
       <BackButton label={localize('settings.back_to_app', 'Back to App')} to="/desktop" />
       <ul className={classNames(desktopStyles.SidebarMenuItemContainer, 'flex-1')}>
         {tabs.map((tab) => (
