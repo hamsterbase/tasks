@@ -13,3 +13,7 @@
 :root {
   --separator-border: transparent;
 }
+
+body {
+  font-family: 'PingFang SC';
+}
