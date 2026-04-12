@@ -189,17 +189,10 @@ export const desktopStyles = {
 
   DetailViewContainer: /*tw*/ 'h-full flex flex-col',
   DetailViewHeader: /*tw*/ 'min-h-15 flex px-5 py-3.75 gap-5 items-start justify-between',
-  DetailViewHeaderMain: /*tw*/ 'flex flex-1 min-w-0 items-start gap-3',
-  DetailViewHeaderActions: /*tw*/ 'flex items-start gap-3',
-  DetailViewHeaderCheckboxButton: /*tw*/ 'flex-shrink-0 size-6 mt-0.5 outline-none',
-  DetailViewHeaderCheckboxIcon: /*tw*/ 'size-6',
   DetailViewHeaderCheckboxIconCompleted: /*tw*/ 'text-brand',
-  DetailViewHeaderCheckboxIconPending: /*tw*/ 'text-t3',
   DetailViewHeaderTitle: /*tw*/ 'flex-1 text-xl leading-5 font-medium outline-none',
   DetailViewHeaderMenuButton: /*tw*/ 'size-6 h-7.6 flex items-center',
   DetailViewHeaderMenuIcon: /*tw*/ 'size-6 text-t3',
-  DetailViewHeaderCloseButton: /*tw*/ 'size-6 h-7.6 flex items-center justify-center',
-  DetailViewHeaderCloseIcon: /*tw*/ 'size-5 text-t3',
   DetailViewContent: /*tw*/ 'flex-1 overflow-y-auto',
   DetailViewContentInner: /*tw*/ 'p-2 space-y-2',
   DetailViewNotesTextarea:
