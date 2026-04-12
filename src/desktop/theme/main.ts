@@ -189,7 +189,6 @@ export const desktopStyles = {
 
   DetailViewContainer: /*tw*/ 'h-full flex flex-col',
   DetailViewHeader: /*tw*/ 'min-h-15 flex px-5 py-3.75 gap-5 items-start justify-between',
-  DetailViewHeaderCheckboxIconCompleted: /*tw*/ 'text-brand',
   DetailViewHeaderTitle: /*tw*/ 'flex-1 text-xl leading-5 font-medium outline-none',
   DetailViewHeaderMenuButton: /*tw*/ 'size-6 h-7.6 flex items-center',
   DetailViewHeaderMenuIcon: /*tw*/ 'size-6 text-t3',
