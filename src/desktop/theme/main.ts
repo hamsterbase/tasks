@@ -47,8 +47,7 @@ export const desktopStyles = {
     'flex items-center justify-center hover:bg-bg hover:bg-bg1 hover:text-brand rounded-md transition-colors size-11 text-t3',
   SidebarSettingsButtonIcon: /*tw*/ 'size-5',
 
-  EntityHeaderContainer:
-    /*tw*/ 'min-h-15 flex items-start justify-between px-5 py-3.75 border-b border-line-regular bg-bg1',
+  EntityHeaderContainer: /*tw*/ 'min-h-15 flex items-start justify-between px-5 py-3.75 bg-bg1',
   EntityHeaderPanelIconContainer: /*tw*/ 'flex items-center size-7.5 text-t2 mr-3 justify-center',
   EntityHeaderPanelIcon: /*tw*/ 'size-5',
   EntityHeaderContentWrapper: /*tw*/ 'flex items-start gap-3 flex-1 min-w-0',
@@ -196,8 +195,8 @@ export const desktopStyles = {
   BackButtonLabel: /*tw*/ 'text-xl leading-5',
 
   DetailViewContainer: /*tw*/ 'h-full flex flex-col',
-  DetailViewHeader: /*tw*/ 'min-h-15 flex px-5 py-3.75 gap-5 items-start justify-between border-b border-line-regular',
-  DetailViewHeaderTitle: /*tw*/ 'flex-1 text-xl leading-7.5 font-medium outline-none',
+  DetailViewHeader: /*tw*/ 'min-h-15 flex px-5 py-3.75 gap-5 items-start justify-between',
+  DetailViewHeaderTitle: /*tw*/ 'flex-1 text-xl leading-5 font-medium outline-none',
   DetailViewHeaderMenuButton: /*tw*/ 'size-6 h-7.6 flex items-center',
   DetailViewHeaderMenuIcon: /*tw*/ 'size-6 text-t3',
   DetailViewContent: /*tw*/ 'flex-1 overflow-y-auto',

@@ -1,8 +1,6 @@
 import '@/locales/browser/config.ts';
 import 'large-small-dynamic-viewport-units-polyfill';
 
-import { startDesktop } from './desktop/main';
-import { startMobile } from './mobile/main';
 import { checkPlatform } from './base/browser/checkPlatform';
 
 function shouldLoadDesktop() {
@@ -25,7 +23,11 @@ function shouldLoadDesktop() {
 }
 
 if (shouldLoadDesktop()) {
-  startDesktop();
+  import('./desktop/main').then(({ startDesktop }) => {
+    startDesktop();
+  });
 } else {
-  startMobile();
+  import('./mobile/main').then(({ startMobile }) => {
+    startMobile();
+  });
 }

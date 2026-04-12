@@ -26,10 +26,10 @@ export const DesktopPage: React.FC<DesktopPageProps> = ({ header, children, show
 
   return (
     <div className={desktopStyles.DesktopPageContainer}>
-      {header}
       <Allotment.Pane className={desktopStyles.DesktopPageContentPane}>
         <Allotment defaultSizes={detailPanelConfig.value} onChange={detailPanelConfig.saveIfValid}>
           <Allotment.Pane className={desktopStyles.DesktopPageMainPane}>
+            {header}
             <div className={desktopStyles.DesktopPageMainContent}>{children}</div>
           </Allotment.Pane>
           <Allotment.Pane
