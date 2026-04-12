@@ -1,6 +1,6 @@
 import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc.ts';
 import { areaPageTitleInputId, projectPageTitleInputId } from '@/components/edit/inputId';
-import { PlusIcon, SquareTerminalIcon, SettingsIcon, SyncIcon } from '@/components/icons';
+import { PlusIcon, SearchIcon, SettingsIcon, SyncIcon } from '@/components/icons';
 import { FlattenedResult } from '@/core/state/home/flattenedItemsToResult';
 import { flattenRootCollections } from '@/core/state/home/getFlattenRootCollections';
 import { getFutureProjects } from '@/core/state/home/getFutureProjects';
@@ -192,12 +192,27 @@ export const SidebarContent: React.FC = () => {
     <div className={classNames(desktopStyles.sidebarBackground, desktopStyles.sidebarContainerStyle)}>
       <div className={desktopStyles.SidebarHeaderContainer}>
         <DragHandle />
-        <button
-          onClick={() => CommandPaletteController.create(instantiationService)}
-          className={desktopStyles.SidebarHeaderSearchButton}
-        >
-          <SquareTerminalIcon className={desktopStyles.SidebarHeaderSearchButtonIcon} />
-        </button>
+        <div className={desktopStyles.SidebarHeaderActions}>
+          <button onClick={handleCreateMenu} className={desktopStyles.SidebarHeaderIconButton}>
+            <PlusIcon className={desktopStyles.SidebarHeaderIconButtonIcon} />
+          </button>
+          {selfhostedSyncService.showSyncIcon && (
+            <button onClick={handleSync} className={desktopStyles.SidebarHeaderIconButton}>
+              <SyncIcon
+                className={`${desktopStyles.SidebarHeaderIconButtonIcon} ${selfhostedSyncService.syncing ? 'animate-spin' : ''}`}
+              />
+            </button>
+          )}
+          <button
+            onClick={() => CommandPaletteController.create(instantiationService)}
+            className={desktopStyles.SidebarHeaderIconButton}
+          >
+            <SearchIcon className={desktopStyles.SidebarHeaderIconButtonIcon} />
+          </button>
+          <Link to="/desktop/settings" className={desktopStyles.SidebarHeaderIconButton}>
+            <SettingsIcon className={desktopStyles.SidebarHeaderIconButtonIcon} />
+          </Link>
+        </div>
       </div>
       <SidebarMenu />
       <div
@@ -218,24 +233,6 @@ export const SidebarContent: React.FC = () => {
           </SortableContext>
           <DragOverlayItem />
         </DndContext>
-      </div>
-      <div className={desktopStyles.SidebarActionsContainer}>
-        <button onClick={handleCreateMenu} className={desktopStyles.SidebarCreateButton}>
-          <PlusIcon className={desktopStyles.SidebarCreateButtonIcon} />
-          <span>{localize('sidebar.create_menu', 'Create New')}</span>
-        </button>
-
-        <Link to="/desktop/settings" className={desktopStyles.SidebarSettingsButton}>
-          <SettingsIcon className={desktopStyles.SidebarSettingsButtonIcon} />
-        </Link>
-
-        {selfhostedSyncService.showSyncIcon && (
-          <button onClick={handleSync} className={desktopStyles.SidebarSettingsButton}>
-            <SyncIcon
-              className={`${desktopStyles.SidebarSettingsButtonIcon} ${selfhostedSyncService.syncing ? 'animate-spin' : ''}`}
-            />
-          </button>
-        )}
       </div>
     </div>
   );

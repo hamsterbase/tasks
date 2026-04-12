@@ -7,10 +7,11 @@ export const desktopStyles = {
   SidebarMaxWidth: /*tw*/ 'w-128',
   SidebarPreferredWidth: /*tw*/ 'w-60',
 
-  SidebarHeaderContainer: /*tw*/ 'flex items-end justify-end h-11 mb-2',
-  SidebarHeaderSearchButton:
+  SidebarHeaderContainer: /*tw*/ 'flex items-end h-11 mb-2',
+  SidebarHeaderActions: /*tw*/ 'flex items-center gap-1 ml-auto',
+  SidebarHeaderIconButton:
     'flex items-center justify-center hover:bg-bg1 hover:text-brand rounded-md transition-colors size-9 text-t3',
-  SidebarHeaderSearchButtonIcon: /*tw*/ 'size-5',
+  SidebarHeaderIconButtonIcon: /*tw*/ 'size-5',
 
   SidebarMenuItemContainer: /*tw*/ 'space-y-2',
   SidebarMenuItem: /*tw*/ 'h-9 px-3 flex rounded-lg text-base leading-5 items-center gap-3 group',
@@ -38,14 +39,6 @@ export const desktopStyles = {
   SidebarProjectItemDueDateDanger: /*tw*/ 'text-accent-danger',
   SidebarProjectItemDueDateActive: /*tw*/ 'text-white',
   SidebarProjectItemDueDateInactive: /*tw*/ 'text-t3',
-
-  SidebarActionsContainer: /*tw*/ 'flex gap-1 h-15 items-center',
-  SidebarCreateButton:
-    'flex-1 flex items-center gap-2 px-3 py-2 text-sm text-t1 hover:bg-bg1 hover:text-brand rounded-md transition-colors h-11',
-  SidebarCreateButtonIcon: /*tw*/ 'size-5',
-  SidebarSettingsButton:
-    'flex items-center justify-center hover:bg-bg hover:bg-bg1 hover:text-brand rounded-md transition-colors size-11 text-t3',
-  SidebarSettingsButtonIcon: /*tw*/ 'size-5',
 
   EntityHeaderContainer: /*tw*/ 'min-h-15 flex items-start justify-between px-5 py-3.75 bg-bg1',
   EntityHeaderPanelIconContainer: /*tw*/ 'flex items-center size-7.5 text-t2 mr-3 justify-center',
@@ -196,9 +189,17 @@ export const desktopStyles = {
 
   DetailViewContainer: /*tw*/ 'h-full flex flex-col',
   DetailViewHeader: /*tw*/ 'min-h-15 flex px-5 py-3.75 gap-5 items-start justify-between',
+  DetailViewHeaderMain: /*tw*/ 'flex flex-1 min-w-0 items-start gap-3',
+  DetailViewHeaderActions: /*tw*/ 'flex items-start gap-3',
+  DetailViewHeaderCheckboxButton: /*tw*/ 'flex-shrink-0 size-6 mt-0.5 outline-none',
+  DetailViewHeaderCheckboxIcon: /*tw*/ 'size-6',
+  DetailViewHeaderCheckboxIconCompleted: /*tw*/ 'text-brand',
+  DetailViewHeaderCheckboxIconPending: /*tw*/ 'text-t3',
   DetailViewHeaderTitle: /*tw*/ 'flex-1 text-xl leading-5 font-medium outline-none',
   DetailViewHeaderMenuButton: /*tw*/ 'size-6 h-7.6 flex items-center',
   DetailViewHeaderMenuIcon: /*tw*/ 'size-6 text-t3',
+  DetailViewHeaderCloseButton: /*tw*/ 'size-6 h-7.6 flex items-center justify-center',
+  DetailViewHeaderCloseIcon: /*tw*/ 'size-5 text-t3',
   DetailViewContent: /*tw*/ 'flex-1 overflow-y-auto',
   DetailViewContentInner: /*tw*/ 'p-2 space-y-2',
   DetailViewNotesTextarea:
