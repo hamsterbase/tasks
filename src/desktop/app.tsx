@@ -76,13 +76,6 @@ export const App = () => {
     menuService.updateMenu();
   }, [menuService]);
 
-  useEffect(() => {
-    const originalFontSize = document.documentElement.style.fontSize;
-    document.documentElement.style.fontSize = '14px';
-    return () => {
-      document.documentElement.style.fontSize = originalFontSize;
-    };
-  }, []);
   useSafeArea();
 
   const element = useRoutes([
