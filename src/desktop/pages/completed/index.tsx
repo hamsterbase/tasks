@@ -7,6 +7,7 @@ import { ProjectInfoState, TaskInfo } from '@/core/state/type.ts';
 import { EntityHeader } from '@/desktop/components/common/EntityHeader';
 import { DesktopProjectListItem } from '@/desktop/components/todo/DesktopProjectListItem';
 import { TaskListItem } from '@/desktop/components/todo/TaskListItem';
+import { useDesktopTaskDisplaySettings } from '@/desktop/hooks/useDesktopTaskDisplaySettings.ts';
 import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
@@ -17,6 +18,7 @@ import React, { useMemo } from 'react';
 export const Completed = () => {
   const todoService = useService(ITodoService);
   useWatchEvent(todoService.onStateChange);
+  const { openTaskDisplaySettings } = useDesktopTaskDisplaySettings('completed');
 
   const completedTaskGroups = getCompletedItems(todoService.modelState, {
     currentDate: getTodayTimestampInUtc(),
@@ -32,14 +34,19 @@ export const Completed = () => {
   return (
     <div className={desktopStyles.SchedulePageContainer}>
       <div className={desktopStyles.SchedulePageLayout}>
-        <EntityHeader renderIcon={() => <LogIcon />} title={localize('completed_tasks.title', 'Completed')} />
+        <EntityHeader
+          renderIcon={() => <LogIcon />}
+          title={localize('completed_tasks.title', 'Completed')}
+          internalActions={{ displaySettings: { onOpen: openTaskDisplaySettings } }}
+        />
 
         <div className={desktopStyles.SchedulePageScrollArea}>
           <div className={desktopStyles.SchedulePageContent}>
             {completedTaskGroups.groups.map((group) => (
               <div key={group.label} className={desktopStyles.SchedulePageGroupContainer}>
-                <div className={desktopStyles.SchedulePageGroupHeader}>
+                <div className={desktopStyles.TodaySectionHeading}>
                   <h2 className={desktopStyles.CompletedPageGroupTitle}>{group.label}</h2>
+                  <span className={desktopStyles.TodaySectionCount}>{group.tasks.length}</span>
                 </div>
 
                 <div className={desktopStyles.SchedulePageItemList}>

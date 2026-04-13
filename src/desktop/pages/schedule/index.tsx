@@ -5,6 +5,7 @@ import { getScheduledTasks } from '@/core/state/scheduled/getScheduledTask';
 import { EntityHeader } from '@/desktop/components/common/EntityHeader';
 import { DesktopProjectListItem } from '@/desktop/components/todo/DesktopProjectListItem';
 import { TaskListItem } from '@/desktop/components/todo/TaskListItem';
+import { useDesktopTaskDisplaySettings } from '@/desktop/hooks/useDesktopTaskDisplaySettings.ts';
 import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
@@ -15,6 +16,7 @@ import React, { useMemo } from 'react';
 export const Schedule = () => {
   const todoService = useService(ITodoService);
   useWatchEvent(todoService.onStateChange);
+  const { openTaskDisplaySettings } = useDesktopTaskDisplaySettings('schedule');
   const { scheduledGroups, willDisappearObjectIds } = getScheduledTasks(todoService.modelState, {
     currentDate: getTodayTimestampInUtc(),
     recentModifiedObjectIds: todoService.keepAliveElements,
@@ -31,7 +33,11 @@ export const Schedule = () => {
   return (
     <div className={desktopStyles.SchedulePageContainer}>
       <div className={desktopStyles.SchedulePageLayout}>
-        <EntityHeader renderIcon={() => <ScheduledIcon />} title={localize('schedule', 'Schedule')} />
+        <EntityHeader
+          renderIcon={() => <ScheduledIcon />}
+          title={localize('schedule', 'Schedule')}
+          internalActions={{ displaySettings: { onOpen: openTaskDisplaySettings } }}
+        />
 
         <div className={desktopStyles.SchedulePageScrollArea}>
           <div className={desktopStyles.SchedulePageContent}>

@@ -267,6 +267,7 @@ export const desktopStyles = {
 
   TaskListItemContainer:
     /*tw*/ 'group relative flex items-start gap-2 px-2 py-2 rounded-md outline-none cursor-pointer',
+  TaskListItemContainerCompleted: /*tw*/ 'opacity-60',
   TaskListItemContainerWillDisappear: /*tw*/ 'opacity-50',
   TaskListItemContainerSelected: /*tw*/ 'bg-bg3',
   TaskListItemContainerArchived: /*tw*/ 'opacity-50!',
@@ -365,15 +366,15 @@ export const desktopStyles = {
   SchedulePageContainer: /*tw*/ 'h-full w-full bg-bg1',
   SchedulePageLayout: /*tw*/ 'h-full flex flex-col',
   SchedulePageScrollArea: /*tw*/ 'flex-1 overflow-y-auto',
-  SchedulePageContent: /*tw*/ 'mx-auto p-6 space-y-6',
-  SchedulePageGroupContainer: /*tw*/ 'space-y-4',
-  SchedulePageGroupHeader: /*tw*/ 'space-y-1 flex items-center gap-2',
-  SchedulePageGroupTitle: /*tw*/ 'text-lg font-semibold text-t1',
-  SchedulePageGroupSubtitle: /*tw*/ 'text-sm text-t2',
-  SchedulePageItemList: /*tw*/ 'space-y-2',
+  SchedulePageContent: /*tw*/ 'px-3 pb-3',
+  SchedulePageGroupContainer: /*tw*/ 'space-y-0',
+  SchedulePageGroupHeader: /*tw*/ 'flex items-baseline gap-2 px-2 pt-5 pb-1.5',
+  SchedulePageGroupTitle: /*tw*/ 'text-sm font-semibold text-t1',
+  SchedulePageGroupSubtitle: /*tw*/ 'text-xs text-t3',
+  SchedulePageItemList: /*tw*/ 'space-y-0',
   SchedulePageEmptyState: /*tw*/ 'text-center py-12',
   SchedulePageEmptyText: /*tw*/ 'text-t3 text-lg',
-  CompletedPageGroupTitle: /*tw*/ 'text-lg font-semibold text-t1 w-10',
+  CompletedPageGroupTitle: /*tw*/ 'text-xs font-semibold text-t3 uppercase tracking-wider',
 
   DragOverlayContent: /*tw*/ 'bg-bg1 shadow-sm rounded-lg',
 

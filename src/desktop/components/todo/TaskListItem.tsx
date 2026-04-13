@@ -135,6 +135,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
   };
 
   const taskClassName = classNames(desktopStyles.TaskListItemContainer, {
+    [desktopStyles.TaskListItemContainerCompleted]: task.status === 'completed' || task.status === 'canceled',
     [desktopStyles.TaskListItemContainerWillDisappear]: willDisappear,
     [desktopStyles.TaskListItemContainerSelected]:
       (isFocused && isSelected && !isDragging && !isInputFocused) || isDragging,
