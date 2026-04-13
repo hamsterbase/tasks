@@ -1,25 +1,29 @@
-import { AreaIcon, MoveIcon } from '@/components/icons';
-import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox';
+import { AreaIcon } from '@/components/icons';
 import { getParentDisplay } from '@/core/state/getParentDisplay';
 import { useTreeSelect } from '@/desktop/overlay/treeSelect/useTreeSelect';
 import { desktopStyles } from '@/desktop/theme/main';
+import { ProjectIcon } from '@/desktop/components/todo/ProjectIcon';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService';
 import { TreeID } from 'loro-crdt';
 import React from 'react';
+import { TaskDetailAttributeRow } from './TaskDetailAttributeRow';
 
 interface TaskLocationFieldProps {
   itemId: TreeID;
+  label?: string;
+  emptyIcon?: React.ReactNode;
 }
 
-export const TaskLocationField: React.FC<TaskLocationFieldProps> = ({ itemId }) => {
+export const TaskLocationField: React.FC<TaskLocationFieldProps> = ({ itemId, label, emptyIcon }) => {
   const todoService = useService(ITodoService);
   useWatchEvent(todoService.onStateChange);
   const treeSelect = useTreeSelect();
+  const resolvedLabel = label || localize('tasks.location', 'Location');
 
-  const handleMoveClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleMoveClick = (e: React.MouseEvent<HTMLElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     treeSelect(rect.left, rect.top, {
       currentItemId: itemId,
@@ -81,28 +85,28 @@ export const TaskLocationField: React.FC<TaskLocationFieldProps> = ({ itemId }) 
 
   if (!parentDisplayData) {
     return (
-      <button className={desktopStyles.SelectionFieldButton} onClick={handleMoveClick}>
-        <MoveIcon className={desktopStyles.SelectionFieldIcon} />
-        <span className={desktopStyles.SelectionFieldPlaceholderText}>
-          {localize('tasks.location.move', 'Move to')}
-        </span>
-      </button>
+      <TaskDetailAttributeRow
+        icon={emptyIcon || <ProjectIcon status="created" progress={0} size="sm" />}
+        label={resolvedLabel}
+        content={localize('tasks.location.empty', 'Not set')}
+        placeholder={true}
+        onClick={handleMoveClick}
+      />
     );
   }
 
   return (
-    <button className={desktopStyles.SelectionFieldButton} onClick={handleMoveClick}>
-      {parentDisplayData.icon.type === 'area' ? (
-        <AreaIcon className={`${desktopStyles.SelectionFieldIcon}`} />
-      ) : (
-        <ProjectStatusBox
-          progress={parentDisplayData.icon.progress}
-          status={parentDisplayData.icon.status}
-          color="t2"
-          className={desktopStyles.SelectionFieldIcon}
-        />
-      )}
-      <span className={desktopStyles.TaskLocationFieldLocationText}>{parentDisplayData.title}</span>
-    </button>
+    <TaskDetailAttributeRow
+      label={resolvedLabel}
+      onClick={handleMoveClick}
+      icon={
+        parentDisplayData.icon.type === 'area' ? (
+          <AreaIcon className={desktopStyles.TaskDetailAttributeIcon} />
+        ) : (
+          <ProjectIcon progress={parentDisplayData.icon.progress} status={parentDisplayData.icon.status} size="sm" />
+        )
+      }
+      content={<span className={desktopStyles.TaskLocationFieldLocationText}>{parentDisplayData.title}</span>}
+    />
   );
 };

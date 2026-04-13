@@ -12,7 +12,7 @@ import React, { useRef } from 'react';
 import { TaskStatusBox } from './TaskStatusBox';
 
 import { EditableInputSpan } from '@/components/edit/EditableInputSpan';
-import { DragHandleIcon, NoteIcon, SubtaskIcon } from '@/components/icons';
+import { DragHandleIcon, NotesIcon, SubtaskIcon } from '@/components/icons';
 import { getTaskItemTags } from '@/core/state/getTaskItemTags';
 import { useService } from '@/hooks/use-service';
 import { useSync } from '@/hooks/use-sync';
@@ -168,7 +168,11 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
       onClickCapture={handleClickCapture}
       data-task-id={task.id}
     >
-      {!disableDrag && <DragHandleIcon className={desktopStyles.TaskListItemDragHandle} />}
+      {!disableDrag && (
+        <span className={desktopStyles.TaskListItemDragHandle}>
+          <DragHandleIcon className={desktopStyles.TaskListItemDragHandleIcon} />
+        </span>
+      )}
       <button
         {...longPress.longPressEvents}
         data-testid="task-item-status-box"
@@ -206,7 +210,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
             className={desktopStyles.TaskListItemTitleInput}
             placeholder={localize('tasks.untitled', 'New Task')}
           />
-          {task.notes && <NoteIcon className={desktopStyles.TaskListItemIcon} />}
+          {task.notes && <NotesIcon className={desktopStyles.TaskListItemIcon} />}
           {task.children && task.children.length > 0 && <SubtaskIcon className={desktopStyles.TaskListItemIcon} />}
         </div>
         <ItemTagsList tags={tags} isSelected={isSelected} />

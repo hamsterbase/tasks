@@ -38,7 +38,7 @@ export function getProjectItemTags(model: ITaskModelData, options: TaskItemTagsO
   if (project.dueDate) {
     res.push({
       icon: {
-        type: 'DueIcon',
+        type: 'CalendarIcon',
       },
       label: formatDueDateInList(project.dueDate),
     });

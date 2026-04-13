@@ -4,17 +4,19 @@ import { isPastOrToday } from '@/core/time/isPast';
 import { desktopStyles } from '@/desktop/theme/main';
 import classNames from 'classnames';
 import React from 'react';
+import { TaskDetailAttributeRow } from './TaskDetailAttributeRow';
 
 interface TaskDateFieldProps {
   label: string;
   placeholder: string;
   icon: React.ReactNode;
   date?: number;
-  onDateClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onDateClick: (e: React.MouseEvent<HTMLElement>) => void;
   isDue?: boolean;
 }
 
 export const TaskDateField: React.FC<TaskDateFieldProps> = ({
+  label,
   icon,
   date,
   onDateClick,
@@ -23,27 +25,35 @@ export const TaskDateField: React.FC<TaskDateFieldProps> = ({
 }) => {
   if (!date) {
     return (
-      <button className={desktopStyles.SelectionFieldButton} onClick={onDateClick}>
-        <div className={desktopStyles.SelectionFieldIcon}>{icon}</div>
-        <span className={desktopStyles.SelectionFieldPlaceholderText}> {placeholder}</span>
-      </button>
+      <TaskDetailAttributeRow
+        icon={icon}
+        label={label}
+        content={placeholder}
+        placeholder={true}
+        onClick={onDateClick}
+      />
     );
   }
 
   return (
-    <button className={desktopStyles.SelectionFieldButton} onClick={onDateClick}>
-      <div className={desktopStyles.SelectionFieldIcon}>{icon}</div>
-      <div className={desktopStyles.TaskDateFieldDateContainer}>
-        <span
-          className={classNames({
-            [desktopStyles.TaskDateFieldDateOverdue]: isDue && isPastOrToday(date),
-            [desktopStyles.TaskDateFieldDateNormal]: !isDue || !isPastOrToday(date),
-          })}
-        >
-          {formatDate(date)}
-        </span>
-        <span className={desktopStyles.TaskDateFieldRemainingText}>{formatRemainingDays(date)}</span>
-      </div>
-    </button>
+    <TaskDetailAttributeRow
+      icon={icon}
+      label={label}
+      onClick={onDateClick}
+      danger={isDue && isPastOrToday(date)}
+      content={
+        <div className={desktopStyles.TaskDateFieldDateContainer}>
+          <span
+            className={classNames({
+              [desktopStyles.TaskDateFieldDateOverdue]: isDue && isPastOrToday(date),
+              [desktopStyles.TaskDateFieldDateNormal]: !isDue || !isPastOrToday(date),
+            })}
+          >
+            {formatDate(date)}
+          </span>
+          <span className={desktopStyles.TaskDateFieldRemainingText}>{formatRemainingDays(date)}</span>
+        </div>
+      }
+    />
   );
 };

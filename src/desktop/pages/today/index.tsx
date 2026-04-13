@@ -10,8 +10,8 @@ import { DesktopProjectList } from '@/desktop/components/DesktopProjectList/Desk
 import { DragOverlayItem } from '@/desktop/components/drag/DragOverlayItem';
 import { InboxTaskInput } from '@/desktop/components/inboxTaskInput/InboxTaskInput';
 import { ListContainer } from '@/desktop/components/listContainer/ListContainer';
-import { TitleContentSection } from '@/desktop/components/TitleContentSection';
 import { TaskListItem } from '@/desktop/components/todo/TaskListItem';
+import { desktopStyles } from '@/desktop/theme/main';
 import { useDesktopTaskDisplaySettings } from '@/desktop/hooks/useDesktopTaskDisplaySettings.ts';
 import { useTaskCommands } from '@/desktop/hooks/useTaskCommands';
 import { useService } from '@/hooks/use-service';
@@ -128,14 +128,22 @@ export const Today = () => {
         />
       }
     >
-      <TitleContentSection title={localize('today.projects', 'Projects')}>
+      <div className={desktopStyles.TodaySectionHeading}>
+        <span className={desktopStyles.TodaySectionTitle}>{localize('today.projects', 'Projects')}</span>
+        <span className={desktopStyles.TodaySectionCount}>{projects.length}</span>
+      </div>
+      <div>
         <DesktopProjectList
           projects={projects}
           emptyStateLabel={localize('today.noProjects', 'No projects for today')}
           useDateAssignedMove={true}
         />
-      </TitleContentSection>
-      <TitleContentSection title={localize('today.tasks', 'Tasks')}>
+      </div>
+      <div className={desktopStyles.TodaySectionHeading}>
+        <span className={desktopStyles.TodaySectionTitle}>{localize('today.tasks', 'Tasks')}</span>
+        <span className={desktopStyles.TodaySectionCount}>{tasks.length}</span>
+      </div>
+      <div>
         <InboxTaskInput />
         <ListContainer taskList={mainList}>
           <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
@@ -148,7 +156,7 @@ export const Today = () => {
             <DragOverlayItem />
           </DndContext>
         </ListContainer>
-      </TitleContentSection>
+      </div>
     </DesktopPage>
   );
 };

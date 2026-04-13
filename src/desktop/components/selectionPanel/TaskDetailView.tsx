@@ -1,14 +1,14 @@
 import { useTaskItemActions } from '@/base/hooks/useTaskItemActions';
-import { EditableTextArea } from '@/components/edit/EditableTextArea.tsx';
+import { CloseIcon, FlagIcon, MenuIcon, ScheduledIcon } from '@/components/icons';
+import { EditableInput } from '@/components/edit/EditableInput.tsx';
 import { taskTitleInputKey } from '@/components/edit/inputKeys.ts';
-import { DueIcon, MenuIcon, ScheduledIcon } from '@/components/icons';
 import { TaskInfo } from '@/core/state/type.ts';
+import { TaskStatusBox } from '@/desktop/components/todo/TaskStatusBox';
 import { useTaskMenu } from '@/desktop/hooks/useTaskMenu.ts';
 import { desktopStyles } from '@/desktop/theme/main.ts';
 import { localize } from '@/nls';
 import React from 'react';
 import { TagsField } from '../TagsField';
-import { ClearSelectionButton } from './ClearSelectionButton';
 import { SubtaskList } from './SubtaskList';
 import { NotesField } from './components/NotesField';
 import { RecurringRuleField } from './components/RecurringRuleField';
@@ -28,6 +28,8 @@ export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task, onClearSel
   const { handleStartDateClick, handleDueDateClick } = useDatePickerHandlers({
     task,
   });
+  const completedSubtaskCount = task.children.filter((subtask) => subtask.status === 'completed').length;
+  const subtaskProgress = task.children.length === 0 ? 0 : (completedSubtaskCount / task.children.length) * 100;
 
   const handleTitleSave = (value: string) => {
     taskItemActions.updateTaskTitle(value);
@@ -45,17 +47,26 @@ export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task, onClearSel
   return (
     <div className={desktopStyles.DetailViewContainer}>
       <div className={desktopStyles.DetailViewHeader}>
-        <EditableTextArea
+        <div className={desktopStyles.DetailViewHeaderStatusIcon}>
+          <TaskStatusBox status={task.status} className={desktopStyles.DetailViewHeaderStatusBox} />
+        </div>
+        <EditableInput
           inputKey={taskTitleInputKey(task.id)}
           defaultValue={task.title}
           placeholder={localize('tasks.title_placeholder', 'Add title...')}
           onSave={handleTitleSave}
           className={desktopStyles.DetailViewHeaderTitle}
-          autoSize={{ minRows: 1 }}
         />
-        <button onClick={handleMenuClick} className={desktopStyles.DetailViewHeaderMenuButton}>
-          <MenuIcon className={desktopStyles.DetailViewHeaderMenuIcon} />
-        </button>
+        <div className={desktopStyles.DetailViewHeaderActions}>
+          <button onClick={handleMenuClick} className={desktopStyles.DetailViewHeaderMenuButton}>
+            <MenuIcon className={desktopStyles.DetailViewHeaderMenuIcon} />
+          </button>
+          {onClearSelection && (
+            <button onClick={onClearSelection} className={desktopStyles.DetailViewHeaderMenuButton}>
+              <CloseIcon className={desktopStyles.DetailViewHeaderMenuIcon} />
+            </button>
+          )}
+        </div>
       </div>
       <div className={desktopStyles.DetailViewContent}>
         <div className={desktopStyles.DetailViewContentInner}>
@@ -63,37 +74,43 @@ export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task, onClearSel
             value={task.notes || ''}
             onSave={handleNotesSave}
             className={desktopStyles.DetailViewNotesTextarea}
-            placeholder={localize('tasks.notes_placeholder', 'Add notes...')}
+            placeholder={localize('desktop.task_detail.notes_placeholder', 'Add notes...')}
+            disableMarkdownRender
           />
+          <div className={desktopStyles.DetailViewDivider} />
           <TaskLocationField itemId={task.id} />
           <TaskDateField
-            label={localize('tasks.start_date', 'Start Date')}
-            placeholder={localize('tasks.start_date_placeholder', 'Select start date')}
+            label={localize('desktop.task_detail.start_date', 'Start Date')}
+            placeholder={localize('desktop.task_detail.unset', 'Not set')}
             icon={<ScheduledIcon />}
             date={task.startDate}
             onDateClick={handleStartDateClick}
           />
           <TaskDateField
-            label={localize('tasks.due_date', 'Due Date')}
-            placeholder={localize('tasks.due_date_placeholder', 'Select due date')}
-            icon={<DueIcon />}
+            label={localize('desktop.task_detail.due_date', 'Due Date')}
+            placeholder={localize('desktop.task_detail.unset', 'Not set')}
+            icon={<FlagIcon />}
             date={task.dueDate}
             onDateClick={handleDueDateClick}
             isDue={true}
           />
+          <RemindersField reminders={task.reminders} itemId={task.id} />
           <TagsField itemId={task.id} />
-          <RemindersField
-            label={localize('tasks.reminders', 'Reminders')}
-            reminders={task.reminders}
-            itemId={task.id}
-          />
-          <RecurringRuleField recurringRule={task.recurringRule} taskId={task.id} />
-          <div className={desktopStyles.DetailViewDivider} />
+          {task.recurringRule && <RecurringRuleField recurringRule={task.recurringRule} taskId={task.id} />}
+          <div className={desktopStyles.DetailViewSubtaskHeader}>
+            <span className={desktopStyles.DetailViewSubtaskHeaderTitle}>
+              {localize('desktop.task_detail.subtasks', 'Subtasks')}
+            </span>
+            <span
+              className={desktopStyles.DetailViewSubtaskHeaderCount}
+            >{`${completedSubtaskCount} / ${task.children.length}`}</span>
+          </div>
+          <div className={desktopStyles.DetailViewSubtaskProgressBar}>
+            <div className={desktopStyles.DetailViewSubtaskProgressFill} style={{ width: `${subtaskProgress}%` }} />
+          </div>
           <SubtaskList task={task} />
         </div>
       </div>
-
-      {onClearSelection && <ClearSelectionButton onClearSelection={onClearSelection} />}
     </div>
   );
 };

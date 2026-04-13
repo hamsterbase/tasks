@@ -1,9 +1,9 @@
 import { projectPageTitleInputId } from '@/components/edit/inputId';
 import { projectTitleInputKey } from '@/components/edit/inputKeys';
-import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox';
 import { getProject } from '@/core/state/getProject';
 import { ItemStatus } from '@/core/type';
 import { EntityHeader } from '@/desktop/components/common/EntityHeader';
+import { ProjectIcon } from '@/desktop/components/todo/ProjectIcon';
 import { useDesktopTaskDisplaySettings } from '@/desktop/hooks/useDesktopTaskDisplaySettings.ts';
 import { useDesktopDialog } from '@/desktop/overlay/desktopDialog/useDesktopDialog';
 import { useService } from '@/hooks/use-service';
@@ -111,9 +111,8 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({ project, projectId
       editable
       inputKey={projectTitleInputKey(projectId)}
       inputId={projectPageTitleInputId(projectId)}
-      renderIcon={() => (
-        <ProjectStatusBox progress={project.progress} status={project.status} onClick={handleToggleProjectStatus} />
-      )}
+      renderIcon={() => <ProjectIcon progress={project.progress} status={project.status} size="lg" />}
+      onIconClick={handleToggleProjectStatus}
       title={project.title}
       placeholder={localize('project.untitled', 'New Project')}
       internalActions={{ displaySettings: { onOpen: openTaskDisplaySettings } }}

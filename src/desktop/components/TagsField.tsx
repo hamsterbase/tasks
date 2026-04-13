@@ -10,6 +10,7 @@ import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService';
 import type { TreeID } from 'loro-crdt';
 import React from 'react';
+import { TaskDetailAttributeRow } from './selectionPanel/components/TaskDetailAttributeRow';
 
 interface ITagsFieldProps {
   itemId: TreeID;
@@ -39,7 +40,7 @@ export const TagsField: React.FC<ITagsFieldProps> = ({ itemId }) => {
 
   if (!itemData) return null;
 
-  const handleTagsClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleTagsClick = (e: React.MouseEvent<HTMLElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const position = {
       x: rect.left,
@@ -64,23 +65,30 @@ export const TagsField: React.FC<ITagsFieldProps> = ({ itemId }) => {
 
   if (itemData.tags.length === 0) {
     return (
-      <div className={desktopStyles.TagsFieldEmptyButton} onClick={handleTagsClick}>
-        <TagIcon className={desktopStyles.TagsFieldIcon} />
-        <span className={desktopStyles.TagsFieldText}>{localize('tasks.add.tags', 'Add Tags')}</span>
-      </div>
+      <TaskDetailAttributeRow
+        icon={<TagIcon className={desktopStyles.TaskDetailAttributeIcon} />}
+        label={localize('tasks.tags', 'Tags')}
+        content={localize('tasks.add.tags', 'Not set')}
+        placeholder={true}
+        onClick={handleTagsClick}
+      />
     );
   }
 
   return (
-    <div className={desktopStyles.TagsFieldWithTagsButton} onClick={handleTagsClick}>
-      <TagIcon className={desktopStyles.TagsFieldIconWithTags} />
-      <div className={desktopStyles.TagsFieldTagsContainer}>
-        {itemData.tags.map((tag, index) => (
-          <span key={index} className={desktopStyles.TagsFieldTag}>
-            {tag}
-          </span>
-        ))}
-      </div>
-    </div>
+    <TaskDetailAttributeRow
+      icon={<TagIcon className={desktopStyles.TaskDetailAttributeIcon} />}
+      label={localize('tasks.tags', 'Tags')}
+      onClick={handleTagsClick}
+      content={
+        <div className={desktopStyles.TaskDetailAttributeTagList}>
+          {itemData.tags.map((tag, index) => (
+            <span key={index} className={desktopStyles.TaskDetailAttributeTag}>
+              {tag}
+            </span>
+          ))}
+        </div>
+      }
+    />
   );
 };

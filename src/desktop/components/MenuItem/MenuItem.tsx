@@ -14,11 +14,15 @@ export interface MenuItemProps {
 export const MenuItem: React.FC<MenuItemProps> = ({ to, text, icon, primaryBadge, secondaryBadge }) => {
   const location = useLocation();
   const isActive = location.pathname.startsWith(to);
+  const iconNode = React.isValidElement<{ className?: string }>(icon)
+    ? React.cloneElement(icon, {
+        className: classNames(desktopStyles.SidebarMenuItemIconSvg, icon.props.className),
+      })
+    : icon;
 
-  const secondaryBadgeClassName = classNames({
-    [desktopStyles.SidebarMenuItemBadgeSecondaryActive]: isActive,
-    [desktopStyles.SidebarMenuItemBadgeSecondary]: !isActive,
-  });
+  const secondaryBadgeClassName = isActive
+    ? desktopStyles.SidebarMenuItemBadgeSecondaryActive
+    : desktopStyles.SidebarMenuItemBadgeSecondary;
 
   return (
     <li>
@@ -29,7 +33,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({ to, text, icon, primaryBadge
           [desktopStyles.SidebarMenuItemInactive]: !isActive,
         })}
       >
-        <div className={desktopStyles.SidebarMenuItemIcon}>{icon}</div>
+        <div className={desktopStyles.SidebarMenuItemIcon}>{iconNode}</div>
         <div className={desktopStyles.SidebarMenuItemLabel}>{text}</div>
         {primaryBadge !== undefined && primaryBadge > 0 && (
           <span className={desktopStyles.SidebarMenuItemBadgePrimary}>{primaryBadge}</span>

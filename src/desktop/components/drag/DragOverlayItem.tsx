@@ -71,7 +71,7 @@ export const DragOverlayItem: React.FC<DragOverlayItemProps> = ({
       }
       case 'projectHeading': {
         const projectHeadingInfo = getProjectHeadingInfo(modelState, activeId as TreeID);
-        return <DesktopHeadingListItem hideDividers projectHeadingInfo={projectHeadingInfo} />;
+        return <DesktopHeadingListItem projectHeadingInfo={projectHeadingInfo} />;
       }
       case 'area': {
         const areaInfo = getArea(modelState, activeId as TreeID);

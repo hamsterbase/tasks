@@ -1,5 +1,5 @@
 import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc.ts';
-import { ChatIcon, InboxIcon, LogIcon, ScheduledIcon, TodayIcon } from '@/components/icons';
+import { CalendarIcon, CheckIcon, InboxIcon, TodayIcon } from '@/components/icons';
 import { getInboxTasks } from '@/core/state/inbox/getInboxTasks';
 import { getTodayItems } from '@/core/state/today/getTodayItems';
 import { useService } from '@/hooks/use-service';
@@ -12,11 +12,10 @@ import { desktopStyles } from '../../../theme/main';
 import { MenuItem } from '../../MenuItem/MenuItem.tsx';
 
 const links = [
-  { to: '/desktop/ai-chat', text: localize('ai_chat', 'AI Chat'), icon: <ChatIcon /> },
   { to: '/desktop/inbox', text: localize('inbox', 'Inbox'), icon: <InboxIcon /> },
   { to: '/desktop/today', text: localize('today', 'Today'), icon: <TodayIcon /> },
-  { to: '/desktop/schedule', text: localize('schedule', 'Schedule'), icon: <ScheduledIcon /> },
-  { to: '/desktop/completed', text: localize('completed', 'Completed'), icon: <LogIcon /> },
+  { to: '/desktop/schedule', text: localize('schedule', 'Schedule'), icon: <CalendarIcon /> },
+  { to: '/desktop/completed', text: localize('completed', 'Completed'), icon: <CheckIcon /> },
 ];
 
 export const SidebarMenu: React.FC = () => {
@@ -38,15 +37,13 @@ export const SidebarMenu: React.FC = () => {
         const isTodayLink = link.to === '/desktop/today';
         const isInboxLink = link.to === '/desktop/inbox';
         const startDateCount = isTodayLink ? todayItems.startDateItemsCount : 0;
-        const dueDateCount = isTodayLink ? todayItems.dueDateItemsCount : 0;
-
         return (
           <MenuItem
             key={index}
             to={link.to}
             text={link.text}
             icon={link.icon}
-            primaryBadge={isTodayLink && dueDateCount > 0 ? dueDateCount : undefined}
+            primaryBadge={undefined}
             secondaryBadge={
               isTodayLink && startDateCount > 0
                 ? startDateCount

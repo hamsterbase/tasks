@@ -1,5 +1,4 @@
 import { useDesktopDndSensors } from '@/base/hooks/useDesktopDndSensors';
-import { HeadingIcon } from '@/components/icons';
 import { ITaskList } from '@/components/taskList/type.ts';
 import { getProject } from '@/core/state/getProject';
 import { FlattenedItem, FlattenedResult } from '@/core/state/home/flattenedItemsToResult.ts';
@@ -11,8 +10,6 @@ import { ListContainer } from '@/desktop/components/listContainer/ListContainer'
 import { TaskListItem } from '@/desktop/components/todo/TaskListItem';
 import { useTaskCommands } from '@/desktop/hooks/useTaskCommands';
 import { desktopStyles } from '@/desktop/theme/main';
-import { useService } from '@/hooks/use-service';
-import { ITodoService } from '@/services/todo/common/todoService';
 import { getFlattenedItemsCollisionDetectionStrategy } from '@/utils/dnd/flattenedItemsCollisionDetectionStrategy';
 import { DndContext, DragEndEvent } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
@@ -29,16 +26,9 @@ interface ProjectTaskListProps {
 const ProjectTaskList: React.FC<ProjectTaskListProps> = ({ items, willDisappearObjectIdSet, taskList }) => {
   return (
     <>
-      {items.map((item, index) => {
+      {items.map((item) => {
         if (item.type === 'header') {
-          return (
-            <DesktopHeadingListItem
-              key={item.id}
-              hideDividers={index === 0}
-              projectHeadingInfo={item.content}
-              taskList={taskList}
-            />
-          );
+          return <DesktopHeadingListItem key={item.id} projectHeadingInfo={item.content} taskList={taskList} />;
         }
         if (item.type === 'item') {
           return (
@@ -75,7 +65,6 @@ export const ProjectTaskArea: React.FC<ProjectTaskAreaProps> = ({
   taskList,
   onDragEnd,
 }) => {
-  const todoService = useService(ITodoService);
   const sensors = useDesktopDndSensors();
 
   useTaskCommands({
@@ -86,23 +75,11 @@ export const ProjectTaskArea: React.FC<ProjectTaskAreaProps> = ({
     createHeader: { position: { type: 'firstElement', parentId: project.id } },
   });
 
-  const handleAddHeading = () => {
-    todoService.fireTaskCommand({
-      type: 'createHeader',
-    });
-  };
-
   return (
     <div className={desktopStyles.ProjectTaskAreaContainer}>
       <div className={desktopStyles.InboxAreaContainer}>
         <div className={desktopStyles.InboxAreaInputWrapper}>
           <InboxTaskInput />
-        </div>
-        <div className={desktopStyles.InboxAreaHeadingButton} onClick={handleAddHeading}>
-          <HeadingIcon className={desktopStyles.InboxAreaHeadingIcon} />
-          <div className={desktopStyles.InboxAreaHeadingBadge}>
-            <span className={desktopStyles.InboxAreaHeadingBadgeIcon}>+</span>
-          </div>
         </div>
       </div>
       <ListContainer taskList={taskList}>

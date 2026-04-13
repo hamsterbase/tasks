@@ -2,6 +2,8 @@ import '@/locales/browser/config.ts';
 import 'large-small-dynamic-viewport-units-polyfill';
 
 import { checkPlatform } from './base/browser/checkPlatform';
+import { startDesktop } from './desktop/main';
+import { startMobile } from './mobile/main';
 
 function shouldLoadDesktop() {
   if (checkPlatform().isElectron) {
@@ -23,11 +25,7 @@ function shouldLoadDesktop() {
 }
 
 if (shouldLoadDesktop()) {
-  import('./desktop/main').then(({ startDesktop }) => {
-    startDesktop();
-  });
+  startDesktop();
 } else {
-  import('./mobile/main').then(({ startMobile }) => {
-    startMobile();
-  });
+  startMobile();
 }

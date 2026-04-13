@@ -33,8 +33,6 @@ import { WorkbenchTodoService } from '@/services/todo/browser/workbenchTodoServi
 import { ITodoService } from '@/services/todo/common/todoService';
 import { WorkbenchWebLoggerService } from '@/services/weblogger/browser/workbenchWebLoggerService';
 import { IWebLoggerService } from '@/services/weblogger/common/webloggerService';
-import 'allotment/dist/style.css';
-import './styles/main.css';
 import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, HashRouter } from 'react-router';
@@ -46,6 +44,8 @@ import { IKeybindingService } from 'vscf/platform/keybinding/common';
 import { App } from './app';
 
 export async function startDesktop() {
+  await Promise.all([import('allotment/dist/style.css'), import('./styles/main.css')]);
+
   initializeTheme();
   watchThemeChange();
   initKeyboardListeners();

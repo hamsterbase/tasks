@@ -1,5 +1,4 @@
-import { ChevronRightIcon, DragHandleIcon } from '@/components/icons';
-import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox';
+import { DragHandleIcon, NotesIcon } from '@/components/icons';
 import { getProjectItemTags } from '@/core/state/getProjectItemTags';
 import { ProjectInfoState } from '@/core/state/type';
 import { desktopStyles } from '@/desktop/theme/main';
@@ -12,6 +11,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { ItemTagsList } from './ItemTagsList';
 import classNames from 'classnames';
+import { ProjectIcon } from './ProjectIcon';
 
 interface DesktopProjectListItemProps {
   project: ProjectInfoState;
@@ -60,27 +60,24 @@ export const DesktopProjectListItem: React.FC<DesktopProjectListItemProps> = ({
         className={desktopStyles.DesktopProjectListItemStatusBox}
         style={{ visibility: isDragging ? 'hidden' : 'visible' }}
       >
-        <ProjectStatusBox
+        <ProjectIcon
           progress={progress}
           status={project.status}
+          size="md"
           className={desktopStyles.DesktopProjectListItemStatusBoxIcon}
-          color="t2"
         />
       </div>
       <div
         className={desktopStyles.DesktopProjectListItemContent}
         style={{ visibility: isDragging ? 'hidden' : 'visible' }}
       >
-        <h3 className={desktopStyles.DesktopProjectListItemTitle}>
-          {project.title || localize('project.untitled', 'New Project')}
-        </h3>
+        <div className={desktopStyles.TaskListItemTitleRow}>
+          <h3 className={desktopStyles.DesktopProjectListItemTitle}>
+            {project.title || localize('project.untitled', 'New Project')}
+          </h3>
+          {project.notes && <NotesIcon className={desktopStyles.TaskListItemIcon} />}
+        </div>
         <ItemTagsList tags={tags} isSelected={false} />
-      </div>
-      <div
-        className={desktopStyles.DesktopProjectListItemChevron}
-        style={{ visibility: isDragging ? 'hidden' : 'visible' }}
-      >
-        <ChevronRightIcon />
       </div>
     </Link>
   );

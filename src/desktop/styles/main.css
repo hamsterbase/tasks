@@ -13,3 +13,7 @@
 :root {
   --separator-border: transparent;
 }
+
+body svg.lucide {
+  stroke-width: 1.5;
+}

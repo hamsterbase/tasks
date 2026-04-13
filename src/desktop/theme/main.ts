@@ -1,111 +1,133 @@
 import { formatTheme } from '@/base/common/formatTheme';
 
 export const desktopStyles = {
-  sidebarContainerStyle: /*tw*/ 'w-full h-full pl-2 pt-2 pr-4 flex flex-col',
-  sidebarBackground: /*tw*/ 'bg-bg3',
+  sidebarContainerStyle: /*tw*/ 'w-full h-full pt-2 flex flex-col',
+  sidebarBackground: /*tw*/ 'bg-bg2',
   SidebarMinWidth: /*tw*/ 'w-45',
   SidebarMaxWidth: /*tw*/ 'w-128',
-  SidebarPreferredWidth: /*tw*/ 'w-60',
+  SidebarPreferredWidth: /*tw*/ 'w-56',
 
-  SidebarHeaderContainer: /*tw*/ 'flex items-end h-11 mb-2',
-  SidebarHeaderActions: /*tw*/ 'flex items-center gap-1 ml-auto',
+  SidebarHeaderContainer: /*tw*/ 'flex items-center justify-end h-12 px-2 mb-3 flex-shrink-0',
+  SidebarHeaderActions: /*tw*/ 'flex items-center gap-0.5 ml-auto',
   SidebarHeaderIconButton:
-    'flex items-center justify-center hover:bg-bg1 hover:text-brand rounded-md transition-colors size-9 text-t3',
-  SidebarHeaderIconButtonIcon: /*tw*/ 'size-5',
+    'flex items-center justify-center hover:bg-bg3 hover:text-t1 rounded-md transition-colors size-6 text-t3',
+  SidebarHeaderIconButtonIcon: /*tw*/ 'size-4',
 
-  SidebarMenuItemContainer: /*tw*/ 'space-y-2',
-  SidebarMenuItem: /*tw*/ 'h-9 px-3 flex rounded-lg text-base leading-5 items-center gap-3 group',
-  SidebarMenuItemActive: /*tw*/ 'bg-brand text-white',
-  SidebarMenuItemInactive: /*tw*/ 'text-t1 hover:bg-bg1',
-  SidebarMenuItemIcon: /*tw*/ 'size-5 flex items-center justify-center flex-shrink-0',
+  SidebarMenuItemContainer: /*tw*/ 'flex flex-col gap-0.5 px-2',
+  SidebarMenuItem: /*tw*/ 'h-7 px-2 flex rounded-md text-sm leading-5 items-center gap-2 group transition-colors',
+  SidebarMenuItemActive: /*tw*/ 'bg-bg3 text-t1 font-medium',
+  SidebarMenuItemInactive: /*tw*/ 'text-t2 hover:bg-bg3 hover:text-t1',
+  SidebarMenuItemIcon: /*tw*/ 'size-4 flex items-center justify-center flex-shrink-0',
+  SidebarMenuItemIconSvg: /*tw*/ 'size-4',
   SidebarMenuItemLabel: /*tw*/ 'flex-1 truncate min-w-0',
   SidebarMenuItemBadgePrimary:
-    'bg-accent-danger min-w-5 text-sm leading-3.5 h-5 rounded-full text-white flex items-center justify-center px-1.5',
-  SidebarMenuItemBadgeSecondaryActive: /*tw*/ 'text-white',
-  SidebarMenuItemBadgeSecondary: /*tw*/ 'text-t3',
-  SidebarMenuDivider: /*tw*/ 'bg-line-bold h-0.25',
+    'min-w-4 text-xs leading-none h-4 rounded-sm bg-accent-danger text-white flex items-center justify-center px-1 font-medium',
+  SidebarMenuItemBadgeSecondaryActive: /*tw*/ 'text-t3 text-xs',
+  SidebarMenuItemBadgeSecondary: /*tw*/ 'text-t3 text-xs',
+  SidebarMenuDivider: /*tw*/ 'bg-line-light h-px my-3 mx-2',
 
-  SidebarProjectAreaList: /*tw*/ 'flex-1 overflow-y-auto py-2',
+  SidebarProjectAreaList: /*tw*/ 'flex-1 overflow-y-auto flex flex-col px-2 pb-2',
   SidebarProjectAreaListNoTopPadding: /*tw*/ 'pt-0',
 
-  SidebarAreaToggleButton:
-    'flex-shrink-0 size-5 transition-all opacity-0 group-hover:opacity-100 flex items-center justify-center',
-  SidebarAreaToggleButtonActive: /*tw*/ 'text-white',
+  SidebarAreaItem:
+    /*tw*/ 'h-7 px-2 flex rounded-md text-sm leading-5 items-center gap-2 group cursor-pointer transition-colors font-medium',
+  SidebarAreaItemActive: /*tw*/ 'bg-bg3 text-t1',
+  SidebarAreaItemInactive: /*tw*/ 'text-t1 hover:bg-bg3',
+  SidebarAreaItemIcon: /*tw*/ 'size-4 flex items-center justify-center flex-shrink-0 text-t3',
+  SidebarAreaToggleButton: 'flex-shrink-0 size-4 transition-all flex items-center justify-center text-t3',
+  SidebarAreaToggleButtonActive: /*tw*/ 'text-t3',
   SidebarAreaToggleButtonInactive: /*tw*/ 'text-t3',
-  SidebarAreaGap: /*tw*/ 'mt-3',
+  SidebarAreaGap: /*tw*/ 'mt-3 first:mt-0',
 
-  SidebarProjectItemActive: /*tw*/ 'bg-brand text-white',
-  SidebarProjectItemInactive: /*tw*/ 'text-t2 hover:bg-bg1',
+  SidebarProjectItemActive: /*tw*/ 'bg-bg3 text-t1 font-medium',
+  SidebarProjectItemInactive: /*tw*/ 'text-t2 hover:bg-bg3 hover:text-t1',
+  SidebarProjectItemIcon: /*tw*/ 'size-4 flex items-center justify-center flex-shrink-0 text-t3',
+  SidebarProjectItemDueDate: /*tw*/ 'text-xs leading-5',
   SidebarProjectItemDueDateDanger: /*tw*/ 'text-accent-danger',
-  SidebarProjectItemDueDateActive: /*tw*/ 'text-white',
+  SidebarProjectItemDueDateActive: /*tw*/ 'text-t3',
   SidebarProjectItemDueDateInactive: /*tw*/ 'text-t3',
 
-  EntityHeaderContainer: /*tw*/ 'min-h-15 flex items-start justify-between px-5 py-3.75 bg-bg1',
-  EntityHeaderPanelIconContainer: /*tw*/ 'flex items-center size-7.5 text-t2 mr-3 justify-center',
-  EntityHeaderPanelIcon: /*tw*/ 'size-5',
-  EntityHeaderContentWrapper: /*tw*/ 'flex items-start gap-3 flex-1 min-w-0',
-  EntityHeaderIconContainer: /*tw*/ 'size-7.5 flex items-center justify-center',
-  EntityHeaderIconButton: /*tw*/ 'size-6 flex items-center justify-center',
+  EntityHeaderContainer: /*tw*/ 'h-11 flex items-center justify-between px-5 pr-3 bg-bg1 flex-shrink-0',
+  EntityHeaderPanelIconContainer: /*tw*/ 'flex items-center size-5 text-t2 mr-3 justify-center',
+  EntityHeaderPanelIcon: /*tw*/ 'size-4',
+  EntityHeaderContentWrapper: /*tw*/ 'flex items-center gap-2 flex-1 min-w-0',
+  EntityHeaderIconContainer: /*tw*/ 'size-5 flex items-center justify-center text-t2',
+  EntityHeaderIconButton: /*tw*/ 'size-5 flex items-center justify-center',
+  EntityHeaderIconSvg: /*tw*/ 'size-5',
   EntityHeaderEditableTextArea:
-    'flex-1 text-xl leading-7.5 font-medium text-t1 resize-none bg-transparent border-none outline-none px-0 py-0',
-  EntityHeaderTitle: /*tw*/ 'text-xl leading-7.5 font-medium text-t1 truncate',
-  EntityHeaderActionsContainer: /*tw*/ 'flex items-center gap-5',
+    'flex-1 text-sm leading-5 font-semibold text-t1 resize-none bg-transparent border-none outline-none px-1 -mx-1 py-0 rounded-sm',
+  EntityHeaderTitle: /*tw*/ 'text-sm leading-5 font-semibold text-t1 truncate',
+  EntityHeaderActionsContainer: /*tw*/ 'flex items-center gap-1',
   EntityHeaderActionButton:
-    'flex items-center gap-2 px-1.5 py-1 text-sm text-t2 hover:bg-bg3 rounded-sm transition-colors h-7',
-  EntityHeaderActionIcon: /*tw*/ 'size-5 flex items-center content-center',
-  EntityHeaderActionLabel: /*tw*/ 'text-base leading-5 font-normal',
+    'flex items-center gap-1 px-2 h-7 text-xs text-t2 hover:bg-bg3 hover:text-t1 rounded-md transition-colors',
+  EntityHeaderActionIcon: /*tw*/ 'size-3.5 flex items-center justify-center',
+  EntityHeaderActionIconSvg: /*tw*/ 'size-3.5',
+  EntityHeaderActionLabel: /*tw*/ 'text-xs leading-5 font-normal',
+  EntityHeaderIconActionButton:
+    /*tw*/ 'size-6 flex items-center justify-center rounded-md text-t3 hover:bg-bg3 hover:text-t1 transition-colors flex-shrink-0',
+  EntityHeaderIconActionIcon: /*tw*/ 'size-3.5',
 
   ClearSelectionButton:
     'border-t border-line-regular h-15 flex items-center text-base text-t3 justify-center cursor-pointer',
 
-  SelectionFieldButton: /*tw*/ 'flex items-start py-3 gap-2 text-t2 min-h-11 hover:bg-bg3 px-3 rounded-lg w-full',
-  SelectionFieldIcon: /*tw*/ 'size-5 shrink-0 flex items-center justify-center',
-  SelectionFieldPlaceholderText: /*tw*/ 'text-base leading-5',
+  TaskDetailAttributeRow:
+    /*tw*/ 'appearance-none flex items-start gap-3 py-1.5 px-2 -mx-2 rounded-md text-left bg-transparent border-none hover:bg-bg2 transition-colors cursor-pointer',
+  TaskDetailAttributeIconContainer: /*tw*/ 'w-3.5 h-4 flex-shrink-0 flex items-center justify-center text-t3',
+  TaskDetailAttributeIconContainerDanger: /*tw*/ 'text-accent-danger',
+  TaskDetailAttributeIconContainerPlaceholder: /*tw*/ 'text-t3',
+  TaskDetailAttributeIcon: /*tw*/ 'size-3.5',
+  TaskDetailAttributeLabel: /*tw*/ 'text-xs text-t3 flex-1 whitespace-nowrap',
+  TaskDetailAttributeContent: /*tw*/ 'ml-auto min-w-0 text-xs text-t1',
+  TaskDetailAttributeContentPlaceholder: /*tw*/ 'text-t3',
+  TaskDetailAttributeTagList: /*tw*/ 'flex gap-1.5 items-center flex-wrap justify-end min-w-0',
+  TaskDetailAttributeTag: /*tw*/ 'text-xs leading-4 text-t2 px-2 py-0.5 rounded-full border border-line-light',
 
-  RemindersFieldContainer: /*tw*/ 'ml-7',
-  RemindersFieldDateText: /*tw*/ 'text-t1 text-base leading-5',
-  RemindersFieldTimeText: /*tw*/ 'text-t2 text-sm leading-5',
+  RemindersFieldAnchor: /*tw*/ 'relative',
+  RemindersFieldPopover:
+    'absolute top-full right-0 mt-1 w-64 bg-bg1 border border-line-regular rounded-md p-1 z-20 shadow-[0_4px_12px_rgba(0,0,0,0.08)]',
+  RemindersFieldPopoverEmpty: /*tw*/ 'px-2 py-1.5 text-sm text-t3',
+  RemindersFieldPopoverItem:
+    'group flex items-center gap-2 px-2 py-2 text-sm rounded-sm text-t1 hover:bg-bg3 transition-colors cursor-pointer',
+  RemindersFieldPopoverDeleteButton:
+    'size-5 flex items-center justify-center rounded-sm text-t3 opacity-0 group-hover:opacity-100 hover:text-accent-danger hover:bg-accent-danger/10 transition-opacity',
+  RemindersFieldPopoverDeleteIcon: /*tw*/ 'size-3.5',
+  RemindersFieldPopoverDivider: /*tw*/ 'h-px bg-line-light mx-1 my-1',
+  RemindersFieldPopoverAddRow:
+    'flex items-center gap-2 px-2 py-2 text-sm cursor-pointer rounded-sm text-t2 hover:bg-bg3 hover:text-t1 transition-colors',
+  RemindersFieldPopoverAddIcon: /*tw*/ 'size-4 flex-shrink-0',
+  RemindersFieldDateText: /*tw*/ 'flex-1 min-w-0 text-t1 text-sm leading-5 truncate',
+  RemindersFieldTimeText: /*tw*/ 'text-t3 text-sm leading-5',
   RemindersFieldPastText: /*tw*/ 'line-through',
+  RemindersFieldPastTag: /*tw*/ 'line-through text-t3',
 
-  RecurringRuleContent: /*tw*/ 'flex flex-col items-start gap-6 text-base leading-5',
+  RecurringRuleContent: /*tw*/ 'flex flex-col items-end gap-1 text-xs leading-4',
 
-  TaskLocationFieldLocationText: /*tw*/ 'text-base leading-5 text-t1 truncate',
+  TaskLocationFieldLocationText: /*tw*/ 'text-xs text-t1',
 
-  TaskDateFieldDateContainer: /*tw*/ 'flex items-baseline gap-1.5 text-base leading-5',
-  TaskDateFieldDateNormal: /*tw*/ 'text-t1',
-  TaskDateFieldDateOverdue: /*tw*/ 'text-accent-danger',
-  TaskDateFieldRemainingText: /*tw*/ 'text-t3',
+  TaskDateFieldDateContainer: /*tw*/ 'flex items-baseline justify-end gap-1 text-xs leading-4 flex-wrap',
+  TaskDateFieldDateNormal: /*tw*/ 'text-xs text-t1',
+  TaskDateFieldDateOverdue: /*tw*/ 'text-xs text-accent-danger font-medium',
+  TaskDateFieldRemainingText: /*tw*/ 'text-xs text-t3',
+  SubtaskListSection: /*tw*/ 'flex flex-col gap-0.5 text-sm',
 
-  TagsFieldEmptyButton: /*tw*/ 'flex items-center py-2 gap-2 text-t2 h-11 hover:bg-bg3 px-3 rounded-lg w-full',
-  TagsFieldWithTagsButton: /*tw*/ 'flex items-start py-3 gap-2 text-t2 min-h-11 hover:bg-bg3 px-3 rounded-lg w-full',
-  TagsFieldIcon: /*tw*/ 'size-5',
-  TagsFieldIconWithTags: /*tw*/ 'size-5 flex-shrink-0',
-  TagsFieldText: /*tw*/ 'text-base leading-5',
-  TagsFieldTagsContainer: /*tw*/ 'flex flex-wrap gap-3 justify-start',
-  TagsFieldTag: /*tw*/ 'text-brand rounded-sm text-base px-2 h-5 flex items-center bg-brand/15',
+  InboxTaskInputWrapper: /*tw*/ '',
+  InboxTaskInputContainer:
+    /*tw*/ 'group flex w-full flex-row items-center gap-2 px-2 py-2 rounded-md transition-colors hover:bg-bg2 focus-within:bg-bg2',
+  InboxTaskInputIcon: /*tw*/ 'flex-none size-4 text-t3 group-focus-within:text-t2',
+  InboxTaskInputField:
+    /*tw*/ 'flex-1 bg-transparent text-sm leading-5 text-t1 placeholder:text-t3 focus:outline-none font-normal',
 
-  SubtaskListTitle: /*tw*/ 'flex items-center px-3 gap-2.5 h-14',
-  SubtaskListTitleIcon: /*tw*/ 'size-5 flex-shrink-0 text-t1 flex items-center justify-center',
-  SubtaskListTitleText: /*tw*/ 'flex-1 text-base leading-5 font-normal text-t1',
-
-  InboxTaskInputWrapper: /*tw*/ 'pt-3 mb-3',
-  InboxTaskInputContainer: /*tw*/ 'flex flex-row items-center p-3 gap-3 h-11 bg-bg3 rounded-lg',
-  InboxTaskInputIcon: /*tw*/ 'flex-none size-5 text-t3',
-  InboxTaskInputField: /*tw*/ 'flex-1 bg-transparent text-base text-t1 placeholder-t3 focus:outline-none font-normal',
-
-  InboxAreaContainer: /*tw*/ 'flex items-center gap-6',
+  InboxAreaContainer: /*tw*/ 'flex w-full items-center',
   InboxAreaInputWrapper: /*tw*/ 'flex-1',
-  InboxAreaHeadingButton: /*tw*/ 'relative size-11 bg-bg3 flex items-center justify-center rounded-lg',
-  InboxAreaHeadingIcon: /*tw*/ 'size-5 text-t3',
-  InboxAreaHeadingBadge:
-    /*tw*/ 'absolute top-5.5 right-2.5 w-2 h-2 bg-primary rounded-full flex items-center justify-center',
-  InboxAreaHeadingBadgeIcon: /*tw*/ 'text-t3 text-xs leading-none',
 
-  ItemTagContainer: /*tw*/ 'flex text-sm leading-5 h-5 items-center gap-0.5 rounded-sm max-w-30 text-t2',
+  ItemTagContainer: /*tw*/ 'flex min-w-0 max-w-30 items-center gap-1 text-xs leading-4',
+  ItemTagNormal: /*tw*/ 'text-t3',
+  ItemTagDanger: /*tw*/ 'text-accent-danger',
   ItemTagSelected: /*tw*/ '',
   ItemTagUnselected: /*tw*/ '',
-  ItemTagIcon: /*tw*/ 'size-3 flex items-center content-center flex-shrink-0',
-  ItemTagLabel: /*tw*/ 'truncate',
+  ItemTagIcon: /*tw*/ 'size-3 flex items-center justify-center flex-shrink-0',
+  ItemTagIconSvg: /*tw*/ 'size-3',
+  ItemTagLabel: /*tw*/ 'min-w-0 truncate',
 
   AuthFormContainer: /*tw*/ 'flex flex-col gap-9',
   AuthFormSection: /*tw*/ 'flex flex-col gap-3',
@@ -175,12 +197,9 @@ export const desktopStyles = {
   DatabaseListEmptyContainer: /*tw*/ 'text-center py-4',
   DatabaseListEmptyText: /*tw*/ 'text-t2',
 
-  TitleContentSectionContainer: /*tw*/ 'flex flex-col pt-5',
-  TitleContentSectionHeader: /*tw*/ 'flex flex-row justify-center items-center px-3 gap-2 w-full h-11 flex-none',
-  TitleContentSectionTitle: /*tw*/ 'flex-1 text-base leading-5 font-normal text-t1 truncate',
-  TitleContentSectionAction: /*tw*/ 'flex-shrink-0',
-  TitleContentSectionActionButton:
-    'px-3 py-1 h-11 text-base rounded-lg hover:bg-bg2 transition-colors text-t2 hover:text-t1',
+  TodaySectionHeading: /*tw*/ 'flex items-center gap-2 px-2 pt-5 pb-1.5',
+  TodaySectionTitle: /*tw*/ 'text-xs font-semibold text-t3 uppercase tracking-wider',
+  TodaySectionCount: /*tw*/ 'text-xs text-t3',
 
   BackButtonLink: /*tw*/ 'flex flex-row items-center h-12 no-underline text-t1 hover:bg-bg2 mb-2 rounded-lg px-3 w-fit',
   BackButtonContainer: /*tw*/ 'flex flex-row items-center gap-1',
@@ -188,15 +207,26 @@ export const desktopStyles = {
   BackButtonLabel: /*tw*/ 'text-xl leading-5',
 
   DetailViewContainer: /*tw*/ 'h-full flex flex-col',
-  DetailViewHeader: /*tw*/ 'min-h-15 flex px-5 py-3.75 gap-5 items-start justify-between',
-  DetailViewHeaderTitle: /*tw*/ 'flex-1 text-xl leading-5 font-medium outline-none',
-  DetailViewHeaderMenuButton: /*tw*/ 'size-6 h-7.6 flex items-center',
-  DetailViewHeaderMenuIcon: /*tw*/ 'size-6 text-t3',
+  DetailViewHeader: /*tw*/ 'group h-11 flex items-center gap-1 px-3 flex-shrink-0',
+  DetailViewHeaderStatusIcon: /*tw*/ 'flex-shrink-0 flex items-center justify-center text-t2',
+  DetailViewHeaderStatusBox: /*tw*/ 'size-4',
+  DetailViewHeaderTitle:
+    /*tw*/ 'flex-1 min-w-0 text-sm leading-5 font-semibold text-t1 bg-transparent border-none outline-none placeholder:text-t3 focus:bg-bg2 rounded-sm px-1 -mx-1',
+  DetailViewHeaderActions: /*tw*/ 'flex items-center gap-0.5 flex-shrink-0',
+  DetailViewHeaderMenuButton:
+    /*tw*/ 'size-6 flex items-center justify-center rounded-md text-t3 hover:bg-bg3 hover:text-t1 transition-colors',
+  DetailViewHeaderMenuIcon: /*tw*/ 'size-3.5',
   DetailViewContent: /*tw*/ 'flex-1 overflow-y-auto',
-  DetailViewContentInner: /*tw*/ 'p-2 space-y-2',
+  DetailViewContentInner: /*tw*/ 'px-3 pt-1 pb-3',
   DetailViewNotesTextarea:
-    'w-full p-3 outline-none resize-none text-base leading-5 placeholder:text-t3 caret-brand break-all',
-  DetailViewDivider: /*tw*/ 'h-px bg-line-regular',
+    'w-full min-h-6 px-0 py-0.5 mb-3 text-sm text-t1 placeholder:text-t3 bg-transparent border-none outline-none resize-none leading-5',
+  DetailViewDivider: /*tw*/ 'h-px bg-line-light my-3',
+  DetailViewSubtaskHeader: /*tw*/ 'flex items-center gap-1 mt-6 mb-3',
+  DetailViewSubtaskHeaderTitle: /*tw*/ 'text-xs text-t2 font-medium',
+  DetailViewSubtaskHeaderCount: /*tw*/ 'ml-auto text-xs text-t3 font-normal',
+  DetailViewSubtaskProgressBar: /*tw*/ 'h-1 bg-bg3 rounded-full overflow-hidden mb-3',
+  DetailViewSubtaskProgressFill: /*tw*/ 'h-full bg-accent-success rounded-full transition-all',
+  DetailViewHint: /*tw*/ 'text-xs text-t3 mb-5',
 
   MarkdownPageLoading: /*tw*/ 'text-t2',
   MarkdownPageH1: /*tw*/ 'text-2xl font-medium text-t1 mb-4 mt-6',
@@ -221,11 +251,11 @@ export const desktopStyles = {
   CheckboxContainer: /*tw*/ 'flex items-center gap-2',
   CheckboxInputContainer: /*tw*/ 'relative',
   CheckboxInput: /*tw*/ 'sr-only',
-  CheckboxBox: /*tw*/ 'size-5 cursor-pointer',
+  CheckboxBox: /*tw*/ 'flex h-5 w-4 items-center justify-center cursor-pointer',
   CheckboxBoxChecked: /*tw*/ 'text-brand',
   CheckboxBoxUnchecked: /*tw*/ 'text-t3',
-  CheckboxStatusBox: /*tw*/ 'size-full',
-  CheckboxLabel: /*tw*/ 'text-base text-t3 leading-5',
+  CheckboxStatusBox: /*tw*/ 'size-4',
+  CheckboxLabel: /*tw*/ 'text-sm text-t3 leading-5',
 
   SettingsTitleContainer: /*tw*/ 'flex mb-8',
   SettingsTitleContent: /*tw*/ 'flex flex-col gap-1 flex-1',
@@ -235,68 +265,63 @@ export const desktopStyles = {
   SettingsTitleDescription: /*tw*/ 'text-base font-normal text-t3 leading-5',
   SettingsTitleActionContainer: /*tw*/ 'flex items-center',
 
-  TaskListItemContainer: /*tw*/ 'group relative flex items-start gap-3 px-3 py-3 rounded-md outline-none',
+  TaskListItemContainer:
+    /*tw*/ 'group relative flex items-start gap-2 px-2 py-2 rounded-md outline-none cursor-pointer',
   TaskListItemContainerWillDisappear: /*tw*/ 'opacity-50',
   TaskListItemContainerSelected: /*tw*/ 'bg-bg3',
   TaskListItemContainerArchived: /*tw*/ 'opacity-50!',
   TaskListItemContainerSelectedInactive: /*tw*/ 'bg-bg2',
   TaskListItemContainerEditing: /*tw*/ 'editing-border rounded-l-none',
   TaskListItemDragHandle:
-    'absolute -left-5 top-1/2 -translate-y-1/2 size-5 text-t3 opacity-0 group-hover:opacity-60 transition-opacity',
-  TaskListItemStatusButton: /*tw*/ 'flex-shrink-0 size-5 outline-none',
-  TaskListItemStatusBox: /*tw*/ 'size-5',
+    'absolute left-0 top-0 flex h-full w-3 -translate-x-full items-center justify-center text-t3 opacity-0 group-hover:opacity-100 transition-opacity',
+  TaskListItemDragHandleIcon: /*tw*/ 'size-2.5',
+  TaskListItemStatusButton: /*tw*/ 'flex h-5 w-4 flex-shrink-0 items-center justify-center outline-none',
+  TaskListItemStatusBox: /*tw*/ 'size-4',
   TaskListItemStatusBoxCompleted: /*tw*/ 'text-brand',
   TaskListItemStatusBoxUncompleted: /*tw*/ 'text-t3',
-  TaskListItemContent: /*tw*/ 'flex flex-col gap-2 flex-1 min-w-0',
+  TaskListItemContent: /*tw*/ 'flex flex-col gap-1 flex-1 min-w-0',
   TaskListItemTitleRow: /*tw*/ 'flex items-center gap-2',
   TaskListItemTitleInput:
-    'text-base leading-5 flex-1 bg-transparent border-none outline-none text-ellipsis text-t1 overflow-hidden',
+    'text-sm leading-5 flex-1 min-w-0 bg-transparent outline-none text-t1 truncate placeholder:text-t3 rounded-sm px-1 -mx-1',
   TaskListItemTitleSpan: /*tw*/ 'cursor-text whitespace-nowrap overflow-hidden',
   TaskListItemTitleSpanPlaceHolder: /*tw*/ 'text-t3',
-  TaskListItemIcon: /*tw*/ 'size-5 text-t3 flex-shrink-0',
+  TaskListItemIcon: /*tw*/ 'size-3.5 text-t3 flex-shrink-0 opacity-60',
 
-  SubtaskItemContainer: /*tw*/ 'flex items-center gap-3 h-11 px-3 group rounded-lg',
+  SubtaskItemContainer: /*tw*/ 'group flex items-center gap-2 -mx-2 px-2 py-1.5 rounded-md cursor-pointer',
   SubtaskItemContainerSelected: /*tw*/ 'bg-bg3',
   SubtaskItemContainerSelectedInactive: /*tw*/ 'bg-bg2',
-  SubtaskItemContainerDefault: /*tw*/ 'bg-bg1',
+  SubtaskItemContainerDefault: /*tw*/ '',
   SubtaskItemContainerEditing: /*tw*/ 'editing-border rounded-l-none',
-  SubtaskItemStatusButton:
-    'size-5 text-t3 flex items-center justify-center hover:bg-bg3 rounded transition-colors flex-shrink-0',
+  SubtaskItemStatusButton: 'flex size-4 flex-shrink-0 items-center justify-center',
   SubtaskItemInputWrapper: /*tw*/ 'flex-1 min-w-0',
-  SubtaskItemInput: /*tw*/ 'text-sm bg-transparent outline-none border-none w-full text-ellipsis',
+  SubtaskItemInput:
+    /*tw*/ 'w-full text-sm leading-5 text-t1 bg-transparent outline outline-1 outline-transparent rounded-sm px-1 -mx-1 truncate',
   SubtaskItemInputCanceled: /*tw*/ 'line-through text-t3',
-  SubtaskItemInputCompleted: /*tw*/ 'text-t3',
+  SubtaskItemInputCompleted: /*tw*/ 'line-through text-t3',
   SubtaskItemInputCreated: /*tw*/ 'text-t1',
-  SubtaskItemDragHandle:
-    /*tw*/ 'opacity-0 group-hover:opacity-100 hover:bg-bg3 p-1 rounded transition-all flex-shrink-0',
-  SubtaskItemDragHandleIcon: /*tw*/ 'size-5 text-t3',
+  SubtaskItemDragHandle: /*tw*/ 'flex size-4 flex-shrink-0 items-center justify-center text-t3 cursor-grab',
+  SubtaskItemDragHandleIcon: /*tw*/ 'size-3 text-t3',
   SubtaskItemDragging: /*tw*/ 'flex items-center h-8 bg-bg3 rounded opacity-50',
 
-  ItemTagsListContainer: /*tw*/ 'flex gap-3 items-center',
+  ItemTagsListContainer: /*tw*/ 'flex min-w-0 flex-wrap items-center gap-2',
 
-  DesktopProjectListItemLink:
-    'min-h-11 no-underline flex items-start gap-3 px-3 py-3 rounded-lg group relative cursor-default',
+  DesktopProjectListItemLink: 'group relative no-underline flex items-start gap-2 px-2 py-2 rounded-md cursor-pointer',
   DesktopProjectListItemDragging: /*tw*/ 'bg-bg3',
   DesktopProjectListItemDragHandle:
-    'absolute -left-5 top-1/2 -translate-y-1/2 size-5 text-t3 opacity-0 group-hover:opacity-60 transition-opacity',
-  DesktopProjectListItemStatusBox: /*tw*/ 'flex-shrink-0',
-  DesktopProjectListItemStatusBoxIcon: /*tw*/ 'size-5',
-  DesktopProjectListItemContent: /*tw*/ 'flex-1 min-w-0 flex gap-2 flex-col',
-  DesktopProjectListItemTitle: /*tw*/ 'text-base font-base text-t1 truncate leading-5',
-  DesktopProjectListItemChevron:
-    'flex items-center gap-1.5 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity size-5 text-t3',
-
+    'absolute left-0 top-0 flex h-full w-3 -translate-x-full items-center justify-center text-t3 opacity-0 group-hover:opacity-100 transition-opacity',
+  DesktopProjectListItemStatusBox: /*tw*/ 'flex h-5 w-4 flex-shrink-0 items-center justify-center',
+  DesktopProjectListItemStatusBoxIcon: /*tw*/ 'size-4',
+  DesktopProjectListItemContent: /*tw*/ 'flex flex-col gap-1 flex-1 min-w-0',
+  DesktopProjectListItemTitle: /*tw*/ 'flex-1 min-w-0 text-sm leading-5 font-normal text-t1 truncate px-1 -mx-1',
   DesktopPageContainer: /*tw*/ 'h-full w-full flex flex-col',
   DesktopPageContentPane: /*tw*/ 'w-full flex-1',
   DesktopPageMainPane: /*tw*/ 'h-full flex flex-col overflow-hidden',
-  DesktopPageMainContent: /*tw*/ 'flex-1 overflow-y-auto px-5',
-  DesktopPageDetailPane: /*tw*/ 'border-l border-line-regular',
+  DesktopPageMainContent: /*tw*/ 'flex-1 overflow-y-auto px-3 pb-3',
+  DesktopPageDetailPane: /*tw*/ 'border-l border-line-light',
 
   DetailPanelMinWidth: /*tw*/ 'w-45',
   DetailPanelMaxWidth: /*tw*/ 'w-128',
-  DetailPanelPreferredWidth: /*tw*/ 'w-75',
-
-  SubtaskListContainer: /*tw*/ 'space-y-0.25 group',
+  DetailPanelPreferredWidth: /*tw*/ 'w-72',
 
   SettingsContentContainer: /*tw*/ 'w-full flex flex-col h-full',
   SettingsContentBackButton: /*tw*/ 'p-3',
@@ -304,7 +329,7 @@ export const desktopStyles = {
   AreaPageNotFoundContainer: /*tw*/ 'h-full w-full bg-bg1 flex items-center justify-center',
   AreaPageNotFoundText: /*tw*/ 'text-t3 text-lg',
 
-  TaskListSectionItemsContainer: /*tw*/ 'space-y-1',
+  TaskListSectionItemsContainer: /*tw*/ '',
 
   FutureProjectsPageContainer: /*tw*/ 'h-full w-full bg-bg1',
   FutureProjectsPageWrapper: /*tw*/ 'h-full flex flex-col',
@@ -352,19 +377,18 @@ export const desktopStyles = {
 
   DragOverlayContent: /*tw*/ 'bg-bg1 shadow-sm rounded-lg',
 
-  EmptyPanelContainer: /*tw*/ 'flex items-center justify-center h-full',
-  EmptyPanelText: /*tw*/ 'text-t3',
-
   EmptyStateContainer: /*tw*/ 'text-center py-12 text-t3',
   EmptyStateText: /*tw*/ 'text-sm',
 
   SubtaskListCreateButton:
-    'flex items-center gap-2 justify-center w-full text-base leading-5 h-11 text-t3 hover:bg-bg3 px-3 rounded-lg transition-colors',
-  SubtaskListCreateButtonIcon: /*tw*/ 'size-5',
+    'appearance-none bg-transparent border-none p-0 w-full flex items-center gap-2 pt-1 text-t3 text-left cursor-pointer hover:text-t2 transition-colors',
+  SubtaskListCreateButtonIconContainer: /*tw*/ 'size-3 flex items-center justify-center',
+  SubtaskListCreateButtonIcon: /*tw*/ 'size-3',
+  SubtaskListCreateButtonLabel: /*tw*/ 'text-xs',
 
-  SidebarLayoutContainer: /*tw*/ 'h-screen w-screen relative  safe-top bg-bg3',
-  SidebarLayoutPaneWrapper: /*tw*/ 'p-4 pl-0 bg-bg3',
-  SidebarLayoutContent: /*tw*/ 'bg-bg1 rounded-lg overflow-hidden border border-line-regular h-full',
+  SidebarLayoutContainer: /*tw*/ 'h-screen w-screen relative safe-top bg-bg2',
+  SidebarLayoutPaneWrapper: /*tw*/ 'p-2 pl-0 bg-bg2',
+  SidebarLayoutContent: /*tw*/ 'h-full overflow-hidden rounded-lg border border-line-light bg-bg1',
   SidebarLayoutContentCollapsedPadding: /*tw*/ 'pl-4',
   SidebarLayoutContentShowDragHandle: /*tw*/ 'pt-0',
 
@@ -374,20 +398,17 @@ export const desktopStyles = {
 
   DesktopHeadingListItemContainer: /*tw*/ 'group relative',
   DesktopHeadingListItemContainerDragging: /*tw*/ 'bg-bg3 rounded-lg',
-  DesktopHeadingListItemContainerPadding: /*tw*/ 'pt-4',
   DesktopHeadingListItemArchived: /*tw*/ 'opacity-50! line-through',
-  DesktopHeadingListItemDivider: /*tw*/ 'h-px mb-4 shadow-sm',
-  DesktopHeadingListItemDividerHidden: /*tw*/ 'opacity-0',
   DesktopHeadingListItemContent:
-    'px-3 py-3 flex items-center gap-3 justify-between text-base leading-5 font-medium text-t1 rounded-lg transition-colors min-h-11 relative',
+    'group relative mt-4 flex min-h-8 w-full items-center gap-1 rounded-md px-2 py-1.5 cursor-pointer transition-colors',
   DesktopHeadingListItemContentFocused: /*tw*/ 'bg-bg3',
   DesktopHeadingListItemContentSelected: /*tw*/ 'bg-bg2',
-  DesktopHeadingListItemContentEditing: /*tw*/ 'editing-border rounded-l-none',
+  DesktopHeadingListItemContentEditing: /*tw*/ 'editing-border',
   DesktopHeadingListItemContentHidden: /*tw*/ 'opacity-0',
   DesktopHeadingListItemDragHandle:
-    'absolute -left-5 top-1/2 -translate-y-1/2 size-5 text-t3 opacity-0 group-hover:opacity-50 transition-opacity z-10',
-  DesktopHeadingListItemIcon: /*tw*/ 'size-5 text-t1 flex-shrink-0',
-  DesktopHeadingListItemInput: /*tw*/ 'flex-1 bg-transparent outline-none text-t1 font-medium',
+    'absolute -left-3 top-1/2 -translate-y-1/2 size-4 text-t3 opacity-0 transition-opacity group-hover:opacity-100 z-10',
+  DesktopHeadingListItemInput:
+    /*tw*/ 'flex-1 min-w-0 bg-transparent outline-none text-xs font-semibold uppercase tracking-wider text-t3 placeholder:text-t3 rounded-sm px-1 -mx-1 truncate',
 
   DragHandleContainer: /*tw*/ 'flex-1 h-full',
 

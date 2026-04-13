@@ -1,5 +1,5 @@
 import { useDesktopDndSensors } from '@/base/hooks/useDesktopDndSensors';
-import { PlusIcon, SubtaskIcon } from '@/components/icons';
+import { PlusIcon } from '@/components/icons';
 import { TaskList } from '@/components/taskList/taskList.ts';
 import { ListOperation } from '@/components/taskList/type';
 import { TaskInfo } from '@/core/state/type.ts';
@@ -123,6 +123,7 @@ export const SubtaskList: React.FC<SubtaskListProps> = ({ task }) => {
 
   return (
     <div
+      className={desktopStyles.SubtaskListSection}
       tabIndex={-1}
       onFocus={() => {
         listService.subList?.setFocus(true);
@@ -131,25 +132,21 @@ export const SubtaskList: React.FC<SubtaskListProps> = ({ task }) => {
         listService.subList?.setFocus(false);
       }}
     >
-      <div className={desktopStyles.SubtaskListTitle}>
-        <div className={desktopStyles.SubtaskListTitleIcon}>
-          <SubtaskIcon />
-        </div>
-        <span className={desktopStyles.SubtaskListTitleText}>{localize('tasks.subtasks', 'Subtasks')}</span>
-      </div>
-      <div className={desktopStyles.SubtaskListContainer}>
-        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-          <SortableContext items={task.children.map((child) => child.id)} strategy={verticalListSortingStrategy}>
-            {task.children.map((subtask) => (
-              <SubtaskItem key={subtask.id} subtask={subtask} subList={listService.subList!} />
-            ))}
-          </SortableContext>
-          <DragOverlayItem isSubtask={true} />
-        </DndContext>
-      </div>
+      <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+        <SortableContext items={task.children.map((child) => child.id)} strategy={verticalListSortingStrategy}>
+          {task.children.map((subtask) => (
+            <SubtaskItem key={subtask.id} subtask={subtask} subList={listService.subList!} />
+          ))}
+        </SortableContext>
+        <DragOverlayItem isSubtask={true} />
+      </DndContext>
       <button onClick={handleCreateFirstSubtask} className={desktopStyles.SubtaskListCreateButton}>
-        <PlusIcon className={desktopStyles.SubtaskListCreateButtonIcon} />
-        {localize('tasks.click_to_create_subtask', 'Click to create subtask')}
+        <span className={desktopStyles.SubtaskListCreateButtonIconContainer}>
+          <PlusIcon className={desktopStyles.SubtaskListCreateButtonIcon} />
+        </span>
+        <span className={desktopStyles.SubtaskListCreateButtonLabel}>
+          {localize('tasks.add_subtask', 'Add subtask')}
+        </span>
       </button>
     </div>
   );

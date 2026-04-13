@@ -1,6 +1,6 @@
 import { EditableInputSpan } from '@/components/edit/EditableInputSpan';
 import { projectHeadingTitleInputKey } from '@/components/edit/inputKeys';
-import { DragHandleIcon, HeadingIcon } from '@/components/icons';
+import { DragHandleIcon } from '@/components/icons';
 import { ITaskList } from '@/components/taskList/type.ts';
 import { ProjectHeadingInfo } from '@/core/state/type.ts';
 import { desktopStyles } from '@/desktop/theme/main';
@@ -21,14 +21,12 @@ export interface DesktopHeadingListItemProps {
   projectHeadingInfo: ProjectHeadingInfo;
   className?: string;
   taskList?: ITaskList;
-  hideDividers?: boolean;
 }
 
 export const DesktopHeadingListItem: React.FC<DesktopHeadingListItemProps> = ({
   projectHeadingInfo,
   className,
   taskList,
-  hideDividers,
 }) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: projectHeadingInfo.id,
@@ -115,17 +113,9 @@ export const DesktopHeadingListItem: React.FC<DesktopHeadingListItemProps> = ({
       {...dragListeners}
       className={classNames(desktopStyles.DesktopHeadingListItemContainer, {
         [desktopStyles.DesktopHeadingListItemContainerDragging]: isDragging,
-        [desktopStyles.DesktopHeadingListItemContainerPadding]: !hideDividers,
         [desktopStyles.DesktopHeadingListItemArchived]: projectHeadingInfo.isArchived,
       })}
     >
-      {!hideDividers && (
-        <div
-          className={classNames(desktopStyles.DesktopHeadingListItemDivider, {
-            [desktopStyles.DesktopHeadingListItemDividerHidden]: isDragging,
-          })}
-        ></div>
-      )}
       <div
         className={classNames(
           desktopStyles.DesktopHeadingListItemContent,
@@ -140,7 +130,6 @@ export const DesktopHeadingListItem: React.FC<DesktopHeadingListItemProps> = ({
         onClickCapture={handleClickCapture}
       >
         <DragHandleIcon className={desktopStyles.DesktopHeadingListItemDragHandle} />
-        <HeadingIcon className={desktopStyles.DesktopHeadingListItemIcon} />
         <EditableInputSpan
           ref={inputRef}
           inputKey={projectHeadingTitleInputKey(projectHeadingInfo.id)}

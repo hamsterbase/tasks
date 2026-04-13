@@ -10,6 +10,8 @@ import classNames from 'classnames';
 import React from 'react';
 import { Link, useLocation } from 'react-router';
 
+const ICON_STROKE_WIDTH = 1.5;
+
 interface SidebarAreaItemProps {
   areaInfo: AreaInfoState;
 }
@@ -47,9 +49,9 @@ export const SidebarAreaItem: React.FC<SidebarAreaItemProps> = ({ areaInfo }) =>
     }
   };
 
-  const sidebarAreaClass = classNames(desktopStyles.SidebarMenuItem, {
-    [desktopStyles.SidebarMenuItemActive]: isActive,
-    [desktopStyles.SidebarMenuItemInactive]: !isActive,
+  const sidebarAreaClass = classNames(desktopStyles.SidebarAreaItem, {
+    [desktopStyles.SidebarAreaItemActive]: isActive,
+    [desktopStyles.SidebarAreaItemInactive]: !isActive,
   });
 
   const areaExpandedIconClass = classNames(desktopStyles.SidebarAreaToggleButton, {
@@ -68,14 +70,14 @@ export const SidebarAreaItem: React.FC<SidebarAreaItemProps> = ({ areaInfo }) =>
         to={`/desktop/area/${areaInfo.uid}`}
         className={classNames(sidebarAreaClass)}
       >
-        <div className={classNames(desktopStyles.SidebarMenuItemIcon)}>
-          <AreaIcon />
+        <div className={classNames(desktopStyles.SidebarAreaItemIcon)}>
+          <AreaIcon strokeWidth={ICON_STROKE_WIDTH} />
         </div>
         <span className={classNames(desktopStyles.SidebarMenuItemLabel)}>
           {areaInfo.title || localize('area.untitled', 'New Area')}
         </span>
         <button onClick={handleToggle} onPointerDown={(e) => e.stopPropagation()} className={areaExpandedIconClass}>
-          <AreaExpandedIcon />
+          <AreaExpandedIcon strokeWidth={ICON_STROKE_WIDTH} />
         </button>
       </Link>
     </div>

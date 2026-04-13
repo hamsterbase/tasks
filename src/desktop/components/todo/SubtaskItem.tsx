@@ -134,7 +134,7 @@ export const SubtaskItem: React.FC<SubtaskItemProps> = ({ subtask, subList, clas
         onPointerDown={handleStopPropagation}
         className={desktopStyles.SubtaskItemStatusButton}
       >
-        <TaskStatusBox status={subtask.status} />
+        <TaskStatusBox status={subtask.status} size="sm" />
       </button>
 
       <div

@@ -3,17 +3,22 @@ import { PanelLeftIcon, TaskDisplaySettingsIcon } from '@/components/icons';
 import { desktopStyles } from '@/desktop/theme/main';
 import { localize } from '@/nls';
 import { TextAreaRef } from 'rc-textarea';
+import classNames from 'classnames';
 import React, { ReactNode, useRef } from 'react';
+
+const ICON_STROKE_WIDTH = 1.5;
 
 interface HeaderAction {
   icon: ReactNode;
   handleClick: (e: React.MouseEvent) => void;
   label: string;
   title: string;
+  iconOnly?: boolean;
 }
 
 interface EntityHeaderProps {
   renderIcon: () => ReactNode;
+  onIconClick?: () => void;
   title: string;
   inputKey?: string;
   inputId?: string;
@@ -31,6 +36,7 @@ interface EntityHeaderProps {
 
 export const EntityHeader: React.FC<EntityHeaderProps> = ({
   renderIcon,
+  onIconClick,
   title,
   inputKey,
   inputId,
@@ -41,6 +47,12 @@ export const EntityHeader: React.FC<EntityHeaderProps> = ({
   internalActions,
 }) => {
   const textAreaRef = useRef<TextAreaRef>(null);
+  const headerIcon = renderIcon();
+  const headerIconNode = React.isValidElement<{ className?: string }>(headerIcon)
+    ? React.cloneElement(headerIcon, {
+        className: classNames(desktopStyles.EntityHeaderIconSvg, headerIcon.props.className),
+      })
+    : headerIcon;
   const handleSave = (value: string) => {
     onSave?.(value);
   };
@@ -53,10 +65,11 @@ export const EntityHeader: React.FC<EntityHeaderProps> = ({
     };
 
     allActions.push({
-      icon: <TaskDisplaySettingsIcon />,
+      icon: <TaskDisplaySettingsIcon strokeWidth={ICON_STROKE_WIDTH} />,
       handleClick: handleOpenTaskDisplaySettings,
       label: localize('inbox.display', 'Display'),
       title: localize('inbox.taskDisplaySettings', 'Task Display Settings'),
+      iconOnly: true,
     });
   }
 
@@ -71,7 +84,9 @@ export const EntityHeader: React.FC<EntityHeaderProps> = ({
           <PanelLeftIcon className={desktopStyles.EntityHeaderPanelIcon} />
         </div>
         <div className={desktopStyles.EntityHeaderIconContainer}>
-          <button className={desktopStyles.EntityHeaderIconButton}>{renderIcon()}</button>
+          <button className={desktopStyles.EntityHeaderIconButton} onClick={onIconClick}>
+            {headerIconNode}
+          </button>
         </div>
         {editable && inputKey && onSave ? (
           <EditableTextArea
@@ -93,17 +108,36 @@ export const EntityHeader: React.FC<EntityHeaderProps> = ({
       </div>
       {allActions.length > 0 && (
         <div className={desktopStyles.EntityHeaderActionsContainer}>
-          {allActions.map((action, index) => (
-            <button
-              key={index}
-              className={desktopStyles.EntityHeaderActionButton}
-              title={action.title}
-              onClick={action.handleClick}
-            >
-              <span className={desktopStyles.EntityHeaderActionIcon}>{action.icon}</span>
-              <span className={desktopStyles.EntityHeaderActionLabel}>{action.label}</span>
-            </button>
-          ))}
+          {allActions.map((action, index) =>
+            (() => {
+              const actionIcon = React.isValidElement<{ className?: string }>(action.icon)
+                ? React.cloneElement(action.icon, {
+                    className: classNames(
+                      action.iconOnly
+                        ? desktopStyles.EntityHeaderIconActionIcon
+                        : desktopStyles.EntityHeaderActionIconSvg,
+                      action.icon.props.className
+                    ),
+                  })
+                : action.icon;
+
+              return (
+                <button
+                  key={index}
+                  className={
+                    action.iconOnly
+                      ? desktopStyles.EntityHeaderIconActionButton
+                      : desktopStyles.EntityHeaderActionButton
+                  }
+                  title={action.title}
+                  onClick={action.handleClick}
+                >
+                  <span className={desktopStyles.EntityHeaderActionIcon}>{actionIcon}</span>
+                  {!action.iconOnly && <span className={desktopStyles.EntityHeaderActionLabel}>{action.label}</span>}
+                </button>
+              );
+            })()
+          )}
         </div>
       )}
     </div>

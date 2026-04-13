@@ -1,17 +1,18 @@
 import {
   AreaIcon,
+  CalendarIcon,
   CalendarCheckIcon,
   CalendarRangeIcon,
   CalendarXIcon,
-  DueIcon,
+  FlagIcon,
   SubtaskIcon,
   TagIcon,
 } from '@/components/icons';
-import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox';
 import { ItemStatus } from '@/core/type';
 import { desktopStyles } from '@/desktop/theme/main';
 import classNames from 'classnames';
 import React from 'react';
+import { ProjectIcon } from './ProjectIcon';
 
 export interface ItemTagProps {
   icon?: {
@@ -23,6 +24,8 @@ export interface ItemTagProps {
 }
 
 export const ItemTag: React.FC<ItemTagProps> = ({ icon, label, isSelected }) => {
+  const isDanger = icon?.type === 'DueIcon' && /\bago\b/i.test(label);
+
   const renderIcon = () => {
     if (!icon) return null;
 
@@ -32,23 +35,20 @@ export const ItemTag: React.FC<ItemTagProps> = ({ icon, label, isSelected }) => 
 
       case 'ProjectStatusBox':
         return (
-          <ProjectStatusBox
-            progress={icon.props?.progress as number}
-            status={icon.props?.status as ItemStatus}
-            border={icon.props?.border as string}
-            color="t3"
-          />
+          <ProjectIcon progress={icon.props?.progress as number} status={icon.props?.status as ItemStatus} size="xs" />
         );
       case 'CalendarCheckIcon':
         return <CalendarCheckIcon />;
       case 'CalendarXIcon':
         return <CalendarXIcon />;
+      case 'CalendarIcon':
+        return <CalendarIcon />;
       case 'CalendarRangeIcon':
         return <CalendarRangeIcon />;
       case 'TagIcon':
         return <TagIcon />;
       case 'DueIcon':
-        return <DueIcon />;
+        return <FlagIcon />;
       case 'ChecklistIcon': {
         return <SubtaskIcon />;
       }
@@ -58,14 +58,24 @@ export const ItemTag: React.FC<ItemTagProps> = ({ icon, label, isSelected }) => 
       }
     }
   };
+
+  const iconNode = renderIcon();
+  const sizedIconNode = React.isValidElement<{ className?: string }>(iconNode)
+    ? React.cloneElement(iconNode, {
+        className: classNames(desktopStyles.ItemTagIconSvg, iconNode.props.className),
+      })
+    : iconNode;
+
   return (
     <div
       className={classNames(desktopStyles.ItemTagContainer, {
         [desktopStyles.ItemTagSelected]: isSelected,
         [desktopStyles.ItemTagUnselected]: !isSelected,
+        [desktopStyles.ItemTagDanger]: isDanger,
+        [desktopStyles.ItemTagNormal]: !isDanger,
       })}
     >
-      {icon && <span className={desktopStyles.ItemTagIcon}>{renderIcon()}</span>}
+      {icon && <span className={desktopStyles.ItemTagIcon}>{sizedIconNode}</span>}
       <span className={desktopStyles.ItemTagLabel}>{label}</span>
     </div>
   );

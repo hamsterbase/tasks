@@ -9,6 +9,7 @@ import {
   ArrowUp,
   Bell,
   Bot,
+  Box,
   Brain,
   Calendar,
   CalendarCheck,
@@ -40,7 +41,7 @@ import {
   LocateFixed,
   MessageSquare,
   MessageSquareReply,
-  MoreVerticalIcon,
+  MoreVertical,
   Notebook,
   Palette,
   PanelLeft,
@@ -71,7 +72,7 @@ export const DueIcon = LocateFixed;
 export const HomeIcon = Home;
 export const InboxIcon = Inbox;
 export const LogIcon = CircleCheck;
-export const MenuIcon = MoreVerticalIcon;
+export const MenuIcon = MoreVertical;
 export const NoteIcon = FileText;
 export const ScheduledIcon = Calendar;
 export const RightArrowIcon = ArrowRight;
@@ -119,6 +120,7 @@ export const Repeat2Icon = Repeat2;
 export const SearchIcon = Search;
 export const SquareTerminalIcon = SquareTerminal;
 export const AIIcon = Bot;
+export const BoxIcon = Box;
 export const ChatIcon = MessageSquare;
 export const ReplyIcon = MessageSquareReply;
 export const LinkIcon = Link;

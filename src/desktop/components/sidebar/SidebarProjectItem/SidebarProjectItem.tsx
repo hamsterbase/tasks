@@ -1,4 +1,3 @@
-import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox';
 import { ProjectInfoState } from '@/core/state/type';
 import { formatDueDateInList } from '@/core/time/formatDueDateInList';
 import { isPastOrToday } from '@/core/time/isPast';
@@ -9,6 +8,7 @@ import classNames from 'classnames';
 import React from 'react';
 import { Link, useLocation } from 'react-router';
 import { desktopStyles } from '../../../theme/main';
+import { ProjectIcon } from '../../todo/ProjectIcon';
 
 interface SidebarProjectItemProps {
   projectInfo: ProjectInfoState;
@@ -43,7 +43,6 @@ export const SidebarProjectItem: React.FC<SidebarProjectItemProps> = ({ projectI
   const sidebarProjectClass = classNames(desktopStyles.SidebarMenuItem, {
     [desktopStyles.SidebarProjectItemActive]: isActive,
     [desktopStyles.SidebarProjectItemInactive]: !isActive,
-    'mb-0.5': true,
   });
 
   return (
@@ -55,19 +54,20 @@ export const SidebarProjectItem: React.FC<SidebarProjectItemProps> = ({ projectI
       {...attributes}
       {...listeners}
     >
-      <div className={classNames(desktopStyles.SidebarMenuItemIcon)}>
-        <ProjectStatusBox
-          progress={projectInfo.progress}
-          status={projectInfo.status}
-          color={isActive ? 'white' : 't2'}
-        />
+      <div className={classNames(desktopStyles.SidebarProjectItemIcon)}>
+        <ProjectIcon progress={projectInfo.progress} status={projectInfo.status} size="md" />
       </div>
       <span className={classNames(desktopStyles.SidebarMenuItemLabel)}>
         {projectInfo.title || localize('project.untitled', 'New Project')}
       </span>
 
       {projectInfo.dueDate && (
-        <div className={getSidebarProjectDueDateStyle(projectInfo.dueDate, isActive)}>
+        <div
+          className={classNames(
+            desktopStyles.SidebarProjectItemDueDate,
+            getSidebarProjectDueDateStyle(projectInfo.dueDate, isActive)
+          )}
+        >
           {formatDueDateInList(projectInfo.dueDate)}
         </div>
       )}

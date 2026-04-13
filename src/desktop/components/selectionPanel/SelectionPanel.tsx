@@ -7,7 +7,6 @@ import { ITodoService } from '@/services/todo/common/todoService.ts';
 import React from 'react';
 import { matchPath, useLocation } from 'react-router';
 import { AreaDetailPanel } from './area/AreaDetailPanel.tsx';
-import { EmptyPanel } from './EmptyPanel.tsx';
 import { HeadingDetailView } from './HeadingDetailView.tsx';
 import { MultipleSelectionView } from './MultipleSelectionView.tsx';
 import { ProjectDetailPanel } from './project/ProjectDetailPanel.tsx';
@@ -43,7 +42,7 @@ export const SelectionPanel: React.FC = () => {
       return <ProjectDetailPanel />;
     }
 
-    return <EmptyPanel />;
+    return null;
   }
 
   if (selectedItems.length > 1) {
@@ -54,7 +53,7 @@ export const SelectionPanel: React.FC = () => {
   const taskObject = todoService.modelState.taskObjectMap.get(selectedItemId);
 
   if (!taskObject) {
-    return <EmptyPanel />;
+    return null;
   }
 
   if (taskObject.type === 'task') {
@@ -67,5 +66,5 @@ export const SelectionPanel: React.FC = () => {
     return <HeadingDetailView heading={headingInfo} onClearSelection={handleClearSelection} />;
   }
 
-  return <EmptyPanel />;
+  return null;
 };

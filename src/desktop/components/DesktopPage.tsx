@@ -24,6 +24,8 @@ export const DesktopPage: React.FC<DesktopPageProps> = ({ header, children, show
     );
   }
 
+  const selectionPanel = <SelectionPanel />;
+
   return (
     <div className={desktopStyles.DesktopPageContainer}>
       <Allotment.Pane className={desktopStyles.DesktopPageContentPane}>
@@ -32,15 +34,17 @@ export const DesktopPage: React.FC<DesktopPageProps> = ({ header, children, show
             {header}
             <div className={desktopStyles.DesktopPageMainContent}>{children}</div>
           </Allotment.Pane>
-          <Allotment.Pane
-            minSize={calculateElementWidth(desktopStyles.DetailPanelMinWidth)}
-            maxSize={calculateElementWidth(desktopStyles.DetailPanelMaxWidth)}
-            preferredSize={calculateElementWidth(desktopStyles.DetailPanelPreferredWidth)}
-            snap
-            className={desktopStyles.DesktopPageDetailPane}
-          >
-            <SelectionPanel />
-          </Allotment.Pane>
+          {selectionPanel && (
+            <Allotment.Pane
+              minSize={calculateElementWidth(desktopStyles.DetailPanelMinWidth)}
+              maxSize={calculateElementWidth(desktopStyles.DetailPanelMaxWidth)}
+              preferredSize={calculateElementWidth(desktopStyles.DetailPanelPreferredWidth)}
+              snap
+              className={desktopStyles.DesktopPageDetailPane}
+            >
+              {selectionPanel}
+            </Allotment.Pane>
+          )}
         </Allotment>
       </Allotment.Pane>
     </div>

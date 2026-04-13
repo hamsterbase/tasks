@@ -1,6 +1,6 @@
 import { EditableTextArea } from '@/components/edit/EditableTextArea.tsx';
 import { areaTitleInputKey } from '@/components/edit/inputKeys.ts';
-import { MenuIcon } from '@/components/icons';
+import { AreaIcon, MenuIcon } from '@/components/icons';
 import { getAreaDetail } from '@/core/state/getArea';
 import { desktopStyles } from '@/desktop/theme/main.ts';
 import { useService } from '@/hooks/use-service';
@@ -12,6 +12,8 @@ import React from 'react';
 import { useParams } from 'react-router';
 import { TagsField } from '../../TagsField';
 import { useAreaDesktopProjectMenu } from './useAreaDesktopProjectMenu';
+
+const ICON_STROKE_WIDTH = 1.5;
 
 const useAreaId = (): TreeID | null => {
   const todoService = useService(ITodoService);
@@ -47,6 +49,9 @@ const AreaDetailPanelContent: React.FC<IAreaDetailPanelContentProps> = ({ areaId
   return (
     <div className={desktopStyles.DetailViewContainer}>
       <div className={desktopStyles.DetailViewHeader}>
+        <div className={desktopStyles.DetailViewHeaderStatusIcon}>
+          <AreaIcon className={desktopStyles.DetailViewHeaderStatusBox} />
+        </div>
         <EditableTextArea
           inputKey={areaTitleInputKey(areaId)}
           defaultValue={area.title}
@@ -57,7 +62,7 @@ const AreaDetailPanelContent: React.FC<IAreaDetailPanelContentProps> = ({ areaId
           autoSize={{ minRows: 1 }}
         />
         <button onClick={handleMenuClick} className={desktopStyles.DetailViewHeaderMenuButton}>
-          <MenuIcon className={desktopStyles.DetailViewHeaderMenuIcon} />
+          <MenuIcon className={desktopStyles.DetailViewHeaderMenuIcon} strokeWidth={ICON_STROKE_WIDTH} />
         </button>
       </div>
 

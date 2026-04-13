@@ -8,7 +8,6 @@ import { EntityHeader } from '@/desktop/components/common/EntityHeader';
 import { DesktopPage } from '@/desktop/components/DesktopPage';
 import { DesktopProjectList } from '@/desktop/components/DesktopProjectList/DesktopProjectList';
 import { InboxTaskInput } from '@/desktop/components/inboxTaskInput/InboxTaskInput';
-import { TitleContentSection } from '@/desktop/components/TitleContentSection';
 import { useDesktopTaskDisplaySettings } from '@/desktop/hooks/useDesktopTaskDisplaySettings';
 import { useScrollToTask } from '@/desktop/hooks/useScrollToTask';
 import { useTaskCommands } from '@/desktop/hooks/useTaskCommands';
@@ -65,10 +64,6 @@ const AreaPageContent: React.FC<AreaPageContentProps> = ({ area, areaId }) => {
 
   useWatchEvent(todoService.onStateChange);
   useWatchEvent(listService.onMainListChange);
-
-  const handleCreateProject = () => {
-    todoService.fireTaskCommand({ type: 'createProject' });
-  };
 
   useTaskCommands({
     createTask: {
@@ -137,24 +132,23 @@ const AreaPageContent: React.FC<AreaPageContentProps> = ({ area, areaId }) => {
         />
       }
     >
-      <TitleContentSection
-        title={localize('area.projects', 'Projects')}
-        action={
-          <button onClick={handleCreateProject} className={desktopStyles.TitleContentSectionActionButton}>
-            {localize('area.newProject', 'New Project')}
-          </button>
-        }
-      >
+      <div className={desktopStyles.TodaySectionHeading}>
+        <h2 className={desktopStyles.TodaySectionTitle}>{localize('area.projects', 'Projects')}</h2>
+      </div>
+      <div>
         <DesktopProjectList
           projects={projects}
           hideProjectTitle
           emptyStateLabel={localize('area.noProjects', 'No projects')}
         />
-      </TitleContentSection>
-      <TitleContentSection title={localize('area.tasks', 'Tasks')}>
+      </div>
+      <div className={desktopStyles.TodaySectionHeading}>
+        <h2 className={desktopStyles.TodaySectionTitle}>{localize('area.tasks', 'Tasks')}</h2>
+      </div>
+      <div>
         <InboxTaskInput />
         <TaskListSection tasks={tasks} willDisappearObjectIdSet={willDisappearObjectIdSet} areaId={area.id} />
-      </TitleContentSection>
+      </div>
     </DesktopPage>
   );
 };

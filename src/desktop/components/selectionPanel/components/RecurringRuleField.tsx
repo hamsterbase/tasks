@@ -1,4 +1,4 @@
-import { RepeatIcon } from '@/components/icons';
+import { Repeat2Icon } from '@/components/icons';
 import { recurringToString } from '@/core/time/recurringToString';
 import { RecurringRule } from '@/core/type';
 import { useRecurringTaskSettings } from '@/desktop/overlay/recurringTaskSettings/useRecurringTaskSettings';
@@ -8,6 +8,7 @@ import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService';
 import { TreeID } from 'loro-crdt';
 import React from 'react';
+import { TaskDetailAttributeRow } from './TaskDetailAttributeRow';
 
 interface RecurringRuleFieldProps {
   taskId: TreeID;
@@ -46,20 +47,23 @@ export const RecurringRuleField: React.FC<RecurringRuleFieldProps> = ({ recurrin
 
   const displayText = formatRecurringRule(recurringRule);
 
-  if (!displayText || displayText.length === 0) {
-    return null;
-  }
-
   return (
-    <button className={desktopStyles.SelectionFieldButton} onClick={handleClick}>
-      <div className={desktopStyles.SelectionFieldIcon}>
-        <RepeatIcon />
-      </div>
-      <div className={desktopStyles.RecurringRuleContent}>
-        {displayText.map((text) => (
-          <span key={text}>{text}</span>
-        ))}
-      </div>
-    </button>
+    <TaskDetailAttributeRow
+      icon={<Repeat2Icon className={desktopStyles.TaskDetailAttributeIcon} />}
+      label={localize('tasks.recurring', 'Repeat')}
+      onClick={handleClick}
+      placeholder={displayText.length === 0}
+      content={
+        displayText.length === 0 ? (
+          localize('tasks.recurring_placeholder', 'Not set')
+        ) : (
+          <div className={desktopStyles.RecurringRuleContent}>
+            {displayText.map((text) => (
+              <span key={text}>{text}</span>
+            ))}
+          </div>
+        )
+      }
+    />
   );
 };

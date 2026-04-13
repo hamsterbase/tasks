@@ -1,3 +1,9 @@
+html,
+body {
+  height: 100%;
+  overscroll-behavior: none;
+}
+
 * {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
@@ -26,6 +32,10 @@ body {
   background-color: var(--color-bg1);
   -webkit-font-smoothing: antialiased;
   letter-spacing: -0.015em;
+}
+
+#root {
+  height: 100vh;
 }
 
 *:focus:not(:focus-visible) {

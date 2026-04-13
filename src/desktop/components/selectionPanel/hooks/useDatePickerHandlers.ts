@@ -14,7 +14,7 @@ export const useDatePickerHandlers = ({ task }: UseDatePickerHandlersProps) => {
   const showDatePickerAtPosition = (
     currentDate: number | undefined,
     onDateSelect: (date: number | null) => void,
-    e: React.MouseEvent<HTMLButtonElement>
+    e: React.MouseEvent<HTMLElement>
   ) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const position = {
@@ -24,7 +24,7 @@ export const useDatePickerHandlers = ({ task }: UseDatePickerHandlersProps) => {
     showDatePicker(currentDate, onDateSelect, position);
   };
 
-  const handleStartDateClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleStartDateClick = (e: React.MouseEvent<HTMLElement>) => {
     showDatePickerAtPosition(
       task.startDate,
       (date) => {
@@ -36,7 +36,7 @@ export const useDatePickerHandlers = ({ task }: UseDatePickerHandlersProps) => {
     );
   };
 
-  const handleDueDateClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleDueDateClick = (e: React.MouseEvent<HTMLElement>) => {
     showDatePickerAtPosition(
       task.dueDate,
       (date) => {

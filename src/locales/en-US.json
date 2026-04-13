@@ -568,6 +568,38 @@
     "defaultMessage": "Create tag \"{0}\"",
     "content": "Create tag \"{0}\""
   },
+  "desktop.task_detail.add_reminder": {
+    "defaultMessage": "Add reminder",
+    "content": "Add reminder"
+  },
+  "desktop.task_detail.due_date": {
+    "defaultMessage": "Due Date",
+    "content": "Due Date"
+  },
+  "desktop.task_detail.notes_placeholder": {
+    "defaultMessage": "Add notes...",
+    "content": "Add notes..."
+  },
+  "desktop.task_detail.reminders": {
+    "defaultMessage": "Reminders",
+    "content": "Reminders"
+  },
+  "desktop.task_detail.reminders_empty": {
+    "defaultMessage": "No reminders",
+    "content": "No reminders"
+  },
+  "desktop.task_detail.start_date": {
+    "defaultMessage": "Start Date",
+    "content": "Start Date"
+  },
+  "desktop.task_detail.subtasks": {
+    "defaultMessage": "Subtasks",
+    "content": "Subtasks"
+  },
+  "desktop.task_detail.unset": {
+    "defaultMessage": "Not set",
+    "content": "Not set"
+  },
   "display_settings.completed_tasks": {
     "defaultMessage": "Completed Tasks",
     "content": "Completed Tasks"
@@ -764,6 +796,10 @@
     "defaultMessage": "About HamsterBase Tasks",
     "content": "About HamsterBase Tasks"
   },
+  "menu.close": {
+    "defaultMessage": "Close Window",
+    "content": "Close Window"
+  },
   "menu.copy": {
     "defaultMessage": "Copy",
     "content": "Copy"
@@ -792,6 +828,10 @@
     "defaultMessage": "Help",
     "content": "Help"
   },
+  "menu.minimize": {
+    "defaultMessage": "Minimize",
+    "content": "Minimize"
+  },
   "menu.paste": {
     "defaultMessage": "Paste",
     "content": "Paste"
@@ -819,6 +859,14 @@
   "menu.view": {
     "defaultMessage": "View",
     "content": "View"
+  },
+  "menu.window": {
+    "defaultMessage": "Window",
+    "content": "Window"
+  },
+  "menu.zoom": {
+    "defaultMessage": "Zoom",
+    "content": "Zoom"
   },
   "message.undo": {
     "defaultMessage": "Undo",
@@ -1648,9 +1696,13 @@
     "defaultMessage": "New Task",
     "content": "New Task"
   },
+  "tasks.add_subtask": {
+    "defaultMessage": "Add subtask",
+    "content": "Add subtask"
+  },
   "tasks.add.tags": {
-    "defaultMessage": "Add Tags",
-    "content": "Add Tags"
+    "defaultMessage": "Not set",
+    "content": "Not set"
   },
   "tasks.click_to_create_subtask": {
     "defaultMessage": "Click to create subtask",
@@ -1676,6 +1728,14 @@
     "defaultMessage": "Select due date",
     "content": "Select due date"
   },
+  "tasks.location": {
+    "defaultMessage": "Location",
+    "content": "Location"
+  },
+  "tasks.location.empty": {
+    "defaultMessage": "Not set",
+    "content": "Not set"
+  },
   "tasks.location.move": {
     "defaultMessage": "Move to",
     "content": "Move to"
@@ -1700,9 +1760,17 @@
     "defaultMessage": "1 day ago",
     "content": "1 day ago"
   },
+  "tasks.recurring": {
+    "defaultMessage": "Repeat",
+    "content": "Repeat"
+  },
   "tasks.recurring_due_date": {
     "defaultMessage": "DueDate: {0}",
     "content": "DueDate: {0}"
+  },
+  "tasks.recurring_placeholder": {
+    "defaultMessage": "Not set",
+    "content": "Not set"
   },
   "tasks.recurring_start_date": {
     "defaultMessage": "StartDate: {0}",
@@ -1739,6 +1807,10 @@
   "tasks.subtasks": {
     "defaultMessage": "Subtasks",
     "content": "Subtasks"
+  },
+  "tasks.tags": {
+    "defaultMessage": "Tags",
+    "content": "Tags"
   },
   "tasks.title_placeholder": {
     "defaultMessage": "Add title...",

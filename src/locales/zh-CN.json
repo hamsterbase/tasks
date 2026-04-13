@@ -568,6 +568,38 @@
     "defaultMessage": "Create tag \"{0}\"",
     "content": "创建标签 \"{0}\""
   },
+  "desktop.task_detail.add_reminder": {
+    "defaultMessage": "Add reminder",
+    "content": "添加提醒"
+  },
+  "desktop.task_detail.due_date": {
+    "defaultMessage": "Due Date",
+    "content": "截止日期"
+  },
+  "desktop.task_detail.notes_placeholder": {
+    "defaultMessage": "Add notes...",
+    "content": "添加笔记..."
+  },
+  "desktop.task_detail.reminders": {
+    "defaultMessage": "Reminders",
+    "content": "提醒"
+  },
+  "desktop.task_detail.reminders_empty": {
+    "defaultMessage": "No reminders",
+    "content": "暂无提醒"
+  },
+  "desktop.task_detail.start_date": {
+    "defaultMessage": "Start Date",
+    "content": "开始日期"
+  },
+  "desktop.task_detail.subtasks": {
+    "defaultMessage": "Subtasks",
+    "content": "子任务"
+  },
+  "desktop.task_detail.unset": {
+    "defaultMessage": "Not set",
+    "content": "未设置"
+  },
   "display_settings.completed_tasks": {
     "defaultMessage": "Completed Tasks",
     "content": "已完成任务"
@@ -764,6 +796,10 @@
     "defaultMessage": "About HamsterBase Tasks",
     "content": "关于 HamsterBase Tasks"
   },
+  "menu.close": {
+    "defaultMessage": "Close Window",
+    "content": ""
+  },
   "menu.copy": {
     "defaultMessage": "Copy",
     "content": "复制"
@@ -792,6 +828,10 @@
     "defaultMessage": "Help",
     "content": "帮助"
   },
+  "menu.minimize": {
+    "defaultMessage": "Minimize",
+    "content": ""
+  },
   "menu.paste": {
     "defaultMessage": "Paste",
     "content": "粘贴"
@@ -819,6 +859,14 @@
   "menu.view": {
     "defaultMessage": "View",
     "content": "视图"
+  },
+  "menu.window": {
+    "defaultMessage": "Window",
+    "content": ""
+  },
+  "menu.zoom": {
+    "defaultMessage": "Zoom",
+    "content": ""
   },
   "message.undo": {
     "defaultMessage": "Undo",
@@ -1648,9 +1696,13 @@
     "defaultMessage": "New Task",
     "content": "新任务"
   },
+  "tasks.add_subtask": {
+    "defaultMessage": "Add subtask",
+    "content": "添加子任务"
+  },
   "tasks.add.tags": {
-    "defaultMessage": "Add Tags",
-    "content": "添加标签"
+    "defaultMessage": "Not set",
+    "content": "未设置"
   },
   "tasks.click_to_create_subtask": {
     "defaultMessage": "Click to create subtask",
@@ -1676,6 +1728,14 @@
     "defaultMessage": "Select due date",
     "content": "选择截止日期"
   },
+  "tasks.location": {
+    "defaultMessage": "Location",
+    "content": "归属"
+  },
+  "tasks.location.empty": {
+    "defaultMessage": "Not set",
+    "content": "未设置"
+  },
   "tasks.location.move": {
     "defaultMessage": "Move to",
     "content": "移动到"
@@ -1700,9 +1760,17 @@
     "defaultMessage": "1 day ago",
     "content": "1天前"
   },
+  "tasks.recurring": {
+    "defaultMessage": "Repeat",
+    "content": "重复"
+  },
   "tasks.recurring_due_date": {
     "defaultMessage": "DueDate: {0}",
     "content": "截止日期：{0}"
+  },
+  "tasks.recurring_placeholder": {
+    "defaultMessage": "Not set",
+    "content": "未设置"
   },
   "tasks.recurring_start_date": {
     "defaultMessage": "StartDate: {0}",
@@ -1739,6 +1807,10 @@
   "tasks.subtasks": {
     "defaultMessage": "Subtasks",
     "content": "子任务"
+  },
+  "tasks.tags": {
+    "defaultMessage": "Tags",
+    "content": "标签"
   },
   "tasks.title_placeholder": {
     "defaultMessage": "Add title...",
