@@ -401,9 +401,9 @@ export const desktopStyles = {
   DesktopHeadingListItemContainerDragging: /*tw*/ 'bg-bg3 rounded-lg',
   DesktopHeadingListItemArchived: /*tw*/ 'opacity-50! line-through',
   DesktopHeadingListItemContent:
-    'group relative mt-4 flex min-h-8 w-full items-center gap-1 rounded-md px-2 py-1.5 cursor-pointer transition-colors',
+    'group relative mt-4 flex w-full items-center gap-1 rounded-md px-2 py-1.5 cursor-pointer transition-colors',
   DesktopHeadingListItemContentFocused: /*tw*/ 'bg-bg3',
-  DesktopHeadingListItemContentSelected: /*tw*/ 'bg-bg2',
+  DesktopHeadingListItemContentSelected: /*tw*/ 'bg-bg3',
   DesktopHeadingListItemContentEditing: /*tw*/ 'editing-border',
   DesktopHeadingListItemContentHidden: /*tw*/ 'opacity-0',
   DesktopHeadingListItemDragHandle:
