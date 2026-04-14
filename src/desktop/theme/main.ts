@@ -525,7 +525,6 @@ export const desktopStyles = {
   DatePickerCalendarDayNotCurrentMonth: /*tw*/ 'text-t4',
   DatePickerCalendarDayToday: /*tw*/ 'text-brand',
   DatePickerCalendarDayCurrentMonth: /*tw*/ 'text-t1',
-  DatePickerCalendarTodayLabel: /*tw*/ 'absolute top-0 left-0 w-full h-full flex items-center justify-center text-xs',
   DatePickerCalendarWeekdayGrid: /*tw*/ 'grid grid-cols-7 gap-0.5 pt-1 pb-0.5',
   DatePickerCalendarWeekdayCell: /*tw*/ 'h-5 flex items-center justify-center text-[10px] text-t3',
 
