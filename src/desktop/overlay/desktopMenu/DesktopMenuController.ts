@@ -14,7 +14,10 @@ import {
 
 export interface IMenuConfig {
   label: string;
+  icon?: 'plus-circle' | 'copy' | 'trash';
   checked?: boolean;
+  danger?: boolean;
+  dividerAbove?: boolean;
   onSelect?: () => void;
   submenu?: Array<IMenuSubmenuConfig[]>;
   disabled?: boolean;
@@ -259,10 +262,6 @@ export class DesktopMenuController implements IDisposable {
     this._desktopMenuHasSubmenuContext = DesktopMenuHasSubmenu.bindTo(contextKeyService);
     this._desktopMenuIsSubmenuOpenContext = DesktopMenuIsSubmenuOpen.bindTo(contextKeyService);
 
-    if (this.menuConfig.length > 0) {
-      this._activeIndex = 0;
-    }
-
     this._desktopMenuFocusContext.set(true);
     this.updateContextKeys();
   }
@@ -278,7 +277,7 @@ export class DesktopMenuController implements IDisposable {
     this._desktopMenuIsSubmenuOpenContext.set(this.isSubmenuOpen);
   }
 
-  setActiveIndex(index: number) {
+  setActiveIndex(index: number | null) {
     this._activeIndex = index;
     this._isSubmenuOpen = false;
     this._activeSubmenuIndex = null;
@@ -306,6 +305,12 @@ export class DesktopMenuController implements IDisposable {
         this.fireStatusChange();
       }
     } else {
+      if (this._activeIndex === null && this.menuConfig.length > 0) {
+        this._activeIndex = 0;
+        this.updateContextKeys();
+        this.fireStatusChange();
+        return;
+      }
       if (this._activeIndex !== null && this._activeIndex < this.menuConfig.length - 1) {
         this._activeIndex++;
         this.updateContextKeys();
@@ -322,6 +327,12 @@ export class DesktopMenuController implements IDisposable {
         this.fireStatusChange();
       }
     } else {
+      if (this._activeIndex === null && this.menuConfig.length > 0) {
+        this._activeIndex = this.menuConfig.length - 1;
+        this.updateContextKeys();
+        this.fireStatusChange();
+        return;
+      }
       if (this._activeIndex !== null && this._activeIndex > 0) {
         this._activeIndex--;
         this.updateContextKeys();

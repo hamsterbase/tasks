@@ -7,6 +7,7 @@ import { TaskStatusBox } from '@/desktop/components/todo/TaskStatusBox';
 import { useTaskMenu } from '@/desktop/hooks/useTaskMenu.ts';
 import { desktopStyles } from '@/desktop/theme/main.ts';
 import { localize } from '@/nls';
+import { TestIds } from '@/testIds';
 import React from 'react';
 import { TagsField } from '../TagsField';
 import { SubtaskList } from './SubtaskList';
@@ -58,7 +59,11 @@ export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task, onClearSel
           className={desktopStyles.DetailViewHeaderTitle}
         />
         <div className={desktopStyles.DetailViewHeaderActions}>
-          <button onClick={handleMenuClick} className={desktopStyles.DetailViewHeaderMenuButton}>
+          <button
+            data-test-id={TestIds.TaskDetail.MenuButton}
+            onClick={handleMenuClick}
+            className={desktopStyles.DetailViewHeaderMenuButton}
+          >
             <MenuIcon className={desktopStyles.DetailViewHeaderMenuIcon} />
           </button>
           {onClearSelection && (

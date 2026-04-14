@@ -47,4 +47,16 @@ export const TestIds = {
     /** Display settings button in mobile page header */
     DisplaySettingsButton: 'page-header-display-settings-button',
   },
+  TaskDetail: {
+    /** Menu button in task detail panel header */
+    MenuButton: 'task-detail-menu-button',
+  },
+  DatePicker: {
+    /** Desktop date picker overlay container */
+    Overlay: 'date-picker-overlay',
+  },
+  TagEditor: {
+    /** Desktop tag editor overlay container */
+    Overlay: 'tag-editor-overlay',
+  },
 } as const;

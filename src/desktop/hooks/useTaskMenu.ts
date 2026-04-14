@@ -35,14 +35,19 @@ export const useTaskMenu = (taskId: TreeID, task: TaskInfo) => {
     return [
       {
         label: localize('task.convert_to_project', 'Convert to Project'),
+        icon: 'plus-circle',
         onSelect: handleConvertToProject,
       },
       {
         label: localize('task.set_recurring', 'Recurring Config'),
+        icon: 'copy',
         onSelect: handleSetRecurringTask,
       },
       {
         label: localize('task.delete_task', 'Delete Task'),
+        icon: 'trash',
+        danger: true,
+        dividerAbove: true,
         onSelect: handleDeleteTask,
       },
     ];

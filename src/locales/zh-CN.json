@@ -566,7 +566,7 @@
   },
   "desktop.tag_editor.create_new_tag": {
     "defaultMessage": "Create tag \"{0}\"",
-    "content": "创建标签 \"{0}\""
+    "content": "创建 \"{0}\""
   },
   "desktop.task_detail.add_reminder": {
     "defaultMessage": "Add reminder",
@@ -1638,11 +1638,11 @@
   },
   "tag_editor.empty_hint": {
     "defaultMessage": "Type to create your first tag",
-    "content": "输入以创建您的第一个标签"
+    "content": "无匹配标签"
   },
   "tag_editor.input_placeholder": {
     "defaultMessage": "Add or search tags...",
-    "content": "添加或搜索标签..."
+    "content": "搜索或新建标签"
   },
   "task.convert": {
     "defaultMessage": "Convert",

@@ -510,7 +510,7 @@
   },
   "date_picker.no_date": {
     "defaultMessage": "No Date",
-    "content": "No Date"
+    "content": "No date"
   },
   "date_picker.saturday": {
     "defaultMessage": "Sat",
@@ -566,7 +566,7 @@
   },
   "desktop.tag_editor.create_new_tag": {
     "defaultMessage": "Create tag \"{0}\"",
-    "content": "Create tag \"{0}\""
+    "content": "Create \"{0}\""
   },
   "desktop.task_detail.add_reminder": {
     "defaultMessage": "Add reminder",
@@ -1638,11 +1638,11 @@
   },
   "tag_editor.empty_hint": {
     "defaultMessage": "Type to create your first tag",
-    "content": "Type to create your first tag"
+    "content": "No matching tags"
   },
   "tag_editor.input_placeholder": {
     "defaultMessage": "Add or search tags...",
-    "content": "Add or search tags..."
+    "content": "Search or create a tag"
   },
   "task.convert": {
     "defaultMessage": "Convert",

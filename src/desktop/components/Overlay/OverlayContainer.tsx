@@ -17,6 +17,7 @@ interface OverlayContainerProps {
   top: number;
   children: React.ReactNode;
   className?: string;
+  dataTestId?: string;
   filter?: OverlayFilterOption;
 }
 
@@ -27,6 +28,7 @@ export const OverlayContainer: React.FC<OverlayContainerProps> = ({
   top,
   children,
   className,
+  dataTestId,
   filter,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -78,6 +80,7 @@ export const OverlayContainer: React.FC<OverlayContainerProps> = ({
       <div
         ref={containerRef}
         className={classNames(desktopStyles.OverlayContainerContent, className)}
+        data-test-id={dataTestId}
         style={{
           zIndex,
           left: position.left,
@@ -88,6 +91,7 @@ export const OverlayContainer: React.FC<OverlayContainerProps> = ({
         {filter && (
           <div className={desktopStyles.OverlayContainerFilterWrapper}>
             <input
+              className={desktopStyles.OverlayContainerFilterInput}
               type="text"
               value={filter.value}
               onBlur={() => {

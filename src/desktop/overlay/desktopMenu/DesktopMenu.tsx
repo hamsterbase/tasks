@@ -62,14 +62,16 @@ const DesktopMenuContent: React.FC<IDesktopMenuContentProps> = ({ controller }) 
       >
         <div className={desktopStyles.DesktopMenuContent}>
           {controller.menuConfig.map((item, index) => (
-            <DesktopMenuItemComponent
-              key={index}
-              item={item}
-              onItemClick={handleItemClick}
-              onMouseEnter={() => controller.setActiveIndex(index)}
-              isActive={controller.activeIndex === index}
-              showCheckmarks={controller.showCheckmarks}
-            />
+            <React.Fragment key={index}>
+              {item.dividerAbove && <div className={desktopStyles.DesktopMenuDivider} />}
+              <DesktopMenuItemComponent
+                item={item}
+                onItemClick={handleItemClick}
+                onMouseEnter={() => controller.setActiveIndex(index)}
+                isActive={controller.activeIndex === index}
+                showCheckmarks={controller.showCheckmarks}
+              />
+            </React.Fragment>
           ))}
         </div>
       </div>

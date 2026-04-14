@@ -1,11 +1,12 @@
+import { CheckIcon, PlusIcon } from '@/components/icons';
 import { OverlayContainer } from '@/desktop/components/Overlay/OverlayContainer';
-import { TaskStatusBox } from '@/desktop/components/todo/TaskStatusBox';
 import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { localize } from '@/nls';
 import { IWorkbenchOverlayService } from '@/services/overlay/common/WorkbenchOverlayService';
 import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
+import { TestIds } from '@/testIds';
 import classNames from 'classnames';
 import React, { useEffect, useRef } from 'react';
 import { calculateElementWidth } from '../datePicker/constant';
@@ -57,6 +58,7 @@ export const TagEditorOverlay: React.FC = () => {
       left={position.x - calculateElementWidth(desktopStyles.TagEditorOverlayContainer)}
       top={position.y}
       className={desktopStyles.TagEditorOverlayContainer}
+      dataTestId={TestIds.TagEditor.Overlay}
       filter={{
         value: controller.searchText,
         placeholder: localize('tag_editor.input_placeholder', 'Add or search tags...'),
@@ -78,13 +80,13 @@ export const TagEditorOverlay: React.FC = () => {
               )}
               onClick={() => handleTagClick(controller.searchText)}
             >
-              <span className={desktopStyles.TagEditorOverlayCreateButtonIcon}>+</span>
-              {localize('desktop.tag_editor.create_new_tag', 'Create tag "{0}"', controller.searchText)}
+              <PlusIcon className={desktopStyles.TagEditorOverlayCreateButtonIcon} />
+              {localize('desktop.tag_editor.create_new_tag', 'Create "{0}"', controller.searchText)}
             </button>
           )}
           {controller.totalTags === 0 && !controller.showCreateButton && (
             <div className={desktopStyles.TagEditorOverlayEmptyHint}>
-              {localize('tag_editor.empty_hint', 'Type to create your first tag')}
+              {localize('tag_editor.empty_hint', 'No matching tags')}
             </div>
           )}
           {controller.displayTags.map((tag, index) => {
@@ -107,17 +109,8 @@ export const TagEditorOverlay: React.FC = () => {
                   handleTagClick(tag);
                 }}
               >
-                <div
-                  className={classNames(
-                    desktopStyles.TagEditorOverlayTagCheckbox,
-                    isSelected
-                      ? desktopStyles.TagEditorOverlayTagCheckboxSelected
-                      : desktopStyles.TagEditorOverlayTagCheckboxUnselected
-                  )}
-                >
-                  <TaskStatusBox status={isSelected ? 'completed' : 'pending'} />
-                </div>
-                <span>{tag}</span>
+                <span className={desktopStyles.TagEditorOverlayTagLabel}>{tag}</span>
+                {isSelected && <CheckIcon className={desktopStyles.TagEditorOverlayTagCheck} />}
               </div>
             );
           })}

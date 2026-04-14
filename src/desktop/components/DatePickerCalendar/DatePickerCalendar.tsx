@@ -37,13 +37,7 @@ const MonthGrid: React.FC<MonthGridProps> = ({ days, onSelectDate }) => {
             })}
             disabled={!day.value}
           >
-            {isToday && !day.isSelected ? (
-              <span className={desktopStyles.DatePickerCalendarTodayLabel}>
-                {localize('date_picker.today', 'Today')}
-              </span>
-            ) : (
-              day.value || ''
-            )}
+            {day.value || ''}
           </button>
         );
       })}

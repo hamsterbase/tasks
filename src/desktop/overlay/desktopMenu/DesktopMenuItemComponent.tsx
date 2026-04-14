@@ -1,4 +1,4 @@
-import { CheckIcon, ChevronRightIcon } from '@/components/icons';
+import { CheckIcon, ChevronRightIcon, CopyIcon, PlusCircleIcon, TrashIcon } from '@/components/icons';
 import type { IMenuConfig } from '@/desktop/overlay/desktopMenu/DesktopMenuController.ts';
 import { desktopStyles } from '@/desktop/theme/main';
 import { TestIds } from '@/testIds';
@@ -26,6 +26,19 @@ export const DesktopMenuItemComponent: React.FC<DesktopMenuItemComponentProps> =
     onItemClick(item);
   };
 
+  const renderIcon = () => {
+    switch (item.icon) {
+      case 'plus-circle':
+        return <PlusCircleIcon className={desktopStyles.DesktopMenuItemIcon} />;
+      case 'copy':
+        return <CopyIcon className={desktopStyles.DesktopMenuItemIcon} />;
+      case 'trash':
+        return <TrashIcon className={desktopStyles.DesktopMenuItemIcon} />;
+      default:
+        return <span className={desktopStyles.DesktopMenuItemIconEmpty} />;
+    }
+  };
+
   return (
     <button
       ref={itemRef}
@@ -33,7 +46,8 @@ export const DesktopMenuItemComponent: React.FC<DesktopMenuItemComponentProps> =
         desktopStyles.DesktopMenuItemBase,
         'justify-between',
         item.disabled ? desktopStyles.DesktopMenuItemDisabled : desktopStyles.DesktopMenuItemEnabled,
-        isActive && desktopStyles.DesktopMenuItemActive
+        isActive && desktopStyles.DesktopMenuItemActive,
+        item.danger && desktopStyles.DesktopMenuItemDanger
       )}
       onClick={handleClick}
       onMouseEnter={onMouseEnter}
@@ -42,6 +56,7 @@ export const DesktopMenuItemComponent: React.FC<DesktopMenuItemComponentProps> =
       data-test-label={item.label}
     >
       <div className={desktopStyles.DesktopMenuItemContent}>
+        {renderIcon()}
         {showCheckmarks && (
           <div className={desktopStyles.DesktopMenuItemCheckbox}>
             {item.checked && <CheckIcon className={desktopStyles.DesktopMenuItemCheckIcon} />}
