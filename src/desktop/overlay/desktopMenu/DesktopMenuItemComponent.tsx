@@ -1,4 +1,12 @@
-import { CheckIcon, ChevronRightIcon, CopyIcon, PlusCircleIcon, TrashIcon } from '@/components/icons';
+import {
+  ArchiveIcon,
+  CheckIcon,
+  ChevronRightIcon,
+  CircleXIcon,
+  CopyIcon,
+  PlusCircleIcon,
+  TrashIcon,
+} from '@/components/icons';
 import type { IMenuConfig } from '@/desktop/overlay/desktopMenu/DesktopMenuController.ts';
 import { desktopStyles } from '@/desktop/theme/main';
 import { TestIds } from '@/testIds';
@@ -34,9 +42,25 @@ export const DesktopMenuItemComponent: React.FC<DesktopMenuItemComponentProps> =
         return <CopyIcon className={desktopStyles.DesktopMenuItemIcon} />;
       case 'trash':
         return <TrashIcon className={desktopStyles.DesktopMenuItemIcon} />;
+      case 'x-circle':
+        return <CircleXIcon className={desktopStyles.DesktopMenuItemIcon} />;
+      case 'archive':
+        return <ArchiveIcon className={desktopStyles.DesktopMenuItemIcon} />;
       default:
         return <span className={desktopStyles.DesktopMenuItemIconEmpty} />;
     }
+  };
+  const shouldUseCheckAsLeadingIcon = showCheckmarks && !item.icon;
+
+  const renderLeadingIcon = () => {
+    if (shouldUseCheckAsLeadingIcon) {
+      return (
+        <span className={desktopStyles.DesktopMenuItemIcon}>
+          {item.checked ? <CheckIcon className={desktopStyles.DesktopMenuItemCheckIcon} strokeWidth={1.5} /> : null}
+        </span>
+      );
+    }
+    return renderIcon();
   };
 
   return (
@@ -53,13 +77,14 @@ export const DesktopMenuItemComponent: React.FC<DesktopMenuItemComponentProps> =
       onMouseEnter={onMouseEnter}
       disabled={item.disabled}
       data-test-id={TestIds.DesktopMenu.Item}
+      data-testid={item.testId}
       data-test-label={item.label}
     >
       <div className={desktopStyles.DesktopMenuItemContent}>
-        {renderIcon()}
-        {showCheckmarks && (
+        {renderLeadingIcon()}
+        {showCheckmarks && item.icon && (
           <div className={desktopStyles.DesktopMenuItemCheckbox}>
-            {item.checked && <CheckIcon className={desktopStyles.DesktopMenuItemCheckIcon} />}
+            {item.checked && <CheckIcon className={desktopStyles.DesktopMenuItemCheckIcon} strokeWidth={1.5} />}
           </div>
         )}
         <span className={desktopStyles.DesktopMenuItemLabel}>{item.label}</span>

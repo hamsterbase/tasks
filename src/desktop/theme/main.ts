@@ -47,17 +47,17 @@ export const desktopStyles = {
   SidebarProjectItemDueDateActive: /*tw*/ 'text-t3',
   SidebarProjectItemDueDateInactive: /*tw*/ 'text-t3',
 
-  EntityHeaderContainer: /*tw*/ 'h-11 flex items-center justify-between px-5 pr-3 bg-bg1 flex-shrink-0',
+  EntityHeaderContainer: /*tw*/ 'min-h-11 flex items-center justify-between px-5 pr-3 bg-bg1 flex-shrink-0',
   EntityHeaderPanelIconContainer: /*tw*/ 'flex items-center size-5 text-t2 mr-3 justify-center',
   EntityHeaderPanelIcon: /*tw*/ 'size-4',
-  EntityHeaderContentWrapper: /*tw*/ 'flex items-center gap-2 flex-1 min-w-0',
+  EntityHeaderContentWrapper: /*tw*/ 'flex items-start gap-2 flex-1 min-w-0 py-3',
   EntityHeaderIconContainer: /*tw*/ 'size-5 flex items-center justify-center text-t2',
   EntityHeaderIconButton: /*tw*/ 'size-5 flex items-center justify-center',
   EntityHeaderIconSvg: /*tw*/ 'size-5',
   EntityHeaderEditableTextArea:
     'flex-1 text-sm leading-5 font-semibold text-t1 resize-none bg-transparent border-none outline-none px-1 -mx-1 py-0 rounded-sm',
   EntityHeaderTitle: /*tw*/ 'text-sm leading-5 font-semibold text-t1 truncate',
-  EntityHeaderActionsContainer: /*tw*/ 'flex items-center gap-1',
+  EntityHeaderActionsContainer: /*tw*/ 'self-start flex items-center gap-1 pt-2.5',
   EntityHeaderActionButton:
     'flex items-center gap-1 px-2 h-7 text-xs text-t2 hover:bg-bg3 hover:text-t1 rounded-md transition-colors',
   EntityHeaderActionIcon: /*tw*/ 'size-3.5 flex items-center justify-center',
@@ -84,20 +84,19 @@ export const desktopStyles = {
 
   RemindersFieldAnchor: /*tw*/ 'relative',
   RemindersFieldPopover:
-    'absolute top-full right-0 mt-1 w-64 bg-bg1 border border-line-regular rounded-md p-1 z-20 shadow-[0_4px_12px_rgba(0,0,0,0.08)]',
-  RemindersFieldPopoverEmpty: /*tw*/ 'px-2 py-1.5 text-sm text-t3',
+    'absolute top-full right-0 mt-1 w-56 bg-bg1 border border-line-regular rounded-md p-1 z-20 shadow-[0_4px_12px_rgba(0,0,0,0.08)]',
+  RemindersFieldPopoverEmpty: /*tw*/ 'px-2 py-1.5 text-xs text-t3',
   RemindersFieldPopoverItem:
-    'group flex items-center gap-2 px-2 py-2 text-sm rounded-sm text-t1 hover:bg-bg3 transition-colors cursor-pointer',
+    'group flex items-center gap-2 px-2 py-1.5 text-xs rounded-sm text-t1 hover:bg-bg3 transition-colors cursor-pointer',
   RemindersFieldPopoverDeleteButton:
-    'size-5 flex items-center justify-center rounded-sm text-t3 opacity-0 group-hover:opacity-100 hover:text-accent-danger hover:bg-accent-danger/10 transition-opacity',
-  RemindersFieldPopoverDeleteIcon: /*tw*/ 'size-3.5',
+    'size-4 flex items-center justify-center rounded-sm text-t3 opacity-0 group-hover:opacity-100 hover:text-accent-danger hover:bg-accent-danger/10 transition-opacity',
+  RemindersFieldPopoverDeleteIcon: /*tw*/ 'size-3',
   RemindersFieldPopoverDivider: /*tw*/ 'h-px bg-line-light mx-1 my-1',
   RemindersFieldPopoverAddRow:
-    'flex items-center gap-2 px-2 py-2 text-sm cursor-pointer rounded-sm text-t2 hover:bg-bg3 hover:text-t1 transition-colors',
-  RemindersFieldPopoverAddIcon: /*tw*/ 'size-4 flex-shrink-0',
-  RemindersFieldDateText: /*tw*/ 'flex-1 min-w-0 text-t1 text-sm leading-5 truncate',
-  RemindersFieldTimeText: /*tw*/ 'text-t3 text-sm leading-5',
-  RemindersFieldPastText: /*tw*/ 'line-through',
+    'flex items-center gap-2 px-2 py-1.5 text-xs cursor-pointer rounded-sm text-t2 hover:bg-bg3 hover:text-t1 transition-colors',
+  RemindersFieldPopoverAddIcon: /*tw*/ 'size-3.5 flex-shrink-0',
+  RemindersFieldDateText: /*tw*/ 'flex-1 text-t1',
+  RemindersFieldTimeText: /*tw*/ 'text-t3',
   RemindersFieldPastTag: /*tw*/ 'line-through text-t3',
 
   RecurringRuleContent: /*tw*/ 'flex flex-col items-end gap-1 text-xs leading-4',
@@ -408,7 +407,8 @@ export const desktopStyles = {
   DesktopHeadingListItemContentEditing: /*tw*/ 'editing-border',
   DesktopHeadingListItemContentHidden: /*tw*/ 'opacity-0',
   DesktopHeadingListItemDragHandle:
-    'absolute -left-3 top-1/2 -translate-y-1/2 size-4 text-t3 opacity-0 transition-opacity group-hover:opacity-100 z-10',
+    'absolute left-0 top-0 flex h-full w-3 -translate-x-full items-center justify-center text-t3 opacity-0 transition-opacity group-hover:opacity-100',
+  DesktopHeadingListItemDragHandleIcon: /*tw*/ 'size-2.5',
   DesktopHeadingListItemInput:
     /*tw*/ 'flex-1 min-w-0 bg-transparent outline-none text-xs font-semibold uppercase tracking-wider text-t3 placeholder:text-t3 rounded-sm px-1 -mx-1 truncate',
 
@@ -446,13 +446,14 @@ export const desktopStyles = {
   DesktopMenuItemIcon: /*tw*/ 'size-3.5 flex items-center justify-center flex-shrink-0',
   DesktopMenuItemIconEmpty: /*tw*/ 'size-3.5 flex-shrink-0',
   DesktopMenuItemLabel: /*tw*/ 'flex-1 truncate',
-  DesktopMenuItemCheckbox: /*tw*/ 'w-4 h-4 flex items-center justify-center',
-  DesktopMenuItemCheckIcon: /*tw*/ 'w-3 h-3 text-t1',
+  DesktopMenuItemCheckbox: /*tw*/ 'size-3.5 flex items-center justify-center flex-shrink-0',
+  DesktopMenuItemCheckIcon: /*tw*/ 'size-3.5 flex-shrink-0 text-t2',
   DesktopMenuItemChevron: /*tw*/ 'size-3.5 text-t3',
 
   DesktopSubmenuContainer:
     /*tw*/ 'fixed bg-bg1 border border-line-regular rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.08)] p-1',
-  DesktopSubmenuItem: /*tw*/ 'h-8 w-full flex items-center gap-2 px-2 text-left text-xs rounded-sm transition-colors',
+  DesktopSubmenuItem:
+    /*tw*/ 'w-full flex items-center gap-2 px-2 py-1.5 text-left text-xs rounded-sm transition-colors',
 
   OverlayBackdrop: /*tw*/ 'fixed inset-0 flex items-center justify-center',
   OverlayBackgroundMask: /*tw*/ 'absolute inset-0 bg-black opacity-45',
@@ -485,21 +486,52 @@ export const desktopStyles = {
   TagEditorOverlayTagCheck: /*tw*/ 'size-3 text-brand flex-shrink-0',
   TagEditorOverlayEmptyHint: /*tw*/ 'px-3 py-2 text-xs text-t3 text-center',
 
+  TreeSelectOverlayMoveTargetContainer:
+    /*tw*/ 'w-56 bg-bg1 border border-line-regular rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.08)] overflow-hidden',
+  TreeSelectOverlayAreaPickerContainer:
+    /*tw*/ 'w-48 bg-bg1 border border-line-regular rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.08)] overflow-hidden',
+  TreeSelectOverlayContent: /*tw*/ 'outline-none',
+  TreeSelectOverlayInputWrap: /*tw*/ 'px-2 py-1.5 border-b border-line-light',
+  TreeSelectOverlayInput: /*tw*/ 'w-full bg-transparent outline-none text-xs text-t1 placeholder:text-t3',
+  TreeSelectOverlayList: /*tw*/ 'max-h-64 overflow-y-auto py-1',
+  TreeSelectOverlayAreaList: /*tw*/ 'max-h-48 overflow-y-auto py-1',
+  TreeSelectOverlayAction:
+    /*tw*/ 'flex justify-start text-left items-center gap-1.5 px-2 py-1.5 text-xs cursor-pointer rounded-sm text-t2 hover:bg-bg3 hover:text-t1 transition-colors mx-1',
+  TreeSelectOverlayAreaAction:
+    /*tw*/ 'flex justify-start text-left items-center gap-2 px-2 py-1.5 text-xs cursor-pointer rounded-sm text-t2 hover:bg-bg3 hover:text-t1 transition-colors mx-1',
+  TreeSelectOverlayActionIcon: /*tw*/ 'size-3.5 flex items-center justify-center flex-shrink-0 text-t3',
+  TreeSelectOverlayDivider: /*tw*/ 'h-px bg-line-light mx-1 my-1',
+  TreeSelectOverlayAreaRow:
+    /*tw*/ 'flex w-[calc(100%-0.5rem)] justify-start text-left items-center gap-1.5 px-2 py-1.5 text-xs rounded-sm text-t1 hover:bg-bg3 transition-colors mx-1',
+  TreeSelectOverlayAreaRowSelectable: /*tw*/ 'cursor-pointer',
+  TreeSelectOverlayAreaRowSelected: /*tw*/ 'bg-brand/10 text-brand hover:bg-brand/10',
+  TreeSelectOverlayAreaIcon: /*tw*/ 'size-3.5 flex items-center justify-center flex-shrink-0 text-t3',
+  TreeSelectOverlayAreaLabel: /*tw*/ 'flex-1 font-medium truncate',
+  TreeSelectOverlayChevronButton:
+    /*tw*/ 'size-4 flex items-center justify-center rounded-sm hover:bg-bg3/80 flex-shrink-0',
+  TreeSelectOverlayChevron: /*tw*/ 'size-3 text-t3 transition-transform flex-shrink-0',
+  TreeSelectOverlayChevronExpanded: /*tw*/ 'rotate-90',
+  TreeSelectOverlayProjectRow:
+    /*tw*/ 'flex w-[calc(100%-0.5rem)] justify-start text-left items-center gap-1.5 pl-7 pr-2 py-1.5 text-xs cursor-pointer rounded-sm text-t1 hover:bg-bg3 transition-colors mx-1',
+  TreeSelectOverlayProjectRowSelected: /*tw*/ 'bg-brand/10 text-brand hover:bg-brand/10',
+  TreeSelectOverlayProjectIcon: /*tw*/ 'size-3 flex items-center justify-center flex-shrink-0 text-t3',
+  TreeSelectOverlayProjectLabel: /*tw*/ 'flex-1 truncate',
+  TreeSelectOverlaySearchRow:
+    /*tw*/ 'flex w-[calc(100%-0.5rem)] justify-start text-left items-center gap-1.5 px-2 py-1.5 text-xs cursor-pointer rounded-sm text-t1 hover:bg-bg3 transition-colors mx-1',
+  TreeSelectOverlaySearchLabel: /*tw*/ 'flex-1 truncate',
+  TreeSelectOverlayAreaItem:
+    /*tw*/ 'flex w-[calc(100%-0.5rem)] justify-start text-left items-center gap-2 px-2 py-1.5 text-xs cursor-pointer rounded-sm text-t1 hover:bg-bg3 transition-colors mx-1',
+  TreeSelectOverlayAreaItemSelected: /*tw*/ 'bg-brand/10 text-brand hover:bg-brand/10',
+  TreeSelectOverlayAreaItemIcon: /*tw*/ 'size-3.5 flex items-center justify-center flex-shrink-0 text-t3',
+  TreeSelectOverlayAreaItemLabel: /*tw*/ 'flex-1 truncate',
+  TreeSelectOverlayEmpty: /*tw*/ 'px-3 py-2 text-xs text-t3 text-center',
+
   RecurringTaskSettingsOverlayField: /*tw*/ 'mb-4',
   RecurringTaskSettingsOverlayLabel: /*tw*/ 'block text-sm font-medium text-t2 mb-2',
   RecurringTaskSettingsOverlayInput:
     /*tw*/ 'w-full px-3 py-2 border border-line-regular rounded bg-bg1 text-t1 focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand',
   RecurringTaskSettingsOverlayExplanation: /*tw*/ 'text-sm text-t3 mt-1',
   RecurringTaskSettingsOverlayCalculation: /*tw*/ 'text-sm text-brand mt-1',
-
-  TreeSelectOverlayContainer: /*tw*/ 'w-80',
-  TreeSelectOverlayContentArea: /*tw*/ 'max-h-76 overflow-y-auto py-3',
-  TreeSelectOverlayButton:
-    /*tw*/ 'w-full h-11 flex items-center gap-2 px-3 hover:bg-bg3 transition-colors text-left text-t2',
-  TreeSelectOverlayButtonDisabled: /*tw*/ 'opacity-50 cursor-not-allowed',
-  TreeSelectOverlayButtonPadding: /*tw*/ 'pl-6',
-  TreeSelectOverlayIcon: /*tw*/ 'size-5 shrink-0 text-t2',
-  TreeSelectOverlayText: /*tw*/ 'text-base leading-5 truncate',
 
   CreateDatabaseOverlayFormContainer: /*tw*/ 'flex flex-col gap-3',
   CreateDatabaseOverlayErrorText: /*tw*/ 'text-accent-danger text-sm',
@@ -516,8 +548,6 @@ export const desktopStyles = {
   DatePickerOverlayQuickActionIcon: /*tw*/ 'size-4 text-t3 flex-shrink-0',
   DatePickerCalendarNavIcon: /*tw*/ 'size-3.5',
   DatePickerCalendarCalendarWrapper: /*tw*/ 'px-2 pb-2',
-  DatePickerCalendarScrollContainer: /*tw*/ 'overflow-y-auto',
-  DatePickerCalendarMonthHeaderTitle: /*tw*/ 'text-xs font-medium text-t1',
   DatePickerCalendarMonthGrid: /*tw*/ 'grid grid-cols-7 gap-0.5 bg-bg1',
   DatePickerCalendarDayButton:
     /*tw*/ 'h-7 rounded-sm text-xs flex items-center justify-center hover:bg-bg3 transition-colors',
@@ -527,18 +557,6 @@ export const desktopStyles = {
   DatePickerCalendarDayCurrentMonth: /*tw*/ 'text-t1',
   DatePickerCalendarWeekdayGrid: /*tw*/ 'grid grid-cols-7 gap-0.5 pt-1 pb-0.5',
   DatePickerCalendarWeekdayCell: /*tw*/ 'h-5 flex items-center justify-center text-[10px] text-t3',
-
-  // TimePicker styles
-  TimePickerOverlayContainer: /*tw*/ 'w-108',
-  TimePickerOverlayMainContent: /*tw*/ 'flex',
-  TimePickerOverlayCalendarSection: /*tw*/ 'flex-1',
-  TimePickerOverlayTimeSection: /*tw*/ 'w-36 h-83 border-l border-line-regular flex',
-  TimePickerScrollColumn: /*tw*/ 'flex-1 overflow-y-auto relative p-3',
-  TimePickerScrollItem:
-    'h-9 flex items-center justify-center text-sm hover:bg-bg2 transition-all flex-shrink-0 w-full rounded',
-  TimePickerScrollItemSelected: /*tw*/ 'bg-brand text-white font-medium scale-105 hover:bg-brand',
-  TimePickerScrollColumnWrapper: /*tw*/ 'w-18 h-83 overflow-y-auto',
-  TimePickerOverlayFooter: /*tw*/ 'flex justify-between gap-2 px-3 py-3 border-t border-line-regular',
 
   // NotesField Markdown styles
   NotesMarkdownH1: /*tw*/ 'text-lg font-bold mb-2 mt-4 first:mt-0',

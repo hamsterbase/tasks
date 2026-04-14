@@ -7,6 +7,7 @@ import {
   ArrowLeft,
   ArrowRight,
   ArrowUp,
+  ArrowUpToLine,
   Bell,
   Bot,
   Box,
@@ -131,6 +132,7 @@ export const LinkIcon = Link;
 export const BrainIcon = Brain;
 export const TrashIcon = Trash2;
 export const ArrowUpIcon = ArrowUp;
+export const ArrowUpToLineIcon = ArrowUpToLine;
 export const StopIcon = Square;
 export const NotebookIcon = Notebook;
 export const NotesIcon = AlignLeft;

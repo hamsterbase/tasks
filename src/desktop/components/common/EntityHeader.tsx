@@ -2,6 +2,7 @@ import { EditableTextArea } from '@/components/edit/EditableTextArea';
 import { PanelLeftIcon, TaskDisplaySettingsIcon } from '@/components/icons';
 import { desktopStyles } from '@/desktop/theme/main';
 import { localize } from '@/nls';
+import { TestIds } from '@/testIds';
 import { TextAreaRef } from 'rc-textarea';
 import classNames from 'classnames';
 import React, { ReactNode, useRef } from 'react';
@@ -14,6 +15,7 @@ interface HeaderAction {
   label: string;
   title: string;
   iconOnly?: boolean;
+  testId?: string;
 }
 
 interface EntityHeaderProps {
@@ -70,6 +72,7 @@ export const EntityHeader: React.FC<EntityHeaderProps> = ({
       label: localize('inbox.display', 'Display'),
       title: localize('inbox.taskDisplaySettings', 'Task Display Settings'),
       iconOnly: true,
+      testId: TestIds.EntityHeader.DisplaySettingsButton,
     });
   }
 
@@ -131,6 +134,7 @@ export const EntityHeader: React.FC<EntityHeaderProps> = ({
                   }
                   title={action.title}
                   onClick={action.handleClick}
+                  data-test-id={action.testId}
                 >
                   <span className={desktopStyles.EntityHeaderActionIcon}>{actionIcon}</span>
                   {!action.iconOnly && <span className={desktopStyles.EntityHeaderActionLabel}>{action.label}</span>}

@@ -1,6 +1,6 @@
 import { localize } from '@/nls';
 import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
-import { format, isValid, parse, setHours, setMinutes, getHours, getMinutes } from 'date-fns';
+import { format, getHours, getMinutes, isValid, parse, setHours, setMinutes, startOfDay } from 'date-fns';
 import { Emitter } from 'vscf/base/common/event';
 import { Disposable } from 'vscf/base/common/lifecycle';
 import { IContextKey, IContextKeyService } from 'vscf/platform/contextkey/common';
@@ -63,7 +63,7 @@ export class TimePickerOverlayController extends Disposable {
     @IContextKeyService contextKeyService: IContextKeyService
   ) {
     super();
-    this._selectedDate = initialDate ? new Date(initialDate) : new Date();
+    this._selectedDate = initialDate ? new Date(initialDate) : setMinutes(setHours(startOfDay(new Date()), 9), 0);
     this._timePickerFocusContext = TimePickerFocus.bindTo(contextKeyService);
 
     this._currentInputValue = format(this._selectedDate, 'yyyy-MM-dd HH:mm');

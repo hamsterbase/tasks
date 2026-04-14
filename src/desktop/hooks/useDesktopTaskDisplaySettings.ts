@@ -69,6 +69,9 @@ export const useDesktopTaskDisplaySettings = (page: string, option?: UseDesktopT
         menuConfig,
         x,
         y,
+        menuWidth: 224,
+        submenuWidth: 176,
+        submenuPlacement: 'right',
       },
       instantiationService
     );

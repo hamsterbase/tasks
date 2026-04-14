@@ -7,7 +7,9 @@ import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
 import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService';
+import { TestIds } from '@/testIds';
 import classNames from 'classnames';
+import { format } from 'date-fns';
 import { TreeID } from 'loro-crdt';
 import React from 'react';
 import { TaskDetailAttributeRow } from './TaskDetailAttributeRow';
@@ -22,6 +24,10 @@ const sortReminders = (reminders: ReminderWithId[]) => [...reminders].sort((a, b
 const formatReminderChip = (reminder: ReminderWithId) => {
   const { date, time } = formatReminderTime(reminder.time);
   return date ? `${date} ${time}` : time;
+};
+
+const formatReminderPopoverTime = (reminder: ReminderWithId) => {
+  return format(reminder.time, 'HH:mm');
 };
 
 export const RemindersField: React.FC<RemindersFieldProps> = ({ reminders, itemId }) => {
@@ -111,16 +117,14 @@ export const RemindersField: React.FC<RemindersFieldProps> = ({ reminders, itemI
         }
       />
       {isOpen && (
-        <div className={desktopStyles.RemindersFieldPopover} ref={popoverRef}>
+        <div className={desktopStyles.RemindersFieldPopover} ref={popoverRef} data-test-id={TestIds.Reminders.Popover}>
           {reminders.length === 0 && (
             <div className={desktopStyles.RemindersFieldPopoverEmpty}>
               {localize('desktop.task_detail.reminders_empty', 'No reminders')}
             </div>
           )}
           {sortReminders(reminders).map((reminder) => {
-            const { date, time } = formatReminderTime(reminder.time);
-            const isReminderPast = isTimestampInPast(reminder.time);
-
+            const { date } = formatReminderTime(reminder.time);
             return (
               <div
                 key={reminder.reminderId}
@@ -130,20 +134,8 @@ export const RemindersField: React.FC<RemindersFieldProps> = ({ reminders, itemI
                   openTimePicker(reminder.time, e.currentTarget, reminder.reminderId);
                 }}
               >
-                <span
-                  className={classNames(desktopStyles.RemindersFieldDateText, {
-                    [desktopStyles.RemindersFieldPastText]: isReminderPast,
-                  })}
-                >
-                  {date}
-                </span>
-                <span
-                  className={classNames(desktopStyles.RemindersFieldTimeText, {
-                    [desktopStyles.RemindersFieldPastText]: isReminderPast,
-                  })}
-                >
-                  {time}
-                </span>
+                <span className={desktopStyles.RemindersFieldDateText}>{date}</span>
+                <span className={desktopStyles.RemindersFieldTimeText}>{formatReminderPopoverTime(reminder)}</span>
                 <button
                   className={desktopStyles.RemindersFieldPopoverDeleteButton}
                   onClick={(e) => {

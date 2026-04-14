@@ -129,7 +129,9 @@ export const DesktopHeadingListItem: React.FC<DesktopHeadingListItemProps> = ({
         )}
         onClickCapture={handleClickCapture}
       >
-        <DragHandleIcon className={desktopStyles.DesktopHeadingListItemDragHandle} />
+        <span className={desktopStyles.DesktopHeadingListItemDragHandle}>
+          <DragHandleIcon className={desktopStyles.DesktopHeadingListItemDragHandleIcon} />
+        </span>
         <EditableInputSpan
           ref={inputRef}
           inputKey={projectHeadingTitleInputKey(projectHeadingInfo.id)}

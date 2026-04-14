@@ -6,6 +6,7 @@ import { useDesktopProjectHeader } from '@/desktop/hooks/useDesktopProjectHeader
 import { useService } from '@/hooks/use-service.ts';
 import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService.ts';
+import { TestIds } from '@/testIds';
 import React from 'react';
 import { TaskLocationField } from './components/TaskLocationField';
 import { desktopStyles } from '@/desktop/theme/main';
@@ -43,7 +44,11 @@ export const HeadingDetailView: React.FC<HeadingDetailViewProps> = ({ heading, o
           autoSize={{ minRows: 1 }}
         />
         <div className={desktopStyles.DetailViewHeaderActions}>
-          <button onClick={handleMenuClick} className={desktopStyles.DetailViewHeaderMenuButton}>
+          <button
+            onClick={handleMenuClick}
+            className={desktopStyles.DetailViewHeaderMenuButton}
+            data-test-id={TestIds.HeadingDetail.MenuButton}
+          >
             <MenuIcon className={desktopStyles.DetailViewHeaderMenuIcon} strokeWidth={ICON_STROKE_WIDTH} />
           </button>
           {onClearSelection && (

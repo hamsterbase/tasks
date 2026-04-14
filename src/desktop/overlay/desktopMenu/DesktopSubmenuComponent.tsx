@@ -1,6 +1,7 @@
 import { CheckIcon } from '@/components/icons';
 import type { IMenuConfig } from '@/desktop/overlay/desktopMenu/DesktopMenuController.ts';
 import { desktopStyles } from '@/desktop/theme/main';
+import { TestIds } from '@/testIds';
 import classNames from 'classnames';
 import React from 'react';
 
@@ -23,8 +24,16 @@ export const DesktopSubmenuComponent: React.FC<DesktopSubmenuComponentProps> = (
 }) => {
   let itemIndex = 0;
 
+  const renderLeadingIcon = (checked?: boolean) => {
+    return (
+      <span className={desktopStyles.DesktopMenuItemIcon}>
+        {checked ? <CheckIcon className={desktopStyles.DesktopMenuItemCheckIcon} strokeWidth={1.5} /> : null}
+      </span>
+    );
+  };
+
   return (
-    <div className={desktopStyles.DesktopSubmenuContainer} style={style}>
+    <div className={desktopStyles.DesktopSubmenuContainer} style={style} data-test-id={TestIds.DesktopMenu.Submenu}>
       {submenu.map((group, groupIndex) => (
         <div key={groupIndex}>
           {groupIndex > 0 && <div className={desktopStyles.DesktopMenuDivider} />}
@@ -47,11 +56,7 @@ export const DesktopSubmenuComponent: React.FC<DesktopSubmenuComponentProps> = (
                 onMouseEnter={() => onMouseEnter?.(currentIndex)}
                 disabled={subItem.disabled}
               >
-                {showCheckmarks && (
-                  <div className={desktopStyles.DesktopMenuItemCheckbox}>
-                    {subItem.checked && <CheckIcon className={desktopStyles.DesktopMenuItemCheckIcon} />}
-                  </div>
-                )}
+                {showCheckmarks ? renderLeadingIcon(subItem.checked) : null}
                 <span className={desktopStyles.DesktopMenuItemLabel}>{subItem.label}</span>
               </button>
             );

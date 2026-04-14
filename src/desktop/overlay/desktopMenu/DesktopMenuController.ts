@@ -14,7 +14,8 @@ import {
 
 export interface IMenuConfig {
   label: string;
-  icon?: 'plus-circle' | 'copy' | 'trash';
+  testId?: string;
+  icon?: 'plus-circle' | 'copy' | 'trash' | 'x-circle' | 'archive';
   checked?: boolean;
   danger?: boolean;
   dividerAbove?: boolean;
@@ -49,6 +50,9 @@ export interface DesktopMenuOptions {
   x: number;
   y: number;
   placement?: MenuPlacement;
+  menuWidth?: number;
+  submenuWidth?: number;
+  submenuPlacement?: 'auto' | 'left' | 'right';
 }
 
 function validateMenuConfig(config: IMenuConfig[]): IMenuConfig[] {
@@ -60,6 +64,7 @@ function validateMenuConfig(config: IMenuConfig[]): IMenuConfig[] {
 }
 
 const menuItemOffset = 4;
+const menuContentPadding = 4;
 
 export class DesktopMenuController implements IDisposable {
   static create(initOptions: DesktopMenuOptions, instantiationService: IInstantiationService) {
@@ -90,6 +95,18 @@ export class DesktopMenuController implements IDisposable {
 
   get y() {
     return this.initOptions.y;
+  }
+
+  get menuWidth() {
+    return this.initOptions.menuWidth;
+  }
+
+  get submenuWidth() {
+    return this.initOptions.submenuWidth;
+  }
+
+  get submenuPlacement() {
+    return this.initOptions.submenuPlacement ?? 'auto';
   }
 
   getMenuStyle({ menuItemHeight, menuWidth }: { menuItemHeight: number; menuWidth: number }) {
@@ -159,21 +176,41 @@ export class DesktopMenuController implements IDisposable {
     };
   }
 
-  getSubmenuStyle({ menuItemHeight, menuWidth }: { menuItemHeight: number; menuWidth: number }) {
+  getSubmenuStyle({
+    menuItemHeight,
+    menuWidth,
+    submenuWidth,
+  }: {
+    menuItemHeight: number;
+    menuWidth: number;
+    submenuWidth: number;
+  }) {
     const submenuHeight = this.activeMenu?.submenu
       ? this.activeMenu.submenu.reduce((acc, group) => acc + group.length, 0) * menuItemHeight
       : 0;
 
-    const menuLeft = this.getMenuStyle({ menuItemHeight, menuWidth }).left as number;
-    const submenuTop = this.y + (this.activeIndex ?? 0) * menuItemHeight;
-
-    let submenuLeft = menuLeft + menuWidth + menuItemOffset;
-
+    const menuStyle = this.getMenuStyle({ menuItemHeight, menuWidth });
+    const menuLeft = menuStyle.left as number;
+    const menuTop = menuStyle.top as number;
+    const submenuTop = menuTop + menuContentPadding + (this.activeIndex ?? 0) * menuItemHeight;
     const screenWidth = window.innerWidth;
-    const submenuRightEdge = submenuLeft + menuWidth;
 
-    if (submenuRightEdge > screenWidth) {
-      submenuLeft = menuLeft - menuWidth - menuItemOffset;
+    const preferredRightLeft = menuLeft + menuWidth + menuItemOffset;
+    const preferredLeftLeft = menuLeft - submenuWidth - menuItemOffset;
+    const preferredPlacement = this.submenuPlacement;
+
+    let submenuLeft =
+      preferredPlacement === 'left'
+        ? preferredLeftLeft
+        : preferredPlacement === 'right'
+          ? preferredRightLeft
+          : preferredRightLeft;
+
+    if (preferredPlacement === 'auto') {
+      const submenuRightEdge = preferredRightLeft + submenuWidth;
+      if (submenuRightEdge > screenWidth) {
+        submenuLeft = preferredLeftLeft;
+      }
     }
 
     let adjustedTop = submenuTop;
@@ -191,7 +228,7 @@ export class DesktopMenuController implements IDisposable {
       left: submenuLeft,
       top: adjustedTop,
       zIndex: this.zIndex,
-      width: menuWidth,
+      width: submenuWidth,
     };
   }
 
@@ -283,7 +320,7 @@ export class DesktopMenuController implements IDisposable {
     this._activeSubmenuIndex = null;
 
     if (this.activeMenu?.submenu && this.activeMenu.submenu.length > 0) {
-      this.openSubmenu();
+      this.openSubmenu(false);
     }
 
     this.updateContextKeys();
@@ -299,7 +336,11 @@ export class DesktopMenuController implements IDisposable {
   moveDown() {
     if (this._isSubmenuOpen && this.activeMenu?.submenu) {
       const totalSubItems = this.activeMenu.submenu.reduce((acc, group) => acc + group.length, 0);
-      if (this._activeSubmenuIndex !== null && this._activeSubmenuIndex < totalSubItems - 1) {
+      if (this._activeSubmenuIndex === null && totalSubItems > 0) {
+        this._activeSubmenuIndex = 0;
+        this.updateContextKeys();
+        this.fireStatusChange();
+      } else if (this._activeSubmenuIndex !== null && this._activeSubmenuIndex < totalSubItems - 1) {
         this._activeSubmenuIndex++;
         this.updateContextKeys();
         this.fireStatusChange();
@@ -321,7 +362,12 @@ export class DesktopMenuController implements IDisposable {
 
   moveUp() {
     if (this._isSubmenuOpen && this.activeMenu?.submenu) {
-      if (this._activeSubmenuIndex !== null && this._activeSubmenuIndex > 0) {
+      const totalSubItems = this.activeMenu.submenu.reduce((acc, group) => acc + group.length, 0);
+      if (this._activeSubmenuIndex === null && totalSubItems > 0) {
+        this._activeSubmenuIndex = totalSubItems - 1;
+        this.updateContextKeys();
+        this.fireStatusChange();
+      } else if (this._activeSubmenuIndex !== null && this._activeSubmenuIndex > 0) {
         this._activeSubmenuIndex--;
         this.updateContextKeys();
         this.fireStatusChange();
@@ -341,10 +387,10 @@ export class DesktopMenuController implements IDisposable {
     }
   }
 
-  openSubmenu() {
-    if (this.hasSubmenu && !this._isSubmenuOpen) {
+  openSubmenu(focusFirstItem: boolean = true) {
+    if (this.hasSubmenu) {
       this._isSubmenuOpen = true;
-      this._activeSubmenuIndex = 0;
+      this._activeSubmenuIndex = focusFirstItem ? 0 : null;
       this.updateContextKeys();
       this.fireStatusChange();
     }
@@ -373,7 +419,7 @@ export class DesktopMenuController implements IDisposable {
     } else if (this._activeIndex !== null) {
       const menu = this.menuConfig[this._activeIndex];
       if (menu.submenu && menu.submenu.length > 0) {
-        this.openSubmenu();
+        this.openSubmenu(true);
       } else {
         this.handleItemClick(menu);
       }
@@ -393,7 +439,7 @@ export class DesktopMenuController implements IDisposable {
 
   handleItemClick(item: IMenuConfig | IMenuSubmenuConfig) {
     if ('submenu' in item && item.submenu && item.submenu.length > 0) {
-      this.openSubmenu();
+      this.openSubmenu(true);
     } else if (item.onSelect) {
       item.onSelect();
       this.dispose();

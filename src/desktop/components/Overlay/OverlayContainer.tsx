@@ -1,4 +1,5 @@
 import { desktopStyles } from '@/desktop/theme/main';
+import { TestIds } from '@/testIds';
 import classNames from 'classnames';
 import React, { useLayoutEffect, useRef, useState } from 'react';
 
@@ -76,7 +77,12 @@ export const OverlayContainer: React.FC<OverlayContainerProps> = ({
 
   return (
     <>
-      <div className={desktopStyles.OverlayContainerBackdrop} style={{ zIndex: zIndex - 1 }} onClick={onDispose} />
+      <div
+        className={desktopStyles.OverlayContainerBackdrop}
+        data-test-id={TestIds.Overlay.ContainerBackdrop}
+        style={{ zIndex: zIndex - 1 }}
+        onClick={onDispose}
+      />
       <div
         ref={containerRef}
         className={classNames(desktopStyles.OverlayContainerContent, className)}
