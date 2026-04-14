@@ -41,6 +41,8 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
   followParentArchiveState,
 }) => {
   const isCompleted = task.status === 'completed';
+  const isCompletedLike = task.status === 'completed' || task.status === 'canceled' || task.status === 'cancelled';
+  const isArchivedLike = followParentArchiveState && task.isParentArchived;
   const inputRef = useRef<HTMLInputElement>(null);
 
   const { attributes, listeners, setNodeRef, transform, isDragging } = useSortable({
@@ -59,11 +61,18 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
     },
   };
 
-  const style = {
+  const style: React.CSSProperties = {
     transform: CSS.Transform.toString(transform),
-    opacity: isDragging ? 0.6 : 1,
-    pointerEvents: (isDragging ? 'none' : 'auto') as React.CSSProperties['pointerEvents'],
+    pointerEvents: isDragging ? 'none' : 'auto',
   };
+
+  if (isDragging) {
+    style.opacity = 0.6;
+  } else if (isCompletedLike) {
+    style.opacity = 0.6;
+  } else if (willDisappear || isArchivedLike) {
+    style.opacity = 0.5;
+  }
 
   useWatchEvent(taskList.onListStateChange);
 
@@ -135,13 +144,13 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
   };
 
   const taskClassName = classNames(desktopStyles.TaskListItemContainer, {
-    [desktopStyles.TaskListItemContainerCompleted]: task.status === 'completed' || task.status === 'canceled',
+    [desktopStyles.TaskListItemContainerCompleted]: isCompletedLike,
     [desktopStyles.TaskListItemContainerWillDisappear]: willDisappear,
     [desktopStyles.TaskListItemContainerSelected]:
       (isFocused && isSelected && !isDragging && !isInputFocused) || isDragging,
     [desktopStyles.TaskListItemContainerSelectedInactive]: !isFocused && isSelected && !isDragging,
     [desktopStyles.TaskListItemContainerEditing]: isFocused && isSelected && !isDragging && isInputFocused,
-    [desktopStyles.TaskListItemContainerArchived]: followParentArchiveState && task.isParentArchived,
+    [desktopStyles.TaskListItemContainerArchived]: isArchivedLike,
   });
 
   const todoService = useService(ITodoService);
@@ -158,6 +167,10 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     taskList.updateInputValue(e.target.value);
   };
+
+  const titleClassName = classNames(desktopStyles.TaskListItemTitleInput, {
+    [desktopStyles.TaskListItemTitleInputCompleted]: task.status === 'completed',
+  });
 
   return (
     <div
@@ -208,7 +221,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
             onSave={(value) => {
               taskItemActions.updateTaskTitle(value);
             }}
-            className={desktopStyles.TaskListItemTitleInput}
+            className={titleClassName}
             placeholder={localize('tasks.untitled', 'New Task')}
           />
           {task.notes && <NotesIcon className={desktopStyles.TaskListItemIcon} />}

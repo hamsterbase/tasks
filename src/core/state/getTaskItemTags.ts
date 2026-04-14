@@ -70,10 +70,9 @@ export function getTaskItemTags(model: ITaskModelData, options: TaskItemTagsOpti
   }
 
   if (completionAt && status !== 'created') {
-    const isCompleted = status === 'completed';
     res.push({
       icon: {
-        type: isCompleted ? 'CalendarCheckIcon' : 'CalendarXIcon',
+        type: 'CalendarIcon',
       },
       label: formatCompletionAt(completionAt),
     });

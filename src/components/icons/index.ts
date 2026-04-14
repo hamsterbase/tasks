@@ -32,6 +32,7 @@ import {
   FileText,
   Flag,
   GripVertical,
+  Hash,
   Home,
   Inbox,
   Info,
@@ -87,6 +88,7 @@ export const AreaIcon = Layers;
 export const PlusIcon = Plus;
 export const LaterProjectsIcon = CalendarClock;
 export const HeadingIcon = TypeIcon;
+export const HashIcon = Hash;
 export const EditIcon = PenLine;
 export const NavIcon = ChevronRight;
 export const DeleteIcon = X;
