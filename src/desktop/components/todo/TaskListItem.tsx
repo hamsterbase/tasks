@@ -41,7 +41,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
   followParentArchiveState,
 }) => {
   const isCompleted = task.status === 'completed';
-  const isCompletedLike = task.status === 'completed' || task.status === 'canceled' || task.status === 'cancelled';
+  const isCompletedLike = task.status === 'completed' || task.status === 'canceled';
   const isArchivedLike = followParentArchiveState && task.isParentArchived;
   const inputRef = useRef<HTMLInputElement>(null);
 
