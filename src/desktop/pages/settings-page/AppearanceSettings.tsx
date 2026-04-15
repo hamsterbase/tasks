@@ -3,7 +3,6 @@ import { ItemGroup } from '@/desktop/components/Settings/ItemGroup';
 import { SettingsContent } from '@/desktop/components/Settings/SettingsContent/SettingsContent';
 import { SettingsItem } from '@/desktop/components/Settings/SettingsItem';
 import { SettingsTitle } from '@/desktop/components/Settings/SettingsTitle';
-import { Space } from '@/desktop/components/Space/Space';
 import { useConfig } from '@/hooks/useConfig';
 import { useGlobalTaskDisplaySettings } from '@/hooks/useGlobalTaskDisplaySettings';
 import { localize } from '@/nls';
@@ -85,7 +84,7 @@ export const AppearanceSettings: React.FC = () => {
           }}
         />
       </ItemGroup>
-      <Space size="large"></Space>
+      <div className="h-6" />
       <SettingsTitle title={localize('settings.notes', 'Notes')} />
       <ItemGroup>
         <SettingsItem
@@ -103,7 +102,7 @@ export const AppearanceSettings: React.FC = () => {
           }}
         ></SettingsItem>
       </ItemGroup>
-      <Space size="large"></Space>
+      <div className="h-6" />
       <SettingsTitle title={localize('settings.dock_badge', 'Dock Badge')} />
       <ItemGroup>
         <SettingsItem
@@ -127,7 +126,7 @@ export const AppearanceSettings: React.FC = () => {
           }}
         />
       </ItemGroup>
-      <Space size="large"></Space>
+      <div className="h-6" />
       <SettingsTitle title={settingOptions.title} description={settingOptions.description} level={2} />
       <ItemGroup>
         <SettingsItem

@@ -14,13 +14,15 @@ interface SettingsContentProps {
 export const SettingsContent: React.FC<SettingsContentProps> = (props) => {
   return (
     <div className={desktopStyles.SettingsContentContainer}>
-      <div className={desktopStyles.SettingsContentBackButton}>
-        {props.back && <BackButton label={props.back.label} to={props.back.to} />}
-      </div>
+      {props.back && (
+        <div className={desktopStyles.SettingsContentBackButton}>
+          <BackButton label={props.back.label} to={props.back.to} />
+        </div>
+      )}
       <div
-        className={classNames('flex-1 w-full max-w-160 overflow-y-scroll m-auto', {
-          'py-6': !!props.back,
-          'py-18': !props.back,
+        className={classNames('mx-auto flex w-full max-w-2xl flex-col px-8 pb-32', {
+          'pt-6': !!props.back,
+          'pt-10': !props.back,
         })}
       >
         {props.children}

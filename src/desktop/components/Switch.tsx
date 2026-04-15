@@ -18,12 +18,10 @@ export const Switch: React.FC<SwitchProps> = ({ checked, onChange, disabled = fa
         className={desktopStyles.SwitchInput}
       />
       <div
-        className={`${desktopStyles.SwitchContainer} ${checked ? desktopStyles.SwitchContainerActive : desktopStyles.SwitchContainerInactive}`}
+        className={`relative h-5 w-9 rounded-full transition-colors ${checked ? 'bg-brand' : 'bg-bg3'}`}
       >
         <div
-          className={`${desktopStyles.SwitchKnob} ${
-            checked ? desktopStyles.SwitchKnobActive : desktopStyles.SwitchKnobInactive
-          }`}
+          className={`absolute left-0.5 top-0.5 size-4 rounded-full bg-bg1 transition-transform ${checked ? 'translate-x-4' : ''}`}
         />
       </div>
     </label>

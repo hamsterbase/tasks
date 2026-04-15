@@ -138,30 +138,19 @@ export const desktopStyles = {
   AuthFormLink: /*tw*/ 'text-brand mx-1 hover:underline',
 
   SelectContainer: /*tw*/ 'relative',
-  SelectTrigger:
-    'box-border flex flex-row justify-between items-center p-3 gap-3 min-w-44 h-11 border border-line-regular rounded-lg cursor-pointer bg-bg1 hover:border-brand focus-within:border-brand',
-  SelectTriggerText: /*tw*/ 'flex-none order-0 flex-grow-0 w-auto h-5 font-normal text-base leading-5 text-t1',
-  SelectTriggerIcon: /*tw*/ 'flex-none order-1 flex-grow-0 w-5 h-5 text-t3 transition-transform',
 
   SwitchLabel: /*tw*/ 'inline-flex items-center cursor-pointer',
   SwitchLabelDisabled: /*tw*/ 'opacity-50 cursor-not-allowed',
   SwitchInput: /*tw*/ 'sr-only',
-  SwitchContainer: /*tw*/ 'relative w-12.75 h-7.75 rounded-full transition-colors',
-  SwitchContainerActive: /*tw*/ 'bg-brand',
-  SwitchContainerInactive: /*tw*/ 'bg-bg2',
-  SwitchKnob: /*tw*/ 'absolute size-7.75 bg-white rounded-full transition-all duration-200 top-0 shadow-sm',
-  SwitchKnobActive: /*tw*/ 'left-5',
-  SwitchKnobInactive: /*tw*/ 'left-0.5',
 
-  SettingsItemContainer: /*tw*/ 'flex w-full items-start justify-between',
-  SettingsItemContentWrapper: /*tw*/ 'flex-1 pr-4',
-  SettingsItemTitle: /*tw*/ 'text-base font-medium text-t1 leading-6 h-6',
-  SettingsItemDescription: /*tw*/ 'text-sm font-normal text-t3 leading-4.5 min-h-4.5',
-  SettingsItemActionWrapper: /*tw*/ 'flex-shrink-0 h-10.5 flex item-center',
+  SettingsItemContainer: /*tw*/ 'flex items-center justify-between gap-4 px-4 py-3',
+  SettingsItemContentWrapper: /*tw*/ 'flex min-w-0 flex-1 flex-col gap-0.5',
+  SettingsItemTitle: /*tw*/ 'text-sm leading-5 text-t1',
+  SettingsItemDescription: /*tw*/ 'text-xs leading-4 text-t3',
+  SettingsItemActionWrapper: /*tw*/ 'flex flex-shrink-0 items-center',
 
   SettingsItemGroupContainer:
-    'flex flex-col justify-center items-start p-4 gap-3 border border-line-regular rounded-lg',
-  SettingsItemGroupDivider: /*tw*/ 'w-full h-0.25 bg-bg3',
+    'overflow-hidden rounded-lg border border-line-light bg-bg1 divide-y divide-line-light',
 
   SettingButtonBase: /*tw*/ 'rounded-lg focus:outline-none flex flex-row justify-center items-center whitespace-nowrap',
   SettingButtonSizeLarge: /*tw*/ 'h-13 text-base font-normal min-w-20',
@@ -256,13 +245,13 @@ export const desktopStyles = {
   CheckboxStatusBox: /*tw*/ 'size-4',
   CheckboxLabel: /*tw*/ 'text-sm text-t3 leading-5',
 
-  SettingsTitleContainer: /*tw*/ 'flex mb-8',
-  SettingsTitleContent: /*tw*/ 'flex flex-col gap-1 flex-1',
-  SettingsTitleHeading: /*tw*/ 'font-medium text-t1 leading-5',
-  SettingsTitleHeadingLevel1: /*tw*/ 'text-2xl',
-  SettingsTitleHeadingLevel2: /*tw*/ 'text-xl',
-  SettingsTitleDescription: /*tw*/ 'text-base font-normal text-t3 leading-5',
-  SettingsTitleActionContainer: /*tw*/ 'flex items-center',
+  SettingsTitleContainer: /*tw*/ 'mb-2 flex items-start justify-between gap-4',
+  SettingsTitleContent: /*tw*/ 'flex min-w-0 flex-1 flex-col gap-1',
+  SettingsTitleHeading: /*tw*/ 'font-semibold text-t1',
+  SettingsTitleHeadingLevel1: /*tw*/ 'text-base leading-6',
+  SettingsTitleHeadingLevel2: /*tw*/ 'text-sm leading-5 text-t2',
+  SettingsTitleDescription: /*tw*/ 'text-xs leading-4 text-t3',
+  SettingsTitleActionContainer: /*tw*/ 'flex flex-shrink-0 items-center',
 
   TaskListItemContainer:
     /*tw*/ 'group relative flex items-start gap-2 px-2 py-2 rounded-md outline-none cursor-pointer',
@@ -324,7 +313,7 @@ export const desktopStyles = {
   DetailPanelMaxWidth: /*tw*/ 'w-128',
   DetailPanelPreferredWidth: /*tw*/ 'w-72',
 
-  SettingsContentContainer: /*tw*/ 'w-full flex flex-col h-full',
+  SettingsContentContainer: /*tw*/ 'h-full w-full overflow-y-auto',
   SettingsContentBackButton: /*tw*/ 'p-3',
 
   AreaPageNotFoundContainer: /*tw*/ 'h-full w-full bg-bg1 flex items-center justify-center',

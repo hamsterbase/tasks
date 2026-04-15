@@ -63,7 +63,7 @@ export const SettingsItem: React.FC<SettingsItemProps> = ({ title, description, 
             placeholder={action.placeholder}
             value={action.currentValue}
             onChange={(e) => action.onChange(e.target.value)}
-            className="w-80 px-3 py-3 h-11 border border-line-regular rounded-lg bg-bg1 text-t1 text-base font-normal leading-5 placeholder-t3 focus:outline-none focus:border-brand"
+            className="w-64 rounded-md border border-line-light bg-bg2 px-2 py-1 text-xs leading-4 text-t1 placeholder-t3 outline-none transition-colors focus:border-line-bold"
           />
         );
     }
@@ -72,8 +72,8 @@ export const SettingsItem: React.FC<SettingsItemProps> = ({ title, description, 
   return (
     <div className={desktopStyles.SettingsItemContainer}>
       <div className={desktopStyles.SettingsItemContentWrapper}>
-        <h2 className={desktopStyles.SettingsItemTitle}>{title}</h2>
-        {description && <p className={desktopStyles.SettingsItemDescription}>{description}</p>}
+        <span className={desktopStyles.SettingsItemTitle}>{title}</span>
+        {description && <span className={desktopStyles.SettingsItemDescription}>{description}</span>}
       </div>
       <div className={desktopStyles.SettingsItemActionWrapper}>{renderAction()}</div>
     </div>

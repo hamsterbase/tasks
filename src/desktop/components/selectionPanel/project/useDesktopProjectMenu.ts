@@ -29,7 +29,7 @@ export const useDesktopProjectMenu = (taskId: TreeID) => {
     }
 
     dialog({
-      title: localize('project.cancel_project', 'Cancel Project'),
+      title: localize('project.cancel_project', 'Cancel project'),
       description: localize(
         'project.toggle_status_description',
         'There are {0} tasks left, what do you want to do?',
@@ -94,7 +94,7 @@ export const useDesktopProjectMenu = (taskId: TreeID) => {
     const project = getProject(todoService.modelState, taskId);
     return [
       {
-        label: localize('project.cancel_project', 'Cancel Project'),
+        label: localize('project.cancel_project', 'Cancel project'),
         testId: TestIds.ProjectDetailPanel.CancelProjectMenuItem,
         onSelect: handleCancelProject,
         icon: 'x-circle',

@@ -9,7 +9,6 @@ import {
   ArrowUp,
   ArrowUpToLine,
   Bell,
-  Bot,
   Box,
   Brain,
   Calendar,
@@ -30,6 +29,7 @@ import {
   Cloud,
   CloudAlert,
   Copy,
+  Download,
   Database,
   FileText,
   Flag,
@@ -54,6 +54,7 @@ import {
   Repeat,
   Repeat2,
   Search,
+  Sparkles,
   Tags,
   ServerIcon,
   Settings,
@@ -115,6 +116,7 @@ export const CircleCheckIcon = CircleCheckBig;
 export const CalendarCheckIcon = CalendarCheck;
 export const CalendarXIcon = CalendarX;
 export const CopyIcon = Copy;
+export const DownloadIcon = Download;
 export const ChevronDownIcon = ChevronDown;
 export const AlarmIcon = AlarmClock;
 export const PanelLeftIcon = PanelLeft;
@@ -124,7 +126,7 @@ export const RepeatIcon = Repeat;
 export const Repeat2Icon = Repeat2;
 export const SearchIcon = Search;
 export const SquareTerminalIcon = SquareTerminal;
-export const AIIcon = Bot;
+export const AIIcon = Sparkles;
 export const BoxIcon = Box;
 export const ChatIcon = MessageSquare;
 export const ReplyIcon = MessageSquareReply;

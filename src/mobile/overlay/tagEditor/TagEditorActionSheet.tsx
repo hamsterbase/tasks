@@ -112,7 +112,7 @@ export const TagEditorActionSheet: React.FC = () => {
 
   const tagInputPlaceholder = controller.hasTags
     ? ''
-    : localize('tag_editor.input_placeholder', 'Add or search tags...');
+    : localize('tag_editor.input_placeholder', 'Search or create a tag');
 
   return (
     <ActionSheet zIndex={controller.zIndex} onClose={handleClose}>

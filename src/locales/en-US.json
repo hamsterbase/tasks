@@ -509,7 +509,7 @@
     "content": "Mon"
   },
   "date_picker.no_date": {
-    "defaultMessage": "No Date",
+    "defaultMessage": "No date",
     "content": "No date"
   },
   "date_picker.saturday": {
@@ -565,7 +565,7 @@
     "content": "Wrong password"
   },
   "desktop.tag_editor.create_new_tag": {
-    "defaultMessage": "Create tag \"{0}\"",
+    "defaultMessage": "Create \"{0}\"",
     "content": "Create \"{0}\""
   },
   "desktop.task_detail.add_reminder": {
@@ -667,6 +667,10 @@
   "futureProjects.empty": {
     "defaultMessage": "No future projects",
     "content": "No future projects"
+  },
+  "heading.task_progress": {
+    "defaultMessage": "Task Progress",
+    "content": "Task Progress"
   },
   "heading.title_placeholder": {
     "defaultMessage": "Add heading title...",
@@ -960,6 +964,10 @@
     "defaultMessage": "Add Heading",
     "content": "Add Heading"
   },
+  "project.area": {
+    "defaultMessage": "Area",
+    "content": "Area"
+  },
   "project.cancel_project": {
     "defaultMessage": "Cancel project",
     "content": "Cancel project"
@@ -1043,6 +1051,14 @@
   "project.status.toggle": {
     "defaultMessage": "Toggle Project Status",
     "content": "Toggle Project Status"
+  },
+  "project.task_progress": {
+    "defaultMessage": "Task Progress",
+    "content": "Task Progress"
+  },
+  "project.task_progress_hint": {
+    "defaultMessage": "Select a task from the middle column to view its details",
+    "content": "Select a task from the middle column to view its details"
   },
   "project.toggle_status_description": {
     "defaultMessage": "There are {0} tasks left, what do you want to do?",
@@ -1500,6 +1516,18 @@
     "defaultMessage": "Display tasks with future due dates in all views.",
     "content": "Display tasks with future due dates in all views."
   },
+  "settings.sidebar.account": {
+    "defaultMessage": "Account",
+    "content": "Account"
+  },
+  "settings.sidebar.data": {
+    "defaultMessage": "Data",
+    "content": "Data"
+  },
+  "settings.sidebar.general": {
+    "defaultMessage": "General",
+    "content": "General"
+  },
   "settings.sync": {
     "defaultMessage": "Sync",
     "content": "Sync"
@@ -1637,12 +1665,32 @@
     "content": "Create tag \"#{0}\""
   },
   "tag_editor.empty_hint": {
-    "defaultMessage": "Type to create your first tag",
+    "defaultMessage": "No matching tags",
     "content": "No matching tags"
   },
   "tag_editor.input_placeholder": {
-    "defaultMessage": "Add or search tags...",
+    "defaultMessage": "Search or create a tag",
     "content": "Search or create a tag"
+  },
+  "task_attr.move_to_inbox": {
+    "defaultMessage": "Move to Inbox",
+    "content": "Move to Inbox"
+  },
+  "task_attr.no_areas": {
+    "defaultMessage": "No areas",
+    "content": "No areas"
+  },
+  "task_attr.no_location": {
+    "defaultMessage": "No locations",
+    "content": "No locations"
+  },
+  "task_attr.no_matching_location": {
+    "defaultMessage": "No matching locations",
+    "content": "No matching locations"
+  },
+  "task_attr.search_project": {
+    "defaultMessage": "Search projects",
+    "content": "Search projects"
   },
   "task.convert": {
     "defaultMessage": "Convert",

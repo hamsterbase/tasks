@@ -61,7 +61,7 @@ export const TagEditorOverlay: React.FC = () => {
       dataTestId={TestIds.TagEditor.Overlay}
       filter={{
         value: controller.searchText,
-        placeholder: localize('tag_editor.input_placeholder', 'Add or search tags...'),
+        placeholder: localize('tag_editor.input_placeholder', 'Search or create a tag'),
         onChange: (value) => controller.updateSearchText(value),
         autoFocus: true,
         disposeWhenBlur: true,
