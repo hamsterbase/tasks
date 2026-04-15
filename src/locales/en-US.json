@@ -1092,6 +1092,26 @@
     "defaultMessage": "e.g. 1w, 2m, 1y3d, due:1d, start:2d",
     "content": "e.g. 1w, 2m, 1y3d, due:1d, start:2d"
   },
+  "desktop.recurring_task.title": {
+    "defaultMessage": "Recurring Settings",
+    "content": "Recurring Settings"
+  },
+  "desktop.recurring_task.placeholder": {
+    "defaultMessage": "For example 1w, 2m, 1y3d, due:1d, start:2d",
+    "content": "For example 1w, 2m, 1y3d, due:1d, start:2d"
+  },
+  "desktop.recurring_task.body_hint": {
+    "defaultMessage": "After completing this task, the next task will be on:",
+    "content": "After completing this task, the next task will be on:"
+  },
+  "desktop.recurring_task.syntax_hint": {
+    "defaultMessage": "Format: number + d / w / m / y, optionally prefixed with start: or due:",
+    "content": "Format: number + d / w / m / y, optionally prefixed with start: or due:"
+  },
+  "desktop.recurring_task.invalid_rule": {
+    "defaultMessage": "Couldn't parse this rule",
+    "content": "Couldn't parse this rule"
+  },
   "recurring_task.settings_title": {
     "defaultMessage": "Set Recurring Task Rules",
     "content": "Set Recurring Task Rules"
@@ -1811,6 +1831,10 @@
   "tasks.recurring": {
     "defaultMessage": "Repeat",
     "content": "Repeat"
+  },
+  "tasks.recurring_next_label": {
+    "defaultMessage": "Next task",
+    "content": "Next task"
   },
   "tasks.recurring_due_date": {
     "defaultMessage": "DueDate: {0}",

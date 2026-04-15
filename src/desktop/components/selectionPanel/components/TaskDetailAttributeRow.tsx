@@ -7,6 +7,7 @@ interface TaskDetailAttributeRowProps {
   label: string;
   content: React.ReactNode;
   onClick?: React.MouseEventHandler<HTMLElement>;
+  dataTestId?: string;
   placeholder?: boolean;
   danger?: boolean;
   contentClassName?: string;
@@ -18,6 +19,7 @@ export const TaskDetailAttributeRow: React.FC<TaskDetailAttributeRowProps> = ({
   label,
   content,
   onClick,
+  dataTestId,
   placeholder = false,
   danger = false,
   contentClassName,
@@ -54,11 +56,20 @@ export const TaskDetailAttributeRow: React.FC<TaskDetailAttributeRowProps> = ({
 
   if (onClick) {
     return (
-      <div className={classNames(desktopStyles.TaskDetailAttributeRow, className)} onClick={onClick} role="button">
+      <div
+        className={classNames(desktopStyles.TaskDetailAttributeRow, className)}
+        data-test-id={dataTestId}
+        onClick={onClick}
+        role="button"
+      >
         {contentNode}
       </div>
     );
   }
 
-  return <div className={classNames(desktopStyles.TaskDetailAttributeRow, className)}>{contentNode}</div>;
+  return (
+    <div className={classNames(desktopStyles.TaskDetailAttributeRow, className)} data-test-id={dataTestId}>
+      {contentNode}
+    </div>
+  );
 };

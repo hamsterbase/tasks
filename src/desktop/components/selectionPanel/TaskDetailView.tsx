@@ -25,7 +25,7 @@ interface TaskDetailViewProps {
 
 export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task, onClearSelection }) => {
   const taskItemActions = useTaskItemActions(task);
-  const { openTaskMenu } = useTaskMenu(task.id, task);
+  const { openTaskMenu } = useTaskMenu(task.id);
   const { handleStartDateClick, handleDueDateClick } = useDatePickerHandlers({
     task,
   });
@@ -90,6 +90,7 @@ export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task, onClearSel
             icon={<ScheduledIcon />}
             date={task.startDate}
             onDateClick={handleStartDateClick}
+            testId={TestIds.TaskDetail.StartDateField}
           />
           <TaskDateField
             label={localize('desktop.task_detail.due_date', 'Due Date')}
@@ -98,10 +99,17 @@ export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task, onClearSel
             date={task.dueDate}
             onDateClick={handleDueDateClick}
             isDue={true}
+            testId={TestIds.TaskDetail.DueDateField}
           />
           <RemindersField reminders={task.reminders} itemId={task.id} />
           <TagsField itemId={task.id} />
-          {task.recurringRule && <RecurringRuleField recurringRule={task.recurringRule} taskId={task.id} />}
+          <RecurringRuleField
+            recurringRule={task.recurringRule}
+            taskId={task.id}
+            taskStartDate={task.startDate}
+            taskDueDate={task.dueDate}
+            testId={TestIds.TaskDetail.RecurringRuleField}
+          />
           <div className={desktopStyles.DetailViewSubtaskHeader}>
             <span className={desktopStyles.DetailViewSubtaskHeaderTitle}>
               {localize('desktop.task_detail.subtasks', 'Subtasks')}

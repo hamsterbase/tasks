@@ -99,7 +99,11 @@ export const desktopStyles = {
   RemindersFieldTimeText: /*tw*/ 'text-t3',
   RemindersFieldPastTag: /*tw*/ 'line-through text-t3',
 
-  RecurringRuleContent: /*tw*/ 'flex flex-col items-end gap-1 text-xs leading-4',
+  RecurringRuleContent: /*tw*/ 'min-w-0 flex flex-col items-end gap-1',
+  RecurringRuleSummaryHint: /*tw*/ 'text-xs leading-4 text-t3',
+  RecurringRuleSummaryItem: /*tw*/ 'max-w-52 flex items-center gap-1.5',
+  RecurringRuleSummaryTitle: /*tw*/ 'text-xs leading-4 text-t3 whitespace-nowrap',
+  RecurringRuleSummaryValue: /*tw*/ 'text-xs leading-4 text-t1 truncate',
 
   TaskLocationFieldLocationText: /*tw*/ 'text-xs text-t1',
 
@@ -149,8 +153,7 @@ export const desktopStyles = {
   SettingsItemDescription: /*tw*/ 'text-xs leading-4 text-t3',
   SettingsItemActionWrapper: /*tw*/ 'flex flex-shrink-0 items-center',
 
-  SettingsItemGroupContainer:
-    'overflow-hidden rounded-lg border border-line-light bg-bg1 divide-y divide-line-light',
+  SettingsItemGroupContainer: 'overflow-hidden rounded-lg border border-line-light bg-bg1 divide-y divide-line-light',
 
   SettingButtonBase: /*tw*/ 'rounded-lg focus:outline-none flex flex-row justify-center items-center whitespace-nowrap',
   SettingButtonSizeLarge: /*tw*/ 'h-13 text-base font-normal min-w-20',
@@ -445,19 +448,27 @@ export const desktopStyles = {
     /*tw*/ 'w-full flex items-center gap-2 px-2 py-1.5 text-left text-xs rounded-sm transition-colors',
 
   OverlayBackdrop: /*tw*/ 'fixed inset-0 flex items-center justify-center',
-  OverlayBackgroundMask: /*tw*/ 'absolute inset-0 bg-black opacity-45',
-  OverlayContainer: /*tw*/ 'bg-bg1 rounded-lg shadow-2xl flex flex-col min-w-130 mx-4 relative p-5',
+  OverlayBackgroundMask: /*tw*/ 'absolute inset-0 bg-black/40',
+  OverlayContainer:
+    /*tw*/ 'relative mx-4 flex w-[28rem] max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-md border border-line-regular bg-bg1 shadow-[0_4px_12px_rgba(0,0,0,0.08)]',
 
   OverlayContainerBackdrop: /*tw*/ 'fixed inset-0',
   OverlayContainerContent:
     /*tw*/ 'fixed bg-bg1 rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.08)] border border-line-regular',
   OverlayContainerFilterWrapper: /*tw*/ 'px-2 py-1.5 border-b border-line-light',
   OverlayContainerFilterInput: /*tw*/ 'w-full bg-transparent outline-none text-xs text-t1 placeholder:text-t3',
-  OverlayHeader: /*tw*/ 'flex items-center justify-between order-b border-bg2 mb-6',
-  OverlayTitle: /*tw*/ 'text-xl leading-6 font-medium text-t1',
-  OverlayCloseButton: /*tw*/ 'text-t3 transition-colors size-6',
-  OverlayContent: /*tw*/ '',
-  OverlayFooter: /*tw*/ 'flex justify-end gap-3 rounded-b-lg',
+  OverlayHeader: /*tw*/ 'flex items-center justify-between gap-3 px-4 py-3 border-b border-line-light',
+  OverlayTitle: /*tw*/ 'text-sm font-semibold text-t1',
+  OverlayCloseButton:
+    /*tw*/ 'size-6 flex items-center justify-center rounded-sm text-t3 hover:bg-bg3 hover:text-t1 transition-colors',
+  OverlayCloseIcon: /*tw*/ 'size-3.5',
+  OverlayContent: /*tw*/ 'px-4 py-3',
+  OverlayFooter: /*tw*/ 'flex justify-end gap-2 px-4 py-3 border-t border-line-light',
+  OverlayCancelButton:
+    /*tw*/ 'text-xs text-t2 px-3 py-1 rounded-md hover:bg-bg3 hover:text-t1 cursor-pointer transition-colors disabled:opacity-50 disabled:cursor-not-allowed',
+  OverlayConfirmButton:
+    /*tw*/ 'text-xs text-white bg-brand px-3 py-1 rounded-md hover:opacity-90 cursor-pointer transition-opacity disabled:pointer-events-none disabled:opacity-50',
+  OverlayConfirmButtonDisabled: /*tw*/ 'pointer-events-none opacity-50',
 
   DesktopDialogDescription: /*tw*/ 'text-sm text-t3 leading-4.5 font-normal',
   DesktopDialogActionsContainer: /*tw*/ 'flex flex-col gap-2 mt-5',
@@ -515,12 +526,22 @@ export const desktopStyles = {
   TreeSelectOverlayAreaItemLabel: /*tw*/ 'flex-1 truncate',
   TreeSelectOverlayEmpty: /*tw*/ 'px-3 py-2 text-xs text-t3 text-center',
 
-  RecurringTaskSettingsOverlayField: /*tw*/ 'mb-4',
-  RecurringTaskSettingsOverlayLabel: /*tw*/ 'block text-sm font-medium text-t2 mb-2',
-  RecurringTaskSettingsOverlayInput:
-    /*tw*/ 'w-full px-3 py-2 border border-line-regular rounded bg-bg1 text-t1 focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand',
-  RecurringTaskSettingsOverlayExplanation: /*tw*/ 'text-sm text-t3 mt-1',
-  RecurringTaskSettingsOverlayCalculation: /*tw*/ 'text-sm text-brand mt-1',
+  RecurringTaskSettingsDialogBody: /*tw*/ 'flex flex-col gap-4 px-4 py-3',
+  RecurringTaskSettingsDialogBodyHint: /*tw*/ 'text-xs leading-5 text-t3',
+  RecurringTaskSettingsDialogSection: /*tw*/ 'flex flex-col gap-1.5',
+  RecurringTaskSettingsDialogSectionHeader: /*tw*/ 'flex items-baseline justify-between gap-3',
+  RecurringTaskSettingsDialogSectionHeaderResult: /*tw*/ 'flex items-baseline gap-1 min-w-0',
+  RecurringTaskSettingsDialogSectionHeaderPlaceholder: /*tw*/ 'text-xs text-t3',
+  RecurringTaskSettingsDialogSectionTitle: /*tw*/ 'text-xs font-medium text-t2',
+  RecurringTaskSettingsDialogInput:
+    /*tw*/ 'w-full rounded-md border border-line-light bg-bg1 px-2.5 py-1.5 text-xs text-t1 outline-none placeholder:text-t3 focus:border-line-bold transition-colors',
+  RecurringTaskSettingsDialogInputDanger: /*tw*/ 'border-accent-danger focus:border-accent-danger',
+  RecurringTaskSettingsDialogSummaryCard: /*tw*/ 'text-xs leading-5 text-t3 break-words',
+  RecurringTaskSettingsDialogSummaryArrow: /*tw*/ 'text-xs text-t3',
+  RecurringTaskSettingsDialogSummaryValueEmphasis: /*tw*/ 'text-xs font-medium text-brand whitespace-nowrap',
+  RecurringTaskSettingsDialogErrorCard: /*tw*/ 'flex flex-col gap-0.5 text-xs leading-5',
+  RecurringTaskSettingsDialogErrorDescription: /*tw*/ 'text-accent-danger',
+  RecurringTaskSettingsDialogSyntaxHint: /*tw*/ 'text-t3',
 
   CreateDatabaseOverlayFormContainer: /*tw*/ 'flex flex-col gap-3',
   CreateDatabaseOverlayErrorText: /*tw*/ 'text-accent-danger text-sm',

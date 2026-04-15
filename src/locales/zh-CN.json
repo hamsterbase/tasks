@@ -1092,6 +1092,26 @@
     "defaultMessage": "e.g. 1w, 2m, 1y3d, due:1d, start:2d",
     "content": "例如：1w, 2m, 1y3d, due:1d, start:2d"
   },
+  "desktop.recurring_task.title": {
+    "defaultMessage": "Recurring Settings",
+    "content": "循环规则"
+  },
+  "desktop.recurring_task.placeholder": {
+    "defaultMessage": "For example 1w, 2m, 1y3d, due:1d, start:2d",
+    "content": "例如 1w、2m、1y3d、due:1d、start:2d"
+  },
+  "desktop.recurring_task.body_hint": {
+    "defaultMessage": "After completing this task, the next task will be on:",
+    "content": "完成当前任务后，下一个任务的日期将是："
+  },
+  "desktop.recurring_task.syntax_hint": {
+    "defaultMessage": "Format: number + d / w / m / y, optionally prefixed with start: or due:",
+    "content": "格式：数字 + d / w / m / y，可加 start: 或 due: 前缀"
+  },
+  "desktop.recurring_task.invalid_rule": {
+    "defaultMessage": "Couldn't parse this rule",
+    "content": "无法解析这条规则"
+  },
   "recurring_task.settings_title": {
     "defaultMessage": "Set Recurring Task Rules",
     "content": "设置循环任务规则"
@@ -1811,6 +1831,10 @@
   "tasks.recurring": {
     "defaultMessage": "Repeat",
     "content": "重复"
+  },
+  "tasks.recurring_next_label": {
+    "defaultMessage": "Next task",
+    "content": "下一个任务"
   },
   "tasks.recurring_due_date": {
     "defaultMessage": "DueDate: {0}",

@@ -66,6 +66,12 @@ export const TestIds = {
   TaskDetail: {
     /** Menu button in task detail panel header */
     MenuButton: 'task-detail-menu-button',
+    /** Start date row in the desktop task detail panel */
+    StartDateField: 'task-detail-start-date-field',
+    /** Due date row in the desktop task detail panel */
+    DueDateField: 'task-detail-due-date-field',
+    /** Recurring rule row in the desktop task detail panel */
+    RecurringRuleField: 'task-detail-recurring-rule-field',
   },
   Reminders: {
     /** Reminder popover container inside task detail panel */
@@ -90,5 +96,13 @@ export const TestIds = {
   TagEditor: {
     /** Desktop tag editor overlay container */
     Overlay: 'tag-editor-overlay',
+  },
+  RecurringTaskSettings: {
+    /** Desktop recurring task settings overlay container */
+    Overlay: 'recurring-task-settings-overlay',
+    /** Start date input in the recurring task settings overlay */
+    StartDateInput: 'recurring-task-settings-start-input',
+    /** Due date input in the recurring task settings overlay */
+    DueDateInput: 'recurring-task-settings-due-input',
   },
 } as const;

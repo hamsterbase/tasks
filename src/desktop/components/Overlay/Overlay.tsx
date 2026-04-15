@@ -1,9 +1,8 @@
 import { CloseIcon } from '@/components/icons';
 import { desktopStyles } from '@/desktop/theme/main';
 import { TestIds } from '@/testIds';
+import classNames from 'classnames';
 import React from 'react';
-import { Space } from '../Space/Space';
-import { SettingButton } from '../Settings/Button/Button';
 
 interface OverlayProps {
   title: string;
@@ -17,6 +16,9 @@ interface OverlayProps {
   zIndex?: number;
   cancelDisabled?: boolean;
   confirmDisabled?: boolean;
+  dataTestId?: string;
+  contentClassName?: string;
+  containerClassName?: string;
 }
 
 export const Overlay: React.FC<OverlayProps> = ({
@@ -31,6 +33,9 @@ export const Overlay: React.FC<OverlayProps> = ({
   cancelDisabled = false,
   confirmDisabled = false,
   hideFooter = false,
+  dataTestId,
+  contentClassName,
+  containerClassName,
 }) => {
   const showFooter = (onCancel || onConfirm) && !hideFooter;
   return (
@@ -41,36 +46,45 @@ export const Overlay: React.FC<OverlayProps> = ({
       }}
     >
       <div className={desktopStyles.OverlayBackgroundMask} />
-      <div className={desktopStyles.OverlayContainer} data-test-id={TestIds.DesktopDialog.Container}>
+      <div
+        className={classNames(desktopStyles.OverlayContainer, containerClassName)}
+        data-test-id={dataTestId || TestIds.DesktopDialog.Container}
+      >
         <div className={desktopStyles.OverlayHeader}>
           <h3 className={desktopStyles.OverlayTitle} data-test-id={TestIds.DesktopDialog.Title}>
             {title}
           </h3>
           <button onClick={onClose} className={desktopStyles.OverlayCloseButton}>
-            <CloseIcon />
+            <CloseIcon className={desktopStyles.OverlayCloseIcon} />
           </button>
         </div>
 
-        <div className={desktopStyles.OverlayContent}>{children}</div>
-        {showFooter && <Space size="medium"></Space>}
+        <div className={classNames(desktopStyles.OverlayContent, contentClassName)}>{children}</div>
         {showFooter && (
           <div className={desktopStyles.OverlayFooter}>
             {onCancel && (
-              <SettingButton variant="default" size="medium" onClick={onCancel} disabled={cancelDisabled}>
+              <button
+                className={desktopStyles.OverlayCancelButton}
+                onClick={onCancel}
+                disabled={cancelDisabled}
+                type="button"
+              >
                 {cancelText || 'Cancel'}
-              </SettingButton>
+              </button>
             )}
 
             {onConfirm && (
-              <SettingButton
-                variant="solid"
-                color="primary"
-                size="medium"
+              <button
+                className={classNames(
+                  desktopStyles.OverlayConfirmButton,
+                  confirmDisabled ? desktopStyles.OverlayConfirmButtonDisabled : ''
+                )}
                 onClick={onConfirm}
                 disabled={confirmDisabled}
+                type="button"
               >
                 {confirmText || 'Confirm'}
-              </SettingButton>
+              </button>
             )}
           </div>
         )}

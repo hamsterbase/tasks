@@ -13,6 +13,7 @@ interface TaskDateFieldProps {
   date?: number;
   onDateClick: (e: React.MouseEvent<HTMLElement>) => void;
   isDue?: boolean;
+  testId?: string;
 }
 
 export const TaskDateField: React.FC<TaskDateFieldProps> = ({
@@ -22,6 +23,7 @@ export const TaskDateField: React.FC<TaskDateFieldProps> = ({
   onDateClick,
   isDue = false,
   placeholder,
+  testId,
 }) => {
   if (!date) {
     return (
@@ -29,6 +31,7 @@ export const TaskDateField: React.FC<TaskDateFieldProps> = ({
         icon={icon}
         label={label}
         content={placeholder}
+        dataTestId={testId}
         placeholder={true}
         onClick={onDateClick}
       />
@@ -39,6 +42,7 @@ export const TaskDateField: React.FC<TaskDateFieldProps> = ({
     <TaskDetailAttributeRow
       icon={icon}
       label={label}
+      dataTestId={testId}
       onClick={onDateClick}
       danger={isDue && isPastOrToday(date)}
       content={
