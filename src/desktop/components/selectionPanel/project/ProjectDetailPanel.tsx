@@ -126,13 +126,15 @@ const ProjectDetailPanelContent: React.FC<IProjectDetailPanelContentProps> = ({ 
           className={desktopStyles.DetailViewHeaderTitle}
           autoSize={{ minRows: 1 }}
         />
-        <button
-          onClick={handleMenuClick}
-          className={desktopStyles.DetailViewHeaderMenuButton}
-          data-test-id={TestIds.ProjectDetailPanel.MenuButton}
-        >
-          <MenuIcon className={desktopStyles.DetailViewHeaderMenuIcon} />
-        </button>
+        <div className={desktopStyles.DetailViewHeaderActions}>
+          <button
+            onClick={handleMenuClick}
+            className={desktopStyles.DetailViewHeaderMenuButton}
+            data-test-id={TestIds.ProjectDetailPanel.MenuButton}
+          >
+            <MenuIcon className={desktopStyles.DetailViewHeaderMenuIcon} />
+          </button>
+        </div>
       </div>
 
       <div className={desktopStyles.DetailViewContent}>

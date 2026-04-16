@@ -61,9 +61,11 @@ const AreaDetailPanelContent: React.FC<IAreaDetailPanelContentProps> = ({ areaId
           className={desktopStyles.DetailViewHeaderTitle}
           autoSize={{ minRows: 1 }}
         />
-        <button onClick={handleMenuClick} className={desktopStyles.DetailViewHeaderMenuButton}>
-          <MenuIcon className={desktopStyles.DetailViewHeaderMenuIcon} strokeWidth={ICON_STROKE_WIDTH} />
-        </button>
+        <div className={desktopStyles.DetailViewHeaderActions}>
+          <button onClick={handleMenuClick} className={desktopStyles.DetailViewHeaderMenuButton}>
+            <MenuIcon className={desktopStyles.DetailViewHeaderMenuIcon} strokeWidth={ICON_STROKE_WIDTH} />
+          </button>
+        </div>
       </div>
 
       <div className={desktopStyles.DetailViewContent}>
