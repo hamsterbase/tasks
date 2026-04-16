@@ -63,7 +63,7 @@ export const SettingsItem: React.FC<SettingsItemProps> = ({ title, description, 
             placeholder={action.placeholder}
             value={action.currentValue}
             onChange={(e) => action.onChange(e.target.value)}
-            className="w-64 rounded-md border border-line-light bg-bg2 px-2 py-1 text-xs leading-4 text-t1 placeholder-t3 outline-none transition-colors focus:border-line-bold"
+            className="w-45 rounded-md border border-line-regular bg-transparent px-2 py-1 text-xs leading-4 text-t1 placeholder:text-t3 outline-none transition-colors hover:border-line-bold focus:border-brand"
           />
         );
     }

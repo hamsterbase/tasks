@@ -1508,6 +1508,10 @@
     "defaultMessage": "Local Database",
     "content": "本地数据库"
   },
+  "settings.local.database.description": {
+    "defaultMessage": "Local data stored on this device",
+    "content": "存储在此设备上的本地数据"
+  },
   "settings.notes": {
     "defaultMessage": "Notes",
     "content": "笔记"
@@ -1596,6 +1600,10 @@
     "defaultMessage": "Server added successfully",
     "content": "服务器添加成功"
   },
+  "sync.addServer": {
+    "defaultMessage": "Add Server",
+    "content": "添加服务器"
+  },
   "sync.authToken": {
     "defaultMessage": "Auth Token",
     "content": "认证令牌"
@@ -1641,8 +1649,8 @@
     "content": "https://tasks.hamsterbase.com/zh/guide/download/selfhosted.html"
   },
   "sync.selfHostedNoConfigDescription": {
-    "defaultMessage": "Add a selfhosted sync server to sync your data with your own server.",
-    "content": "添加自托管同步服务器，将您的数据与您自己的服务器同步。"
+    "defaultMessage": "No server configured yet. Add one to sync tasks across devices.",
+    "content": "尚未配置服务器，添加后可在多设备间同步任务。"
   },
   "sync.selfHostedOnlyLocalDatabase": {
     "defaultMessage": "Selfhosted sync is only available for local database.",

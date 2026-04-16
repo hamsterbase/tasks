@@ -1,5 +1,5 @@
 import { SettingsContent } from '@/desktop/components/Settings/SettingsContent/SettingsContent';
-import { SettingsTitle } from '@/desktop/components/Settings/SettingsTitle';
+import { SettingsSection } from '@/desktop/components/Settings/SettingsSection';
 import { ChinaServerSettings } from '@/desktop/pages/settings-page/databases/components/ChinaServerSettings.tsx';
 import { DatabaseList } from '@/desktop/pages/settings-page/databases/components/DatabaseList.tsx';
 import { useService } from '@/hooks/use-service.ts';
@@ -13,10 +13,11 @@ export const SyncSettings: React.FC = () => {
   useWatchEvent(cloudService.onSessionChange);
 
   return (
-    <SettingsContent>
-      <SettingsTitle title={localize('settings.sync', 'Sync')} />
+    <SettingsContent title={localize('settings.sync', 'Sync')}>
       <ChinaServerSettings />
-      <DatabaseList />
+      <SettingsSection title={localize('settings.cloud.database', 'Database')}>
+        <DatabaseList />
+      </SettingsSection>
     </SettingsContent>
   );
 };

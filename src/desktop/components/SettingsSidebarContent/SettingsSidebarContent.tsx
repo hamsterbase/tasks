@@ -15,8 +15,7 @@ import classNames from 'classnames';
 import React from 'react';
 import { Link, useLocation } from 'react-router';
 import { desktopStyles } from '../../theme/main.ts';
-import { DragHandle } from '../DragHandle.tsx';
-import { useShouldShowOnDesktopMac } from '@/desktop/hooks/useShouldShowOnDesktopMac.ts';
+import { MacTopBar } from '../MacTopBar.tsx';
 
 const groups = [
   {
@@ -78,31 +77,26 @@ const groups = [
 export const SettingsSidebarContent: React.FC = () => {
   const todoService = useService(ITodoService);
   useWatchEvent(todoService.onStateChange);
-  const sidebarContainerNoPaddingTop = useShouldShowOnDesktopMac();
   const location = useLocation();
 
   return (
     <div className={classNames(desktopStyles.sidebarBackground, desktopStyles.sidebarContainerStyle)}>
-      {sidebarContainerNoPaddingTop && (
-        <div className={desktopStyles.SidebarHeaderContainer}>
-          <DragHandle />
-        </div>
-      )}
-      <div className="mb-3 flex h-12 flex-shrink-0 items-center pl-5 pr-2">
+      <MacTopBar />
+      <div className="flex h-12 flex-shrink-0 items-center pl-5 pr-2">
         <Link
           to="/desktop"
-          className="-mx-2 flex h-7 items-center gap-1.5 rounded-md px-2 text-xs font-medium text-t2 transition-colors hover:bg-bg3 hover:text-t1"
+          className="flex h-7 items-center gap-1.5 rounded-md px-2 -mx-2 text-xs text-t2 transition-colors hover:bg-bg3 hover:text-t1 cursor-pointer"
         >
           <span className="flex size-3.5 items-center justify-center">
             <BackIcon className="size-3.5" strokeWidth={1.5} />
           </span>
-          <span>{localize('settings.back_to_app', 'Back to App')}</span>
+          <span className="font-medium">{localize('settings.back_to_app', 'Back to App')}</span>
         </Link>
       </div>
       <div className="flex flex-1 flex-col gap-0.5 overflow-y-auto px-2 pb-2">
         {groups.map((group) => (
           <div key={group.id} className="flex flex-col gap-0.5">
-            <span className="px-2 pb-1.5 pt-3 text-xs font-semibold tracking-wider text-t3">{group.heading}</span>
+            <span className="px-2 pb-1.5 pt-3 text-xs font-semibold text-t3">{group.heading}</span>
             {group.items.map((item) => {
               const isActive =
                 location.pathname === item.path ||
@@ -114,14 +108,14 @@ export const SettingsSidebarContent: React.FC = () => {
                   key={item.id}
                   to={item.path}
                   className={classNames(
-                    'flex h-8 items-center gap-2 rounded-md px-2 text-sm transition-colors',
-                    isActive ? 'bg-bg3 font-medium text-t2' : 'text-t2 hover:bg-bg3 hover:text-t1'
+                    desktopStyles.SidebarMenuItem,
+                    isActive ? desktopStyles.SidebarMenuItemActive : desktopStyles.SidebarMenuItemInactive
                   )}
                 >
-                  <span className="flex size-4 flex-shrink-0 items-center justify-center text-t3">
-                    <Icon className="size-4" strokeWidth={1.5} />
+                  <span className={desktopStyles.SidebarMenuItemIcon}>
+                    <Icon className={desktopStyles.SidebarMenuItemIconSvg} strokeWidth={1.5} />
                   </span>
-                  <span className="min-w-0 flex-1 truncate">{item.label}</span>
+                  <span className={desktopStyles.SidebarMenuItemLabel}>{item.label}</span>
                 </Link>
               );
             })}

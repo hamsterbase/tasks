@@ -1,7 +1,7 @@
+import { SwitchDatabaseIcon } from '@/components/icons';
 import { desktopStyles } from '@/desktop/theme/main';
 import { localize } from '@/nls';
 import React from 'react';
-import { SettingButton } from './Settings/Button/Button';
 
 interface DatabaseItemProps {
   icon: React.ReactNode;
@@ -52,9 +52,15 @@ export const DatabaseItem: React.FC<DatabaseItemProps> = ({
 
         {isCurrent && actionButtons && <div className={desktopStyles.DatabaseItemActionButtons}>{actionButtons}</div>}
         {!isCurrent && (
-          <SettingButton variant="text" size="small" inline onClick={onClick} color="primary">
-            {localize('database.switch', 'Switch to Database')}
-          </SettingButton>
+          <button
+            type="button"
+            className={desktopStyles.DatabaseItemActionButton}
+            title={localize('database.switch', 'Switch to Database')}
+            aria-label={localize('database.switch', 'Switch to Database')}
+            onClick={onClick}
+          >
+            <SwitchDatabaseIcon className={desktopStyles.DatabaseItemActionButtonIcon} strokeWidth={1.75} />
+          </button>
         )}
       </div>
 

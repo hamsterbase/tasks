@@ -1,9 +1,8 @@
 import { getLoginErrorMessage } from '@/base/common/error';
-import { Checkbox } from '@/desktop/components/Form/Checkbox/Checkbox';
 import { InputField } from '@/desktop/components/Form/InputField/InputField';
 import { SettingButton } from '@/desktop/components/Settings/Button/Button';
+import { ItemGroup } from '@/desktop/components/Settings/ItemGroup';
 import { SettingsContent } from '@/desktop/components/Settings/SettingsContent/SettingsContent';
-import { SettingsTitle } from '@/desktop/components/Settings/SettingsTitle';
 import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
 import { localize } from '@/nls';
@@ -38,19 +37,15 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <SettingsContent>
+    <SettingsContent title={localize('account.title', 'Account')}>
       <div className={desktopStyles.AuthFormContainer}>
-        <div className={desktopStyles.AuthFormSection}>
-          <SettingsTitle
-            title={localize('login.signIn', 'Sign In')}
-            description={localize('login.subtitle', 'Welcome back! Please sign in to your account.')}
-          />
-
+        <ItemGroup>
           <InputField
             type="text"
             placeholder={localize('login.account.placeholder', 'Enter your email')}
             value={account}
             onChange={(e) => setAccount(e.target.value)}
+            className="block w-full bg-transparent px-4 py-3 text-sm leading-5 text-t1 outline-none transition-colors placeholder:text-t3 focus:bg-bg2"
           />
 
           <InputField
@@ -58,19 +53,41 @@ export const LoginPage: React.FC = () => {
             placeholder={localize('login.password.placeholder', 'Enter your password')}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className="block w-full bg-transparent px-4 py-3 text-sm leading-5 text-t1 outline-none transition-colors placeholder:text-t3 focus:bg-bg2"
           />
 
-          <Checkbox checked={agreedToTerms} onChange={setAgreedToTerms}>
-            {localize('login.agree', 'I agree to')}
-            <Link to="/desktop/settings/account/eula" className={desktopStyles.AuthFormLink}>
-              {localize('login.eula', 'EULA')}
-            </Link>
-            {localize('login.and', 'and')}
-            <Link to="/desktop/settings/account/privacy" className={desktopStyles.AuthFormLink}>
-              {localize('login.privacyPolicy', 'Privacy Policy')}
-            </Link>
-          </Checkbox>
-        </div>
+          <label className="flex items-center gap-2 px-4 py-3">
+            <input
+              type="checkbox"
+              className="sr-only"
+              checked={agreedToTerms}
+              onChange={(e) => setAgreedToTerms(e.target.checked)}
+            />
+            <span className="flex h-5 w-4 items-center justify-center text-t3">
+              <svg className="size-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <rect x="1" y="1" width="14" height="14" rx="4" ry="4" stroke="currentColor" strokeWidth="1" />
+                {agreedToTerms && (
+                  <path
+                    d="M4.5 8.25 6.75 10.5 11.5 5.75"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                  />
+                )}
+              </svg>
+            </span>
+            <span className="text-xs leading-4 text-t3">
+              {localize('login.agree', 'I agree to')}
+              <Link to="/desktop/settings/account/eula" className={desktopStyles.AuthFormLink}>
+                {localize('login.eula', 'EULA')}
+              </Link>
+              {localize('login.and', 'and')}
+              <Link to="/desktop/settings/account/privacy" className={desktopStyles.AuthFormLink}>
+                {localize('login.privacyPolicy', 'Privacy Policy')}
+              </Link>
+            </span>
+          </label>
+        </ItemGroup>
 
         {errorMessage && <div className={desktopStyles.AuthFormErrorMessage}>{errorMessage}</div>}
 
@@ -78,6 +95,8 @@ export const LoginPage: React.FC = () => {
           <SettingButton
             variant="solid"
             color="primary"
+            inline
+            className="self-start"
             onClick={handleSubmit}
             disabled={isLoading || !account || !password || !agreedToTerms}
           >

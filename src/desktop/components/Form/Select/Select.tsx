@@ -49,7 +49,7 @@ export const Select: React.FC<SelectProps> = ({ value, onChange, options, classN
     <div ref={selectRef} className={`${desktopStyles.SelectContainer} ${className}`}>
       <button
         type="button"
-        className="flex min-w-32 cursor-pointer items-center gap-2 rounded-md border border-line-light bg-bg2 px-2 py-1 text-xs text-t1 transition-colors"
+        className="flex min-w-32 cursor-pointer items-center gap-2 rounded-md border border-line-regular bg-transparent px-2 py-1 text-xs text-t1 transition-colors hover:border-line-bold"
         onClick={handleToggle}
       >
         <span className="flex-1 truncate text-left">{selectedOption?.label || ''}</span>

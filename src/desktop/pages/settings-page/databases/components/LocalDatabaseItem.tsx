@@ -1,6 +1,6 @@
-import { DatabaseIcon } from '@/components/icons';
+import { DatabaseIcon, TrashIcon } from '@/components/icons';
 import { DatabaseItem } from '@/desktop/components/DatabaseItem';
-import { SettingButton } from '@/desktop/components/Settings/Button/Button';
+import { desktopStyles } from '@/desktop/theme/main';
 import { useDatabaseActions } from '@/desktop/hooks/useDatabaseActions';
 import { localize } from '@/nls.ts';
 import { LocalDatabaseItem as LocalDatabaseType } from '@/services/cloud/common/cloudService.ts';
@@ -18,14 +18,20 @@ export const LocalDatabaseItem: React.FC<LocalDatabaseItemProps> = ({ database, 
   return (
     <DatabaseItem
       icon={<DatabaseIcon />}
-      description={database.databaseName}
+      description={localize('settings.local.database.description', 'Local data stored on this device')}
       title={localize('settings.local.database', 'Local Database')}
       isCurrent={isCurrent}
       onClick={() => databaseActions.handleSwitchToDatabase()}
       actionButtons={
-        <SettingButton onClick={databaseActions.handleClearLocalData} variant="text" color="danger" size="small">
-          {localize('database.clearData', 'Clear Data')}
-        </SettingButton>
+        <button
+          type="button"
+          className={desktopStyles.DatabaseItemActionButtonDanger}
+          title={localize('database.clearData', 'Clear Data')}
+          aria-label={localize('database.clearData', 'Clear Data')}
+          onClick={databaseActions.handleClearLocalData}
+        >
+          <TrashIcon className={desktopStyles.DatabaseItemActionButtonIcon} strokeWidth={1.75} />
+        </button>
       }
     />
   );

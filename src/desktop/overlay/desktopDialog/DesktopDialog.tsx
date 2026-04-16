@@ -44,9 +44,9 @@ const DesktopDialogContent: React.FC<{ controller: DesktopDialogController }> = 
             return (
               <div key={action.key} className="flex flex-col space-y-1">
                 {action.label && (
-                  <label className="text-sm font-medium text-t1">
+                  <label className="text-xs font-medium text-t1">
                     {action.label}
-                    {action.required && <span className="text-accent-danger ml-1">*</span>}
+                    {action.required && <span className="text-accent-danger ml-0.5">*</span>}
                   </label>
                 )}
                 <InputField
@@ -54,6 +54,7 @@ const DesktopDialogContent: React.FC<{ controller: DesktopDialogController }> = 
                   placeholder={action.placeholder || ''}
                   value={(controller.actionValues[action.key] as string) || ''}
                   onChange={(e) => controller.updateActionValue(action.key, e.target.value)}
+                  className="w-full text-xs text-t1 bg-bg2 border border-line-light rounded-md px-2 py-1 outline-none focus:border-line-bold transition-colors placeholder:text-t3"
                 />
                 {error && <span className="text-sm text-accent-danger">{error}</span>}
               </div>

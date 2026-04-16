@@ -1,6 +1,6 @@
 import { explanationRecurringDate } from '@/core/time/explanationRecurringDate';
-import { Overlay } from '@/desktop/components/Overlay/Overlay';
 import { parseRecurringRule } from '@/core/time/parseRecurringRule';
+import { CloseIcon } from '@/components/icons';
 import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
@@ -50,92 +50,121 @@ export const RecurringTaskSettingsOverlay: React.FC = () => {
   const confirmDisabled = !startDateIsValid || !dueDateIsValid;
 
   return (
-    <Overlay
-      title={localize('desktop.recurring_task.title', 'Recurring Settings')}
-      onClose={() => controller.dispose()}
-      onCancel={() => controller.dispose()}
-      onConfirm={() => controller.save()}
-      cancelText={localize('common.cancel', 'Cancel')}
-      confirmText={localize('confirm', 'Confirm')}
-      confirmDisabled={confirmDisabled}
-      zIndex={controller.zIndex}
-      dataTestId={TestIds.RecurringTaskSettings.Overlay}
-      contentClassName={desktopStyles.RecurringTaskSettingsDialogBody}
-    >
-      <>
-        <p className={desktopStyles.RecurringTaskSettingsDialogBodyHint}>
-          {localize('desktop.recurring_task.body_hint', 'After completing this task, the next task will be on:')}
-        </p>
+    <div className={desktopStyles.RecurringTaskSettingsDialogRoot} style={{ zIndex: controller.zIndex }}>
+      <div className={desktopStyles.RecurringTaskSettingsDialogBackdrop} onClick={() => controller.dispose()} />
+      <div
+        className={desktopStyles.RecurringTaskSettingsDialogSurface}
+        data-test-id={TestIds.RecurringTaskSettings.Overlay}
+      >
+        <div className={desktopStyles.RecurringTaskSettingsDialogHeader}>
+          <h3 className={desktopStyles.RecurringTaskSettingsDialogTitle}>
+            {localize('desktop.recurring_task.title', 'Recurring Settings')}
+          </h3>
+          <button
+            type="button"
+            onClick={() => controller.dispose()}
+            className={desktopStyles.RecurringTaskSettingsDialogCloseButton}
+          >
+            <CloseIcon className={desktopStyles.RecurringTaskSettingsDialogCloseIcon} strokeWidth={1.75} />
+          </button>
+        </div>
 
-        <section className={desktopStyles.RecurringTaskSettingsDialogSection}>
-          <div className={desktopStyles.RecurringTaskSettingsDialogSectionHeader}>
-            <span className={desktopStyles.RecurringTaskSettingsDialogSectionTitle}>
-              {localize('desktop.task_detail.start_date', 'Start Date')}
-            </span>
-            {startDateIsValid ? (
-              <span className={desktopStyles.RecurringTaskSettingsDialogSectionHeaderResult}>
-                <span className={desktopStyles.RecurringTaskSettingsDialogSummaryArrow}>→</span>
-                <span className={desktopStyles.RecurringTaskSettingsDialogSummaryValueEmphasis}>{startDateNext}</span>
-              </span>
-            ) : (
-              <span className={desktopStyles.RecurringTaskSettingsDialogSectionHeaderPlaceholder}>—</span>
-            )}
-          </div>
-          <input
-            ref={startDateInputRef}
-            className={classNames(desktopStyles.RecurringTaskSettingsDialogInput, {
-              [desktopStyles.RecurringTaskSettingsDialogInputDanger]: startDateHasValue && !startDateIsValid,
-            })}
-            data-test-id={TestIds.RecurringTaskSettings.StartDateInput}
-            onChange={(event) => controller.updateStartDateRule(event.target.value)}
-            placeholder={placeholder}
-            type="text"
-            value={startDateRule}
-          />
-          {startDateHasValue && !startDateIsValid ? (
-            <div className={desktopStyles.RecurringTaskSettingsDialogErrorCard}>
-              <span className={desktopStyles.RecurringTaskSettingsDialogErrorDescription}>{invalidRuleText}</span>
-              <span className={desktopStyles.RecurringTaskSettingsDialogSyntaxHint}>{syntaxHint}</span>
-            </div>
-          ) : (
-            <div className={desktopStyles.RecurringTaskSettingsDialogSummaryCard}>{startDatePreview}</div>
-          )}
-        </section>
+        <div className={desktopStyles.RecurringTaskSettingsDialogBody}>
+          <p className={desktopStyles.RecurringTaskSettingsDialogBodyHint}>
+            {localize('desktop.recurring_task.body_hint', 'After completing this task, the next task will be on:')}
+          </p>
 
-        <section className={desktopStyles.RecurringTaskSettingsDialogSection}>
-          <div className={desktopStyles.RecurringTaskSettingsDialogSectionHeader}>
-            <span className={desktopStyles.RecurringTaskSettingsDialogSectionTitle}>
-              {localize('desktop.task_detail.due_date', 'Due Date')}
-            </span>
-            {dueDateIsValid ? (
-              <span className={desktopStyles.RecurringTaskSettingsDialogSectionHeaderResult}>
-                <span className={desktopStyles.RecurringTaskSettingsDialogSummaryArrow}>→</span>
-                <span className={desktopStyles.RecurringTaskSettingsDialogSummaryValueEmphasis}>{dueDateNext}</span>
+          <section className={desktopStyles.RecurringTaskSettingsDialogSection}>
+            <div className={desktopStyles.RecurringTaskSettingsDialogSectionHeader}>
+              <span className={desktopStyles.RecurringTaskSettingsDialogSectionTitle}>
+                {localize('desktop.task_detail.start_date', 'Start Date')}
               </span>
-            ) : (
-              <span className={desktopStyles.RecurringTaskSettingsDialogSectionHeaderPlaceholder}>—</span>
-            )}
-          </div>
-          <input
-            className={classNames(desktopStyles.RecurringTaskSettingsDialogInput, {
-              [desktopStyles.RecurringTaskSettingsDialogInputDanger]: dueDateHasValue && !dueDateIsValid,
-            })}
-            data-test-id={TestIds.RecurringTaskSettings.DueDateInput}
-            onChange={(event) => controller.updateDueDateRule(event.target.value)}
-            placeholder={placeholder}
-            type="text"
-            value={dueDateRule}
-          />
-          {dueDateHasValue && !dueDateIsValid ? (
-            <div className={desktopStyles.RecurringTaskSettingsDialogErrorCard}>
-              <span className={desktopStyles.RecurringTaskSettingsDialogErrorDescription}>{invalidRuleText}</span>
-              <span className={desktopStyles.RecurringTaskSettingsDialogSyntaxHint}>{syntaxHint}</span>
+              {startDateIsValid ? (
+                <span className={desktopStyles.RecurringTaskSettingsDialogSectionHeaderResult}>
+                  <span className={desktopStyles.RecurringTaskSettingsDialogSummaryArrow}>→</span>
+                  <span className={desktopStyles.RecurringTaskSettingsDialogSummaryValueEmphasis}>{startDateNext}</span>
+                </span>
+              ) : (
+                <span className={desktopStyles.RecurringTaskSettingsDialogSectionHeaderPlaceholder}>—</span>
+              )}
             </div>
-          ) : (
-            <div className={desktopStyles.RecurringTaskSettingsDialogSummaryCard}>{dueDatePreview}</div>
-          )}
-        </section>
-      </>
-    </Overlay>
+            <input
+              ref={startDateInputRef}
+              className={classNames(desktopStyles.RecurringTaskSettingsDialogInput, {
+                [desktopStyles.RecurringTaskSettingsDialogInputDanger]: startDateHasValue && !startDateIsValid,
+              })}
+              data-test-id={TestIds.RecurringTaskSettings.StartDateInput}
+              onChange={(event) => controller.updateStartDateRule(event.target.value)}
+              placeholder={placeholder}
+              type="text"
+              value={startDateRule}
+            />
+            {startDateHasValue && !startDateIsValid ? (
+              <div className={desktopStyles.RecurringTaskSettingsDialogErrorCard}>
+                <span className={desktopStyles.RecurringTaskSettingsDialogErrorDescription}>{invalidRuleText}</span>
+                <span className={desktopStyles.RecurringTaskSettingsDialogSyntaxHint}>{syntaxHint}</span>
+              </div>
+            ) : (
+              <div className={desktopStyles.RecurringTaskSettingsDialogSummaryCard}>{startDatePreview}</div>
+            )}
+          </section>
+
+          <section className={desktopStyles.RecurringTaskSettingsDialogSection}>
+            <div className={desktopStyles.RecurringTaskSettingsDialogSectionHeader}>
+              <span className={desktopStyles.RecurringTaskSettingsDialogSectionTitle}>
+                {localize('desktop.task_detail.due_date', 'Due Date')}
+              </span>
+              {dueDateIsValid ? (
+                <span className={desktopStyles.RecurringTaskSettingsDialogSectionHeaderResult}>
+                  <span className={desktopStyles.RecurringTaskSettingsDialogSummaryArrow}>→</span>
+                  <span className={desktopStyles.RecurringTaskSettingsDialogSummaryValueEmphasis}>{dueDateNext}</span>
+                </span>
+              ) : (
+                <span className={desktopStyles.RecurringTaskSettingsDialogSectionHeaderPlaceholder}>—</span>
+              )}
+            </div>
+            <input
+              className={classNames(desktopStyles.RecurringTaskSettingsDialogInput, {
+                [desktopStyles.RecurringTaskSettingsDialogInputDanger]: dueDateHasValue && !dueDateIsValid,
+              })}
+              data-test-id={TestIds.RecurringTaskSettings.DueDateInput}
+              onChange={(event) => controller.updateDueDateRule(event.target.value)}
+              placeholder={placeholder}
+              type="text"
+              value={dueDateRule}
+            />
+            {dueDateHasValue && !dueDateIsValid ? (
+              <div className={desktopStyles.RecurringTaskSettingsDialogErrorCard}>
+                <span className={desktopStyles.RecurringTaskSettingsDialogErrorDescription}>{invalidRuleText}</span>
+                <span className={desktopStyles.RecurringTaskSettingsDialogSyntaxHint}>{syntaxHint}</span>
+              </div>
+            ) : (
+              <div className={desktopStyles.RecurringTaskSettingsDialogSummaryCard}>{dueDatePreview}</div>
+            )}
+          </section>
+        </div>
+
+        <div className={desktopStyles.RecurringTaskSettingsDialogFooter}>
+          <button
+            type="button"
+            className={desktopStyles.RecurringTaskSettingsDialogCancelButton}
+            onClick={() => controller.dispose()}
+          >
+            {localize('common.cancel', 'Cancel')}
+          </button>
+          <button
+            type="button"
+            className={classNames(
+              desktopStyles.RecurringTaskSettingsDialogConfirmButton,
+              confirmDisabled && desktopStyles.RecurringTaskSettingsDialogConfirmButtonDisabled
+            )}
+            disabled={confirmDisabled}
+            onClick={() => controller.save()}
+          >
+            {localize('confirm', 'Confirm')}
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };

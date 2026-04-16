@@ -3,7 +3,6 @@ import { encodePatch } from '@/core/export/encode';
 import { ItemGroup } from '@/desktop/components/Settings/ItemGroup';
 import { SettingsContent } from '@/desktop/components/Settings/SettingsContent/SettingsContent';
 import { SettingsItem } from '@/desktop/components/Settings/SettingsItem';
-import { SettingsTitle } from '@/desktop/components/Settings/SettingsTitle';
 import { useService } from '@/hooks/use-service.ts';
 import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService';
@@ -77,8 +76,7 @@ export const ImportExportSettings: React.FC = () => {
   };
 
   return (
-    <SettingsContent>
-      <SettingsTitle title={localize('settings.import_export', 'Import & Export')} />
+    <SettingsContent title={localize('settings.import_export', 'Import & Export')}>
       <ItemGroup>
         <SettingsItem
           title={localize('settings.export', 'Export')}

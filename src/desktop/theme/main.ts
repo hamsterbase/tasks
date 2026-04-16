@@ -7,7 +7,7 @@ export const desktopStyles = {
   SidebarMaxWidth: /*tw*/ 'w-128',
   SidebarPreferredWidth: /*tw*/ 'w-56',
 
-  SidebarHeaderContainer: /*tw*/ 'flex items-center justify-end h-12 px-2 mb-3 flex-shrink-0',
+  SidebarHeaderContainer: /*tw*/ 'flex items-center justify-start h-12 px-2 flex-shrink-0',
   SidebarHeaderActions: /*tw*/ 'flex items-center gap-0.5 ml-auto',
   SidebarHeaderIconButton:
     'flex items-center justify-center hover:bg-bg3 hover:text-t1 rounded-md transition-colors size-6 text-t3',
@@ -132,12 +132,11 @@ export const desktopStyles = {
   ItemTagIconSvg: /*tw*/ 'size-3',
   ItemTagLabel: /*tw*/ 'min-w-0 truncate',
 
-  AuthFormContainer: /*tw*/ 'flex flex-col gap-9',
-  AuthFormSection: /*tw*/ 'flex flex-col gap-3',
-  AuthFormErrorMessage: /*tw*/ 'text-accent-danger text-base',
-  AuthFormButtonSection: /*tw*/ 'flex flex-col gap-3',
-  AuthFormFooterContainer: /*tw*/ 'flex items-center gap-2 justify-center',
-  AuthFormFooterText: /*tw*/ 'text-base font-normal text-t3 leading-5',
+  AuthFormContainer: /*tw*/ 'flex flex-col gap-4',
+  AuthFormErrorMessage: /*tw*/ 'px-4 text-xs leading-4 text-accent-danger',
+  AuthFormButtonSection: /*tw*/ 'flex flex-col gap-3 px-4',
+  AuthFormFooterContainer: /*tw*/ 'flex items-center gap-2',
+  AuthFormFooterText: /*tw*/ 'text-xs font-normal text-t3 leading-4',
   AuthFormSwitchButton: /*tw*/ 'text-brand hover:underline ml-1',
   AuthFormLink: /*tw*/ 'text-brand mx-1 hover:underline',
 
@@ -149,38 +148,38 @@ export const desktopStyles = {
 
   SettingsItemContainer: /*tw*/ 'flex items-center justify-between gap-4 px-4 py-3',
   SettingsItemContentWrapper: /*tw*/ 'flex min-w-0 flex-1 flex-col gap-0.5',
-  SettingsItemTitle: /*tw*/ 'text-sm leading-5 text-t1',
+  SettingsItemTitle: /*tw*/ 'text-sm font-medium leading-5 text-t1',
   SettingsItemDescription: /*tw*/ 'text-xs leading-4 text-t3',
   SettingsItemActionWrapper: /*tw*/ 'flex flex-shrink-0 items-center',
 
   SettingsItemGroupContainer: 'overflow-hidden rounded-lg border border-line-light bg-bg1 divide-y divide-line-light',
 
-  SettingButtonBase: /*tw*/ 'rounded-lg focus:outline-none flex flex-row justify-center items-center whitespace-nowrap',
-  SettingButtonSizeLarge: /*tw*/ 'h-13 text-base font-normal min-w-20',
-  SettingButtonSizeMedium: /*tw*/ 'h-11 text-base font-normal min-w-20 px-3',
-  SettingButtonSizeSmall: /*tw*/ 'h-9 text-sm font-normal min-w-20 px-3',
+  SettingButtonBase:
+    /*tw*/ 'focus:outline-none flex flex-row justify-center items-center whitespace-nowrap cursor-pointer',
+  SettingButtonSizeLarge: /*tw*/ 'h-8 rounded-md px-6 text-xs',
+  SettingButtonSizeMedium: /*tw*/ 'h-8 rounded-md px-3 text-xs',
+  SettingButtonSizeSmall: /*tw*/ 'h-7 rounded-md px-3 text-xs',
   SettingButtonFullWidth: /*tw*/ 'w-full',
 
-  SettingButtonSolidPrimary: /*tw*/ 'bg-brand text-white hover:bg-brand/90',
-  SettingButtonSolidDanger: /*tw*/ 'bg-accent-danger text-white hover:bg-accent-danger/90',
-  SettingButtonSolidDefault: /*tw*/ 'bg-bg3 text-white hover:bg-bg3/90',
+  SettingButtonSolidPrimary: /*tw*/ 'bg-brand text-white hover:opacity-90 transition-opacity',
+  SettingButtonSolidDanger: /*tw*/ 'bg-accent-danger text-white hover:opacity-90 transition-opacity',
+  SettingButtonSolidDefault: /*tw*/ 'bg-bg3 text-white hover:opacity-90 transition-opacity',
 
-  SettingButtonFilledPrimary: /*tw*/ 'bg-brand/10 text-brand hover:bg-brand/20',
-  SettingButtonFilledDanger: /*tw*/ 'bg-accent-danger/10 text-accent-danger hover:bg-accent-danger/20',
-  SettingButtonFilledDefault: /*tw*/ 'bg-bg2 text-t1 hover:bg-bg3',
+  SettingButtonFilledPrimary: /*tw*/ 'bg-brand text-white hover:opacity-90 transition-opacity',
+  SettingButtonFilledDanger:
+    /*tw*/ 'bg-accent-danger/10 text-accent-danger hover:bg-accent-danger/20 transition-colors',
+  SettingButtonFilledDefault: /*tw*/ 'border border-line-light bg-bg2 text-t1 hover:bg-bg3 transition-colors',
 
-  SettingButtonDefaultPrimary: /*tw*/ 'bg-transparent text-brand border border-brand hover:bg-brand/10',
-  SettingButtonDefaultDanger:
-    /*tw*/ 'bg-transparent text-accent-danger border border-accent-danger hover:bg-accent-danger/10',
-  SettingButtonDefaultDefault: /*tw*/ 'bg-transparent text-t1 border border-line-regular hover:bg-bg2',
+  SettingButtonDefaultPrimary: /*tw*/ 'bg-transparent text-brand hover:bg-brand/10 transition-colors',
+  SettingButtonDefaultDanger: /*tw*/ 'bg-transparent text-accent-danger hover:bg-accent-danger/10 transition-colors',
+  SettingButtonDefaultDefault: /*tw*/ 'bg-transparent text-t1 hover:bg-bg2 transition-colors',
 
-  SettingButtonTextPrimary: /*tw*/ 'bg-transparent text-brand hover:bg-brand/10',
-  SettingButtonTextDanger: /*tw*/ 'bg-transparent text-accent-danger hover:bg-accent-danger/10',
-  SettingButtonTextDefault: /*tw*/ 'bg-transparent text-t1 hover:bg-bg2',
+  SettingButtonTextPrimary: /*tw*/ 'bg-transparent text-brand hover:underline',
+  SettingButtonTextDanger: /*tw*/ 'bg-transparent text-accent-danger hover:underline',
+  SettingButtonTextDefault: /*tw*/ 'bg-transparent text-t1 hover:bg-bg2 transition-colors',
 
   SettingButtonDisabled: /*tw*/ 'opacity-50 cursor-not-allowed pointer-events-none',
 
-  DatabaseListContainer: /*tw*/ 'mt-12',
   DatabaseListLoadingContainer: /*tw*/ 'text-center py-4',
   DatabaseListLoadingText: /*tw*/ 'text-t2',
   DatabaseListErrorContainer: /*tw*/ 'text-center py-4',
@@ -192,7 +191,7 @@ export const desktopStyles = {
   TodaySectionTitle: /*tw*/ 'text-xs font-semibold text-t3 uppercase tracking-wider',
   TodaySectionCount: /*tw*/ 'text-xs text-t3',
 
-  BackButtonLink: /*tw*/ 'flex flex-row items-center h-12 no-underline text-t1 hover:bg-bg2 mb-2 rounded-lg px-3 w-fit',
+  BackButtonLink: /*tw*/ 'mb-2 flex h-12 w-fit flex-row items-center rounded-lg px-3 no-underline text-t1 hover:bg-bg2',
   BackButtonContainer: /*tw*/ 'flex flex-row items-center gap-1',
   BackButtonIcon: /*tw*/ 'w-6 h-6 flex items-center justify-center',
   BackButtonLabel: /*tw*/ 'text-xl leading-5',
@@ -231,30 +230,31 @@ export const desktopStyles = {
   MarkdownPageLi: /*tw*/ 'my-1',
   MarkdownPageBlockquote: /*tw*/ 'text-t2 border-l-4 border-line-light pl-4 my-4',
 
-  InfoItemContainer:
-    /*tw*/ 'flex flex-row justify-between items-center gap-3 w-full h-5 font-normal text-balance leading-5',
-  InfoItemLabel: /*tw*/ 'text-t3',
+  InfoItemContainer: /*tw*/ 'flex items-center justify-between gap-4 px-4 py-3',
+  InfoItemLabel: /*tw*/ 'text-xs text-t3',
   InfoItemValueContainer: /*tw*/ 'flex items-center gap-2',
-  InfoItemValue: /*tw*/ 'text-t1',
-  InfoItemCopyButton: /*tw*/ 'text-t3 hover:text-t1 transition-colors',
-  InfoItemCopyIcon: /*tw*/ 'w-4 h-4',
+  InfoItemValue: /*tw*/ 'text-sm text-t1',
+  InfoItemCopyButton:
+    /*tw*/ 'size-6 flex items-center justify-center rounded-md text-t3 hover:bg-bg3 hover:text-t1 cursor-pointer transition-colors',
+  InfoItemCopyIcon: /*tw*/ 'size-3.5',
 
-  CheckboxContainer: /*tw*/ 'flex items-center gap-2',
+  CheckboxContainer: /*tw*/ 'flex items-center gap-2 px-4 py-3',
   CheckboxInputContainer: /*tw*/ 'relative',
   CheckboxInput: /*tw*/ 'sr-only',
-  CheckboxBox: /*tw*/ 'flex h-5 w-4 items-center justify-center cursor-pointer',
+  CheckboxBox: /*tw*/ 'flex h-5 w-4 items-center justify-center cursor-pointer text-t3',
   CheckboxBoxChecked: /*tw*/ 'text-brand',
   CheckboxBoxUnchecked: /*tw*/ 'text-t3',
   CheckboxStatusBox: /*tw*/ 'size-4',
-  CheckboxLabel: /*tw*/ 'text-sm text-t3 leading-5',
+  CheckboxLabel: /*tw*/ 'text-xs text-t3 leading-4',
 
-  SettingsTitleContainer: /*tw*/ 'mb-2 flex items-start justify-between gap-4',
+  SettingsTitleContainer: /*tw*/ 'mb-3 flex items-start justify-between gap-4 px-4',
   SettingsTitleContent: /*tw*/ 'flex min-w-0 flex-1 flex-col gap-1',
   SettingsTitleHeading: /*tw*/ 'font-semibold text-t1',
   SettingsTitleHeadingLevel1: /*tw*/ 'text-base leading-6',
   SettingsTitleHeadingLevel2: /*tw*/ 'text-sm leading-5 text-t2',
   SettingsTitleDescription: /*tw*/ 'text-xs leading-4 text-t3',
   SettingsTitleActionContainer: /*tw*/ 'flex flex-shrink-0 items-center',
+  SettingsSectionContainer: /*tw*/ 'flex flex-col',
 
   TaskListItemContainer:
     /*tw*/ 'group relative flex items-start gap-2 px-2 py-2 rounded-md outline-none cursor-pointer',
@@ -318,6 +318,10 @@ export const desktopStyles = {
 
   SettingsContentContainer: /*tw*/ 'h-full w-full overflow-y-auto',
   SettingsContentBackButton: /*tw*/ 'p-3',
+  SettingsContentInner: /*tw*/ 'mx-auto flex w-full max-w-2xl flex-col gap-12 px-4 pb-32',
+  SettingsContentInnerWithBack: /*tw*/ 'pt-6',
+  SettingsContentInnerWithoutBack: /*tw*/ 'pt-10',
+  SettingsContentPageTitle: /*tw*/ 'px-4 text-3xl font-semibold leading-9 text-t1',
 
   AreaPageNotFoundContainer: /*tw*/ 'h-full w-full bg-bg1 flex items-center justify-center',
   AreaPageNotFoundText: /*tw*/ 'text-t3 text-lg',
@@ -333,27 +337,58 @@ export const desktopStyles = {
 
   ProjectTaskAreaContainer: /*tw*/ 'flex-1',
 
-  DatabaseItemContainer: /*tw*/ 'flex flex-col gap-3 w-full',
+  DatabaseItemContainer: /*tw*/ 'flex w-full flex-col gap-1 px-4 py-3',
   DatabaseItemMainRow: /*tw*/ 'flex items-center gap-3',
-  DatabaseItemContentWrapper: /*tw*/ 'flex items-center gap-2 flex-1',
-  DatabaseItemIconWrapper: /*tw*/ 'w-11 h-11 bg-bg3 rounded-lg flex items-center justify-center flex-shrink-0',
-  DatabaseItemIcon: /*tw*/ 'size-5 flex items-center justify-center',
-  DatabaseItemContent: /*tw*/ 'flex flex-col gap-1 flex-1',
-  DatabaseItemTitleRow: /*tw*/ 'flex items-center gap-2 h-6',
-  DatabaseItemTitle: /*tw*/ 'text-base font-medium text-t1 leading-6',
-  DatabaseItemCurrentBadge: /*tw*/ 'text-sm font-normal text-brand leading-4.5',
+  DatabaseItemContentWrapper: /*tw*/ 'flex flex-1 items-center gap-2',
+  DatabaseItemIconWrapper: /*tw*/ 'flex size-6 flex-shrink-0 items-center justify-center rounded text-t3',
+  DatabaseItemIcon: /*tw*/ 'size-4 flex items-center justify-center',
+  DatabaseItemContent: /*tw*/ 'flex flex-1 flex-col gap-0.5',
+  DatabaseItemTitleRow: /*tw*/ 'flex items-center gap-2',
+  DatabaseItemTitle: /*tw*/ 'text-sm font-medium text-t1',
+  DatabaseItemCurrentBadge: /*tw*/ 'rounded bg-brand/10 px-1.5 py-0.5 text-xs text-brand',
   DatabaseItemDescriptionRow: /*tw*/ 'flex items-center gap-2',
-  DatabaseItemDescription: /*tw*/ 'text-sm font-normal text-t3 leading-4.5',
-  DatabaseItemActionButtons: /*tw*/ 'flex items-center gap-2 shrink-0',
+  DatabaseItemDescription: /*tw*/ 'text-xs text-t3',
+  DatabaseItemActionButtons: /*tw*/ 'flex items-center gap-1 shrink-0',
+  DatabaseItemActionButton:
+    /*tw*/ 'flex size-6 items-center justify-center rounded-md text-t3 transition-colors hover:bg-bg2 hover:text-t1',
+  DatabaseItemActionButtonDanger:
+    /*tw*/ 'flex size-6 items-center justify-center rounded-md text-t3 transition-colors hover:bg-accent-danger/10 hover:text-accent-danger',
+  DatabaseItemActionButtonIcon: /*tw*/ 'size-4',
   DatabaseItemPropertiesSection: /*tw*/ 'shrink-0',
-  DatabaseItemProperty: /*tw*/ 'flex flex-col gap-1 h-11.5 justify-center',
-  DatabaseItemPropertyLabel: /*tw*/ 'text-base font-medium text-t1 leading-6',
-  DatabaseItemPropertyValue: /*tw*/ 'text-sm font-normal text-t3 leading-4.5',
+  DatabaseItemProperty: /*tw*/ 'flex flex-col gap-0.5',
+  DatabaseItemPropertyLabel: /*tw*/ 'text-sm text-t1',
+  DatabaseItemPropertyValue: /*tw*/ 'text-xs text-t3',
 
-  SpaceMedium: /*tw*/ 'h-8',
+  SettingsButtonRow: /*tw*/ 'flex items-center gap-3',
+  SettingsEmptyStateActionButton:
+    /*tw*/ 'inline-flex h-7 items-center gap-1.5 rounded-md bg-transparent px-3 text-xs text-t1 transition-colors hover:bg-bg2',
+  SettingsEmptyStateActionIcon: /*tw*/ 'size-3.5',
+  SettingsDialogRoot: /*tw*/ 'fixed inset-0 z-[60] flex items-center justify-center',
+  SettingsDialogBackdrop: /*tw*/ 'absolute inset-0 bg-black/40',
+  SettingsDialogSurface:
+    /*tw*/ 'relative mx-4 flex w-[28rem] max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-md border border-line-regular bg-bg1 shadow-[0_4px_12px_rgba(0,0,0,0.08)]',
+  SettingsDialogHeader: /*tw*/ 'flex items-center justify-between gap-3 px-4 py-3',
+  SettingsDialogTitle: /*tw*/ 'text-sm font-semibold text-t1',
+  SettingsDialogCloseButton:
+    /*tw*/ 'size-6 flex items-center justify-center rounded-sm text-t3 transition-colors hover:bg-bg3 hover:text-t1 cursor-pointer',
+  SettingsDialogCloseIcon: /*tw*/ 'size-3.5',
+  SettingsDialogContent: /*tw*/ 'px-4 pt-1 pb-2',
+  SettingsDialogActions: /*tw*/ 'mt-2 flex flex-col gap-4',
+  SettingsDialogField: /*tw*/ 'flex flex-col space-y-1.5',
+  SettingsDialogLabel: /*tw*/ 'text-xs font-medium text-t1',
+  SettingsDialogRequired: /*tw*/ 'ml-0.5 text-accent-danger',
+  SettingsDialogInput:
+    /*tw*/ 'w-full rounded-md border border-line-regular bg-transparent px-2.5 py-1.5 text-xs text-t1 outline-none transition-colors hover:border-line-bold focus:border-brand placeholder:text-t3',
+  SettingsDialogFooter: /*tw*/ 'flex justify-end gap-2 px-4 py-3',
+  SettingsDialogCancelButton:
+    /*tw*/ 'inline-flex h-7 items-center rounded-md px-3 text-xs text-t2 cursor-pointer transition-colors hover:bg-bg3 hover:text-t1 disabled:cursor-not-allowed disabled:opacity-50',
+  SettingsDialogConfirmButton:
+    /*tw*/ 'inline-flex h-7 items-center rounded-md bg-brand px-3 text-xs text-white cursor-pointer transition-opacity hover:opacity-90 disabled:pointer-events-none disabled:opacity-50',
+
+  SpaceMedium: /*tw*/ 'h-4',
   SpaceLarge: /*tw*/ 'h-16',
 
-  AccountSettingsButtonContainer: /*tw*/ 'space-y-3',
+  AccountSettingsButtonContainer: /*tw*/ 'flex flex-col gap-2',
 
   SchedulePageContainer: /*tw*/ 'h-full w-full bg-bg1',
   SchedulePageLayout: /*tw*/ 'h-full flex flex-col',
@@ -383,7 +418,6 @@ export const desktopStyles = {
   SidebarLayoutPaneWrapper: /*tw*/ 'p-2 pl-0 bg-bg2',
   SidebarLayoutContent: /*tw*/ 'h-full overflow-hidden rounded-lg border border-line-light bg-bg1',
   SidebarLayoutContentCollapsedPadding: /*tw*/ 'pl-4',
-  SidebarLayoutContentShowDragHandle: /*tw*/ 'pt-0',
 
   MultipleSelectionViewContainer: /*tw*/ 'h-full flex flex-col bg-bg1',
   MultipleSelectionViewContent: /*tw*/ 'flex items-center justify-center flex-1',
@@ -403,8 +437,6 @@ export const desktopStyles = {
   DesktopHeadingListItemDragHandleIcon: /*tw*/ 'size-2.5',
   DesktopHeadingListItemInput:
     /*tw*/ 'flex-1 min-w-0 bg-transparent outline-none text-xs font-semibold uppercase tracking-wider text-t3 placeholder:text-t3 rounded-sm px-1 -mx-1 truncate',
-
-  DragHandleContainer: /*tw*/ 'flex-1 h-full',
 
   DesktopMessageContainer: /*tw*/ 'fixed top-6 right-6 flex flex-col items-end pointer-events-none',
   DesktopMessageContent:
@@ -471,7 +503,7 @@ export const desktopStyles = {
   OverlayConfirmButtonDisabled: /*tw*/ 'pointer-events-none opacity-50',
 
   DesktopDialogDescription: /*tw*/ 'text-sm text-t3 leading-4.5 font-normal',
-  DesktopDialogActionsContainer: /*tw*/ 'flex flex-col gap-2 mt-5',
+  DesktopDialogActionsContainer: /*tw*/ 'flex flex-col gap-2 mt-2',
 
   TagEditorOverlayContainer: /*tw*/ 'w-[224px]',
   TagEditorOverlayCreateButton:
@@ -526,6 +558,15 @@ export const desktopStyles = {
   TreeSelectOverlayAreaItemLabel: /*tw*/ 'flex-1 truncate',
   TreeSelectOverlayEmpty: /*tw*/ 'px-3 py-2 text-xs text-t3 text-center',
 
+  RecurringTaskSettingsDialogRoot: /*tw*/ 'fixed inset-0 z-[60] flex items-center justify-center',
+  RecurringTaskSettingsDialogBackdrop: /*tw*/ 'absolute inset-0 bg-black/40',
+  RecurringTaskSettingsDialogSurface:
+    /*tw*/ 'relative mx-4 flex w-[28rem] max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-md border border-line-regular bg-bg1 shadow-[0_4px_12px_rgba(0,0,0,0.08)]',
+  RecurringTaskSettingsDialogHeader: /*tw*/ 'flex items-center justify-between gap-3 px-4 py-3',
+  RecurringTaskSettingsDialogTitle: /*tw*/ 'text-sm font-semibold text-t1',
+  RecurringTaskSettingsDialogCloseButton:
+    /*tw*/ 'size-6 flex items-center justify-center rounded-sm text-t3 hover:bg-bg3 hover:text-t1 cursor-pointer transition-colors',
+  RecurringTaskSettingsDialogCloseIcon: /*tw*/ 'size-3.5',
   RecurringTaskSettingsDialogBody: /*tw*/ 'flex flex-col gap-4 px-4 py-3',
   RecurringTaskSettingsDialogBodyHint: /*tw*/ 'text-xs leading-5 text-t3',
   RecurringTaskSettingsDialogSection: /*tw*/ 'flex flex-col gap-1.5',
@@ -534,14 +575,21 @@ export const desktopStyles = {
   RecurringTaskSettingsDialogSectionHeaderPlaceholder: /*tw*/ 'text-xs text-t3',
   RecurringTaskSettingsDialogSectionTitle: /*tw*/ 'text-xs font-medium text-t2',
   RecurringTaskSettingsDialogInput:
-    /*tw*/ 'w-full rounded-md border border-line-light bg-bg1 px-2.5 py-1.5 text-xs text-t1 outline-none placeholder:text-t3 focus:border-line-bold transition-colors',
-  RecurringTaskSettingsDialogInputDanger: /*tw*/ 'border-accent-danger focus:border-accent-danger',
+    /*tw*/ 'w-full rounded-md border border-line-regular bg-transparent px-2.5 py-1.5 text-xs text-t1 outline-none transition-colors hover:border-line-bold focus:border-brand placeholder:text-t3',
+  RecurringTaskSettingsDialogInputDanger:
+    /*tw*/ 'border-accent-danger hover:border-accent-danger focus:border-accent-danger',
   RecurringTaskSettingsDialogSummaryCard: /*tw*/ 'text-xs leading-5 text-t3 break-words',
   RecurringTaskSettingsDialogSummaryArrow: /*tw*/ 'text-xs text-t3',
   RecurringTaskSettingsDialogSummaryValueEmphasis: /*tw*/ 'text-xs font-medium text-brand whitespace-nowrap',
   RecurringTaskSettingsDialogErrorCard: /*tw*/ 'flex flex-col gap-0.5 text-xs leading-5',
   RecurringTaskSettingsDialogErrorDescription: /*tw*/ 'text-accent-danger',
   RecurringTaskSettingsDialogSyntaxHint: /*tw*/ 'text-t3',
+  RecurringTaskSettingsDialogFooter: /*tw*/ 'flex justify-end gap-2 px-4 py-3',
+  RecurringTaskSettingsDialogCancelButton:
+    /*tw*/ 'rounded-md px-3 py-1 text-xs text-t2 hover:bg-bg3 hover:text-t1 cursor-pointer transition-colors',
+  RecurringTaskSettingsDialogConfirmButton:
+    /*tw*/ 'rounded-md bg-brand px-3 py-1 text-xs text-white hover:opacity-90 cursor-pointer transition-opacity',
+  RecurringTaskSettingsDialogConfirmButtonDisabled: /*tw*/ 'pointer-events-none opacity-50',
 
   CreateDatabaseOverlayFormContainer: /*tw*/ 'flex flex-col gap-3',
   CreateDatabaseOverlayErrorText: /*tw*/ 'text-accent-danger text-sm',

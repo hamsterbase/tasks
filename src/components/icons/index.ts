@@ -6,6 +6,7 @@ import {
   Archive,
   ArrowLeft,
   ArrowRight,
+  ArrowRightLeft,
   ArrowUp,
   ArrowUpToLine,
   Bell,
@@ -80,6 +81,7 @@ export const MenuIcon = MoreVertical;
 export const NoteIcon = FileText;
 export const ScheduledIcon = Calendar;
 export const RightArrowIcon = ArrowRight;
+export const SwitchDatabaseIcon = ArrowRightLeft;
 export const SettingsIcon = Settings;
 export const TagIcon = Tags;
 export const DragHandleIcon = GripVertical;

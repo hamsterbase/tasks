@@ -1508,6 +1508,10 @@
     "defaultMessage": "Local Database",
     "content": "Local Database"
   },
+  "settings.local.database.description": {
+    "defaultMessage": "Local data stored on this device",
+    "content": "Local data stored on this device"
+  },
   "settings.notes": {
     "defaultMessage": "Notes",
     "content": "Notes"
@@ -1596,6 +1600,10 @@
     "defaultMessage": "Server added successfully",
     "content": "Server added successfully"
   },
+  "sync.addServer": {
+    "defaultMessage": "Add Server",
+    "content": "Add Server"
+  },
   "sync.authToken": {
     "defaultMessage": "Auth Token",
     "content": "Auth Token"
@@ -1641,8 +1649,8 @@
     "content": "https://tasks.hamsterbase.com/guide/download/selfhosted.html"
   },
   "sync.selfHostedNoConfigDescription": {
-    "defaultMessage": "Add a selfhosted sync server to sync your data with your own server.",
-    "content": "Add a selfhosted sync server to sync your data with your own server."
+    "defaultMessage": "No server configured yet. Add one to sync tasks across devices.",
+    "content": "No server configured yet. Add one to sync tasks across devices."
   },
   "sync.selfHostedOnlyLocalDatabase": {
     "defaultMessage": "Selfhosted sync is only available for local database.",

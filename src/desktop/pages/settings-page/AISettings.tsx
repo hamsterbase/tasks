@@ -1,7 +1,6 @@
 import { ItemGroup } from '@/desktop/components/Settings/ItemGroup';
 import { SettingsContent } from '@/desktop/components/Settings/SettingsContent/SettingsContent';
 import { SettingsItem } from '@/desktop/components/Settings/SettingsItem';
-import { SettingsTitle } from '@/desktop/components/Settings/SettingsTitle';
 import { useConfig } from '@/hooks/useConfig';
 import { localize } from '@/nls';
 import { aiApiTokenConfigKey, aiApiUrlConfigKey, aiModelNameConfigKey } from '@/services/config/config';
@@ -13,8 +12,7 @@ export const AISettings: React.FC = () => {
   const { value: modelName, setValue: setModelName } = useConfig(aiModelNameConfigKey());
 
   return (
-    <SettingsContent>
-      <SettingsTitle title={localize('settings.ai', 'AI Assistant')} />
+    <SettingsContent title={localize('settings.ai', 'AI Assistant')}>
       <ItemGroup>
         <SettingsItem
           title={localize('settings.ai.api_url', 'API URL')}

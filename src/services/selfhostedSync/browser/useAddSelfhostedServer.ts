@@ -67,7 +67,7 @@ export const useAddSelfhostedServer = (options: UseAddSelfhostedServerOptions) =
 
   const emptyStateMessage = localize(
     'sync.selfHostedNoConfigDescription',
-    'Add a selfhosted sync server to sync your data with your own server.'
+    'No server configured yet. Add one to sync tasks across devices.'
   );
 
   const disabledStateMessage = localize(

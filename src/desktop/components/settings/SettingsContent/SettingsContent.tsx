@@ -4,6 +4,7 @@ import { desktopStyles } from '@/desktop/theme/main';
 import { BackButton } from '../../BackButton/BackButton';
 
 interface SettingsContentProps {
+  title?: string;
   back?: {
     label: string;
     to: string;
@@ -20,11 +21,12 @@ export const SettingsContent: React.FC<SettingsContentProps> = (props) => {
         </div>
       )}
       <div
-        className={classNames('mx-auto flex w-full max-w-2xl flex-col px-8 pb-32', {
-          'pt-6': !!props.back,
-          'pt-10': !props.back,
+        className={classNames(desktopStyles.SettingsContentInner, {
+          [desktopStyles.SettingsContentInnerWithBack]: !!props.back,
+          [desktopStyles.SettingsContentInnerWithoutBack]: !props.back,
         })}
       >
+        {props.title && <h1 className={desktopStyles.SettingsContentPageTitle}>{props.title}</h1>}
         {props.children}
       </div>
     </div>

@@ -27,12 +27,12 @@ import { Link, useNavigate } from 'react-router';
 import { IInstantiationService } from 'vscf/platform/instantiation/common';
 import { desktopStyles } from '../../theme/main';
 import { DragOverlayItem } from '../drag/DragOverlayItem';
-import { DragHandle } from '../DragHandle';
 import { CommandPaletteController } from '../../overlay/commandPalette/CommandPaletteController';
 import { SidebarAreaItem } from './SidebarAreaItem/SidebarAreaItem.tsx';
 import { SidebarFutureProjectsItem } from './SidebarFutureProjectsItem/SidebarFutureProjectsItem.tsx';
 import { SidebarMenu } from './SidebarMenu/SidebarMenu.tsx';
 import { SidebarProjectItem as SidebarProjectItemComponent } from './SidebarProjectItem/SidebarProjectItem.tsx';
+import { MacTopBar } from '../MacTopBar.tsx';
 
 interface SidebarProjectAndAreaProps {
   flattenedResult: FlattenedResult<AreaInfoState, ProjectInfoState>;
@@ -190,8 +190,8 @@ export const SidebarContent: React.FC = () => {
 
   return (
     <div className={classNames(desktopStyles.sidebarBackground, desktopStyles.sidebarContainerStyle)}>
+      <MacTopBar />
       <div className={desktopStyles.SidebarHeaderContainer}>
-        <DragHandle />
         <div className={desktopStyles.SidebarHeaderActions}>
           <button onClick={handleCreateMenu} className={desktopStyles.SidebarHeaderIconButton}>
             <PlusIcon className={desktopStyles.SidebarHeaderIconButtonIcon} />

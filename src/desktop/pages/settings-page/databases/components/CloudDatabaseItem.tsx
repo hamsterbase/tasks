@@ -1,6 +1,6 @@
-import { CloudIcon } from '@/components/icons';
+import { CloudIcon, SyncIcon, TrashIcon } from '@/components/icons';
 import { DatabaseItem } from '@/desktop/components/DatabaseItem';
-import { SettingButton } from '@/desktop/components/Settings/Button/Button';
+import { desktopStyles } from '@/desktop/theme/main';
 import { useDatabaseActions } from '@/desktop/hooks/useDatabaseActions';
 import { localize } from '@/nls.ts';
 import { CloudDatabaseItem as CloudDatabaseType } from '@/services/cloud/common/cloudService.ts';
@@ -25,19 +25,24 @@ export const CloudDatabaseItem: React.FC<CloudDatabaseItemProps> = ({ database, 
 
   const actionButtons = (
     <>
-      <SettingButton
-        onClick={() => databaseActions.handleDelete('cloud')}
-        variant="text"
-        color="danger"
-        size="small"
-        inline
+      <button
+        type="button"
+        className={desktopStyles.DatabaseItemActionButton}
+        title={localize('database.sync', 'Sync')}
+        aria-label={localize('database.sync', 'Sync')}
+        onClick={databaseActions.handleSync}
       >
-        {localize('database.delete', 'Delete Database')}
-      </SettingButton>
-
-      <SettingButton onClick={databaseActions.handleSync} variant="solid" color="primary" size="small">
-        {localize('database.sync', 'Sync')}
-      </SettingButton>
+        <SyncIcon className={desktopStyles.DatabaseItemActionButtonIcon} strokeWidth={1.75} />
+      </button>
+      <button
+        type="button"
+        className={desktopStyles.DatabaseItemActionButtonDanger}
+        title={localize('database.delete', 'Delete Database')}
+        aria-label={localize('database.delete', 'Delete Database')}
+        onClick={() => databaseActions.handleDelete('cloud')}
+      >
+        <TrashIcon className={desktopStyles.DatabaseItemActionButtonIcon} strokeWidth={1.75} />
+      </button>
     </>
   );
 
