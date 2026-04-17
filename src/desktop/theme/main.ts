@@ -244,7 +244,6 @@ export const desktopStyles = {
   CheckboxBox: /*tw*/ 'flex h-5 w-4 items-center justify-center cursor-pointer text-t3',
   CheckboxBoxChecked: /*tw*/ 'text-brand',
   CheckboxBoxUnchecked: /*tw*/ 'text-t3',
-  CheckboxStatusBox: /*tw*/ 'size-4',
   CheckboxLabel: /*tw*/ 'text-xs text-t3 leading-4',
 
   SettingsTitleContainer: /*tw*/ 'mb-3 flex items-start justify-between gap-4 px-4',
@@ -267,10 +266,7 @@ export const desktopStyles = {
   TaskListItemDragHandle:
     'absolute left-0 top-0 flex h-full w-3 -translate-x-full items-center justify-center text-t3 opacity-0 group-hover:opacity-100 transition-opacity',
   TaskListItemDragHandleIcon: /*tw*/ 'size-2.5',
-  TaskListItemStatusButton: /*tw*/ 'flex h-5 w-4 flex-shrink-0 items-center justify-center outline-none',
-  TaskListItemStatusBox: /*tw*/ 'size-4',
-  TaskListItemStatusBoxCompleted: /*tw*/ 'text-t3',
-  TaskListItemStatusBoxUncompleted: /*tw*/ 'text-t3',
+  TaskListItemStatusButton: /*tw*/ 'flex h-5 w-4 flex-shrink-0 items-center justify-center text-t3 outline-none',
   TaskListItemContent: /*tw*/ 'flex flex-col gap-1 flex-1 min-w-0',
   TaskListItemTitleRow: /*tw*/ 'flex items-center gap-2',
   TaskListItemTitleInput:
@@ -285,7 +281,7 @@ export const desktopStyles = {
   SubtaskItemContainerSelectedInactive: /*tw*/ 'bg-bg2',
   SubtaskItemContainerDefault: /*tw*/ '',
   SubtaskItemContainerEditing: /*tw*/ 'editing-border rounded-l-none',
-  SubtaskItemStatusButton: 'flex size-4 flex-shrink-0 items-center justify-center',
+  SubtaskItemStatusButton: 'flex size-4 flex-shrink-0 items-center justify-center text-t3',
   SubtaskItemInputWrapper: /*tw*/ 'flex-1 min-w-0',
   SubtaskItemInput:
     /*tw*/ 'w-full text-sm leading-5 text-t1 bg-transparent outline outline-1 outline-transparent rounded-sm px-1 -mx-1 truncate',

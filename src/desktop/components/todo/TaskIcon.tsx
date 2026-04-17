@@ -27,7 +27,7 @@ export const TaskIcon: React.FC<TaskIconProps> = ({ status, size = 'md', classNa
 
   return (
     <span
-      className={classNames('inline-flex items-center justify-center text-t3 shrink-0', className)}
+      className={classNames('inline-flex items-center justify-center shrink-0', className)}
       style={{ width: pixelSize, height: pixelSize }}
     >
       <svg

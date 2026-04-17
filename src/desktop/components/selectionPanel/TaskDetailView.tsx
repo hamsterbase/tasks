@@ -3,7 +3,7 @@ import { CloseIcon, FlagIcon, MenuIcon, ScheduledIcon } from '@/components/icons
 import { EditableInput } from '@/components/edit/EditableInput.tsx';
 import { taskTitleInputKey } from '@/components/edit/inputKeys.ts';
 import { TaskInfo } from '@/core/state/type.ts';
-import { TaskStatusBox } from '@/desktop/components/todo/TaskStatusBox';
+import { TaskIcon } from '@/desktop/components/todo/TaskIcon';
 import { useTaskMenu } from '@/desktop/hooks/useTaskMenu.ts';
 import { desktopStyles } from '@/desktop/theme/main.ts';
 import { localize } from '@/nls';
@@ -49,7 +49,7 @@ export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task, onClearSel
     <div className={desktopStyles.DetailViewContainer}>
       <div className={desktopStyles.DetailViewHeader}>
         <div className={desktopStyles.DetailViewHeaderStatusIcon}>
-          <TaskStatusBox status={task.status} className={desktopStyles.DetailViewHeaderStatusBox} />
+          <TaskIcon status={task.status} className="text-t3" />
         </div>
         <EditableInput
           inputKey={taskTitleInputKey(task.id)}

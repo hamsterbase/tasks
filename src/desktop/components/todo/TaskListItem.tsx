@@ -9,7 +9,7 @@ import { useRegisterEvent } from '@/hooks/useRegisterEvent.ts';
 import { localize } from '@/nls';
 import classNames from 'classnames';
 import React, { useRef } from 'react';
-import { TaskStatusBox } from './TaskStatusBox';
+import { TaskIcon } from './TaskIcon';
 
 import { EditableInputSpan } from '@/components/edit/EditableInputSpan';
 import { DragHandleIcon, NotesIcon, SubtaskIcon } from '@/components/icons';
@@ -40,7 +40,6 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
   disableDrag,
   followParentArchiveState,
 }) => {
-  const isCompleted = task.status === 'completed';
   const isCompletedLike = task.status === 'completed' || task.status === 'canceled';
   const isArchivedLike = followParentArchiveState && task.isParentArchived;
   const inputRef = useRef<HTMLInputElement>(null);
@@ -201,13 +200,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
         className={desktopStyles.TaskListItemStatusButton}
         style={{ visibility: isDragging ? 'hidden' : 'visible' }}
       >
-        <TaskStatusBox
-          status={task.status}
-          className={classNames(desktopStyles.TaskListItemStatusBox, {
-            [desktopStyles.TaskListItemStatusBoxCompleted]: isCompleted,
-            [desktopStyles.TaskListItemStatusBoxUncompleted]: !isCompleted,
-          })}
-        />
+        <TaskIcon status={task.status} />
       </button>
       <div className={desktopStyles.TaskListItemContent} style={{ visibility: isDragging ? 'hidden' : 'visible' }}>
         <div className={desktopStyles.TaskListItemTitleRow}>

@@ -2,7 +2,7 @@ import React from 'react';
 import { TaskObjectSchema } from '@/core/type';
 import { AreaIcon } from '@/components/icons';
 import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox';
-import { TaskStatusBox } from '@/desktop/components/todo/TaskStatusBox';
+import { TaskIcon } from '@/desktop/components/todo/TaskIcon';
 import { desktopStyles } from '@/desktop/theme/main';
 import { localize } from '@/nls';
 import { getParentDisplay } from '@/core/state/getParentDisplay';
@@ -36,7 +36,7 @@ export const SearchResultItem: React.FC<SearchResultItemProps> = ({ item, isSele
         );
 
       case 'task':
-        return <TaskStatusBox status={item.status} className="size-4" />;
+        return <TaskIcon status={item.status} />;
       default:
         return null;
     }

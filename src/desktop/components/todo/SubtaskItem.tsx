@@ -17,7 +17,7 @@ import { CSS } from '@dnd-kit/utilities';
 import classNames from 'classnames';
 import React, { useRef } from 'react';
 import { InputFocusedContext } from 'vscf/platform/contextkey/common';
-import { TaskStatusBox } from './TaskStatusBox';
+import { TaskIcon } from './TaskIcon';
 
 interface SubtaskItemProps {
   subtask: SubTaskInfo;
@@ -134,7 +134,7 @@ export const SubtaskItem: React.FC<SubtaskItemProps> = ({ subtask, subList, clas
         onPointerDown={handleStopPropagation}
         className={desktopStyles.SubtaskItemStatusButton}
       >
-        <TaskStatusBox status={subtask.status} size="sm" />
+        <TaskIcon status={subtask.status} size="sm" />
       </button>
 
       <div

@@ -1,4 +1,4 @@
-import { TaskStatusBox } from '@/desktop/components/todo/TaskStatusBox';
+import { TaskIcon } from '@/desktop/components/todo/TaskIcon';
 import classNames from 'classnames';
 import React from 'react';
 import { desktopStyles } from '@/desktop/theme/main';
@@ -27,7 +27,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({ checked, onChange, children,
           })}
           onClick={() => onChange(!checked)}
         >
-          <TaskStatusBox status={checked ? 'completed' : 'pending'} className={desktopStyles.CheckboxStatusBox} />
+          <TaskIcon status={checked ? 'completed' : 'pending'} />
         </div>
       </div>
       <div className={desktopStyles.CheckboxLabel}>{children}</div>
