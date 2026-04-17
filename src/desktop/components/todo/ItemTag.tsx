@@ -21,11 +21,10 @@ export interface ItemTagProps {
   };
   label: string;
   isSelected?: boolean;
+  isDanger?: boolean;
 }
 
-export const ItemTag: React.FC<ItemTagProps> = ({ icon, label, isSelected }) => {
-  const isDanger = icon?.type === 'DueIcon' && /\bago\b/i.test(label);
-
+export const ItemTag: React.FC<ItemTagProps> = ({ icon, label, isSelected, isDanger }) => {
   const renderIcon = () => {
     if (!icon) return null;
 

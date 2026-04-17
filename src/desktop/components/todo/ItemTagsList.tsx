@@ -13,7 +13,9 @@ export const ItemTagsList: React.FC<ItemTagsListProps> = ({ tags, isSelected, ma
   return (
     <div className={desktopStyles.ItemTagsListContainer}>
       {tags.slice(0, maxVisibleTags).map((tag) => {
-        return <ItemTag isSelected={isSelected} key={tag.label} label={tag.label} icon={tag.icon} />;
+        return (
+          <ItemTag isSelected={isSelected} key={tag.label} label={tag.label} icon={tag.icon} isDanger={tag.isDanger} />
+        );
       })}
       {tags.length > maxVisibleTags && <ItemTag isSelected={isSelected} label={`+${tags.length - maxVisibleTags}`} />}
     </div>

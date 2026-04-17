@@ -15,7 +15,7 @@ export const desktopStyles = {
 
   SidebarMenuItemContainer: /*tw*/ 'flex flex-col gap-0.5 px-2',
   SidebarMenuItem: /*tw*/ 'h-7 px-2 flex rounded-md text-sm leading-5 items-center gap-2 group transition-colors',
-  SidebarMenuItemActive: /*tw*/ 'bg-bg3 text-t1 font-medium',
+  SidebarMenuItemActive: /*tw*/ 'bg-bg3 text-t1',
   SidebarMenuItemInactive: /*tw*/ 'text-t2 hover:bg-bg3 hover:text-t1',
   SidebarMenuItemIcon: /*tw*/ 'size-4 flex items-center justify-center flex-shrink-0',
   SidebarMenuItemIconSvg: /*tw*/ 'size-4',
@@ -39,7 +39,7 @@ export const desktopStyles = {
   SidebarAreaToggleButtonInactive: /*tw*/ 'text-t3',
   SidebarAreaGap: /*tw*/ 'mt-3 first:mt-0',
 
-  SidebarProjectItemActive: /*tw*/ 'bg-bg3 text-t1 font-medium',
+  SidebarProjectItemActive: /*tw*/ 'bg-bg3 text-t1',
   SidebarProjectItemInactive: /*tw*/ 'text-t2 hover:bg-bg3 hover:text-t1',
   SidebarProjectItemIcon: /*tw*/ 'size-4 flex items-center justify-center flex-shrink-0 text-t3',
   SidebarProjectItemDueDate: /*tw*/ 'text-xs leading-5',

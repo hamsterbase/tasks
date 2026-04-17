@@ -38,13 +38,14 @@ export const SidebarMenu: React.FC = () => {
         const isTodayLink = link.to === '/desktop/today';
         const isInboxLink = link.to === '/desktop/inbox';
         const startDateCount = isTodayLink ? todayItems.startDateItemsCount : 0;
+        const dueDateCount = isTodayLink ? todayItems.dueDateItemsCount : 0;
         return (
           <MenuItem
             key={index}
             to={link.to}
             text={link.text}
             icon={link.icon}
-            primaryBadge={undefined}
+            primaryBadge={isTodayLink && dueDateCount > 0 ? dueDateCount : undefined}
             secondaryBadge={
               isTodayLink && startDateCount > 0
                 ? startDateCount

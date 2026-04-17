@@ -13,6 +13,7 @@ interface ResultItem {
     props?: Record<string, unknown>;
   };
   label: string;
+  isDanger?: boolean;
 }
 
 interface TaskItemTagsOptions {
@@ -38,9 +39,10 @@ export function getProjectItemTags(model: ITaskModelData, options: TaskItemTagsO
   if (project.dueDate) {
     res.push({
       icon: {
-        type: 'CalendarIcon',
+        type: 'DueIcon',
       },
       label: formatDueDateInList(project.dueDate),
+      isDanger: isPastOrToday(project.dueDate),
     });
   }
 
