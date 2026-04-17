@@ -53,7 +53,7 @@ export const desktopStyles = {
   EntityHeaderContentWrapper: /*tw*/ 'flex items-start gap-2 flex-1 min-w-0 py-3',
   EntityHeaderIconContainer: /*tw*/ 'size-5 flex items-center justify-center text-t2',
   EntityHeaderIconButton: /*tw*/ 'size-5 flex items-center justify-center',
-  EntityHeaderIconSvg: /*tw*/ 'size-5',
+  EntityHeaderIconSvg: /*tw*/ 'size-4',
   EntityHeaderEditableTextArea:
     'flex-1 text-sm leading-5 font-semibold text-t1 resize-none bg-transparent border-none outline-none px-1 -mx-1 py-0 rounded-sm',
   EntityHeaderTitle: /*tw*/ 'text-sm leading-5 font-semibold text-t1 truncate',
@@ -198,7 +198,7 @@ export const desktopStyles = {
 
   DetailViewContainer: /*tw*/ 'h-full flex flex-col',
   DetailViewHeader: /*tw*/ 'group min-h-11 flex items-start gap-1 px-3 flex-shrink-0',
-  DetailViewHeaderStatusIcon: /*tw*/ 'flex-shrink-0 flex items-center justify-center text-t2 mt-3 h-5',
+  DetailViewHeaderStatusIcon: /*tw*/ 'flex-shrink-0 size-5 flex items-center justify-center text-t2 mt-3',
   DetailViewHeaderStatusBox: /*tw*/ 'size-4',
   DetailViewHeaderTitle:
     /*tw*/ 'flex-1 min-w-0 text-sm leading-5 font-semibold text-t1 bg-transparent border-none outline-none placeholder:text-t3 focus:bg-bg2 rounded-sm px-1 -mx-1 my-3',

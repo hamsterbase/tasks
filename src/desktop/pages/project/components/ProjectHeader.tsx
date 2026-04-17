@@ -111,7 +111,7 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({ project, projectId
       editable
       inputKey={projectTitleInputKey(projectId)}
       inputId={projectPageTitleInputId(projectId)}
-      renderIcon={() => <ProjectIcon progress={project.progress} status={project.status} size="lg" />}
+      renderIcon={() => <ProjectIcon progress={project.progress} status={project.status} size="md" />}
       onIconClick={handleToggleProjectStatus}
       title={project.title}
       placeholder={localize('project.untitled', 'New Project')}

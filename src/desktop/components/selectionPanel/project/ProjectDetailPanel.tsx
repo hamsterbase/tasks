@@ -115,7 +115,7 @@ const ProjectDetailPanelContent: React.FC<IProjectDetailPanelContentProps> = ({ 
     <div className={desktopStyles.DetailViewContainer}>
       <div className={desktopStyles.DetailViewHeader}>
         <div className={desktopStyles.DetailViewHeaderStatusIcon}>
-          <ProjectIcon progress={project.progress} status={project.status} size="lg" />
+          <ProjectIcon progress={project.progress} status={project.status} size="md" />
         </div>
         <EditableTextArea
           inputKey={projectTitleInputKey(projectId)}
