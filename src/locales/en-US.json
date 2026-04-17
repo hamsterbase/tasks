@@ -180,9 +180,13 @@
     "defaultMessage": "Reply to this",
     "content": "Reply to this"
   },
+  "ai_chat.replying_to_message": {
+    "defaultMessage": "Reply #{0}",
+    "content": "Reply #{0}"
+  },
   "ai_chat.status_responding": {
-    "defaultMessage": "Responding...",
-    "content": "Responding..."
+    "defaultMessage": "Generating...",
+    "content": "Generating..."
   },
   "ai_chat.status_stopped": {
     "defaultMessage": "Stopped",
@@ -191,6 +195,18 @@
   "ai_chat.thinking": {
     "defaultMessage": "Thinking",
     "content": "Thinking"
+  },
+  "ai_chat.parameters": {
+    "defaultMessage": "Parameters",
+    "content": "Parameters"
+  },
+  "ai_chat.result": {
+    "defaultMessage": "Result",
+    "content": "Result"
+  },
+  "ai_chat.success": {
+    "defaultMessage": "Success",
+    "content": "Success"
   },
   "ai_chat.tool_batchEdit": {
     "defaultMessage": "Batch Edit",

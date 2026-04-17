@@ -1,18 +1,22 @@
-import { ChatIcon, TrashIcon } from '@/components/icons';
-import { DesktopPage } from '@/desktop/components/DesktopPage';
-import { EntityHeader } from '@/desktop/components/common/EntityHeader';
-import { localize } from '@/nls';
-import React, { useCallback } from 'react';
-import { ChatMessageList } from './ChatMessageList';
-import { ChatInput } from './ChatInput';
+import { AIIcon, RotateCcwIcon } from '@/components/icons';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
+import { localize } from '@/nls';
 import { IAIService } from '@/services/ai/common/aiService';
+import React, { useCallback } from 'react';
+import { ChatInput } from './ChatInput';
+import { ChatMessageList } from './ChatMessageList';
 import { useAutoScroll } from './useAutoScroll';
 
 export const AIChat: React.FC = () => {
   const aiService = useService(IAIService);
   const controller = aiService.chatController;
+  const linkedMessageIndex = controller.linkedMessage
+    ? (() => {
+        const index = controller.session.messages.findIndex((message) => message.id === controller.linkedMessage?.id);
+        return index >= 0 ? index + 1 : undefined;
+      })()
+    : undefined;
 
   useWatchEvent(controller.onStateChange);
 
@@ -63,42 +67,48 @@ export const AIChat: React.FC = () => {
   }, [controller]);
 
   return (
-    <DesktopPage
-      header={
-        <EntityHeader
-          renderIcon={() => <ChatIcon />}
-          title={localize('ai_chat', 'AI Chat')}
-          extraActions={[
-            {
-              icon: <TrashIcon className="size-4" />,
-              handleClick: handleClearChat,
-              label: localize('ai_chat.clear', 'Clear'),
-              title: localize('ai_chat.clear_chat', 'Clear chat'),
-            },
-          ]}
-        />
-      }
-      showDetailPanel={false}
-    >
-      <div className="flex flex-col h-full">
-        <div ref={scrollContainerRef} className="flex-1 overflow-y-auto p-4">
-          <ChatMessageList
-            messages={controller.session.messages}
-            isLoading={controller.isLoading}
-            onLinkMessage={handleLinkMessage}
-            onConfirmToolCall={handleConfirmToolCall}
-            onRejectToolCall={handleRejectToolCall}
-          />
+    <div className="flex h-full w-full flex-col bg-bg1">
+      <div className="h-11 flex items-center justify-between bg-bg1 px-5 pr-3 flex-shrink-0">
+        <div className="flex items-center gap-2 flex-1 min-w-0">
+          <div className="size-5 flex items-center justify-center text-t2">
+            <button className="size-5 flex items-center justify-center">
+              <AIIcon className="size-4" strokeWidth={1.5} />
+            </button>
+          </div>
+          <div className="group flex items-center gap-1 flex-1 min-w-0">
+            <h1 className="text-sm font-semibold text-t1 truncate">{localize('ai_chat', 'AI Chat')}</h1>
+          </div>
         </div>
-        <ChatInput
-          onSendMessage={handleSendMessage}
+        <div className="flex items-center gap-1">
+          <button
+            onClick={handleClearChat}
+            className="flex items-center gap-1 px-2 text-xs text-t2 rounded-md transition-colors h-7 cursor-pointer"
+          >
+            <span className="size-3.5 flex items-center justify-center">
+              <RotateCcwIcon className="size-3.5" strokeWidth={1.5} />
+            </span>
+            <span className="text-xs leading-5 font-normal">{localize('ai_chat.new_chat', 'New Chat')}</span>
+          </button>
+        </div>
+      </div>
+      <div ref={scrollContainerRef} className="flex-1 overflow-y-auto px-6 py-6">
+        <ChatMessageList
+          messages={controller.session.messages}
           isLoading={controller.isLoading}
-          linkedMessage={controller.linkedMessage}
-          onClearLink={handleClearLink}
-          isConfigured={controller.isConfigured()}
-          onStop={handleStop}
+          onLinkMessage={handleLinkMessage}
+          onConfirmToolCall={handleConfirmToolCall}
+          onRejectToolCall={handleRejectToolCall}
         />
       </div>
-    </DesktopPage>
+      <ChatInput
+        onSendMessage={handleSendMessage}
+        isLoading={controller.isLoading}
+        linkedMessage={controller.linkedMessage}
+        linkedMessageIndex={linkedMessageIndex}
+        onClearLink={handleClearLink}
+        isConfigured={controller.isConfigured()}
+        onStop={handleStop}
+      />
+    </div>
   );
 };

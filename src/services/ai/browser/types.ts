@@ -72,6 +72,7 @@ export interface ChatMessageItem {
   role: 'user' | 'assistant';
   contentBlocks: ContentBlock[];
   linkedMessageId?: string;
+  loading?: boolean;
   timestamp: number;
   aborted?: boolean;
 }

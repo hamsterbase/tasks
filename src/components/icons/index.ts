@@ -24,6 +24,7 @@ import {
   Circle,
   CircleCheck,
   CircleCheckBig,
+  CircleHelp,
   CirclePlus,
   CircleSmall,
   CircleX,
@@ -52,9 +53,12 @@ import {
   PenLine,
   Plus,
   RefreshCw,
+  RotateCcw,
   Repeat,
   Repeat2,
+  Loader2,
   Search,
+  Send,
   Sparkles,
   Tags,
   ServerIcon,
@@ -115,14 +119,17 @@ export const CircleIcon = Circle;
 export const InfoIcon = Info;
 export const AlertCircleIcon = AlertCircle;
 export const CircleCheckIcon = CircleCheckBig;
+export const CircleHelpIcon = CircleHelp;
 export const CalendarCheckIcon = CalendarCheck;
 export const CalendarXIcon = CalendarX;
 export const CopyIcon = Copy;
 export const DownloadIcon = Download;
 export const ChevronDownIcon = ChevronDown;
+export const Loader2Icon = Loader2;
 export const AlarmIcon = AlarmClock;
 export const PanelLeftIcon = PanelLeft;
 export const SyncIcon = RefreshCw;
+export const RotateCcwIcon = RotateCcw;
 export const ArchiveIcon = Archive;
 export const RepeatIcon = Repeat;
 export const Repeat2Icon = Repeat2;
@@ -138,6 +145,7 @@ export const TrashIcon = Trash2;
 export const ArrowUpIcon = ArrowUp;
 export const ArrowUpToLineIcon = ArrowUpToLine;
 export const StopIcon = Square;
+export const SendIcon = Send;
 export const NotebookIcon = Notebook;
 export const NotesIcon = AlignLeft;
 export const CalendarIcon = Calendar;

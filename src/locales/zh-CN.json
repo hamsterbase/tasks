@@ -180,9 +180,13 @@
     "defaultMessage": "Reply to this",
     "content": "回复此消息"
   },
+  "ai_chat.replying_to_message": {
+    "defaultMessage": "Reply #{0}",
+    "content": "回复 #{0}"
+  },
   "ai_chat.status_responding": {
-    "defaultMessage": "Responding...",
-    "content": "回复中..."
+    "defaultMessage": "Generating...",
+    "content": "生成中…"
   },
   "ai_chat.status_stopped": {
     "defaultMessage": "Stopped",
@@ -191,6 +195,18 @@
   "ai_chat.thinking": {
     "defaultMessage": "Thinking",
     "content": "思考中"
+  },
+  "ai_chat.parameters": {
+    "defaultMessage": "Parameters",
+    "content": "参数"
+  },
+  "ai_chat.result": {
+    "defaultMessage": "Result",
+    "content": "结果"
+  },
+  "ai_chat.success": {
+    "defaultMessage": "Success",
+    "content": "成功"
   },
   "ai_chat.tool_batchEdit": {
     "defaultMessage": "Batch Edit",
