@@ -120,10 +120,9 @@ export const DesktopHeadingListItem: React.FC<DesktopHeadingListItemProps> = ({
         className={classNames(
           desktopStyles.DesktopHeadingListItemContent,
           {
-            [desktopStyles.DesktopHeadingListItemContentFocused]: isFocused && isSelected && !isInputFocused,
+            [desktopStyles.DesktopHeadingListItemContentFocused]: isFocused && isSelected,
             [desktopStyles.DesktopHeadingListItemContentSelected]: !isFocused && isSelected,
             [desktopStyles.DesktopHeadingListItemContentHidden]: isDragging,
-            [desktopStyles.DesktopHeadingListItemContentEditing]: isFocused && isSelected && isInputFocused,
           },
           className
         )}

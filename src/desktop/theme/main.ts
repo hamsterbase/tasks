@@ -262,7 +262,6 @@ export const desktopStyles = {
   TaskListItemContainerSelected: /*tw*/ 'bg-bg3',
   TaskListItemContainerArchived: /*tw*/ 'opacity-50!',
   TaskListItemContainerSelectedInactive: /*tw*/ 'bg-bg2',
-  TaskListItemContainerEditing: /*tw*/ 'editing-border rounded-l-none',
   TaskListItemDragHandle:
     'absolute left-0 top-0 flex h-full w-3 -translate-x-full items-center justify-center text-t3 opacity-0 group-hover:opacity-100 transition-opacity',
   TaskListItemDragHandleIcon: /*tw*/ 'size-2.5',
@@ -280,7 +279,6 @@ export const desktopStyles = {
   SubtaskItemContainerSelected: /*tw*/ 'bg-bg3',
   SubtaskItemContainerSelectedInactive: /*tw*/ 'bg-bg2',
   SubtaskItemContainerDefault: /*tw*/ '',
-  SubtaskItemContainerEditing: /*tw*/ 'editing-border rounded-l-none',
   SubtaskItemStatusButton: 'flex size-4 flex-shrink-0 items-center justify-center text-t3',
   SubtaskItemInputWrapper: /*tw*/ 'flex-1 min-w-0',
   SubtaskItemInput:
@@ -426,7 +424,6 @@ export const desktopStyles = {
     'group relative mt-4 flex w-full items-center gap-1 rounded-md px-2 py-1.5 cursor-pointer transition-colors',
   DesktopHeadingListItemContentFocused: /*tw*/ 'bg-bg3',
   DesktopHeadingListItemContentSelected: /*tw*/ 'bg-bg3',
-  DesktopHeadingListItemContentEditing: /*tw*/ 'editing-border',
   DesktopHeadingListItemContentHidden: /*tw*/ 'opacity-0',
   DesktopHeadingListItemDragHandle:
     'absolute left-0 top-0 flex h-full w-3 -translate-x-full items-center justify-center text-t3 opacity-0 transition-opacity group-hover:opacity-100',
