@@ -1,4 +1,6 @@
+import { checkPlatform } from '@/base/browser/checkPlatform';
 import { SidebarLayout } from '@/desktop/components/SidebarLayout/SidebarLayout.tsx';
+import { desktopStyles } from '@/desktop/theme/main';
 import { CreateDatabaseOverlay } from '@/desktop/overlay/createDatabase/CreateDatabaseOverlay';
 import { DatePickerOverlay } from '@/desktop/overlay/datePicker/DatePickerOverlay';
 import { DesktopDialog } from '@/desktop/overlay/desktopDialog/DesktopDialog';
@@ -64,6 +66,7 @@ const DesktopNavigationBridge: React.FC = () => {
 export const App = () => {
   useInputFocused();
   useCloudSync();
+  const { isElectron } = checkPlatform();
 
   const location = useLocation();
   const menuService = useService(IMenuService);
@@ -206,6 +209,9 @@ export const App = () => {
 
   return (
     <div>
+      {isElectron && (
+        <div className={desktopStyles.DragBar} style={{ WebkitAppRegion: 'drag' } as React.CSSProperties} />
+      )}
       <DesktopNavigationBridge />
       {element}
       <DesktopMenu />

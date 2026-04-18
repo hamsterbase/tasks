@@ -410,6 +410,8 @@ export const desktopStyles = {
 
   SidebarLayoutContainer: /*tw*/ 'h-screen w-screen relative safe-top bg-bg2',
   SidebarLayoutPaneWrapper: /*tw*/ 'p-2 pl-0 bg-bg2',
+
+  DragBar: /*tw*/ 'fixed top-0 left-0 w-screen h-2 z-50',
   SidebarLayoutContent: /*tw*/ 'h-full overflow-hidden rounded-lg border border-line-light bg-bg1',
   SidebarLayoutContentCollapsedPadding: /*tw*/ 'pl-4',
 
