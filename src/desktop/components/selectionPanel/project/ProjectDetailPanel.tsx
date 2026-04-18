@@ -143,8 +143,6 @@ const ProjectDetailPanelContent: React.FC<IProjectDetailPanelContentProps> = ({ 
             value={project.notes || ''}
             onSave={handleNotesSave}
             className={desktopStyles.DetailViewNotesTextarea}
-            disableMarkdownRender
-            minRows={2}
           />
           <div className={desktopStyles.DetailViewDivider} />
           <TaskLocationField itemId={projectId} label={localize('project.area', 'Area')} emptyIcon={<AreaIcon />} />

@@ -66,7 +66,7 @@ export function detailPanelConfigKey(): ConfigKey<number[]> {
 export function notesMarkdownRenderConfigKey(): ConfigKey<boolean> {
   return {
     key: 'notesMarkdownRender',
-    default: true,
+    default: false,
     check: (value: boolean) => typeof value === 'boolean',
   };
 }

@@ -16,7 +16,6 @@ interface NotesFieldProps {
   onSave: (value: string) => void;
   placeholder?: string;
   className?: string;
-  disableMarkdownRender?: boolean;
   minRows?: number;
 }
 
@@ -25,8 +24,6 @@ export const NotesField: React.FC<NotesFieldProps> = ({
   onSave,
   placeholder = localize('notes_placeholder', 'Add notes...'),
   className,
-  disableMarkdownRender = false,
-  minRows,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [textValue, setTextValue] = useState(value);
@@ -79,7 +76,7 @@ export const NotesField: React.FC<NotesFieldProps> = ({
 
   return (
     <div ref={containerRef} className={desktopStyles.NotesFieldContainer}>
-      {!hasNotes || isEditing || !notesMarkdownRender || disableMarkdownRender ? (
+      {!hasNotes || isEditing || !notesMarkdownRender ? (
         <TextArea
           ref={textAreaRef}
           value={textValue}
@@ -88,7 +85,7 @@ export const NotesField: React.FC<NotesFieldProps> = ({
           className={className}
           style={{ width: '100%' }}
           placeholder={placeholder}
-          autoSize={{ minRows: minRows ?? (disableMarkdownRender ? 2 : 1) }}
+          autoSize={{ minRows: 3 }}
         />
       ) : (
         <div className={className} onClick={handleMarkdownClick}>

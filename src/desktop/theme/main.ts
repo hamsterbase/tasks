@@ -209,7 +209,7 @@ export const desktopStyles = {
   DetailViewContent: /*tw*/ 'flex-1 overflow-y-auto',
   DetailViewContentInner: /*tw*/ 'px-3 pt-1 pb-3',
   DetailViewNotesTextarea:
-    'w-full min-h-6 px-0 py-0.5 mb-3 text-sm text-t1 placeholder:text-t3 bg-transparent border-none outline-none resize-none leading-5',
+    'w-full min-h-15 px-0 mb-3 text-sm text-t1 placeholder:text-t3 bg-transparent border-none outline-none resize-none leading-5',
   DetailViewDivider: /*tw*/ 'h-px bg-line-light my-3',
   DetailViewSubtaskHeader: /*tw*/ 'flex items-center gap-1 mt-6 mb-3',
   DetailViewSubtaskHeaderTitle: /*tw*/ 'text-xs text-t2 font-medium',

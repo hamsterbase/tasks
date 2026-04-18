@@ -80,7 +80,6 @@ export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task, onClearSel
             onSave={handleNotesSave}
             className={desktopStyles.DetailViewNotesTextarea}
             placeholder={localize('desktop.task_detail.notes_placeholder', 'Add notes...')}
-            disableMarkdownRender
           />
           <div className={desktopStyles.DetailViewDivider} />
           <TaskLocationField itemId={task.id} />
