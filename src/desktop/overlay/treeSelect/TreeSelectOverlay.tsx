@@ -188,7 +188,7 @@ const TreeSelectContent: React.FC<TreeSelectContentProps> = ({ controller }) => 
             <>
               <button className={desktopStyles.TreeSelectOverlayAction} onClick={() => handleConfirmSelection(null)}>
                 <span className={desktopStyles.TreeSelectOverlayActionIcon}>
-                  <InboxIcon className="size-3.5" />
+                  <InboxIcon className={desktopStyles.TreeSelectOverlayItemIcon} />
                 </span>
                 <span className={desktopStyles.TreeSelectOverlayProjectLabel}>
                   {localize('task_attr.move_to_inbox', 'Move to Inbox')}
@@ -205,7 +205,7 @@ const TreeSelectContent: React.FC<TreeSelectContentProps> = ({ controller }) => 
                 onClick={() => handleConfirmSelection(null)}
               >
                 <span className={desktopStyles.TreeSelectOverlayActionIcon}>
-                  <ArrowUpToLineIcon className="size-3.5" />
+                  <ArrowUpToLineIcon className={desktopStyles.TreeSelectOverlayItemIcon} />
                 </span>
                 <span className={desktopStyles.TreeSelectOverlayAreaItemLabel}>
                   {localize('project_area_selector.move_to_root', 'Move to root')}
@@ -228,7 +228,7 @@ const TreeSelectContent: React.FC<TreeSelectContentProps> = ({ controller }) => 
                   onClick={() => handleConfirmSelection(area.id)}
                 >
                   <span className={desktopStyles.TreeSelectOverlayAreaItemIcon}>
-                    <AreaIcon className="size-3.5" />
+                    <AreaIcon className={desktopStyles.TreeSelectOverlayItemIcon} />
                   </span>
                   <span className={desktopStyles.TreeSelectOverlayAreaItemLabel}>{area.title}</span>
                 </button>
@@ -250,7 +250,7 @@ const TreeSelectContent: React.FC<TreeSelectContentProps> = ({ controller }) => 
                 >
                   <span className={desktopStyles.TreeSelectOverlayProjectIcon}>
                     {result.type === 'area' ? (
-                      <AreaIcon className="size-3.5" />
+                      <AreaIcon className={desktopStyles.TreeSelectOverlayItemIcon} />
                     ) : (
                       <ProjectIcon
                         progress={result.project?.progress ?? 0}
@@ -300,7 +300,7 @@ const TreeSelectContent: React.FC<TreeSelectContentProps> = ({ controller }) => 
                       />
                     </button>
                     <span className={desktopStyles.TreeSelectOverlayAreaIcon}>
-                      <AreaIcon className="size-3.5" />
+                      <AreaIcon className={desktopStyles.TreeSelectOverlayItemIcon} />
                     </span>
                     <span className={desktopStyles.TreeSelectOverlayAreaLabel}>{area.title}</span>
                   </div>

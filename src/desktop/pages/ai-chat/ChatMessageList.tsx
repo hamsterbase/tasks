@@ -1,10 +1,9 @@
 import { BrainIcon, ChevronDownIcon, ChevronRightIcon, Loader2Icon, StopIcon, SyncIcon } from '@/components/icons';
+import { desktopStyles } from '@/desktop/theme/main';
 import { localize } from '@/nls';
 import type { ChatMessageItem, ContentBlock } from '@/services/ai/browser/types';
 import React, { useState } from 'react';
 import { UnifiedToolCard } from './UnifiedToolCard';
-
-const AI_CHAT_CONTENT_WIDTH = 'w-full max-w-2xl mx-auto';
 
 interface ChatMessageListProps {
   messages: ChatMessageItem[];
@@ -23,14 +22,14 @@ export const ChatMessageList: React.FC<ChatMessageListProps> = ({
 }) => {
   if (messages.length === 0) {
     return (
-      <div className="flex h-full items-center justify-center text-t3">
+      <div className={desktopStyles.AIChatMessageListEmpty}>
         {localize('ai_chat.empty', 'Start a conversation with AI')}
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className={desktopStyles.AIChatMessageList}>
       {messages.map((message, index) => (
         <ChatMessageItemComponent
           key={message.id}
@@ -63,21 +62,18 @@ const ThinkingBlock: React.FC<{ text: string; isStreaming?: boolean }> = ({ text
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div className="overflow-hidden rounded-md border border-line-light bg-bg2">
-      <button
-        onClick={() => setIsExpanded((value) => !value)}
-        className="flex w-full items-center gap-2 px-3 py-2 text-left text-xs text-t3 transition-colors hover:text-t1"
-      >
+    <div className={desktopStyles.AIChatThinkingBlock}>
+      <button onClick={() => setIsExpanded((value) => !value)} className={desktopStyles.AIChatThinkingToggle}>
         {isExpanded ? (
-          <ChevronDownIcon className="size-3.5 flex-shrink-0" />
+          <ChevronDownIcon className={desktopStyles.AIChatThinkingIcon} />
         ) : (
-          <ChevronRightIcon className="size-3.5 flex-shrink-0" />
+          <ChevronRightIcon className={desktopStyles.AIChatThinkingIcon} />
         )}
-        <BrainIcon className="size-3.5 flex-shrink-0" />
-        <span className="flex-1">{localize('ai_chat.thinking', 'Thinking')}</span>
-        {isStreaming && <SyncIcon className="size-3.5 animate-spin flex-shrink-0" />}
+        <BrainIcon className={desktopStyles.AIChatThinkingIcon} />
+        <span className={desktopStyles.AIChatThinkingLabel}>{localize('ai_chat.thinking', 'Thinking')}</span>
+        {isStreaming && <SyncIcon className={desktopStyles.AIChatThinkingStreamingIcon} />}
       </button>
-      {isExpanded && <pre className="px-3 pb-3 text-xs leading-5 text-t1 whitespace-pre-wrap break-words">{text}</pre>}
+      {isExpanded && <pre className={desktopStyles.AIChatThinkingContent}>{text}</pre>}
     </div>
   );
 };
@@ -113,8 +109,8 @@ const MessageFooter: React.FC<{
 
   if (status === 'generating') {
     return (
-      <span className="flex items-center gap-1 text-xs text-t3">
-        <Loader2Icon className="size-3 animate-spin text-brand" />
+      <span className={desktopStyles.AIChatMessageFooterStatus}>
+        <Loader2Icon className={desktopStyles.AIChatMessageFooterLoadingIcon} />
         {localize('ai_chat.status_responding', 'Generating...')}
       </span>
     );
@@ -122,8 +118,8 @@ const MessageFooter: React.FC<{
 
   if (status === 'stopped') {
     return (
-      <span className="flex items-center gap-1 text-xs text-t3">
-        <StopIcon className="size-3" />
+      <span className={desktopStyles.AIChatMessageFooterStatus}>
+        <StopIcon className={desktopStyles.AIChatMessageFooterStoppedIcon} />
         {localize('ai_chat.status_stopped', 'Stopped')}
       </span>
     );
@@ -146,7 +142,7 @@ const MessageFooter: React.FC<{
       tabIndex={0}
       onClick={handleLink}
       onKeyDown={handleKeyDown}
-      className="select-none text-xs text-t3 transition-colors hover:text-t1"
+      className={desktopStyles.AIChatMessageReplyButton}
       title={localize('ai_chat.reply_to_this', 'Reply to this')}
     >
       #{messageIndex}
@@ -177,7 +173,7 @@ const ContentBlockRenderer: React.FC<{
   onRejectToolCall: (messageId: string, toolCallId: string) => void;
 }> = ({ block, messageId, onConfirmToolCall, onRejectToolCall }) => {
   if (block.type === 'text') {
-    return <p className="text-sm leading-5 text-t1 whitespace-pre-wrap">{block.text}</p>;
+    return <p className={desktopStyles.AIChatMessageText}>{block.text}</p>;
   }
 
   if (block.type === 'thinking') {
@@ -211,18 +207,10 @@ const ChatMessageItemComponent: React.FC<ChatMessageItemComponentProps> = ({
   const linkedQuote = getMessageTextById(messages, message.linkedMessageId);
 
   return (
-    <div
-      className={
-        isUser
-          ? `${AI_CHAT_CONTENT_WIDTH} flex flex-col items-end gap-1`
-          : `${AI_CHAT_CONTENT_WIDTH} flex flex-col items-start gap-1`
-      }
-    >
+    <div className={isUser ? desktopStyles.AIChatMessageContainerUser : desktopStyles.AIChatMessageContainerAssistant}>
       {isUser ? (
-        <div className="flex max-w-full flex-col gap-1 rounded-xl bg-bg3 px-3 py-2 text-sm leading-5 text-t1">
-          {linkedQuote && (
-            <span className="line-clamp-2 border-l-2 border-brand pl-2 text-xs leading-5 text-t3">{linkedQuote}</span>
-          )}
+        <div className={desktopStyles.AIChatMessageUserBubble}>
+          {linkedQuote && <span className={desktopStyles.AIChatMessageLinkedQuote}>{linkedQuote}</span>}
           {message.contentBlocks.map((block, index) => (
             <ContentBlockRenderer
               key={index}
@@ -234,7 +222,7 @@ const ChatMessageItemComponent: React.FC<ChatMessageItemComponentProps> = ({
           ))}
         </div>
       ) : (
-        <div className="flex max-w-full flex-col gap-2 text-sm leading-5 text-t1">
+        <div className={desktopStyles.AIChatMessageAssistantContent}>
           {message.contentBlocks.map((block, index) => (
             <ContentBlockRenderer
               key={index}

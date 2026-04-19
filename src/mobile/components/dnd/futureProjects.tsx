@@ -40,7 +40,7 @@ export const FutureProjects: React.FC<FutureProjectsProps> = ({
       }}
     >
       <div className={styles.homeProjectItemCheckboxContainer}>
-        <LaterProjectsIcon className="size-5.5"></LaterProjectsIcon>
+        <LaterProjectsIcon className={styles.areaHeaderIconSize}></LaterProjectsIcon>
       </div>
       <span className={classNames(styles.homeProjectItemTitle, styles.homeProjectItemTitleNormal)}>
         {unstartedProjects.length} {localize('home.futureProjects', 'Future Projects')}

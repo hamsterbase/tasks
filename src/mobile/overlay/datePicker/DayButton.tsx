@@ -21,18 +21,19 @@ export const DayButton: React.FC<DayButtonProps> = ({ day, onSelect }) => {
     <button
       onClick={() => day.value && onSelect(day.date)}
       data-testid={day.value ? getMobileDatePickerDayTestId(day.date.toISOString().slice(0, 10)) : undefined}
-      className={classNames(`${styles.datePickerDayButtonHeight} ${styles.datePickerDayButtonRound} text-sm relative`, {
-        [`${styles.datePickerDaySelectedBackground} ${styles.datePickerDaySelectedTextColor}`]: day.isSelected,
-        'opacity-0': !day.isCurrentMonth,
-        [styles.datePickerTodayTextColor]: isTodayValue,
-      })}
+      className={classNames(
+        styles.datePickerDayButtonHeight,
+        styles.datePickerDayButtonRound,
+        styles.datePickerDayButtonBase,
+        {
+          [styles.datePickerDayButtonSelected]: day.isSelected,
+          [styles.overlayHidden]: !day.isCurrentMonth,
+          [styles.datePickerTodayTextColor]: isTodayValue,
+        }
+      )}
       disabled={!day.value}
     >
-      {isTodayValue && (
-        <span className="absolute top-0 left-0 w-full h-full flex items-start justify-center text-xs pt-1">
-          {localize('date_picker.today', 'Today')}
-        </span>
-      )}
+      {isTodayValue && <span className={styles.datePickerTodayLabel}>{localize('date_picker.today', 'Today')}</span>}
       {day.value || ''}
     </button>
   );

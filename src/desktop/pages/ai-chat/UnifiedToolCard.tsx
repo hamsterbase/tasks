@@ -1,8 +1,19 @@
 import { ChevronRightIcon, CircleXIcon, CloseIcon, CircleHelpIcon, LogIcon, Loader2Icon } from '@/components/icons';
+import { desktopStyles } from '@/desktop/theme/main';
 import { localize } from '@/nls';
 import type { UIToolCallInfo } from '@/services/ai/browser/types';
 import { getToolConfig } from '@/services/ai/browser/tools/tools';
 import React, { useState } from 'react';
+
+const getToolStatusClassName = (tone: 'neutral' | 'success' | 'warning' | 'danger') =>
+  `${desktopStyles.AIChatToolStatusBase} ${
+    {
+      neutral: desktopStyles.AIChatToolStatusToneNeutral,
+      success: desktopStyles.AIChatToolStatusToneSuccess,
+      warning: desktopStyles.AIChatToolStatusToneWarning,
+      danger: desktopStyles.AIChatToolStatusToneDanger,
+    }[tone]
+  }`;
 
 interface UnifiedToolCardProps {
   toolCall: UIToolCallInfo;
@@ -54,8 +65,8 @@ const showResultSection = (toolCall: UIToolCallInfo) => {
 const ToolStatus: React.FC<{ toolCall: UIToolCallInfo }> = ({ toolCall }) => {
   if (toolCall.status === 'streaming') {
     return (
-      <span className="flex items-center gap-1 text-xs text-t3">
-        <Loader2Icon className="size-3.5 animate-spin flex-shrink-0" />
+      <span className={getToolStatusClassName('neutral')}>
+        <Loader2Icon className={desktopStyles.AIChatToolStatusLoadingIcon} />
         {localize('ai_chat.executing', 'Executing...')}
       </span>
     );
@@ -64,8 +75,8 @@ const ToolStatus: React.FC<{ toolCall: UIToolCallInfo }> = ({ toolCall }) => {
   if (toolCall.type === 'confirm') {
     if (toolCall.status === 'confirmed') {
       return (
-        <span className="flex items-center gap-1 text-xs text-accent-success">
-          <LogIcon className="size-3.5 flex-shrink-0" />
+        <span className={getToolStatusClassName('success')}>
+          <LogIcon className={desktopStyles.AIChatToolStatusIcon} />
           {localize('ai_chat.success', 'Success')}
         </span>
       );
@@ -73,16 +84,16 @@ const ToolStatus: React.FC<{ toolCall: UIToolCallInfo }> = ({ toolCall }) => {
 
     if (toolCall.status === 'rejected') {
       return (
-        <span className="flex items-center gap-1 text-xs text-t3">
-          <CloseIcon className="size-3.5 flex-shrink-0" />
+        <span className={getToolStatusClassName('neutral')}>
+          <CloseIcon className={desktopStyles.AIChatToolStatusIcon} />
           {localize('ai_chat.canceled', 'Canceled')}
         </span>
       );
     }
 
     return (
-      <span className="flex items-center gap-1 text-xs text-accent-warning">
-        <CircleHelpIcon className="size-3.5 flex-shrink-0" />
+      <span className={getToolStatusClassName('warning')}>
+        <CircleHelpIcon className={desktopStyles.AIChatToolStatusIcon} />
         {localize('ai_chat.awaiting_confirm', 'Awaiting')}
       </span>
     );
@@ -90,8 +101,8 @@ const ToolStatus: React.FC<{ toolCall: UIToolCallInfo }> = ({ toolCall }) => {
 
   if (toolCall.status === 'pending') {
     return (
-      <span className="flex items-center gap-1 text-xs text-t3">
-        <Loader2Icon className="size-3.5 animate-spin flex-shrink-0" />
+      <span className={getToolStatusClassName('neutral')}>
+        <Loader2Icon className={desktopStyles.AIChatToolStatusLoadingIcon} />
         {localize('ai_chat.executing', 'Executing...')}
       </span>
     );
@@ -99,16 +110,16 @@ const ToolStatus: React.FC<{ toolCall: UIToolCallInfo }> = ({ toolCall }) => {
 
   if (toolCall.status === 'executed' && toolCall.result?.success) {
     return (
-      <span className="flex items-center gap-1 text-xs text-accent-success">
-        <LogIcon className="size-3.5 flex-shrink-0" />
+      <span className={getToolStatusClassName('success')}>
+        <LogIcon className={desktopStyles.AIChatToolStatusIcon} />
         {localize('ai_chat.success', 'Success')}
       </span>
     );
   }
 
   return (
-    <span className="flex items-center gap-1 text-xs text-accent-danger">
-      <CircleXIcon className="size-3.5 flex-shrink-0" />
+    <span className={getToolStatusClassName('danger')}>
+      <CircleXIcon className={desktopStyles.AIChatToolStatusIcon} />
       {localize('ai_chat.failed', 'Failed')}
     </span>
   );
@@ -124,18 +135,15 @@ interface ToolSectionProps {
 const ToolSection: React.FC<ToolSectionProps> = ({ title, content, expanded, onToggle }) => {
   return (
     <>
-      <button
-        onClick={onToggle}
-        className="flex w-full items-center gap-1 py-1.5 text-xs text-t3 transition-colors hover:text-t1"
-      >
-        <span className="flex-1 text-left">{title}</span>
-        <ChevronRightIcon className={`size-3.5 flex-shrink-0 transition-transform ${expanded ? 'rotate-90' : ''}`} />
+      <button onClick={onToggle} className={desktopStyles.AIChatToolSectionButton}>
+        <span className={desktopStyles.AIChatToolSectionTitle}>{title}</span>
+        <ChevronRightIcon
+          className={`${desktopStyles.AIChatToolSectionChevron} ${
+            expanded ? desktopStyles.AIChatToolSectionChevronExpanded : ''
+          }`}
+        />
       </button>
-      {expanded && (
-        <pre className="mb-1 overflow-x-auto break-all whitespace-pre-wrap rounded-md bg-bg3 px-2 py-1.5 font-mono text-xs leading-5 text-t1">
-          {content}
-        </pre>
-      )}
+      {expanded && <pre className={desktopStyles.AIChatToolSectionContent}>{content}</pre>}
     </>
   );
 };
@@ -157,12 +165,12 @@ export const UnifiedToolCard: React.FC<UnifiedToolCardProps> = ({ toolCall, onCo
   const resultText = getResultText(toolCall);
 
   return (
-    <div className="overflow-hidden rounded-md border border-line-light bg-bg2">
-      <div className="flex items-center gap-2 px-3 py-2">
-        <span className="flex-1 truncate text-sm font-medium text-t1">{toolName}</span>
+    <div className={desktopStyles.AIChatToolCard}>
+      <div className={desktopStyles.AIChatToolCardHeader}>
+        <span className={desktopStyles.AIChatToolCardTitle}>{toolName}</span>
         <ToolStatus toolCall={toolCall} />
       </div>
-      <div className="flex flex-col px-3 pb-2">
+      <div className={desktopStyles.AIChatToolCardBody}>
         <ToolSection
           title={localize('ai_chat.parameters', 'Parameters')}
           content={formatArguments(toolCall)}
@@ -178,17 +186,11 @@ export const UnifiedToolCard: React.FC<UnifiedToolCardProps> = ({ toolCall, onCo
           />
         )}
         {toolCall.type === 'confirm' && toolCall.status === 'pending' && onConfirm && onReject && (
-          <div className="flex items-center gap-2 pt-2">
-            <button
-              onClick={onConfirm}
-              className="rounded-md bg-brand px-3 py-1.5 text-xs text-white transition-opacity hover:opacity-90"
-            >
+          <div className={desktopStyles.AIChatToolCardActions}>
+            <button onClick={onConfirm} className={desktopStyles.AIChatToolCardConfirmButton}>
               {localize('ai_chat.confirm', 'Confirm')}
             </button>
-            <button
-              onClick={onReject}
-              className="rounded-md border border-line-light bg-bg1 px-3 py-1.5 text-xs text-t1 transition-colors hover:bg-bg3"
-            >
+            <button onClick={onReject} className={desktopStyles.AIChatToolCardCancelButton}>
               {localize('ai_chat.cancel', 'Cancel')}
             </button>
           </div>

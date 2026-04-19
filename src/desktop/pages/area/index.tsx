@@ -168,8 +168,8 @@ export const AreaPage = () => {
 
   if (!area) {
     return (
-      <div className={desktopStyles.AreaPageNotFoundContainer}>
-        <div className={desktopStyles.AreaPageNotFoundText}>{localize('area.notFound', 'Area not found')}</div>
+      <div className={desktopStyles.EntityPageNotFoundContainer}>
+        <div className={desktopStyles.EntityPageNotFoundText}>{localize('area.notFound', 'Area not found')}</div>
       </div>
     );
   }

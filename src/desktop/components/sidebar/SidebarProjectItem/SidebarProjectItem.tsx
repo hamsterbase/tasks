@@ -16,13 +16,10 @@ interface SidebarProjectItemProps {
 
 function getSidebarProjectDueDateStyle(dueDate: number, isActive: boolean): string {
   if (!dueDate) return '';
-  if (isActive) {
-    return desktopStyles.SidebarProjectItemDueDateActive;
-  }
-  if (isPastOrToday(dueDate)) {
+  if (!isActive && isPastOrToday(dueDate)) {
     return desktopStyles.SidebarProjectItemDueDateDanger;
   }
-  return desktopStyles.SidebarProjectItemDueDateInactive;
+  return desktopStyles.SidebarProjectItemDueDateMuted;
 }
 
 export const SidebarProjectItem: React.FC<SidebarProjectItemProps> = ({ projectInfo }) => {

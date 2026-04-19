@@ -18,11 +18,11 @@ export const Switch: React.FC<SwitchProps> = ({ checked, onChange, disabled = fa
         className={desktopStyles.SwitchInput}
       />
       <div
-        className={`relative h-5 w-9 rounded-full transition-colors ${checked ? 'bg-brand' : 'bg-bg3'}`}
+        className={`${desktopStyles.SwitchTrack} ${
+          checked ? desktopStyles.SwitchTrackChecked : desktopStyles.SwitchTrackUnchecked
+        }`}
       >
-        <div
-          className={`absolute left-0.5 top-0.5 size-4 rounded-full bg-bg1 transition-transform ${checked ? 'translate-x-4' : ''}`}
-        />
+        <div className={`${desktopStyles.SwitchThumb} ${checked ? desktopStyles.SwitchThumbChecked : ''}`} />
       </div>
     </label>
   );

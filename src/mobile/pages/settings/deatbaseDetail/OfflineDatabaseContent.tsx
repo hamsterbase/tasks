@@ -2,6 +2,7 @@ import { DeviceDatabaseItem } from '@/services/cloud/common/cloudService';
 import { useDatabaseActions } from './useDatabaseActions';
 import { ListItemGroup } from '@/mobile/components/listItem/listItem';
 import { localize } from '@/nls';
+import { styles } from '@/mobile/theme';
 import React from 'react';
 
 export const OfflineDatabaseContent = ({
@@ -25,7 +26,7 @@ export const OfflineDatabaseContent = ({
     />
 
     <ListItemGroup
-      className="mt-4"
+      className={styles.settingsListGroupSpacingMd}
       title={localize('database.isOffline', 'Database is Offline')}
       items={[
         {

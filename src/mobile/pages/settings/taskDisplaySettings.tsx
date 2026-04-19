@@ -3,6 +3,7 @@ import { TimeAfterEnum } from '@/core/time/getTimeAfter';
 import { useGlobalTaskDisplaySettings } from '@/hooks/useGlobalTaskDisplaySettings';
 import { ListItemGroup } from '@/mobile/components/listItem/listItem';
 import { PageLayout } from '@/mobile/components/PageLayout';
+import { styles } from '@/mobile/theme';
 import React from 'react';
 
 export const TaskDisplaySettings = () => {
@@ -25,7 +26,7 @@ export const TaskDisplaySettings = () => {
         renderIcon: (className: string) => <SettingsIcon className={className} />,
       }}
     >
-      <div className="flex flex-col space-y-4">
+      <div className={styles.settingsPageSections}>
         <ListItemGroup
           items={[
             {

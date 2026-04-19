@@ -69,7 +69,7 @@ export const LoginPage: React.FC = () => {
         title: localize('login.title', 'Login & Register'),
       }}
     >
-      <div className="flex flex-col gap-3">
+      <div className={styles.formSectionStack}>
         <Tabbar
           options={[
             {
@@ -114,20 +114,20 @@ export const LoginPage: React.FC = () => {
         )}
 
         {mode === LoginMode.Register && (
-          <div className="flex items-center px-3">
+          <div className={styles.formCheckboxRow}>
             <input
               type="checkbox"
-              className="mr-2 h-4 w-4 text-primary"
+              className={styles.formCheckbox}
               checked={agreedToTerms}
               onChange={(e) => setAgreedToTerms(e.target.checked)}
             />
-            <div className="text-sm text-t2">
+            <div className={styles.formHintText}>
               {localize('register.agree', 'I agree to')}
-              <a className="text-primary mx-1 text-text-link" onClick={() => navigate({ path: '/settings/eula' })}>
+              <a className={styles.formLinkText} onClick={() => navigate({ path: '/settings/eula' })}>
                 {localize('register.eula', 'EULA')}
               </a>
               {localize('register.and', 'and')}
-              <a className="text-primary mx-1 text-text-link" onClick={() => navigate({ path: '/settings/privacy' })}>
+              <a className={styles.formLinkText} onClick={() => navigate({ path: '/settings/privacy' })}>
                 {localize('register.privacyPolicy', 'Privacy Policy')}
               </a>
             </div>
@@ -135,7 +135,7 @@ export const LoginPage: React.FC = () => {
         )}
         <button
           data-testid="login-register-button-submit"
-          className="mt-6 w-full py-3 px-4 bg-brand text-white rounded-full hover:bg-brand-dark focus:outline-none disabled:opacity-50 font-medium"
+          className={styles.formPrimaryButton}
           onClick={handleSubmit}
           disabled={!account || !password || (mode === LoginMode.Register && (!confirmPassword || !agreedToTerms))}
         >

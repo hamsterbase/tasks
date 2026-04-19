@@ -162,14 +162,14 @@ export const SelfHostedSyncSettings: React.FC = () => {
 
     return (
       <ItemGroup>
-        <div className="w-full px-4 py-12 text-center">
-          <p className="text-sm text-t3">{disabledStateMessage}</p>
+        <div className={desktopStyles.SettingsDisabledStateContainer}>
+          <p className={desktopStyles.SettingsDisabledStateText}>{disabledStateMessage}</p>
           {documentationLink && (
             <a
               href={documentationLink.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 inline-flex items-center text-sm text-brand transition-colors hover:text-brand/80"
+              className={desktopStyles.SettingsDisabledStateLink}
             >
               {documentationLink.text}
             </a>

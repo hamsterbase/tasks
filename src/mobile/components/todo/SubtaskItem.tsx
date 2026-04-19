@@ -8,6 +8,7 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import classNames from 'classnames';
 import React from 'react';
+import { styles } from '@/mobile/theme';
 
 interface SubtaskItemProps {
   id: string;
@@ -85,15 +86,15 @@ export const SubtaskItem: React.FC<SubtaskItemProps> = ({
   };
 
   if (isDragging && !disableDragStyle) {
-    return <div className="flex items-center gap-1.5 bg-bg3 rounded-lg w-full" ref={setNodeRef} style={style}></div>;
+    return <div className={styles.subtaskItemDraggingPlaceholder} ref={setNodeRef} style={style}></div>;
   }
 
   return (
-    <div className={classNames('flex items-center gap-1.5', className)} ref={setNodeRef} style={style}>
+    <div className={classNames(styles.subtaskItemRoot, className)} ref={setNodeRef} style={style}>
       <div
         onClick={handleClick}
         {...longPressEvents}
-        className={classNames('flex items-center justify-center text-t3', statusButtonClassName)}
+        className={classNames(styles.subtaskItemStatusButton, statusButtonClassName)}
       >
         <TaskCheckbox size="small" status={status} />
       </div>
@@ -104,16 +105,20 @@ export const SubtaskItem: React.FC<SubtaskItemProps> = ({
         onKeyDown={handleKeyDown}
         onFocus={handleFocusAndScroll}
         className={classNames(
-          'flex-1 text-sm leading-6 bg-transparent border-none outline-none p-0 placeholder:text-t4',
+          styles.createTaskSubtaskInput,
           inputClassName,
-          status === 'canceled' ? 'text-t3 line-through' : status === 'completed' ? 'text-t3' : 'text-t1'
+          status === 'canceled'
+            ? styles.subtaskItemInputCanceled
+            : status === 'completed'
+              ? styles.subtaskItemInputCompleted
+              : styles.subtaskItemInputNormal
         )}
         placeholder={localize('mobile.subtask.placeholder', 'Subtask')}
         ref={inputRef}
         data-testid={inputTestId}
       />
       <DragHandleIcon
-        className={classNames('size-4 cursor-grab text-t3 opacity-40', dragHandleClassName)}
+        className={classNames(styles.createTaskSubtaskDragHandle, dragHandleClassName)}
         strokeWidth={1.5}
         {...attributes}
         {...listeners}

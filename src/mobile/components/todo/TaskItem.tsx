@@ -105,14 +105,14 @@ export const TaskItem: React.FC<TaskItemProps> = ({
   return (
     <div
       data-testid="task-item"
-      className={classNames('flex items-start', className, {
+      className={classNames(styles.taskItemRoot, className, {
         [styles.listItemRound]: true,
         [styles.taskItemHeight]: true,
         [styles.listItemEditingBackground]: isEditing,
         [styles.taskItemEditingRound]: isEditing,
         [styles.taskItemPaddingX]: true,
         [styles.taskItemGap]: true,
-        'opacity-50!': followParentArchiveState && taskInfo.isParentArchived,
+        [styles.taskItemArchived]: followParentArchiveState && taskInfo.isParentArchived,
       })}
       onClick={handleTaskClick}
       ref={setNodeRef}
@@ -132,8 +132,8 @@ export const TaskItem: React.FC<TaskItemProps> = ({
       >
         <TaskCheckbox status={taskInfo.status} />
       </button>
-      <div className="flex-1 flex flex-col gap-1 min-w-0">
-        <div className="flex items-center gap-2 min-w-0">
+      <div className={styles.taskItemContent}>
+        <div className={styles.taskItemTitleRow}>
           <TaskItemTitle
             testId={'task-item-title'}
             title={taskInfo.title}
@@ -141,7 +141,7 @@ export const TaskItem: React.FC<TaskItemProps> = ({
             isCompleted={isCompleted}
             emptyText={localize('tasks.untitled', 'New Task')}
           />
-          <div className="flex items-center gap-1 text-t3 shrink-0">
+          <div className={styles.homeProjectItemMetaIcons}>
             <TaskItemIcons tags={taskInfo.tags} notes={taskInfo.notes} subtasks={taskInfo.children} navIcon={false} />
           </div>
         </div>

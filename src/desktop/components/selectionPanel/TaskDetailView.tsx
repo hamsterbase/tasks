@@ -49,7 +49,7 @@ export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task, onClearSel
     <div className={desktopStyles.DetailViewContainer}>
       <div className={desktopStyles.DetailViewHeader}>
         <div className={desktopStyles.DetailViewHeaderStatusIcon}>
-          <TaskIcon status={task.status} className="text-t3" />
+          <TaskIcon status={task.status} className={desktopStyles.DetailViewHeaderStatusIconColor} />
         </div>
         <EditableInput
           inputKey={taskTitleInputKey(task.id)}

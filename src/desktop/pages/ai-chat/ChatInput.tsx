@@ -1,10 +1,9 @@
 import { CloseIcon, SendIcon, StopIcon } from '@/components/icons';
+import { desktopStyles } from '@/desktop/theme/main';
 import { localize } from '@/nls';
 import type { ChatMessageItem, TextContentBlock } from '@/services/ai/browser/types';
 import React, { useCallback, useRef, useState } from 'react';
 import { Link } from 'react-router';
-
-const AI_CHAT_CONTENT_WIDTH = 'w-full max-w-2xl mx-auto';
 
 interface ChatInputProps {
   onSendMessage: (content: string) => void;
@@ -61,12 +60,10 @@ export const ChatInput: React.FC<ChatInputProps> = ({
 
   if (!isConfigured) {
     return (
-      <div className="px-6 pb-6">
-        <div
-          className={`${AI_CHAT_CONTENT_WIDTH} rounded-xl border border-line-light bg-bg2 px-4 py-3 text-center text-sm text-t3`}
-        >
+      <div className={desktopStyles.AIChatInputOuter}>
+        <div className={`${desktopStyles.AIChatContentWidth} ${desktopStyles.AIChatInputNotice}`}>
           {localize('ai_chat.not_configured', 'Please configure your AI API settings first')}
-          <Link to="/desktop/settings/ai" className="ml-1 text-brand hover:underline">
+          <Link to="/desktop/settings/ai" className={desktopStyles.AIChatInputNoticeLink}>
             {localize('ai_chat.go_to_settings', 'Go to Settings')}
           </Link>
         </div>
@@ -82,28 +79,23 @@ export const ChatInput: React.FC<ChatInputProps> = ({
     : '';
 
   return (
-    <div className="px-6 pb-6">
-      <div
-        className={`${AI_CHAT_CONTENT_WIDTH} flex flex-col gap-2 rounded-xl border border-line-light bg-bg2 px-3 py-2 transition-colors focus-within:border-line-bold`}
-      >
+    <div className={desktopStyles.AIChatInputOuter}>
+      <div className={`${desktopStyles.AIChatContentWidth} ${desktopStyles.AIChatInputContainer}`}>
         {linkedMessage && (
-          <div className="flex items-start gap-2 py-1 text-xs text-t2">
-            <div className="flex min-w-0 flex-1 flex-col gap-0.5 border-l-2 border-brand pl-2">
-              <span className="text-xs text-brand">
+          <div className={desktopStyles.AIChatInputLinkedRow}>
+            <div className={desktopStyles.AIChatInputLinkedContent}>
+              <span className={desktopStyles.AIChatInputLinkedLabel}>
                 {localize('ai_chat.replying_to_message', 'Reply #{0}', linkedMessageIndex ?? linkedMessage.id)}
               </span>
-              <span className="line-clamp-2 text-xs leading-5 text-t3">{linkedMessageText}</span>
+              <span className={desktopStyles.AIChatInputLinkedText}>{linkedMessageText}</span>
             </div>
-            <button
-              onClick={onClearLink}
-              className="flex size-4 flex-shrink-0 items-center justify-center rounded-sm text-t3 transition-colors hover:bg-bg3 hover:text-t1"
-            >
-              <CloseIcon className="size-3" />
+            <button onClick={onClearLink} className={desktopStyles.AIChatInputLinkedClearButton}>
+              <CloseIcon className={desktopStyles.AIChatInputLinkedClearIcon} />
             </button>
           </div>
         )}
         <form onSubmit={handleSubmit}>
-          <div className="flex items-end gap-2">
+          <div className={desktopStyles.AIChatInputFormRow}>
             <textarea
               ref={textAreaRef}
               rows={1}
@@ -112,23 +104,16 @@ export const ChatInput: React.FC<ChatInputProps> = ({
               onKeyDown={handleKeyDown}
               onInput={(event) => resizeTextArea(event.currentTarget)}
               placeholder={localize('ai_chat.placeholder', 'Type your message...')}
-              className="min-h-6 max-h-32 flex-1 resize-none overflow-y-auto border-none bg-transparent px-0 py-0 text-sm leading-5 text-t1 outline-none placeholder:text-t3"
+              className={desktopStyles.AIChatInputTextarea}
               disabled={isLoading}
             />
             {isLoading ? (
-              <button
-                type="button"
-                onClick={onStop}
-                className="flex size-7 flex-shrink-0 items-center justify-center rounded-md bg-brand text-white transition-opacity hover:opacity-90"
-              >
-                <StopIcon className="size-4" />
+              <button type="button" onClick={onStop} className={desktopStyles.AIChatInputSubmitButton}>
+                <StopIcon className={desktopStyles.AIChatInputSubmitIcon} />
               </button>
             ) : (
-              <button
-                type="submit"
-                className="flex size-7 flex-shrink-0 items-center justify-center rounded-md bg-brand text-white transition-opacity hover:opacity-90"
-              >
-                <SendIcon className="size-4" strokeWidth={1.5} />
+              <button type="submit" className={desktopStyles.AIChatInputSubmitButton}>
+                <SendIcon className={desktopStyles.AIChatInputSubmitIcon} strokeWidth={1.5} />
               </button>
             )}
           </div>

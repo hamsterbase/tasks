@@ -80,16 +80,16 @@ export const PageLayout: React.FC<PageLayoutProps> = (props: PageLayoutProps) =>
 
   return (
     <div
-      className={classNames(styles.pageBackground, 'polyfill-min-h-dvh min-h-dvh text-t1', {
-        'safe-top': !props.header,
+      className={classNames(styles.pageBackground, styles.pageLayoutRoot, {
+        [styles.pageLayoutSafeTop]: !props.header,
       })}
       id="page-content"
     >
-      {props.header && <div className={classNames('sticky top-0 z-100 safe-top', styles.headerBackground)} />}
+      {props.header && <div className={classNames(styles.pageLayoutHeaderPlaceholder, styles.headerBackground)} />}
       {props.header && (
         <div
-          className={classNames('top-0 z-100', styles.headerBackground, {
-            sticky: !props.disableSticky,
+          className={classNames(styles.pageLayoutHeaderContainer, styles.headerBackground, {
+            [styles.pageLayoutSticky]: !props.disableSticky,
           })}
         >
           <PageHeader
@@ -104,9 +104,9 @@ export const PageLayout: React.FC<PageLayoutProps> = (props: PageLayoutProps) =>
           />
         </div>
       )}
-      {props.meta && <div className="mb-6">{props.meta}</div>}
-      <div className="safe-bottom">{children}</div>
-      <div className="h-[var(--keyboard-height)] w-full"></div>
+      {props.meta && <div className={styles.pageLayoutMetaSpacing}>{props.meta}</div>}
+      <div className={styles.pageLayoutSafeBottom}>{children}</div>
+      <div className={styles.pageLayoutKeyboardSpacer}></div>
     </div>
   );
 };

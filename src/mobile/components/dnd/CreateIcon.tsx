@@ -53,12 +53,12 @@ export const CreateIcon: React.FC<ICreateIconProps> = (props: ICreateIconProps) 
       data-testid={MobileTestIds.Home.CreateTaskButton}
       data-id={DragDropElements.create}
       ref={setNodeRef}
-      className={classNames(styles.fabButton, 'bg-brand')}
+      className={styles.fabButton}
       style={style}
       {...listeners}
       {...attributes}
     >
-      <PlusIcon className="size-6" strokeWidth={1.5} />
+      <PlusIcon className={styles.fabIcon} strokeWidth={1.5} />
     </button>
   );
 };

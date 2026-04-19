@@ -1,4 +1,5 @@
 import { ItemStatus } from '@/core/type';
+import { desktopStyles } from '@/desktop/theme/main';
 import classNames from 'classnames';
 import React from 'react';
 
@@ -50,7 +51,7 @@ export const ProjectIcon: React.FC<ProjectIconProps> = ({
 
   return (
     <span
-      className={classNames('inline-flex items-center justify-center text-t3 shrink-0', className)}
+      className={classNames(desktopStyles.ProjectIconContainer, className)}
       style={{ width: pixelSize, height: pixelSize }}
     >
       <svg
@@ -58,7 +59,7 @@ export const ProjectIcon: React.FC<ProjectIconProps> = ({
         height={pixelSize}
         viewBox={`0 0 ${pixelSize} ${pixelSize}`}
         aria-hidden="true"
-        className="block"
+        className={desktopStyles.ProjectIconSvg}
       >
         <circle cx={center} cy={center} r={radius} fill="none" stroke="currentColor" strokeWidth="1" />
         {effectiveStatus === 'created' && normalizedProgress > 0 && normalizedProgress < 1 && (

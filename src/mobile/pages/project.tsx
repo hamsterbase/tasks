@@ -119,9 +119,7 @@ export const ProjectPage = () => {
           title: localize('project.notFound', 'Project not found'),
         }}
       >
-        <div className="flex h-100 items-center justify-center text-t3">
-          {localize('project.notFound', 'Project not found')}
-        </div>
+        <div className={styles.pageEmptyState}>{localize('project.notFound', 'Project not found')}</div>
       </PageLayout>
     );
   }

@@ -1,6 +1,7 @@
 import { TEST_ACCOUNT_LIST } from '@/base/common/account';
 import { useService } from '@/hooks/use-service';
 import { ListItemGroup } from '@/mobile/components/listItem/listItem';
+import { styles } from '@/mobile/theme';
 import { useToast } from '@/mobile/overlay/toast/useToast';
 import { localize } from '@/nls';
 import { ISwitchService } from '@/services/switchService/common/switchService';
@@ -45,7 +46,7 @@ export const AppleStorePurchase: React.FC<{
   );
   return (
     <ListItemGroup
-      className="mt-8"
+      className={styles.settingsListGroupSpacingLg}
       items={[
         {
           hidden: !!userInfo,

@@ -7,6 +7,7 @@ import { AppleStorePurchase } from '@/mobile/components/purchase/AppleStorePurch
 import { OtherPurchase } from '@/mobile/components/purchase/OtherPurchase';
 import { useDialog } from '@/mobile/overlay/dialog/useDialog';
 import { useToast } from '@/mobile/overlay/toast/useToast';
+import { styles } from '@/mobile/theme';
 import { localize } from '@/nls';
 import { ICloudService } from '@/services/cloud/common/cloudService';
 import { format } from 'date-fns';
@@ -164,7 +165,7 @@ export const AccountPage = () => {
       <OtherPurchase />
 
       <ListItemGroup
-        className="mt-8"
+        className={styles.settingsListGroupSpacingLg}
         items={[
           {
             title: localize('account.logout', 'Log out'),

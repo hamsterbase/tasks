@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
+import { desktopStyles } from '@/desktop/theme/main';
 
 type IconSize = 'lg' | 'md' | 'sm' | 'xs';
 
@@ -16,7 +17,7 @@ interface TaskIconProps {
   className?: string;
 }
 
-export const gsTaskIcon: React.FC<TaskIconProps> = ({ status, size = 'md', className }) => {
+export const TaskIcon: React.FC<TaskIconProps> = ({ status, size = 'md', className }) => {
   const isCompleted = status === 'completed';
   const isCanceled = status === 'canceled' || status === 'cancelled';
   const pixelSize = sizeMap[size];
@@ -27,7 +28,7 @@ export const gsTaskIcon: React.FC<TaskIconProps> = ({ status, size = 'md', class
 
   return (
     <span
-      className={classNames('inline-flex items-center justify-center shrink-0', className)}
+      className={classNames(desktopStyles.TaskIconContainer, className)}
       style={{ width: pixelSize, height: pixelSize }}
     >
       <svg
@@ -63,5 +64,3 @@ export const gsTaskIcon: React.FC<TaskIconProps> = ({ status, size = 'md', class
     </span>
   );
 };
-
-export const TaskIcon = gsTaskIcon;

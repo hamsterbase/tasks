@@ -28,7 +28,7 @@ export const SettingButton: React.FC<ButtonProps> = ({
     if (buttonVariant === 'solid') {
       switch (buttonColor) {
         case 'primary':
-          return desktopStyles.SettingButtonSolidPrimary;
+          return desktopStyles.SettingButtonPrimaryEmphasis;
         case 'danger':
           return desktopStyles.SettingButtonSolidDanger;
         case 'default':
@@ -39,7 +39,7 @@ export const SettingButton: React.FC<ButtonProps> = ({
     if (buttonVariant === 'filled') {
       switch (buttonColor) {
         case 'primary':
-          return desktopStyles.SettingButtonFilledPrimary;
+          return desktopStyles.SettingButtonPrimaryEmphasis;
         case 'danger':
           return desktopStyles.SettingButtonFilledDanger;
         case 'default':

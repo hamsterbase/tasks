@@ -39,16 +39,16 @@ export const AttrLabel: React.FC<AttrLabelProps> = ({
       attrStyles={attrStyles}
     >
       {value ? (
-        <p className="flex items-baseline gap-2">
+        <p className={styles.infoItemBaselineRow}>
           <span
             className={classNames(
-              'text-sm leading-6',
+              styles.attrLabelTitle,
               value.titleType === 'danger' ? 'text-accent-danger' : (labelTitleColor ?? attrStyles?.labelTitleColor)
             )}
           >
             {value.title}
           </span>
-          {value.subtitle && <span className="text-sm text-t2">{value.subtitle}</span>}
+          {value.subtitle && <span className={styles.attrLabelSubtitle}>{value.subtitle}</span>}
         </p>
       ) : (
         <span className={styles.createTaskAttrPlaceholder}>{placeholder}</span>

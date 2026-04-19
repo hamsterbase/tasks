@@ -7,6 +7,7 @@ import useSWR from 'swr';
 import { SettingsIcon } from '../../../../components/icons';
 import { localize } from '../../../../nls';
 import { PageLayout } from '../../../components/PageLayout';
+import { styles } from '../../../theme';
 import { CloudDatabaseContent } from './CloudDatabaseContent';
 import { LocalDatabaseContent } from './LocalDatabaseContent';
 import { OfflineDatabaseContent } from './OfflineDatabaseContent';
@@ -30,11 +31,11 @@ export const DatabaseDetailPage = () => {
   const databaseActions = useDatabaseActions(id, database || null, mutate);
   const renderDatabaseContent = () => {
     if (isLoading) {
-      return <div className="text-center p-4">{localize('common.loading', 'Loading...')}</div>;
+      return <div className={styles.settingsStatusState}>{localize('common.loading', 'Loading...')}</div>;
     }
 
     if (!database) {
-      return <div className="text-center p-4">{localize('database.notFound', 'Database not found')}</div>;
+      return <div className={styles.settingsStatusState}>{localize('database.notFound', 'Database not found')}</div>;
     }
 
     switch (database.type) {

@@ -8,10 +8,12 @@ import { useWatchEvent } from '@/hooks/use-watch-event.ts';
 import { TaskItem } from '@/mobile/components/todo/TaskItem.tsx';
 import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService.ts';
+import classNames from 'classnames';
 import React from 'react';
 import { PageLayout } from '../components/PageLayout';
 import TaskItemWrapper from '../components/taskItem/TaskItemWrapper';
 import { HomeProjectItem } from '../components/todo/HomeProjectItem';
+import { styles } from '../theme';
 
 export const ScheduledPage = () => {
   const todoService = useService(ITodoService);
@@ -34,13 +36,13 @@ export const ScheduledPage = () => {
         renderIcon: (className: string) => <ScheduledIcon className={className} />,
       }}
     >
-      <div className="flex flex-col">
+      <div className={styles.pageContentColumn}>
         {scheduledGroups.map((group) => (
           <React.Fragment key={group.title}>
-            <div key={group.title} className="ui-card-normal mb-3">
-              <div className="flex items-baseline gap-3 px-4 py-3">
-                <span className="text-xl font-medium text-t1 leading-none">{group.title}</span>
-                {group.subtitle && <span className="text-sm text-t3">{group.subtitle}</span>}
+            <div key={group.title} className={styles.scheduledGroupCard}>
+              <div className={classNames(styles.taskItemGroupHeader, styles.pageContentPaddingX)}>
+                <span className={styles.taskItemGroupTitle}>{group.title}</span>
+                {group.subtitle && <span className={styles.taskItemGroupSubtitle}>{group.subtitle}</span>}
               </div>
               {group.items.map((item) => {
                 if (item.type === ModelTypes.project) {

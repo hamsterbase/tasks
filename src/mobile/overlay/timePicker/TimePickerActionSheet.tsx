@@ -15,6 +15,7 @@ import {
   getMobileTimePickerPresetTestId,
   MobileTestIds,
 } from '@/mobile/testids';
+import classNames from 'classnames';
 
 interface TimeWheelProps {
   value: number;
@@ -68,18 +69,19 @@ const TimeWheel: React.FC<TimeWheelProps> = ({
   return (
     <div
       ref={scrollRef}
-      className="flex-1 h-32 overflow-y-auto"
+      className={styles.timePickerWheel}
       style={{ scrollSnapType: 'y mandatory' }}
       onScroll={handleScroll}
     >
-      <div className="py-24">
+      <div className={styles.timePickerWheelInner}>
         {options.map((option) => (
           <div
             key={option}
             data-testid={getOptionTestId?.(option)}
-            className={`h-8 flex items-center justify-center cursor-pointer text-lg ${
-              value === option ? 'text-brand font-semibold' : 'text-t2'
-            }`}
+            className={classNames(styles.timePickerWheelOption, {
+              [styles.timePickerWheelOptionSelected]: value === option,
+              [styles.timePickerWheelOptionNormal]: value !== option,
+            })}
             style={{ scrollSnapAlign: 'center' }}
             onClick={() => onChange(option)}
           >
@@ -111,16 +113,16 @@ export const TimePickerActionSheet: React.FC = () => {
       contentClassName={styles.datePickerActionSheetPadding}
     >
       <div className={styles.datePickerContentPadding}>
-        <div className="text-center mb-6">
-          <div className="text-base text-t2 mb-2">{selectedTime.date}</div>
-          <div className="text-5xl font-light text-t1 tracking-wide">
+        <div className={styles.timePickerHeader}>
+          <div className={styles.timePickerHeaderDate}>{selectedTime.date}</div>
+          <div className={styles.timePickerHeaderTime}>
             {selectedTime.hour.toString().padStart(2, '0')}
-            <span className="text-t2 mx-1">:</span>
+            <span className={styles.timePickerHeaderSeparator}>:</span>
             {selectedTime.minute.toString().padStart(2, '0')}
           </div>
         </div>
 
-        <div className="flex items-center mb-6 relative">
+        <div className={styles.timePickerWheelRow}>
           <TimeWheel
             value={selectedTime.hour}
             onChange={(hour) => controller.updateHour(hour)}
@@ -129,7 +131,7 @@ export const TimePickerActionSheet: React.FC = () => {
             getOptionTestId={getMobileTimePickerHourTestId}
           />
 
-          <div className="text-2xl text-t1 h-8 flex items-center leading-8">-</div>
+          <div className={styles.timePickerWheelSeparator}>-</div>
 
           <TimeWheel
             value={selectedTime.minute}
@@ -140,14 +142,14 @@ export const TimePickerActionSheet: React.FC = () => {
           />
         </div>
 
-        <div className="mb-4">
-          <div className="text-sm text-t2 mb-2">{localize('time-picker.presets', 'Presets')}</div>
-          <div className="flex gap-2">
+        <div className={styles.timePickerPresetSection}>
+          <div className={styles.timePickerPresetTitle}>{localize('time-picker.presets', 'Presets')}</div>
+          <div className={styles.timePickerPresetList}>
             {PRESET_TIMES.map((preset) => (
               <button
                 key={preset.label}
                 data-testid={getMobileTimePickerPresetTestId(preset.label)}
-                className="flex-1 py-2 px-3 rounded-lg bg-bg2 text-t1 text-sm font-medium hover:bg-bg3 transition-colors"
+                className={styles.timePickerPresetButton}
                 onClick={() => controller.setPresetTime(preset.hour, preset.minute)}
               >
                 {preset.label}

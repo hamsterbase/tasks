@@ -46,10 +46,7 @@ export const HomeProjectItem: React.FC<ProjectItemProps> = ({ projectInfo, hideS
     opacity: isDragging ? 0.5 : 1,
   };
   const titleNode = isEditing ? (
-    <input
-      {...textAreaProps}
-      className="flex-1 overflow-hidden text-ellipsis whitespace-nowrap bg-transparent text-base leading-6 font-medium outline-none"
-    />
+    <input {...textAreaProps} className={styles.homeProjectItemEditingInput} />
   ) : (
     <TaskItemTitle
       title={projectInfo.title}
@@ -69,18 +66,10 @@ export const HomeProjectItem: React.FC<ProjectItemProps> = ({ projectInfo, hideS
       style={style}
       {...attributes}
       {...listeners}
-      className={classNames(
-        'flex items-start',
-        styles.taskItemPaddingX,
-        styles.taskItemHeight,
-        styles.taskItemGap,
-        itemClassName,
-        className,
-        {
-          [styles.taskItemEditingShadow]: isEditing,
-          [styles.taskItemEditingRound]: isEditing,
-        }
-      )}
+      className={classNames(styles.homeProjectItemRoot, itemClassName, className, {
+        [styles.taskItemEditingShadow]: isEditing,
+        [styles.taskItemEditingRound]: isEditing,
+      })}
       onClick={(e) => {
         if (shouldIgnoreClick(e)) {
           return;
@@ -91,12 +80,12 @@ export const HomeProjectItem: React.FC<ProjectItemProps> = ({ projectInfo, hideS
       <button className={classNames(styles.taskItemIconSize)}>
         <MobileProjectCheckbox status={projectInfo.status} progress={projectInfo.progress} />
       </button>
-      <div className="flex-1 flex flex-col gap-0.5 min-w-0">
-        <div className="flex items-center gap-1.5 min-w-0">
+      <div className={styles.homeProjectItemContent}>
+        <div className={styles.homeProjectItemTitleRow}>
           {titleNode}
           {!isEditing && (
             <>
-              <div className="flex items-center gap-1 text-t3 shrink-0">
+              <div className={styles.homeProjectItemMetaIcons}>
                 <TaskItemIcons tags={projectInfo.tags} notes={projectInfo.notes} navIcon={false} />
               </div>
             </>

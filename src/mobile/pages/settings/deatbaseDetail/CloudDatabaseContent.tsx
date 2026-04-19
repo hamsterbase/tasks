@@ -1,6 +1,7 @@
 import { ListItemGroup } from '@/mobile/components/listItem/listItem';
 import { localize } from '@/nls';
 import { DeviceDatabaseItem } from '@/services/cloud/common/cloudService';
+import { styles } from '@/mobile/theme';
 import { format } from 'date-fns';
 import React from 'react';
 import { useDatabaseActions } from './useDatabaseActions';
@@ -48,7 +49,7 @@ export const CloudDatabaseContent = ({
     />
 
     <ListItemGroup
-      className="mt-20"
+      className={styles.settingsListGroupSpacingXl}
       items={[
         {
           hidden: actions.isSwitchNeeded,

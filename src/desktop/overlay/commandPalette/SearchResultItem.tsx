@@ -31,7 +31,10 @@ export const SearchResultItem: React.FC<SearchResultItemProps> = ({ item, isSele
     const display = getParentDisplay(todoService.modelState, item.id);
     if (display) {
       if (display.icon.type === 'area') {
-        return { icon: <AreaIcon className="size-3" />, title: display.title };
+        return {
+          icon: <AreaIcon className={desktopStyles.CommandPaletteResultItemParentIconSvg} />,
+          title: display.title,
+        };
       }
       return {
         icon: <ProjectIcon status={display.icon.status} progress={display.icon.progress} size="xs" />,
@@ -40,7 +43,7 @@ export const SearchResultItem: React.FC<SearchResultItemProps> = ({ item, isSele
     }
     if (item.type === 'task') {
       return {
-        icon: <InboxIcon className="size-3" />,
+        icon: <InboxIcon className={desktopStyles.CommandPaletteResultItemParentIconSvg} />,
         title: localize('inbox.title', 'Inbox'),
       };
     }
@@ -50,7 +53,7 @@ export const SearchResultItem: React.FC<SearchResultItemProps> = ({ item, isSele
   const renderIcon = () => {
     switch (item.type) {
       case 'area':
-        return <AreaIcon className="size-4" />;
+        return <AreaIcon className={desktopStyles.CommandPaletteResultItemIconSvg} />;
 
       case 'project':
         return <ProjectIcon status={item.status} progress={projectInfo?.progress || 0} size="md" />;
@@ -87,13 +90,13 @@ export const SearchResultItem: React.FC<SearchResultItemProps> = ({ item, isSele
     >
       <div className={desktopStyles.CommandPaletteResultItemIcon}>{renderIcon()}</div>
 
-      <div className="flex flex-col flex-1 min-w-0 gap-0.5">
+      <div className={desktopStyles.CommandPaletteResultItemContent}>
         <span className={desktopStyles.CommandPaletteResultItemTitle}>{getTitle()}</span>
 
         {parentInfo && (
-          <div className="flex items-center gap-1 text-xs text-t3 leading-4 min-w-0">
-            <span className="size-3 text-t3 flex-shrink-0 flex items-center justify-center">{parentInfo.icon}</span>
-            <span className="truncate min-w-0">{parentInfo.title}</span>
+          <div className={desktopStyles.CommandPaletteResultItemParent}>
+            <span className={desktopStyles.CommandPaletteResultItemParentIcon}>{parentInfo.icon}</span>
+            <span className={desktopStyles.CommandPaletteResultItemParentTitle}>{parentInfo.title}</span>
           </div>
         )}
       </div>

@@ -4,6 +4,7 @@ import { DragDropElements } from '@/utils/dnd/dragDropCollision.ts';
 import { useDndContext, useDroppable } from '@dnd-kit/core';
 import classNames from 'classnames';
 import React from 'react';
+import { styles } from '@/mobile/theme';
 
 export const InboxDropZone = () => {
   const dndContext = useDndContext();
@@ -18,19 +19,16 @@ export const InboxDropZone = () => {
     <div
       ref={setNodeRef}
       className={classNames(
-        `fixed bottom-20 left-4 h-12 ${
-          isOver ? 'w-32' : 'w-12'
-        } bg-brand rounded-full flex items-center justify-center text-white transition-all duration-200`,
+        styles.inboxDropZone,
+        isOver ? styles.inboxDropZoneExpanded : styles.inboxDropZoneCollapsed,
         {
-          'opacity-100': isOver,
-          'opacity-60': !isOver,
+          [styles.inboxDropZoneVisible]: isOver,
+          [styles.inboxDropZoneHidden]: !isOver,
         }
       )}
     >
       <InboxIcon size={20} />
-      {isOver && (
-        <span className="ml-1 text-sm whitespace-nowrap">{localize('inbox.hoverMessage', 'Create Task')}</span>
-      )}
+      {isOver && <span className={styles.inboxDropZoneLabel}>{localize('inbox.hoverMessage', 'Create Task')}</span>}
     </div>
   );
 };

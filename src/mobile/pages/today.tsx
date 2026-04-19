@@ -86,7 +86,10 @@ export const TodayPage = () => {
         title: `${localize('today', 'Today')} (${formatTodayTitle()})`,
         renderIcon: (className: string) => <TodayIcon className={className} />,
         actions: [
-          { icon: <TaskDisplaySettingsIcon className="size-5" strokeWidth={1.5} />, onClick: openTaskDisplaySettings },
+          {
+            icon: <TaskDisplaySettingsIcon className={styles.headerActionButtonIcon} strokeWidth={1.5} />,
+            onClick: openTaskDisplaySettings,
+          },
         ],
       }}
       dragOption={{

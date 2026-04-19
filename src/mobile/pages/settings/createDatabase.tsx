@@ -47,7 +47,7 @@ export const CreateDatabasePage = () => {
         renderIcon: (className: string) => <SettingsIcon className={className} />,
       }}
     >
-      <div className="flex flex-col gap-3">
+      <div className={styles.formSectionStack}>
         <input
           type="text"
           className={styles.inputItemStyle}
@@ -72,15 +72,15 @@ export const CreateDatabasePage = () => {
           onChange={(e) => setPasswordRepeat(e.target.value)}
         />
 
-        <div className="flex items-center gap-2 px-3">
+        <div className={styles.formCheckboxRow}>
           <input
             type="checkbox"
             id="passwordReadOnly"
-            className="h-4 w-4 text-primary"
+            className={styles.formCheckbox}
             checked={passwordReadOnly}
             onChange={(e) => setPasswordReadOnly(e.target.checked)}
           />
-          <label htmlFor="passwordReadOnly" className="text-sm text-t2">
+          <label htmlFor="passwordReadOnly" className={styles.formHintText}>
             {localize(
               'settings.createDatabase.passwordReadOnly',
               'Password cannot be modified. Data will be permanently lost if forgotten.'
@@ -88,11 +88,7 @@ export const CreateDatabasePage = () => {
           </label>
         </div>
 
-        <button
-          className={'mt-6 w-full py-3 px-4 rounded-full font-medium bg-brand text-white disabled:opacity-50'}
-          onClick={handleCreateDatabase}
-          disabled={!isFormValid}
-        >
+        <button className={styles.formPrimaryButton} onClick={handleCreateDatabase} disabled={!isFormValid}>
           {localize('settings.createDatabase.createAndUse', 'Create and Use')}
         </button>
       </div>

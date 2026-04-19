@@ -57,7 +57,7 @@ export const RegisterPage: React.FC = () => {
             placeholder={localize('login.account.placeholder', 'Enter your email')}
             value={account}
             onChange={(e) => setAccount(e.target.value)}
-            className="block w-full bg-transparent px-4 py-3 text-sm leading-5 text-t1 outline-none transition-colors placeholder:text-t3 focus:bg-bg2"
+            className={desktopStyles.AuthFormInput}
           />
 
           <InputField
@@ -65,7 +65,7 @@ export const RegisterPage: React.FC = () => {
             placeholder={localize('login.password.placeholder', 'Enter your password')}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="block w-full bg-transparent px-4 py-3 text-sm leading-5 text-t1 outline-none transition-colors placeholder:text-t3 focus:bg-bg2"
+            className={desktopStyles.AuthFormInput}
           />
 
           <InputField
@@ -73,18 +73,18 @@ export const RegisterPage: React.FC = () => {
             placeholder={localize('register.confirmPassword.placeholder', 'Enter your password again')}
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            className="block w-full bg-transparent px-4 py-3 text-sm leading-5 text-t1 outline-none transition-colors placeholder:text-t3 focus:bg-bg2"
+            className={desktopStyles.AuthFormInput}
           />
 
-          <label className="flex items-center gap-2 px-4 py-3">
+          <label className={desktopStyles.CheckboxContainer}>
             <input
               type="checkbox"
-              className="sr-only"
+              className={desktopStyles.CheckboxInput}
               checked={agreedToTerms}
               onChange={(e) => setAgreedToTerms(e.target.checked)}
             />
-            <span className="flex h-5 w-4 items-center justify-center text-t3">
-              <svg className="size-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <span className={desktopStyles.CheckboxBox}>
+              <svg className={desktopStyles.CheckboxIcon} viewBox="0 0 16 16" fill="none" aria-hidden="true">
                 <rect x="1" y="1" width="14" height="14" rx="4" ry="4" stroke="currentColor" strokeWidth="1" />
                 {agreedToTerms && (
                   <path
@@ -96,7 +96,7 @@ export const RegisterPage: React.FC = () => {
                 )}
               </svg>
             </span>
-            <span className="text-xs leading-4 text-t3">
+            <span className={desktopStyles.CheckboxLabel}>
               {localize('register.agree', 'I agree to')}
               <Link to="/desktop/settings/account/eula" className={desktopStyles.AuthFormLink}>
                 {localize('register.eula', 'EULA')}
@@ -116,7 +116,7 @@ export const RegisterPage: React.FC = () => {
             variant="solid"
             color="primary"
             inline
-            className="self-start"
+            className={desktopStyles.AuthFormSubmitButton}
             onClick={handleSubmit}
             disabled={isLoading || !account || !password || !confirmPassword || !agreedToTerms}
           >

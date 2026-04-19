@@ -293,10 +293,7 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
                     items={taskInfo.children.map((item) => item.id)}
                     strategy={verticalListSortingStrategy}
                   >
-                    <OverlayItem
-                      isSubtask={true}
-                      className={`${styles.editingTaskSubtaskPadding} ${styles.editingTaskSubtaskContainerBackground}`}
-                    />
+                    <OverlayItem isSubtask={true} className={styles.editingTaskSubtaskOverlay} />
                     {taskInfo.children.map((child) => (
                       <SubtaskItem
                         key={child.id}
@@ -426,11 +423,11 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
         styles.taskItemEditingShadow,
         styles.taskItemEditingRound,
         itemClassName,
-        'py-3.5'
+        styles.editTaskItemRootPaddingY
       )}
     >
       {/* Title row */}
-      <div className="flex items-start gap-3">
+      <div className={styles.createTaskAttrRow}>
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -438,12 +435,12 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
             taskActions.toggleTask();
           }}
           {...longPressEvents}
-          className="size-6 shrink-0 flex items-center justify-center text-t3"
+          className={styles.editTaskItemStatusButton}
         >
           <TaskCheckbox status={taskInfo.status} />
         </button>
-        <div className="flex-1 min-w-0 flex flex-col gap-1">
-          <div className="flex items-center gap-2 min-w-0">
+        <div className={styles.editTaskItemContent}>
+          <div className={styles.editTaskItemTitleInputRow}>
             <TextArea
               {...textAreaProps}
               ref={(el) => {
@@ -452,25 +449,21 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
                 }
               }}
               autoSize={{ minRows: 1 }}
-              className="min-w-0 overflow-hidden text-ellipsis text-base leading-6 font-medium text-t1 bg-transparent outline-none w-full"
+              className={styles.editTaskItemTitleInput}
             />
           </div>
         </div>
-        <button
-          data-testid="edit-task-menu-button"
-          className="size-6 shrink-0 flex items-center justify-end text-t3"
-          onClick={handleMenuClick}
-        >
-          <MenuIcon className="size-4" />
+        <button data-testid="edit-task-menu-button" className={styles.editTaskItemMenuButton} onClick={handleMenuClick}>
+          <MenuIcon className={styles.projectHeadingItemMenuIcon} />
         </button>
       </div>
 
       {/* Expanded content */}
-      <div className="grid grid-rows-[1fr]">
-        <div className="overflow-hidden">
-          <div className="flex gap-3 mt-2">
-            <div className="size-6 shrink-0 -ml-0.5"></div>
-            <div className="flex-1 min-w-0 flex flex-col gap-1">
+      <div className={styles.editTaskItemExpanded}>
+        <div className={styles.editTaskItemExpandedOverflow}>
+          <div className={styles.editTaskItemExpandedRow}>
+            <div className={styles.editTaskItemExpandedSpacer}></div>
+            <div className={styles.editTaskItemExpandedContent}>
               <AttrContainer icon={<NotesIcon className={styles.editTaskAttrIcon} />}>
                 <TextArea
                   {...notesProps}

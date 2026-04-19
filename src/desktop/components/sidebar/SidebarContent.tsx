@@ -178,8 +178,8 @@ export const SidebarContent: React.FC = () => {
           },
         ],
         x: rect.left,
-        y: rect.top,
-        placement: 'top-start',
+        y: rect.bottom,
+        placement: 'bottom-start',
       },
       instantiationService
     );

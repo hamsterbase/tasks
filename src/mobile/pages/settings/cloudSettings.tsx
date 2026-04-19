@@ -8,8 +8,10 @@ import { PageLayout } from '@/mobile/components/PageLayout.tsx';
 import { localize } from '@/nls.ts';
 import { formatReason, ICloudService } from '@/services/cloud/common/cloudService';
 import { chinaServerConfigKey } from '@/services/config/config';
+import classNames from 'classnames';
 import React from 'react';
 import useSWR from 'swr';
+import { styles } from '../../theme';
 
 export const CloudSettings = () => {
   const navigate = useNavigate();
@@ -74,11 +76,11 @@ export const CloudSettings = () => {
       ? databases.map((db) => ({
           icon:
             db.type === 'cloud' ? (
-              <CloudIcon className="w-5 h-5" />
+              <CloudIcon className={styles.settingsDatabaseIcon} />
             ) : db.type === 'local' ? (
-              <DatabaseIcon className="w-5 h-5" />
+              <DatabaseIcon className={styles.settingsDatabaseIcon} />
             ) : (
-              <CloudOffIcon className="w-5 h-5" />
+              <CloudOffIcon className={styles.settingsDatabaseIcon} />
             ),
           title: db.databaseName,
           description:
@@ -109,16 +111,18 @@ export const CloudSettings = () => {
         renderIcon: (className: string) => <SettingsIcon className={className} />,
       }}
     >
-      <div className="flex flex-col space-y-4">
+      <div className={styles.settingsPageSections}>
         <ListItemGroup items={accountItems} />
 
-        <div className="flex flex-col space-y-2">
+        <div className={styles.settingsPageSubsections}>
           {isLoading && (
-            <div className="p-4 text-center text-t2">{localize('settings.cloud.loading', 'Loading...')}</div>
+            <div className={classNames(styles.settingsStatusState, styles.settingsStatusTextMuted)}>
+              {localize('settings.cloud.loading', 'Loading...')}
+            </div>
           )}
 
           {error && (
-            <div className="p-4 text-center text-accent-danger">
+            <div className={classNames(styles.settingsStatusState, styles.settingsStatusTextDanger)}>
               {localize('settings.cloud.error', 'Failed to load databases')}
             </div>
           )}

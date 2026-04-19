@@ -2,6 +2,7 @@ import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { ActionSheet } from '@/mobile/components/ActionSheet';
 import { ListItemGroup } from '@/mobile/components/listItem/listItem';
+import { styles } from '@/mobile/theme';
 import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
 import { IWorkbenchOverlayService } from '@/services/overlay/common/WorkbenchOverlayService';
 import React from 'react';
@@ -19,8 +20,8 @@ export const PopupActionSheet: React.FC = () => {
 
   return (
     <ActionSheet zIndex={controller.zIndex} onClose={() => controller.dispose()}>
-      {controller.description && <div className="text-sm text-t3 mb-2">{controller.description}</div>}
-      <div className={'flex flex-col gap-3'}>
+      {controller.description && <div className={styles.popupActionDescription}>{controller.description}</div>}
+      <div className={styles.formSectionStack}>
         {groups.map((group, groupIndex) => (
           <ListItemGroup
             key={groupIndex}

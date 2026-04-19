@@ -59,17 +59,19 @@ const ActionSheetContent: React.FC<ActionSheetContentProps> = ({
         onAnimationEnd?.();
       }}
       style={style}
-      className={classNames('absolute left-0 bottom-0 right-0 transition-transform safe-bottom', className, {
+      className={classNames(styles.actionSheetPosition, className, {
         [styles.overlayAnimationDuration]: true,
         [styles.actionSheetRound]: true,
         [styles.actionSheetBackground]: true,
         [styles.actionSheetContentBorder]: true,
       })}
     >
-      <div ref={setNodeRef} className="flex items-center justify-center pt-3 pb-2" {...attributes} {...listeners}>
-        <div className="w-10 h-1 bg-t4 rounded-full"></div>
+      <div ref={setNodeRef} className={styles.actionSheetHandleContainer} {...attributes} {...listeners}>
+        <div className={styles.actionSheetHandleBar}></div>
       </div>
-      <div className={classNames(styles.actionSheetPadding, 'overflow-y-auto', contentClassName)}>{children}</div>
+      <div className={classNames(styles.actionSheetPadding, styles.actionSheetContentOverflow, contentClassName)}>
+        {children}
+      </div>
     </div>
   );
 };
@@ -121,11 +123,11 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({ zIndex, children, onCl
 
   return (
     <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
-      <div className={`fixed inset-0 text-t1`} style={{ zIndex }}>
+      <div className={styles.actionSheetRoot} style={{ zIndex }}>
         <div
           data-testid="mobile-action-sheet-backdrop"
-          className={classNames(styles.overlayBackground, 'absolute inset-0 transition-opacity', {
-            'opacity-0': !isVisible,
+          className={classNames(styles.overlayBackground, styles.overlayBackdrop, {
+            [styles.overlayHidden]: !isVisible,
             [styles.overlayBackgroundOpacity]: isVisible,
             [styles.overlayAnimationDuration]: true,
           })}

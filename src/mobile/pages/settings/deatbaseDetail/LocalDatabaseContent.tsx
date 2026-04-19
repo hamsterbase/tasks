@@ -2,6 +2,7 @@ import { localize } from '@/nls';
 import { useDatabaseActions } from './useDatabaseActions';
 import { DeviceDatabaseItem } from '@/services/cloud/common/cloudService';
 import { ListItemGroup } from '@/mobile/components/listItem/listItem';
+import { styles } from '@/mobile/theme';
 import React from 'react';
 
 export const LocalDatabaseContent = ({
@@ -24,7 +25,7 @@ export const LocalDatabaseContent = ({
       ]}
     />
     <ListItemGroup
-      className="mt-20"
+      className={styles.settingsListGroupSpacingXl}
       items={[
         {
           hidden: !actions.isSwitchNeeded,

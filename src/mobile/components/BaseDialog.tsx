@@ -30,40 +30,38 @@ export const BaseDialog: React.FC<BaseDialogProps> = ({
 
   return (
     <div
-      className={classNames('fixed inset-0 flex items-center justify-center')}
+      className={classNames(styles.dialogOverlayRoot)}
       style={{
         zIndex,
       }}
     >
       <div
-        className={classNames('absolute inset-0', {
+        className={classNames(styles.dialogBackdrop, {
           [styles.overlayBackground]: true,
           [styles.overlayBackgroundOpacity]: true,
         })}
         onClick={onCancel}
       />
-      <div
-        className={classNames(
-          styles.dialogBorder,
-          'bg-bg1 rounded-lg flex flex-col w-80 absolute max-h-[80vh] overflow-y-auto'
-        )}
-      >
-        <div className="flex flex-col p-6 space-y-4">
-          <h3 className="text-lg font-medium text-center text-t1">{title}</h3>
+      <div className={classNames(styles.dialogBorder, styles.dialogPanel)}>
+        <div className={styles.dialogBody}>
+          <h3 className={styles.dialogTitle}>{title}</h3>
           {children}
         </div>
 
         {showFooter && (
-          <div className="border-t border-bg1 rounded-b-lg" style={{ height: '44px' }}>
-            <div className="flex flex-row justify-center items-center h-full px-4">
-              <button className="flex-1 text-base text-center text-t1" onClick={onCancel}>
+          <div className={styles.dialogFooter} style={{ height: '44px' }}>
+            <div className={styles.dialogFooterInner}>
+              <button
+                className={classNames(styles.dialogFooterButton, styles.dialogFooterCancelButton)}
+                onClick={onCancel}
+              >
                 {cancelText || localize('cancel', 'Cancel')}
               </button>
 
               <button
-                className={classNames('flex-1 text-base text-center', {
-                  'text-brand': !confirmDisabled,
-                  'text-t3': confirmDisabled,
+                className={classNames(styles.dialogFooterButton, {
+                  [styles.dialogFooterConfirmEnabled]: !confirmDisabled,
+                  [styles.dialogFooterConfirmDisabled]: confirmDisabled,
                 })}
                 onClick={onConfirm}
                 disabled={confirmDisabled}

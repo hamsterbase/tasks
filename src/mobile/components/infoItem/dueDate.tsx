@@ -2,6 +2,7 @@ import { DueIcon } from '@/components/icons';
 import { formatDate } from '@/core/time/formatDate';
 import { formatRemainingDays } from '@/core/time/formatRemainingDays';
 import { isPastOrToday } from '@/core/time/isPast';
+import { styles } from '@/mobile/theme';
 import { localize } from '@/nls';
 import classNames from 'classnames';
 import React from 'react';
@@ -12,7 +13,7 @@ interface DueDateInfoItemProps {
 
 export const DueDateInfoItem: React.FC<DueDateInfoItemProps> = ({ dueDate }) => {
   return (
-    <p className="flex items-baseline gap-2">
+    <p className={styles.infoItemBaselineRow}>
       <span
         className={classNames({
           'text-accent-danger': isPastOrToday(dueDate),
@@ -20,7 +21,7 @@ export const DueDateInfoItem: React.FC<DueDateInfoItemProps> = ({ dueDate }) => 
       >
         {localize('create_task_page.due_date', 'Due Date')}: {formatDate(dueDate)}
       </span>
-      <span className="text-sm text-t2"> {formatRemainingDays(dueDate)}</span>
+      <span className={styles.formHintText}> {formatRemainingDays(dueDate)}</span>
     </p>
   );
 };

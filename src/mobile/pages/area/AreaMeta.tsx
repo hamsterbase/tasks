@@ -29,10 +29,10 @@ const AreaMeta: React.FC<AreaMetaProps> = ({ areaDetail, onUpdateTitle, onEditTa
   const areaTags = areaDetail.tags || [];
 
   return (
-    <div className={classNames(styles.screenEdgePadding, 'flex flex-col gap-2')}>
+    <div className={classNames(styles.screenEdgePadding, styles.projectInfoSection)}>
       <div className={styles.projectInfoRoot}>
         <div className={styles.projectInfoLogoContainer}>
-          <AreaIcon className="size-5.5 text-t2" />
+          <AreaIcon className={styles.areaMetaIcon} />
         </div>
         <div className={styles.projectInfoContent}>
           <Textarea

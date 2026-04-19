@@ -42,11 +42,11 @@ const DesktopDialogContent: React.FC<{ controller: DesktopDialogController }> = 
           if (action.type === 'input') {
             const error = controller.errors[action.key];
             return (
-              <div key={action.key} className="flex flex-col space-y-1">
+              <div key={action.key} className={desktopStyles.DesktopDialogField}>
                 {action.label && (
-                  <label className="text-xs font-medium text-t1">
+                  <label className={desktopStyles.SettingsDialogLabel}>
                     {action.label}
-                    {action.required && <span className="text-accent-danger ml-0.5">*</span>}
+                    {action.required && <span className={desktopStyles.SettingsDialogRequired}>*</span>}
                   </label>
                 )}
                 <InputField
@@ -54,9 +54,9 @@ const DesktopDialogContent: React.FC<{ controller: DesktopDialogController }> = 
                   placeholder={action.placeholder || ''}
                   value={(controller.actionValues[action.key] as string) || ''}
                   onChange={(e) => controller.updateActionValue(action.key, e.target.value)}
-                  className="w-full text-xs text-t1 bg-bg2 border border-line-light rounded-md px-2 py-1 outline-none focus:border-line-bold transition-colors placeholder:text-t3"
+                  className={desktopStyles.DesktopDialogInput}
                 />
-                {error && <span className="text-sm text-accent-danger">{error}</span>}
+                {error && <span className={desktopStyles.DesktopDialogError}>{error}</span>}
               </div>
             );
           } else if (action.type === 'button') {

@@ -37,7 +37,7 @@ export const AttrContainer: React.FC<AttrContainerProps> = ({
       <div className={attrStyles.iconContainer}>{icon}</div>
       <div className={attrStyles.content}>
         {onClear ? (
-          <div className="flex w-full items-center justify-between">
+          <div className={styles.attrContentWithClear}>
             {children}
             <button
               className={styles.createTaskReminderRemoveBtn}

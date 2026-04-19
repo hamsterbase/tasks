@@ -7,6 +7,7 @@ import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
 import { IWorkbenchOverlayService } from '@/services/overlay/common/WorkbenchOverlayService';
 import { ITodoService } from '@/services/todo/common/todoService';
 import { TestIds } from '@/testIds';
+import classNames from 'classnames';
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useNavigate } from 'react-router';
 import { CommandPaletteController } from './CommandPaletteController';
@@ -152,7 +153,9 @@ const CommandPaletteContent: React.FC<CommandPaletteContentProps> = ({ controlle
         data-test-id={TestIds.CommandPalette.Overlay}
       >
         <div
-          className={`${desktopStyles.CommandPaletteInputContainer} ${controller.searchQuery ? 'border-b border-line-regular' : ''}`}
+          className={classNames(desktopStyles.CommandPaletteInputContainer, {
+            [desktopStyles.CommandPaletteInputContainerWithQuery]: controller.searchQuery,
+          })}
         >
           <input
             ref={inputRef}

@@ -111,7 +111,7 @@ export const DatePickerOverlay: React.FC = () => {
           {localize('date_picker.no_date', 'No date')}
         </button>
       </div>
-      <div className="h-px bg-line-light" />
+      <div className={desktopStyles.DatePickerOverlayDivider} />
       <div className={desktopStyles.DatePickerCalendarHeaderContainer}>
         <div className={desktopStyles.DatePickerCalendarHeaderTitle}>{formatCalendarMonth(visibleMonth)}</div>
         <div className={desktopStyles.DatePickerCalendarNavContainer}>

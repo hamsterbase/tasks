@@ -33,14 +33,20 @@ export const MacTopBar: React.FC = () => {
   }
 
   return (
-    <div className="flex items-center h-8 px-2 flex-shrink-0">
-      <div className="flex-1 h-full" style={{ WebkitAppRegion: 'drag' } as React.CSSProperties} />
-      <div className="flex items-center gap-0.5" style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}>
+    <div className={desktopStyles.MacTopBarContainer}>
+      <div className={desktopStyles.MacTopBarDragRegion} style={{ WebkitAppRegion: 'drag' } as React.CSSProperties} />
+      <div
+        className={desktopStyles.MacTopBarControlRegion}
+        style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}
+      >
         <button
           type="button"
           onClick={() => canGoBack && navigate(-1)}
           disabled={!canGoBack}
-          className={classNames(desktopStyles.SidebarHeaderIconButton, !canGoBack && 'opacity-40 pointer-events-none')}
+          className={classNames(
+            desktopStyles.SidebarHeaderIconButton,
+            !canGoBack && desktopStyles.MacTopBarButtonDisabled
+          )}
         >
           <LeftIcon className={desktopStyles.SidebarHeaderIconButtonIcon} />
         </button>
@@ -50,7 +56,7 @@ export const MacTopBar: React.FC = () => {
           disabled={!canGoForward}
           className={classNames(
             desktopStyles.SidebarHeaderIconButton,
-            !canGoForward && 'opacity-40 pointer-events-none'
+            !canGoForward && desktopStyles.MacTopBarButtonDisabled
           )}
         >
           <RightIcon className={desktopStyles.SidebarHeaderIconButtonIcon} />

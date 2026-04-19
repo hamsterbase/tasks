@@ -107,8 +107,8 @@ export const ProjectPage = () => {
 
   if (!project) {
     return (
-      <div className={desktopStyles.ProjectPageNotFoundContainer}>
-        <div className={desktopStyles.ProjectPageNotFoundText}>{localize('project.notFound', 'Project not found')}</div>
+      <div className={desktopStyles.EntityPageNotFoundContainer}>
+        <div className={desktopStyles.EntityPageNotFoundText}>{localize('project.notFound', 'Project not found')}</div>
       </div>
     );
   }

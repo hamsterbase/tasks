@@ -14,9 +14,8 @@ const inputContainerStyles = classNames(
   styles.tagEditorContainerPadding,
   styles.tagEditorContainerRound,
   styles.tagEditorContainerBackground,
-  'w-full flex flex-wrap',
+  styles.tagEditorInputContainer,
   styles.tagEditorSmallGap,
-  'items-center',
   styles.tagEditorMinHeightDefault
 );
 
@@ -29,7 +28,7 @@ const selectedTagsStyle = classNames(
   styles.tagEditorTextSize,
   styles.tagEditorSmallGap,
   styles.tagEditorSelectedTagColor,
-  'flex items-center'
+  styles.tagEditorSelectedTags
 );
 
 const tagSuggestionStyle = classNames(
@@ -39,9 +38,7 @@ const tagSuggestionStyle = classNames(
   styles.tagEditorSuggestionBackground,
   styles.tagEditorSuggestionTextColor,
   styles.tagEditorHeightDefault,
-  'break-words',
-  'w-full',
-  'text-left'
+  styles.tagEditorSuggestionButton
 );
 
 const createTagButtonStyle = classNames(
@@ -51,9 +48,7 @@ const createTagButtonStyle = classNames(
   styles.tagEditorSuggestionBackground,
   styles.tagEditorCreateTagTextColor,
   styles.tagEditorHeightDefault,
-  'break-words',
-  'w-full',
-  'text-left'
+  styles.tagEditorSuggestionButton
 );
 
 const useTagInteraction = (controller: TagEditorActionSheetController | null) => {
@@ -116,7 +111,7 @@ export const TagEditorActionSheet: React.FC = () => {
 
   return (
     <ActionSheet zIndex={controller.zIndex} onClose={handleClose}>
-      <div className="space-y-4">
+      <div className={styles.settingsPageSections}>
         <div className={inputContainerStyles}>
           {controller.selectedTags.map((tag) => (
             <span key={tag} className={selectedTagsStyle} {...tagProps(tag)}>
@@ -135,14 +130,14 @@ export const TagEditorActionSheet: React.FC = () => {
             data-testid={MobileTestIds.TagEditor.Input}
           />
         </div>
-        <div className={`h-50 overflow-y-scroll flex flex-col ${styles.tagEditorSmallGap}`}>
+        <div className={classNames(styles.tagEditorList, styles.tagEditorSmallGap)}>
           {controller.searchText && !controller.selectedTags.includes(controller.searchText) && (
             <button className={createTagButtonStyle} {...tagProps(controller.searchText)}>
               {localize('tag_editor.create_new_tag', 'Create tag "#{0}"', controller.searchText)}
             </button>
           )}
           {controller.displayTags.length > 0 && (
-            <div className={`flex flex-col ${styles.tagEditorSmallGap}`}>
+            <div className={classNames(styles.pageContentColumn, styles.tagEditorSmallGap)}>
               {controller.displayTags.map((tag) => (
                 <span className={tagSuggestionStyle} key={tag} {...tagProps(tag)}>
                   {tag}

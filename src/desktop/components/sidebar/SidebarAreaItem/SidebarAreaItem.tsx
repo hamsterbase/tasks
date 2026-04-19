@@ -55,8 +55,6 @@ export const SidebarAreaItem: React.FC<SidebarAreaItemProps> = ({ areaInfo }) =>
   });
 
   const areaExpandedIconClass = classNames(desktopStyles.SidebarAreaToggleButton, {
-    [desktopStyles.SidebarAreaToggleButtonActive]: isActive,
-    [desktopStyles.SidebarAreaToggleButtonInactive]: !isActive,
     ['rotate-90']: isExpanded,
   });
 

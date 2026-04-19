@@ -20,10 +20,6 @@ export const MenuItem: React.FC<MenuItemProps> = ({ to, text, icon, primaryBadge
       })
     : icon;
 
-  const secondaryBadgeClassName = isActive
-    ? desktopStyles.SidebarMenuItemBadgeSecondaryActive
-    : desktopStyles.SidebarMenuItemBadgeSecondary;
-
   return (
     <li>
       <Link
@@ -39,7 +35,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({ to, text, icon, primaryBadge
           <span className={desktopStyles.SidebarMenuItemBadgePrimary}>{primaryBadge}</span>
         )}
         {secondaryBadge !== undefined && secondaryBadge > 0 && (
-          <span className={secondaryBadgeClassName}>{secondaryBadge}</span>
+          <span className={desktopStyles.SidebarMenuItemBadgeSecondary}>{secondaryBadge}</span>
         )}
       </Link>
     </li>

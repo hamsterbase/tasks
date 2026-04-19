@@ -6,6 +6,7 @@ import { PageState } from '@/mobile/components/page-state';
 import { PageLayout } from '@/mobile/components/PageLayout';
 import { useDialog } from '@/mobile/overlay/dialog/useDialog';
 import { useToast } from '@/mobile/overlay/toast/useToast';
+import { styles } from '@/mobile/theme';
 import { useAddSelfhostedServer } from '@/services/selfhostedSync/browser/useAddSelfhostedServer';
 import { ISelfhostedSyncService } from '@/services/selfhostedSync/common/selfhostedSyncService.ts';
 import React from 'react';
@@ -41,7 +42,7 @@ export const SelfhostedSync = () => {
   const renderPageContent = () => {
     if (!selfhostedSyncService.enabled) {
       return (
-        <div className="flex flex-col space-y-4">
+        <div className={styles.settingsPageSections}>
           <PageState label={disabledStateMessage} />
         </div>
       );
@@ -76,7 +77,7 @@ export const SelfhostedSync = () => {
 
       const actionItems: ListItemOption[] = [
         {
-          icon: <CircleCheckIcon className="w-5 h-5" />,
+          icon: <CircleCheckIcon className={styles.settingsDatabaseIcon} />,
           title: syncButtonLabel,
           onClick: handleSync,
           mode: {
@@ -86,7 +87,7 @@ export const SelfhostedSync = () => {
           },
         },
         {
-          icon: <DeleteIcon className="w-5 h-5" />,
+          icon: <DeleteIcon className={styles.settingsDatabaseIcon} />,
           title: deleteButtonLabel,
           onClick: handleDeleteServer,
           mode: {
@@ -98,7 +99,7 @@ export const SelfhostedSync = () => {
       ];
 
       return (
-        <div className="flex flex-col space-y-4">
+        <div className={styles.settingsPageSections}>
           <ListItemGroup items={configItems} />
           <ListItemGroup items={actionItems} />
         </div>
@@ -116,7 +117,7 @@ export const SelfhostedSync = () => {
     };
 
     return (
-      <div className="flex flex-col space-y-4">
+      <div className={styles.settingsPageSections}>
         <PageState label={emptyStateMessage} link={documentationLink} />
         <ListItemGroup items={[createItem]} />
       </div>

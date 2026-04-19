@@ -82,21 +82,20 @@ export const SettingsSidebarContent: React.FC = () => {
   return (
     <div className={classNames(desktopStyles.sidebarBackground, desktopStyles.sidebarContainerStyle)}>
       <MacTopBar />
-      <div className="flex h-12 flex-shrink-0 items-center pl-5 pr-2">
-        <Link
-          to="/desktop"
-          className="flex h-7 items-center gap-1.5 rounded-md px-2 -mx-2 text-xs text-t2 transition-colors hover:bg-bg3 hover:text-t1 cursor-pointer"
-        >
-          <span className="flex size-3.5 items-center justify-center">
-            <BackIcon className="size-3.5" strokeWidth={1.5} />
+      <div className={desktopStyles.SettingsSidebarBackRow}>
+        <Link to="/desktop" className={desktopStyles.SettingsSidebarBackLink}>
+          <span className={desktopStyles.SettingsSidebarBackIconContainer}>
+            <BackIcon className={desktopStyles.SettingsSidebarBackIcon} strokeWidth={1.5} />
           </span>
-          <span className="font-medium">{localize('settings.back_to_app', 'Back to App')}</span>
+          <span className={desktopStyles.SettingsSidebarBackLabel}>
+            {localize('settings.back_to_app', 'Back to App')}
+          </span>
         </Link>
       </div>
-      <div className="flex flex-1 flex-col gap-0.5 overflow-y-auto px-2 pb-2">
+      <div className={desktopStyles.SettingsSidebarGroupList}>
         {groups.map((group) => (
-          <div key={group.id} className="flex flex-col gap-0.5">
-            <span className="px-2 pb-1.5 pt-3 text-xs font-semibold text-t3">{group.heading}</span>
+          <div key={group.id} className={desktopStyles.SettingsSidebarGroup}>
+            <span className={desktopStyles.SettingsSidebarGroupHeading}>{group.heading}</span>
             {group.items.map((item) => {
               const isActive =
                 location.pathname === item.path ||

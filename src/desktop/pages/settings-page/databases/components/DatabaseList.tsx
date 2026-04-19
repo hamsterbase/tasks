@@ -61,8 +61,8 @@ export const DatabaseList: React.FC = () => {
   if (isLoading) {
     return (
       <ItemGroup>
-        <div className={desktopStyles.DatabaseListLoadingContainer}>
-          <span className={desktopStyles.DatabaseListLoadingText}>{localize('common.loading', 'Loading...')}</span>
+        <div className={desktopStyles.DatabaseListStateContainer}>
+          <span className={desktopStyles.DatabaseListStateText}>{localize('common.loading', 'Loading...')}</span>
         </div>
       </ItemGroup>
     );
@@ -71,7 +71,7 @@ export const DatabaseList: React.FC = () => {
   if (error) {
     return (
       <ItemGroup>
-        <div className={desktopStyles.DatabaseListErrorContainer}>
+        <div className={desktopStyles.DatabaseListStateContainer}>
           <span className={desktopStyles.DatabaseListErrorText}>
             {localize('settings.cloud.error', 'Failed to load databases')}
           </span>
@@ -83,8 +83,8 @@ export const DatabaseList: React.FC = () => {
   if (!databases || databases.length === 0) {
     return (
       <ItemGroup>
-        <div className={desktopStyles.DatabaseListEmptyContainer}>
-          <span className={desktopStyles.DatabaseListEmptyText}>
+        <div className={desktopStyles.DatabaseListStateContainer}>
+          <span className={desktopStyles.DatabaseListStateText}>
             {localize('settings.sync.noDatabases', 'No databases available')}
           </span>
         </div>
@@ -94,8 +94,8 @@ export const DatabaseList: React.FC = () => {
 
   return (
     <ItemGroup>
-      <div className="flex items-center justify-between gap-4 px-4 py-3">
-        <span className="text-sm font-medium text-t1">{databaseCountLabel}</span>
+      <div className={desktopStyles.SettingsItemContainer}>
+        <span className={desktopStyles.SettingsItemTitle}>{databaseCountLabel}</span>
         {isLoggedIn && cloudDatabasesCount < 3 && (
           <button
             type="button"

@@ -30,7 +30,7 @@ const ProjectAreaSelectorImpl: React.FC<{ controller: ProjectAreaSelectorControl
 
   return (
     <ActionSheet zIndex={controller.zIndex} onClose={() => controller.dispose()}>
-      <div className="space-y-4">
+      <div className={styles.settingsPageSections}>
         <div className={styles.projectAreaSelectorInputContainer}>
           <input
             type="text"
@@ -60,7 +60,9 @@ const ProjectAreaSelectorImpl: React.FC<{ controller: ProjectAreaSelectorControl
                   <div className={styles.projectAreaSelectorItemIcon}>
                     <MobileProjectCheckbox progress={project.progress * 100} status={project.status} />
                   </div>
-                  <span className={project.isPlaceholder ? 'text-t3' : ''}>{project.displayTitle}</span>
+                  <span className={project.isPlaceholder ? styles.taskItemPlaceholderColor : ''}>
+                    {project.displayTitle}
+                  </span>
                 </button>
               ))}
             </div>
@@ -69,7 +71,7 @@ const ProjectAreaSelectorImpl: React.FC<{ controller: ProjectAreaSelectorControl
             <div key={area.id} className={classNames(styles.projectAreaSelectorContentGap, {})}>
               <div
                 className={classNames(styles.projectAreaSelectorItem, {
-                  'opacity-50': area.isDisabled,
+                  [styles.projectAreaSelectorDisabled]: area.isDisabled,
                 })}
                 onClick={() => {
                   if (!area.isDisabled) {
@@ -80,7 +82,7 @@ const ProjectAreaSelectorImpl: React.FC<{ controller: ProjectAreaSelectorControl
                 <div className={styles.projectAreaSelectorItemIcon}>
                   <AreaIcon />
                 </div>
-                <span className={area.isPlaceholder ? 'text-t3' : ''}>{area.displayTitle}</span>
+                <span className={area.isPlaceholder ? styles.taskItemPlaceholderColor : ''}>{area.displayTitle}</span>
               </div>
               {area.projectList.length > 0 && (
                 <div
@@ -95,7 +97,9 @@ const ProjectAreaSelectorImpl: React.FC<{ controller: ProjectAreaSelectorControl
                       <div className={styles.projectAreaSelectorItemIcon}>
                         <MobileProjectCheckbox progress={project.progress * 100} status={project.status} />
                       </div>
-                      <span className={project.isPlaceholder ? 'text-t3' : ''}>{project.displayTitle}</span>
+                      <span className={project.isPlaceholder ? styles.taskItemPlaceholderColor : ''}>
+                        {project.displayTitle}
+                      </span>
                     </button>
                   ))}
                 </div>

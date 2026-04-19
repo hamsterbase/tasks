@@ -33,7 +33,7 @@ export const MobileCompleted = () => {
       }}
     >
       {completedTaskGroups.groups.length === 0 ? (
-        <div className="flex h-100 items-center justify-center text-t3">
+        <div className={styles.pageEmptyState}>
           {localize('completed_tasks.noCompletedTasks', 'No completed tasks or projects yet')}
         </div>
       ) : (
@@ -41,10 +41,14 @@ export const MobileCompleted = () => {
           {completedTaskGroups.groups.map((group) => (
             <div
               key={group.label}
-              className={classNames(styles.taskItemGroupBackground, styles.taskItemGroupRound, 'mb-3')}
+              className={classNames(
+                styles.taskItemGroupBackground,
+                styles.taskItemGroupRound,
+                styles.taskItemGroupSpacing
+              )}
             >
-              <div className={classNames('flex items-baseline gap-3 py-3', styles.taskItemPaddingX)}>
-                <span className="text-xl font-medium text-t1 leading-none">{group.label}</span>
+              <div className={classNames(styles.taskItemGroupHeader, styles.taskItemPaddingX)}>
+                <span className={styles.taskItemGroupTitle}>{group.label}</span>
               </div>
               <div>
                 {group.tasks.map((taskInfo) => {

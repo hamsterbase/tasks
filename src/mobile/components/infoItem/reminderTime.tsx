@@ -1,3 +1,4 @@
+import { styles } from '@/mobile/theme';
 import { formatReminderTime } from '@/core/time/formatReminderTime';
 import React from 'react';
 
@@ -9,9 +10,9 @@ export const ReminderTimeInfoItem: React.FC<ReminderTimeInfoItemProps> = ({ remi
   const { date, time } = formatReminderTime(reminderTime);
 
   return (
-    <div className="flex items-center gap-2">
-      {date && <span className="text-t1">{date}</span>}
-      <span className="text-sm text-t2">{time}</span>
+    <div className={styles.infoItemInlineRow}>
+      {date && <span className={styles.infoItemTextColor}>{date}</span>}
+      <span className={styles.formHintText}>{time}</span>
     </div>
   );
 };

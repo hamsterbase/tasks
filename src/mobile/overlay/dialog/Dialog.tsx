@@ -5,6 +5,7 @@ import { useService } from '../../../hooks/use-service';
 import { useWatchEvent } from '../../../hooks/use-watch-event';
 import { IWorkbenchOverlayService } from '../../../services/overlay/common/WorkbenchOverlayService';
 import { BaseDialog } from '../../components/BaseDialog';
+import { styles } from '../../theme';
 import { DialogController } from './DialogController';
 
 const DialogContent: React.FC<{ controller: DialogController }> = ({ controller }) => {
@@ -18,37 +19,32 @@ const DialogContent: React.FC<{ controller: DialogController }> = ({ controller 
       onConfirm={() => controller.handleConfirm()}
       hideFooter={controller.hideFooter}
     >
-      {controller.description && (
-        <p className="text-sm text-center text-t2 whitespace-pre-line">{controller.description}</p>
-      )}
+      {controller.description && <p className={styles.dialogDescription}>{controller.description}</p>}
 
       {controller.actions && (
-        <div className="space-y-4">
+        <div className={styles.dialogActionList}>
           {controller.actions.map((action) => {
             if (action.type === 'input') {
               return (
                 <div key={action.key}>
                   {action.label && (
-                    <label className="block text-sm font-medium text-t1 mb-2">
+                    <label className={styles.dialogFieldLabel}>
                       {action.label}
-                      {action.required && <span className="text-accent-danger ml-1">*</span>}
+                      {action.required && <span className={styles.dialogRequiredMark}>*</span>}
                     </label>
                   )}
                   <input
                     type={action.inputType || 'text'}
-                    className={classNames(
-                      'w-full px-3 py-2 border bg-bg2 rounded-md text-t1 outline-none transition-colors',
-                      {
-                        'border-bg2 focus:border-brand': !controller.errors[action.key],
-                        'border-accent-danger': controller.errors[action.key],
-                      }
-                    )}
+                    className={classNames(styles.dialogInput, {
+                      [styles.dialogInputNormal]: !controller.errors[action.key],
+                      [styles.dialogInputError]: controller.errors[action.key],
+                    })}
                     placeholder={action.placeholder || ''}
                     value={(controller.actionValues[action.key] as string) || ''}
                     onChange={(e) => controller.updateActionValue(action.key, e.target.value)}
                   />
                   {controller.errors[action.key] && (
-                    <p className="text-xs text-accent-danger mt-1">{controller.errors[action.key]}</p>
+                    <p className={styles.dialogFieldError}>{controller.errors[action.key]}</p>
                   )}
                 </div>
               );
@@ -56,10 +52,10 @@ const DialogContent: React.FC<{ controller: DialogController }> = ({ controller 
               return (
                 <button
                   key={action.key}
-                  className={classNames('w-full py-2 px-4 rounded-md text-center font-medium', {
-                    'bg-brand text-white': action.color === 'primary',
-                    'bg-accent-danger text-white': action.color === 'danger',
-                    'bg-bg2 text-t1': !action.color,
+                  className={classNames(styles.dialogButton, {
+                    [styles.dialogButtonPrimary]: action.color === 'primary',
+                    [styles.dialogButtonDanger]: action.color === 'danger',
+                    [styles.dialogButtonDefault]: !action.color,
                   })}
                   onClick={() => controller.handleButtonClick(action)}
                 >

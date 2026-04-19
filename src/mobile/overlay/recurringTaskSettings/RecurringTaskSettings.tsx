@@ -3,8 +3,10 @@ import { useWatchEvent } from '@/hooks/use-watch-event';
 import { IWorkbenchOverlayService } from '@/services/overlay/common/WorkbenchOverlayService';
 import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
 import { localize } from '@/nls';
+import classNames from 'classnames';
 import React, { useRef, useEffect } from 'react';
 import { BaseDialog } from '../../components/BaseDialog';
+import { styles } from '../../theme';
 import { RecurringTaskSettingsDialogController } from './RecurringTaskSettingsDialogController';
 
 export const RecurringTaskSettings: React.FC = () => {
@@ -36,45 +38,43 @@ export const RecurringTaskSettings: React.FC = () => {
       onConfirm={() => controller.save()}
       confirmDisabled={!controller.isStartDateRuleValid || !controller.isDueDateRuleValid}
     >
-      <div className="space-y-4">
+      <div className={styles.dialogActionList}>
         <div>
-          <label className="block text-sm font-medium text-t1 mb-2">
+          <label className={styles.dialogFieldLabel}>
             {localize('recurring_task.start_date_rule', 'Start Date Rule')}
           </label>
           <input
             ref={startDateInputRef}
             type="text"
-            className="w-full px-3 py-2 border border-line-light rounded-lg bg-bg2 text-t1 placeholder-t3"
+            className={classNames(styles.dialogInput, styles.dialogInputLightBorder, styles.dialogInputPlaceholder)}
             value={controller.startDateRule}
             onChange={(e) => controller.updateStartDateRule(e.target.value)}
             placeholder={placeholder}
           />
           {controller.getStartDateExplanation() && (
-            <div className="mt-2 text-sm text-t2">{controller.getStartDateExplanation()}</div>
+            <div className={styles.dialogFieldHelp}>{controller.getStartDateExplanation()}</div>
           )}
           {controller.getStartDateCalculation() && (
-            <div className="mt-2 text-sm text-brand">
+            <div className={styles.dialogFieldAccent}>
               {localize('recurring_task.next_date', 'Next date: {0}', controller.getStartDateCalculation())}
             </div>
           )}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-t1 mb-2">
-            {localize('recurring_task.due_date_rule', 'Due Date Rule')}
-          </label>
+          <label className={styles.dialogFieldLabel}>{localize('recurring_task.due_date_rule', 'Due Date Rule')}</label>
           <input
             type="text"
-            className="w-full px-3 py-2 border border-line-light rounded-lg bg-bg2 text-t1 placeholder-t3"
+            className={classNames(styles.dialogInput, styles.dialogInputLightBorder, styles.dialogInputPlaceholder)}
             value={controller.dueDateRule}
             onChange={(e) => controller.updateDueDateRule(e.target.value)}
             placeholder={placeholder}
           />
           {controller.getDueDateExplanation() && (
-            <div className="mt-2 text-sm text-t2">{controller.getDueDateExplanation()}</div>
+            <div className={styles.dialogFieldHelp}>{controller.getDueDateExplanation()}</div>
           )}
           {controller.getDueDateCalculation() && (
-            <div className="mt-2 text-sm text-brand">
+            <div className={styles.dialogFieldAccent}>
               {localize('recurring_task.next_date', 'Next date: {0}', controller.getDueDateCalculation())}
             </div>
           )}

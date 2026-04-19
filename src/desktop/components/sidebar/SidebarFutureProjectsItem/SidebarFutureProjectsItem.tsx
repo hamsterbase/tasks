@@ -29,11 +29,6 @@ export const SidebarFutureProjectsItem: React.FC<SidebarFutureProjectsItemProps>
     [desktopStyles.SidebarMenuItemInactive]: !isActive,
   });
 
-  const secondaryBadgeClassName = classNames({
-    [desktopStyles.SidebarMenuItemBadgeSecondaryActive]: isActive,
-    [desktopStyles.SidebarMenuItemBadgeSecondary]: !isActive,
-  });
-
   return (
     <Link
       to="/desktop/future_projects"
@@ -47,7 +42,7 @@ export const SidebarFutureProjectsItem: React.FC<SidebarFutureProjectsItemProps>
         <LaterProjectsIcon />
       </div>
       <span className={desktopStyles.SidebarMenuItemLabel}>{localize('home.futureProjects', 'Future Projects')}</span>
-      {<span className={secondaryBadgeClassName}>{count}</span>}
+      {<span className={desktopStyles.SidebarMenuItemBadgeSecondary}>{count}</span>}
     </Link>
   );
 };
