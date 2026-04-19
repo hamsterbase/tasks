@@ -24,6 +24,8 @@ export const TestIds = {
     ResultItem: 'command-palette-result-item',
     /** No results message */
     NoResults: 'command-palette-no-results',
+    /** Sidebar button that opens the command palette */
+    SidebarTrigger: 'command-palette-sidebar-trigger',
   },
   ProjectDetailPanel: {
     /** Menu button in project detail panel header */

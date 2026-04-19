@@ -28,6 +28,7 @@ import { IInstantiationService } from 'vscf/platform/instantiation/common';
 import { desktopStyles } from '../../theme/main';
 import { DragOverlayItem } from '../drag/DragOverlayItem';
 import { CommandPaletteController } from '../../overlay/commandPalette/CommandPaletteController';
+import { TestIds } from '@/testIds';
 import { SidebarAreaItem } from './SidebarAreaItem/SidebarAreaItem.tsx';
 import { SidebarFutureProjectsItem } from './SidebarFutureProjectsItem/SidebarFutureProjectsItem.tsx';
 import { SidebarMenu } from './SidebarMenu/SidebarMenu.tsx';
@@ -204,6 +205,7 @@ export const SidebarContent: React.FC = () => {
             </button>
           )}
           <button
+            data-test-id={TestIds.CommandPalette.SidebarTrigger}
             onClick={() => CommandPaletteController.create(instantiationService)}
             className={desktopStyles.SidebarHeaderIconButton}
           >

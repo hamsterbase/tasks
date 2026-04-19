@@ -636,7 +636,7 @@ export const desktopStyles = {
   CommandPaletteResultsContainer: /*tw*/ 'max-h-96 overflow-y-auto p-3',
   CommandPaletteResultsEmpty: /*tw*/ 'flex items-center justify-center h-24 text-t3 text-base',
   CommandPaletteResultItem:
-    /*tw*/ 'flex items-start gap-2 px-3 py-3 rounded-md hover:bg-bg2 cursor-pointer transition-colors',
+    /*tw*/ 'flex items-start gap-2 px-2 py-2 rounded-md hover:bg-bg2 cursor-pointer transition-colors',
   CommandPaletteResultItemSelected: /*tw*/ 'bg-bg2',
   CommandPaletteResultItemIcon: /*tw*/ 'size-4 text-t3 flex-shrink-0 flex items-center justify-center',
   CommandPaletteResultItemTitle: /*tw*/ 'text-sm text-t1 truncate leading-4 h-4',
