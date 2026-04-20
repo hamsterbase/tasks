@@ -1,7 +1,7 @@
-import { EditableTextArea } from '@/components/edit/EditableTextArea.tsx';
 import { areaTitleInputKey } from '@/components/edit/inputKeys.ts';
 import { AreaIcon, MenuIcon } from '@/components/icons';
 import { getAreaDetail } from '@/core/state/getArea';
+import { EntityHeader } from '@/desktop/components/common/EntityHeader';
 import { desktopStyles } from '@/desktop/theme/main.ts';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
@@ -46,27 +46,26 @@ const AreaDetailPanelContent: React.FC<IAreaDetailPanelContentProps> = ({ areaId
     openAreaDesktopMenu(rect.right, rect.bottom);
   };
 
+  const headerActions = [
+    {
+      icon: <MenuIcon strokeWidth={ICON_STROKE_WIDTH} />,
+      handleClick: handleMenuClick,
+      title: localize('common.more', 'More'),
+    },
+  ];
+
   return (
     <div className={desktopStyles.DetailViewContainer}>
-      <div className={desktopStyles.DetailViewHeader}>
-        <div className={desktopStyles.DetailViewHeaderStatusIcon}>
-          <AreaIcon className={desktopStyles.DetailViewHeaderStatusBox} />
-        </div>
-        <EditableTextArea
-          inputKey={areaTitleInputKey(areaId)}
-          defaultValue={area.title}
-          placeholder={localize('area.untitled', 'New Area')}
-          onSave={handleTitleSave}
-          enableEnterToSave
-          className={desktopStyles.DetailViewHeaderTitle}
-          autoSize={{ minRows: 1 }}
-        />
-        <div className={desktopStyles.DetailViewHeaderActions}>
-          <button onClick={handleMenuClick} className={desktopStyles.DetailViewHeaderMenuButton}>
-            <MenuIcon className={desktopStyles.DetailViewHeaderMenuIcon} strokeWidth={ICON_STROKE_WIDTH} />
-          </button>
-        </div>
-      </div>
+      <EntityHeader
+        editable
+        variant="detail"
+        inputKey={areaTitleInputKey(areaId)}
+        renderIcon={() => <AreaIcon className={desktopStyles.DetailViewHeaderStatusBox} />}
+        title={area.title}
+        placeholder={localize('area.untitled', 'New Area')}
+        onSave={handleTitleSave}
+        extraActions={headerActions}
+      />
 
       <div className={desktopStyles.DetailViewContent}>
         <div className={desktopStyles.DetailViewContentInner}>

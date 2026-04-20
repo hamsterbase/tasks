@@ -1,9 +1,9 @@
 import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc';
-import { EditableTextArea } from '@/components/edit/EditableTextArea.tsx';
 import { projectTitleInputKey } from '@/components/edit/inputKeys.ts';
 import { AreaIcon, FlagIcon, MenuIcon, ScheduledIcon } from '@/components/icons';
 import { getProjectHeadingAndTasks } from '@/core/state/getProjectHeadingAndTasks';
 import { getProject } from '@/core/state/getProject';
+import { EntityHeader } from '@/desktop/components/common/EntityHeader';
 import { ProjectIcon } from '@/desktop/components/todo/ProjectIcon';
 import { useDatepicker } from '@/desktop/overlay/datePicker/useDatepicker';
 import { desktopStyles } from '@/desktop/theme/main.ts';
@@ -111,31 +111,27 @@ const ProjectDetailPanelContent: React.FC<IProjectDetailPanelContentProps> = ({ 
     openDesktopProjectMenu(rect.right, rect.bottom);
   };
 
+  const headerActions = [
+    {
+      icon: <MenuIcon />,
+      handleClick: handleMenuClick,
+      title: localize('common.more', 'More'),
+      testId: TestIds.ProjectDetailPanel.MenuButton,
+    },
+  ];
+
   return (
     <div className={desktopStyles.DetailViewContainer}>
-      <div className={desktopStyles.DetailViewHeader}>
-        <div className={desktopStyles.DetailViewHeaderStatusIcon}>
-          <ProjectIcon progress={project.progress} status={project.status} size="md" />
-        </div>
-        <EditableTextArea
-          inputKey={projectTitleInputKey(projectId)}
-          defaultValue={project.title}
-          placeholder={localize('project.untitled', 'New Project')}
-          onSave={handleTitleSave}
-          enableEnterToSave
-          className={desktopStyles.DetailViewHeaderTitle}
-          autoSize={{ minRows: 1 }}
-        />
-        <div className={desktopStyles.DetailViewHeaderActions}>
-          <button
-            onClick={handleMenuClick}
-            className={desktopStyles.DetailViewHeaderMenuButton}
-            data-test-id={TestIds.ProjectDetailPanel.MenuButton}
-          >
-            <MenuIcon className={desktopStyles.DetailViewHeaderMenuIcon} />
-          </button>
-        </div>
-      </div>
+      <EntityHeader
+        editable
+        variant="detail"
+        inputKey={projectTitleInputKey(projectId)}
+        renderIcon={() => <ProjectIcon progress={project.progress} status={project.status} size="md" />}
+        title={project.title}
+        placeholder={localize('project.untitled', 'New Project')}
+        onSave={handleTitleSave}
+        extraActions={headerActions}
+      />
 
       <div className={desktopStyles.DetailViewContent}>
         <div className={desktopStyles.DetailViewContentInner}>

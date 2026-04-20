@@ -43,25 +43,20 @@ export const desktopStyles = {
   SidebarProjectItemDueDateDanger: /*tw*/ 'text-accent-danger',
   SidebarProjectItemDueDateMuted: /*tw*/ 'text-t3',
 
-  EntityHeaderContainer: /*tw*/ 'min-h-11 flex items-center justify-between px-5 pr-3 bg-bg1 flex-shrink-0',
-  EntityHeaderPanelIconContainer: /*tw*/ 'flex items-center size-5 text-t2 mr-3 justify-center',
-  EntityHeaderPanelIcon: /*tw*/ 'size-4',
-  EntityHeaderContentWrapper: /*tw*/ 'flex items-start gap-2 flex-1 min-w-0 py-3',
-  EntityHeaderIconContainer: /*tw*/ 'size-5 flex items-center justify-center text-t2',
+  EntityHeaderContainer: /*tw*/ 'min-h-11 flex items-start justify-between px-5 pr-3 bg-bg1 flex-shrink-0',
+  EntityHeaderContainerDetail: /*tw*/ 'group !px-3 !bg-transparent',
+  EntityHeaderContentWrapper: /*tw*/ 'flex items-start gap-2 flex-1 min-w-0',
+  EntityHeaderIconContainer: /*tw*/ 'size-5 flex-shrink-0 flex items-center justify-center text-t2 mt-3',
   EntityHeaderIconButton: /*tw*/ 'size-5 flex items-center justify-center',
   EntityHeaderIconSvg: /*tw*/ 'size-4',
   EntityHeaderEditableTextArea:
-    'flex-1 text-sm leading-5 font-semibold text-t1 resize-none bg-transparent border-none outline-none px-1 -mx-1 py-0 rounded-sm',
-  EntityHeaderTitle: /*tw*/ 'text-sm leading-5 font-semibold text-t1 truncate',
-  EntityHeaderActionsContainer: /*tw*/ 'self-start flex items-center gap-1 pt-2.5',
-  EntityHeaderActionButton:
-    'flex items-center gap-1 px-2 h-7 text-xs text-t2 hover:bg-bg3 hover:text-t1 rounded-md transition-colors',
+    /*tw*/ 'flex-1 min-w-0 text-sm leading-5 font-semibold text-t1 bg-transparent border-none outline-none placeholder:text-t3 rounded-sm px-1 -mx-1 my-3',
+  EntityHeaderTitle: /*tw*/ 'flex-1 min-w-0 text-sm leading-5 font-semibold text-t1 truncate my-3',
+  EntityHeaderActionsContainer: /*tw*/ 'self-start flex items-center gap-0.5 mt-2.5',
   EntityHeaderActionIcon: /*tw*/ 'size-3.5 flex items-center justify-center',
   EntityHeaderActionIconSvg: /*tw*/ 'size-3.5',
-  EntityHeaderActionLabel: /*tw*/ 'text-xs leading-5 font-normal',
   EntityHeaderIconActionButton:
     /*tw*/ 'size-6 flex items-center justify-center rounded-md text-t3 hover:bg-bg3 hover:text-t1 transition-colors flex-shrink-0',
-  EntityHeaderIconActionIcon: /*tw*/ 'size-3.5',
 
   ClearSelectionButton:
     'border-t border-line-regular h-15 flex items-center text-base text-t3 justify-center cursor-pointer',
@@ -300,16 +295,8 @@ export const desktopStyles = {
   BackButtonLabel: /*tw*/ 'text-xl leading-5',
 
   DetailViewContainer: /*tw*/ 'h-full flex flex-col',
-  DetailViewHeader: /*tw*/ 'group min-h-11 flex items-start gap-1 px-3 flex-shrink-0',
-  DetailViewHeaderStatusIcon: /*tw*/ 'flex-shrink-0 size-5 flex items-center justify-center text-t2 mt-3',
   DetailViewHeaderStatusIconColor: /*tw*/ 'text-t3',
   DetailViewHeaderStatusBox: /*tw*/ 'size-4',
-  DetailViewHeaderTitle:
-    /*tw*/ 'flex-1 min-w-0 text-sm leading-5 font-semibold text-t1 bg-transparent border-none outline-none placeholder:text-t3 focus:bg-bg2 rounded-sm px-1 -mx-1 my-3',
-  DetailViewHeaderActions: /*tw*/ 'flex items-center gap-0.5 flex-shrink-0 mt-2.5',
-  DetailViewHeaderMenuButton:
-    /*tw*/ 'size-6 flex items-center justify-center rounded-md text-t3 hover:bg-bg3 hover:text-t1 transition-colors',
-  DetailViewHeaderMenuIcon: /*tw*/ 'size-3.5',
   DetailViewContent: /*tw*/ 'flex-1 overflow-y-auto',
   DetailViewContentInner: /*tw*/ 'px-3 pt-1 pb-3',
   DetailViewNotesTextarea:

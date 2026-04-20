@@ -1,20 +1,22 @@
-import { EditableTextArea } from '@/components/edit/EditableTextArea';
-import { PanelLeftIcon, TaskDisplaySettingsIcon } from '@/components/icons';
+import { TaskDisplaySettingsIcon } from '@/components/icons';
 import { desktopStyles } from '@/desktop/theme/main';
+import { useService } from '@/hooks/use-service';
+import { useWatchEvent } from '@/hooks/use-watch-event';
 import { localize } from '@/nls';
+import { IEditService } from '@/services/edit/common/editService';
 import { TestIds } from '@/testIds';
-import { TextAreaRef } from 'rc-textarea';
 import classNames from 'classnames';
-import React, { ReactNode, useRef } from 'react';
+import TextArea, { TextAreaRef } from 'rc-textarea';
+import React, { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
+import { IContextKeyService } from 'vscf/platform/contextkey/common';
+import { EntityHeaderDetailFocus, EntityHeaderPageFocus } from './entityHeader.contextKey';
 
 const ICON_STROKE_WIDTH = 1.5;
 
 interface HeaderAction {
   icon: ReactNode;
-  handleClick: (e: React.MouseEvent) => void;
-  label: string;
+  handleClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   title: string;
-  iconOnly?: boolean;
   testId?: string;
 }
 
@@ -27,6 +29,7 @@ interface EntityHeaderProps {
   onSave?: (value: string) => void;
   placeholder?: string;
   editable?: boolean;
+  variant?: 'page' | 'detail';
   extraActions?: HeaderAction[];
 
   internalActions?: {
@@ -34,6 +37,16 @@ interface EntityHeaderProps {
       onOpen: (right: number, bottom: number) => void;
     };
   };
+}
+
+function withIconClass(icon: ReactNode, className: string) {
+  if (!React.isValidElement<{ className?: string }>(icon)) {
+    return icon;
+  }
+
+  return React.cloneElement(icon, {
+    className: classNames(className, icon.props.className),
+  });
 }
 
 export const EntityHeader: React.FC<EntityHeaderProps> = ({
@@ -45,103 +58,129 @@ export const EntityHeader: React.FC<EntityHeaderProps> = ({
   onSave,
   placeholder,
   editable = false,
+  variant = 'page',
   extraActions,
   internalActions,
 }) => {
+  const isDetail = variant === 'detail';
   const textAreaRef = useRef<TextAreaRef>(null);
-  const headerIcon = renderIcon();
-  const headerIconNode = React.isValidElement<{ className?: string }>(headerIcon)
-    ? React.cloneElement(headerIcon, {
-        className: classNames(desktopStyles.EntityHeaderIconSvg, headerIcon.props.className),
-      })
-    : headerIcon;
-  const handleSave = (value: string) => {
-    onSave?.(value);
+  const editService = useService(IEditService);
+  const contextKeyService = useService(IContextKeyService);
+  const [entityHeaderFocusContext] = useState(() =>
+    (isDetail ? EntityHeaderDetailFocus : EntityHeaderPageFocus).bindTo(contextKeyService)
+  );
+  const displaySettings = internalActions?.displaySettings;
+  const headerIconNode = withIconClass(renderIcon(), desktopStyles.EntityHeaderIconSvg);
+  const fallbackTitle = placeholder || localize('common.untitled', 'Untitled');
+  const displayTitle = title || fallbackTitle;
+
+  useWatchEvent(editService.onInputChange, (e) => {
+    return e.inputKey === inputKey;
+  });
+
+  useWatchEvent(editService.onFocusInput, (e) => {
+    if (inputId && e.inputId === inputId && textAreaRef.current) {
+      textAreaRef.current.focus();
+      textAreaRef.current.resizableTextArea?.textArea?.select();
+    }
+    return inputId === e.inputId;
+  });
+
+  useEffect(() => {
+    if (!inputKey) {
+      return;
+    }
+    editService.setInputValue(inputKey, title);
+  }, [editService, inputKey, title]);
+
+  const handleTitleFocus = () => {
+    entityHeaderFocusContext.set(true);
   };
 
-  const allActions: HeaderAction[] = [];
-  if (internalActions?.displaySettings) {
-    const handleOpenTaskDisplaySettings = (e: React.MouseEvent) => {
-      const rect = e.currentTarget.getBoundingClientRect();
-      internalActions.displaySettings!.onOpen(rect.right, rect.bottom + 4);
-    };
+  const handleTitleBlur = useCallback(() => {
+    entityHeaderFocusContext.set(false);
+  }, [entityHeaderFocusContext]);
 
-    allActions.push({
-      icon: <TaskDisplaySettingsIcon strokeWidth={ICON_STROKE_WIDTH} />,
-      handleClick: handleOpenTaskDisplaySettings,
-      label: localize('inbox.display', 'Display'),
-      title: localize('inbox.taskDisplaySettings', 'Task Display Settings'),
-      iconOnly: true,
-      testId: TestIds.EntityHeader.DisplaySettingsButton,
-    });
-  }
+  const handleTitleChange = useCallback(
+    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      if (!inputKey) {
+        return;
+      }
+      editService.setInputValue(inputKey, e.target.value);
+    },
+    [editService, inputKey]
+  );
 
-  if (extraActions && extraActions.length > 0) {
-    allActions.push(...extraActions);
-  }
+  const handleInputBlur = useCallback(() => {
+    if (inputKey) {
+      onSave?.(editService.getInputValue(inputKey, title));
+    }
+    handleTitleBlur();
+  }, [editService, inputKey, onSave, title, handleTitleBlur]);
+
+  const inputValue = inputKey ? editService.getInputValue(inputKey, title) : title;
+  const allActions: HeaderAction[] = [
+    ...(displaySettings
+      ? [
+          {
+            icon: <TaskDisplaySettingsIcon strokeWidth={ICON_STROKE_WIDTH} />,
+            handleClick: (e: React.MouseEvent<HTMLButtonElement>) => {
+              const rect = e.currentTarget.getBoundingClientRect();
+              displaySettings.onOpen(rect.right, rect.bottom + 4);
+            },
+            title: localize('inbox.taskDisplaySettings', 'Task Display Settings'),
+            testId: TestIds.EntityHeader.DisplaySettingsButton,
+          },
+        ]
+      : []),
+    ...(extraActions ?? []),
+  ];
 
   return (
-    <div className={desktopStyles.EntityHeaderContainer}>
-      <div className={desktopStyles.EntityHeaderContentWrapper}>
-        <div className={desktopStyles.EntityHeaderPanelIconContainer} style={{ display: 'none' }}>
-          <PanelLeftIcon className={desktopStyles.EntityHeaderPanelIcon} />
-        </div>
+    <div
+      className={classNames(desktopStyles.EntityHeaderContainer, isDetail && desktopStyles.EntityHeaderContainerDetail)}
+    >
+      <div className={classNames(desktopStyles.EntityHeaderContentWrapper, isDetail && 'gap-1!')}>
         <div className={desktopStyles.EntityHeaderIconContainer}>
-          <button className={desktopStyles.EntityHeaderIconButton} onClick={onIconClick}>
-            {headerIconNode}
-          </button>
+          {onIconClick ? (
+            <button type="button" className={desktopStyles.EntityHeaderIconButton} onClick={onIconClick}>
+              {headerIconNode}
+            </button>
+          ) : (
+            <div className={desktopStyles.EntityHeaderIconButton}>{headerIconNode}</div>
+          )}
         </div>
         {editable && inputKey && onSave ? (
-          <EditableTextArea
+          <TextArea
             ref={textAreaRef}
-            inputKey={inputKey}
-            inputId={inputId}
-            defaultValue={title}
-            onSave={handleSave}
-            enableEnterToSave
-            placeholder={placeholder || localize('common.untitled', 'Untitled')}
-            className={desktopStyles.EntityHeaderEditableTextArea}
+            value={inputValue}
+            onChange={handleTitleChange}
+            onFocus={handleTitleFocus}
+            onBlur={handleInputBlur}
             autoSize={{ minRows: 1 }}
+            placeholder={fallbackTitle}
+            className={desktopStyles.EntityHeaderEditableTextArea}
           />
         ) : (
-          <h1 className={desktopStyles.EntityHeaderTitle}>
-            {title || placeholder || localize('common.untitled', 'Untitled')}
-          </h1>
+          <h1 className={desktopStyles.EntityHeaderTitle}>{displayTitle}</h1>
         )}
       </div>
       {allActions.length > 0 && (
         <div className={desktopStyles.EntityHeaderActionsContainer}>
-          {allActions.map((action, index) =>
-            (() => {
-              const actionIcon = React.isValidElement<{ className?: string }>(action.icon)
-                ? React.cloneElement(action.icon, {
-                    className: classNames(
-                      action.iconOnly
-                        ? desktopStyles.EntityHeaderIconActionIcon
-                        : desktopStyles.EntityHeaderActionIconSvg,
-                      action.icon.props.className
-                    ),
-                  })
-                : action.icon;
-
-              return (
-                <button
-                  key={index}
-                  className={
-                    action.iconOnly
-                      ? desktopStyles.EntityHeaderIconActionButton
-                      : desktopStyles.EntityHeaderActionButton
-                  }
-                  title={action.title}
-                  onClick={action.handleClick}
-                  data-test-id={action.testId}
-                >
-                  <span className={desktopStyles.EntityHeaderActionIcon}>{actionIcon}</span>
-                  {!action.iconOnly && <span className={desktopStyles.EntityHeaderActionLabel}>{action.label}</span>}
-                </button>
-              );
-            })()
-          )}
+          {allActions.map((action, index) => (
+            <button
+              type="button"
+              key={index}
+              className={desktopStyles.EntityHeaderIconActionButton}
+              title={action.title}
+              onClick={action.handleClick}
+              data-test-id={action.testId}
+            >
+              <span className={desktopStyles.EntityHeaderActionIcon}>
+                {withIconClass(action.icon, desktopStyles.EntityHeaderActionIconSvg)}
+              </span>
+            </button>
+          ))}
         </div>
       )}
     </div>

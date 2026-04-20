@@ -1,8 +1,8 @@
 import { useTaskItemActions } from '@/base/hooks/useTaskItemActions';
 import { CloseIcon, FlagIcon, MenuIcon, ScheduledIcon } from '@/components/icons';
-import { EditableInput } from '@/components/edit/EditableInput.tsx';
 import { taskTitleInputKey } from '@/components/edit/inputKeys.ts';
 import { TaskInfo } from '@/core/state/type.ts';
+import { EntityHeader } from '@/desktop/components/common/EntityHeader';
 import { TaskIcon } from '@/desktop/components/todo/TaskIcon';
 import { useTaskMenu } from '@/desktop/hooks/useTaskMenu.ts';
 import { desktopStyles } from '@/desktop/theme/main.ts';
@@ -45,34 +45,36 @@ export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task, onClearSel
     openTaskMenu(rect.right, rect.bottom);
   };
 
+  const headerActions = [
+    {
+      icon: <MenuIcon />,
+      handleClick: handleMenuClick,
+      title: localize('common.more', 'More'),
+      testId: TestIds.TaskDetail.MenuButton,
+    },
+    ...(onClearSelection
+      ? [
+          {
+            icon: <CloseIcon />,
+            handleClick: () => onClearSelection(),
+            title: localize('common.close', 'Close'),
+          },
+        ]
+      : []),
+  ];
+
   return (
     <div className={desktopStyles.DetailViewContainer}>
-      <div className={desktopStyles.DetailViewHeader}>
-        <div className={desktopStyles.DetailViewHeaderStatusIcon}>
-          <TaskIcon status={task.status} className={desktopStyles.DetailViewHeaderStatusIconColor} />
-        </div>
-        <EditableInput
-          inputKey={taskTitleInputKey(task.id)}
-          defaultValue={task.title}
-          placeholder={localize('tasks.title_placeholder', 'Add title...')}
-          onSave={handleTitleSave}
-          className={desktopStyles.DetailViewHeaderTitle}
-        />
-        <div className={desktopStyles.DetailViewHeaderActions}>
-          <button
-            data-test-id={TestIds.TaskDetail.MenuButton}
-            onClick={handleMenuClick}
-            className={desktopStyles.DetailViewHeaderMenuButton}
-          >
-            <MenuIcon className={desktopStyles.DetailViewHeaderMenuIcon} />
-          </button>
-          {onClearSelection && (
-            <button onClick={onClearSelection} className={desktopStyles.DetailViewHeaderMenuButton}>
-              <CloseIcon className={desktopStyles.DetailViewHeaderMenuIcon} />
-            </button>
-          )}
-        </div>
-      </div>
+      <EntityHeader
+        editable
+        variant="detail"
+        inputKey={taskTitleInputKey(task.id)}
+        renderIcon={() => <TaskIcon status={task.status} className={desktopStyles.DetailViewHeaderStatusIconColor} />}
+        title={task.title}
+        placeholder={localize('tasks.title_placeholder', 'Add title...')}
+        onSave={handleTitleSave}
+        extraActions={headerActions}
+      />
       <div className={desktopStyles.DetailViewContent}>
         <div className={desktopStyles.DetailViewContentInner}>
           <NotesField

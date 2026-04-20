@@ -57,7 +57,7 @@ export const useDesktopProjectHeader = (options: IUseDesktopProjectHeaderOptions
     event.preventDefault();
     event.stopPropagation();
 
-    const rect = (event.target as HTMLElement).getBoundingClientRect();
+    const rect = (event.currentTarget as HTMLElement).getBoundingClientRect();
     const x = rect.right;
     const y = rect.bottom;
 
