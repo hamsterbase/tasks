@@ -164,9 +164,17 @@
     "defaultMessage": "Go to Settings",
     "content": "Go to Settings"
   },
+  "ai_chat.new_chat": {
+    "defaultMessage": "New Chat",
+    "content": "New Chat"
+  },
   "ai_chat.not_configured": {
     "defaultMessage": "Please configure your AI API settings first",
     "content": "Please configure your AI API settings first"
+  },
+  "ai_chat.parameters": {
+    "defaultMessage": "Parameters",
+    "content": "Parameters"
   },
   "ai_chat.placeholder": {
     "defaultMessage": "Type your message...",
@@ -184,6 +192,10 @@
     "defaultMessage": "Reply #{0}",
     "content": "Reply #{0}"
   },
+  "ai_chat.result": {
+    "defaultMessage": "Result",
+    "content": "Result"
+  },
   "ai_chat.status_responding": {
     "defaultMessage": "Generating...",
     "content": "Generating..."
@@ -192,21 +204,13 @@
     "defaultMessage": "Stopped",
     "content": "Stopped"
   },
-  "ai_chat.thinking": {
-    "defaultMessage": "Thinking",
-    "content": "Thinking"
-  },
-  "ai_chat.parameters": {
-    "defaultMessage": "Parameters",
-    "content": "Parameters"
-  },
-  "ai_chat.result": {
-    "defaultMessage": "Result",
-    "content": "Result"
-  },
   "ai_chat.success": {
     "defaultMessage": "Success",
     "content": "Success"
+  },
+  "ai_chat.thinking": {
+    "defaultMessage": "Thinking",
+    "content": "Thinking"
   },
   "ai_chat.tool_batchEdit": {
     "defaultMessage": "Batch Edit",
@@ -307,6 +311,10 @@
   "common.cancel": {
     "defaultMessage": "Cancel",
     "content": "Cancel"
+  },
+  "common.close": {
+    "defaultMessage": "Close",
+    "content": "Close"
   },
   "common.exporting": {
     "defaultMessage": "Exporting...",
@@ -580,6 +588,26 @@
     "defaultMessage": "Wrong password",
     "content": "Wrong password"
   },
+  "desktop.recurring_task.body_hint": {
+    "defaultMessage": "After completing this task, the next task will be on:",
+    "content": "After completing this task, the next task will be on:"
+  },
+  "desktop.recurring_task.invalid_rule": {
+    "defaultMessage": "Couldn't parse this rule",
+    "content": "Couldn't parse this rule"
+  },
+  "desktop.recurring_task.placeholder": {
+    "defaultMessage": "For example 1w, 2m, 1y3d, due:1d, start:2d",
+    "content": "For example 1w, 2m, 1y3d, due:1d, start:2d"
+  },
+  "desktop.recurring_task.syntax_hint": {
+    "defaultMessage": "Format: number + d / w / m / y, optionally prefixed with start: or due:",
+    "content": "Format: number + d / w / m / y, optionally prefixed with start: or due:"
+  },
+  "desktop.recurring_task.title": {
+    "defaultMessage": "Recurring Settings",
+    "content": "Recurring Settings"
+  },
   "desktop.tag_editor.create_new_tag": {
     "defaultMessage": "Create \"{0}\"",
     "content": "Create \"{0}\""
@@ -715,6 +743,10 @@
   "inbox.taskDisplaySettings": {
     "defaultMessage": "Task Display Settings",
     "content": "Task Display Settings"
+  },
+  "inbox.title": {
+    "defaultMessage": "Inbox",
+    "content": "Inbox"
   },
   "indexedDBStorageInvalidParams": {
     "defaultMessage": "dbName and storeName are required",
@@ -1108,26 +1140,6 @@
     "defaultMessage": "e.g. 1w, 2m, 1y3d, due:1d, start:2d",
     "content": "e.g. 1w, 2m, 1y3d, due:1d, start:2d"
   },
-  "desktop.recurring_task.title": {
-    "defaultMessage": "Recurring Settings",
-    "content": "Recurring Settings"
-  },
-  "desktop.recurring_task.placeholder": {
-    "defaultMessage": "For example 1w, 2m, 1y3d, due:1d, start:2d",
-    "content": "For example 1w, 2m, 1y3d, due:1d, start:2d"
-  },
-  "desktop.recurring_task.body_hint": {
-    "defaultMessage": "After completing this task, the next task will be on:",
-    "content": "After completing this task, the next task will be on:"
-  },
-  "desktop.recurring_task.syntax_hint": {
-    "defaultMessage": "Format: number + d / w / m / y, optionally prefixed with start: or due:",
-    "content": "Format: number + d / w / m / y, optionally prefixed with start: or due:"
-  },
-  "desktop.recurring_task.invalid_rule": {
-    "defaultMessage": "Couldn't parse this rule",
-    "content": "Couldn't parse this rule"
-  },
   "recurring_task.settings_title": {
     "defaultMessage": "Set Recurring Task Rules",
     "content": "Set Recurring Task Rules"
@@ -1288,6 +1300,10 @@
     "defaultMessage": "AI Assistant",
     "content": "AI Assistant"
   },
+  "settings.ai.api": {
+    "defaultMessage": "API",
+    "content": "API"
+  },
   "settings.ai.api_token": {
     "defaultMessage": "API Token",
     "content": "API Token"
@@ -1307,6 +1323,18 @@
   "settings.ai.api_url.description": {
     "defaultMessage": "OpenAI compatible API endpoint URL",
     "content": "OpenAI compatible API endpoint URL"
+  },
+  "settings.ai.display": {
+    "defaultMessage": "Display",
+    "content": "Display"
+  },
+  "settings.ai.hide_entry": {
+    "defaultMessage": "Hide AI Chat in Sidebar",
+    "content": "Hide AI Chat in Sidebar"
+  },
+  "settings.ai.hide_entry.description": {
+    "defaultMessage": "Hide the AI Chat entry from the sidebar.",
+    "content": "Hide the AI Chat entry from the sidebar."
   },
   "settings.ai.model_name": {
     "defaultMessage": "Model Name",
@@ -1612,13 +1640,13 @@
     "defaultMessage": "Add subtask...",
     "content": "Add subtask..."
   },
-  "sync.addServerSuccess": {
-    "defaultMessage": "Server added successfully",
-    "content": "Server added successfully"
-  },
   "sync.addServer": {
     "defaultMessage": "Add Server",
     "content": "Add Server"
+  },
+  "sync.addServerSuccess": {
+    "defaultMessage": "Server added successfully",
+    "content": "Server added successfully"
   },
   "sync.authToken": {
     "defaultMessage": "Auth Token",
@@ -1635,6 +1663,10 @@
   "sync.deleteServer": {
     "defaultMessage": "Delete Server",
     "content": "Delete Server"
+  },
+  "sync.deleteServer.description": {
+    "defaultMessage": "This action cannot be undone and will remove the server configuration from this device.",
+    "content": "This action cannot be undone and will remove the server configuration from this device."
   },
   "sync.endpoint": {
     "defaultMessage": "Endpoint",
@@ -1856,13 +1888,13 @@
     "defaultMessage": "Repeat",
     "content": "Repeat"
   },
-  "tasks.recurring_next_label": {
-    "defaultMessage": "Next task",
-    "content": "Next task"
-  },
   "tasks.recurring_due_date": {
     "defaultMessage": "DueDate: {0}",
     "content": "DueDate: {0}"
+  },
+  "tasks.recurring_next_label": {
+    "defaultMessage": "Next task",
+    "content": "Next task"
   },
   "tasks.recurring_placeholder": {
     "defaultMessage": "Not set",

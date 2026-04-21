@@ -11,7 +11,6 @@
     "build:coverage": "tsc -b && VITE_COVERAGE=true vite build",
     "lint": "eslint src --no-warn-ignored",
     "check": "tsc -b && npm run lint",
-    "test:ui-pc": "npm --prefix ../packages/ui-pc run check",
     "format": "prettier -w src",
     "debug:start-server": "tsx scripts/tasks.ts debugServer",
     "web:dev": "tsx scripts/tasks.ts webDev",

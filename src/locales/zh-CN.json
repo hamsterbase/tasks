@@ -164,9 +164,17 @@
     "defaultMessage": "Go to Settings",
     "content": "前往设置"
   },
+  "ai_chat.new_chat": {
+    "defaultMessage": "New Chat",
+    "content": "新对话"
+  },
   "ai_chat.not_configured": {
     "defaultMessage": "Please configure your AI API settings first",
     "content": "请先配置 AI API 设置"
+  },
+  "ai_chat.parameters": {
+    "defaultMessage": "Parameters",
+    "content": "参数"
   },
   "ai_chat.placeholder": {
     "defaultMessage": "Type your message...",
@@ -184,6 +192,10 @@
     "defaultMessage": "Reply #{0}",
     "content": "回复 #{0}"
   },
+  "ai_chat.result": {
+    "defaultMessage": "Result",
+    "content": "结果"
+  },
   "ai_chat.status_responding": {
     "defaultMessage": "Generating...",
     "content": "生成中…"
@@ -192,21 +204,13 @@
     "defaultMessage": "Stopped",
     "content": "已停止"
   },
-  "ai_chat.thinking": {
-    "defaultMessage": "Thinking",
-    "content": "思考中"
-  },
-  "ai_chat.parameters": {
-    "defaultMessage": "Parameters",
-    "content": "参数"
-  },
-  "ai_chat.result": {
-    "defaultMessage": "Result",
-    "content": "结果"
-  },
   "ai_chat.success": {
     "defaultMessage": "Success",
     "content": "成功"
+  },
+  "ai_chat.thinking": {
+    "defaultMessage": "Thinking",
+    "content": "思考中"
   },
   "ai_chat.tool_batchEdit": {
     "defaultMessage": "Batch Edit",
@@ -307,6 +311,10 @@
   "common.cancel": {
     "defaultMessage": "Cancel",
     "content": "取消"
+  },
+  "common.close": {
+    "defaultMessage": "Close",
+    "content": "关闭"
   },
   "common.exporting": {
     "defaultMessage": "Exporting...",
@@ -580,6 +588,26 @@
     "defaultMessage": "Wrong password",
     "content": "密码错误"
   },
+  "desktop.recurring_task.body_hint": {
+    "defaultMessage": "After completing this task, the next task will be on:",
+    "content": "完成当前任务后，下一个任务的日期将是："
+  },
+  "desktop.recurring_task.invalid_rule": {
+    "defaultMessage": "Couldn't parse this rule",
+    "content": "无法解析这条规则"
+  },
+  "desktop.recurring_task.placeholder": {
+    "defaultMessage": "For example 1w, 2m, 1y3d, due:1d, start:2d",
+    "content": "例如 1w、2m、1y3d、due:1d、start:2d"
+  },
+  "desktop.recurring_task.syntax_hint": {
+    "defaultMessage": "Format: number + d / w / m / y, optionally prefixed with start: or due:",
+    "content": "格式：数字 + d / w / m / y，可加 start: 或 due: 前缀"
+  },
+  "desktop.recurring_task.title": {
+    "defaultMessage": "Recurring Settings",
+    "content": "循环规则"
+  },
   "desktop.tag_editor.create_new_tag": {
     "defaultMessage": "Create \"{0}\"",
     "content": "创建标签 \"#{0}\""
@@ -715,6 +743,10 @@
   "inbox.taskDisplaySettings": {
     "defaultMessage": "Task Display Settings",
     "content": "任务显示设置"
+  },
+  "inbox.title": {
+    "defaultMessage": "Inbox",
+    "content": "收件箱"
   },
   "indexedDBStorageInvalidParams": {
     "defaultMessage": "dbName and storeName are required",
@@ -1108,26 +1140,6 @@
     "defaultMessage": "e.g. 1w, 2m, 1y3d, due:1d, start:2d",
     "content": "例如：1w, 2m, 1y3d, due:1d, start:2d"
   },
-  "desktop.recurring_task.title": {
-    "defaultMessage": "Recurring Settings",
-    "content": "循环规则"
-  },
-  "desktop.recurring_task.placeholder": {
-    "defaultMessage": "For example 1w, 2m, 1y3d, due:1d, start:2d",
-    "content": "例如 1w、2m、1y3d、due:1d、start:2d"
-  },
-  "desktop.recurring_task.body_hint": {
-    "defaultMessage": "After completing this task, the next task will be on:",
-    "content": "完成当前任务后，下一个任务的日期将是："
-  },
-  "desktop.recurring_task.syntax_hint": {
-    "defaultMessage": "Format: number + d / w / m / y, optionally prefixed with start: or due:",
-    "content": "格式：数字 + d / w / m / y，可加 start: 或 due: 前缀"
-  },
-  "desktop.recurring_task.invalid_rule": {
-    "defaultMessage": "Couldn't parse this rule",
-    "content": "无法解析这条规则"
-  },
   "recurring_task.settings_title": {
     "defaultMessage": "Set Recurring Task Rules",
     "content": "设置循环任务规则"
@@ -1288,6 +1300,10 @@
     "defaultMessage": "AI Assistant",
     "content": "AI 助手"
   },
+  "settings.ai.api": {
+    "defaultMessage": "API",
+    "content": "API"
+  },
   "settings.ai.api_token": {
     "defaultMessage": "API Token",
     "content": "API Token"
@@ -1307,6 +1323,18 @@
   "settings.ai.api_url.description": {
     "defaultMessage": "OpenAI compatible API endpoint URL",
     "content": "兼容 OpenAI 协议的 API 地址。"
+  },
+  "settings.ai.display": {
+    "defaultMessage": "Display",
+    "content": "显示"
+  },
+  "settings.ai.hide_entry": {
+    "defaultMessage": "Hide AI Chat in Sidebar",
+    "content": "在侧边栏隐藏 AI 助手"
+  },
+  "settings.ai.hide_entry.description": {
+    "defaultMessage": "Hide the AI Chat entry from the sidebar.",
+    "content": "在侧边栏中隐藏 AI 助手入口。"
   },
   "settings.ai.model_name": {
     "defaultMessage": "Model Name",
@@ -1612,13 +1640,13 @@
     "defaultMessage": "Add subtask...",
     "content": "添加子任务..."
   },
-  "sync.addServerSuccess": {
-    "defaultMessage": "Server added successfully",
-    "content": "服务器添加成功"
-  },
   "sync.addServer": {
     "defaultMessage": "Add Server",
     "content": "添加服务器"
+  },
+  "sync.addServerSuccess": {
+    "defaultMessage": "Server added successfully",
+    "content": "服务器添加成功"
   },
   "sync.authToken": {
     "defaultMessage": "Auth Token",
@@ -1635,6 +1663,10 @@
   "sync.deleteServer": {
     "defaultMessage": "Delete Server",
     "content": "删除服务器"
+  },
+  "sync.deleteServer.description": {
+    "defaultMessage": "This action cannot be undone and will remove the server configuration from this device.",
+    "content": "此操作无法撤销，将从本设备移除该服务器配置。"
   },
   "sync.endpoint": {
     "defaultMessage": "Endpoint",
@@ -1856,13 +1888,13 @@
     "defaultMessage": "Repeat",
     "content": "重复"
   },
-  "tasks.recurring_next_label": {
-    "defaultMessage": "Next task",
-    "content": "下一个任务"
-  },
   "tasks.recurring_due_date": {
     "defaultMessage": "DueDate: {0}",
     "content": "截止日期：{0}"
+  },
+  "tasks.recurring_next_label": {
+    "defaultMessage": "Next task",
+    "content": "下一个任务"
   },
   "tasks.recurring_placeholder": {
     "defaultMessage": "Not set",

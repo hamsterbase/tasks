@@ -2,17 +2,19 @@ import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc.ts'
 import { AIIcon, CalendarIcon, CheckIcon, InboxIcon, TodayIcon } from '@/components/icons';
 import { getInboxTasks } from '@/core/state/inbox/getInboxTasks';
 import { getTodayItems } from '@/core/state/today/getTodayItems';
+import { useConfig } from '@/hooks/useConfig';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { useTaskDisplaySettings } from '@/hooks/useTaskDisplaySettings';
 import { localize } from '@/nls';
+import { hideAIEntryConfigKey } from '@/services/config/config';
 import { ITodoService } from '@/services/todo/common/todoService.ts';
 import React from 'react';
 import { desktopStyles } from '../../../theme/main';
 import { MenuItem } from '../../MenuItem/MenuItem.tsx';
 
-const links = [
-  { to: '/desktop/ai-chat', text: localize('ai_chat', 'AI Chat'), icon: <AIIcon strokeWidth={1.5} /> },
+const aiChatLink = { to: '/desktop/ai-chat', text: localize('ai_chat', 'AI Chat'), icon: <AIIcon strokeWidth={1.5} /> };
+const baseLinks = [
   { to: '/desktop/inbox', text: localize('inbox', 'Inbox'), icon: <InboxIcon /> },
   { to: '/desktop/today', text: localize('today', 'Today'), icon: <TodayIcon /> },
   { to: '/desktop/schedule', text: localize('schedule', 'Schedule'), icon: <CalendarIcon /> },
@@ -22,6 +24,8 @@ const links = [
 export const SidebarMenu: React.FC = () => {
   const todoService = useService(ITodoService);
   useWatchEvent(todoService.onStateChange);
+  const { value: hideAIEntry } = useConfig(hideAIEntryConfigKey());
+  const links = hideAIEntry ? baseLinks : [aiChatLink, ...baseLinks];
   const todayItems = getTodayItems(todoService.modelState, getTodayTimestampInUtc());
   const { showFutureTasks, showCompletedTasks, completedAfter } = useTaskDisplaySettings('inbox');
   const { uncompletedTasksCount } = getInboxTasks(todoService.modelState, {
