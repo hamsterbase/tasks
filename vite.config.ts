@@ -59,6 +59,7 @@ export default defineConfig({
         'src/third-party/**',
         'src/electron/**',
         'src/server/**',
+        'src/cli/**',
         'src/core/time/getTimeStampFromDateStr.ts',
         'src/core/time/isStartOfDay.ts',
         '**/*.d.ts',
