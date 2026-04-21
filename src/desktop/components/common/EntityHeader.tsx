@@ -140,7 +140,7 @@ export const EntityHeader: React.FC<EntityHeaderProps> = ({
     <div
       className={classNames(desktopStyles.EntityHeaderContainer, isDetail && desktopStyles.EntityHeaderContainerDetail)}
     >
-      <div className={classNames(desktopStyles.EntityHeaderContentWrapper, isDetail && 'gap-1!')}>
+      <div className={classNames(desktopStyles.EntityHeaderContentWrapper)}>
         <div className={desktopStyles.EntityHeaderIconContainer}>
           {onIconClick ? (
             <button type="button" className={desktopStyles.EntityHeaderIconButton} onClick={onIconClick}>

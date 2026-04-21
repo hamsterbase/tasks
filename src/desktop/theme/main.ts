@@ -44,10 +44,10 @@ export const desktopStyles = {
   SidebarProjectItemDueDateMuted: /*tw*/ 'text-t3',
 
   EntityHeaderContainer: /*tw*/ 'min-h-11 flex items-start justify-between px-5 pr-3 bg-bg1 flex-shrink-0',
-  EntityHeaderContainerDetail: /*tw*/ 'group !px-3 !bg-transparent',
+  EntityHeaderContainerDetail: /*tw*/ '!px-3',
   EntityHeaderContentWrapper: /*tw*/ 'flex items-start gap-2 flex-1 min-w-0',
-  EntityHeaderIconContainer: /*tw*/ 'size-5 flex-shrink-0 flex items-center justify-center text-t2 mt-3',
-  EntityHeaderIconButton: /*tw*/ 'size-5 flex items-center justify-center',
+  EntityHeaderIconContainer: /*tw*/ 'h-5 w-4 flex-shrink-0 flex items-center justify-center text-t2 mt-3',
+  EntityHeaderIconButton: /*tw*/ 'size-full flex items-center justify-center',
   EntityHeaderIconSvg: /*tw*/ 'size-4',
   EntityHeaderEditableTextArea:
     /*tw*/ 'flex-1 min-w-0 text-sm leading-5 font-semibold text-t1 bg-transparent border-none outline-none placeholder:text-t3 rounded-sm px-1 -mx-1 my-3',
@@ -62,8 +62,8 @@ export const desktopStyles = {
     'border-t border-line-regular h-15 flex items-center text-base text-t3 justify-center cursor-pointer',
 
   TaskDetailAttributeRow:
-    /*tw*/ 'appearance-none flex items-start gap-3 py-1.5 px-2 -mx-2 rounded-md text-left bg-transparent border-none hover:bg-bg2 transition-colors cursor-pointer',
-  TaskDetailAttributeIconContainer: /*tw*/ 'w-3.5 h-4 flex-shrink-0 flex items-center justify-center text-t3',
+    /*tw*/ 'appearance-none flex items-start gap-2 py-1.5 px-2 -mx-2 rounded-md text-left bg-transparent border-none hover:bg-bg2 transition-colors cursor-pointer',
+  TaskDetailAttributeIconContainer: /*tw*/ 'w-4 h-4 flex-shrink-0 flex items-center justify-center text-t3',
   TaskDetailAttributeIconContainerDanger: /*tw*/ 'text-accent-danger',
   TaskDetailAttributeIconContainerPlaceholder: /*tw*/ 'text-t3',
   TaskDetailAttributeIcon: /*tw*/ 'size-3.5',
@@ -160,8 +160,8 @@ export const desktopStyles = {
   AIChatPageRoot: /*tw*/ 'flex h-full w-full flex-col bg-bg1',
   AIChatPageHeader: /*tw*/ 'h-11 flex flex-shrink-0 items-center justify-between bg-bg1 px-5 pr-3',
   AIChatPageHeaderMain: /*tw*/ 'flex min-w-0 flex-1 items-center gap-2',
-  AIChatPageHeaderIconContainer: /*tw*/ 'size-5 flex items-center justify-center text-t2',
-  AIChatPageHeaderIconButton: /*tw*/ 'size-5 flex items-center justify-center',
+  AIChatPageHeaderIconContainer: /*tw*/ 'w-4 h-5 flex items-center justify-center text-t2',
+  AIChatPageHeaderIconButton: /*tw*/ 'size-full flex items-center justify-center',
   AIChatPageHeaderIcon: /*tw*/ 'size-4',
   AIChatPageHeaderTitleGroup: /*tw*/ 'group flex min-w-0 flex-1 items-center gap-1',
   AIChatPageHeaderTitle: /*tw*/ 'truncate text-sm font-semibold text-t1',
