@@ -67,6 +67,7 @@ export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task, onClearSel
     <div className={desktopStyles.DetailViewContainer}>
       <EntityHeader
         editable
+        disableNewLine
         variant="detail"
         inputKey={taskTitleInputKey(task.id)}
         renderIcon={() => <TaskIcon status={task.status} className={desktopStyles.DetailViewHeaderStatusIconColor} />}

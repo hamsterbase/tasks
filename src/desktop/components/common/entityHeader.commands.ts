@@ -1,7 +1,7 @@
-import { KeyCode } from 'vscf/internal/base/common/keyCodes';
+import { KeyCode, KeyMod } from 'vscf/internal/base/common/keyCodes';
 import { ContextKeyExpr } from 'vscf/platform/contextkey/common';
 import { KeybindingsRegistry, KeybindingWeight } from 'vscf/platform/keybinding/common';
-import { EntityHeaderDetailFocus, EntityHeaderPageFocus } from './entityHeader.contextKey';
+import { EntityHeaderDetailFocus, EntityHeaderDisableNewLine, EntityHeaderPageFocus } from './entityHeader.contextKey';
 
 KeybindingsRegistry.registerCommandAndKeybindingRule({
   id: 'EntityHeaderSubmit',
@@ -14,4 +14,12 @@ KeybindingsRegistry.registerCommandAndKeybindingRule({
       activeElement.blur();
     }
   },
+});
+
+KeybindingsRegistry.registerCommandAndKeybindingRule({
+  id: 'EntityHeaderDisableNewLine',
+  weight: KeybindingWeight.WorkbenchContrib + 5,
+  when: ContextKeyExpr.and(EntityHeaderDetailFocus, EntityHeaderDisableNewLine),
+  primary: KeyMod.Shift | KeyCode.Enter,
+  handler: () => {},
 });

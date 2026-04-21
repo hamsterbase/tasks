@@ -9,7 +9,7 @@ import classNames from 'classnames';
 import TextArea, { TextAreaRef } from 'rc-textarea';
 import React, { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import { IContextKeyService } from 'vscf/platform/contextkey/common';
-import { EntityHeaderDetailFocus, EntityHeaderPageFocus } from './entityHeader.contextKey';
+import { EntityHeaderDetailFocus, EntityHeaderDisableNewLine, EntityHeaderPageFocus } from './entityHeader.contextKey';
 
 const ICON_STROKE_WIDTH = 1.5;
 
@@ -30,6 +30,7 @@ interface EntityHeaderProps {
   placeholder?: string;
   editable?: boolean;
   variant?: 'page' | 'detail';
+  disableNewLine?: boolean;
   extraActions?: HeaderAction[];
 
   internalActions?: {
@@ -59,6 +60,7 @@ export const EntityHeader: React.FC<EntityHeaderProps> = ({
   placeholder,
   editable = false,
   variant = 'page',
+  disableNewLine = false,
   extraActions,
   internalActions,
 }) => {
@@ -69,6 +71,7 @@ export const EntityHeader: React.FC<EntityHeaderProps> = ({
   const [entityHeaderFocusContext] = useState(() =>
     (isDetail ? EntityHeaderDetailFocus : EntityHeaderPageFocus).bindTo(contextKeyService)
   );
+  const [entityHeaderDisableNewLineContext] = useState(() => EntityHeaderDisableNewLine.bindTo(contextKeyService));
   const displaySettings = internalActions?.displaySettings;
   const headerIconNode = withIconClass(renderIcon(), desktopStyles.EntityHeaderIconSvg);
   const fallbackTitle = placeholder || localize('common.untitled', 'Untitled');
@@ -95,11 +98,13 @@ export const EntityHeader: React.FC<EntityHeaderProps> = ({
 
   const handleTitleFocus = () => {
     entityHeaderFocusContext.set(true);
+    entityHeaderDisableNewLineContext.set(disableNewLine);
   };
 
   const handleTitleBlur = useCallback(() => {
     entityHeaderFocusContext.set(false);
-  }, [entityHeaderFocusContext]);
+    entityHeaderDisableNewLineContext.set(false);
+  }, [entityHeaderFocusContext, entityHeaderDisableNewLineContext]);
 
   const handleTitleChange = useCallback(
     (e: React.ChangeEvent<HTMLTextAreaElement>) => {

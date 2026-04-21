@@ -50,6 +50,7 @@ export const HeadingDetailView: React.FC<HeadingDetailViewProps> = ({ heading, o
     <div className={desktopStyles.DetailViewContainer}>
       <EntityHeader
         editable
+        disableNewLine
         variant="detail"
         inputKey={projectHeadingTitleInputKey(heading.id)}
         renderIcon={() => (
