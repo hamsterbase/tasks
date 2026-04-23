@@ -30,6 +30,7 @@ android/app/release/
 scripts/env.json
 electron-dist
 scripts/electronPackEnv.json
+scripts/mas/embedded.provisionprofile
 android/version
 android/release.keystore
 android/release.properties

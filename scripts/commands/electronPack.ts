@@ -9,6 +9,7 @@ import { getDarwinArm64Config } from './electronPack/config/darwin-arm64.js';
 import { getLinuxX64Config } from './electronPack/config/linux-x64.js';
 import { getWin32X64Config } from './electronPack/config/win32-x64.js';
 import { getDarwinX64Config } from './electronPack/config/darwin-x64.js';
+import { getMasUniversalConfig } from './electronPack/config/mas-universal.js';
 import { checkUncommittedChanges } from '../utils/git.js';
 import { validateReleaseConfigs } from '../utils/release.js';
 import { createTempDir } from '../utils/createTempDir.js';
@@ -18,7 +19,7 @@ interface ElectronPackOptions {
   target: string;
 }
 
-const SUPPORTED_TARGETS = ['darwin-arm64', 'linux-x64', 'win32-x64', 'darwin-x64'] as const;
+const SUPPORTED_TARGETS = ['darwin-arm64', 'linux-x64', 'win32-x64', 'darwin-x64', 'mas-universal'] as const;
 type SupportedTarget = (typeof SUPPORTED_TARGETS)[number];
 
 const targetConfigMap = {
@@ -26,6 +27,7 @@ const targetConfigMap = {
   'linux-x64': getLinuxX64Config,
   'win32-x64': getWin32X64Config,
   'darwin-x64': getDarwinX64Config,
+  'mas-universal': getMasUniversalConfig,
 } as const;
 
 export async function electronPackCommand(options: ElectronPackOptions) {
