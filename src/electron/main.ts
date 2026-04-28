@@ -13,7 +13,9 @@ if (!homeDir) {
 const appName = 'HamsterBaseTasks';
 // Platform-specific paths
 let basePath: string;
-if (process.platform === 'darwin') {
+if (process.mas) {
+  basePath = app.getPath('userData');
+} else if (process.platform === 'darwin') {
   basePath = path.join(homeDir, 'Library', 'Application Support', appName);
 } else if (process.platform === 'linux') {
   basePath = path.join(homeDir, '.config', appName);
