@@ -884,6 +884,10 @@
     "defaultMessage": "Minimize",
     "content": "Minimize"
   },
+  "menu.restoreWindow": {
+    "defaultMessage": "Restore Window",
+    "content": "Restore Window"
+  },
   "menu.paste": {
     "defaultMessage": "Paste",
     "content": "Paste"

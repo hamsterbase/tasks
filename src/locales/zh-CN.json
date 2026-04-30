@@ -884,6 +884,10 @@
     "defaultMessage": "Minimize",
     "content": ""
   },
+  "menu.restoreWindow": {
+    "defaultMessage": "Restore Window",
+    "content": "恢复窗口"
+  },
   "menu.paste": {
     "defaultMessage": "Paste",
     "content": "粘贴"

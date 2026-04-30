@@ -45,6 +45,12 @@ export class ElectronMenuService implements IMenuService {
       {
         label: localize('menu.window', 'Window'),
         submenu: [
+          {
+            id: 'restore-window',
+            label: localize('menu.restoreWindow', 'Restore Window'),
+            accelerator: 'CmdOrCtrl+N',
+          },
+          { type: 'separator' as const },
           { label: localize('menu.minimize', 'Minimize'), role: 'minimize' as const },
           { label: localize('menu.zoom', 'Zoom'), role: 'zoom' as const },
           { label: localize('menu.close', 'Close Window'), role: 'close' as const },

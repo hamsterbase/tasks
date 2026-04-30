@@ -61,6 +61,18 @@ function createWindow() {
   });
 }
 
+function restoreMainWindow() {
+  if (mainWindow && !mainWindow.isDestroyed()) {
+    if (mainWindow.isMinimized()) {
+      mainWindow.restore();
+    }
+    mainWindow.show();
+    mainWindow.focus();
+    return;
+  }
+  createWindow();
+}
+
 app.whenReady().then(() => {
   createWindow();
 
@@ -81,9 +93,24 @@ ipcMain.handle('is-fullscreen', () => {
   return mainWindow?.isFullScreen() || false;
 });
 
+// Menu item click handlers can only run in the main process. Items sent via IPC
+// from the renderer carry an `id` marker; we attach the matching handler here.
+function injectMenuActions(items: Electron.MenuItemConstructorOptions[]): Electron.MenuItemConstructorOptions[] {
+  return items.map((item) => {
+    const next: Electron.MenuItemConstructorOptions = { ...item };
+    if (next.id === 'restore-window') {
+      next.click = () => restoreMainWindow();
+    }
+    if (Array.isArray(next.submenu)) {
+      next.submenu = injectMenuActions(next.submenu as Electron.MenuItemConstructorOptions[]);
+    }
+    return next;
+  });
+}
+
 class ElectronMenuService {
   setApplicationMenu(template: Electron.MenuItemConstructorOptions[]) {
-    const menu = Menu.buildFromTemplate(template);
+    const menu = Menu.buildFromTemplate(injectMenuActions(template));
     Menu.setApplicationMenu(menu);
   }
 }
