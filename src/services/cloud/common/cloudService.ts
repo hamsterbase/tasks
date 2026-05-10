@@ -242,6 +242,7 @@ export class CloudService implements ICloudService {
   }
 
   async syncImmediately() {
+    this.taskTokensLoaded = false;
     return this.doSync();
   }
 

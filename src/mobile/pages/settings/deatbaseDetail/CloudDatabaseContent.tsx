@@ -27,7 +27,7 @@ export const CloudDatabaseContent: React.FC<{
   const dialog = useDialog();
   const toast = useToast();
 
-  const { data: tokens = [], mutate: mutateTokens } = useSWR(
+  const { data: tokens = null, mutate: mutateTokens } = useSWR(
     actions.isSwitchNeeded ? null : ['db-tokens', database.databaseId],
     async () => {
       await cloudService.refreshTaskTokens();
@@ -92,8 +92,9 @@ export const CloudDatabaseContent: React.FC<{
   };
 
   const tokenItems: ListItemOption[] = [];
-  for (const token of tokens) {
+  for (const token of tokens ?? []) {
     tokenItems.push({
+      testId: 'cloud-database-inbox-token-row',
       title: token.name,
       description: token.token,
       mode: { type: 'plain' },
@@ -106,12 +107,14 @@ export const CloudDatabaseContent: React.FC<{
     });
   }
 
-  tokenItems.push({
-    hidden: tokens.length >= MAX_TOKENS_PER_DATABASE,
-    title: localize('database.token.generate', 'Generate Token'),
-    mode: { type: 'button', theme: 'primary' },
-    onClick: handleGenerateToken,
-  });
+  if (tokens && tokens.length === 0) {
+    tokenItems.push({
+      hidden: tokens.length >= MAX_TOKENS_PER_DATABASE,
+      title: localize('database.token.generate', 'Generate Token'),
+      mode: { type: 'button', theme: 'primary' },
+      onClick: handleGenerateToken,
+    });
+  }
 
   return (
     <>
@@ -141,7 +144,7 @@ export const CloudDatabaseContent: React.FC<{
         ]}
       />
 
-      {!actions.isSwitchNeeded && (
+      {!actions.isSwitchNeeded && tokens !== null && (
         <ListItemGroup
           className={styles.settingsListGroupSpacingMd}
           title={localize('database.token.section', 'Inbox Tokens')}
