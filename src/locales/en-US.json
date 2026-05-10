@@ -316,6 +316,10 @@
     "defaultMessage": "Close",
     "content": "Close"
   },
+  "common.copy": {
+    "defaultMessage": "Copy",
+    "content": "Copy"
+  },
   "common.exporting": {
     "defaultMessage": "Exporting...",
     "content": "Exporting..."
@@ -515,6 +519,34 @@
   "database.sync.success": {
     "defaultMessage": "Sync successfully",
     "content": "Sync successfully"
+  },
+  "database.token.copy.success": {
+    "defaultMessage": "Token copied to clipboard",
+    "content": "Token copied to clipboard"
+  },
+  "database.token.created": {
+    "defaultMessage": "Token created. Copy it now.",
+    "content": "Token created. Copy it now."
+  },
+  "database.token.generate": {
+    "defaultMessage": "Generate Token",
+    "content": "Generate Token"
+  },
+  "database.token.namePrompt": {
+    "defaultMessage": "Token name",
+    "content": "Token name"
+  },
+  "database.token.revoke": {
+    "defaultMessage": "Revoke",
+    "content": "Revoke"
+  },
+  "database.token.revoke.confirm": {
+    "defaultMessage": "Revoke this token? Any apps using it will stop working.",
+    "content": "Revoke this token? Any apps using it will stop working."
+  },
+  "database.token.section": {
+    "defaultMessage": "Inbox Tokens",
+    "content": "Inbox Tokens"
   },
   "databaseNotFound": {
     "defaultMessage": "Database not found",

@@ -40,6 +40,10 @@ export class HBServerClient {
     return this.request<T>('POST', api, data);
   }
 
+  bearerPost<T>(bearerToken: string, api: string, data?: unknown) {
+    return this.request<T>('POST', api, data, `Bearer ${bearerToken}`);
+  }
+
   patch<T>(api: string, data: unknown) {
     return this.request<T>('PATCH', api, data);
   }
@@ -56,13 +60,13 @@ export class HBServerClient {
     return this.request<T>('GET', api);
   }
 
-  private async request<T>(method: string, api: string, data?: unknown): Promise<T> {
+  private async request<T>(method: string, api: string, data?: unknown, authorization?: string): Promise<T> {
     const requestLib = this.options.requestLib;
     const response = await requestLib(`${this.options.endpoint}/api/${api}`, {
       method: method,
       headers: {
         'Content-Type': 'application/json',
-        authorization: this.currentToken ?? '',
+        authorization: authorization ?? this.currentToken ?? '',
       },
       body: data ? JSON.stringify(data) : undefined,
     });

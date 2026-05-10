@@ -3,6 +3,7 @@ import { sha256 } from '@/core/crypto/sha256';
 import { localize } from '@/nls';
 import { HttpError } from '@/packages/cloud/error';
 import { HbCloudSDK } from '@/packages/cloud/main';
+import { CreateTaskTokenResponse, TaskTokenItem } from '@/packages/cloud/server/tasks';
 import { chinaServerConfigKey } from '@/services/config/config';
 import { IConfigService } from '@/services/config/configService.ts';
 import { IDatabaseService } from '@/services/database/common/database';
@@ -128,6 +129,14 @@ export interface ICloudService extends IDisposable {
   init(): Promise<void>;
 
   checkAndInsertPurchaseHistory(): Promise<void>;
+
+  refreshTaskTokens(): Promise<TaskTokenItem[]>;
+
+  getCachedTaskTokens(databaseId: string): TaskTokenItem[];
+
+  createTaskToken(databaseId: string, name: string): Promise<CreateTaskTokenResponse>;
+
+  revokeTaskToken(tokenId: string): Promise<void>;
 }
 
 export class CloudService implements ICloudService {
@@ -147,6 +156,9 @@ export class CloudService implements ICloudService {
   private syncWaitTime = 8000;
 
   private notSyncDatabases: Set<string> = new Set(['local']);
+
+  private taskTokensCache: TaskTokenItem[] = [];
+  private taskTokensLoaded = false;
 
   constructor(
     @ITodoService private readonly todoService: ITodoService,
@@ -243,10 +255,22 @@ export class CloudService implements ICloudService {
     if (database.account !== this.config.account || this.notSyncDatabases.has(currentDatabase)) {
       return;
     }
+    if (!this.taskTokensLoaded) {
+      try {
+        await this.refreshTaskTokens();
+      } catch {
+        // ignore: don't block database sync if token list fails; will retry next sync
+      }
+    }
     try {
       const sdk = this._sdk.clone();
       sdk.setToken(this.config.session);
-      await syncDatabaseLogic(sdk, this.todoService, database);
+      const inboxTokens = this.getCachedTaskTokens(database.id);
+      const result = await syncDatabaseLogic(sdk, this.todoService, database, inboxTokens);
+      if (result.inboxFailed) {
+        // Token may have been revoked or rotated elsewhere — invalidate so next sync refreshes.
+        this.taskTokensLoaded = false;
+      }
     } catch (error) {
       if (error instanceof HttpError) {
         if (error.code === 'E02C001') {
@@ -462,7 +486,66 @@ export class CloudService implements ICloudService {
   private async updateUserConfig(config: AccountConfig) {
     this.config = config;
     localStorage.setItem('account', JSON.stringify(this.config));
+    if (config.type !== 'login') {
+      this.taskTokensCache = [];
+      this.taskTokensLoaded = false;
+    }
     this._onSessionChange.fire();
+  }
+
+  async refreshTaskTokens(): Promise<TaskTokenItem[]> {
+    if (this.config.type !== 'login') {
+      this.taskTokensCache = [];
+      this.taskTokensLoaded = true;
+      return [];
+    }
+    const sdk = this._sdk.clone();
+    sdk.setToken(this.config.session);
+    const tokens = await sdk.tasksToken.list();
+    this.taskTokensCache = tokens;
+    this.taskTokensLoaded = true;
+    return tokens;
+  }
+
+  getCachedTaskTokens(databaseId: string): TaskTokenItem[] {
+    return this.taskTokensCache.filter((t) => t.database_id === databaseId);
+  }
+
+  async createTaskToken(databaseId: string, name: string): Promise<CreateTaskTokenResponse> {
+    if (this.config.type !== 'login') {
+      throw NotLoginError;
+    }
+    const meta = await this.databaseService.getDatabaseMeta(databaseId);
+    const sdk = this._sdk.clone();
+    sdk.setToken(this.config.session);
+    const res = await sdk.tasksToken.create({
+      database_id: databaseId,
+      database_access_key: meta.accessKey,
+      database_salt: meta.salt,
+      name,
+    });
+    this.taskTokensCache = [
+      ...this.taskTokensCache,
+      {
+        id: res.id,
+        database_id: res.database_id,
+        name: res.name,
+        token: res.token,
+        created_at: new Date().toISOString(),
+        last_used_at: null,
+      },
+    ];
+    return res;
+  }
+
+  async revokeTaskToken(tokenId: string): Promise<void> {
+    if (this.config.type !== 'login') {
+      throw NotLoginError;
+    }
+    const sdk = this._sdk.clone();
+    sdk.setToken(this.config.session);
+    await sdk.tasksToken.revoke({ id: tokenId });
+    this.taskTokensCache = this.taskTokensCache.filter((t) => t.id !== tokenId);
   }
 
   async userInfo(): Promise<AccountInfo | null> {

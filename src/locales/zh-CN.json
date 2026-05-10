@@ -316,6 +316,10 @@
     "defaultMessage": "Close",
     "content": "关闭"
   },
+  "common.copy": {
+    "defaultMessage": "Copy",
+    "content": "复制"
+  },
   "common.exporting": {
     "defaultMessage": "Exporting...",
     "content": "导出中..."
@@ -515,6 +519,34 @@
   "database.sync.success": {
     "defaultMessage": "Sync successfully",
     "content": "同步成功"
+  },
+  "database.token.copy.success": {
+    "defaultMessage": "Token copied to clipboard",
+    "content": "令牌已复制到剪贴板"
+  },
+  "database.token.created": {
+    "defaultMessage": "Token created. Copy it now.",
+    "content": "令牌已生成，请立即复制。"
+  },
+  "database.token.generate": {
+    "defaultMessage": "Generate Token",
+    "content": "生成令牌"
+  },
+  "database.token.namePrompt": {
+    "defaultMessage": "Token name",
+    "content": "令牌名称"
+  },
+  "database.token.revoke": {
+    "defaultMessage": "Revoke",
+    "content": "撤销"
+  },
+  "database.token.revoke.confirm": {
+    "defaultMessage": "Revoke this token? Any apps using it will stop working.",
+    "content": "撤销此令牌？正在使用它的应用将停止工作。"
+  },
+  "database.token.section": {
+    "defaultMessage": "Inbox Tokens",
+    "content": "收件箱令牌"
   },
   "databaseNotFound": {
     "defaultMessage": "Database not found",
