@@ -14,6 +14,10 @@
   --separator-border: transparent;
 }
 
+body {
+  font-family: 'PingFang SC';
+}
+
 body svg.lucide {
   stroke-width: 1.5;
 }
