@@ -13,6 +13,7 @@ interface DatabaseItemProps {
     label: string;
     value: string;
   }>;
+  extraSection?: React.ReactNode;
   onClick?: () => void;
 }
 
@@ -23,9 +24,11 @@ export const DatabaseItem: React.FC<DatabaseItemProps> = ({
   isCurrent = false,
   actionButtons,
   properties,
+  extraSection,
   onClick,
 }) => {
-  const shProperties = isCurrent && properties && properties.length > 0;
+  const showProperties = isCurrent && properties && properties.length > 0;
+  const showExtraSection = isCurrent && extraSection;
 
   return (
     <div className={desktopStyles.DatabaseItemContainer}>
@@ -64,7 +67,7 @@ export const DatabaseItem: React.FC<DatabaseItemProps> = ({
         )}
       </div>
 
-      {shProperties && (
+      {showProperties && (
         <div className={desktopStyles.DatabaseItemPropertiesSection}>
           {properties.map((prop, index) => (
             <div key={index} className={desktopStyles.DatabaseItemProperty}>
@@ -74,6 +77,8 @@ export const DatabaseItem: React.FC<DatabaseItemProps> = ({
           ))}
         </div>
       )}
+
+      {showExtraSection && <div className={desktopStyles.DatabaseItemExtraSection}>{extraSection}</div>}
     </div>
   );
 };

@@ -444,6 +444,15 @@ export const desktopStyles = {
   DatabaseItemProperty: /*tw*/ 'flex flex-col gap-0.5',
   DatabaseItemPropertyLabel: /*tw*/ 'text-sm text-t1',
   DatabaseItemPropertyValue: /*tw*/ 'text-xs text-t3',
+  DatabaseItemExtraSection: /*tw*/ 'flex flex-col gap-0.5 pl-8',
+
+  DatabaseTokenSection: /*tw*/ 'flex flex-col gap-0.5',
+  DatabaseTokenRow: /*tw*/ 'flex items-center gap-3',
+  DatabaseTokenLine: /*tw*/ 'flex-1 min-w-0 text-xs text-t3 truncate',
+  DatabaseTokenActions: /*tw*/ 'flex items-center gap-1.5 shrink-0 text-xs text-t3',
+  DatabaseTokenActionSeparator: /*tw*/ 'select-none',
+  DatabaseTokenCopyLink: /*tw*/ 'transition-colors hover:text-brand cursor-pointer',
+  DatabaseTokenRevokeLink: /*tw*/ 'transition-colors hover:text-accent-danger cursor-pointer',
 
   SettingsButtonRow: /*tw*/ 'flex items-center gap-3',
   SettingsEmptyStateActionButton:

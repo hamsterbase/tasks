@@ -40,6 +40,7 @@ import {
   Home,
   Inbox,
   Info,
+  KeyRound,
   Layers,
   Link,
   ListChecks,
@@ -96,6 +97,7 @@ export const CancelIcon = X;
 export const AreaIcon = Layers;
 export const PlusIcon = Plus;
 export const PlusCircleIcon = CirclePlus;
+export const KeyIcon = KeyRound;
 export const LaterProjectsIcon = CalendarClock;
 export const HeadingIcon = TypeIcon;
 export const HashIcon = Hash;

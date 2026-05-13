@@ -1,4 +1,4 @@
-import { CloudIcon, SyncIcon, TrashIcon } from '@/components/icons';
+import { CloudIcon, KeyIcon, SyncIcon, TrashIcon } from '@/components/icons';
 import { DatabaseItem } from '@/desktop/components/DatabaseItem';
 import { desktopStyles } from '@/desktop/theme/main';
 import { useDatabaseActions } from '@/desktop/hooks/useDatabaseActions';
@@ -6,6 +6,8 @@ import { localize } from '@/nls.ts';
 import { CloudDatabaseItem as CloudDatabaseType } from '@/services/cloud/common/cloudService.ts';
 import { format } from 'date-fns';
 import React from 'react';
+import { CloudDatabaseTokenSection } from './CloudDatabaseTokenSection';
+import { useCloudDatabaseTokens } from './useCloudDatabaseTokens';
 
 interface CloudDatabaseItemProps {
   database: CloudDatabaseType;
@@ -13,18 +15,23 @@ interface CloudDatabaseItemProps {
   mutate: () => Promise<unknown>;
 }
 
-function formatBytes(bytes: number) {
-  if (bytes < 1024) {
-    return `${bytes} B`;
-  }
-  return `${(bytes / 1024).toFixed(2)} KB`;
-}
-
 export const CloudDatabaseItem: React.FC<CloudDatabaseItemProps> = ({ database, isCurrent, mutate }) => {
   const databaseActions = useDatabaseActions(database.databaseId, database, mutate);
+  const tokenState = useCloudDatabaseTokens(database, databaseActions);
 
   const actionButtons = (
     <>
+      {tokenState.canGenerate && (
+        <button
+          type="button"
+          className={desktopStyles.DatabaseItemActionButton}
+          title={localize('database.token.generate', 'Generate Token')}
+          aria-label={localize('database.token.generate', 'Generate Token')}
+          onClick={tokenState.handleGenerate}
+        >
+          <KeyIcon className={desktopStyles.DatabaseItemActionButtonIcon} strokeWidth={1.75} />
+        </button>
+      )}
       <button
         type="button"
         className={desktopStyles.DatabaseItemActionButton}
@@ -46,6 +53,15 @@ export const CloudDatabaseItem: React.FC<CloudDatabaseItemProps> = ({ database, 
     </>
   );
 
+  const extraSection =
+    tokenState.ready && tokenState.tokens && tokenState.tokens.length > 0 ? (
+      <CloudDatabaseTokenSection
+        tokens={tokenState.tokens}
+        onCopy={tokenState.handleCopy}
+        onRevoke={tokenState.handleRevoke}
+      />
+    ) : undefined;
+
   return (
     <DatabaseItem
       icon={<CloudIcon />}
@@ -54,16 +70,7 @@ export const CloudDatabaseItem: React.FC<CloudDatabaseItemProps> = ({ database, 
       isCurrent={isCurrent}
       onClick={() => databaseActions.handleSwitchToDatabase()}
       actionButtons={actionButtons}
-      properties={[
-        {
-          label: localize('database.databaseSize', 'Database Size'),
-          value: formatBytes(database.usage),
-        },
-        {
-          label: localize('database.lastUpdated', 'Last Updated'),
-          value: format(database.lastModified, 'yyyy/MM/dd HH:mm'),
-        },
-      ]}
+      extraSection={extraSection}
     />
   );
 };
