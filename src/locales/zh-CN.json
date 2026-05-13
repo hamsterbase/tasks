@@ -332,6 +332,10 @@
     "defaultMessage": "Loading...",
     "content": "加载中..."
   },
+  "common.more": {
+    "defaultMessage": "More",
+    "content": ""
+  },
   "common.ok": {
     "defaultMessage": "OK",
     "content": "确定"
@@ -916,10 +920,6 @@
     "defaultMessage": "Minimize",
     "content": ""
   },
-  "menu.restoreWindow": {
-    "defaultMessage": "Restore Window",
-    "content": "恢复窗口"
-  },
   "menu.paste": {
     "defaultMessage": "Paste",
     "content": "粘贴"
@@ -931,6 +931,10 @@
   "menu.reload": {
     "defaultMessage": "Reload",
     "content": "重新加载"
+  },
+  "menu.restoreWindow": {
+    "defaultMessage": "Restore Window",
+    "content": "恢复窗口"
   },
   "menu.selectAll": {
     "defaultMessage": "Select All",

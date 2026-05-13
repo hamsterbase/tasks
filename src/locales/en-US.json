@@ -332,6 +332,10 @@
     "defaultMessage": "Loading...",
     "content": "Loading..."
   },
+  "common.more": {
+    "defaultMessage": "More",
+    "content": "More"
+  },
   "common.ok": {
     "defaultMessage": "OK",
     "content": "OK"
@@ -916,10 +920,6 @@
     "defaultMessage": "Minimize",
     "content": "Minimize"
   },
-  "menu.restoreWindow": {
-    "defaultMessage": "Restore Window",
-    "content": "Restore Window"
-  },
   "menu.paste": {
     "defaultMessage": "Paste",
     "content": "Paste"
@@ -931,6 +931,10 @@
   "menu.reload": {
     "defaultMessage": "Reload",
     "content": "Reload"
+  },
+  "menu.restoreWindow": {
+    "defaultMessage": "Restore Window",
+    "content": "Restore Window"
   },
   "menu.selectAll": {
     "defaultMessage": "Select All",
