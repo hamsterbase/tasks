@@ -1156,6 +1156,18 @@
     "defaultMessage": "New Project",
     "content": "New Project"
   },
+  "project.tagFilter.all": {
+    "defaultMessage": "All",
+    "content": "All"
+  },
+  "project.tagFilter.untagged": {
+    "defaultMessage": "No Tags",
+    "content": "No Tags"
+  },
+  "project.tagFilter.label": {
+    "defaultMessage": "Tags:",
+    "content": "Tags:"
+  },
   "recurring_task.base_prefix": {
     "defaultMessage": "From completion date:",
     "content": "From completion date:"
@@ -1979,6 +1991,10 @@
   "tasks.tags": {
     "defaultMessage": "Tags",
     "content": "Tags"
+  },
+  "tasks.filterByTag": {
+    "defaultMessage": "Filter by Tag",
+    "content": "Filter by Tag"
   },
   "tasks.title_placeholder": {
     "defaultMessage": "Add title...",

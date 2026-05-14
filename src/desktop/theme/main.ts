@@ -43,8 +43,9 @@ export const desktopStyles = {
   SidebarProjectItemDueDateDanger: /*tw*/ 'text-accent-danger',
   SidebarProjectItemDueDateMuted: /*tw*/ 'text-t3',
 
-  EntityHeaderContainer: /*tw*/ 'min-h-11 flex items-start justify-between px-5 pr-3 bg-bg1 flex-shrink-0',
-  EntityHeaderContainerDetail: /*tw*/ '!px-3',
+  EntityHeaderContainer: /*tw*/ 'flex flex-col bg-bg1 flex-shrink-0',
+  EntityHeaderMainRow: /*tw*/ 'min-h-11 flex items-start justify-between px-5 pr-3',
+  EntityHeaderMainRowDetail: /*tw*/ '!px-3',
   EntityHeaderContentWrapper: /*tw*/ 'flex items-start gap-2 flex-1 min-w-0',
   EntityHeaderIconContainer: /*tw*/ 'h-5 w-4 flex-shrink-0 flex items-center justify-center text-t2 mt-3',
   EntityHeaderIconButton: /*tw*/ 'size-full flex items-center justify-center',
@@ -57,6 +58,9 @@ export const desktopStyles = {
   EntityHeaderActionIconSvg: /*tw*/ 'size-3.5',
   EntityHeaderIconActionButton:
     /*tw*/ 'size-6 flex items-center justify-center rounded-md text-t3 hover:bg-bg3 hover:text-t1 transition-colors flex-shrink-0',
+  EntityHeaderIconActionButtonActive: /*tw*/ '!bg-bg3 !text-t1',
+  EntityHeaderBelowTitleSlot: /*tw*/ 'mx-3 mb-2 px-3 py-1.5 bg-bg2 rounded-lg',
+  EntityHeaderBelowTitleSlotDetail: /*tw*/ '!mx-1',
 
   ClearSelectionButton:
     'border-t border-line-regular h-15 flex items-center text-base text-t3 justify-center cursor-pointer',
@@ -113,6 +117,13 @@ export const desktopStyles = {
 
   InboxAreaContainer: /*tw*/ 'flex w-full items-center',
   InboxAreaInputWrapper: /*tw*/ 'flex-1',
+
+  tagFilterBarContainer: /*tw*/ '-mx-1 flex min-w-0 flex-wrap items-center gap-0.5',
+  tagFilterBarIcon: /*tw*/ 'mr-1 h-5 flex items-center justify-center text-t3',
+  tagFilterBarIconSvg: /*tw*/ 'size-4',
+  tagFilterBarChip: /*tw*/ 'h-6 rounded-full px-2 text-xs leading-5 transition-colors cursor-pointer select-none',
+  tagFilterBarChipIdle: /*tw*/ 'text-t3 hover:bg-bg3 hover:text-t1',
+  tagFilterBarChipActive: /*tw*/ 'bg-bg3 text-t1',
 
   ItemTagContainer: /*tw*/ 'flex min-w-0 max-w-30 items-center gap-1 text-xs leading-4',
   ItemTagNormal: /*tw*/ 'text-t3',

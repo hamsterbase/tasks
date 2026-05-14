@@ -1156,6 +1156,18 @@
     "defaultMessage": "New Project",
     "content": "新项目"
   },
+  "project.tagFilter.all": {
+    "defaultMessage": "All",
+    "content": "全部"
+  },
+  "project.tagFilter.untagged": {
+    "defaultMessage": "No Tags",
+    "content": "无标签"
+  },
+  "project.tagFilter.label": {
+    "defaultMessage": "Tags:",
+    "content": "标签："
+  },
   "recurring_task.base_prefix": {
     "defaultMessage": "From completion date:",
     "content": "从完成日期："
@@ -1979,6 +1991,10 @@
   "tasks.tags": {
     "defaultMessage": "Tags",
     "content": "标签"
+  },
+  "tasks.filterByTag": {
+    "defaultMessage": "Filter by Tag",
+    "content": "按标签筛选"
   },
   "tasks.title_placeholder": {
     "defaultMessage": "Add title...",

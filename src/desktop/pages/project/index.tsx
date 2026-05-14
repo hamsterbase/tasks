@@ -8,11 +8,12 @@ import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { useTaskDisplaySettings } from '@/hooks/useTaskDisplaySettings';
+import { useTagFilter } from '@/desktop/components/filter/useTagFilter';
 import { localize } from '@/nls';
 import { IListService } from '@/services/list/common/listService';
 import { ITodoService } from '@/services/todo/common/todoService';
 import type { TreeID } from 'loro-crdt';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import { ProjectHeader } from './components/ProjectHeader';
 import { ProjectTaskArea } from './components/ProjectTaskArea';
@@ -25,6 +26,11 @@ interface ProjectContentProps {
   projectId: string;
 }
 
+function isSameTags(a: string[], b: string[]) {
+  if (a.length !== b.length) return false;
+  return a.every((tag, index) => tag === b[index]);
+}
+
 const ProjectContent: React.FC<ProjectContentProps> = ({ project, projectId }) => {
   const todoService = useService(ITodoService);
   const listService = useService(IListService);
@@ -35,6 +41,8 @@ const ProjectContent: React.FC<ProjectContentProps> = ({ project, projectId }) =
   useScrollToTask();
 
   const { showCompletedTasks, showFutureTasks, completedAfter } = useTaskDisplaySettings(`project-${projectId}`);
+  const [allTags, setAllTags] = useState<string[]>([]);
+  const tagFilter = useTagFilter(allTags);
 
   const state = location.state as { highlightTaskId?: string };
   const highlightTaskId = state?.highlightTaskId;
@@ -44,7 +52,11 @@ const ProjectContent: React.FC<ProjectContentProps> = ({ project, projectId }) =
     recentChangedTaskSet.add(highlightTaskId as TreeID);
   }
 
-  const { flattenedItemsResult, willDisappearObjectIdSet } = getProjectHeadingAndTasks({
+  const {
+    flattenedItemsResult,
+    willDisappearObjectIdSet,
+    allTags: latestAllTags,
+  } = getProjectHeadingAndTasks({
     modelData: todoService.modelState,
     projectId: project.id,
     option: {
@@ -54,8 +66,13 @@ const ProjectContent: React.FC<ProjectContentProps> = ({ project, projectId }) =
       currentDate: getTodayTimestampInUtc(),
       recentChangedTaskSet,
     },
+    tags: tagFilter.currentTag,
     disableCreateTask: true,
   });
+
+  useEffect(() => {
+    setAllTags((previousTags) => (isSameTags(previousTags, latestAllTags) ? previousTags : latestAllTags));
+  }, [latestAllTags]);
 
   const { flattenedItems } = flattenedItemsResult;
 
@@ -79,7 +96,19 @@ const ProjectContent: React.FC<ProjectContentProps> = ({ project, projectId }) =
     return null;
   }
   return (
-    <DesktopPage header={<ProjectHeader project={project} projectId={projectId} />}>
+    <DesktopPage
+      header={
+        <ProjectHeader
+          project={project}
+          projectId={projectId}
+          isFilterOpen={tagFilter.isFilterOpen}
+          onToggleFilter={tagFilter.clickFilter}
+          availableTags={tagFilter.tags}
+          tagFilter={tagFilter.currentTag}
+          onSelectTagFilter={tagFilter.selectTag}
+        />
+      }
+    >
       <ProjectTaskArea
         project={project}
         flattenedItems={flattenedItems}
@@ -113,5 +142,5 @@ export const ProjectPage = () => {
     );
   }
 
-  return <ProjectContent project={project} projectId={projectId} />;
+  return <ProjectContent key={projectId} project={project} projectId={projectId} />;
 };

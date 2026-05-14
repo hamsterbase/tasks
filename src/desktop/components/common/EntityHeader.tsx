@@ -18,6 +18,7 @@ interface HeaderAction {
   handleClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   title: string;
   testId?: string;
+  isActive?: boolean;
 }
 
 interface EntityHeaderProps {
@@ -32,6 +33,7 @@ interface EntityHeaderProps {
   variant?: 'page' | 'detail';
   disableNewLine?: boolean;
   extraActions?: HeaderAction[];
+  titleDetail?: ReactNode;
 
   internalActions?: {
     displaySettings?: {
@@ -62,6 +64,7 @@ export const EntityHeader: React.FC<EntityHeaderProps> = ({
   variant = 'page',
   disableNewLine = false,
   extraActions,
+  titleDetail,
   internalActions,
 }) => {
   const isDetail = variant === 'detail';
@@ -125,6 +128,7 @@ export const EntityHeader: React.FC<EntityHeaderProps> = ({
 
   const inputValue = inputKey ? editService.getInputValue(inputKey, title) : title;
   const allActions: HeaderAction[] = [
+    ...(extraActions ?? []),
     ...(displaySettings
       ? [
           {
@@ -138,54 +142,68 @@ export const EntityHeader: React.FC<EntityHeaderProps> = ({
           },
         ]
       : []),
-    ...(extraActions ?? []),
   ];
 
   return (
-    <div
-      className={classNames(desktopStyles.EntityHeaderContainer, isDetail && desktopStyles.EntityHeaderContainerDetail)}
-    >
-      <div className={classNames(desktopStyles.EntityHeaderContentWrapper)}>
-        <div className={desktopStyles.EntityHeaderIconContainer}>
-          {onIconClick ? (
-            <button type="button" className={desktopStyles.EntityHeaderIconButton} onClick={onIconClick}>
-              {headerIconNode}
-            </button>
+    <div className={desktopStyles.EntityHeaderContainer}>
+      <div
+        className={classNames(desktopStyles.EntityHeaderMainRow, isDetail && desktopStyles.EntityHeaderMainRowDetail)}
+      >
+        <div className={classNames(desktopStyles.EntityHeaderContentWrapper)}>
+          <div className={desktopStyles.EntityHeaderIconContainer}>
+            {onIconClick ? (
+              <button type="button" className={desktopStyles.EntityHeaderIconButton} onClick={onIconClick}>
+                {headerIconNode}
+              </button>
+            ) : (
+              <div className={desktopStyles.EntityHeaderIconButton}>{headerIconNode}</div>
+            )}
+          </div>
+          {editable && inputKey && onSave ? (
+            <TextArea
+              ref={textAreaRef}
+              value={inputValue}
+              onChange={handleTitleChange}
+              onFocus={handleTitleFocus}
+              onBlur={handleInputBlur}
+              autoSize={{ minRows: 1 }}
+              placeholder={fallbackTitle}
+              className={desktopStyles.EntityHeaderEditableTextArea}
+            />
           ) : (
-            <div className={desktopStyles.EntityHeaderIconButton}>{headerIconNode}</div>
+            <h1 className={desktopStyles.EntityHeaderTitle}>{displayTitle}</h1>
           )}
         </div>
-        {editable && inputKey && onSave ? (
-          <TextArea
-            ref={textAreaRef}
-            value={inputValue}
-            onChange={handleTitleChange}
-            onFocus={handleTitleFocus}
-            onBlur={handleInputBlur}
-            autoSize={{ minRows: 1 }}
-            placeholder={fallbackTitle}
-            className={desktopStyles.EntityHeaderEditableTextArea}
-          />
-        ) : (
-          <h1 className={desktopStyles.EntityHeaderTitle}>{displayTitle}</h1>
+        {allActions.length > 0 && (
+          <div className={desktopStyles.EntityHeaderActionsContainer}>
+            {allActions.map((action, index) => (
+              <button
+                type="button"
+                key={index}
+                className={classNames(
+                  desktopStyles.EntityHeaderIconActionButton,
+                  action.isActive && desktopStyles.EntityHeaderIconActionButtonActive
+                )}
+                title={action.title}
+                onClick={action.handleClick}
+                data-test-id={action.testId}
+              >
+                <span className={desktopStyles.EntityHeaderActionIcon}>
+                  {withIconClass(action.icon, desktopStyles.EntityHeaderActionIconSvg)}
+                </span>
+              </button>
+            ))}
+          </div>
         )}
       </div>
-      {allActions.length > 0 && (
-        <div className={desktopStyles.EntityHeaderActionsContainer}>
-          {allActions.map((action, index) => (
-            <button
-              type="button"
-              key={index}
-              className={desktopStyles.EntityHeaderIconActionButton}
-              title={action.title}
-              onClick={action.handleClick}
-              data-test-id={action.testId}
-            >
-              <span className={desktopStyles.EntityHeaderActionIcon}>
-                {withIconClass(action.icon, desktopStyles.EntityHeaderActionIconSvg)}
-              </span>
-            </button>
-          ))}
+      {titleDetail && (
+        <div
+          className={classNames(
+            desktopStyles.EntityHeaderBelowTitleSlot,
+            isDetail && desktopStyles.EntityHeaderBelowTitleSlotDetail
+          )}
+        >
+          {titleDetail}
         </div>
       )}
     </div>

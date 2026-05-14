@@ -1,3 +1,4 @@
+import { FilterIcon } from '@/components/icons';
 import { projectPageTitleInputId } from '@/components/edit/inputId';
 import { projectTitleInputKey } from '@/components/edit/inputKeys';
 import { getProject } from '@/core/state/getProject';
@@ -10,15 +11,31 @@ import { useService } from '@/hooks/use-service';
 import { localize } from '@/nls';
 import { IEditService } from '@/services/edit/common/editService';
 import { ITodoService } from '@/services/todo/common/todoService';
+import type { TagFilter } from '@/desktop/components/filter/tagFilter';
+import { TestIds } from '@/testIds';
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router';
+import { TagFilterBar } from '@/desktop/components/filter/TagFilterBar';
 
 interface ProjectHeaderProps {
   project: ReturnType<typeof getProject>;
   projectId: string;
+  isFilterOpen: boolean;
+  onToggleFilter: () => void;
+  availableTags: string[];
+  tagFilter: TagFilter;
+  onSelectTagFilter: (next: TagFilter) => void;
 }
 
-export const ProjectHeader: React.FC<ProjectHeaderProps> = ({ project, projectId }) => {
+export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
+  project,
+  projectId,
+  isFilterOpen,
+  onToggleFilter,
+  availableTags,
+  tagFilter,
+  onSelectTagFilter,
+}) => {
   const todoService = useService(ITodoService);
   const { openTaskDisplaySettings } = useDesktopTaskDisplaySettings(`project-${projectId}`);
 
@@ -115,7 +132,21 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({ project, projectId
       onIconClick={handleToggleProjectStatus}
       title={project.title}
       placeholder={localize('project.untitled', 'New Project')}
-      internalActions={{ displaySettings: { onOpen: openTaskDisplaySettings } }}
+      extraActions={[
+        {
+          icon: <FilterIcon strokeWidth={1.5} />,
+          handleClick: onToggleFilter,
+          title: localize('tasks.filterByTag', 'Filter by Tag'),
+          testId: TestIds.EntityHeader.FilterToggleButton,
+          isActive: isFilterOpen || tagFilter.type !== 'all',
+        },
+      ]}
+      internalActions={{
+        displaySettings: { onOpen: openTaskDisplaySettings },
+      }}
+      titleDetail={
+        isFilterOpen ? <TagFilterBar tags={availableTags} selected={tagFilter} onSelect={onSelectTagFilter} /> : null
+      }
       onSave={(title) => {
         todoService.updateProject(project.id, { title });
       }}

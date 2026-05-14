@@ -34,6 +34,7 @@ import {
   Download,
   Database,
   FileText,
+  Filter,
   Flag,
   GripVertical,
   Hash,
@@ -152,6 +153,7 @@ export const NotebookIcon = Notebook;
 export const NotesIcon = AlignLeft;
 export const CalendarIcon = Calendar;
 export const FlagIcon = Flag;
+export const FilterIcon = Filter;
 export const ListChecksIcon = ListChecks;
 export const BellIcon = Bell;
 export const CircleXIcon = CircleX;

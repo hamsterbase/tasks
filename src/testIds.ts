@@ -10,6 +10,8 @@ export const TestIds = {
   EntityHeader: {
     /** Display settings button in desktop entity header */
     DisplaySettingsButton: 'entity-header-display-settings-button',
+    /** Tag filter toggle button in desktop entity header */
+    FilterToggleButton: 'entity-header-filter-toggle-button',
   },
   CommandPalette: {
     /** Command palette overlay container */
