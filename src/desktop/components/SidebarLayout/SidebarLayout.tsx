@@ -2,7 +2,7 @@ import { SidebarContent } from '@/desktop/components/sidebar/SidebarContent';
 import { desktopStyles } from '@/desktop/theme/main';
 import { useConfig } from '@/hooks/useConfig';
 import { mainSidebarWidthConfigKey } from '@/services/config/config';
-import { Allotment } from 'allotment';
+import { Allotment, LayoutPriority } from 'allotment';
 import classNames from 'classnames';
 import React from 'react';
 import { Outlet } from 'react-router';
@@ -19,7 +19,11 @@ export const SidebarLayout: React.FC<SidebarLayoutOptions> = ({ setting }) => {
 
   return (
     <div className={desktopStyles.SidebarLayoutContainer}>
-      <Allotment defaultSizes={mainSidebarConfig.value} onChange={mainSidebarConfig.saveIfValid}>
+      <Allotment
+        defaultSizes={mainSidebarConfig.value}
+        onChange={mainSidebarConfig.saveIfValid}
+        proportionalLayout={false}
+      >
         <Allotment.Pane
           minSize={calculateElementWidth(desktopStyles.SidebarMinWidth)}
           maxSize={calculateElementWidth(desktopStyles.SidebarMaxWidth)}
@@ -29,6 +33,7 @@ export const SidebarLayout: React.FC<SidebarLayoutOptions> = ({ setting }) => {
           {setting ? <SettingsSidebarContent /> : <SidebarContent />}
         </Allotment.Pane>
         <Allotment.Pane
+          priority={LayoutPriority.High}
           className={classNames(desktopStyles.SidebarLayoutPaneWrapper, {
             [desktopStyles.SidebarLayoutContentCollapsedPadding]: isSidebarCollapsed,
           })}

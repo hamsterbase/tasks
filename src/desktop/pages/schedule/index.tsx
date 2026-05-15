@@ -7,7 +7,6 @@ import { TagFilterBar } from '@/desktop/components/filter/TagFilterBar';
 import { useTagFilter } from '@/desktop/components/filter/useTagFilter';
 import { DesktopProjectListItem } from '@/desktop/components/todo/DesktopProjectListItem';
 import { TaskListItem } from '@/desktop/components/todo/TaskListItem';
-import { useDesktopTaskDisplaySettings } from '@/desktop/hooks/useDesktopTaskDisplaySettings.ts';
 import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
@@ -24,7 +23,6 @@ function isSameTags(a: string[], b: string[]) {
 export const Schedule = () => {
   const todoService = useService(ITodoService);
   useWatchEvent(todoService.onStateChange);
-  const { openTaskDisplaySettings } = useDesktopTaskDisplaySettings('schedule');
   const [allTags, setAllTags] = useState<string[]>([]);
   const tagFilter = useTagFilter(allTags);
   const {
@@ -64,7 +62,6 @@ export const Schedule = () => {
               isActive: tagFilter.isFilterOpen || tagFilter.currentTag.type !== 'all',
             },
           ]}
-          internalActions={{ displaySettings: { onOpen: openTaskDisplaySettings } }}
           titleDetail={
             tagFilter.isFilterOpen ? (
               <TagFilterBar tags={tagFilter.tags} selected={tagFilter.currentTag} onSelect={tagFilter.selectTag} />

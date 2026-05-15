@@ -2,7 +2,7 @@ import { SelectionPanel } from '@/desktop/components/selectionPanel/SelectionPan
 import { desktopStyles } from '@/desktop/theme/main';
 import { useConfig } from '@/hooks/useConfig';
 import { detailPanelConfigKey } from '@/services/config/config';
-import { Allotment } from 'allotment';
+import { Allotment, LayoutPriority } from 'allotment';
 import React, { ReactNode } from 'react';
 import { calculateElementWidth } from '../overlay/datePicker/constant';
 
@@ -28,9 +28,13 @@ export const DesktopPage: React.FC<DesktopPageProps> = ({ header, children, show
 
   return (
     <div className={desktopStyles.DesktopPageContainer}>
-      <Allotment.Pane className={desktopStyles.DesktopPageContentPane}>
-        <Allotment defaultSizes={detailPanelConfig.value} onChange={detailPanelConfig.saveIfValid}>
-          <Allotment.Pane className={desktopStyles.DesktopPageMainPane}>
+      <div className={desktopStyles.DesktopPageContentPane}>
+        <Allotment
+          defaultSizes={detailPanelConfig.value}
+          onChange={detailPanelConfig.saveIfValid}
+          proportionalLayout={false}
+        >
+          <Allotment.Pane priority={LayoutPriority.High} className={desktopStyles.DesktopPageMainPane}>
             {header}
             <div className={desktopStyles.DesktopPageMainContent}>{children}</div>
           </Allotment.Pane>
@@ -46,7 +50,7 @@ export const DesktopPage: React.FC<DesktopPageProps> = ({ header, children, show
             </Allotment.Pane>
           )}
         </Allotment>
-      </Allotment.Pane>
+      </div>
     </div>
   );
 };
