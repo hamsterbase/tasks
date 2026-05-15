@@ -9,6 +9,7 @@ export interface HeaderAction {
   icon: React.ReactNode;
   onClick: () => void;
   testId?: string;
+  isActive?: boolean;
 }
 
 export interface PageHeaderProps {
@@ -38,7 +39,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({ title, id, actions, show
     >
       {showBack && (
         <div className={styles.headerLeftContainer}>
-          <button onClick={back} className={styles.headerActionButton}>
+          <button onClick={back} className={classNames(styles.headerActionButton, styles.headerActionButtonNormal)}>
             <LeftIcon className={styles.headerActionButtonIcon} strokeWidth={1.5} />
           </button>
         </div>
@@ -52,7 +53,10 @@ export const PageHeader: React.FC<PageHeaderProps> = ({ title, id, actions, show
             <button
               key={index}
               onClick={action.onClick}
-              className={styles.headerActionButton}
+              className={classNames(
+                styles.headerActionButton,
+                action.isActive ? styles.headerActionButtonActive : styles.headerActionButtonNormal
+              )}
               data-test-id={action.testId}
             >
               <div className={styles.headerActionButtonIcon}>{action.icon}</div>

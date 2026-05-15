@@ -66,6 +66,8 @@ export const TestIds = {
     MenuButton: 'page-header-menu-button',
     /** Display settings button in mobile page header */
     DisplaySettingsButton: 'page-header-display-settings-button',
+    /** Tag filter button in mobile page header */
+    FilterButton: 'page-header-filter-button',
   },
   TaskDetail: {
     /** Menu button in task detail panel header */

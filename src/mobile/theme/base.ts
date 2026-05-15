@@ -47,9 +47,16 @@ export const baseStyles = {
   headerLeftContainer: /*tw*/ 'flex gap-2 absolute left-5.5 top-1/2 -translate-y-1/2',
   headerRightContainer: /*tw*/ 'flex gap-2 absolute right-5 top-1/2 -translate-y-1/2',
   headerTitle: /*tw*/ 'text-base font-medium text-t1 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2',
-  headerActionButton:
-    /*tw*/ 'size-9 flex items-center justify-center border-none bg-bg1 cursor-pointer rounded-full text-t2',
+  headerActionButton: /*tw*/ 'size-9 flex items-center justify-center border-none bg-bg1 cursor-pointer rounded-full',
+  headerActionButtonNormal: /*tw*/ 'text-t2',
+  headerActionButtonActive: /*tw*/ 'text-brand',
   headerActionButtonIcon: /*tw*/ 'size-5 flex items-center justify-center',
+
+  tagFilterBarRoot: /*tw*/ 'flex items-center mb-3',
+  tagFilterBarChip:
+    /*tw*/ 'inline-flex items-center gap-1.5 h-7 pl-3 pr-2 rounded-full bg-bg3 text-sm text-t1 cursor-pointer select-none',
+  tagFilterBarChipIcon: /*tw*/ 'size-3.5 text-t3',
+  tagFilterBarChipClose: /*tw*/ 'size-4 text-t3',
 
   taskItemGroupRound: /*tw*/ 'rounded-2xl',
   taskItemGroupBackground: /*tw*/ 'bg-bg1',
