@@ -1,8 +1,10 @@
 import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc';
-import { ScheduledIcon } from '@/components/icons';
+import { FilterIcon, ScheduledIcon } from '@/components/icons';
 import { TaskList } from '@/components/taskList/taskList.ts';
 import { getScheduledTasks } from '@/core/state/scheduled/getScheduledTask';
 import { EntityHeader } from '@/desktop/components/common/EntityHeader';
+import { TagFilterBar } from '@/desktop/components/filter/TagFilterBar';
+import { useTagFilter } from '@/desktop/components/filter/useTagFilter';
 import { DesktopProjectListItem } from '@/desktop/components/todo/DesktopProjectListItem';
 import { TaskListItem } from '@/desktop/components/todo/TaskListItem';
 import { useDesktopTaskDisplaySettings } from '@/desktop/hooks/useDesktopTaskDisplaySettings.ts';
@@ -11,17 +13,34 @@ import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService';
-import React, { useMemo } from 'react';
+import { TestIds } from '@/testIds';
+import React, { useEffect, useMemo, useState } from 'react';
+
+function isSameTags(a: string[], b: string[]) {
+  if (a.length !== b.length) return false;
+  return a.every((tag, index) => tag === b[index]);
+}
 
 export const Schedule = () => {
   const todoService = useService(ITodoService);
   useWatchEvent(todoService.onStateChange);
   const { openTaskDisplaySettings } = useDesktopTaskDisplaySettings('schedule');
-  const { scheduledGroups, willDisappearObjectIds } = getScheduledTasks(todoService.modelState, {
+  const [allTags, setAllTags] = useState<string[]>([]);
+  const tagFilter = useTagFilter(allTags);
+  const {
+    scheduledGroups,
+    willDisappearObjectIds,
+    allTags: latestAllTags,
+  } = getScheduledTasks(todoService.modelState, {
     currentDate: getTodayTimestampInUtc(),
     recentModifiedObjectIds: todoService.keepAliveElements,
     editingContentId: todoService.editingContent?.id,
+    tags: tagFilter.currentTag,
   });
+
+  useEffect(() => {
+    setAllTags((previousTags) => (isSameTags(previousTags, latestAllTags) ? previousTags : latestAllTags));
+  }, [latestAllTags]);
 
   const willDisappearObjectIdSet = new Set(willDisappearObjectIds);
 
@@ -36,7 +55,21 @@ export const Schedule = () => {
         <EntityHeader
           renderIcon={() => <ScheduledIcon />}
           title={localize('schedule', 'Schedule')}
+          extraActions={[
+            {
+              icon: <FilterIcon strokeWidth={1.5} />,
+              handleClick: tagFilter.clickFilter,
+              title: localize('tasks.filterByTag', 'Filter by Tag'),
+              testId: TestIds.EntityHeader.FilterToggleButton,
+              isActive: tagFilter.isFilterOpen || tagFilter.currentTag.type !== 'all',
+            },
+          ]}
           internalActions={{ displaySettings: { onOpen: openTaskDisplaySettings } }}
+          titleDetail={
+            tagFilter.isFilterOpen ? (
+              <TagFilterBar tags={tagFilter.tags} selected={tagFilter.currentTag} onSelect={tagFilter.selectTag} />
+            ) : null
+          }
         />
 
         <div className={desktopStyles.SchedulePageScrollArea}>

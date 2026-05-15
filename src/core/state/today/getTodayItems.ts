@@ -2,6 +2,7 @@ import { FilterOption, isTaskVisible } from '@/core/time/filterProjectAndTask';
 import { TreeID } from 'loro-crdt';
 import { getProject } from '../getProject';
 import { getTaskInfo } from '../getTaskInfo';
+import type { TagFilter } from '../getProjectHeadingAndTasks';
 import { ITaskModelData, ProjectInfoState, TaskInfo } from '../type';
 
 export interface TodayItemsResult {
@@ -9,6 +10,10 @@ export interface TodayItemsResult {
   items: (TaskInfo | ProjectInfoState)[];
   dueDateItemsCount: number;
   startDateItemsCount: number;
+  /**
+   * Today 视图中所有任务用到的标签集合（在按标签过滤前）
+   */
+  allTags: string[];
 }
 
 /**
@@ -16,63 +21,80 @@ export interface TodayItemsResult {
  * @param modelData
  * @param today
  */
-export function getTodayItems(modelData: ITaskModelData, today: number, filterOption?: FilterOption): TodayItemsResult {
+export function getTodayItems(
+  modelData: ITaskModelData,
+  today: number,
+  filterOption?: FilterOption,
+  tagsFilter: TagFilter = { type: 'all' }
+): TodayItemsResult {
   const willDisappearObjectIdSet = new Set<TreeID>();
   const dateAssignedList = modelData.dateAssignedList;
   const items: (TaskInfo | ProjectInfoState)[] = [];
+  const allTagsSet = new Set<string>();
   let dueDateItemsCount = 0;
   let startDateItemsCount = 0;
+
+  const isEntityMatchedByTags = (entity: { tags?: string[] }): boolean => {
+    if (tagsFilter.type === 'all') {
+      return true;
+    }
+    if (tagsFilter.type === 'untagged') {
+      return !entity.tags || entity.tags.length === 0;
+    }
+    return !!entity.tags?.includes(tagsFilter.value);
+  };
 
   dateAssignedList.forEach((item) => {
     const type = modelData.taskObjectMap.get(item)?.type;
     if (type === 'task') {
       const task = getTaskInfo(modelData, item);
-      if (task.dueDate && task.dueDate <= today) {
-        if (isTaskVisible(task, filterOption) === 'invalid') {
-          return;
-        }
-        if (isTaskVisible(task, filterOption) === 'recentChanged') {
-          willDisappearObjectIdSet.add(task.id);
-        }
-        items.push(task);
-        if (task.status === 'created') {
+      const isCandidate = (task.dueDate && task.dueDate <= today) || (task.startDate && task.startDate <= today);
+      if (!isCandidate) {
+        return;
+      }
+      const taskState = isTaskVisible(task, filterOption);
+      if (taskState === 'invalid') {
+        return;
+      }
+      task.tags?.forEach((tag) => allTagsSet.add(tag));
+      if (!isEntityMatchedByTags(task) && taskState !== 'recentChanged') {
+        return;
+      }
+      if (taskState === 'recentChanged') {
+        willDisappearObjectIdSet.add(task.id);
+      }
+      items.push(task);
+      if (task.status === 'created') {
+        if (task.dueDate && task.dueDate <= today) {
           dueDateItemsCount++;
-        }
-      } else if (task.startDate && task.startDate <= today) {
-        if (isTaskVisible(task, filterOption) === 'invalid') {
-          return;
-        }
-        if (isTaskVisible(task, filterOption) === 'recentChanged') {
-          willDisappearObjectIdSet.add(task.id);
-        }
-        items.push(task);
-        if (task.status === 'created') {
+        } else {
           startDateItemsCount++;
         }
       }
     }
     if (type === 'project') {
       const project = getProject(modelData, item);
-      if (project.dueDate && project.dueDate <= today) {
-        if (isTaskVisible(project, filterOption) === 'invalid') {
-          return;
-        }
-        if (isTaskVisible(project, filterOption) === 'recentChanged') {
-          willDisappearObjectIdSet.add(project.id);
-        }
-        items.push(project);
-        if (project.status === 'created') {
+      const isCandidate =
+        (project.dueDate && project.dueDate <= today) || (project.startDate && project.startDate <= today);
+      if (!isCandidate) {
+        return;
+      }
+      const projectState = isTaskVisible(project, filterOption);
+      if (projectState === 'invalid') {
+        return;
+      }
+      project.tags?.forEach((tag) => allTagsSet.add(tag));
+      if (!isEntityMatchedByTags(project) && projectState !== 'recentChanged') {
+        return;
+      }
+      if (projectState === 'recentChanged') {
+        willDisappearObjectIdSet.add(project.id);
+      }
+      items.push(project);
+      if (project.status === 'created') {
+        if (project.dueDate && project.dueDate <= today) {
           dueDateItemsCount++;
-        }
-      } else if (project.startDate && project.startDate <= today) {
-        if (isTaskVisible(project, filterOption) === 'invalid') {
-          return;
-        }
-        if (isTaskVisible(project, filterOption) === 'recentChanged') {
-          willDisappearObjectIdSet.add(project.id);
-        }
-        items.push(project);
-        if (project.status === 'created') {
+        } else {
           startDateItemsCount++;
         }
       }
@@ -84,5 +106,6 @@ export function getTodayItems(modelData: ITaskModelData, today: number, filterOp
     items,
     dueDateItemsCount,
     startDateItemsCount,
+    allTags: Array.from(allTagsSet).sort(),
   };
 }

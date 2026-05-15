@@ -13,6 +13,7 @@ import {
 } from 'date-fns';
 import { getProject } from '../getProject';
 import { getTaskInfo } from '../getTaskInfo';
+import type { TagFilter } from '../getProjectHeadingAndTasks';
 import { ITaskModelData, ProjectInfoState, TaskInfo } from '../type';
 
 export interface ScheduledGroup {
@@ -27,11 +28,13 @@ export interface GetScheduledTasksOptions {
   recentModifiedObjectIds?: string[];
   editingContentId?: string;
   language?: string;
+  tags?: TagFilter;
 }
 
 export interface GetScheduledTasksResult {
   scheduledGroups: ScheduledGroup[];
   willDisappearObjectIds: string[];
+  allTags: string[];
 }
 
 const formats = {
@@ -75,6 +78,17 @@ export function getScheduledTasks(
 
   const recentModifiedObjectIds = new Set<string>(options.recentModifiedObjectIds ?? []);
   const willDisappearObjectIds: string[] = [];
+  const tagsFilter: TagFilter = options.tags ?? { type: 'all' };
+  const allTagsSet = new Set<string>();
+  const isEntityMatchedByTags = (entity: { tags?: string[] }): boolean => {
+    if (tagsFilter.type === 'all') {
+      return true;
+    }
+    if (tagsFilter.type === 'untagged') {
+      return !entity.tags || entity.tags.length === 0;
+    }
+    return !!entity.tags?.includes(tagsFilter.value);
+  };
   // 过滤出未来的任务
   const scheduledItems: (TaskInfo | ProjectInfoState)[] = modelData.taskList
     .map((task: TaskObjectSchema) => {
@@ -99,15 +113,21 @@ export function getScheduledTasks(
     .filter((o): o is TaskInfo | ProjectInfoState => !!o)
     .filter((o) => {
       if (o.status === 'created') {
-        return true;
+        // pass
+      } else if (recentModifiedObjectIds.has(o.id)) {
+        // pass; will mark disappear later if tag-matched
+      } else {
+        return false;
       }
-      if (recentModifiedObjectIds.has(o.id)) {
-        if (options.editingContentId !== o.id) {
-          willDisappearObjectIds.push(o.id);
-        }
-        return true;
+      o.tags?.forEach((tag) => allTagsSet.add(tag));
+      const isRecentChanged = o.status !== 'created' && recentModifiedObjectIds.has(o.id);
+      if (!isEntityMatchedByTags(o) && !isRecentChanged) {
+        return false;
       }
-      return false;
+      if (isRecentChanged && options.editingContentId !== o.id) {
+        willDisappearObjectIds.push(o.id);
+      }
+      return true;
     });
 
   scheduledItems.sort((a: TaskInfo | ProjectInfoState, b: TaskInfo | ProjectInfoState) => {
@@ -178,6 +198,7 @@ export function getScheduledTasks(
   return {
     scheduledGroups: groups,
     willDisappearObjectIds,
+    allTags: Array.from(allTagsSet).sort(),
   };
 }
 

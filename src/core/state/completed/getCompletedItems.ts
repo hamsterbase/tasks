@@ -4,16 +4,19 @@ import { localize } from '@/nls';
 import { format, isSameWeek, isSameYear } from 'date-fns';
 import { getProject } from '../getProject';
 import { getTaskInfo } from '../getTaskInfo';
+import type { TagFilter } from '../getProjectHeadingAndTasks';
 import { ITaskModelData, ProjectInfoState, TaskInfo } from '../type';
 
 export interface GetCompletedItemsProps {
   currentDate: number;
   recentModifiedObjectIds?: string[];
+  tags?: TagFilter;
 }
 
 export interface GetCompletedItemsRes {
   groups: CompletedTaskGroup[];
   willDisappearObjectIds: string[];
+  allTags: string[];
 }
 
 interface CompletedTaskGroup {
@@ -24,26 +27,29 @@ interface CompletedTaskGroup {
 export function getCompletedItems(modelData: ITaskModelData, options: GetCompletedItemsProps): GetCompletedItemsRes {
   const willDisappearObjectIds: string[] = [];
   const recentModifiedObjectIds = new Set<string>(options.recentModifiedObjectIds ?? []);
+  const tagsFilter: TagFilter = options.tags ?? { type: 'all' };
+  const allTagsSet = new Set<string>();
+  const isEntityMatchedByTags = (entity: { tags?: string[] }): boolean => {
+    if (tagsFilter.type === 'all') {
+      return true;
+    }
+    if (tagsFilter.type === 'untagged') {
+      return !entity.tags || entity.tags.length === 0;
+    }
+    return !!entity.tags?.includes(tagsFilter.value);
+  };
 
   const completedTasks: (TaskInfo | ProjectInfoState)[] = modelData.taskList
     .filter((task: TaskObjectSchema) => {
       if (task.type === ModelTypes.project) {
         if (task.status === ItemStatusEnum.created) {
-          if (recentModifiedObjectIds.has(task.id)) {
-            willDisappearObjectIds.push(task.id);
-            return true;
-          }
-          return false;
+          return recentModifiedObjectIds.has(task.id);
         }
         return true;
       }
       if (task.type === ModelTypes.task) {
         if (task.status === ItemStatusEnum.created) {
-          if (recentModifiedObjectIds.has(task.id)) {
-            willDisappearObjectIds.push(task.id);
-            return true;
-          }
-          return false;
+          return recentModifiedObjectIds.has(task.id);
         }
         return true;
       }
@@ -62,7 +68,18 @@ export function getCompletedItems(modelData: ITaskModelData, options: GetComplet
       }
       return null;
     })
-    .filter((o): o is TaskInfo | ProjectInfoState => !!o);
+    .filter((o): o is TaskInfo | ProjectInfoState => !!o)
+    .filter((o) => {
+      o.tags?.forEach((tag) => allTagsSet.add(tag));
+      const isRecentCreated = o.status === ItemStatusEnum.created && recentModifiedObjectIds.has(o.id);
+      if (!isEntityMatchedByTags(o) && !isRecentCreated) {
+        return false;
+      }
+      if (isRecentCreated) {
+        willDisappearObjectIds.push(o.id);
+      }
+      return true;
+    });
 
   completedTasks.sort((a: TaskInfo | ProjectInfoState, b: TaskInfo | ProjectInfoState) => {
     const dateA = a.completionAt || 0;
@@ -96,5 +113,6 @@ export function getCompletedItems(modelData: ITaskModelData, options: GetComplet
   return {
     groups,
     willDisappearObjectIds,
+    allTags: Array.from(allTagsSet).sort(),
   };
 }

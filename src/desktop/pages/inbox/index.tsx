@@ -1,11 +1,13 @@
 import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc';
-import { InboxIcon } from '@/components/icons';
+import { FilterIcon, InboxIcon } from '@/components/icons';
 import { TaskList } from '@/components/taskList/taskList.ts';
 import { calculateDragPosition } from '@/core/dnd/calculateDragPosition';
 import { getInboxTasks } from '@/core/state/inbox/getInboxTasks';
 import { EntityHeader } from '@/desktop/components/common/EntityHeader';
 import { DesktopPage } from '@/desktop/components/DesktopPage';
 import { DragOverlayItem } from '@/desktop/components/drag/DragOverlayItem';
+import { TagFilterBar } from '@/desktop/components/filter/TagFilterBar';
+import { useTagFilter } from '@/desktop/components/filter/useTagFilter';
 import { InboxTaskInput } from '@/desktop/components/inboxTaskInput/InboxTaskInput';
 import { ListContainer } from '@/desktop/components/listContainer/ListContainer';
 import { TaskListItem } from '@/desktop/components/todo/TaskListItem';
@@ -18,6 +20,7 @@ import { useRegisterEvent } from '@/hooks/useRegisterEvent';
 import { localize } from '@/nls';
 import { IListService } from '@/services/list/common/listService';
 import { ITodoService } from '@/services/todo/common/todoService';
+import { TestIds } from '@/testIds';
 import {
   closestCenter,
   DndContext,
@@ -29,9 +32,14 @@ import {
 } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import type { TreeID } from 'loro-crdt';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { flushSync } from 'react-dom';
 import { useLocation } from 'react-router';
+
+function isSameTags(a: string[], b: string[]) {
+  if (a.length !== b.length) return false;
+  return a.every((tag, index) => tag === b[index]);
+}
 
 export const Inbox = () => {
   const todoService = useService(ITodoService);
@@ -42,6 +50,8 @@ export const Inbox = () => {
   useScrollToTask();
   const { openTaskDisplaySettings, showCompletedTasks, completedAfter, showFutureTasks } =
     useDesktopTaskDisplaySettings('inbox');
+  const [allTags, setAllTags] = useState<string[]>([]);
+  const tagFilter = useTagFilter(allTags);
 
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: {
@@ -64,13 +74,22 @@ export const Inbox = () => {
     keepAliveElements.push(highlightTaskId);
   }
 
-  const { inboxTasks, willDisappearObjectIdSet } = getInboxTasks(todoService.modelState, {
+  const {
+    inboxTasks,
+    willDisappearObjectIdSet,
+    allTags: latestAllTags,
+  } = getInboxTasks(todoService.modelState, {
     currentDate: getTodayTimestampInUtc(),
     showFutureTasks,
     showCompletedTasks,
     showCompletedTasksAfter: completedAfter,
     keepAliveElements,
+    tags: tagFilter.currentTag,
   });
+
+  useEffect(() => {
+    setAllTags((previousTags) => (isSameTags(previousTags, latestAllTags) ? previousTags : latestAllTags));
+  }, [latestAllTags]);
 
   const inboxTaskIds = inboxTasks.map((task) => task.id);
 
@@ -150,7 +169,21 @@ export const Inbox = () => {
     <EntityHeader
       renderIcon={() => <InboxIcon />}
       title={localize('inbox', 'Inbox')}
+      extraActions={[
+        {
+          icon: <FilterIcon strokeWidth={1.5} />,
+          handleClick: tagFilter.clickFilter,
+          title: localize('tasks.filterByTag', 'Filter by Tag'),
+          testId: TestIds.EntityHeader.FilterToggleButton,
+          isActive: tagFilter.isFilterOpen || tagFilter.currentTag.type !== 'all',
+        },
+      ]}
       internalActions={{ displaySettings: { onOpen: (right, bottom) => openTaskDisplaySettings(right, bottom) } }}
+      titleDetail={
+        tagFilter.isFilterOpen ? (
+          <TagFilterBar tags={tagFilter.tags} selected={tagFilter.currentTag} onSelect={tagFilter.selectTag} />
+        ) : null
+      }
     />
   );
 
