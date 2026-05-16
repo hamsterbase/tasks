@@ -1,5 +1,5 @@
 import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc.ts';
-import { CheckIcon, FilterIcon, MenuIcon, TagIcon, TaskDisplaySettingsIcon } from '@/components/icons';
+import { MenuIcon, TaskDisplaySettingsIcon } from '@/components/icons';
 import { TestIds } from '@/testIds';
 import { getProjectHeadingAndTasks } from '@/core/state/getProjectHeadingAndTasks.ts';
 import { getProject } from '@/core/state/getProject';
@@ -8,8 +8,6 @@ import { ProjectHeadingInfo, TaskInfo } from '@/core/state/type';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import useProject from '@/mobile/hooks/useProject.tsx';
-import { PopupActionItem } from '@/mobile/overlay/popupAction/PopupActionController';
-import { usePopupAction } from '@/mobile/overlay/popupAction/usePopupAction';
 import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService';
 import { getFlattenedItemsCollisionDetectionStrategy } from '@/utils/dnd/flattenedItemsCollisionDetectionStrategy';
@@ -18,12 +16,10 @@ import { DragEndEvent, useDndContext } from '@dnd-kit/core';
 import { verticalListSortingStrategy } from '@dnd-kit/sortable';
 import classNames from 'classnames';
 import type { TreeID } from 'loro-crdt';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router';
 import { LastPlacement } from '../components/dnd/lastPlacement.tsx';
-import { TagFilterBar } from '../components/filter/TagFilterBar';
-import { TAG_FILTER_ALL, TAG_FILTER_UNTAGGED, TagFilter, isSameTagFilter } from '../components/filter/tagFilter';
-import { useTagFilter } from '../components/filter/useTagFilter';
+import { useMobileTagFilter } from '../components/filter/useMobileTagFilter';
 import { PageHeaderProps } from '../components/PageHeader.tsx';
 import { PageLayout } from '../components/PageLayout.tsx';
 import TaskItemWrapper from '../components/taskItem/TaskItemWrapper.tsx';
@@ -32,11 +28,6 @@ import { TaskItem } from '../components/todo/TaskItem';
 import { styles } from '../theme.ts';
 import ProjectMeta from './project/ProjectMeta';
 import { useTaskDisplaySettingsMobile } from '../hooks/useTaskDisplaySettings.ts';
-
-function isSameTags(a: string[], b: string[]) {
-  if (a.length !== b.length) return false;
-  return a.every((tag, index) => tag === b[index]);
-}
 
 const Files: React.FC<{
   items: FlattenedItem<ProjectHeadingInfo, TaskInfo>[];
@@ -116,9 +107,8 @@ const ProjectContent: React.FC<ProjectContentProps> = ({ project, projectId }) =
 
   const { handleMoreOptions, handleAddTask } = useProject(project);
 
-  const [allTags, setAllTags] = useState<string[]>([]);
-  const tagFilter = useTagFilter(allTags);
-  const popupAction = usePopupAction();
+  const tagFilter = useMobileTagFilter();
+  const { observeTags } = tagFilter;
 
   const {
     flattenedItemsResult,
@@ -134,12 +124,12 @@ const ProjectContent: React.FC<ProjectContentProps> = ({ project, projectId }) =
       currentDate: getTodayTimestampInUtc(),
       recentChangedTaskSet: new Set<TreeID>(todoService.keepAliveElements as TreeID[]),
     },
-    tags: tagFilter.currentTag,
+    tags: tagFilter.value,
   });
 
   useEffect(() => {
-    setAllTags((previousTags) => (isSameTags(previousTags, latestAllTags) ? previousTags : latestAllTags));
-  }, [latestAllTags]);
+    observeTags(latestAllTags);
+  }, [latestAllTags, observeTags]);
 
   const { flattenedItems } = flattenedItemsResult;
   const handleDragEnd = (event: DragEndEvent) => {
@@ -185,37 +175,12 @@ const ProjectContent: React.FC<ProjectContentProps> = ({ project, projectId }) =
     },
   };
 
-  const handleOpenTagFilter = () => {
-    const makeItem = (name: string, value: TagFilter): PopupActionItem => ({
-      icon: isSameTagFilter(tagFilter.currentTag, value) ? <CheckIcon /> : <TagIcon />,
-      name,
-      onClick: () => tagFilter.selectTag(value),
-    });
-    popupAction({
-      description: localize('tasks.filterByTag', 'Filter by Tag'),
-      groups: [
-        {
-          items: [
-            makeItem(localize('project.tagFilter.all', 'All'), TAG_FILTER_ALL),
-            ...tagFilter.tags.map((tag) => makeItem(tag, { type: 'tag', value: tag })),
-            makeItem(localize('project.tagFilter.untagged', 'No Tags'), TAG_FILTER_UNTAGGED),
-          ],
-        },
-      ],
-    });
-  };
-
   const header: PageHeaderProps = {
     showBack: true,
     id: project.id,
     title: '',
     actions: [
-      {
-        icon: <FilterIcon className={styles.headerActionButtonIcon} strokeWidth={1.5} />,
-        onClick: handleOpenTagFilter,
-        testId: TestIds.PageHeader.FilterButton,
-        isActive: tagFilter.currentTag.type !== 'all',
-      },
+      tagFilter.headerAction,
       {
         icon: <TaskDisplaySettingsIcon />,
         onClick: openTaskDisplaySettings,
@@ -236,11 +201,7 @@ const ProjectContent: React.FC<ProjectContentProps> = ({ project, projectId }) =
       dragOption={dragOption}
       onFabClick={handleAddTask}
     >
-      <TagFilterBar
-        filter={tagFilter.currentTag}
-        onOpen={handleOpenTagFilter}
-        onClear={() => tagFilter.selectTag(TAG_FILTER_ALL)}
-      />
+      {tagFilter.filterBar}
       <Files
         items={flattenedItems}
         result={flattenedItemsResult}
