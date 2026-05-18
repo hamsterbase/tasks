@@ -1,7 +1,6 @@
 import { defineCli } from '../engine';
 import { TodayCommand } from './today/TodayCommand';
 import { DbLsCommand } from './db/DbLsCommand';
-import { DbCurrentCommand } from './db/DbCurrentCommand';
 import { DbUseCommand } from './db/DbUseCommand';
 
 /**
@@ -9,5 +8,5 @@ import { DbUseCommand } from './db/DbUseCommand';
  * class here — routing, help, validation, and JSON mode follow from its meta.
  */
 export const cli = defineCli({
-  commands: [TodayCommand, DbLsCommand, DbCurrentCommand, DbUseCommand],
+  commands: [TodayCommand, DbLsCommand, DbUseCommand],
 });

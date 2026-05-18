@@ -22,6 +22,7 @@ export function TodayView({ rows }: { rows: TodayRow[] }) {
     {
       header: 'TITLE',
       value: (r) => r.title,
+      width: 36,
       render: (r) => <Text>{r.title}</Text>,
     },
     {
