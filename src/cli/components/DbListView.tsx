@@ -1,48 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { Box, Text, useApp } from 'ink';
-import { IDatabaseMeta } from '../../services/database/common/database';
-import { listDatabases, countTaskFiles } from '../databases';
-import { readConfig, pickDatabaseId } from '../config';
+import React from 'react';
+import { Box, Text } from 'ink';
+import { DbLsRow } from '../commands/db/DbLsCommand';
 import { Column, TaskTable } from './TaskTable';
 
-interface Row {
-  id: string;
-  name: string;
-  taskCount: number;
-  isCurrent: boolean;
-}
-
-export function DbListView() {
-  const { exit } = useApp();
-  const [rows, setRows] = useState<Row[] | null>(null);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const [dbs, config] = await Promise.all([listDatabases(), readConfig()]);
-        const currentId = pickDatabaseId(undefined, config);
-        const withCounts: Row[] = await Promise.all(
-          dbs.map(async (d: IDatabaseMeta) => ({
-            id: d.id,
-            name: d.name,
-            taskCount: await countTaskFiles(d.id),
-            isCurrent: d.id === currentId,
-          }))
-        );
-        setRows(withCounts);
-      } catch (err) {
-        setError((err as Error).message);
-      } finally {
-        setTimeout(() => exit(), 0);
-      }
-    })();
-  }, [exit]);
-
-  if (error) return <Text color="red">✗ {error}</Text>;
-  if (!rows) return <Text dimColor>Loading…</Text>;
-
-  const columns: Column<Row>[] = [
+export function DbListView({ rows }: { rows: DbLsRow[] }) {
+  const columns: Column<DbLsRow>[] = [
     {
       header: ' ',
       width: 1,

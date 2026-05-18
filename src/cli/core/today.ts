@@ -1,5 +1,5 @@
-import { TaskModel } from '../core/model';
-import { TaskSchema } from '../core/type';
+import { TaskModel } from '../../core/model';
+import { TaskSchema } from '../../core/type';
 
 export interface TodayTask {
   id: string;

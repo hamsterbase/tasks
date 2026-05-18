@@ -1,39 +1,39 @@
 import * as fs from 'fs/promises';
 import * as path from 'path';
-import { IDatabaseMeta, LocalDatabaseMeta } from '../services/database/common/database';
-import { getAppDataDir, getDatabaseDir } from './paths';
+import { IDatabaseMeta } from '../../services/database/common/database';
+import { getDataDirs, resolveDatabaseDir } from './paths';
 
 const DIR_PREFIX = 'hamster-base-tasks-';
 const FILE_EXT = '.hamsterbase_tasks';
 
 export async function listDatabases(): Promise<IDatabaseMeta[]> {
-  const base = getAppDataDir();
-  try {
-    await fs.mkdir(base, { recursive: true });
-  } catch {
-    // ignore
-  }
+  const byId = new Map<string, IDatabaseMeta>();
 
-  const entries = await fs.readdir(base, { withFileTypes: true }).catch(() => []);
-  const dbs: IDatabaseMeta[] = [];
-
-  for (const entry of entries) {
-    if (!entry.isDirectory() || !entry.name.startsWith(DIR_PREFIX)) continue;
-    try {
-      const raw = await fs.readFile(path.join(base, entry.name, '_meta.json'), 'utf8');
-      dbs.push(JSON.parse(raw));
-    } catch {
-      // skip unreadable entries
+  for (const base of getDataDirs()) {
+    const entries = await fs.readdir(base, { withFileTypes: true }).catch(() => []);
+    for (const entry of entries) {
+      if (!entry.isDirectory() || !entry.name.startsWith(DIR_PREFIX)) continue;
+      try {
+        const raw = await fs.readFile(path.join(base, entry.name, '_meta.json'), 'utf8');
+        const meta: IDatabaseMeta = JSON.parse(raw);
+        if (!byId.has(meta.id)) byId.set(meta.id, meta);
+      } catch {
+        // skip unreadable entries
+      }
     }
   }
 
-  if (!dbs.find((d) => d.id === 'local')) {
-    dbs.unshift({ ...LocalDatabaseMeta });
-  }
-  return dbs;
+  // No synthesized `local` fallback: `db ls` reflects what is actually on
+  // disk. The desktop app writes `hamster-base-tasks-local/_meta.json` on
+  // first use, so real users still see `local`; a CLI-only/fresh setup
+  // correctly shows nothing rather than a phantom database.
+  return Array.from(byId.values());
 }
 
-export function resolveDatabase(input: string, dbs: IDatabaseMeta[]): IDatabaseMeta | { error: string; candidates?: IDatabaseMeta[] } {
+export function resolveDatabase(
+  input: string,
+  dbs: IDatabaseMeta[]
+): IDatabaseMeta | { error: string; candidates?: IDatabaseMeta[] } {
   const exact = dbs.find((d) => d.id === input);
   if (exact) return exact;
 
@@ -47,7 +47,7 @@ export function resolveDatabase(input: string, dbs: IDatabaseMeta[]): IDatabaseM
 
 export async function countTaskFiles(databaseId: string): Promise<number> {
   try {
-    const files = await fs.readdir(getDatabaseDir(databaseId));
+    const files = await fs.readdir(await resolveDatabaseDir(databaseId));
     return files.filter((f) => f.endsWith(FILE_EXT) && f !== '_meta.json').length;
   } catch {
     return 0;
@@ -55,7 +55,7 @@ export async function countTaskFiles(databaseId: string): Promise<number> {
 }
 
 export async function readSnapshotBlobs(databaseId: string): Promise<Uint8Array[]> {
-  const dir = getDatabaseDir(databaseId);
+  const dir = await resolveDatabaseDir(databaseId);
   let files: string[];
   try {
     files = await fs.readdir(dir);

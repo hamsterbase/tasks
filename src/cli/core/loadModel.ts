@@ -1,4 +1,4 @@
-import { TaskModel } from '../core/model';
+import { TaskModel } from '../../core/model';
 import { readSnapshotBlobs } from './databases';
 
 export async function loadModel(databaseId: string): Promise<TaskModel> {
