@@ -103,6 +103,24 @@ export const TestIds = {
     /** Desktop tag editor overlay container */
     Overlay: 'tag-editor-overlay',
   },
+  TodayPage: {
+    /** Sortable heading row for an area or project group on the Today page */
+    GroupHeader: 'today-group-header',
+    /** Title element inside a Today group heading */
+    GroupHeaderTitle: 'today-group-header-title',
+  },
+  TaskListItem: {
+    /** Root of a desktop task row */
+    Root: 'task-list-item',
+    /** Title element inside a desktop task row */
+    Title: 'task-list-item-title',
+  },
+  ProjectListItem: {
+    /** Root of a desktop project row */
+    Root: 'project-list-item',
+    /** Title element inside a desktop project row */
+    Title: 'project-list-item-title',
+  },
   RecurringTaskSettings: {
     /** Desktop recurring task settings overlay container */
     Overlay: 'recurring-task-settings-overlay',

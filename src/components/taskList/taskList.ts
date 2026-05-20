@@ -201,6 +201,14 @@ export class TaskList implements ITaskList {
   }
 
   setEditingState(isEditing: boolean): void {
+    if (this._isEditing && !isEditing) {
+      // Editing just ended (e.g. Escape blurred the title input). Clear the
+      // tracked input value so MainListIsInputValueEmpty becomes true and the
+      // Backspace keybinding can delete the row, instead of falling through
+      // to browser back-navigation.
+      this._inputValue = '';
+      this._onListStateChange.fire();
+    }
     this._isEditing = isEditing;
   }
 }

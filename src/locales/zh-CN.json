@@ -1684,6 +1684,18 @@
     "defaultMessage": "Settings",
     "content": "设置"
   },
+  "settings.today": {
+    "defaultMessage": "Today",
+    "content": "今天"
+  },
+  "settings.today.group_by_area_project": {
+    "defaultMessage": "Group by Area / Project",
+    "content": "按区域 / 项目分组"
+  },
+  "settings.today.group_by_area_project.description": {
+    "defaultMessage": "Group projects by area and tasks by project on the Today page.",
+    "content": "在今天页面按区域对项目分组，按项目对任务分组。"
+  },
   "sidebar.create_menu": {
     "defaultMessage": "Create New",
     "content": "新建"
@@ -2039,6 +2051,14 @@
   "today": {
     "defaultMessage": "Today",
     "content": "今天"
+  },
+  "today.group.noArea": {
+    "defaultMessage": "No Area",
+    "content": "无区域"
+  },
+  "today.group.noProject": {
+    "defaultMessage": "No Project",
+    "content": "无项目"
   },
   "today.noProjects": {
     "defaultMessage": "No projects for today",

@@ -299,6 +299,10 @@ export const desktopStyles = {
   TodaySectionHeading: /*tw*/ 'flex items-center gap-2 px-2 pt-5 pb-1.5',
   TodaySectionTitle: /*tw*/ 'text-xs font-semibold text-t3 uppercase tracking-wider',
   TodaySectionCount: /*tw*/ 'text-xs text-t3',
+  TodayGroupHeader: /*tw*/ 'flex items-center gap-2 px-2 pt-5 pb-1.5 border-b border-line-light',
+  TodayGroupHeaderIcon: /*tw*/ 'flex items-center justify-center size-4 text-t2 shrink-0',
+  TodayGroupHeaderIconSvg: /*tw*/ 'size-4',
+  TodayGroupHeaderTitle: /*tw*/ 'text-sm leading-5 font-semibold text-t1 truncate',
 
   BackButtonLink: /*tw*/ 'mb-2 flex h-12 w-fit flex-row items-center rounded-lg px-3 no-underline text-t1 hover:bg-bg2',
   BackButtonContainer: /*tw*/ 'flex flex-row items-center gap-1',
@@ -396,6 +400,7 @@ export const desktopStyles = {
   ItemTagsListContainer: /*tw*/ 'flex min-w-0 flex-wrap items-center gap-2',
 
   DesktopProjectListItemLink: 'group relative no-underline flex items-start gap-2 px-2 py-2 rounded-md cursor-pointer',
+  DesktopProjectListItemRow: 'group relative flex items-start gap-2 px-2 py-2 rounded-md outline-none',
   DesktopProjectListItemDragging: /*tw*/ 'bg-bg3',
   DesktopProjectListItemDragHandle:
     'absolute left-0 top-0 flex h-full w-3 -translate-x-full items-center justify-center text-t3 opacity-0 group-hover:opacity-100 transition-opacity',

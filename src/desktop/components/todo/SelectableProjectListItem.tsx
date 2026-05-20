@@ -1,8 +1,10 @@
 import { DragHandleIcon, NotesIcon } from '@/components/icons';
+import { ITaskList } from '@/components/taskList/type.ts';
 import { getProjectItemTags } from '@/core/state/getProjectItemTags';
 import { ProjectInfoState } from '@/core/state/type';
 import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
+import { useWatchEvent } from '@/hooks/use-watch-event';
 import { localize } from '@/nls';
 import { TestIds } from '@/testIds';
 import { ITodoService } from '@/services/todo/common/todoService';
@@ -10,26 +12,35 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import classNames from 'classnames';
 import React from 'react';
-import { Link } from 'react-router';
+import { useNavigate } from 'react-router';
 import { ItemTagsList } from './ItemTagsList';
 import { ProjectIcon } from './ProjectIcon';
 
-interface DesktopProjectListItemProps {
+interface SelectableProjectListItemProps {
   project: ProjectInfoState;
-  disableDrag?: boolean;
+  taskList: ITaskList;
   hideProjectTitle?: boolean;
 }
 
-export const DesktopProjectListItem: React.FC<DesktopProjectListItemProps> = ({
+/**
+ * Project row variant used when the row participates in a `taskList`
+ * selection model (e.g. grouped Today): the first click selects the row
+ * (meta+click toggles multi-select); clicking an already-singly-selected row
+ * navigates to the project. This two-step interaction lets users browse with
+ * the keyboard or build a multi-selection without being yanked off the page.
+ *
+ * For plain navigation contexts (flat Today, Inbox, project list, schedule,
+ * completed, drag overlay) use {@link DesktopProjectListItem} instead.
+ */
+export const SelectableProjectListItem: React.FC<SelectableProjectListItemProps> = ({
   project,
-  disableDrag,
+  taskList,
   hideProjectTitle,
 }) => {
   const progress = project.progress || 0;
 
   const { attributes, listeners, setNodeRef, transform, isDragging } = useSortable({
     id: project.id,
-    disabled: disableDrag,
   });
 
   const style = {
@@ -39,6 +50,12 @@ export const DesktopProjectListItem: React.FC<DesktopProjectListItemProps> = ({
   };
 
   const todoService = useService(ITodoService);
+  const navigate = useNavigate();
+
+  useWatchEvent(taskList.onListStateChange);
+  const isSelected = taskList.selectedIds.includes(project.id);
+  const isOnlySelection = isSelected && taskList.selectedIds.length === 1;
+  const isFocused = taskList.isFocused;
 
   const tags = getProjectItemTags(todoService.modelState, {
     projectId: project.id,
@@ -46,19 +63,36 @@ export const DesktopProjectListItem: React.FC<DesktopProjectListItemProps> = ({
   });
 
   return (
-    <Link
+    <div
       ref={setNodeRef}
       style={style}
       {...attributes}
       {...listeners}
-      to={`/desktop/project/${project.uid}`}
-      draggable={false}
       data-testid={TestIds.ProjectListItem.Root}
-      className={classNames(desktopStyles.DesktopProjectListItemLink, {
+      data-selected={isSelected ? 'true' : undefined}
+      // Tabbable + focus on click so the surrounding ListContainer treats the
+      // list as focused (otherwise keyboard commands like Enter wouldn't fire
+      // after selecting a project, since divs aren't focusable by default).
+      tabIndex={-1}
+      onClick={(e) => {
+        e.currentTarget.focus({ preventScroll: true });
+        if (e.metaKey) {
+          taskList.select(project.id, { offset: null, multipleMode: true });
+          return;
+        }
+        if (isOnlySelection) {
+          navigate(`/desktop/project/${project.uid}`);
+          return;
+        }
+        taskList.select(project.id, { offset: null, multipleMode: false });
+      }}
+      className={classNames(desktopStyles.DesktopProjectListItemRow, {
         [desktopStyles.DesktopProjectListItemDragging]: isDragging,
+        [desktopStyles.TaskListItemContainerSelected]: isSelected && isFocused && !isDragging,
+        [desktopStyles.TaskListItemContainerSelectedInactive]: isSelected && !isFocused && !isDragging,
       })}
     >
-      {!disableDrag && <DragHandleIcon className={desktopStyles.DesktopProjectListItemDragHandle} />}
+      <DragHandleIcon className={desktopStyles.DesktopProjectListItemDragHandle} />
       <div
         className={desktopStyles.DesktopProjectListItemStatusBox}
         style={{ visibility: isDragging ? 'hidden' : 'visible' }}
@@ -82,6 +116,6 @@ export const DesktopProjectListItem: React.FC<DesktopProjectListItemProps> = ({
         </div>
         <ItemTagsList tags={tags} isSelected={false} />
       </div>
-    </Link>
+    </div>
   );
 };

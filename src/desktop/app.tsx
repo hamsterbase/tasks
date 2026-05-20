@@ -27,7 +27,7 @@ import { LoginPage } from '@/desktop/pages/settings-page/Login/LoginPage.tsx';
 import { RegisterPage } from '@/desktop/pages/settings-page/Register/RegisterPage.tsx';
 import { SelfHostedSyncSettings } from '@/desktop/pages/settings-page/sync/SelfHostedSyncSettings.tsx';
 import { AISettings } from '@/desktop/pages/settings-page/AISettings';
-import { Today } from '@/desktop/pages/today/index.tsx';
+import { Today } from '@/desktop/pages/today/today.tsx';
 import { AIChat } from '@/desktop/pages/ai-chat';
 import { useInputFocused } from '@/hooks/global/useInputFocused';
 import { useService } from '@/hooks/use-service';

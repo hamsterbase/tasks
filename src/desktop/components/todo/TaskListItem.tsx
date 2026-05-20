@@ -7,6 +7,7 @@ import { useWatchEvent } from '@/hooks/use-watch-event';
 import { useLongPress } from '@/hooks/useLongPress.ts';
 import { useRegisterEvent } from '@/hooks/useRegisterEvent.ts';
 import { localize } from '@/nls';
+import { TestIds } from '@/testIds';
 import classNames from 'classnames';
 import React, { useRef } from 'react';
 import { TaskIcon } from './TaskIcon';
@@ -178,6 +179,8 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
       className={taskClassName}
       onClickCapture={handleClickCapture}
       data-task-id={task.id}
+      data-testid={TestIds.TaskListItem.Root}
+      data-selected={isSelected ? 'true' : undefined}
     >
       {!disableDrag && (
         <span className={desktopStyles.TaskListItemDragHandle}>
@@ -201,7 +204,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
         <TaskIcon status={task.status} />
       </button>
       <div className={desktopStyles.TaskListItemContent} style={{ visibility: isDragging ? 'hidden' : 'visible' }}>
-        <div className={desktopStyles.TaskListItemTitleRow}>
+        <div className={desktopStyles.TaskListItemTitleRow} data-testid={TestIds.TaskListItem.Title}>
           <EditableInputSpan
             inputKey={taskTitleInputKey(task.id)}
             ref={inputRef}

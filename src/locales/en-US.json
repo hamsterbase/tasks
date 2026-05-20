@@ -1684,6 +1684,18 @@
     "defaultMessage": "Settings",
     "content": "Settings"
   },
+  "settings.today": {
+    "defaultMessage": "Today",
+    "content": "Today"
+  },
+  "settings.today.group_by_area_project": {
+    "defaultMessage": "Group by Area / Project",
+    "content": "Group by Area / Project"
+  },
+  "settings.today.group_by_area_project.description": {
+    "defaultMessage": "Group projects by area and tasks by project on the Today page.",
+    "content": "Group projects by area and tasks by project on the Today page."
+  },
   "sidebar.create_menu": {
     "defaultMessage": "Create New",
     "content": "Create New"
@@ -2039,6 +2051,14 @@
   "today": {
     "defaultMessage": "Today",
     "content": "Today"
+  },
+  "today.group.noArea": {
+    "defaultMessage": "No Area",
+    "content": "No Area"
+  },
+  "today.group.noProject": {
+    "defaultMessage": "No Project",
+    "content": "No Project"
   },
   "today.noProjects": {
     "defaultMessage": "No projects for today",

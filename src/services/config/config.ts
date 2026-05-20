@@ -71,6 +71,14 @@ export function notesMarkdownRenderConfigKey(): ConfigKey<boolean> {
   };
 }
 
+export function groupTodayByAreaProjectConfigKey(): ConfigKey<boolean> {
+  return {
+    key: 'groupTodayByAreaProject',
+    default: false,
+    check: (value: boolean) => typeof value === 'boolean',
+  };
+}
+
 export function thirdpartySyncServersConfigKey(): ConfigKey<ISelfhostedSyncServerConfig | null> {
   return {
     key: 'thirdpartySyncServers',

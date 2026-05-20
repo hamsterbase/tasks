@@ -8,6 +8,7 @@ import { useGlobalTaskDisplaySettings } from '@/hooks/useGlobalTaskDisplaySettin
 import { localize } from '@/nls';
 import {
   dockBadgeCountTypeConfigKey,
+  groupTodayByAreaProjectConfigKey,
   notesMarkdownRenderConfigKey,
   type DockBadgeCountType,
 } from '@/services/config/config';
@@ -28,6 +29,9 @@ export const AppearanceSettings: React.FC = () => {
 
   const { value: notesMarkdownRender, setValue: setNotesMarkdownRender } = useConfig(notesMarkdownRenderConfigKey());
   const { value: dockBadgeCountType, setValue: setDockBadgeCountType } = useConfig(dockBadgeCountTypeConfigKey());
+  const { value: groupTodayByAreaProject, setValue: setGroupTodayByAreaProject } = useConfig(
+    groupTodayByAreaProjectConfigKey()
+  );
 
   const changeTheme = (theme: string) => {
     localStorage.setItem('theme', theme);
@@ -121,6 +125,24 @@ export const AppearanceSettings: React.FC = () => {
               ],
               currentValue: dockBadgeCountType,
               onChange: (value: string) => setDockBadgeCountType(value as DockBadgeCountType),
+            }}
+          />
+        </ItemGroup>
+      </SettingsSection>
+      <SettingsSection title={localize('settings.today', 'Today')}>
+        <ItemGroup>
+          <SettingsItem
+            title={localize('settings.today.group_by_area_project', 'Group by Area / Project')}
+            description={localize(
+              'settings.today.group_by_area_project.description',
+              'Group projects by area and tasks by project on the Today page.'
+            )}
+            action={{
+              type: 'switch',
+              currentValue: groupTodayByAreaProject,
+              onChange: () => {
+                setGroupTodayByAreaProject(!groupTodayByAreaProject);
+              },
             }}
           />
         </ItemGroup>
