@@ -1,4 +1,3 @@
-// eslint-disable-next-line custom/no-restricted-packages
 import {
   AlarmClock,
   AlertCircle,

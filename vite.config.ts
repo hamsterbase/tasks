@@ -7,7 +7,7 @@ import { defineConfig } from 'vite';
 import { execSync } from 'child_process';
 import IstanbulPlugin from './src/packages/vite-plugin-istanbul/index';
 import { commonFilesPlugin } from './src/packages/vite-plugin-common-files';
-import { unusedFilesPlugin } from './src/packages/eslint-plugin/detect-unused-files';
+import { unusedFilesPlugin } from './src/packages/vite-plugin-detect-unused-files/detect-unused-files';
 
 function getGitCommitHash() {
   try {

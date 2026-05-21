@@ -334,7 +334,7 @@
   },
   "common.more": {
     "defaultMessage": "More",
-    "content": ""
+    "content": "更多"
   },
   "common.ok": {
     "defaultMessage": "OK",
@@ -570,7 +570,7 @@
   },
   "date_picker.no_date": {
     "defaultMessage": "No date",
-    "content": ""
+    "content": "无日期"
   },
   "date_picker.saturday": {
     "defaultMessage": "Sat",
@@ -750,7 +750,7 @@
   },
   "heading.task_progress": {
     "defaultMessage": "Task Progress",
-    "content": ""
+    "content": "任务进度"
   },
   "heading.title_placeholder": {
     "defaultMessage": "Add heading title...",
@@ -886,7 +886,7 @@
   },
   "menu.close": {
     "defaultMessage": "Close Window",
-    "content": ""
+    "content": "关闭窗口"
   },
   "menu.copy": {
     "defaultMessage": "Copy",
@@ -918,7 +918,7 @@
   },
   "menu.minimize": {
     "defaultMessage": "Minimize",
-    "content": ""
+    "content": "最小化"
   },
   "menu.paste": {
     "defaultMessage": "Paste",
@@ -954,11 +954,11 @@
   },
   "menu.window": {
     "defaultMessage": "Window",
-    "content": ""
+    "content": "窗口"
   },
   "menu.zoom": {
     "defaultMessage": "Zoom",
-    "content": ""
+    "content": "缩放"
   },
   "message.undo": {
     "defaultMessage": "Undo",
@@ -1054,11 +1054,11 @@
   },
   "project.area": {
     "defaultMessage": "Area",
-    "content": ""
+    "content": "领域"
   },
   "project.cancel_project": {
     "defaultMessage": "Cancel project",
-    "content": ""
+    "content": "取消项目"
   },
   "project.delete": {
     "defaultMessage": "Delete",
@@ -1140,13 +1140,25 @@
     "defaultMessage": "Toggle Project Status",
     "content": "切换项目状态"
   },
+  "project.tagFilter.all": {
+    "defaultMessage": "All",
+    "content": "全部"
+  },
+  "project.tagFilter.label": {
+    "defaultMessage": "Tags:",
+    "content": "标签："
+  },
+  "project.tagFilter.untagged": {
+    "defaultMessage": "No Tags",
+    "content": "无标签"
+  },
   "project.task_progress": {
     "defaultMessage": "Task Progress",
-    "content": ""
+    "content": "任务进度"
   },
   "project.task_progress_hint": {
     "defaultMessage": "Select a task from the middle column to view its details",
-    "content": ""
+    "content": "从中间列选择一个任务以查看其详情"
   },
   "project.toggle_status_description": {
     "defaultMessage": "There are {0} tasks left, what do you want to do?",
@@ -1155,18 +1167,6 @@
   "project.untitled": {
     "defaultMessage": "New Project",
     "content": "新项目"
-  },
-  "project.tagFilter.all": {
-    "defaultMessage": "All",
-    "content": "全部"
-  },
-  "project.tagFilter.untagged": {
-    "defaultMessage": "No Tags",
-    "content": "无标签"
-  },
-  "project.tagFilter.label": {
-    "defaultMessage": "Tags:",
-    "content": "标签："
   },
   "recurring_task.base_prefix": {
     "defaultMessage": "From completion date:",
@@ -1806,31 +1806,31 @@
   },
   "tag_editor.empty_hint": {
     "defaultMessage": "No matching tags",
-    "content": ""
+    "content": "没有匹配的标签"
   },
   "tag_editor.input_placeholder": {
     "defaultMessage": "Search or create a tag",
-    "content": ""
+    "content": "搜索或创建标签"
   },
   "task_attr.move_to_inbox": {
     "defaultMessage": "Move to Inbox",
-    "content": ""
+    "content": "移至收件箱"
   },
   "task_attr.no_areas": {
     "defaultMessage": "No areas",
-    "content": ""
+    "content": "无领域"
   },
   "task_attr.no_location": {
     "defaultMessage": "No locations",
-    "content": ""
+    "content": "无归属"
   },
   "task_attr.no_matching_location": {
     "defaultMessage": "No matching locations",
-    "content": ""
+    "content": "没有匹配的归属"
   },
   "task_attr.search_project": {
     "defaultMessage": "Search projects",
-    "content": ""
+    "content": "搜索项目"
   },
   "task.convert": {
     "defaultMessage": "Convert",
@@ -1850,7 +1850,7 @@
   },
   "task.delete_project": {
     "defaultMessage": "Delete project",
-    "content": ""
+    "content": "删除项目"
   },
   "task.delete_project_confirm_description": {
     "defaultMessage": "Are you sure you want to delete this project? This action cannot be undone.",
@@ -1915,6 +1915,10 @@
   "tasks.due_date_placeholder": {
     "defaultMessage": "Select due date",
     "content": "选择截止日期"
+  },
+  "tasks.filterByTag": {
+    "defaultMessage": "Filter by Tag",
+    "content": "按标签筛选"
   },
   "tasks.location": {
     "defaultMessage": "Location",
@@ -2003,10 +2007,6 @@
   "tasks.tags": {
     "defaultMessage": "Tags",
     "content": "标签"
-  },
-  "tasks.filterByTag": {
-    "defaultMessage": "Filter by Tag",
-    "content": "按标签筛选"
   },
   "tasks.title_placeholder": {
     "defaultMessage": "Add title...",
