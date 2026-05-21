@@ -95,6 +95,7 @@ export class WorkbenchTodoService implements ITodoService {
     }
     const disposeStore = new DisposableStore();
     await saveToStorage();
+    taskModel.clearUndoHistory();
     const dataModel: DateModel = {
       taskModel,
       save: saveToStorage,

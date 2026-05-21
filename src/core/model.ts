@@ -328,29 +328,48 @@ export class TaskModel {
   }
 
   getDateAssignedList() {
-    return (this.doc.getMovableList(dateAssigned.listName).toArray() as TreeID[]).filter((item) => {
-      return !this.getTree().isNodeDeleted(item);
-    });
+    const uidToLiveId = this.buildUidToLiveTreeId();
+    const out: TreeID[] = [];
+    const entries = this.doc.getMovableList(dateAssigned.listName).toArray() as TreeID[];
+    for (const entry of entries) {
+      if (!this.getTree().isNodeDeleted(entry)) {
+        out.push(entry);
+        continue;
+      }
+      const uid = this.getEntryUid(entry);
+      if (!uid) continue;
+      const liveId = uidToLiveId.get(uid);
+      if (liveId) out.push(liveId);
+    }
+    return out;
   }
 
   public moveDateAssignedList(item: TreeID, position: ItemMovePosition) {
+    const itemUid = this.getEntryUid(item);
+    if (!itemUid) throw new Error('item not found');
+
     const dateAssignedList = this.doc.getMovableList(dateAssigned.listName);
-    const previousIndex = dateAssignedList.toArray().indexOf(item);
+    const items = dateAssignedList.toArray() as TreeID[];
+    const findIndexByUid = (uid: string) => items.findIndex((e) => this.getEntryUid(e) === uid);
+
+    const previousIndex = findIndexByUid(itemUid);
     if (previousIndex === -1) {
       throw new Error('item not found');
     }
-
     let targetIndex = previousIndex;
-    const items = dateAssignedList.toArray();
     if (position.type === 'beforeElement') {
-      if (position.nextElementId === item) return;
-      const beforeIndex = items.indexOf(position.nextElementId);
+      const nextUid = this.getEntryUid(position.nextElementId);
+      if (!nextUid) throw new Error('previous element not found');
+      if (nextUid === itemUid) return;
+      const beforeIndex = findIndexByUid(nextUid);
       if (beforeIndex === -1) throw new Error('previous element not found');
       if (beforeIndex - 1 === previousIndex) return;
       targetIndex = previousIndex < beforeIndex ? beforeIndex - 1 : beforeIndex;
     } else if (position.type === 'afterElement') {
-      if (position.previousElementId === item) return;
-      const afterIndex = items.indexOf(position.previousElementId);
+      const prevUid = this.getEntryUid(position.previousElementId);
+      if (!prevUid) throw new Error('next element not found');
+      if (prevUid === itemUid) return;
+      const afterIndex = findIndexByUid(prevUid);
       if (afterIndex === -1) throw new Error('next element not found');
       targetIndex = afterIndex > previousIndex ? afterIndex : afterIndex + 1;
     }
@@ -662,15 +681,30 @@ export class TaskModel {
     this.handleFilterConditions(payload, itemId, (condition, payload) => condition.meetProjectUpdateCriteria(payload));
   }
 
+  private buildUidToLiveTreeId(): Map<string, TreeID> {
+    const map = new Map<string, TreeID>();
+    this.getTree()
+      .getNodes()
+      .forEach((node) => {
+        const uid = node.data.get(ModelKeys.uid) as string | undefined;
+        if (uid) map.set(uid, node.id);
+      });
+    return map;
+  }
+
+  private getEntryUid(entry: TreeID): string | undefined {
+    return this.getTree().getNodeByID(entry)?.data.get(ModelKeys.uid) as string | undefined;
+  }
+
   private addToFilterList(itemId: TreeID, listName: string) {
     const list = this.doc.getMovableList(listName);
-    const index = list.toArray().indexOf(itemId);
+    const items = list.toArray() as TreeID[];
+    const itemUid = this.getEntryUid(itemId);
+    const index =
+      itemUid !== undefined ? items.findIndex((e) => this.getEntryUid(e) === itemUid) : items.indexOf(itemId);
     if (index === -1) {
       list.insert(0, itemId);
-    } else {
-      list.move(list.length - 1, 0);
     }
-    this.doc.commit();
   }
 
   public covertToProject(itemId: TreeID) {
@@ -747,6 +781,14 @@ export class TaskModel {
   }
 
   clearUndoHistory() {
-    this.undoManager.clear();
+    // Rebuild UndoManager so its baseline = current doc state and peer.
+    // `UndoManager.clear()` alone is not enough: Loro requires the peer to
+    // stay fixed for the manager's lifetime (see loro-crdt docs), but in
+    // practice the manager is constructed before `setPeerId`/`import`, so we
+    // need a fresh instance pinned to the post-import doc.
+    this.undoManager = new UndoManager(this.doc, {
+      maxUndoSteps: 1000,
+      mergeInterval: 0,
+    });
   }
 }

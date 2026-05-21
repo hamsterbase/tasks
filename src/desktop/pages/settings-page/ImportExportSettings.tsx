@@ -48,6 +48,7 @@ export const ImportExportSettings: React.FC = () => {
             try {
               if (event.target && event.target.result) {
                 await todoService.import([decodePatch(event.target.result as string)], todoService.storageId);
+                todoService.clearUndoHistory();
                 // TODO: Add success notification
               }
             } catch (error) {

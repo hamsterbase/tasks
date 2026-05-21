@@ -4,6 +4,7 @@ import { getProjectItemTags } from '@/core/state/getProjectItemTags';
 import { ProjectInfoState } from '@/core/state/type';
 import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
+import { useRegisterEvent } from '@/hooks/useRegisterEvent';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { localize } from '@/nls';
 import { TestIds } from '@/testIds';
@@ -11,7 +12,7 @@ import { ITodoService } from '@/services/todo/common/todoService';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import classNames from 'classnames';
-import React from 'react';
+import React, { useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router';
 import { ItemTagsList } from './ItemTagsList';
 import { ProjectIcon } from './ProjectIcon';
@@ -43,6 +44,15 @@ export const SelectableProjectListItem: React.FC<SelectableProjectListItemProps>
     id: project.id,
   });
 
+  const rowRef = useRef<HTMLDivElement | null>(null);
+  const setRowRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      rowRef.current = node;
+      setNodeRef(node);
+    },
+    [setNodeRef]
+  );
+
   const style = {
     transform: CSS.Transform.toString(transform),
     opacity: isDragging ? 0.6 : 1,
@@ -57,6 +67,18 @@ export const SelectableProjectListItem: React.FC<SelectableProjectListItemProps>
   const isOnlySelection = isSelected && taskList.selectedIds.length === 1;
   const isFocused = taskList.isFocused;
 
+  useRegisterEvent(taskList.onFocusItem, (e) => {
+    if (e.id !== project.id) return;
+    rowRef.current?.focus({ preventScroll: true });
+    // Focusing the row drops the global InputFocused context to false, which
+    // the list service reads as "user exited edit mode" and resets
+    // _isEditing. Re-assert it so the next ArrowDown onto a task still
+    // fires onFocusItem and refocuses the task's title input — without
+    // this, navigating task → project → task silently lands on a selected
+    // but non-editing row.
+    taskList.setEditingState(true);
+  });
+
   const tags = getProjectItemTags(todoService.modelState, {
     projectId: project.id,
     hideParent: hideProjectTitle ?? false,
@@ -64,7 +86,7 @@ export const SelectableProjectListItem: React.FC<SelectableProjectListItemProps>
 
   return (
     <div
-      ref={setNodeRef}
+      ref={setRowRef}
       style={style}
       {...attributes}
       {...listeners}

@@ -34,6 +34,7 @@ export const ImportPage = () => {
               if (event.target && event.target.result) {
                 await todoService.import([decodePatch(event.target.result as string)], todoService.storageId);
                 toast({ message: Messages.importedSuccessfully });
+                todoService.clearUndoHistory();
               }
             } catch (error) {
               toast({ message: (error as Error).message });
