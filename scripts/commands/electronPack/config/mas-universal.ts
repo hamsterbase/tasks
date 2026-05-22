@@ -24,6 +24,9 @@ export const getMasUniversalConfig = (options: ElectronPackConfigOption) => {
         icon: resolveRoot('assets/desktop-icon.png'),
         hardenedRuntime: true,
         gatekeeperAssess: false,
+        extendInfo: {
+          ITSAppUsesNonExemptEncryption: false,
+        },
         ...(options.codeSign
           ? {}
           : {
