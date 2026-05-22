@@ -7,11 +7,14 @@ export interface ISelectionOption {
   multipleMode: boolean;
 
   fireEditEvent?: boolean;
+
+  selectAll?: boolean;
 }
 
 export interface IEditItemState {
   id: TreeID;
   offset: number;
+  selectAll?: boolean;
 }
 
 export type ListOperation = {
@@ -40,6 +43,8 @@ export interface ITaskList {
   readonly selectedIds: TreeID[];
 
   readonly isFocused: boolean;
+
+  readonly isEditing: boolean;
 
   readonly isInputValueEmpty: boolean;
 

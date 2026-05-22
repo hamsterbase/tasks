@@ -79,6 +79,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
 
   const isSelected = taskList.selectedIds.includes(task.id);
   const isFocused = taskList.isFocused;
+  const isEditing = taskList.isEditing && taskList.cursorId === task.id;
 
   const taskItemActions = useTaskItemActions(task);
 
@@ -106,25 +107,34 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
   const sync = useSync();
 
   useRegisterEvent(taskList.onFocusItem, (e) => {
-    const inputElement = inputRef.current;
     if (e.id !== task.id) {
       return;
     }
+    // taskList.select(..., fireEditEvent: true) already set _isEditing = true
+    // and cursorId = task.id synchronously. sync() flushes the pending render
+    // so the input is mounted (not display:none) before focus() runs.
     sync();
+    const inputElement = inputRef.current;
     if (!inputElement) {
-      const inputElement = inputRef.current as HTMLInputElement | null;
-      inputElement?.focus({ preventScroll: true });
-      inputElement?.setSelectionRange(e.offset, e.offset);
       return;
     }
     inputElement.focus({ preventScroll: true });
-    inputElement.setSelectionRange(e.offset, e.offset);
+    if (e.selectAll) {
+      inputElement.select();
+    } else {
+      inputElement.setSelectionRange(e.offset, e.offset);
+    }
   });
+
+  const hasModifier = (e: React.MouseEvent) => e.metaKey || e.shiftKey || e.ctrlKey || e.altKey;
 
   const handleClickCapture = (e: React.MouseEvent) => {
     let element = e.target as HTMLElement;
     while (element && element !== e.currentTarget) {
       if (element.getAttribute('data-testid') === 'task-item-status-box') {
+        return;
+      }
+      if (element.dataset?.titleText === 'true' && !hasModifier(e)) {
         return;
       }
       element = element.parentElement as HTMLElement;
@@ -142,6 +152,22 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
         multipleMode: false,
       });
     }
+  };
+
+  const handleDoubleClick = (e: React.MouseEvent) => {
+    if (hasModifier(e)) return;
+    let element = e.target as HTMLElement;
+    while (element && element !== e.currentTarget) {
+      if (element.dataset?.titleText === 'true') return;
+      if (element.getAttribute('data-testid') === 'task-item-status-box') return;
+      element = element.parentElement as HTMLElement;
+    }
+    taskList.select(task.id, {
+      offset: 0,
+      multipleMode: false,
+      fireEditEvent: true,
+      selectAll: true,
+    });
   };
 
   const taskClassName = classNames(desktopStyles.TaskListItemContainer, {
@@ -183,6 +209,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
       {...dragListeners}
       className={taskClassName}
       onClickCapture={handleClickCapture}
+      onDoubleClick={handleDoubleClick}
       data-task-id={task.id}
       data-testid={TestIds.TaskListItem.Root}
       data-selected={isSelected ? 'true' : undefined}
@@ -215,7 +242,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
             ref={inputRef}
             defaultValue={task.title}
             onChange={handleChange}
-            isFocused={isSelected}
+            isFocused={isEditing}
             onStartEdit={handleStartEdit}
             onSave={(value) => {
               taskItemActions.updateTaskTitle(value);

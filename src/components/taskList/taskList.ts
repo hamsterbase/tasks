@@ -46,6 +46,10 @@ export class TaskList implements ITaskList {
 
   private _isEditing = false;
 
+  public get isEditing() {
+    return this._isEditing;
+  }
+
   constructor(
     public name: string,
     private _items: TreeID[],
@@ -69,11 +73,19 @@ export class TaskList implements ITaskList {
       this._cursorId = id;
     }
 
+    if (option.fireEditEvent) {
+      // Flip editing state proactively so the next render shows the input
+      // (display:none → visible) before onFocusItem's focus() call runs.
+      // The DOM focus event will redundantly setEditingState(true) — that's
+      // a no-op thanks to the equality guard.
+      this._isEditing = true;
+    }
     this._onListStateChange.fire();
     if (option.fireEditEvent) {
       this._onFocusItem.fire({
         id,
         offset: this.cursorOffset ?? 0,
+        selectAll: option.selectAll,
       });
     }
   }
@@ -201,14 +213,17 @@ export class TaskList implements ITaskList {
   }
 
   setEditingState(isEditing: boolean): void {
+    if (this._isEditing === isEditing) {
+      return;
+    }
     if (this._isEditing && !isEditing) {
       // Editing just ended (e.g. Escape blurred the title input). Clear the
       // tracked input value so MainListIsInputValueEmpty becomes true and the
       // Backspace keybinding can delete the row, instead of falling through
       // to browser back-navigation.
       this._inputValue = '';
-      this._onListStateChange.fire();
     }
     this._isEditing = isEditing;
+    this._onListStateChange.fire();
   }
 }

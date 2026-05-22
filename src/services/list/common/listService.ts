@@ -56,12 +56,16 @@ export class ListService implements IListService {
     this._subListCursorHasPreviousItemContext = SubListCursorHasPreviousItem.bindTo(contextKeyService);
     this._subListIsInputValueEmptyContext = SubListIsInputValueEmpty.bindTo(contextKeyService);
 
-    contextKeyService.onDidChangeContext(() => {
+    contextKeyService.onDidChangeContext((e) => {
+      if (!e.affectsSome(new Set([InputFocusedContextKey]))) {
+        return;
+      }
+      const isInputFocused = !!contextKeyService.getContextKeyValue(InputFocusedContextKey);
       if (this.mainList) {
-        this.mainList.setEditingState(!!contextKeyService.getContextKeyValue(InputFocusedContextKey));
+        this.mainList.setEditingState(isInputFocused);
       }
       if (this.subList) {
-        this.subList.setEditingState(!!contextKeyService.getContextKeyValue(InputFocusedContextKey));
+        this.subList.setEditingState(isInputFocused);
       }
     });
   }

@@ -44,6 +44,9 @@ export const EditableInputSpan = forwardRef<HTMLInputElement, EditableInputProps
     );
 
     const handleClickX = (e: React.MouseEvent<HTMLSpanElement>) => {
+      if (e.metaKey || e.shiftKey || e.ctrlKey || e.altKey) {
+        return;
+      }
       e.preventDefault();
       e.stopPropagation();
       const position = getCaretIndexAtX(e.currentTarget, inputValue, e.clientX);
@@ -63,6 +66,7 @@ export const EditableInputSpan = forwardRef<HTMLInputElement, EditableInputProps
         >
           <span
             data-no-drag
+            data-title-text="true"
             style={{
               userSelect: 'text',
             }}
@@ -76,6 +80,7 @@ export const EditableInputSpan = forwardRef<HTMLInputElement, EditableInputProps
         </div>
         <input
           ref={ref}
+          data-title-text="true"
           className={classNames(className, {
             hidden: !isFocused,
           })}
