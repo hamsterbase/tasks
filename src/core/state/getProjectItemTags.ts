@@ -19,6 +19,7 @@ interface ResultItem {
 interface TaskItemTagsOptions {
   hideParent: boolean;
   projectId: TreeID;
+  attachmentCount?: number;
 }
 
 export function getProjectItemTags(model: ITaskModelData, options: TaskItemTagsOptions): ResultItem[] {
@@ -71,6 +72,15 @@ export function getProjectItemTags(model: ITaskModelData, options: TaskItemTagsO
         type: 'ChecklistIcon',
       },
       label: `${project.completedTasks}/${project.totalTasks}`,
+    });
+  }
+
+  if (options.attachmentCount && options.attachmentCount > 0) {
+    res.push({
+      icon: {
+        type: 'AttachmentIcon',
+      },
+      label: `${options.attachmentCount}`,
     });
   }
 

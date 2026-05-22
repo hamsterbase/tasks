@@ -5,6 +5,7 @@ import {
   CalendarRangeIcon,
   CalendarXIcon,
   FlagIcon,
+  PaperclipIcon,
   SubtaskIcon,
   TagIcon,
 } from '@/components/icons';
@@ -51,6 +52,8 @@ export const ItemTag: React.FC<ItemTagProps> = ({ icon, label, isSelected, isDan
       case 'ChecklistIcon': {
         return <SubtaskIcon />;
       }
+      case 'AttachmentIcon':
+        return <PaperclipIcon />;
       default: {
         console.log(`Unknown icon type: ${icon.type}`);
         return null;

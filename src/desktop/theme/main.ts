@@ -324,6 +324,89 @@ export const desktopStyles = {
   DetailViewSubtaskProgressFill: /*tw*/ 'h-full bg-accent-success rounded-full transition-all',
   DetailViewHint: /*tw*/ 'text-xs text-t3 mb-5',
 
+  AttachmentSectionContainer: /*tw*/ 'mt-6 flex flex-col gap-2',
+  AttachmentSectionHeader: /*tw*/ 'flex items-center gap-1 mb-1',
+  AttachmentSectionTitle: /*tw*/ 'text-xs text-t2 font-medium',
+  AttachmentSectionMeta: /*tw*/ 'ml-auto text-xs text-t3 font-normal',
+  AttachmentSectionWarning: /*tw*/ 'flex items-center gap-2 rounded-md bg-bg2 px-3 py-2 text-xs leading-5 text-t3',
+  AttachmentSectionWarningIcon: /*tw*/ 'size-4 flex-shrink-0 text-t3',
+  AttachmentSectionWarningText: /*tw*/ 'flex-1 min-w-0 truncate',
+  AttachmentSectionWarningLink:
+    /*tw*/ 'flex-shrink-0 flex items-center gap-0.5 whitespace-nowrap text-brand hover:underline',
+  AttachmentSectionWarningLinkArrow: /*tw*/ 'size-3.5',
+
+  AttachmentList: /*tw*/ 'flex flex-col gap-0.5',
+
+  AttachmentRow:
+    /*tw*/ 'group relative flex items-center gap-3 -mx-2 px-2 py-1.5 rounded-md hover:bg-bg2 cursor-pointer transition-colors min-w-0',
+  AttachmentRowDisabled: /*tw*/ 'opacity-50 cursor-default hover:bg-transparent',
+  AttachmentRowFailed: /*tw*/ 'bg-accent-danger/5 hover:bg-accent-danger/10',
+  AttachmentRowUploading: /*tw*/ 'opacity-70 cursor-default',
+  AttachmentRowThumb:
+    /*tw*/ 'relative flex items-center justify-center size-10 flex-shrink-0 rounded-md bg-bg2 border border-line-light overflow-hidden',
+  AttachmentRowThumbImage: /*tw*/ 'absolute inset-0 size-full object-cover',
+  AttachmentRowThumbIcon: /*tw*/ 'size-4 text-t3 opacity-60',
+  AttachmentRowThumbLoading: /*tw*/ 'size-4 text-t3 opacity-60 animate-spin',
+  AttachmentRowContent: /*tw*/ 'flex-1 flex flex-col min-w-0',
+  AttachmentRowFilename: /*tw*/ 'text-sm text-t1',
+  AttachmentFilenameWrapper: /*tw*/ 'flex min-w-0',
+  AttachmentFilenameHead: /*tw*/ 'truncate',
+  AttachmentFilenameTail: /*tw*/ 'flex-shrink-0',
+  AttachmentRowSize: /*tw*/ 'text-xs text-t3',
+  AttachmentRowDeleteButton:
+    /*tw*/ 'flex-shrink-0 size-6 flex items-center justify-center rounded-md text-t3 opacity-0 group-hover:opacity-100 hover:text-accent-danger hover:bg-accent-danger/10 transition-opacity',
+  AttachmentRowDeleteIcon: /*tw*/ 'size-3.5',
+
+  AttachmentRowProgressBar:
+    /*tw*/ 'pointer-events-none absolute bottom-0 left-2 right-2 h-0.5 rounded-full bg-bg3 overflow-hidden',
+  AttachmentRowProgressFill: /*tw*/ 'h-full bg-brand transition-[width]',
+  AttachmentRowError: /*tw*/ 'text-xs text-accent-danger truncate',
+  AttachmentRowRetryButton:
+    /*tw*/ 'flex-shrink-0 inline-flex items-center rounded-md bg-bg1 px-2 py-0.5 text-xs text-t1 border border-line-regular hover:bg-bg2 transition-colors',
+
+  ImagePreviewBackdrop: /*tw*/ 'fixed inset-0 z-[100] flex items-center justify-center bg-black/70 cursor-zoom-out',
+  ImagePreviewImage: /*tw*/ 'max-w-[90vw] max-h-[90vh] object-contain cursor-default',
+  ImagePreviewLoading: /*tw*/ 'size-8 text-white/70 animate-spin',
+  ImagePreviewCloseButton:
+    /*tw*/ 'absolute top-4 right-4 size-9 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors cursor-pointer',
+  ImagePreviewDownloadButton:
+    /*tw*/ 'absolute top-4 right-16 size-9 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors cursor-pointer',
+  ImagePreviewActionIcon: /*tw*/ 'size-4',
+
+  AttachmentSettingsWrapper: /*tw*/ 'flex flex-col gap-4',
+  AttachmentSettingsIntro: /*tw*/ 'px-4 text-sm leading-5 text-t2',
+  AttachmentSettingsIntroEmphasis: /*tw*/ 'text-t1 font-medium',
+  FormFieldInputSecretWrapper: /*tw*/ 'relative',
+  FormFieldInputSecretToggle:
+    /*tw*/ 'absolute right-2 top-1/2 -translate-y-1/2 text-xs text-t3 hover:text-t1 bg-transparent border-none cursor-pointer px-1',
+  FormFieldSwitchRow: /*tw*/ 'flex items-center justify-between gap-4',
+  FormFieldSwitchContent: /*tw*/ 'flex min-w-0 flex-1 flex-col gap-0.5',
+  FormFieldSwitchLabel: /*tw*/ 'text-xs font-medium text-t1',
+  FormFieldSwitchDescription: /*tw*/ 'text-xs leading-4 text-t3',
+
+  AttachmentsDialogContainer: /*tw*/ '!w-[32rem] !max-h-[calc(100vh-4rem)]',
+  AttachmentsDialogContent: /*tw*/ '!p-0 flex-1 overflow-y-auto flex flex-col',
+  AttachmentsDialogFields: /*tw*/ 'flex flex-col gap-4 px-4 py-3',
+  AttachmentsDialogTestRow: /*tw*/ 'flex items-center gap-3',
+  AttachmentsDialogTestResultSuccess: /*tw*/ 'text-xs text-accent-success',
+  AttachmentsDialogTestResultError: /*tw*/ 'text-xs text-accent-danger',
+
+  AttachmentsRowContainer:
+    /*tw*/ 'flex items-center gap-3 px-4 py-3 rounded-lg border border-line-light bg-bg1 hover:bg-bg2 cursor-pointer transition-colors',
+  AttachmentsRowIcon: /*tw*/ 'flex size-6 flex-shrink-0 items-center justify-center text-t3',
+  AttachmentsRowIconSvg: /*tw*/ 'size-4',
+  AttachmentsRowContent: /*tw*/ 'flex flex-1 flex-col gap-0.5 min-w-0',
+  AttachmentsRowTitleRow: /*tw*/ 'flex items-center gap-2 min-w-0',
+  AttachmentsRowTitle: /*tw*/ 'text-sm font-medium text-t1 truncate',
+  AttachmentsRowBadge: /*tw*/ 'rounded bg-brand/10 px-1.5 py-0.5 text-xs text-brand flex-shrink-0',
+  AttachmentsRowDescription: /*tw*/ 'text-xs text-t3 truncate',
+  AttachmentsRowActions: /*tw*/ 'flex items-center gap-1 flex-shrink-0',
+  AttachmentsRowActionButton:
+    /*tw*/ 'size-7 flex items-center justify-center rounded-md text-t3 hover:bg-bg3 hover:text-t1 transition-colors',
+  AttachmentsRowActionButtonDanger:
+    /*tw*/ 'size-7 flex items-center justify-center rounded-md text-t3 hover:bg-accent-danger/10 hover:text-accent-danger transition-colors',
+  AttachmentsRowActionIcon: /*tw*/ 'size-3.5',
+
   MarkdownPageLoading: /*tw*/ 'text-t2',
   MarkdownPageH1: /*tw*/ 'text-2xl font-medium text-t1 mb-4 mt-6',
   MarkdownPageH2: /*tw*/ 'text-xl font-medium text-t1 mb-3 mt-5',

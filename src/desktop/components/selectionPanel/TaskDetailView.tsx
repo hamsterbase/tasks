@@ -9,6 +9,7 @@ import { desktopStyles } from '@/desktop/theme/main.ts';
 import { localize } from '@/nls';
 import { TestIds } from '@/testIds';
 import React from 'react';
+import { AttachmentSection } from '../attachment/AttachmentSection';
 import { TagsField } from '../TagsField';
 import { SubtaskList } from './SubtaskList';
 import { NotesField } from './components/NotesField';
@@ -124,6 +125,7 @@ export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task, onClearSel
             <div className={desktopStyles.DetailViewSubtaskProgressFill} style={{ width: `${subtaskProgress}%` }} />
           </div>
           <SubtaskList task={task} />
+          <AttachmentSection parentUid={task.uid} />
         </div>
       </div>
     </div>

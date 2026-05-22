@@ -27,6 +27,8 @@ import { ISelfhostedSyncService } from '@/services/selfhostedSync/common/selfhos
 import { WorkbenchSelfhostedSyncService } from '@/services/selfhostedSync/common/workbenchSelfhostedSyncService';
 import { IAIService } from '@/services/ai/common/aiService';
 import { WorkbenchAIService } from '@/services/ai/browser/workbenchAIService';
+import { IAttachmentUploadService } from '@/services/attachment/common/attachmentUploadService';
+import { WorkbenchAttachmentUploadService } from '@/services/attachment/browser/workbenchAttachmentUploadService';
 import { ISwitchService, SwitchService } from '@/services/switchService/common/switchService';
 import '@/services/todo/browser/desktopCommands';
 import { WorkbenchTodoService } from '@/services/todo/browser/workbenchTodoService';
@@ -74,6 +76,7 @@ export async function startDesktop() {
   serviceCollection.set(IMenuService, new SyncDescriptor(ElectronMenuService));
   serviceCollection.set(IDockBadgeService, new SyncDescriptor(ElectronDockBadgeService));
   serviceCollection.set(IAIService, new SyncDescriptor(WorkbenchAIService));
+  serviceCollection.set(IAttachmentUploadService, new SyncDescriptor(WorkbenchAttachmentUploadService));
   const instantiationService = new InstantiationService(serviceCollection, true);
 
   await instantiationService.invokeFunction(async (dss) => {

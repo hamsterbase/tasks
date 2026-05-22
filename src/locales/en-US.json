@@ -304,6 +304,238 @@
     "defaultMessage": "New Area",
     "content": "New Area"
   },
+  "attachments.accessKeyId": {
+    "defaultMessage": "Access Key ID",
+    "content": "Access Key ID"
+  },
+  "attachments.accessKeyIdDesc": {
+    "defaultMessage": "Your S3 access key ID",
+    "content": "Your S3 access key ID"
+  },
+  "attachments.add": {
+    "defaultMessage": "Add attachment",
+    "content": "Add attachment"
+  },
+  "attachments.addTitle": {
+    "defaultMessage": "Configure S3 Storage",
+    "content": "Configure S3 Storage"
+  },
+  "attachments.bucket": {
+    "defaultMessage": "Bucket",
+    "content": "Bucket"
+  },
+  "attachments.bucketDesc": {
+    "defaultMessage": "Name of the storage bucket",
+    "content": "Name of the storage bucket"
+  },
+  "attachments.clear": {
+    "defaultMessage": "Clear",
+    "content": "Clear"
+  },
+  "attachments.clearConfirmDescription": {
+    "defaultMessage": "Existing attachments will become inaccessible until you reconfigure S3. The files in S3 will not be deleted.",
+    "content": "Existing attachments will become inaccessible until you reconfigure S3. The files in S3 will not be deleted."
+  },
+  "attachments.clearConfirmTitle": {
+    "defaultMessage": "Clear S3 configuration?",
+    "content": "Clear S3 configuration?"
+  },
+  "attachments.cleared": {
+    "defaultMessage": "S3 configuration cleared",
+    "content": "S3 configuration cleared"
+  },
+  "attachments.configure": {
+    "defaultMessage": "Configure",
+    "content": "Configure"
+  },
+  "attachments.configureAction": {
+    "defaultMessage": "Set up",
+    "content": "Set up"
+  },
+  "attachments.configured": {
+    "defaultMessage": "Configured",
+    "content": "Configured"
+  },
+  "attachments.currentDatabase": {
+    "defaultMessage": "Current database",
+    "content": "Current database"
+  },
+  "attachments.delete": {
+    "defaultMessage": "Delete",
+    "content": "Delete"
+  },
+  "attachments.deleteConfirmDescription": {
+    "defaultMessage": "Are you sure you want to delete \"{0}\"? This only removes it from this task. The file in S3 will not be deleted.",
+    "content": "Are you sure you want to delete \"{0}\"? This only removes it from this task. The file in S3 will not be deleted."
+  },
+  "attachments.deleteConfirmTitle": {
+    "defaultMessage": "Delete attachment?",
+    "content": "Delete attachment?"
+  },
+  "attachments.download": {
+    "defaultMessage": "Download",
+    "content": "Download"
+  },
+  "attachments.dropOrClick": {
+    "defaultMessage": "Click or drag files here to add attachments",
+    "content": "Click or drag files here to add attachments"
+  },
+  "attachments.edit": {
+    "defaultMessage": "Edit",
+    "content": "Edit"
+  },
+  "attachments.editTitle": {
+    "defaultMessage": "Edit S3 Configuration",
+    "content": "Edit S3 Configuration"
+  },
+  "attachments.endpoint": {
+    "defaultMessage": "Endpoint URL",
+    "content": "Endpoint URL"
+  },
+  "attachments.endpointDesc": {
+    "defaultMessage": "S3-compatible endpoint, e.g. https://s3.amazonaws.com",
+    "content": "S3-compatible endpoint, e.g. https://s3.amazonaws.com"
+  },
+  "attachments.failed": {
+    "defaultMessage": "Failed",
+    "content": "Failed"
+  },
+  "attachments.file": {
+    "defaultMessage": "FILE",
+    "content": "FILE"
+  },
+  "attachments.forcePathStyle": {
+    "defaultMessage": "Force Path Style (for MinIO and some self-hosted S3)",
+    "content": "Force Path Style (for MinIO and some self-hosted S3)"
+  },
+  "attachments.forcePathStyleDesc": {
+    "defaultMessage": "Required for MinIO and some self-hosted S3-compatible servers",
+    "content": "Required for MinIO and some self-hosted S3-compatible servers"
+  },
+  "attachments.forcePathStyleTitle": {
+    "defaultMessage": "Force Path Style",
+    "content": "Force Path Style"
+  },
+  "attachments.goToSettings": {
+    "defaultMessage": "Open Settings",
+    "content": "Open Settings"
+  },
+  "attachments.heading": {
+    "defaultMessage": "Attachments",
+    "content": "Attachments"
+  },
+  "attachments.hide": {
+    "defaultMessage": "Hide",
+    "content": "Hide"
+  },
+  "attachments.intro": {
+    "defaultMessage": "Configure S3-compatible storage for attachments in ",
+    "content": "Configure S3-compatible storage for attachments in "
+  },
+  "attachments.introSuffix": {
+    "defaultMessage": ". Configuration is stored locally on this device.",
+    "content": ". Configuration is stored locally on this device."
+  },
+  "attachments.keyPrefix": {
+    "defaultMessage": "Key Prefix",
+    "content": "Key Prefix"
+  },
+  "attachments.keyPrefixDesc": {
+    "defaultMessage": "Optional prefix applied to every object key",
+    "content": "Optional prefix applied to every object key"
+  },
+  "attachments.notConfigured": {
+    "defaultMessage": "S3 storage not configured",
+    "content": "S3 storage not configured"
+  },
+  "attachments.notConfiguredDesc": {
+    "defaultMessage": "Add S3-compatible storage to enable attachments for tasks and projects.",
+    "content": "Add S3-compatible storage to enable attachments for tasks and projects."
+  },
+  "attachments.notConfiguredStatus": {
+    "defaultMessage": "unavailable",
+    "content": "unavailable"
+  },
+  "attachments.notConfiguredWarning": {
+    "defaultMessage": "Storage not set up",
+    "content": "Storage not set up"
+  },
+  "attachments.region": {
+    "defaultMessage": "Region",
+    "content": "Region"
+  },
+  "attachments.regionDesc": {
+    "defaultMessage": "Region code, e.g. us-east-1 or auto for Cloudflare R2",
+    "content": "Region code, e.g. us-east-1 or auto for Cloudflare R2"
+  },
+  "attachments.retry": {
+    "defaultMessage": "Retry",
+    "content": "Retry"
+  },
+  "attachments.save": {
+    "defaultMessage": "Save",
+    "content": "Save"
+  },
+  "attachments.saved": {
+    "defaultMessage": "S3 configuration saved",
+    "content": "S3 configuration saved"
+  },
+  "attachments.saving": {
+    "defaultMessage": "Saving…",
+    "content": "Saving…"
+  },
+  "attachments.secretAccessKey": {
+    "defaultMessage": "Secret Access Key",
+    "content": "Secret Access Key"
+  },
+  "attachments.secretAccessKeyDesc": {
+    "defaultMessage": "Stored locally on this device only",
+    "content": "Stored locally on this device only"
+  },
+  "attachments.show": {
+    "defaultMessage": "Show",
+    "content": "Show"
+  },
+  "attachments.summary": {
+    "defaultMessage": "{0} files · {1}",
+    "content": "{0} files · {1}"
+  },
+  "attachments.switchConfirmAction": {
+    "defaultMessage": "Cancel uploads and switch",
+    "content": "Cancel uploads and switch"
+  },
+  "attachments.switchConfirmDescription": {
+    "defaultMessage": "{0} file(s) are still uploading. Switching will cancel them.",
+    "content": "{0} file(s) are still uploading. Switching will cancel them."
+  },
+  "attachments.switchConfirmTitle": {
+    "defaultMessage": "Switch database?",
+    "content": "Switch database?"
+  },
+  "attachments.test": {
+    "defaultMessage": "Test Connection",
+    "content": "Test Connection"
+  },
+  "attachments.testFailed": {
+    "defaultMessage": "Connection failed",
+    "content": "Connection failed"
+  },
+  "attachments.testing": {
+    "defaultMessage": "Testing…",
+    "content": "Testing…"
+  },
+  "attachments.testSuccess": {
+    "defaultMessage": "✓ Connection successful",
+    "content": "✓ Connection successful"
+  },
+  "attachments.uploadFailed": {
+    "defaultMessage": "Upload failed",
+    "content": "Upload failed"
+  },
+  "attachments.uploading": {
+    "defaultMessage": "Uploading",
+    "content": "Uploading"
+  },
   "cancel": {
     "defaultMessage": "Cancel",
     "content": "Cancel"
@@ -739,6 +971,14 @@
   "errorReadingMetadata": {
     "defaultMessage": "Error reading metadata for {0}:",
     "content": "Error reading metadata for {0}:"
+  },
+  "form.hide": {
+    "defaultMessage": "Hide",
+    "content": "Hide"
+  },
+  "form.show": {
+    "defaultMessage": "Show",
+    "content": "Show"
   },
   "futureProjects": {
     "defaultMessage": "Future Projects",
@@ -1399,6 +1639,10 @@
   "settings.appearance": {
     "defaultMessage": "Appearance",
     "content": "Appearance"
+  },
+  "settings.attachments": {
+    "defaultMessage": "Attachments",
+    "content": "Attachments"
   },
   "settings.back_to_app": {
     "defaultMessage": "Back to App",

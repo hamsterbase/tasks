@@ -23,10 +23,11 @@ interface TaskItemTagsOptions {
   startDate?: number;
   dueDate?: number;
   tags?: string[];
+  attachmentCount?: number;
 }
 
 export function getTaskItemTags(model: ITaskModelData, options: TaskItemTagsOptions): ResultItem[] {
-  const { taskId, hideProjectTitle, completionAt, status, startDate, tags, dueDate } = options;
+  const { taskId, hideProjectTitle, completionAt, status, startDate, tags, dueDate, attachmentCount } = options;
   const res: ResultItem[] = [];
 
   if (!hideProjectTitle) {
@@ -77,6 +78,15 @@ export function getTaskItemTags(model: ITaskModelData, options: TaskItemTagsOpti
         type: 'CalendarIcon',
       },
       label: formatCompletionAt(completionAt),
+    });
+  }
+
+  if (attachmentCount && attachmentCount > 0) {
+    res.push({
+      icon: {
+        type: 'AttachmentIcon',
+      },
+      label: `${attachmentCount}`,
     });
   }
 

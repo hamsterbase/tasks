@@ -9,7 +9,9 @@ import { createProjectWithChildren } from '@/core/state/tasks/createProject/crea
 import { CreateProjectWithChildrenParams } from '@/core/state/tasks/createProject/types';
 import { ITaskModelData } from '@/core/type';
 import {
+  AttachmentSchema,
   CreateAreaSchema,
+  CreateAttachmentSchema,
   CreateProjectHeadingSchema,
   CreateProjectSchema,
   CreateReminderSchema,
@@ -251,6 +253,18 @@ export class WorkbenchTodoService implements ITodoService {
 
   getReminders(): Map<TreeID, ReminderWithId[]> {
     return this.taskModel.getReminders();
+  }
+
+  addAttachment(data: CreateAttachmentSchema): void {
+    return this.taskModel.addAttachment(data);
+  }
+
+  softDeleteAttachment(attachmentId: string): void {
+    return this.taskModel.softDeleteAttachment(attachmentId);
+  }
+
+  listAllAttachments(): AttachmentSchema[] {
+    return this.taskModel.listAllAttachments();
   }
 
   fireTaskCommand(command: TaskCommand): void {

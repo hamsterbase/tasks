@@ -18,6 +18,7 @@ import { getTaskItemTags } from '@/core/state/getTaskItemTags';
 import { useService } from '@/hooks/use-service';
 import { useSync } from '@/hooks/use-sync';
 import { useContextKeyValue } from '@/hooks/useContextKeyValue';
+import { IAttachmentUploadService } from '@/services/attachment/common/attachmentUploadService';
 import { ITodoService } from '@/services/todo/common/todoService';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
@@ -152,6 +153,9 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
   });
 
   const todoService = useService(ITodoService);
+  const attachmentService = useService(IAttachmentUploadService);
+  useWatchEvent(attachmentService.onChange);
+  const attachmentCount = attachmentService.listAttachmentsByParent(task.uid).length;
   const tags = getTaskItemTags(todoService.modelState, {
     taskId: task.id,
     startDate: task.startDate,
@@ -160,6 +164,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
     status: task.status,
     tags: task.tags,
     dueDate: task.dueDate,
+    attachmentCount,
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -29,10 +29,13 @@ import {
   CircleX,
   Cloud,
   CloudAlert,
+  CloudOff,
   Copy,
   Download,
   Database,
+  File,
   FileText,
+  Image,
   Filter,
   Flag,
   GripVertical,
@@ -51,6 +54,7 @@ import {
   Notebook,
   Palette,
   PanelLeft,
+  Paperclip,
   PenLine,
   Plus,
   RefreshCw,
@@ -84,6 +88,7 @@ export const InboxIcon = Inbox;
 export const LogIcon = CircleCheck;
 export const MenuIcon = MoreVertical;
 export const NoteIcon = FileText;
+export const FileIcon = File;
 export const ScheduledIcon = Calendar;
 export const RightArrowIcon = ArrowRight;
 export const SwitchDatabaseIcon = ArrowRightLeft;
@@ -107,6 +112,8 @@ export const DeleteIcon = X;
 export const CloudIcon = Cloud;
 export const SelfHostedSyncIcon = ServerIcon;
 export const CloudOffIcon = CloudAlert;
+export const CloudSlashIcon = CloudOff;
+export const ImageIcon = Image;
 export const DatabaseIcon = Database;
 export const UserIcon = User;
 export const ChevronRightIcon = ChevronRight;
@@ -158,3 +165,4 @@ export const BellIcon = Bell;
 export const CircleXIcon = CircleX;
 export const TargetIcon = FlagIcon;
 export const TagsIcon = Tags;
+export const PaperclipIcon = Paperclip;

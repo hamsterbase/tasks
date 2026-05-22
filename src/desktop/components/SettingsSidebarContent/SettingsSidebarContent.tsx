@@ -4,6 +4,7 @@ import {
   CloudIcon,
   DownloadIcon,
   PaletteIcon,
+  PaperclipIcon,
   SelfHostedSyncIcon,
   UserIcon,
 } from '@/components/icons';
@@ -57,6 +58,12 @@ const groups = [
         label: localize('settings.import_export', 'Import & Export'),
         path: '/desktop/settings/import-export',
         icon: DownloadIcon,
+      },
+      {
+        id: 'attachments',
+        label: localize('settings.attachments', 'Attachments'),
+        path: '/desktop/settings/attachments',
+        icon: PaperclipIcon,
       },
     ],
   },

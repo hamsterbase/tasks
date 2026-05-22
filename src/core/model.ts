@@ -31,6 +31,8 @@ import {
   UpdateProjectSchema,
   UpdateReminderSchema,
   UpdateTaskSchema,
+  AttachmentSchema,
+  CreateAttachmentSchema,
 } from './type.ts';
 import { patch } from './utils.ts';
 
@@ -60,6 +62,7 @@ export class TaskModel {
       maxUndoSteps: 1000,
       mergeInterval: 0,
     });
+
     this.doc.subscribeLocalUpdates(() => {
       this._onModelChange.fire();
     });
@@ -428,6 +431,32 @@ export class TaskModel {
     });
 
     return groupedReminders;
+  }
+
+  addAttachment(data: CreateAttachmentSchema): void {
+    const attachmentsMap = this.doc.getMap('attachments');
+    const entry: AttachmentSchema = {
+      ...data,
+      createdAt: Date.now(),
+    };
+    attachmentsMap.set(data.id, entry);
+    this.doc.commit();
+  }
+
+  softDeleteAttachment(attachmentId: string): void {
+    const attachmentsMap = this.doc.getMap('attachments');
+    const existing = attachmentsMap.get(attachmentId) as AttachmentSchema | undefined;
+    if (!existing || existing.deletedAt) {
+      return;
+    }
+    attachmentsMap.set(attachmentId, { ...existing, deletedAt: Date.now() });
+    this.doc.commit();
+  }
+
+  listAllAttachments(): AttachmentSchema[] {
+    const attachmentsMap = this.doc.getMap('attachments');
+    const data = attachmentsMap.toJSON() as Record<string, AttachmentSchema>;
+    return Object.values(data);
   }
 
   private updateTaskStatus(taskId: TreeID, status: ItemStatus, completionAt?: number) {

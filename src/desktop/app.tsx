@@ -1,6 +1,8 @@
 import { checkPlatform } from '@/base/browser/checkPlatform';
 import { SidebarLayout } from '@/desktop/components/SidebarLayout/SidebarLayout.tsx';
 import { desktopStyles } from '@/desktop/theme/main';
+import { AttachmentsConfigOverlay } from '@/desktop/overlay/attachmentsConfig/AttachmentsConfigOverlay';
+import { ImagePreviewOverlay } from '@/desktop/overlay/imagePreview/ImagePreviewOverlay';
 import { CreateDatabaseOverlay } from '@/desktop/overlay/createDatabase/CreateDatabaseOverlay';
 import { DatePickerOverlay } from '@/desktop/overlay/datePicker/DatePickerOverlay';
 import { DesktopDialog } from '@/desktop/overlay/desktopDialog/DesktopDialog';
@@ -23,6 +25,7 @@ import { AccountSettings } from '@/desktop/pages/settings-page/AccountSettings';
 import { AppearanceSettings } from '@/desktop/pages/settings-page/AppearanceSettings';
 import { SyncSettings } from '@/desktop/pages/settings-page/databases/SyncSettings.tsx';
 import { ImportExportSettings } from '@/desktop/pages/settings-page/ImportExportSettings';
+import { AttachmentsSettings } from '@/desktop/pages/settings-page/attachments/AttachmentsSettings';
 import { LoginPage } from '@/desktop/pages/settings-page/Login/LoginPage.tsx';
 import { RegisterPage } from '@/desktop/pages/settings-page/Register/RegisterPage.tsx';
 import { SelfHostedSyncSettings } from '@/desktop/pages/settings-page/sync/SelfHostedSyncSettings.tsx';
@@ -192,6 +195,10 @@ export const App = () => {
                   element: <ImportExportSettings />,
                 },
                 {
+                  path: 'attachments',
+                  element: <AttachmentsSettings />,
+                },
+                {
                   path: 'ai',
                   element: <AISettings />,
                 },
@@ -222,6 +229,8 @@ export const App = () => {
       <DesktopDialog />
       <DesktopMessage />
       <CreateDatabaseOverlay />
+      <AttachmentsConfigOverlay />
+      <ImagePreviewOverlay />
       <TreeSelectOverlay />
       <CommandPaletteOverlay />
     </div>

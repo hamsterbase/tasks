@@ -3,8 +3,10 @@ import { getProjectItemTags } from '@/core/state/getProjectItemTags';
 import { ProjectInfoState } from '@/core/state/type';
 import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
+import { useWatchEvent } from '@/hooks/use-watch-event';
 import { localize } from '@/nls';
 import { TestIds } from '@/testIds';
+import { IAttachmentUploadService } from '@/services/attachment/common/attachmentUploadService';
 import { ITodoService } from '@/services/todo/common/todoService';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
@@ -39,10 +41,14 @@ export const DesktopProjectListItem: React.FC<DesktopProjectListItemProps> = ({
   };
 
   const todoService = useService(ITodoService);
+  const attachmentService = useService(IAttachmentUploadService);
+  useWatchEvent(attachmentService.onChange);
+  const attachmentCount = attachmentService.listAttachmentsByParent(project.uid).length;
 
   const tags = getProjectItemTags(todoService.modelState, {
     projectId: project.id,
     hideParent: hideProjectTitle ?? false,
+    attachmentCount,
   });
 
   return (

@@ -236,3 +236,25 @@ export type ReminderWithId = {
   itemId: TreeID;
   time: number;
 };
+
+export type AttachmentSchema = {
+  id: string;
+  parentUid: string;
+  filename: string;
+  size: number;
+  mimetype: string;
+  hasThumbnail: boolean;
+  s3Key: string;
+  createdAt: number;
+  deletedAt?: number;
+};
+
+export type CreateAttachmentSchema = {
+  id: string;
+  parentUid: string;
+  filename: string;
+  size: number;
+  mimetype: string;
+  hasThumbnail: boolean;
+  s3Key: string;
+};

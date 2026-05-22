@@ -5,6 +5,7 @@ import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { useBack } from '@/hooks/useBack';
 import { localize } from '@/nls';
+import { IAttachmentUploadService } from '@/services/attachment/common/attachmentUploadService';
 import { DeviceDatabaseItem, ICloudService } from '@/services/cloud/common/cloudService';
 import { useState, useEffect } from 'react';
 
@@ -14,6 +15,7 @@ export const useDatabaseActions = (
   mutate: () => Promise<unknown>
 ) => {
   const cloudService = useService(ICloudService);
+  const attachmentService = useService(IAttachmentUploadService);
   useWatchEvent(cloudService.onSessionChange);
   const dialog = useDesktopDialog();
   const back = useBack();
@@ -116,10 +118,8 @@ export const useDatabaseActions = (
     });
   };
 
-  const handleSwitchToDatabase = async () => {
+  const performSwitch = async () => {
     if (!id || !database) return;
-    setLastClickTime(new Date());
-    await cloudService.syncImmediately();
     if (database.type === 'cloud') {
       if (database.exists) {
         await cloudService.switchToLocalDatabase(id);
@@ -167,6 +167,31 @@ export const useDatabaseActions = (
     } else if (database.type === 'offline' || database.type === 'local') {
       await cloudService.switchToLocalDatabase(id);
     }
+  };
+
+  const handleSwitchToDatabase = async () => {
+    if (!id || !database) return;
+    setLastClickTime(new Date());
+    await cloudService.syncImmediately();
+    const activeUploads = attachmentService.getActiveUploadCount();
+    if (activeUploads > 0) {
+      dialog({
+        title: localize('attachments.switchConfirmTitle', 'Switch database?'),
+        description: localize(
+          'attachments.switchConfirmDescription',
+          '{0} file(s) are still uploading. Switching will cancel them.',
+          activeUploads
+        ),
+        confirmText: localize('attachments.switchConfirmAction', 'Cancel uploads and switch'),
+        cancelText: localize('common.cancel', 'Cancel'),
+        onConfirm: async () => {
+          await attachmentService.cancelAllUploads();
+          await performSwitch();
+        },
+      });
+      return;
+    }
+    await performSwitch();
   };
 
   return {

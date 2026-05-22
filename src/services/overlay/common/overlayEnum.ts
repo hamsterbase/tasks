@@ -17,4 +17,6 @@ export enum OverlayEnum {
   desktopRecurringTaskSettings = 'desktopRecurringTaskSettings',
   mobileRecurringTaskSettings = 'mobileRecurringTaskSettings',
   commandPalette = 'commandPalette',
+  attachmentsConfig = 'attachmentsConfig',
+  imagePreview = 'imagePreview',
 }

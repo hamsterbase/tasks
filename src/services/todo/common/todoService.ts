@@ -1,7 +1,9 @@
 import { BatchEditParams, BatchEditResult } from '@/core/state/tasks/batchEdit/batchEdit';
 import { CreateProjectWithChildrenParams } from '@/core/state/tasks/createProject/types';
 import {
+  AttachmentSchema,
   CreateAreaSchema,
+  CreateAttachmentSchema,
   CreateProjectHeadingSchema,
   CreateProjectSchema,
   CreateReminderSchema,
@@ -83,6 +85,10 @@ export interface ITodoService {
   updateReminder(reminderId: string, data: UpdateReminderSchema): void;
   deleteReminder(reminderId: string): void;
   getReminders(): Map<TreeID, ReminderWithId[]>;
+
+  addAttachment(data: CreateAttachmentSchema): void;
+  softDeleteAttachment(attachmentId: string): void;
+  listAllAttachments(): AttachmentSchema[];
 
   onTaskCommands: Event<TaskCommand>;
 

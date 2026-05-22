@@ -304,6 +304,238 @@
     "defaultMessage": "New Area",
     "content": "新领域"
   },
+  "attachments.accessKeyId": {
+    "defaultMessage": "Access Key ID",
+    "content": "Access Key ID"
+  },
+  "attachments.accessKeyIdDesc": {
+    "defaultMessage": "Your S3 access key ID",
+    "content": "S3 访问密钥 ID"
+  },
+  "attachments.add": {
+    "defaultMessage": "Add attachment",
+    "content": "添加附件"
+  },
+  "attachments.addTitle": {
+    "defaultMessage": "Configure S3 Storage",
+    "content": "配置 S3 存储"
+  },
+  "attachments.bucket": {
+    "defaultMessage": "Bucket",
+    "content": "存储桶"
+  },
+  "attachments.bucketDesc": {
+    "defaultMessage": "Name of the storage bucket",
+    "content": "存储桶名称"
+  },
+  "attachments.clear": {
+    "defaultMessage": "Clear",
+    "content": "清除"
+  },
+  "attachments.clearConfirmDescription": {
+    "defaultMessage": "Existing attachments will become inaccessible until you reconfigure S3. The files in S3 will not be deleted.",
+    "content": "在重新配置 S3 之前，已有附件将无法访问。S3 上的文件不会被删除。"
+  },
+  "attachments.clearConfirmTitle": {
+    "defaultMessage": "Clear S3 configuration?",
+    "content": "清除 S3 配置？"
+  },
+  "attachments.cleared": {
+    "defaultMessage": "S3 configuration cleared",
+    "content": "S3 配置已清除"
+  },
+  "attachments.configure": {
+    "defaultMessage": "Configure",
+    "content": "配置"
+  },
+  "attachments.configureAction": {
+    "defaultMessage": "Set up",
+    "content": "配置"
+  },
+  "attachments.configured": {
+    "defaultMessage": "Configured",
+    "content": "已配置"
+  },
+  "attachments.currentDatabase": {
+    "defaultMessage": "Current database",
+    "content": "当前数据库"
+  },
+  "attachments.delete": {
+    "defaultMessage": "Delete",
+    "content": "删除"
+  },
+  "attachments.deleteConfirmDescription": {
+    "defaultMessage": "Are you sure you want to delete \"{0}\"? This only removes it from this task. The file in S3 will not be deleted.",
+    "content": "确定要删除「{0}」吗？仅从该任务中移除，S3 上的文件不会被删除。"
+  },
+  "attachments.deleteConfirmTitle": {
+    "defaultMessage": "Delete attachment?",
+    "content": "删除附件？"
+  },
+  "attachments.download": {
+    "defaultMessage": "Download",
+    "content": "下载"
+  },
+  "attachments.dropOrClick": {
+    "defaultMessage": "Click or drag files here to add attachments",
+    "content": "点击或拖拽文件到此处添加附件"
+  },
+  "attachments.edit": {
+    "defaultMessage": "Edit",
+    "content": "编辑"
+  },
+  "attachments.editTitle": {
+    "defaultMessage": "Edit S3 Configuration",
+    "content": "编辑 S3 配置"
+  },
+  "attachments.endpoint": {
+    "defaultMessage": "Endpoint URL",
+    "content": "Endpoint 地址"
+  },
+  "attachments.endpointDesc": {
+    "defaultMessage": "S3-compatible endpoint, e.g. https://s3.amazonaws.com",
+    "content": "S3 兼容的端点地址，例如 https://s3.amazonaws.com"
+  },
+  "attachments.failed": {
+    "defaultMessage": "Failed",
+    "content": "失败"
+  },
+  "attachments.file": {
+    "defaultMessage": "FILE",
+    "content": "FILE"
+  },
+  "attachments.forcePathStyle": {
+    "defaultMessage": "Force Path Style (for MinIO and some self-hosted S3)",
+    "content": "强制 Path Style（MinIO 和部分自建 S3 需要）"
+  },
+  "attachments.forcePathStyleDesc": {
+    "defaultMessage": "Required for MinIO and some self-hosted S3-compatible servers",
+    "content": "MinIO 和部分自建 S3 兼容服务需要开启"
+  },
+  "attachments.forcePathStyleTitle": {
+    "defaultMessage": "Force Path Style",
+    "content": "强制 Path Style"
+  },
+  "attachments.goToSettings": {
+    "defaultMessage": "Open Settings",
+    "content": "打开设置"
+  },
+  "attachments.heading": {
+    "defaultMessage": "Attachments",
+    "content": "附件"
+  },
+  "attachments.hide": {
+    "defaultMessage": "Hide",
+    "content": "隐藏"
+  },
+  "attachments.intro": {
+    "defaultMessage": "Configure S3-compatible storage for attachments in ",
+    "content": "为 "
+  },
+  "attachments.introSuffix": {
+    "defaultMessage": ". Configuration is stored locally on this device.",
+    "content": " 配置 S3 兼容的附件存储。配置仅保存在本机。"
+  },
+  "attachments.keyPrefix": {
+    "defaultMessage": "Key Prefix",
+    "content": "Key 前缀"
+  },
+  "attachments.keyPrefixDesc": {
+    "defaultMessage": "Optional prefix applied to every object key",
+    "content": "可选前缀，附加到每个对象 key 前"
+  },
+  "attachments.notConfigured": {
+    "defaultMessage": "S3 storage not configured",
+    "content": "尚未配置 S3 存储"
+  },
+  "attachments.notConfiguredDesc": {
+    "defaultMessage": "Add S3-compatible storage to enable attachments for tasks and projects.",
+    "content": "配置 S3 兼容存储后即可为任务和项目添加附件。"
+  },
+  "attachments.notConfiguredStatus": {
+    "defaultMessage": "unavailable",
+    "content": "不可用"
+  },
+  "attachments.notConfiguredWarning": {
+    "defaultMessage": "Storage not set up",
+    "content": "存储未配置"
+  },
+  "attachments.region": {
+    "defaultMessage": "Region",
+    "content": "区域"
+  },
+  "attachments.regionDesc": {
+    "defaultMessage": "Region code, e.g. us-east-1 or auto for Cloudflare R2",
+    "content": "区域代码，如 us-east-1；Cloudflare R2 填 auto"
+  },
+  "attachments.retry": {
+    "defaultMessage": "Retry",
+    "content": "重试"
+  },
+  "attachments.save": {
+    "defaultMessage": "Save",
+    "content": "保存"
+  },
+  "attachments.saved": {
+    "defaultMessage": "S3 configuration saved",
+    "content": "S3 配置已保存"
+  },
+  "attachments.saving": {
+    "defaultMessage": "Saving…",
+    "content": "保存中…"
+  },
+  "attachments.secretAccessKey": {
+    "defaultMessage": "Secret Access Key",
+    "content": "Secret Access Key"
+  },
+  "attachments.secretAccessKeyDesc": {
+    "defaultMessage": "Stored locally on this device only",
+    "content": "仅保存在本机"
+  },
+  "attachments.show": {
+    "defaultMessage": "Show",
+    "content": "显示"
+  },
+  "attachments.summary": {
+    "defaultMessage": "{0} files · {1}",
+    "content": "{0} 个文件 · {1}"
+  },
+  "attachments.switchConfirmAction": {
+    "defaultMessage": "Cancel uploads and switch",
+    "content": "取消上传并切换"
+  },
+  "attachments.switchConfirmDescription": {
+    "defaultMessage": "{0} file(s) are still uploading. Switching will cancel them.",
+    "content": "还有 {0} 个文件正在上传，切换会取消它们。"
+  },
+  "attachments.switchConfirmTitle": {
+    "defaultMessage": "Switch database?",
+    "content": "切换数据库？"
+  },
+  "attachments.test": {
+    "defaultMessage": "Test Connection",
+    "content": "测试连接"
+  },
+  "attachments.testFailed": {
+    "defaultMessage": "Connection failed",
+    "content": "连接失败"
+  },
+  "attachments.testing": {
+    "defaultMessage": "Testing…",
+    "content": "测试中…"
+  },
+  "attachments.testSuccess": {
+    "defaultMessage": "✓ Connection successful",
+    "content": "✓ 连接成功"
+  },
+  "attachments.uploadFailed": {
+    "defaultMessage": "Upload failed",
+    "content": "上传失败"
+  },
+  "attachments.uploading": {
+    "defaultMessage": "Uploading",
+    "content": "上传中"
+  },
   "cancel": {
     "defaultMessage": "Cancel",
     "content": "取消"
@@ -739,6 +971,14 @@
   "errorReadingMetadata": {
     "defaultMessage": "Error reading metadata for {0}:",
     "content": "读取{0}的元数据时出错："
+  },
+  "form.hide": {
+    "defaultMessage": "Hide",
+    "content": "隐藏"
+  },
+  "form.show": {
+    "defaultMessage": "Show",
+    "content": "显示"
   },
   "futureProjects": {
     "defaultMessage": "Future Projects",
@@ -1399,6 +1639,10 @@
   "settings.appearance": {
     "defaultMessage": "Appearance",
     "content": "外观"
+  },
+  "settings.attachments": {
+    "defaultMessage": "Attachments",
+    "content": "附件"
   },
   "settings.back_to_app": {
     "defaultMessage": "Back to App",

@@ -16,6 +16,7 @@ import { TestIds } from '@/testIds';
 import type { TreeID } from 'loro-crdt';
 import React from 'react';
 import { useParams } from 'react-router';
+import { AttachmentSection } from '../../attachment/AttachmentSection';
 import { TagsField } from '../../TagsField';
 import { NotesField } from '../components/NotesField';
 import { TaskDateField } from '../components/TaskDateField';
@@ -173,6 +174,7 @@ const ProjectDetailPanelContent: React.FC<IProjectDetailPanelContentProps> = ({ 
           <p className={desktopStyles.DetailViewHint}>
             {localize('project.task_progress_hint', 'Select a task from the middle column to view its details')}
           </p>
+          <AttachmentSection parentUid={project.uid} />
         </div>
       </div>
     </div>
