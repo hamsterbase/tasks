@@ -34,6 +34,8 @@ export const TestIds = {
     MenuButton: 'project-detail-menu-button',
     /** Cancel project item in the project detail menu */
     CancelProjectMenuItem: 'project-detail-cancel-project-menu-item',
+    /** Add heading item in the project detail menu */
+    AddHeadingMenuItem: 'project-detail-add-heading-menu-item',
   },
   HeadingDetail: {
     /** Menu button in heading detail panel header */

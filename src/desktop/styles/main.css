@@ -11,7 +11,7 @@
 @import './reset.css';
 
 :root {
-  --separator-border: transparent;
+  --separator-border: transparent !important;
 }
 
 body {

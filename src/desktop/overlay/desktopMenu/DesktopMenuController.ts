@@ -15,13 +15,14 @@ import {
 export interface IMenuConfig {
   label: string;
   testId?: string;
-  icon?: 'plus-circle' | 'copy' | 'trash' | 'x-circle' | 'archive';
+  icon?: 'plus-circle' | 'copy' | 'trash' | 'x-circle' | 'archive' | 'heading';
   checked?: boolean;
   danger?: boolean;
   dividerAbove?: boolean;
   onSelect?: () => void;
   submenu?: Array<IMenuSubmenuConfig[]>;
   disabled?: boolean;
+  shortcut?: string;
 }
 
 export interface IMenuSubmenuConfig {

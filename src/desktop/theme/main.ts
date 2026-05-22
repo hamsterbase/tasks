@@ -672,6 +672,7 @@ export const desktopStyles = {
   DesktopMenuItemCheckbox: /*tw*/ 'size-3.5 flex items-center justify-center flex-shrink-0',
   DesktopMenuItemCheckIcon: /*tw*/ 'size-3.5 flex-shrink-0 text-t2',
   DesktopMenuItemChevron: /*tw*/ 'size-3.5 text-t3',
+  DesktopMenuItemShortcut: /*tw*/ 'ml-2 text-t3 text-xs flex-shrink-0',
 
   DesktopSubmenuContainer:
     /*tw*/ 'fixed bg-bg1 border border-line-regular rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.08)] p-1',

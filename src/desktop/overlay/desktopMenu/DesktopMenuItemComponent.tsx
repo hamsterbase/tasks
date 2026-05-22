@@ -4,6 +4,7 @@ import {
   ChevronRightIcon,
   CircleXIcon,
   CopyIcon,
+  HeadingIcon,
   PlusCircleIcon,
   TrashIcon,
 } from '@/components/icons';
@@ -46,6 +47,8 @@ export const DesktopMenuItemComponent: React.FC<DesktopMenuItemComponentProps> =
         return <CircleXIcon className={desktopStyles.DesktopMenuItemIcon} />;
       case 'archive':
         return <ArchiveIcon className={desktopStyles.DesktopMenuItemIcon} />;
+      case 'heading':
+        return <HeadingIcon className={desktopStyles.DesktopMenuItemIcon} />;
       default:
         return <span className={desktopStyles.DesktopMenuItemIconEmpty} />;
     }
@@ -89,6 +92,7 @@ export const DesktopMenuItemComponent: React.FC<DesktopMenuItemComponentProps> =
         )}
         <span className={desktopStyles.DesktopMenuItemLabel}>{item.label}</span>
       </div>
+      {item.shortcut && <span className={desktopStyles.DesktopMenuItemShortcut}>{item.shortcut}</span>}
       {item.submenu && item.submenu.length > 0 && <ChevronRightIcon className={desktopStyles.DesktopMenuItemChevron} />}
     </button>
   );

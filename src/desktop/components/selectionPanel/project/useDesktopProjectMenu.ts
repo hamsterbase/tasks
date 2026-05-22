@@ -7,11 +7,13 @@ import { ITodoService } from '@/services/todo/common/todoService.ts';
 import { TestIds } from '@/testIds.ts';
 import type { TreeID } from 'loro-crdt';
 import { useNavigate } from 'react-router';
+import { ICommandService } from 'vscf/platform/commands/common';
 import { IInstantiationService } from 'vscf/platform/instantiation/common.ts';
 
 export const useDesktopProjectMenu = (taskId: TreeID) => {
   const instantiationService = useService(IInstantiationService);
   const todoService = useService(ITodoService);
+  const commandService = useService(ICommandService);
   const navigate = useNavigate();
   const dialog = useDesktopDialog();
 
@@ -76,6 +78,10 @@ export const useDesktopProjectMenu = (taskId: TreeID) => {
     });
   };
 
+  const handleAddHeading = () => {
+    commandService.executeCommand('CreateHeader');
+  };
+
   const handleDeleteProject = () => {
     dialog({
       title: localize('task.delete_project_confirm_title', 'Delete Project'),
@@ -94,11 +100,19 @@ export const useDesktopProjectMenu = (taskId: TreeID) => {
     const project = getProject(todoService.modelState, taskId);
     return [
       {
+        label: localize('project.add_heading', 'Add Heading'),
+        testId: TestIds.ProjectDetailPanel.AddHeadingMenuItem,
+        onSelect: handleAddHeading,
+        icon: 'heading',
+        shortcut: 'H',
+      },
+      {
         label: localize('project.cancel_project', 'Cancel project'),
         testId: TestIds.ProjectDetailPanel.CancelProjectMenuItem,
         onSelect: handleCancelProject,
         icon: 'x-circle',
         disabled: project?.status === 'canceled',
+        dividerAbove: true,
       },
       {
         label: localize('task.delete_project', 'Delete project'),
