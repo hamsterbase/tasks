@@ -3,6 +3,7 @@ import { buildTaskRuleItem } from '@/core/filter/taskRuleSchema';
 import { FilterOption, isTaskVisible } from '@/core/time/filterProjectAndTask';
 import type { TreeID } from 'loro-crdt';
 import { getTaskInfo } from '../getTaskInfo';
+import { getTopLevelTaskList } from '../getTopLevelTaskList';
 import type { TagFilter } from '../getProjectHeadingAndTasks';
 import type { ITaskModelData, TaskInfo } from '../type';
 import { buildTaskRuleContext } from './buildTaskRuleContext';
@@ -42,7 +43,7 @@ export function matchRuleIds(rule: string, modelData: ITaskModelData): TreeID[] 
   if (!compiled.success) return [];
 
   const ids: TreeID[] = [];
-  for (const obj of modelData.taskList) {
+  for (const obj of getTopLevelTaskList(modelData)) {
     if (obj.type !== 'task') continue;
     const ctx = buildTaskRuleContext(modelData, obj.parentId);
     const ruleItem = buildTaskRuleItem(obj, ctx);
@@ -81,7 +82,7 @@ export function getViewItems(
       return { items, groups: [], itemIds: [], willDisappearObjectIdSet, allTags: [] };
     }
     candidates = [];
-    for (const obj of modelData.taskList) {
+    for (const obj of getTopLevelTaskList(modelData)) {
       if (obj.type !== 'task') continue;
       const ctx = buildTaskRuleContext(modelData, obj.parentId);
       const ruleItem = buildTaskRuleItem(obj, ctx);
