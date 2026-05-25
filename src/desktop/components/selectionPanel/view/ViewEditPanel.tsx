@@ -129,7 +129,7 @@ export const ViewEditPanel: React.FC<ViewEditPanelProps> = ({ viewUid }) => {
           <NotesField
             value={view.rule}
             onSave={(value) => todoService.updateView(viewUid, { rule: value })}
-            placeholder="item.status === 'created'"
+            placeholder={localize('view.field.rulePlaceholder', 'Write an expression, or pick a starter on the left')}
             className={desktopStyles.ViewFieldRuleInput}
           />
           {ruleError && <pre className={desktopStyles.ViewRuleError}>{ruleError}</pre>}

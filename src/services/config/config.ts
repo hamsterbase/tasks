@@ -122,7 +122,7 @@ export function aiApiTokenConfigKey(): ConfigKey<string> {
 export function aiModelNameConfigKey(): ConfigKey<string> {
   return {
     key: 'aiModelName',
-    default: 'deepseek-chat',
+    default: 'deepseek-v4-pro',
     check: (value: string) => typeof value === 'string',
   };
 }

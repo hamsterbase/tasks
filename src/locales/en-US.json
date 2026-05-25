@@ -1641,8 +1641,8 @@
     "content": "Model Name"
   },
   "settings.ai.model_name.description": {
-    "defaultMessage": "The AI model to use (e.g., deepseek-chat, gpt-4, gpt-4o)",
-    "content": "The AI model to use (e.g., deepseek-chat, gpt-4, gpt-4o)"
+    "defaultMessage": "The AI model to use (e.g., deepseek-v4-pro, gpt-4, gpt-4o)",
+    "content": "The AI model to use (e.g., deepseek-v4-pro, gpt-4, gpt-4o)"
   },
   "settings.appearance": {
     "defaultMessage": "Appearance",
@@ -2348,6 +2348,34 @@
     "defaultMessage": "Untitled view",
     "content": "Untitled view"
   },
+  "view.docs.ai.copied": {
+    "defaultMessage": "Copied",
+    "content": "Copied"
+  },
+  "view.docs.ai.copyButton": {
+    "defaultMessage": "Copy AI prompt",
+    "content": "Copy AI prompt"
+  },
+  "view.docs.ai.copyFailed": {
+    "defaultMessage": "Failed to fetch AI prompt",
+    "content": "Failed to fetch AI prompt"
+  },
+  "view.docs.ai.copySuccess": {
+    "defaultMessage": "AI prompt copied to clipboard",
+    "content": "AI prompt copied to clipboard"
+  },
+  "view.docs.ai.desc": {
+    "defaultMessage": "Copy the prompt below and send it to ChatGPT, Claude, or another AI along with your request (e.g. \"show my work tasks for this week\"). Paste the rule it returns into the Rule box on the right.",
+    "content": "Copy the prompt below and send it to ChatGPT, Claude, or another AI along with your request (e.g. \"show my work tasks for this week\"). Paste the rule it returns into the Rule box on the right."
+  },
+  "view.docs.ai.title": {
+    "defaultMessage": "AI assist",
+    "content": "AI assist"
+  },
+  "view.docs.ai.viewSource": {
+    "defaultMessage": "View source",
+    "content": "View source"
+  },
   "view.docs.constants": {
     "defaultMessage": "Constants",
     "content": "Constants"
@@ -2356,13 +2384,45 @@
     "defaultMessage": "Fields",
     "content": "Fields"
   },
-  "view.docs.intro": {
-    "defaultMessage": "This view has no rule yet. Pick a starter below, or write your own on the right.",
-    "content": "This view has no rule yet. Pick a starter below, or write your own on the right."
+  "view.docs.introBody": {
+    "defaultMessage": "Pick a starter below, or write your own expression in the Rule editor on the right.",
+    "content": "Pick a starter below, or write your own expression in the Rule editor on the right."
+  },
+  "view.docs.introTitle": {
+    "defaultMessage": "Set a filter rule for this view",
+    "content": "Set a filter rule for this view"
   },
   "view.docs.operators": {
     "defaultMessage": "Operators",
     "content": "Operators"
+  },
+  "view.docs.referenceToggle": {
+    "defaultMessage": "Reference (fields / constants / operators)",
+    "content": "Reference (fields / constants / operators)"
+  },
+  "view.docs.starter.anytime": {
+    "defaultMessage": "Anytime",
+    "content": "Anytime"
+  },
+  "view.docs.starter.dueIn7Days": {
+    "defaultMessage": "Due in next 7 days",
+    "content": "Due in next 7 days"
+  },
+  "view.docs.starter.notCompleted": {
+    "defaultMessage": "Not completed",
+    "content": "Not completed"
+  },
+  "view.docs.starter.overdue": {
+    "defaultMessage": "Overdue",
+    "content": "Overdue"
+  },
+  "view.docs.starter.someday": {
+    "defaultMessage": "Someday",
+    "content": "Someday"
+  },
+  "view.docs.starter.taggedWork": {
+    "defaultMessage": "Tagged 'work'",
+    "content": "Tagged 'work'"
   },
   "view.docs.starters": {
     "defaultMessage": "Starters",
@@ -2375,6 +2435,10 @@
   "view.field.rule": {
     "defaultMessage": "Rule",
     "content": "Rule"
+  },
+  "view.field.rulePlaceholder": {
+    "defaultMessage": "Write an expression, or pick a starter on the left",
+    "content": "Write an expression, or pick a starter on the left"
   },
   "view.menu.delete": {
     "defaultMessage": "Delete view",

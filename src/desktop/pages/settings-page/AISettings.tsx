@@ -61,12 +61,12 @@ export const AISettings: React.FC = () => {
             title={localize('settings.ai.model_name', 'Model Name')}
             description={localize(
               'settings.ai.model_name.description',
-              'The AI model to use (e.g., deepseek-chat, gpt-4, gpt-4o)'
+              'The AI model to use (e.g., deepseek-v4-pro, gpt-4, gpt-4o)'
             )}
             action={{
               type: 'input',
               inputType: 'text',
-              placeholder: 'deepseek-chat',
+              placeholder: 'deepseek-v4-pro',
               currentValue: modelName,
               onChange: setModelName,
             }}

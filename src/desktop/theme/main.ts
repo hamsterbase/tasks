@@ -903,8 +903,7 @@ export const desktopStyles = {
 
   // Views — pages
   ViewDetailEmpty: /*tw*/ 'px-4 py-8 text-sm text-t3 text-center',
-  ViewUnsupportedContainer:
-    'flex flex-col items-center justify-center gap-2 px-6 py-16 mx-auto max-w-md text-center',
+  ViewUnsupportedContainer: 'flex flex-col items-center justify-center gap-2 px-6 py-16 mx-auto max-w-md text-center',
   ViewUnsupportedTitle: /*tw*/ 'text-base font-semibold text-t1',
   ViewUnsupportedBody: /*tw*/ 'text-sm text-t3 leading-6',
 
@@ -912,18 +911,36 @@ export const desktopStyles = {
   ViewRuleHeader: /*tw*/ 'flex items-center gap-1 mb-1',
   ViewRuleHeaderTitle: /*tw*/ 'text-xs text-t2 font-medium',
   ViewFieldRuleInput:
-    'w-full px-2 py-1.5 rounded-md border border-line-light bg-bg1 font-mono text-xs text-t1 focus:outline-none focus:border-brand resize-y',
+    'w-full min-h-15 px-0 mb-2 font-mono text-sm text-t1 placeholder:text-t3 bg-transparent border-none outline-none resize-none leading-5',
   ViewRuleError:
-    'mt-2 px-3 py-2 rounded-md bg-bg3 text-accent-danger font-mono text-xs whitespace-pre overflow-x-auto',
+    'mt-1 mb-3 px-3 py-2 rounded-md bg-bg3 text-accent-danger font-mono text-xs whitespace-pre-wrap break-words overflow-x-auto',
 
-  // Views — empty-rule docs panel (middle column, plain text)
-  RuleDocsContainer: /*tw*/ 'px-6 py-6 max-w-2xl mx-auto w-full flex flex-col gap-5',
-  RuleDocsIntro: /*tw*/ 'text-sm text-t2 leading-6',
-  RuleDocsSectionHeading: /*tw*/ 'text-xs text-t3 font-medium uppercase tracking-wide mb-1.5',
+  // Views — empty-rule docs panel (middle column)
+  RuleDocsContainer: /*tw*/ 'px-6 py-6 max-w-2xl mx-auto w-full flex flex-col gap-6',
+  RuleDocsIntroTitle: /*tw*/ 'text-base font-semibold text-t1',
+  RuleDocsIntroBody: /*tw*/ 'text-sm text-t3 leading-6 mt-1',
+  RuleDocsSectionHeading: /*tw*/ 'text-xs text-t3 font-medium uppercase tracking-wide mb-2',
+  RuleDocsStarterGrid: /*tw*/ 'grid grid-cols-2 gap-2',
+  RuleDocsStarterCard:
+    'flex flex-col gap-1.5 text-left p-3 rounded-md border border-line-light bg-bg1 hover:bg-bg2 hover:border-line-regular transition-colors cursor-pointer',
+  RuleDocsStarterHeader: /*tw*/ 'flex items-center gap-2',
+  RuleDocsStarterIcon: /*tw*/ 'size-3.5 text-t3 shrink-0',
+  RuleDocsStarterIconDanger: /*tw*/ 'size-3.5 text-accent-danger shrink-0',
+  RuleDocsStarterLabel: /*tw*/ 'text-sm text-t1 font-medium',
+  RuleDocsStarterCode: /*tw*/ 'font-mono text-xs text-t3 whitespace-pre-wrap break-words leading-5',
+  RuleDocsAiDesc: /*tw*/ 'text-xs text-t3 leading-5 mb-3',
+  RuleDocsAiActions: /*tw*/ 'flex items-center gap-3',
+  RuleDocsAiCopyButton:
+    'flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-brand text-white text-xs font-medium hover:opacity-90 transition-opacity cursor-pointer',
+  RuleDocsAiCopyIcon: /*tw*/ 'size-3.5',
+  RuleDocsAiViewLink: 'text-xs text-t2 hover:text-t1 transition-colors underline-offset-2 hover:underline',
+  RuleDocsReferenceToggle:
+    'flex items-center gap-1.5 text-xs text-t2 hover:text-t1 transition-colors cursor-pointer w-fit',
+  RuleDocsReferenceChevron: /*tw*/ 'size-3.5 transition-transform',
+  RuleDocsReferenceChevronOpen: /*tw*/ 'size-3.5 transition-transform rotate-90',
+  RuleDocsReferenceBody: /*tw*/ 'flex flex-col gap-5 mt-3',
   RuleDocsList: /*tw*/ 'flex flex-col',
   RuleDocsRow: /*tw*/ 'grid grid-cols-[200px_1fr] gap-3 py-1 text-xs items-baseline',
-  RuleDocsStarterRow:
-    'grid grid-cols-[200px_1fr] gap-3 py-1 text-xs items-baseline text-left cursor-pointer hover:bg-bg2 rounded -mx-1 px-1',
   RuleDocsRowLabel: /*tw*/ 'font-mono text-t2 truncate',
   RuleDocsRowCode: /*tw*/ 'font-mono text-t1 whitespace-pre-wrap break-words',
   RuleDocsRowNote: /*tw*/ 'text-t3',
