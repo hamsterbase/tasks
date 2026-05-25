@@ -888,6 +888,45 @@ export const desktopStyles = {
   CommandPaletteResultItemParentIconSvg: /*tw*/ 'size-3',
   CommandPaletteResultItemParentTitle: /*tw*/ 'truncate min-w-0',
   CommandPaletteResultItemTitle: /*tw*/ 'text-sm text-t1 truncate leading-4 h-4',
+
+  // Views — sidebar Views section
+  SidebarViewsContainer: /*tw*/ 'flex flex-col',
+  SidebarViewsHeader: /*tw*/ 'flex items-center justify-between px-4 pt-3 pb-1.5 text-xs text-t3',
+  SidebarViewsHeaderLabel: /*tw*/ 'font-semibold',
+  SidebarViewsHeaderAddButton:
+    'flex items-center justify-center hover:bg-bg3 hover:text-t1 rounded-md transition-colors size-5 text-t3',
+  SidebarViewsHeaderAddIcon: /*tw*/ 'size-3.5',
+  SidebarProjectsHeader: /*tw*/ 'px-4 pt-3 pb-1.5 text-xs font-semibold text-t3',
+  SidebarViewsItemActive: /*tw*/ 'bg-bg3 text-t1',
+  SidebarViewsItemInactive: /*tw*/ 'text-t2 hover:bg-bg3 hover:text-t1',
+  SidebarViewsEmpty: /*tw*/ 'px-4 py-1 text-xs text-t3',
+
+  // Views — pages
+  ViewDetailEmpty: /*tw*/ 'px-4 py-8 text-sm text-t3 text-center',
+  ViewUnsupportedContainer:
+    'flex flex-col items-center justify-center gap-2 px-6 py-16 mx-auto max-w-md text-center',
+  ViewUnsupportedTitle: /*tw*/ 'text-base font-semibold text-t1',
+  ViewUnsupportedBody: /*tw*/ 'text-sm text-t3 leading-6',
+
+  // Views — edit panel (right detail pane)
+  ViewRuleHeader: /*tw*/ 'flex items-center gap-1 mb-1',
+  ViewRuleHeaderTitle: /*tw*/ 'text-xs text-t2 font-medium',
+  ViewFieldRuleInput:
+    'w-full px-2 py-1.5 rounded-md border border-line-light bg-bg1 font-mono text-xs text-t1 focus:outline-none focus:border-brand resize-y',
+  ViewRuleError:
+    'mt-2 px-3 py-2 rounded-md bg-bg3 text-accent-danger font-mono text-xs whitespace-pre overflow-x-auto',
+
+  // Views — empty-rule docs panel (middle column, plain text)
+  RuleDocsContainer: /*tw*/ 'px-6 py-6 max-w-2xl mx-auto w-full flex flex-col gap-5',
+  RuleDocsIntro: /*tw*/ 'text-sm text-t2 leading-6',
+  RuleDocsSectionHeading: /*tw*/ 'text-xs text-t3 font-medium uppercase tracking-wide mb-1.5',
+  RuleDocsList: /*tw*/ 'flex flex-col',
+  RuleDocsRow: /*tw*/ 'grid grid-cols-[200px_1fr] gap-3 py-1 text-xs items-baseline',
+  RuleDocsStarterRow:
+    'grid grid-cols-[200px_1fr] gap-3 py-1 text-xs items-baseline text-left cursor-pointer hover:bg-bg2 rounded -mx-1 px-1',
+  RuleDocsRowLabel: /*tw*/ 'font-mono text-t2 truncate',
+  RuleDocsRowCode: /*tw*/ 'font-mono text-t1 whitespace-pre-wrap break-words',
+  RuleDocsRowNote: /*tw*/ 'text-t3',
 };
 
 export type DesktopThemeDefinition = typeof desktopStyles;

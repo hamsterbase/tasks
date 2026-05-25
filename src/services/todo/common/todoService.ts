@@ -8,6 +8,7 @@ import {
   CreateProjectSchema,
   CreateReminderSchema,
   CreateTaskSchema,
+  CreateTaskViewSchema,
   ITaskModelData,
   ItemMovePosition,
   ProjectStatusTransition,
@@ -17,11 +18,21 @@ import {
   UpdateProjectSchema,
   UpdateReminderSchema,
   UpdateTaskSchema,
+  UpdateTaskViewSchema,
 } from '@/core/type.ts';
 import { IDatabaseStorage } from '@/services/database/common/database';
 import type { TreeID } from 'loro-crdt';
 import { Event } from 'vs/base/common/event.ts';
 import { createDecorator } from 'vs/platform/instantiation/common/instantiation.ts';
+
+/**
+ * The view-schema version this build understands. Bumped whenever the rule
+ * grammar / available fields / constants change in a way an older client
+ * cannot faithfully evaluate. Stamped onto every view at write time so a
+ * client encountering a view with a higher version can refuse to evaluate
+ * instead of silently returning wrong results.
+ */
+export const VIEW_SCHEMA_VERSION = 1;
 
 export interface EditingContent {
   id: TreeID;
@@ -112,6 +123,13 @@ export interface ITodoService {
    * @returns 执行结果
    */
   batchEdit(params: BatchEditParams): BatchEditResult;
+
+  // Callers don't supply schemaVersion — the service stamps the current
+  // VIEW_SCHEMA_VERSION onto every write.
+  addView(payload: Omit<CreateTaskViewSchema, 'schemaVersion'>): string;
+  updateView(uid: string, payload: Omit<UpdateTaskViewSchema, 'schemaVersion'>): void;
+  deleteView(uid: string): void;
+  moveView(uid: string, toIndex: number): void;
 }
 
 export const ITodoService = createDecorator<ITodoService>('todoService');

@@ -11,6 +11,7 @@ import { HeadingDetailView } from './HeadingDetailView.tsx';
 import { MultipleSelectionView } from './MultipleSelectionView.tsx';
 import { ProjectDetailPanel } from './project/ProjectDetailPanel.tsx';
 import { TaskDetailView } from './TaskDetailView.tsx';
+import { ViewEditPanel } from './view/ViewEditPanel.tsx';
 
 export const SelectionPanel: React.FC = () => {
   const todoService = useService(ITodoService);
@@ -34,12 +35,18 @@ export const SelectionPanel: React.FC = () => {
 
     const projectMatch = matchPath({ path: '/desktop/project/:projectUid' }, location.pathname);
 
+    const viewMatch = matchPath<'viewUid', string>({ path: '/desktop/views/:viewUid' }, location.pathname);
+
     if (areaMatch) {
       return <AreaDetailPanel />;
     }
 
     if (projectMatch) {
       return <ProjectDetailPanel />;
+    }
+
+    if (viewMatch && viewMatch.params.viewUid) {
+      return <ViewEditPanel viewUid={viewMatch.params.viewUid} />;
     }
 
     return null;

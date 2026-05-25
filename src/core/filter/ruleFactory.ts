@@ -12,8 +12,17 @@ class CompileError extends Error {
   }
 }
 
-export function ruleFactory(schema: ItemSchema): (expr: string) => ParseResult {
+export interface RuleFactoryOptions {
+  /** Named numeric constants usable on the right-hand side of comparisons. */
+  constants?: Record<string, number>;
+}
+
+export function ruleFactory(
+  schema: ItemSchema,
+  options: RuleFactoryOptions = {}
+): (expr: string) => ParseResult {
   const fields = new Map<string, FieldSchema>(Object.entries(schema));
+  const constants = options.constants ?? {};
 
   return (expr: string): ParseResult => {
     if (expr.trim() === '') {
@@ -40,7 +49,7 @@ export function ruleFactory(schema: ItemSchema): (expr: string) => ParseResult {
     }
 
     try {
-      const fn = compileProgram(ast, fields);
+      const fn = compileProgram(ast, fields, constants);
       return { success: true, fn };
     } catch (e) {
       if (e instanceof CompileError) {
@@ -51,7 +60,11 @@ export function ruleFactory(schema: ItemSchema): (expr: string) => ParseResult {
   };
 }
 
-function compileProgram(ast: Node, fields: Map<string, FieldSchema>): (item: FilterItem) => boolean {
+function compileProgram(
+  ast: Node,
+  fields: Map<string, FieldSchema>,
+  constants: Record<string, number>
+): (item: FilterItem) => boolean {
   if (ast.type !== 'Program' || ast.body.length !== 1 || ast.body[0].type !== 'ExpressionStatement') {
     throw new CompileError({
       code: 'UNSUPPORTED_SYNTAX',
@@ -59,12 +72,16 @@ function compileProgram(ast: Node, fields: Map<string, FieldSchema>): (item: Fil
       location: rangeOf(ast),
     });
   }
-  return compileBoolean(ast.body[0].expression, fields);
+  return compileBoolean(ast.body[0].expression, fields, constants);
 }
 
-function compileBoolean(node: Node, fields: Map<string, FieldSchema>): (item: FilterItem) => boolean {
+function compileBoolean(
+  node: Node,
+  fields: Map<string, FieldSchema>,
+  constants: Record<string, number>
+): (item: FilterItem) => boolean {
   if (node.type === 'BinaryExpression') {
-    return compileBinary(node, fields);
+    return compileBinary(node, fields, constants);
   }
   if (node.type === 'LogicalExpression') {
     if (node.operator !== '&&' && node.operator !== '||') {
@@ -74,8 +91,8 @@ function compileBoolean(node: Node, fields: Map<string, FieldSchema>): (item: Fi
         location: rangeOf(node),
       });
     }
-    const left = compileBoolean(node.left as Node, fields);
-    const right = compileBoolean(node.right as Node, fields);
+    const left = compileBoolean(node.left as Node, fields, constants);
+    const right = compileBoolean(node.right as Node, fields, constants);
     return node.operator === '&&' ? (item) => left(item) && right(item) : (item) => left(item) || right(item);
   }
   if (node.type === 'UnaryExpression') {
@@ -86,7 +103,7 @@ function compileBoolean(node: Node, fields: Map<string, FieldSchema>): (item: Fi
         location: rangeOf(node),
       });
     }
-    const inner = compileBoolean(node.argument as Node, fields);
+    const inner = compileBoolean(node.argument as Node, fields, constants);
     return (item) => !inner(item);
   }
   if (node.type === 'CallExpression') {
@@ -124,7 +141,8 @@ function compileBoolean(node: Node, fields: Map<string, FieldSchema>): (item: Fi
 
 function compileBinary(
   node: Extract<Node, { type: 'BinaryExpression' }>,
-  fields: Map<string, FieldSchema>
+  fields: Map<string, FieldSchema>,
+  constants: Record<string, number>
 ): (item: FilterItem) => boolean {
   const op = node.operator;
   if (op !== '===' && op !== '!==' && op !== '<' && op !== '<=' && op !== '>' && op !== '>=') {
@@ -142,7 +160,7 @@ function compileBinary(
 
   const numLeft = tryCompileNumericValue(node.left as Node, fields);
   if (numLeft) {
-    return compileNumericComparison(numLeft, op, node.right as Node, node);
+    return compileNumericComparison(numLeft, op, node.right as Node, node, constants);
   }
 
   if (rightIsNull) {
@@ -222,16 +240,17 @@ function compileNumericComparison(
   left: NumericValue,
   op: '===' | '!==' | '<' | '<=' | '>' | '>=',
   rightNode: Node,
-  fullNode: Node
+  fullNode: Node,
+  constants: Record<string, number>
 ): (item: FilterItem) => boolean {
   if (op === '===' || op === '!==') {
     if (rightNode.type === 'Literal' && rightNode.value === null) {
       return op === '===' ? (item) => left(item) === null : (item) => left(item) !== null;
     }
-    const literal = readNumericLiteral(rightNode);
+    const literal = readNumericLiteral(rightNode, constants);
     return op === '===' ? (item) => left(item) === literal : (item) => left(item) !== literal;
   }
-  const literal = readNumericLiteral(rightNode);
+  const literal = readNumericLiteral(rightNode, constants);
   return (item) => {
     const v = left(item);
     if (v === null) return false;
@@ -250,21 +269,39 @@ function compileNumericComparison(
   };
 }
 
-function readNumericLiteral(node: Node): number {
+function readNumericLiteral(node: Node, constants: Record<string, number>): number {
   if (node.type === 'Literal' && typeof node.value === 'number') {
     return node.value;
   }
-  if (
-    node.type === 'UnaryExpression' &&
-    node.operator === '-' &&
-    node.argument.type === 'Literal' &&
-    typeof node.argument.value === 'number'
-  ) {
-    return -node.argument.value;
+  if (node.type === 'UnaryExpression' && (node.operator === '-' || node.operator === '+')) {
+    const inner = readNumericLiteral(node.argument as Node, constants);
+    return node.operator === '-' ? -inner : inner;
+  }
+  if (node.type === 'Identifier' && Object.prototype.hasOwnProperty.call(constants, node.name)) {
+    return constants[node.name];
+  }
+  if (node.type === 'BinaryExpression') {
+    const left = readNumericLiteral(node.left as Node, constants);
+    const right = readNumericLiteral(node.right as Node, constants);
+    switch (node.operator) {
+      case '+':
+        return left + right;
+      case '-':
+        return left - right;
+      case '*':
+        return left * right;
+      case '/':
+        return left / right;
+    }
+    throw new CompileError({
+      code: 'INVALID_OPERATOR',
+      message: `Arithmetic operator '${node.operator}' is not supported`,
+      location: rangeOf(node),
+    });
   }
   throw new CompileError({
     code: 'TYPE_MISMATCH',
-    message: 'Expected a numeric literal',
+    message: 'Expected a numeric literal or constant',
     location: rangeOf(node),
   });
 }

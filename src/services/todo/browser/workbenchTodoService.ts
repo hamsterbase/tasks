@@ -16,6 +16,7 @@ import {
   CreateProjectSchema,
   CreateReminderSchema,
   CreateTaskSchema,
+  CreateTaskViewSchema,
   ItemMovePosition,
   ProjectStatusTransition,
   ReminderWithId,
@@ -24,9 +25,15 @@ import {
   UpdateProjectSchema,
   UpdateReminderSchema,
   UpdateTaskSchema,
+  UpdateTaskViewSchema,
 } from '@/core/type.ts';
 import { IDatabaseStorage } from '@/services/database/common/database';
-import { EditingContent, ITodoService, TaskCommand } from '@/services/todo/common/todoService.ts';
+import {
+  EditingContent,
+  ITodoService,
+  TaskCommand,
+  VIEW_SCHEMA_VERSION,
+} from '@/services/todo/common/todoService.ts';
 import type { TreeID } from 'loro-crdt';
 import { debounceTime, Subject } from 'rxjs';
 import { decodeBase64, encodeBase64, VSBuffer } from 'vscf/base/common/buffer';
@@ -289,5 +296,26 @@ export class WorkbenchTodoService implements ITodoService {
 
   batchEdit(params: BatchEditParams): BatchEditResult {
     return executeBatchEdit(this.taskModel, params);
+  }
+
+  addView(payload: Omit<CreateTaskViewSchema, 'schemaVersion'>): string {
+    return this.taskModel.addView({ ...payload, schemaVersion: VIEW_SCHEMA_VERSION });
+  }
+
+  updateView(uid: string, payload: Omit<UpdateTaskViewSchema, 'schemaVersion'>): void {
+    // Re-stamp the writer's schema version whenever the rule itself changes,
+    // so the persisted version always reflects the engine that produced the
+    // current rule string.
+    const next: UpdateTaskViewSchema =
+      payload.rule !== undefined ? { ...payload, schemaVersion: VIEW_SCHEMA_VERSION } : payload;
+    this.taskModel.updateView(uid, next);
+  }
+
+  deleteView(uid: string): void {
+    this.taskModel.deleteView(uid);
+  }
+
+  moveView(uid: string, toIndex: number): void {
+    this.taskModel.moveView(uid, toIndex);
   }
 }

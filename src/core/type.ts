@@ -198,6 +198,36 @@ export type UpdateTaskSchema = {
 
 export type TaskObjectSchema = AreaSchema | ProjectSchema | ProjectHeadingSchema | TaskSchema;
 
+export type TaskViewSchema = {
+  uid: string;
+  type: 'tasks';
+  name: string;
+  desc: string;
+  rule: string;
+  /** Version of the view-schema engine that wrote this view. */
+  schemaVersion: number;
+};
+
+export type CreateTaskViewSchema = {
+  name: string;
+  desc?: string;
+  rule: string;
+  schemaVersion: number;
+  /**
+   * Override the auto-generated uid. Production code never sets this — it's
+   * an escape hatch for test fixtures that need a deterministic URL.
+   */
+  uid?: string;
+};
+
+export type UpdateTaskViewSchema = {
+  name?: string;
+  desc?: string;
+  rule?: string;
+  /** Caller must pass this whenever `rule` changes. */
+  schemaVersion?: number;
+};
+
 export type TaskObjectType = TaskObjectSchema['type'];
 
 export interface ITaskModelData {
@@ -208,6 +238,7 @@ export interface ITaskModelData {
   rootObjectIdList: TreeID[];
   dateAssignedList: TreeID[];
   remindersMap: Map<TreeID, ReminderWithId[]>;
+  views: TaskViewSchema[];
 }
 
 export interface ProjectStatusTransition {

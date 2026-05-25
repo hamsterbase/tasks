@@ -1,4 +1,12 @@
-import { CalendarXIcon, CircleSmallIcon, LeftIcon, RightIcon, ScheduledIcon, TodayIcon } from '@/components/icons';
+import {
+  CalendarXIcon,
+  CircleSmallIcon,
+  LaterProjectsIcon,
+  LeftIcon,
+  RightIcon,
+  ScheduledIcon,
+  TodayIcon,
+} from '@/components/icons';
 import { formatCalendarMonth } from '@/core/time/formatCalendarMonth';
 import { isTimestampToday } from '@/core/time/isTimestampToday';
 import { WeekdayHeader } from '@/desktop/components/DatePickerCalendar/WeekdayHeader';
@@ -105,6 +113,13 @@ export const DatePickerOverlay: React.FC = () => {
         >
           <ScheduledIcon className={desktopStyles.DatePickerOverlayQuickActionIcon} />
           {localize('date_picker.tomorrow', 'Tomorrow')}
+        </button>
+        <button
+          onClick={() => controller.selectSomeday()}
+          className={desktopStyles.DatePickerOverlayQuickActionButton}
+        >
+          <LaterProjectsIcon className={desktopStyles.DatePickerOverlayQuickActionIcon} />
+          {localize('date_picker.someday', 'Someday')}
         </button>
         <button onClick={() => controller.selectNoDate()} className={desktopStyles.DatePickerOverlayQuickActionButton}>
           <CalendarXIcon className={desktopStyles.DatePickerOverlayQuickActionIcon} />

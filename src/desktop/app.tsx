@@ -32,6 +32,7 @@ import { SelfHostedSyncSettings } from '@/desktop/pages/settings-page/sync/SelfH
 import { AISettings } from '@/desktop/pages/settings-page/AISettings';
 import { Today } from '@/desktop/pages/today/today.tsx';
 import { AIChat } from '@/desktop/pages/ai-chat';
+import { ViewDetailPage } from '@/desktop/pages/views';
 import { useInputFocused } from '@/hooks/global/useInputFocused';
 import { useService } from '@/hooks/use-service';
 import { useCloudSync } from '@/hooks/useCloudSync.ts';
@@ -127,6 +128,10 @@ export const App = () => {
             {
               path: 'project/:projectUid',
               element: <ProjectPage />,
+            },
+            {
+              path: 'views/:viewUid',
+              element: <ViewDetailPage />,
             },
           ],
         },

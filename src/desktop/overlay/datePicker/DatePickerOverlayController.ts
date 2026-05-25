@@ -1,5 +1,6 @@
 import { formatTimeStampToDate } from '@/core/time/formatTimeStampToDate';
 import { getUTCTimeStampFromDateStr } from '@/core/time/getUTCTimeStampFromDateStr';
+import { SOMEDAY_TIMESTAMP } from '@/core/time/someday';
 import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
 import { format, isValid, parse } from 'date-fns';
 import { Emitter } from 'vscf/base/common/event';
@@ -96,6 +97,13 @@ export class DatePickerOverlayController extends Disposable {
     this._selectedDate = null;
     this._currentInputValue = '';
     this.onDateSelected(null);
+    this.dispose();
+  }
+
+  selectSomeday() {
+    this._selectedDate = new Date(SOMEDAY_TIMESTAMP);
+    this._currentInputValue = formatTimeStampToDate(SOMEDAY_TIMESTAMP);
+    this.onDateSelected(SOMEDAY_TIMESTAMP);
     this.dispose();
   }
 

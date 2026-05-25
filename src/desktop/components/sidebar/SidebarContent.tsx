@@ -32,6 +32,7 @@ import { TestIds } from '@/testIds';
 import { SidebarAreaItem } from './SidebarAreaItem/SidebarAreaItem.tsx';
 import { SidebarFutureProjectsItem } from './SidebarFutureProjectsItem/SidebarFutureProjectsItem.tsx';
 import { SidebarMenu } from './SidebarMenu/SidebarMenu.tsx';
+import { SidebarViewsSection } from './SidebarViewsSection/SidebarViewsSection.tsx';
 import { SidebarProjectItem as SidebarProjectItemComponent } from './SidebarProjectItem/SidebarProjectItem.tsx';
 import { MacTopBar } from '../MacTopBar.tsx';
 
@@ -217,6 +218,10 @@ export const SidebarContent: React.FC = () => {
         </div>
       </div>
       <SidebarMenu />
+      <SidebarViewsSection />
+      <div className={desktopStyles.SidebarProjectsHeader}>
+        {localize('sidebar.projects.title', 'Projects')}
+      </div>
       <div
         className={classNames(desktopStyles.SidebarProjectAreaList, {
           [desktopStyles.SidebarProjectAreaListNoTopPadding]: sidebarProjectAreaListNoTopPadding,

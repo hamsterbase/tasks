@@ -1,7 +1,9 @@
 import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc';
 import { getCurrentLocale, getDateFnsLocale } from '@/locales/common/locale';
+import { localize } from '@/nls';
 import { format, isSameYear } from 'date-fns';
 import { getDateFromUTCTimeStamp } from './getDateFromUTCTimeStamp';
+import { isSomeday } from './someday';
 
 const currentYearFormat = {
   'zh-CN': 'EEE, M月 d日',
@@ -19,6 +21,9 @@ const otherYearFormat = {
 export function formatDate(dueDate?: number, currentDate?: number) {
   if (!dueDate) {
     return '';
+  }
+  if (isSomeday(dueDate)) {
+    return localize('date.someday', 'Someday');
   }
   if (!currentDate) {
     currentDate = getTodayTimestampInUtc();

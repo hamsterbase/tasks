@@ -48,6 +48,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
 
   const { attributes, listeners, setNodeRef, transform, isDragging } = useSortable({
     id: task.id,
+    disabled: disableDrag,
   });
 
   const dragListeners = {

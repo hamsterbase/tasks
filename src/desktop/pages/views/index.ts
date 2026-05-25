@@ -1,0 +1,1 @@
+export { ViewDetailPage } from './ViewDetailPage';

@@ -28,6 +28,7 @@ export const TaskModelListKeys = {
   objects: 'objects',
   inboxTasks: 'inboxTasks',
   rootCollections: 'rootCollections',
+  views: 'views',
 } as const;
 
 export const ItemStatusEnum = {

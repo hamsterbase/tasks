@@ -45,6 +45,7 @@ import {
   Info,
   KeyRound,
   Layers,
+  Layers2,
   Link,
   ListChecks,
   LocateFixed,
@@ -100,6 +101,7 @@ export const CloseIcon = X;
 export const CheckIcon = Check;
 export const CancelIcon = X;
 export const AreaIcon = Layers;
+export const ViewIcon = Layers2;
 export const PlusIcon = Plus;
 export const PlusCircleIcon = CirclePlus;
 export const KeyIcon = KeyRound;

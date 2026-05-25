@@ -2,9 +2,13 @@ import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc';
 import { localize } from '@/nls';
 import { differenceInDays } from 'date-fns';
 import { getDateFromUTCTimeStamp } from './getDateFromUTCTimeStamp';
+import { isSomeday } from './someday';
 
 export function formatRemainingDays(date?: number, currentDate?: number) {
   if (!date) {
+    return '';
+  }
+  if (isSomeday(date)) {
     return '';
   }
   if (!currentDate) {

@@ -1,4 +1,4 @@
-import { ItemStatusEnum, ModelKeys, ModelTypes } from '@/core/enum.ts';
+import { ItemStatusEnum, ModelKeys, ModelTypes, TaskModelListKeys } from '@/core/enum.ts';
 import { LoroDoc, LoroMap, LoroMovableList, LoroTreeNode, PeerID, TreeID, UndoManager, VersionVector } from 'loro-crdt';
 import { nanoid } from 'nanoid';
 import { Emitter } from 'vscf/base/common/event.ts';
@@ -33,6 +33,9 @@ import {
   UpdateTaskSchema,
   AttachmentSchema,
   CreateAttachmentSchema,
+  CreateTaskViewSchema,
+  TaskViewSchema,
+  UpdateTaskViewSchema,
 } from './type.ts';
 import { patch } from './utils.ts';
 
@@ -780,6 +783,7 @@ export class TaskModel {
         versions[peerId] = version;
       });
     const remindersMap = this.getReminders();
+    const views = this.listViews();
     return {
       taskObjectUidMap,
       version: versions,
@@ -788,6 +792,7 @@ export class TaskModel {
       rootObjectIdList,
       dateAssignedList,
       remindersMap,
+      views,
     };
   }
 
@@ -819,5 +824,82 @@ export class TaskModel {
       maxUndoSteps: 1000,
       mergeInterval: 0,
     });
+  }
+
+  private getViewsList(): LoroMovableList<LoroMap> {
+    return this.doc.getMovableList(TaskModelListKeys.views) as LoroMovableList<LoroMap>;
+  }
+
+  addView(payload: CreateTaskViewSchema): string {
+    const list = this.getViewsList();
+    const map = list.pushContainer(new LoroMap());
+    const uid = payload.uid ?? nanoid();
+    map.set('uid', uid);
+    map.set('type', 'tasks');
+    map.set('name', payload.name);
+    map.set('desc', payload.desc ?? '');
+    map.set('rule', payload.rule);
+    map.set('schemaVersion', payload.schemaVersion);
+    this.doc.commit();
+    return uid;
+  }
+
+  updateView(uid: string, payload: UpdateTaskViewSchema) {
+    const list = this.getViewsList();
+    const items = list.toArray() as LoroMap[];
+    for (let i = 0; i < items.length; i++) {
+      const map = items[i];
+      if (map.get('uid') === uid) {
+        if (payload.name !== undefined) map.set('name', payload.name);
+        if (payload.desc !== undefined) map.set('desc', payload.desc);
+        if (payload.rule !== undefined) map.set('rule', payload.rule);
+        if (payload.schemaVersion !== undefined) map.set('schemaVersion', payload.schemaVersion);
+        this.doc.commit();
+        return;
+      }
+    }
+    throw new Error(`view '${uid}' not found`);
+  }
+
+  deleteView(uid: string) {
+    const list = this.getViewsList();
+    const items = list.toArray() as LoroMap[];
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].get('uid') === uid) {
+        list.delete(i, 1);
+        this.doc.commit();
+        return;
+      }
+    }
+    throw new Error(`view '${uid}' not found`);
+  }
+
+  moveView(uid: string, toIndex: number) {
+    const list = this.getViewsList();
+    const items = list.toArray() as LoroMap[];
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].get('uid') === uid) {
+        const clamped = Math.max(0, Math.min(toIndex, items.length - 1));
+        if (clamped !== i) {
+          list.move(i, clamped);
+          this.doc.commit();
+        }
+        return;
+      }
+    }
+    throw new Error(`view '${uid}' not found`);
+  }
+
+  listViews(): TaskViewSchema[] {
+    const list = this.getViewsList();
+    return (list.toArray() as LoroMap[]).map((map) => ({
+      uid: map.get('uid') as string,
+      type: 'tasks' as const,
+      name: (map.get('name') as string | undefined) ?? '',
+      desc: (map.get('desc') as string | undefined) ?? '',
+      rule: (map.get('rule') as string | undefined) ?? '',
+      // Views written before the version field existed are version 1.
+      schemaVersion: (map.get('schemaVersion') as number | undefined) ?? 1,
+    }));
   }
 }

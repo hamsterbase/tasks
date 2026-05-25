@@ -808,6 +808,10 @@
     "defaultMessage": "Sat",
     "content": "周六"
   },
+  "date_picker.someday": {
+    "defaultMessage": "Someday",
+    "content": ""
+  },
   "date_picker.sunday": {
     "defaultMessage": "Sun",
     "content": "周日"
@@ -835,6 +839,10 @@
   "date_picker.wednesday": {
     "defaultMessage": "Wed",
     "content": "周三"
+  },
+  "date.someday": {
+    "defaultMessage": "Someday",
+    "content": ""
   },
   "date.today": {
     "defaultMessage": "Today",
@@ -1944,6 +1952,10 @@
     "defaultMessage": "Create New",
     "content": "新建"
   },
+  "sidebar.projects.title": {
+    "defaultMessage": "Projects",
+    "content": ""
+  },
   "subtask.placeholder": {
     "defaultMessage": "Add subtask...",
     "content": "添加子任务..."
@@ -2315,5 +2327,77 @@
   "today.tasks": {
     "defaultMessage": "Tasks",
     "content": "任务"
+  },
+  "view.create.placeholder": {
+    "defaultMessage": "New view",
+    "content": ""
+  },
+  "view.delete.description": {
+    "defaultMessage": "Are you sure you want to delete this view? This cannot be undone.",
+    "content": ""
+  },
+  "view.delete.title": {
+    "defaultMessage": "Delete view",
+    "content": ""
+  },
+  "view.detail.empty": {
+    "defaultMessage": "No tasks match this view.",
+    "content": ""
+  },
+  "view.detail.untitled": {
+    "defaultMessage": "Untitled view",
+    "content": ""
+  },
+  "view.docs.constants": {
+    "defaultMessage": "Constants",
+    "content": ""
+  },
+  "view.docs.fields": {
+    "defaultMessage": "Fields",
+    "content": ""
+  },
+  "view.docs.intro": {
+    "defaultMessage": "This view has no rule yet. Pick a starter below, or write your own on the right.",
+    "content": ""
+  },
+  "view.docs.operators": {
+    "defaultMessage": "Operators",
+    "content": ""
+  },
+  "view.docs.starters": {
+    "defaultMessage": "Starters",
+    "content": ""
+  },
+  "view.field.descPlaceholder": {
+    "defaultMessage": "Add description...",
+    "content": ""
+  },
+  "view.field.rule": {
+    "defaultMessage": "Rule",
+    "content": ""
+  },
+  "view.menu.delete": {
+    "defaultMessage": "Delete view",
+    "content": ""
+  },
+  "view.sidebar.add": {
+    "defaultMessage": "Add view",
+    "content": ""
+  },
+  "view.sidebar.empty": {
+    "defaultMessage": "No views yet",
+    "content": ""
+  },
+  "view.sidebar.title": {
+    "defaultMessage": "Views",
+    "content": ""
+  },
+  "view.unsupported.body": {
+    "defaultMessage": "This view was created with a newer version of the app. Please update the app to open it.",
+    "content": ""
+  },
+  "view.unsupported.title": {
+    "defaultMessage": "Update the app to view this",
+    "content": ""
   }
 }
