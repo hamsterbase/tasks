@@ -732,7 +732,7 @@ export const desktopStyles = {
   TreeSelectOverlayList: /*tw*/ 'max-h-64 overflow-y-auto py-1',
   TreeSelectOverlayAreaList: /*tw*/ 'max-h-48 overflow-y-auto py-1',
   TreeSelectOverlayAction:
-    /*tw*/ 'flex justify-start text-left items-center gap-1.5 px-2 py-1.5 text-xs cursor-pointer rounded-sm text-t2 hover:bg-bg3 hover:text-t1 transition-colors mx-1',
+    /*tw*/ 'flex w-[calc(100%-0.5rem)] justify-start text-left items-center gap-1.5 px-2 py-1.5 text-xs cursor-pointer rounded-sm text-t2 hover:bg-bg3 hover:text-t1 transition-colors mx-1',
   TreeSelectOverlayAreaAction:
     /*tw*/ 'flex justify-start text-left items-center gap-2 px-2 py-1.5 text-xs cursor-pointer rounded-sm text-t2 hover:bg-bg3 hover:text-t1 transition-colors mx-1',
   TreeSelectOverlayItemIcon: /*tw*/ 'size-3.5',
@@ -746,10 +746,9 @@ export const desktopStyles = {
   TreeSelectOverlayAreaLabel: /*tw*/ 'flex-1 font-medium truncate',
   TreeSelectOverlayChevronButton:
     /*tw*/ 'size-4 flex items-center justify-center rounded-sm hover:bg-bg3/80 flex-shrink-0',
+  TreeSelectOverlayChevronSpacer: /*tw*/ 'size-4 flex-shrink-0',
   TreeSelectOverlayChevron: /*tw*/ 'size-3 text-t3 transition-transform flex-shrink-0',
   TreeSelectOverlayChevronExpanded: /*tw*/ 'rotate-90',
-  TreeSelectOverlayProjectRow:
-    /*tw*/ 'flex w-[calc(100%-0.5rem)] justify-start text-left items-center gap-1.5 pl-7 pr-2 py-1.5 text-xs cursor-pointer rounded-sm text-t1 hover:bg-bg3 transition-colors mx-1',
   TreeSelectOverlayProjectRowSelected: /*tw*/ 'bg-brand/10 text-brand hover:bg-brand/10',
   TreeSelectOverlayProjectIcon: /*tw*/ 'size-3 flex items-center justify-center flex-shrink-0 text-t3',
   TreeSelectOverlayProjectLabel: /*tw*/ 'flex-1 truncate',

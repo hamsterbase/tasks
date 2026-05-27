@@ -38,6 +38,13 @@ interface OverlayArea {
   projects: OverlayProject[];
 }
 
+interface OverlayRootProject {
+  id: TreeID;
+  title: string;
+  progress: number;
+  status: ItemStatus;
+}
+
 function getVariant(controller: TreeSelectController, todoService: ITodoService): OverlayVariant {
   const currentItem = controller.currentItemId
     ? todoService.modelState.taskObjectMap.get(controller.currentItemId)
@@ -64,6 +71,16 @@ function getOverlayAreas(todoService: ITodoService, searchText: string): Overlay
   }));
 }
 
+function getOverlayRootProjects(todoService: ITodoService, searchText: string): OverlayRootProject[] {
+  const { filteredProjects } = getAllProject(todoService.modelState, searchText);
+  return filteredProjects.map((project) => ({
+    id: project.id,
+    title: project.title || localize('project.untitled', 'New Project'),
+    progress: project.progress,
+    status: project.status,
+  }));
+}
+
 function getInitialExpandedIds(areas: OverlayArea[], selection: SelectionState) {
   const expanded = new Set<string>();
   if (selection.currentAreaId) {
@@ -84,6 +101,7 @@ const TreeSelectContent: React.FC<TreeSelectContentProps> = ({ controller }) => 
   const selection = getSelectionState(controller, todoService);
   const { currentAreaId, currentProjectId } = selection;
   const areas = getOverlayAreas(todoService, searchText);
+  const rootProjects = variant === 'project' ? [] : getOverlayRootProjects(todoService, searchText);
   const [expandedIds, setExpandedIds] = useState<Set<string>>(() => getInitialExpandedIds(areas, selection));
   const isSearching = searchText.trim().length > 0;
 
@@ -100,7 +118,11 @@ const TreeSelectContent: React.FC<TreeSelectContentProps> = ({ controller }) => 
         currentProjectId,
       })
     );
-  }, [areas, currentAreaId, currentProjectId, variant]);
+    // Only re-seed when the overlay's selection context changes. `areas` is a fresh
+    // array reference on every render, so depending on it would clobber the user's
+    // manual chevron toggles.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentAreaId, currentProjectId, variant]);
 
   const handleConfirmSelection = (id: TreeID | null) => {
     controller.confirmSelection(id);
@@ -118,32 +140,45 @@ const TreeSelectContent: React.FC<TreeSelectContentProps> = ({ controller }) => 
     });
   };
 
-  const searchResults = areas.flatMap((area) => {
-    const areaMatch = area.title.toLowerCase().includes(searchText.trim().toLowerCase())
-      ? [
-          {
-            id: area.id,
-            type: 'area' as const,
-            label: area.title,
-            selected: area.id === selection.currentAreaId,
-          },
-        ]
-      : [];
-    const projectMatches = area.projects
-      .filter((project) => {
-        const query = searchText.trim().toLowerCase();
-        return project.title.toLowerCase().includes(query) || project.path.toLowerCase().includes(query);
-      })
-      .map((project) => ({
-        id: project.id,
-        type: 'project' as const,
-        label: project.path,
-        selected: project.id === selection.currentProjectId,
-        project,
-      }));
+  const rootProjectMatches = rootProjects
+    .filter((project) => project.title.toLowerCase().includes(searchText.trim().toLowerCase()))
+    .map((project) => ({
+      id: project.id,
+      type: 'project' as const,
+      label: project.title,
+      selected: project.id === selection.currentProjectId,
+      project: { ...project, path: project.title },
+    }));
 
-    return [...areaMatch, ...projectMatches];
-  });
+  const searchResults = [
+    ...rootProjectMatches,
+    ...areas.flatMap((area) => {
+      const areaMatch = area.title.toLowerCase().includes(searchText.trim().toLowerCase())
+        ? [
+            {
+              id: area.id,
+              type: 'area' as const,
+              label: area.title,
+              selected: area.id === selection.currentAreaId,
+            },
+          ]
+        : [];
+      const projectMatches = area.projects
+        .filter((project) => {
+          const query = searchText.trim().toLowerCase();
+          return project.title.toLowerCase().includes(query) || project.path.toLowerCase().includes(query);
+        })
+        .map((project) => ({
+          id: project.id,
+          type: 'project' as const,
+          label: project.path,
+          selected: project.id === selection.currentProjectId,
+          project,
+        }));
+
+      return [...areaMatch, ...projectMatches];
+    }),
+  ];
 
   return (
     <OverlayContainer
@@ -186,7 +221,14 @@ const TreeSelectContent: React.FC<TreeSelectContentProps> = ({ controller }) => 
         >
           {variant === 'task' && (
             <>
-              <button className={desktopStyles.TreeSelectOverlayAction} onClick={() => handleConfirmSelection(null)}>
+              <button
+                className={desktopStyles.TreeSelectOverlayAction}
+                onClick={() => handleConfirmSelection(null)}
+                data-test-id="tree-select-action-inbox"
+              >
+                {/* When any area exists the chevron forms its own column; add a phantom spacer
+                    so the inbox icon lines up with area/project icons below. */}
+                {areas.length > 0 && <span className={desktopStyles.TreeSelectOverlayChevronSpacer} aria-hidden />}
                 <span className={desktopStyles.TreeSelectOverlayActionIcon}>
                   <InboxIcon className={desktopStyles.TreeSelectOverlayItemIcon} />
                 </span>
@@ -194,7 +236,9 @@ const TreeSelectContent: React.FC<TreeSelectContentProps> = ({ controller }) => 
                   {localize('task_attr.move_to_inbox', 'Move to Inbox')}
                 </span>
               </button>
-              {areas.length > 0 && <div className={desktopStyles.TreeSelectOverlayDivider} />}
+              {(areas.length > 0 || rootProjects.length > 0) && (
+                <div className={desktopStyles.TreeSelectOverlayDivider} />
+              )}
             </>
           )}
 
@@ -263,66 +307,96 @@ const TreeSelectContent: React.FC<TreeSelectContentProps> = ({ controller }) => 
                 </button>
               ))
             )
-          ) : areas.length === 0 ? (
+          ) : areas.length === 0 && rootProjects.length === 0 ? (
             <div className={desktopStyles.TreeSelectOverlayEmpty}>
               {localize('task_attr.no_location', 'No locations')}
             </div>
           ) : (
-            areas.map((area) => {
-              const isExpanded = expandedIds.has(area.id);
-              const areaRowProps =
-                variant === 'task'
-                  ? { onClick: () => handleConfirmSelection(area.id) }
-                  : { onClick: () => toggleArea(area.id) };
+            <>
+              {rootProjects.map((project) => (
+                <button
+                  key={project.id}
+                  className={classNames(desktopStyles.TreeSelectOverlayAreaRow, {
+                    [desktopStyles.TreeSelectOverlayAreaRowSelectable]: true,
+                    [desktopStyles.TreeSelectOverlayProjectRowSelected]: project.id === selection.currentProjectId,
+                  })}
+                  onClick={() => handleConfirmSelection(project.id)}
+                  data-test-id="tree-select-root-project-row"
+                >
+                  {/* Phantom chevron spacer keeps the icon aligned with area icons when areas exist.
+                      With no areas there's no chevron column to align to. */}
+                  {areas.length > 0 && <span className={desktopStyles.TreeSelectOverlayChevronSpacer} aria-hidden />}
+                  <span className={desktopStyles.TreeSelectOverlayAreaIcon}>
+                    <ProjectIcon progress={project.progress} status={project.status} size="sm" />
+                  </span>
+                  <span className={desktopStyles.TreeSelectOverlayProjectLabel}>{project.title}</span>
+                </button>
+              ))}
+              {rootProjects.length > 0 && areas.length > 0 && (
+                <div className={desktopStyles.TreeSelectOverlayDivider} />
+              )}
+              {areas.map((area) => {
+                const isExpanded = expandedIds.has(area.id);
+                const areaRowProps =
+                  variant === 'task'
+                    ? { onClick: () => handleConfirmSelection(area.id) }
+                    : { onClick: () => toggleArea(area.id) };
 
-              return (
-                <React.Fragment key={area.id}>
-                  <div
-                    className={classNames(desktopStyles.TreeSelectOverlayAreaRow, {
-                      [desktopStyles.TreeSelectOverlayAreaRowSelectable]: true,
-                      [desktopStyles.TreeSelectOverlayAreaRowSelected]:
-                        area.id === selection.currentAreaId && selection.currentProjectId === null,
-                    })}
-                    {...areaRowProps}
-                  >
-                    <button
-                      type="button"
-                      className={desktopStyles.TreeSelectOverlayChevronButton}
-                      onClick={(event) => {
-                        event.stopPropagation();
-                        toggleArea(area.id);
-                      }}
+                return (
+                  <React.Fragment key={area.id}>
+                    <div
+                      className={classNames(desktopStyles.TreeSelectOverlayAreaRow, {
+                        [desktopStyles.TreeSelectOverlayAreaRowSelectable]: true,
+                        [desktopStyles.TreeSelectOverlayAreaRowSelected]:
+                          area.id === selection.currentAreaId && selection.currentProjectId === null,
+                      })}
+                      data-test-id="tree-select-area-row"
+                      {...areaRowProps}
                     >
-                      <ChevronRightIcon
-                        className={classNames(desktopStyles.TreeSelectOverlayChevron, {
-                          [desktopStyles.TreeSelectOverlayChevronExpanded]: isExpanded,
-                        })}
-                      />
-                    </button>
-                    <span className={desktopStyles.TreeSelectOverlayAreaIcon}>
-                      <AreaIcon className={desktopStyles.TreeSelectOverlayItemIcon} />
-                    </span>
-                    <span className={desktopStyles.TreeSelectOverlayAreaLabel}>{area.title}</span>
-                  </div>
-                  {isExpanded &&
-                    area.projects.map((project) => (
                       <button
-                        key={project.id}
-                        className={classNames(desktopStyles.TreeSelectOverlayProjectRow, {
-                          [desktopStyles.TreeSelectOverlayProjectRowSelected]:
-                            project.id === selection.currentProjectId,
-                        })}
-                        onClick={() => handleConfirmSelection(project.id)}
+                        type="button"
+                        className={desktopStyles.TreeSelectOverlayChevronButton}
+                        onMouseDown={(event) => event.stopPropagation()}
+                        onClick={(event) => {
+                          event.preventDefault();
+                          event.stopPropagation();
+                          toggleArea(area.id);
+                        }}
                       >
-                        <span className={desktopStyles.TreeSelectOverlayProjectIcon}>
-                          <ProjectIcon progress={project.progress} status={project.status} size="sm" />
-                        </span>
-                        <span className={desktopStyles.TreeSelectOverlayProjectLabel}>{project.title}</span>
+                        <ChevronRightIcon
+                          className={classNames(desktopStyles.TreeSelectOverlayChevron, {
+                            [desktopStyles.TreeSelectOverlayChevronExpanded]: isExpanded,
+                          })}
+                        />
                       </button>
-                    ))}
-                </React.Fragment>
-              );
-            })
+                      <span className={desktopStyles.TreeSelectOverlayAreaIcon}>
+                        <AreaIcon className={desktopStyles.TreeSelectOverlayItemIcon} />
+                      </span>
+                      <span className={desktopStyles.TreeSelectOverlayAreaLabel}>{area.title}</span>
+                    </div>
+                    {isExpanded &&
+                      area.projects.map((project) => (
+                        <button
+                          key={project.id}
+                          className={classNames(desktopStyles.TreeSelectOverlayAreaRow, {
+                            [desktopStyles.TreeSelectOverlayAreaRowSelectable]: true,
+                            [desktopStyles.TreeSelectOverlayProjectRowSelected]:
+                              project.id === selection.currentProjectId,
+                          })}
+                          onClick={() => handleConfirmSelection(project.id)}
+                          data-test-id="tree-select-area-project-row"
+                        >
+                          <span className={desktopStyles.TreeSelectOverlayChevronSpacer} aria-hidden />
+                          <span className={desktopStyles.TreeSelectOverlayAreaIcon}>
+                            <ProjectIcon progress={project.progress} status={project.status} size="sm" />
+                          </span>
+                          <span className={desktopStyles.TreeSelectOverlayProjectLabel}>{project.title}</span>
+                        </button>
+                      ))}
+                  </React.Fragment>
+                );
+              })}
+            </>
           )}
         </div>
       </div>

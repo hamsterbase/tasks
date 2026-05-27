@@ -195,7 +195,11 @@ export const SidebarContent: React.FC = () => {
       <MacTopBar />
       <div className={desktopStyles.SidebarHeaderContainer}>
         <div className={desktopStyles.SidebarHeaderActions}>
-          <button onClick={handleCreateMenu} className={desktopStyles.SidebarHeaderIconButton}>
+          <button
+            onClick={handleCreateMenu}
+            className={desktopStyles.SidebarHeaderIconButton}
+            data-test-id="sidebar-create-menu-button"
+          >
             <PlusIcon className={desktopStyles.SidebarHeaderIconButtonIcon} />
           </button>
           {selfhostedSyncService.showSyncIcon && (
@@ -219,9 +223,7 @@ export const SidebarContent: React.FC = () => {
       </div>
       <SidebarMenu />
       <SidebarViewsSection />
-      <div className={desktopStyles.SidebarProjectsHeader}>
-        {localize('sidebar.projects.title', 'Projects')}
-      </div>
+      <div className={desktopStyles.SidebarProjectsHeader}>{localize('sidebar.projects.title', 'Projects')}</div>
       <div
         className={classNames(desktopStyles.SidebarProjectAreaList, {
           [desktopStyles.SidebarProjectAreaListNoTopPadding]: sidebarProjectAreaListNoTopPadding,
