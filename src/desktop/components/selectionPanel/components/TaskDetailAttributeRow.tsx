@@ -12,6 +12,10 @@ interface TaskDetailAttributeRowProps {
   danger?: boolean;
   contentClassName?: string;
   className?: string;
+  overrideClassName?: {
+    label?: string;
+    icon?: string;
+  };
 }
 
 export const TaskDetailAttributeRow: React.FC<TaskDetailAttributeRowProps> = ({
@@ -24,6 +28,7 @@ export const TaskDetailAttributeRow: React.FC<TaskDetailAttributeRowProps> = ({
   danger = false,
   contentClassName,
   className,
+  overrideClassName = {},
 }) => {
   const iconNode = React.isValidElement<{ className?: string }>(icon)
     ? React.cloneElement(icon, {
@@ -45,11 +50,12 @@ export const TaskDetailAttributeRow: React.FC<TaskDetailAttributeRowProps> = ({
         className={classNames(desktopStyles.TaskDetailAttributeIconContainer, {
           [desktopStyles.TaskDetailAttributeIconContainerDanger]: danger,
           [desktopStyles.TaskDetailAttributeIconContainerPlaceholder]: placeholder,
+          [overrideClassName.icon!]: overrideClassName.icon,
         })}
       >
         {iconNode}
       </div>
-      <span className={desktopStyles.TaskDetailAttributeLabel}>{label}</span>
+      <span className={classNames(desktopStyles.TaskDetailAttributeLabel, overrideClassName.label)}>{label}</span>
       <div className={contentWrapperClassName}>{content}</div>
     </>
   );

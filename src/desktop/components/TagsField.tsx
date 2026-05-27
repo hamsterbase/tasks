@@ -80,6 +80,10 @@ export const TagsField: React.FC<ITagsFieldProps> = ({ itemId }) => {
       icon={<TagIcon className={desktopStyles.TaskDetailAttributeIcon} />}
       label={localize('tasks.tags', 'Tags')}
       onClick={handleTagsClick}
+      overrideClassName={{
+        label: 'mt-0.75',
+        icon: 'mt-0.75',
+      }}
       content={
         <div className={desktopStyles.TaskDetailAttributeTagList}>
           {itemData.tags.map((tag, index) => (
