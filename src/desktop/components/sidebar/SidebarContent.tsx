@@ -198,7 +198,7 @@ export const SidebarContent: React.FC = () => {
           <button
             onClick={handleCreateMenu}
             className={desktopStyles.SidebarHeaderIconButton}
-            data-test-id="sidebar-create-menu-button"
+            data-test-id={TestIds.Sidebar.CreateMenuButton}
           >
             <PlusIcon className={desktopStyles.SidebarHeaderIconButtonIcon} />
           </button>

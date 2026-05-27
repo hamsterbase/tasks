@@ -26,6 +26,7 @@ import { useLongPress } from '@/hooks/useLongPress';
 import { SubtaskItem } from '@/mobile/components/todo/SubtaskItem';
 import { useMobileDatepicker } from '@/mobile/overlay/datePicker/useDatepicker';
 import { usePopupAction } from '@/mobile/overlay/popupAction/usePopupAction';
+import { MobileTestIds } from '@/mobile/testids';
 import { useRecurringTaskSettings } from '@/mobile/overlay/recurringTaskSettings/useRecurringTaskSettings';
 import { TagEditorActionSheetController } from '@/mobile/overlay/tagEditor/TagEditorActionSheetController';
 import { useTimePicker } from '@/mobile/overlay/timePicker/useTimePicker';
@@ -453,7 +454,11 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
             />
           </div>
         </div>
-        <button data-testid="edit-task-menu-button" className={styles.editTaskItemMenuButton} onClick={handleMenuClick}>
+        <button
+          data-testid={MobileTestIds.EditTaskItem.MenuButton}
+          className={styles.editTaskItemMenuButton}
+          onClick={handleMenuClick}
+        >
           <MenuIcon className={styles.projectHeadingItemMenuIcon} />
         </button>
       </div>

@@ -96,6 +96,14 @@ export const TestIds = {
   TreeSelect: {
     /** Desktop tree select overlay container */
     Overlay: 'tree-select-overlay',
+    /** Inbox action row in the tree select overlay (task variant) */
+    ActionInbox: 'tree-select-action-inbox',
+    /** Root-level (no area) project row in the tree select overlay */
+    RootProjectRow: 'tree-select-root-project-row',
+    /** Area row in the tree select overlay */
+    AreaRow: 'tree-select-area-row',
+    /** Project row nested under an area in the tree select overlay */
+    AreaProjectRow: 'tree-select-area-project-row',
   },
   TimePicker: {
     /** Desktop time picker overlay container */
@@ -116,12 +124,22 @@ export const TestIds = {
     Root: 'task-list-item',
     /** Title element inside a desktop task row */
     Title: 'task-list-item-title',
+    /** Status checkbox button inside a desktop task row */
+    StatusBox: 'task-item-status-box',
   },
   ProjectListItem: {
     /** Root of a desktop project row */
     Root: 'project-list-item',
     /** Title element inside a desktop project row */
     Title: 'project-list-item-title',
+  },
+  Sidebar: {
+    /** Create menu button in the desktop sidebar header */
+    CreateMenuButton: 'sidebar-create-menu-button',
+  },
+  CloudDatabase: {
+    /** Row in the cloud database settings showing an inbox token */
+    InboxTokenRow: 'cloud-database-inbox-token-row',
   },
   RecurringTaskSettings: {
     /** Desktop recurring task settings overlay container */

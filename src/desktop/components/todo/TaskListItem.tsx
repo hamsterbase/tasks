@@ -132,7 +132,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
   const handleClickCapture = (e: React.MouseEvent) => {
     let element = e.target as HTMLElement;
     while (element && element !== e.currentTarget) {
-      if (element.getAttribute('data-testid') === 'task-item-status-box') {
+      if (element.getAttribute('data-testid') === TestIds.TaskListItem.StatusBox) {
         return;
       }
       if (element.dataset?.titleText === 'true' && !hasModifier(e)) {
@@ -160,7 +160,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
     let element = e.target as HTMLElement;
     while (element && element !== e.currentTarget) {
       if (element.dataset?.titleText === 'true') return;
-      if (element.getAttribute('data-testid') === 'task-item-status-box') return;
+      if (element.getAttribute('data-testid') === TestIds.TaskListItem.StatusBox) return;
       element = element.parentElement as HTMLElement;
     }
     taskList.select(task.id, {
@@ -222,7 +222,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
       )}
       <button
         {...longPress.longPressEvents}
-        data-testid="task-item-status-box"
+        data-testid={TestIds.TaskListItem.StatusBox}
         onClick={(e) => {
           e.stopPropagation();
           if (longPress.isLongPress.current) {

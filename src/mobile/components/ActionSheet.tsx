@@ -1,3 +1,4 @@
+import { MobileTestIds } from '@/mobile/testids';
 import classNames from 'classnames';
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { styles } from '../theme';
@@ -125,7 +126,7 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({ zIndex, children, onCl
     <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
       <div className={styles.actionSheetRoot} style={{ zIndex }}>
         <div
-          data-testid="mobile-action-sheet-backdrop"
+          data-testid={MobileTestIds.ActionSheet.Backdrop}
           className={classNames(styles.overlayBackground, styles.overlayBackdrop, {
             [styles.overlayHidden]: !isVisible,
             [styles.overlayBackgroundOpacity]: isVisible,

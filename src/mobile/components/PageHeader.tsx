@@ -1,6 +1,7 @@
 import { LeftIcon } from '@/components/icons';
 import { useBack } from '@/hooks/useBack';
 import { useCancelEdit } from '@/hooks/useCancelEdit';
+import { MobileTestIds } from '@/mobile/testids';
 import classNames from 'classnames';
 import React, { useRef } from 'react';
 import { styles } from '../theme';
@@ -35,7 +36,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({ title, id, actions, show
       className={headerContainerStyle}
       ref={headerContainerRef}
       onClick={shouldIgnoreClick}
-      data-testid="page-header"
+      data-testid={MobileTestIds.PageHeader.Root}
     >
       {showBack && (
         <div className={styles.headerLeftContainer}>

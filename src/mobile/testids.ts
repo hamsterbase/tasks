@@ -22,6 +22,31 @@ export const MobileTestIds = {
     DoneButton: 'mobile-time-picker-done-button',
     PresetPrefix: 'mobile-time-picker-preset',
   },
+  ActionSheet: {
+    Backdrop: 'mobile-action-sheet-backdrop',
+  },
+  PageHeader: {
+    Root: 'page-header',
+  },
+  EditTaskItem: {
+    MenuButton: 'edit-task-menu-button',
+  },
+  TaskItem: {
+    Root: 'task-item',
+    StatusBox: 'task-item-status-box',
+  },
+  Toast: {
+    Root: 'overlay-toast',
+  },
+  Login: {
+    AccountInput: 'login-input-account',
+    PasswordInput: 'login-input-password',
+    ConfirmPasswordInput: 'login-input-confirm-password',
+    SubmitButton: 'login-register-button-submit',
+  },
+  ProjectMeta: {
+    Checkbox: 'project-checkbox',
+  },
 } as const;
 
 export function getMobileDatePickerDayTestId(dateText: string) {

@@ -4,6 +4,7 @@ import { useService } from '@/hooks/use-service';
 import { useSessionStorageState } from '@/hooks/use-session-storage-state';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import useNavigate from '@/hooks/useNavigate';
+import { MobileTestIds } from '@/mobile/testids';
 import { localize } from '@/nls';
 import { ICloudService } from '@/services/cloud/common/cloudService';
 import React, { useState } from 'react';
@@ -87,7 +88,7 @@ export const LoginPage: React.FC = () => {
           onChange={(value) => setMode(value as LoginMode)}
         />
         <input
-          data-testid="login-input-account"
+          data-testid={MobileTestIds.Login.AccountInput}
           type="text"
           className={styles.inputItemStyle}
           placeholder={localize('login.account.placeholder', 'Enter your email')}
@@ -95,7 +96,7 @@ export const LoginPage: React.FC = () => {
           onChange={(e) => setAccount(e.target.value)}
         />
         <input
-          data-testid="login-input-password"
+          data-testid={MobileTestIds.Login.PasswordInput}
           type="password"
           className={styles.inputItemStyle}
           placeholder={localize('login.password.placeholder', 'Enter your password')}
@@ -104,7 +105,7 @@ export const LoginPage: React.FC = () => {
         />
         {mode === LoginMode.Register && (
           <input
-            data-testid="login-input-confirm-password"
+            data-testid={MobileTestIds.Login.ConfirmPasswordInput}
             type="password"
             className={styles.inputItemStyle}
             placeholder={localize('register.confirmPassword.placeholder', 'Enter your password again')}
@@ -134,7 +135,7 @@ export const LoginPage: React.FC = () => {
           </div>
         )}
         <button
-          data-testid="login-register-button-submit"
+          data-testid={MobileTestIds.Login.SubmitButton}
           className={styles.formPrimaryButton}
           onClick={handleSubmit}
           disabled={!account || !password || (mode === LoginMode.Register && (!confirmPassword || !agreedToTerms))}

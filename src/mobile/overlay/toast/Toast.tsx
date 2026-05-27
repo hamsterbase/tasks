@@ -1,5 +1,6 @@
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
+import { MobileTestIds } from '@/mobile/testids';
 import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
 import { IWorkbenchOverlayService } from '@/services/overlay/common/WorkbenchOverlayService';
 import React, { useEffect, useState } from 'react';
@@ -29,7 +30,7 @@ export const Toast: React.FC = () => {
 
   const toastMessage = (
     <div
-      data-testid="overlay-toast"
+      data-testid={MobileTestIds.Toast.Root}
       className={classNames(
         'fixed left-1/2',
         'bg-toast-bg text-white rounded-md max-w-70 px-3 py-2 text-center text-sm w-max',
@@ -52,7 +53,7 @@ export const Toast: React.FC = () => {
   if (toastController.forbidClick) {
     return (
       <div
-        data-testid="overlay-toast"
+        data-testid={MobileTestIds.Toast.Root}
         className={classNames('fixed inset-0 flex items-center justify-center')}
         style={{
           zIndex: toastController.zIndex,

@@ -3,6 +3,7 @@ import { ProjectInfoState } from '@/core/state/type';
 import { getDateFromUTCTimeStamp } from '@/core/time/getDateFromUTCTimeStamp';
 import { getDateFnsLocale } from '@/locales/common/locale';
 import useProject from '@/mobile/hooks/useProject';
+import { MobileTestIds } from '@/mobile/testids';
 import { styles } from '@/mobile/theme';
 import { localize } from '@/nls';
 import classNames from 'classnames';
@@ -53,7 +54,7 @@ const ProjectMeta: React.FC<{ project: ProjectInfoState }> = ({ project }) => {
         <div className={styles.projectInfoLogoContainer}>
           <MobileProjectCheckbox
             size="large"
-            data-testid="project-checkbox"
+            data-testid={MobileTestIds.ProjectMeta.Checkbox}
             onLongPress={handleLongPressStatusIcon}
             progress={project.progress * 100}
             status={project.status}

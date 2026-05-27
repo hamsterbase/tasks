@@ -2,6 +2,7 @@ import { TaskInfo } from '@/core/state/type.ts';
 import { useService } from '@/hooks/use-service';
 import { useCancelEdit } from '@/hooks/useCancelEdit';
 import { usePopupAction } from '@/mobile/overlay/popupAction/usePopupAction';
+import { MobileTestIds } from '@/mobile/testids';
 import { styles } from '@/mobile/theme';
 import { ITodoService } from '@/services/todo/common/todoService';
 import { localize } from '@/nls';
@@ -104,7 +105,7 @@ export const TaskItem: React.FC<TaskItemProps> = ({
   }
   return (
     <div
-      data-testid="task-item"
+      data-testid={MobileTestIds.TaskItem.Root}
       className={classNames(styles.taskItemRoot, className, {
         [styles.listItemRound]: true,
         [styles.taskItemHeight]: true,
@@ -121,7 +122,7 @@ export const TaskItem: React.FC<TaskItemProps> = ({
       {...listeners}
     >
       <button
-        data-testid="task-item-status-box"
+        data-testid={MobileTestIds.TaskItem.StatusBox}
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();

@@ -224,7 +224,7 @@ const TreeSelectContent: React.FC<TreeSelectContentProps> = ({ controller }) => 
               <button
                 className={desktopStyles.TreeSelectOverlayAction}
                 onClick={() => handleConfirmSelection(null)}
-                data-test-id="tree-select-action-inbox"
+                data-test-id={TestIds.TreeSelect.ActionInbox}
               >
                 {/* When any area exists the chevron forms its own column; add a phantom spacer
                     so the inbox icon lines up with area/project icons below. */}
@@ -321,7 +321,7 @@ const TreeSelectContent: React.FC<TreeSelectContentProps> = ({ controller }) => 
                     [desktopStyles.TreeSelectOverlayProjectRowSelected]: project.id === selection.currentProjectId,
                   })}
                   onClick={() => handleConfirmSelection(project.id)}
-                  data-test-id="tree-select-root-project-row"
+                  data-test-id={TestIds.TreeSelect.RootProjectRow}
                 >
                   {/* Phantom chevron spacer keeps the icon aligned with area icons when areas exist.
                       With no areas there's no chevron column to align to. */}
@@ -350,7 +350,7 @@ const TreeSelectContent: React.FC<TreeSelectContentProps> = ({ controller }) => 
                         [desktopStyles.TreeSelectOverlayAreaRowSelected]:
                           area.id === selection.currentAreaId && selection.currentProjectId === null,
                       })}
-                      data-test-id="tree-select-area-row"
+                      data-test-id={TestIds.TreeSelect.AreaRow}
                       {...areaRowProps}
                     >
                       <button
@@ -384,7 +384,7 @@ const TreeSelectContent: React.FC<TreeSelectContentProps> = ({ controller }) => 
                               project.id === selection.currentProjectId,
                           })}
                           onClick={() => handleConfirmSelection(project.id)}
-                          data-test-id="tree-select-area-project-row"
+                          data-test-id={TestIds.TreeSelect.AreaProjectRow}
                         >
                           <span className={desktopStyles.TreeSelectOverlayChevronSpacer} aria-hidden />
                           <span className={desktopStyles.TreeSelectOverlayAreaIcon}>

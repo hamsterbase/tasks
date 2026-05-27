@@ -711,7 +711,7 @@ export const desktopStyles = {
 
   TagEditorOverlayContainer: /*tw*/ 'w-[224px]',
   TagEditorOverlayCreateButton:
-    /*tw*/ 'flex items-center gap-2 px-2 py-1.5 text-xs cursor-pointer rounded-sm text-t2 hover:bg-bg3 hover:text-t1 transition-colors mx-1',
+    /*tw*/ 'flex w-[calc(100%-0.5rem)] items-center gap-2 px-2 py-1.5 text-xs cursor-pointer rounded-sm text-t2 hover:bg-bg3 hover:text-t1 transition-colors mx-1',
   TagEditorOverlayCreateButtonActive: /*tw*/ 'bg-bg3 text-t1',
   TagEditorOverlayCreateButtonIcon: /*tw*/ 'size-3.5 flex items-center justify-center flex-shrink-0',
   TagEditorOverlayScrollContainer: /*tw*/ 'py-1 overflow-y-auto max-h-[224px]',
