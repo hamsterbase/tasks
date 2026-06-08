@@ -35,11 +35,14 @@ import { useTimePicker } from '@/mobile/overlay/timePicker/useTimePicker';
 import { styles } from '@/mobile/theme';
 import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService';
+import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc';
 import { closestCenter, DndContext, MouseSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import classNames from 'classnames';
 import TextArea from 'rc-textarea';
 import React, { useRef } from 'react';
+import { flushSync } from 'react-dom';
+import { useLocation } from 'react-router';
 import { IInstantiationService } from 'vscf/platform/instantiation/common';
 import { OverlayItem } from '../dnd/DragOverlayItem';
 import { AttrList, AttrRowItem } from '../attr/AttrList';
@@ -82,7 +85,27 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
   );
 
   const divRef = useRef<HTMLDivElement>(null);
-  const { itemClassName, shouldIgnoreClick, endEditing } = useCancelEdit(divRef, taskInfo.id);
+  const { itemClassName, shouldIgnoreClick } = useCancelEdit(divRef, taskInfo.id);
+  const location = useLocation();
+  const createTaskAfterCurrent = React.useCallback(() => {
+    todoService.endEditingContent();
+    const position = { type: 'afterElement' as const, previousElementId: taskInfo.id };
+    const isToday = location.pathname === '/today';
+    const newTaskId = flushSync(() => {
+      const id = todoService.addTask({
+        title: '',
+        position,
+        ...(isToday ? { startDate: getTodayTimestampInUtc() } : {}),
+      });
+      if (isToday) {
+        todoService.moveDateAssignedList(id, position);
+      }
+      return id;
+    });
+    setTimeout(() => {
+      todoService.editItem(newTaskId);
+    }, 60);
+  }, [location.pathname, taskInfo.id, todoService]);
   const { textAreaProps } = useEdit({
     isEditing,
     title: taskInfo.title,
@@ -90,7 +113,8 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
       todoService.updateTask(taskInfo.id, { title });
     },
     singleLine: true,
-    onConfirm: endEditing,
+    onConfirm: createTaskAfterCurrent,
+    enterKeyHint: 'next',
     disableAutoFocus: !!taskInfo.title,
   });
   const { textAreaProps: notesProps } = useEdit({
@@ -439,6 +463,7 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
 
   return (
     <div
+      data-testid={MobileTestIds.EditTaskItem.Root}
       ref={divRef}
       onClick={shouldIgnoreClick}
       className={classNames(
@@ -467,6 +492,7 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
           <div className={styles.editTaskItemTitleInputRow}>
             <TextArea
               {...textAreaProps}
+              data-testid={MobileTestIds.EditTaskItem.TitleInput}
               ref={(el) => {
                 if (el) {
                   textAreaProps.ref.current = el.nativeElement as HTMLInputElement;

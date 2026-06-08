@@ -8,6 +8,7 @@ interface UseEditProps {
   singleLine?: boolean;
   disableAutoFocus?: boolean;
   onConfirm?: () => void;
+  enterKeyHint?: React.HTMLAttributes<HTMLInputElement>['enterKeyHint'];
 }
 
 export const useEdit = ({
@@ -17,6 +18,7 @@ export const useEdit = ({
   singleLine = false,
   disableAutoFocus = false,
   onConfirm,
+  enterKeyHint = 'done',
 }: UseEditProps) => {
   const textareaRef = useRef<HTMLInputElement | null>(null);
   const [textContent, setTextContent] = useState(title);
@@ -24,9 +26,11 @@ export const useEdit = ({
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setTextContent(e.target.value);
   }
+
   function handleBlur() {
     onSave(textContent);
   }
+
   function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) {
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -34,6 +38,7 @@ export const useEdit = ({
       onConfirm?.();
     }
   }
+
   useLayoutEffect(() => {
     const focusAndSelect = () => {
       if (textareaRef.current) {
@@ -63,7 +68,7 @@ export const useEdit = ({
       value: textContent,
       onChange: handleChange,
       onBlur: handleBlur,
-      ...(singleLine ? { enterKeyHint: 'done' as const, onKeyDown: handleKeyDown } : {}),
+      ...(singleLine ? { enterKeyHint, onKeyDown: handleKeyDown } : {}),
       onFocus: handleFocusAndScroll,
     },
   };

@@ -29,6 +29,8 @@ export const MobileTestIds = {
     Root: 'page-header',
   },
   EditTaskItem: {
+    Root: 'edit-task-item',
+    TitleInput: 'edit-task-title-input',
     MenuButton: 'edit-task-menu-button',
   },
   TaskItem: {
