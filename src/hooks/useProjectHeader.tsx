@@ -96,7 +96,7 @@ export const useProjectHeader = (options: IUseProjectHeaderOptions) => {
             },
             {
               icon: <MoveIcon />,
-              name: localize('project_heading.move', 'Move'),
+              name: localize('project_heading.move', 'Move Heading'),
               onClick: handleMoveToProject,
             },
             {

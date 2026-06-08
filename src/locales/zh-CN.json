@@ -1285,8 +1285,8 @@
     "content": "编辑标题"
   },
   "project_heading.move": {
-    "defaultMessage": "Move",
-    "content": "移动"
+    "defaultMessage": "Move Heading",
+    "content": "移动标题"
   },
   "project_heading.placeholder": {
     "defaultMessage": "New Heading",
@@ -2125,8 +2125,8 @@
     "content": "您确定要删除此任务吗？"
   },
   "task.move": {
-    "defaultMessage": "Move",
-    "content": "移动"
+    "defaultMessage": "Move Task",
+    "content": "移动任务"
   },
   "task.recurring_settings": {
     "defaultMessage": "Recurring Settings",

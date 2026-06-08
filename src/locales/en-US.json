@@ -1285,8 +1285,8 @@
     "content": "Edit Title"
   },
   "project_heading.move": {
-    "defaultMessage": "Move",
-    "content": "Move"
+    "defaultMessage": "Move Heading",
+    "content": "Move Heading"
   },
   "project_heading.placeholder": {
     "defaultMessage": "New Heading",
@@ -2125,8 +2125,8 @@
     "content": "Are you sure you want to delete this task?"
   },
   "task.move": {
-    "defaultMessage": "Move",
-    "content": "Move"
+    "defaultMessage": "Move Task",
+    "content": "Move Task"
   },
   "task.recurring_settings": {
     "defaultMessage": "Recurring Settings",

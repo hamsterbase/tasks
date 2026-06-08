@@ -109,7 +109,7 @@ export const useEditTaskHooks = (taskInfo: TaskInfo) => {
             },
             {
               icon: <MoveIcon />,
-              name: localize('task.move', 'Move'),
+              name: localize('task.move', 'Move Task'),
               onClick: () => {
                 projectAreaSelector({
                   currentItemId: taskInfo.id,

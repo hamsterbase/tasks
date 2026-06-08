@@ -5,6 +5,7 @@ import {
   FlagIcon,
   ListChecksIcon,
   MenuIcon,
+  MoveIcon,
   NotesIcon,
   Repeat2Icon,
   RepeatIcon,
@@ -26,6 +27,7 @@ import { useLongPress } from '@/hooks/useLongPress';
 import { SubtaskItem } from '@/mobile/components/todo/SubtaskItem';
 import { useMobileDatepicker } from '@/mobile/overlay/datePicker/useDatepicker';
 import { usePopupAction } from '@/mobile/overlay/popupAction/usePopupAction';
+import { useProjectAreaSelector } from '@/mobile/overlay/projectAreaSelector/useProjectAreaSelector';
 import { MobileTestIds } from '@/mobile/testids';
 import { useRecurringTaskSettings } from '@/mobile/overlay/recurringTaskSettings/useRecurringTaskSettings';
 import { TagEditorActionSheetController } from '@/mobile/overlay/tagEditor/TagEditorActionSheetController';
@@ -43,6 +45,7 @@ import { OverlayItem } from '../dnd/DragOverlayItem';
 import { AttrList, AttrRowItem } from '../attr/AttrList';
 import { AttrContainer } from '../attr/AttrContainer';
 import { TaskCheckbox } from '../icon/TaskCheckbox';
+import { TreeID } from 'loro-crdt';
 
 interface EditTaskItemProps {
   taskInfo: TaskInfo;
@@ -105,6 +108,21 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
   const openRecurringTaskSettings = useRecurringTaskSettings();
   const timePicker = useTimePicker();
   const instantiationService = useService(IInstantiationService);
+  const projectAreaSelector = useProjectAreaSelector();
+
+  const handleMoveTask = () => {
+    projectAreaSelector({
+      currentItemId: taskInfo.id,
+      onConfirm: (id: TreeID | null) => {
+        todoService.updateTask(taskInfo.id, {
+          position: {
+            type: 'firstElement',
+            parentId: id ?? undefined,
+          },
+        });
+      },
+    });
+  };
 
   const handleMenuClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
@@ -155,6 +173,11 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
                   instantiationService
                 );
               },
+            },
+            {
+              icon: <MoveIcon />,
+              name: localize('task.move', 'Move Task'),
+              onClick: handleMoveTask,
             },
           ],
         },
