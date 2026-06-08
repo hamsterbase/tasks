@@ -1656,6 +1656,18 @@
     "defaultMessage": "Back to App",
     "content": "Back to App"
   },
+  "settings.calendar": {
+    "defaultMessage": "Calendar",
+    "content": "Calendar"
+  },
+  "settings.calendar_week_start_day": {
+    "defaultMessage": "Week starts on",
+    "content": "Week starts on"
+  },
+  "settings.calendar_week_start_day.description": {
+    "defaultMessage": "Choose the first day of the week in date pickers.",
+    "content": "Choose the first day of the week in date pickers."
+  },
   "settings.cloud": {
     "defaultMessage": "Cloud",
     "content": "Cloud"
@@ -1947,6 +1959,34 @@
   "settings.today.group_by_area_project.description": {
     "defaultMessage": "Group projects by area and tasks by project on the Today page.",
     "content": "Group projects by area and tasks by project on the Today page."
+  },
+  "settings.weekday.friday": {
+    "defaultMessage": "Friday",
+    "content": "Friday"
+  },
+  "settings.weekday.monday": {
+    "defaultMessage": "Monday",
+    "content": "Monday"
+  },
+  "settings.weekday.saturday": {
+    "defaultMessage": "Saturday",
+    "content": "Saturday"
+  },
+  "settings.weekday.sunday": {
+    "defaultMessage": "Sunday",
+    "content": "Sunday"
+  },
+  "settings.weekday.thursday": {
+    "defaultMessage": "Thursday",
+    "content": "Thursday"
+  },
+  "settings.weekday.tuesday": {
+    "defaultMessage": "Tuesday",
+    "content": "Tuesday"
+  },
+  "settings.weekday.wednesday": {
+    "defaultMessage": "Wednesday",
+    "content": "Wednesday"
   },
   "sidebar.create_menu": {
     "defaultMessage": "Create New",

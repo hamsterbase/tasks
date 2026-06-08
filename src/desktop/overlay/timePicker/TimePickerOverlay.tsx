@@ -1,9 +1,12 @@
 import { OverlayContainer } from '@/desktop/components/Overlay/OverlayContainer';
 import { CircleSmallIcon, LeftIcon, RightIcon } from '@/components/icons';
+import { getCalendarWeekdayLabels, type CalendarWeekStartDay } from '@/core/time/calendarWeekStart';
 import { desktopStyles } from '@/desktop/theme/main';
+import { useConfig } from '@/hooks/useConfig';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { localize } from '@/nls';
+import { calendarWeekStartDayConfigKey } from '@/services/config/config';
 import { IWorkbenchOverlayService } from '@/services/overlay/common/WorkbenchOverlayService';
 import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
 import { TestIds } from '@/testIds';
@@ -15,12 +18,11 @@ import { calculateElementWidth } from '../datePicker/constant';
 import { TimePickerOverlayController } from './TimePickerOverlayController';
 import { useDesktopMessage } from '../desktopMessage/useDesktopMessage';
 
-const weekdays = ['一', '二', '三', '四', '五', '六', '日'];
 const hours = Array.from({ length: 24 }, (_, index) => index);
 const minutes = Array.from({ length: 60 }, (_, index) => index);
 
-function buildCalendarCells(monthDate: Date, selectedDate: Date | null) {
-  const cells = [...calculateDaysForMonth(monthDate, selectedDate)];
+function buildCalendarCells(monthDate: Date, selectedDate: Date | null, weekStartDay: CalendarWeekStartDay) {
+  const cells = [...calculateDaysForMonth(monthDate, selectedDate, weekStartDay)];
   const existingNextMonthCount = cells.filter((cell) => !cell.isCurrentMonth && cell.date > monthDate).length;
   const extraCount = 42 - cells.length;
 
@@ -46,6 +48,7 @@ export const TimePickerOverlay: React.FC = () => {
   const workbenchOverlayService = useService(IWorkbenchOverlayService);
   useWatchEvent(workbenchOverlayService.onOverlayChange);
   const desktopMessage = useDesktopMessage();
+  const { value: weekStartDay } = useConfig(calendarWeekStartDayConfigKey());
   const controller: TimePickerOverlayController | null = workbenchOverlayService.getOverlay(
     OverlayEnum.desktopTimePicker
   );
@@ -87,7 +90,8 @@ export const TimePickerOverlay: React.FC = () => {
   if (!controller) return null;
 
   const position = controller.getPosition();
-  const cells = buildCalendarCells(visibleMonth, controller.selectedDate);
+  const cells = buildCalendarCells(visibleMonth, controller.selectedDate, weekStartDay);
+  const weekdays = getCalendarWeekdayLabels(weekStartDay);
   const monthLabel = `${visibleMonth.getMonth() + 1}/${visibleMonth.getFullYear()}`;
   const displayValue = format(controller.selectedDate, 'yyyy-MM-dd HH:mm');
 

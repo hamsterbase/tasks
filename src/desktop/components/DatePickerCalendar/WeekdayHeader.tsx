@@ -1,17 +1,13 @@
+import { getCalendarWeekdayLabels, type CalendarWeekStartDay } from '@/core/time/calendarWeekStart';
 import { desktopStyles } from '@/desktop/theme/main';
-import { localize } from '@/nls';
 import React from 'react';
 
-export const WeekdayHeader: React.FC = () => {
-  const weekdays = [
-    localize('date_picker.monday', 'Mon'),
-    localize('date_picker.tuesday', 'Tue'),
-    localize('date_picker.wednesday', 'Wed'),
-    localize('date_picker.thursday', 'Thu'),
-    localize('date_picker.friday', 'Fri'),
-    localize('date_picker.saturday', 'Sat'),
-    localize('date_picker.sunday', 'Sun'),
-  ];
+interface WeekdayHeaderProps {
+  weekStartDay: CalendarWeekStartDay;
+}
+
+export const WeekdayHeader: React.FC<WeekdayHeaderProps> = ({ weekStartDay }) => {
+  const weekdays = getCalendarWeekdayLabels(weekStartDay);
 
   return (
     <div className={desktopStyles.DatePickerCalendarWeekdayGrid}>

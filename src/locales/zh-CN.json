@@ -1656,6 +1656,18 @@
     "defaultMessage": "Back to App",
     "content": "返回应用"
   },
+  "settings.calendar": {
+    "defaultMessage": "Calendar",
+    "content": ""
+  },
+  "settings.calendar_week_start_day": {
+    "defaultMessage": "Week starts on",
+    "content": ""
+  },
+  "settings.calendar_week_start_day.description": {
+    "defaultMessage": "Choose the first day of the week in date pickers.",
+    "content": ""
+  },
   "settings.cloud": {
     "defaultMessage": "Cloud",
     "content": "云端"
@@ -1947,6 +1959,34 @@
   "settings.today.group_by_area_project.description": {
     "defaultMessage": "Group projects by area and tasks by project on the Today page.",
     "content": "在今天页面按区域对项目分组，按项目对任务分组。"
+  },
+  "settings.weekday.friday": {
+    "defaultMessage": "Friday",
+    "content": ""
+  },
+  "settings.weekday.monday": {
+    "defaultMessage": "Monday",
+    "content": ""
+  },
+  "settings.weekday.saturday": {
+    "defaultMessage": "Saturday",
+    "content": ""
+  },
+  "settings.weekday.sunday": {
+    "defaultMessage": "Sunday",
+    "content": ""
+  },
+  "settings.weekday.thursday": {
+    "defaultMessage": "Thursday",
+    "content": ""
+  },
+  "settings.weekday.tuesday": {
+    "defaultMessage": "Tuesday",
+    "content": ""
+  },
+  "settings.weekday.wednesday": {
+    "defaultMessage": "Wednesday",
+    "content": ""
   },
   "sidebar.create_menu": {
     "defaultMessage": "Create New",

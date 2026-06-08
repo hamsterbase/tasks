@@ -1,4 +1,5 @@
 import { getUTCTimeStampFromDateStr } from '@/core/time/getUTCTimeStampFromDateStr';
+import { getCalendarLeadingDaysCount, type CalendarWeekStartDay } from '@/core/time/calendarWeekStart';
 import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
 import { startOfMonth, endOfMonth, differenceInMonths, addMonths, format } from 'date-fns';
 import { Emitter } from 'vscf/base/common/event';
@@ -86,24 +87,24 @@ export class DatePickerActionSheetController extends Disposable {
     return this._currentMonthIndex;
   }
 
-  getMonthData(index: number): MonthData {
+  getMonthData(index: number, weekStartDay: CalendarWeekStartDay): MonthData {
     const date = addMonths(startOfMonth(new Date()), index - 500);
-    const days = this.calculateDaysForMonth(date);
+    const days = this.calculateDaysForMonth(date, weekStartDay);
     return {
       date,
       days,
     };
   }
 
-  private calculateDaysForMonth(monthDate: Date): MonthData['days'] {
+  private calculateDaysForMonth(monthDate: Date, weekStartDay: CalendarWeekStartDay): MonthData['days'] {
     const year = monthDate.getFullYear();
     const month = monthDate.getMonth();
     const firstDay = startOfMonth(monthDate);
     const lastDay = endOfMonth(monthDate);
     const days: MonthData['days'] = [];
-    const firstDayOfWeek = firstDay.getDay() || 7;
-    for (let i = 1; i < firstDayOfWeek; i++) {
-      const prevDate = new Date(year, month, 1 - (firstDayOfWeek - i));
+    const leadingDaysCount = getCalendarLeadingDaysCount(firstDay, weekStartDay);
+    for (let i = 0; i < leadingDaysCount; i++) {
+      const prevDate = new Date(year, month, 1 - (leadingDaysCount - i));
       days.push({
         date: prevDate,
         value: prevDate.getDate(),
@@ -159,8 +160,8 @@ export class DatePickerActionSheetController extends Disposable {
     this.dispose();
   }
 
-  getMonthRowCount(index: number): number {
-    const monthData = this.getMonthData(index);
+  getMonthRowCount(index: number, weekStartDay: CalendarWeekStartDay): number {
+    const monthData = this.getMonthData(index, weekStartDay);
     return Math.ceil(monthData.days.length / 7);
   }
 

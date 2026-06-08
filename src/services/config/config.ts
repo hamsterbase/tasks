@@ -1,3 +1,4 @@
+import type { CalendarWeekStartDay } from '@/core/time/calendarWeekStart';
 import { TimeAfterEnum } from '@/core/time/getTimeAfter';
 import { ISelfhostedSyncServerConfig } from '../selfhostedSync/common/selfhostedSyncService.ts';
 import { ConfigKey } from './configService.ts';
@@ -76,6 +77,14 @@ export function groupTodayByAreaProjectConfigKey(): ConfigKey<boolean> {
     key: 'groupTodayByAreaProject',
     default: false,
     check: (value: boolean) => typeof value === 'boolean',
+  };
+}
+
+export function calendarWeekStartDayConfigKey(): ConfigKey<CalendarWeekStartDay> {
+  return {
+    key: 'calendarWeekStartDay',
+    default: 1,
+    check: (value: CalendarWeekStartDay) => Number.isInteger(value) && value >= 0 && value <= 6,
   };
 }
 

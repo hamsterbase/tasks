@@ -1,12 +1,15 @@
 import { getTheme } from '@/base/browser/initializeTheme';
 import { taskDisplaySettingOptions } from '@/base/common/TaskDisplaySettings';
 import { SettingsIcon } from '@/components/icons';
+import { getCalendarWeekStartOptions } from '@/core/time/calendarWeekStart';
+import { useConfig } from '@/hooks/useConfig';
 import { useAbout } from '@/hooks/use-about';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import useNavigate from '@/hooks/useNavigate';
 import { localize } from '@/nls';
 import { ICloudService } from '@/services/cloud/common/cloudService';
+import { calendarWeekStartDayConfigKey } from '@/services/config/config';
 import { selfhostedSyncPageTitle } from '@/services/selfhostedSync/browser/useAddSelfhostedServer';
 import { ISwitchService } from '@/services/switchService/common/switchService';
 import React from 'react';
@@ -18,6 +21,8 @@ export const MobileSettings = () => {
   const cloudService = useService(ICloudService);
   const { showAbout } = useAbout();
   const switchService = useService(ISwitchService);
+  const { value: weekStartDay } = useConfig(calendarWeekStartDayConfigKey());
+  const weekStartDayLabel = getCalendarWeekStartOptions().find((option) => option.value === weekStartDay)?.label;
   useWatchEvent(cloudService.onSessionChange);
 
   return (
@@ -43,6 +48,14 @@ export const MobileSettings = () => {
             onClick: () => navigate({ path: '/settings/theme' }),
             mode: {
               type: 'navigation',
+            },
+          },
+          {
+            title: localize('settings.calendar', 'Calendar'),
+            onClick: () => navigate({ path: '/settings/calendar' }),
+            mode: {
+              type: 'navigation',
+              label: weekStartDayLabel,
             },
           },
           {

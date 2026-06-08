@@ -1,3 +1,4 @@
+import { getCalendarWeekStartOptions, type CalendarWeekStartDay } from '@/core/time/calendarWeekStart';
 import { TimeAfterEnum } from '@/core/time/getTimeAfter';
 import { ItemGroup } from '@/desktop/components/Settings/ItemGroup';
 import { SettingsContent } from '@/desktop/components/Settings/SettingsContent/SettingsContent';
@@ -7,6 +8,7 @@ import { useConfig } from '@/hooks/useConfig';
 import { useGlobalTaskDisplaySettings } from '@/hooks/useGlobalTaskDisplaySettings';
 import { localize } from '@/nls';
 import {
+  calendarWeekStartDayConfigKey,
   dockBadgeCountTypeConfigKey,
   groupTodayByAreaProjectConfigKey,
   notesMarkdownRenderConfigKey,
@@ -28,6 +30,7 @@ export const AppearanceSettings: React.FC = () => {
   } = useGlobalTaskDisplaySettings();
 
   const { value: notesMarkdownRender, setValue: setNotesMarkdownRender } = useConfig(notesMarkdownRenderConfigKey());
+  const { value: weekStartDay, setValue: setWeekStartDay } = useConfig(calendarWeekStartDayConfigKey());
   const { value: dockBadgeCountType, setValue: setDockBadgeCountType } = useConfig(dockBadgeCountTypeConfigKey());
   const { value: groupTodayByAreaProject, setValue: setGroupTodayByAreaProject } = useConfig(
     groupTodayByAreaProjectConfigKey()
@@ -103,6 +106,26 @@ export const AppearanceSettings: React.FC = () => {
               },
             }}
           ></SettingsItem>
+        </ItemGroup>
+      </SettingsSection>
+      <SettingsSection title={localize('settings.calendar', 'Calendar')}>
+        <ItemGroup>
+          <SettingsItem
+            title={localize('settings.calendar_week_start_day', 'Week starts on')}
+            description={localize(
+              'settings.calendar_week_start_day.description',
+              'Choose the first day of the week in date pickers.'
+            )}
+            action={{
+              type: 'select',
+              options: getCalendarWeekStartOptions().map((option) => ({
+                value: String(option.value),
+                label: option.label,
+              })),
+              currentValue: String(weekStartDay),
+              onChange: (value) => setWeekStartDay(Number(value) as CalendarWeekStartDay),
+            }}
+          />
         </ItemGroup>
       </SettingsSection>
       <SettingsSection title={localize('settings.dock_badge', 'Dock Badge')}>

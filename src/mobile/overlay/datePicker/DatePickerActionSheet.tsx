@@ -1,8 +1,10 @@
 import { formatCalendarMonth } from '@/core/time/formatCalendarMonth';
+import { useConfig } from '@/hooks/useConfig';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { ActionSheet } from '@/mobile/components/ActionSheet';
 import { styles } from '@/mobile/theme';
+import { calendarWeekStartDayConfigKey } from '@/services/config/config';
 import { IWorkbenchOverlayService } from '@/services/overlay/common/WorkbenchOverlayService';
 import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
 import React, { useEffect, useRef } from 'react';
@@ -38,11 +40,12 @@ export const DatePickerActionSheet: React.FC = () => {
   useWatchEvent(workbenchOverlayService.onOverlayChange);
   const controller: DatePickerActionSheetController | null = workbenchOverlayService.getOverlay(OverlayEnum.datePicker);
   useWatchEvent(controller?.onStatusChange);
+  const { value: weekStartDay } = useConfig(calendarWeekStartDayConfigKey());
   const listRef = useRef<VariableSizeList>(null);
 
   const getItemSize = (index: number) => {
     if (!controller) return 0;
-    const rowCount = controller.getMonthRowCount(index);
+    const rowCount = controller.getMonthRowCount(index, weekStartDay);
     return MONTH_HEADER_HEIGHT + rowCount * (DAY_CELL_HEIGHT + GAP_HEIGHT) + GAP_HEIGHT;
   };
 
@@ -51,6 +54,10 @@ export const DatePickerActionSheet: React.FC = () => {
     if (!controller) return;
     listRef.current?.scrollToItem(controller.getCurrentMonthIndex(), 'start');
   }, [controller]);
+
+  useEffect(() => {
+    listRef.current?.resetAfterIndex(0, true);
+  }, [weekStartDay]);
 
   if (!controller) return null;
 
@@ -62,11 +69,11 @@ export const DatePickerActionSheet: React.FC = () => {
       contentClassName={styles.datePickerActionSheetPadding}
     >
       <div>
-        <WeekdayHeader />
+        <WeekdayHeader weekStartDay={weekStartDay} />
         <VariableSizeList ref={listRef} height={ITEM_HEIGHT} width="100%" itemCount={1000} itemSize={getItemSize}>
           {({ index, style }: { index: number; style: React.CSSProperties }) => {
             if (!controller) return null;
-            const monthData = controller.getMonthData(index);
+            const monthData = controller.getMonthData(index, weekStartDay);
             return (
               <div style={style}>
                 <div

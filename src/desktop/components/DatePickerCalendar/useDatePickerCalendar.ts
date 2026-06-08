@@ -1,11 +1,19 @@
-export function getMonthData(index: number, _selectedDate: Date | null): MonthData {
-  const date = addMonths(startOfMonth(new Date()), index - 500);
-  const days = calculateDaysForMonth(date, _selectedDate);
-  return {
-    date,
-    days,
-  };
+import { getCalendarLeadingDaysCount, type CalendarWeekStartDay } from '@/core/time/calendarWeekStart';
+import { formatCalendarMonth } from '@/core/time/formatCalendarMonth';
+import { startOfMonth, endOfMonth, addMonths, differenceInMonths } from 'date-fns';
+import { useEffect, useState } from 'react';
+import { VariableSizeList } from 'react-window';
+
+interface MonthData {
+  date: Date;
+  days: {
+    date: Date;
+    value: number | null;
+    isCurrentMonth: boolean;
+    isSelected: boolean;
+  }[];
 }
+
 export function isSameDate(date1: Date | null, date2: Date | null): boolean {
   if (!date1 || !date2) return false;
   return (
@@ -14,17 +22,35 @@ export function isSameDate(date1: Date | null, date2: Date | null): boolean {
     date1.getFullYear() === date2.getFullYear()
   );
 }
-export function calculateDaysForMonth(monthDate: Date, _selectedDate: Date | null): MonthData['days'] {
+
+export function getMonthData(
+  index: number,
+  _selectedDate: Date | null,
+  weekStartDay: CalendarWeekStartDay = 1
+): MonthData {
+  const date = addMonths(startOfMonth(new Date()), index - 500);
+  const days = calculateDaysForMonth(date, _selectedDate, weekStartDay);
+  return {
+    date,
+    days,
+  };
+}
+
+export function calculateDaysForMonth(
+  monthDate: Date,
+  _selectedDate: Date | null,
+  weekStartDay: CalendarWeekStartDay = 1
+): MonthData['days'] {
   const year = monthDate.getFullYear();
   const month = monthDate.getMonth();
   const firstDay = startOfMonth(monthDate);
   const lastDay = endOfMonth(monthDate);
   const days: MonthData['days'] = [];
-  const firstDayOfWeek = firstDay.getDay() || 7;
+  const leadingDaysCount = getCalendarLeadingDaysCount(firstDay, weekStartDay);
 
   // Previous month days
-  for (let i = 1; i < firstDayOfWeek; i++) {
-    const prevDate = new Date(year, month, 1 - (firstDayOfWeek - i));
+  for (let i = 0; i < leadingDaysCount; i++) {
+    const prevDate = new Date(year, month, 1 - (leadingDaysCount - i));
     days.push({
       date: prevDate,
       value: prevDate.getDate(),
@@ -58,22 +84,12 @@ export function calculateDaysForMonth(monthDate: Date, _selectedDate: Date | nul
 
   return days;
 }
-import { formatCalendarMonth } from '@/core/time/formatCalendarMonth';
-import { startOfMonth, endOfMonth, addMonths, differenceInMonths } from 'date-fns';
-import { useEffect, useState } from 'react';
-import { VariableSizeList } from 'react-window';
 
-interface MonthData {
-  date: Date;
-  days: {
-    date: Date;
-    value: number | null;
-    isCurrentMonth: boolean;
-    isSelected: boolean;
-  }[];
-}
-
-export function useDatePickerCalendar(selectedDate: Date | null, listRef: React.RefObject<VariableSizeList>) {
+export function useDatePickerCalendar(
+  selectedDate: Date | null,
+  listRef: React.RefObject<VariableSizeList>,
+  weekStartDay: CalendarWeekStartDay = 1
+) {
   const [visibleMonthIndex, setVisibleMonthIndex] = useState(500);
 
   useEffect(() => {
@@ -89,7 +105,7 @@ export function useDatePickerCalendar(selectedDate: Date | null, listRef: React.
     }
   }, [selectedDate, listRef]);
 
-  const visibleMonthTitle = formatCalendarMonth(getMonthData(visibleMonthIndex, selectedDate).date);
+  const visibleMonthTitle = formatCalendarMonth(getMonthData(visibleMonthIndex, selectedDate, weekStartDay).date);
 
   const handlePrevMonth = () => {
     const newIndex = visibleMonthIndex - 1;
@@ -114,7 +130,7 @@ export function useDatePickerCalendar(selectedDate: Date | null, listRef: React.
   };
 
   function getMonthRowCount(index: number): number {
-    const monthData = getMonthData(index, selectedDate);
+    const monthData = getMonthData(index, selectedDate, weekStartDay);
     return Math.ceil(monthData.days.length / 7);
   }
 

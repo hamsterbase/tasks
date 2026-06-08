@@ -13,9 +13,11 @@ import { WeekdayHeader } from '@/desktop/components/DatePickerCalendar/WeekdayHe
 import { calculateDaysForMonth } from '@/desktop/components/DatePickerCalendar/useDatePickerCalendar';
 import { OverlayContainer } from '@/desktop/components/Overlay/OverlayContainer';
 import { desktopStyles } from '@/desktop/theme/main';
+import { useConfig } from '@/hooks/useConfig';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { localize } from '@/nls';
+import { calendarWeekStartDayConfigKey } from '@/services/config/config';
 import { IWorkbenchOverlayService } from '@/services/overlay/common/WorkbenchOverlayService';
 import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
 import { TestIds } from '@/testIds';
@@ -66,6 +68,7 @@ export const DatePickerOverlay: React.FC = () => {
     OverlayEnum.desktopDatePicker
   );
   useWatchEvent(controller?.onStatusChange);
+  const { value: weekStartDay } = useConfig(calendarWeekStartDayConfigKey());
 
   const [visibleMonth, setVisibleMonth] = useState(() => startOfMonth(new Date()));
 
@@ -85,7 +88,7 @@ export const DatePickerOverlay: React.FC = () => {
   if (!controller) return null;
 
   const position = controller.getPosition();
-  const monthDays = calculateDaysForMonth(visibleMonth, controller.selectedDate);
+  const monthDays = calculateDaysForMonth(visibleMonth, controller.selectedDate, weekStartDay);
 
   return (
     <OverlayContainer
@@ -114,10 +117,7 @@ export const DatePickerOverlay: React.FC = () => {
           <ScheduledIcon className={desktopStyles.DatePickerOverlayQuickActionIcon} />
           {localize('date_picker.tomorrow', 'Tomorrow')}
         </button>
-        <button
-          onClick={() => controller.selectSomeday()}
-          className={desktopStyles.DatePickerOverlayQuickActionButton}
-        >
+        <button onClick={() => controller.selectSomeday()} className={desktopStyles.DatePickerOverlayQuickActionButton}>
           <LaterProjectsIcon className={desktopStyles.DatePickerOverlayQuickActionIcon} />
           {localize('date_picker.someday', 'Someday')}
         </button>
@@ -152,7 +152,7 @@ export const DatePickerOverlay: React.FC = () => {
         </div>
       </div>
       <div className={desktopStyles.DatePickerCalendarCalendarWrapper}>
-        <WeekdayHeader />
+        <WeekdayHeader weekStartDay={weekStartDay} />
         <MonthGrid days={monthDays} onSelectDate={(date) => controller.selectDate(date)} />
       </div>
     </OverlayContainer>
