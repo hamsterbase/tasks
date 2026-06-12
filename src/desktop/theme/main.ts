@@ -10,7 +10,7 @@ export const desktopStyles = {
   SidebarHeaderContainer: /*tw*/ 'flex items-center justify-start h-12 px-2 flex-shrink-0',
   SidebarHeaderActions: /*tw*/ 'flex items-center gap-0.5 ml-auto',
   SidebarHeaderIconButton:
-    'flex items-center justify-center hover:bg-bg3 hover:text-t1 rounded-md transition-colors size-6 text-t3',
+    'flex items-center justify-center hover:bg-bg3 hover:text-t1 rounded-md transition active:scale-90 size-6 text-t3',
   SidebarHeaderIconButtonIcon: /*tw*/ 'size-4',
 
   SidebarMenuItemContainer: /*tw*/ 'flex flex-col gap-0.5 px-2',
@@ -21,7 +21,7 @@ export const desktopStyles = {
   SidebarMenuItemIconSvg: /*tw*/ 'size-4',
   SidebarMenuItemLabel: /*tw*/ 'flex-1 truncate min-w-0',
   SidebarMenuItemBadgePrimary:
-    'min-w-4 text-xs leading-none h-4 rounded-sm bg-accent-danger text-white flex items-center justify-center px-1 font-medium',
+    'min-w-4 text-xs leading-none h-4 rounded-full bg-accent-danger text-white flex items-center justify-center px-1 font-medium',
   SidebarMenuItemBadgeSecondary: /*tw*/ 'text-t3 text-xs',
   SidebarMenuDivider: /*tw*/ 'bg-line-light h-px my-3 mx-2',
 
@@ -57,13 +57,13 @@ export const desktopStyles = {
   EntityHeaderActionIcon: /*tw*/ 'size-3.5 flex items-center justify-center',
   EntityHeaderActionIconSvg: /*tw*/ 'size-3.5',
   EntityHeaderIconActionButton:
-    /*tw*/ 'size-6 flex items-center justify-center rounded-md text-t3 hover:bg-bg3 hover:text-t1 transition-colors flex-shrink-0',
+    /*tw*/ 'size-6 flex items-center justify-center rounded-md text-t3 hover:bg-bg3 hover:text-t1 transition active:scale-90 flex-shrink-0',
   EntityHeaderIconActionButtonActive: /*tw*/ '!bg-bg3 !text-t1',
   EntityHeaderBelowTitleSlot: /*tw*/ 'mx-3 mb-2 px-3 py-1.5 bg-bg2 rounded-lg',
   EntityHeaderBelowTitleSlotDetail: /*tw*/ '!mx-1',
 
   ClearSelectionButton:
-    'border-t border-line-regular h-15 flex items-center text-base text-t3 justify-center cursor-pointer',
+    'border-t border-line-regular h-15 flex items-center text-sm text-t3 justify-center cursor-pointer hover:text-t1 transition-colors',
 
   TaskDetailAttributeRow:
     /*tw*/ 'appearance-none flex items-start gap-2 py-1.5 px-2 -mx-2 rounded-md text-left bg-transparent border-none hover:bg-bg2 transition-colors cursor-pointer',
@@ -79,12 +79,12 @@ export const desktopStyles = {
 
   RemindersFieldAnchor: /*tw*/ 'relative',
   RemindersFieldPopover:
-    'absolute top-full right-0 mt-1 w-56 bg-bg1 border border-line-regular rounded-md p-1 z-20 shadow-[0_4px_12px_rgba(0,0,0,0.08)]',
+    'absolute top-full right-0 mt-1 w-56 bg-bg1 border border-line-regular rounded-md p-1 z-20 shadow-popover origin-top-right animate-popover-in',
   RemindersFieldPopoverEmpty: /*tw*/ 'px-2 py-1.5 text-xs text-t3',
   RemindersFieldPopoverItem:
     'group flex items-center gap-2 px-2 py-1.5 text-xs rounded-sm text-t1 hover:bg-bg3 transition-colors cursor-pointer',
   RemindersFieldPopoverDeleteButton:
-    'size-4 flex items-center justify-center rounded-sm text-t3 opacity-0 group-hover:opacity-100 hover:text-accent-danger hover:bg-accent-danger/10 transition-opacity',
+    'size-4 flex items-center justify-center rounded-sm text-t3 opacity-0 group-hover:opacity-100 hover:text-accent-danger hover:bg-accent-danger/10 transition active:scale-90',
   RemindersFieldPopoverDeleteIcon: /*tw*/ 'size-3',
   RemindersFieldPopoverDivider: /*tw*/ 'h-px bg-line-light mx-1 my-1',
   RemindersFieldPopoverAddRow:
@@ -121,7 +121,8 @@ export const desktopStyles = {
   tagFilterBarContainer: /*tw*/ '-mx-1 flex min-w-0 flex-wrap items-center gap-0.5',
   tagFilterBarIcon: /*tw*/ 'mr-1 h-5 flex items-center justify-center text-t3',
   tagFilterBarIconSvg: /*tw*/ 'size-4',
-  tagFilterBarChip: /*tw*/ 'h-6 rounded-full px-2 text-xs leading-5 transition-colors cursor-pointer select-none',
+  tagFilterBarChip:
+    /*tw*/ 'h-6 rounded-full px-2 text-xs leading-5 transition active:scale-95 cursor-pointer select-none',
   tagFilterBarChipIdle: /*tw*/ 'text-t3 hover:bg-bg3 hover:text-t1',
   tagFilterBarChipActive: /*tw*/ 'bg-bg3 text-t1',
 
@@ -145,7 +146,7 @@ export const desktopStyles = {
     /*tw*/ 'block w-full bg-transparent px-4 py-3 text-sm leading-5 text-t1 outline-none transition-colors placeholder:text-t3 focus:bg-bg2',
   AuthFormSubmitButton: /*tw*/ 'self-start',
   DefaultInputField:
-    /*tw*/ 'w-full h-13 rounded-lg border border-line-regular bg-bg1 px-3 py-3 text-base font-normal leading-5 text-t1 placeholder-t3 focus:border-brand focus:pr-8 focus:outline-none',
+    /*tw*/ 'w-full h-13 rounded-lg border border-line-regular bg-bg1 px-3 py-3 text-base font-normal leading-5 text-t1 placeholder-t3 transition focus:border-brand focus:ring-2 focus:ring-brand/15 focus:pr-8 focus:outline-none',
 
   SelectContainer: /*tw*/ 'relative',
   SelectTrigger:
@@ -178,7 +179,7 @@ export const desktopStyles = {
   AIChatPageHeaderTitle: /*tw*/ 'truncate text-sm font-semibold text-t1',
   AIChatPageHeaderActions: /*tw*/ 'flex items-center gap-1',
   AIChatPageHeaderActionButton:
-    /*tw*/ 'flex h-7 cursor-pointer items-center gap-1 rounded-md px-2 text-xs text-t2 transition-colors',
+    /*tw*/ 'flex h-7 cursor-pointer items-center gap-1 rounded-md px-2 text-xs text-t2 transition-colors hover:bg-bg3 hover:text-t1',
   AIChatPageHeaderActionIconContainer: /*tw*/ 'size-3.5 flex items-center justify-center',
   AIChatPageHeaderActionIcon: /*tw*/ 'size-3.5',
   AIChatPageHeaderActionLabel: /*tw*/ 'text-xs font-normal leading-5',
@@ -194,13 +195,13 @@ export const desktopStyles = {
   AIChatInputLinkedLabel: /*tw*/ 'text-xs text-brand',
   AIChatInputLinkedText: /*tw*/ 'line-clamp-2 text-xs leading-5 text-t3',
   AIChatInputLinkedClearButton:
-    /*tw*/ 'flex size-4 flex-shrink-0 items-center justify-center rounded-sm text-t3 transition-colors hover:bg-bg3 hover:text-t1',
+    /*tw*/ 'flex size-4 flex-shrink-0 items-center justify-center rounded-sm text-t3 transition hover:bg-bg3 hover:text-t1 active:scale-90',
   AIChatInputLinkedClearIcon: /*tw*/ 'size-3',
   AIChatInputFormRow: /*tw*/ 'flex items-end gap-2',
   AIChatInputTextarea:
     /*tw*/ 'min-h-6 max-h-32 flex-1 resize-none overflow-y-auto border-none bg-transparent px-0 py-0 text-sm leading-5 text-t1 outline-none placeholder:text-t3',
   AIChatInputSubmitButton:
-    /*tw*/ 'flex size-7 flex-shrink-0 items-center justify-center rounded-md bg-brand text-white transition-opacity hover:opacity-90',
+    /*tw*/ 'flex size-7 flex-shrink-0 items-center justify-center rounded-md bg-brand text-white transition hover:opacity-90 active:scale-95',
   AIChatInputSubmitIcon: /*tw*/ 'size-4',
 
   AIChatMessageListEmpty: /*tw*/ 'flex h-full items-center justify-center text-t3',
@@ -244,17 +245,18 @@ export const desktopStyles = {
   AIChatToolCardBody: /*tw*/ 'flex flex-col px-3 pb-2',
   AIChatToolCardActions: /*tw*/ 'flex items-center gap-2 pt-2',
   AIChatToolCardConfirmButton:
-    /*tw*/ 'rounded-md bg-brand px-3 py-1.5 text-xs text-white transition-opacity hover:opacity-90',
+    /*tw*/ 'rounded-md bg-brand px-3 py-1.5 text-xs text-white transition hover:opacity-90 active:scale-[0.98]',
   AIChatToolCardCancelButton:
-    /*tw*/ 'rounded-md border border-line-light bg-bg1 px-3 py-1.5 text-xs text-t1 transition-colors hover:bg-bg3',
+    /*tw*/ 'rounded-md border border-line-light bg-bg1 px-3 py-1.5 text-xs text-t1 transition hover:bg-bg3 active:scale-[0.98]',
 
   SwitchLabel: /*tw*/ 'inline-flex items-center cursor-pointer',
   SwitchLabelDisabled: /*tw*/ 'opacity-50 cursor-not-allowed',
   SwitchInput: /*tw*/ 'sr-only',
-  SwitchTrack: /*tw*/ 'relative h-5 w-9 rounded-full transition-colors',
+  SwitchTrack: /*tw*/ 'relative h-5 w-9 rounded-full transition-colors duration-200',
   SwitchTrackChecked: /*tw*/ 'bg-brand',
   SwitchTrackUnchecked: /*tw*/ 'bg-bg3',
-  SwitchThumb: /*tw*/ 'absolute left-0.5 top-0.5 size-4 rounded-full bg-bg1 transition-transform',
+  SwitchThumb:
+    /*tw*/ 'absolute left-0.5 top-0.5 size-4 rounded-full bg-white shadow-sm transition-transform duration-200 ease-out',
   SwitchThumbChecked: /*tw*/ 'translate-x-4',
 
   SettingsItemContainer: /*tw*/ 'flex items-center justify-between gap-4 px-4 py-3',
@@ -263,7 +265,7 @@ export const desktopStyles = {
   SettingsItemDescription: /*tw*/ 'text-xs leading-4 text-t3',
   SettingsItemActionWrapper: /*tw*/ 'flex flex-shrink-0 items-center',
   SettingsItemInput:
-    /*tw*/ 'w-45 rounded-md border border-line-regular bg-transparent px-2 py-1 text-xs leading-4 text-t1 placeholder:text-t3 outline-none transition-colors hover:border-line-bold focus:border-brand',
+    /*tw*/ 'w-45 rounded-md border border-line-regular bg-transparent px-2 py-1 text-xs leading-4 text-t1 placeholder:text-t3 outline-none transition hover:border-line-bold focus:border-brand focus:ring-2 focus:ring-brand/15',
 
   SettingsItemGroupContainer: 'overflow-hidden rounded-lg border border-line-light bg-bg1 divide-y divide-line-light',
 
@@ -274,17 +276,19 @@ export const desktopStyles = {
   SettingButtonSizeSmall: /*tw*/ 'h-7 rounded-md px-3 text-xs',
   SettingButtonFullWidth: /*tw*/ 'w-full',
 
-  SettingButtonPrimaryEmphasis: /*tw*/ 'bg-brand text-white hover:opacity-90 transition-opacity',
-  SettingButtonSolidDanger: /*tw*/ 'bg-accent-danger text-white hover:opacity-90 transition-opacity',
-  SettingButtonSolidDefault: /*tw*/ 'bg-bg3 text-white hover:opacity-90 transition-opacity',
+  SettingButtonPrimaryEmphasis: /*tw*/ 'bg-brand text-white hover:opacity-90 transition active:scale-[0.98]',
+  SettingButtonSolidDanger: /*tw*/ 'bg-accent-danger text-white hover:opacity-90 transition active:scale-[0.98]',
+  SettingButtonSolidDefault: /*tw*/ 'bg-bg3 text-t1 hover:opacity-90 transition active:scale-[0.98]',
 
   SettingButtonFilledDanger:
-    /*tw*/ 'bg-accent-danger/10 text-accent-danger hover:bg-accent-danger/20 transition-colors',
-  SettingButtonFilledDefault: /*tw*/ 'border border-line-light bg-bg2 text-t1 hover:bg-bg3 transition-colors',
+    /*tw*/ 'bg-accent-danger/10 text-accent-danger hover:bg-accent-danger/20 transition active:scale-[0.98]',
+  SettingButtonFilledDefault:
+    /*tw*/ 'border border-line-light bg-bg2 text-t1 hover:bg-bg3 transition active:scale-[0.98]',
 
-  SettingButtonDefaultPrimary: /*tw*/ 'bg-transparent text-brand hover:bg-brand/10 transition-colors',
-  SettingButtonDefaultDanger: /*tw*/ 'bg-transparent text-accent-danger hover:bg-accent-danger/10 transition-colors',
-  SettingButtonDefaultDefault: /*tw*/ 'bg-transparent text-t1 hover:bg-bg2 transition-colors',
+  SettingButtonDefaultPrimary: /*tw*/ 'bg-transparent text-brand hover:bg-brand/10 transition active:scale-[0.98]',
+  SettingButtonDefaultDanger:
+    /*tw*/ 'bg-transparent text-accent-danger hover:bg-accent-danger/10 transition active:scale-[0.98]',
+  SettingButtonDefaultDefault: /*tw*/ 'bg-transparent text-t1 hover:bg-bg2 transition active:scale-[0.98]',
 
   SettingButtonTextPrimary: /*tw*/ 'bg-transparent text-brand hover:underline',
   SettingButtonTextDanger: /*tw*/ 'bg-transparent text-accent-danger hover:underline',
@@ -304,10 +308,11 @@ export const desktopStyles = {
   TodayGroupHeaderIconSvg: /*tw*/ 'size-4',
   TodayGroupHeaderTitle: /*tw*/ 'text-sm leading-5 font-semibold text-t1 truncate',
 
-  BackButtonLink: /*tw*/ 'mb-2 flex h-12 w-fit flex-row items-center rounded-lg px-3 no-underline text-t1 hover:bg-bg2',
-  BackButtonContainer: /*tw*/ 'flex flex-row items-center gap-1',
-  BackButtonIcon: /*tw*/ 'w-6 h-6 flex items-center justify-center',
-  BackButtonLabel: /*tw*/ 'text-xl leading-5',
+  BackButtonLink:
+    /*tw*/ 'mb-2 flex h-7 w-fit flex-row items-center rounded-md px-2 no-underline text-t2 hover:bg-bg3 hover:text-t1 transition-colors',
+  BackButtonContainer: /*tw*/ 'flex flex-row items-center gap-1.5',
+  BackButtonIcon: /*tw*/ 'size-4 flex items-center justify-center',
+  BackButtonLabel: /*tw*/ 'text-sm leading-5 font-medium',
 
   DetailViewContainer: /*tw*/ 'h-full flex flex-col',
   DetailViewHeaderStatusIconColor: /*tw*/ 'text-t3',
@@ -354,7 +359,7 @@ export const desktopStyles = {
   AttachmentFilenameTail: /*tw*/ 'flex-shrink-0',
   AttachmentRowSize: /*tw*/ 'text-xs text-t3',
   AttachmentRowDeleteButton:
-    /*tw*/ 'flex-shrink-0 size-6 flex items-center justify-center rounded-md text-t3 opacity-0 group-hover:opacity-100 hover:text-accent-danger hover:bg-accent-danger/10 transition-opacity',
+    /*tw*/ 'flex-shrink-0 size-6 flex items-center justify-center rounded-md text-t3 opacity-0 group-hover:opacity-100 hover:text-accent-danger hover:bg-accent-danger/10 transition active:scale-90',
   AttachmentRowDeleteIcon: /*tw*/ 'size-3.5',
 
   AttachmentRowProgressBar:
@@ -364,13 +369,14 @@ export const desktopStyles = {
   AttachmentRowRetryButton:
     /*tw*/ 'flex-shrink-0 inline-flex items-center rounded-md bg-bg1 px-2 py-0.5 text-xs text-t1 border border-line-regular hover:bg-bg2 transition-colors',
 
-  ImagePreviewBackdrop: /*tw*/ 'fixed inset-0 z-[100] flex items-center justify-center bg-black/70 cursor-zoom-out',
-  ImagePreviewImage: /*tw*/ 'max-w-[90vw] max-h-[90vh] object-contain cursor-default',
+  ImagePreviewBackdrop:
+    /*tw*/ 'fixed inset-0 z-[100] flex items-center justify-center bg-black/70 cursor-zoom-out animate-fade-in',
+  ImagePreviewImage: /*tw*/ 'max-w-[90vw] max-h-[90vh] object-contain cursor-default animate-dialog-in',
   ImagePreviewLoading: /*tw*/ 'size-8 text-white/70 animate-spin',
   ImagePreviewCloseButton:
-    /*tw*/ 'absolute top-4 right-4 size-9 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors cursor-pointer',
+    /*tw*/ 'absolute top-4 right-4 size-9 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition active:scale-90 cursor-pointer',
   ImagePreviewDownloadButton:
-    /*tw*/ 'absolute top-4 right-16 size-9 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors cursor-pointer',
+    /*tw*/ 'absolute top-4 right-16 size-9 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition active:scale-90 cursor-pointer',
   ImagePreviewActionIcon: /*tw*/ 'size-4',
 
   AttachmentSettingsWrapper: /*tw*/ 'flex flex-col gap-4',
@@ -402,9 +408,9 @@ export const desktopStyles = {
   AttachmentsRowDescription: /*tw*/ 'text-xs text-t3 truncate',
   AttachmentsRowActions: /*tw*/ 'flex items-center gap-1 flex-shrink-0',
   AttachmentsRowActionButton:
-    /*tw*/ 'size-7 flex items-center justify-center rounded-md text-t3 hover:bg-bg3 hover:text-t1 transition-colors',
+    /*tw*/ 'size-7 flex items-center justify-center rounded-md text-t3 hover:bg-bg3 hover:text-t1 transition active:scale-90',
   AttachmentsRowActionButtonDanger:
-    /*tw*/ 'size-7 flex items-center justify-center rounded-md text-t3 hover:bg-accent-danger/10 hover:text-accent-danger transition-colors',
+    /*tw*/ 'size-7 flex items-center justify-center rounded-md text-t3 hover:bg-accent-danger/10 hover:text-accent-danger transition active:scale-90',
   AttachmentsRowActionIcon: /*tw*/ 'size-3.5',
 
   MarkdownPageLoading: /*tw*/ 'text-t2',
@@ -412,7 +418,7 @@ export const desktopStyles = {
   MarkdownPageH2: /*tw*/ 'text-xl font-medium text-t1 mb-3 mt-5',
   MarkdownPageH3: /*tw*/ 'text-lg font-medium text-t1 mb-2 mt-4',
   MarkdownPageP: /*tw*/ 'text-t1 mb-4 leading-relaxed',
-  MarkdownPageLink: /*tw*/ 'text-accent no-underline hover:underline',
+  MarkdownPageLink: /*tw*/ 'text-brand no-underline hover:underline',
   MarkdownPageStrong: /*tw*/ 'text-t1 font-medium',
   MarkdownPageUl: /*tw*/ 'text-t1 my-4 list-disc pl-6',
   MarkdownPageOl: /*tw*/ 'text-t1 my-4 list-decimal pl-6',
@@ -424,13 +430,13 @@ export const desktopStyles = {
   InfoItemValueContainer: /*tw*/ 'flex items-center gap-2',
   InfoItemValue: /*tw*/ 'text-sm text-t1',
   InfoItemCopyButton:
-    /*tw*/ 'size-6 flex items-center justify-center rounded-md text-t3 hover:bg-bg3 hover:text-t1 cursor-pointer transition-colors',
+    /*tw*/ 'size-6 flex items-center justify-center rounded-md text-t3 hover:bg-bg3 hover:text-t1 cursor-pointer transition active:scale-90',
   InfoItemCopyIcon: /*tw*/ 'size-3.5',
 
   CheckboxContainer: /*tw*/ 'flex items-center gap-2 px-4 py-3',
   CheckboxInputContainer: /*tw*/ 'relative',
   CheckboxInput: /*tw*/ 'sr-only',
-  CheckboxBox: /*tw*/ 'flex h-5 w-4 items-center justify-center cursor-pointer text-t3',
+  CheckboxBox: /*tw*/ 'flex h-5 w-4 items-center justify-center cursor-pointer text-t3 transition active:scale-90',
   CheckboxBoxChecked: /*tw*/ 'text-brand',
   CheckboxBoxUnchecked: /*tw*/ 'text-t3',
   CheckboxIcon: /*tw*/ 'size-4',
@@ -446,7 +452,7 @@ export const desktopStyles = {
   SettingsSectionContainer: /*tw*/ 'flex flex-col',
 
   TaskListItemContainer:
-    /*tw*/ 'group relative flex items-start gap-2 px-2 py-2 rounded-md outline-none cursor-pointer',
+    /*tw*/ 'group relative flex items-start gap-2 px-2 py-2 rounded-md outline-none cursor-pointer transition-colors duration-100',
   TaskListItemContainerCompleted: /*tw*/ 'opacity-60',
   TaskListItemContainerWillDisappear: /*tw*/ 'opacity-50',
   TaskListItemContainerSelected: /*tw*/ 'bg-bg3',
@@ -455,21 +461,24 @@ export const desktopStyles = {
   TaskListItemDragHandle:
     'absolute left-0 top-0 flex h-full w-3 -translate-x-full items-center justify-center text-t3 opacity-0 group-hover:opacity-100 transition-opacity',
   TaskListItemDragHandleIcon: /*tw*/ 'size-2.5',
-  TaskListItemStatusButton: /*tw*/ 'flex h-5 w-4 flex-shrink-0 items-center justify-center text-t3 outline-none',
+  TaskListItemStatusButton:
+    /*tw*/ 'flex h-5 w-4 flex-shrink-0 items-center justify-center text-t3 outline-none transition-transform duration-150 hover:scale-110 active:scale-90',
   TaskListItemContent: /*tw*/ 'flex flex-col gap-1 flex-1 min-w-0',
   TaskListItemTitleRow: /*tw*/ 'flex items-center gap-2',
   TaskListItemTitleInput:
     'text-sm leading-5 flex-1 min-w-0 bg-transparent outline-none text-t1 truncate placeholder:text-t3 rounded-sm px-1 -mx-1',
   TaskListItemTitleInputCompleted: /*tw*/ 'line-through text-t3',
-  TaskListItemTitleSpan: /*tw*/ 'cursor-text whitespace-nowrap overflow-hidden',
+  TaskListItemTitleSpan: /*tw*/ 'cursor-text whitespace-nowrap overflow-hidden text-ellipsis',
   TaskListItemTitleSpanPlaceHolder: /*tw*/ 'text-t3',
   TaskListItemIcon: /*tw*/ 'size-3.5 text-t3 flex-shrink-0 opacity-60',
 
-  SubtaskItemContainer: /*tw*/ 'group flex items-center gap-2 -mx-2 px-2 py-1.5 rounded-md cursor-pointer',
+  SubtaskItemContainer:
+    /*tw*/ 'group flex items-center gap-2 -mx-2 px-2 py-1.5 rounded-md cursor-pointer transition-colors duration-100',
   SubtaskItemContainerSelected: /*tw*/ 'bg-bg3',
   SubtaskItemContainerSelectedInactive: /*tw*/ 'bg-bg2',
   SubtaskItemContainerDefault: /*tw*/ '',
-  SubtaskItemStatusButton: 'flex size-4 flex-shrink-0 items-center justify-center text-t3',
+  SubtaskItemStatusButton:
+    'flex size-4 flex-shrink-0 items-center justify-center text-t3 transition-transform duration-150 hover:scale-110 active:scale-90',
   SubtaskItemInputWrapper: /*tw*/ 'flex-1 min-w-0',
   SubtaskItemInput:
     /*tw*/ 'w-full text-sm leading-5 text-t1 bg-transparent outline outline-1 outline-transparent rounded-sm px-1 -mx-1 truncate',
@@ -509,7 +518,7 @@ export const desktopStyles = {
   SettingsContentPageTitle: /*tw*/ 'px-4 text-3xl font-semibold leading-9 text-t1',
 
   EntityPageNotFoundContainer: /*tw*/ 'h-full w-full bg-bg1 flex items-center justify-center',
-  EntityPageNotFoundText: /*tw*/ 'text-t3 text-lg',
+  EntityPageNotFoundText: /*tw*/ 'text-t3 text-sm',
 
   TaskListSectionItemsContainer: /*tw*/ '',
 
@@ -535,9 +544,9 @@ export const desktopStyles = {
   DatabaseItemDescription: /*tw*/ 'text-xs text-t3',
   DatabaseItemActionButtons: /*tw*/ 'flex items-center gap-1 shrink-0',
   DatabaseItemActionButton:
-    /*tw*/ 'flex size-6 items-center justify-center rounded-md text-t3 transition-colors hover:bg-bg2 hover:text-t1',
+    /*tw*/ 'flex size-6 items-center justify-center rounded-md text-t3 transition hover:bg-bg2 hover:text-t1 active:scale-90',
   DatabaseItemActionButtonDanger:
-    /*tw*/ 'flex size-6 items-center justify-center rounded-md text-t3 transition-colors hover:bg-accent-danger/10 hover:text-accent-danger',
+    /*tw*/ 'flex size-6 items-center justify-center rounded-md text-t3 transition hover:bg-accent-danger/10 hover:text-accent-danger active:scale-90',
   DatabaseItemActionButtonIcon: /*tw*/ 'size-4',
   DatabaseItemPropertiesSection: /*tw*/ 'shrink-0',
   DatabaseItemProperty: /*tw*/ 'flex flex-col gap-0.5',
@@ -562,13 +571,13 @@ export const desktopStyles = {
   SettingsDisabledStateLink:
     /*tw*/ 'mt-4 inline-flex items-center text-sm text-brand transition-colors hover:text-brand/80',
   SettingsDialogRoot: /*tw*/ 'fixed inset-0 z-[60] flex items-center justify-center',
-  SettingsDialogBackdrop: /*tw*/ 'absolute inset-0 bg-black/40',
+  SettingsDialogBackdrop: /*tw*/ 'absolute inset-0 bg-black/40 animate-fade-in',
   SettingsDialogSurface:
-    /*tw*/ 'relative mx-4 flex w-[28rem] max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-md border border-line-regular bg-bg1 shadow-[0_4px_12px_rgba(0,0,0,0.08)]',
+    /*tw*/ 'relative mx-4 flex w-[28rem] max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-md border border-line-regular bg-bg1 shadow-dialog animate-dialog-in',
   SettingsDialogHeader: /*tw*/ 'flex items-center justify-between gap-3 px-4 py-3',
   SettingsDialogTitle: /*tw*/ 'text-sm font-semibold text-t1',
   SettingsDialogCloseButton:
-    /*tw*/ 'size-6 flex items-center justify-center rounded-sm text-t3 transition-colors hover:bg-bg3 hover:text-t1 cursor-pointer',
+    /*tw*/ 'size-6 flex items-center justify-center rounded-sm text-t3 transition hover:bg-bg3 hover:text-t1 cursor-pointer active:scale-90',
   SettingsDialogCloseIcon: /*tw*/ 'size-3.5',
   SettingsDialogContent: /*tw*/ 'px-4 pt-1 pb-2',
   SettingsDialogActions: /*tw*/ 'mt-2 flex flex-col gap-4',
@@ -576,12 +585,12 @@ export const desktopStyles = {
   SettingsDialogLabel: /*tw*/ 'text-xs font-medium text-t1',
   SettingsDialogRequired: /*tw*/ 'ml-0.5 text-accent-danger',
   SettingsDialogInput:
-    /*tw*/ 'w-full rounded-md border border-line-regular bg-transparent px-2.5 py-1.5 text-xs text-t1 outline-none transition-colors hover:border-line-bold focus:border-brand placeholder:text-t3',
+    /*tw*/ 'w-full rounded-md border border-line-regular bg-transparent px-2.5 py-1.5 text-xs text-t1 outline-none transition hover:border-line-bold focus:border-brand focus:ring-2 focus:ring-brand/15 placeholder:text-t3',
   SettingsDialogFooter: /*tw*/ 'flex justify-end gap-2 px-4 py-3',
   SettingsDialogCancelButton:
-    /*tw*/ 'inline-flex h-7 items-center rounded-md px-3 text-xs text-t2 cursor-pointer transition-colors hover:bg-bg3 hover:text-t1 disabled:cursor-not-allowed disabled:opacity-50',
+    /*tw*/ 'inline-flex h-7 items-center rounded-md px-3 text-xs text-t2 cursor-pointer transition hover:bg-bg3 hover:text-t1 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50',
   SettingsDialogConfirmButton:
-    /*tw*/ 'inline-flex h-7 items-center rounded-md bg-brand px-3 text-xs text-white cursor-pointer transition-opacity hover:opacity-90 disabled:pointer-events-none disabled:opacity-50',
+    /*tw*/ 'inline-flex h-7 items-center rounded-md bg-brand px-3 text-xs text-white cursor-pointer transition hover:opacity-90 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50',
 
   SpaceMedium: /*tw*/ 'h-4',
   SpaceLarge: /*tw*/ 'h-16',
@@ -598,12 +607,12 @@ export const desktopStyles = {
   SchedulePageGroupSubtitle: /*tw*/ 'text-xs text-t3',
   SchedulePageItemList: /*tw*/ 'space-y-0',
   SchedulePageEmptyState: /*tw*/ 'text-center py-12',
-  SchedulePageEmptyText: /*tw*/ 'text-t3 text-lg',
+  SchedulePageEmptyText: /*tw*/ 'text-t3 text-sm',
   CompletedPageGroupTitle: /*tw*/ 'text-xs font-semibold text-t3 uppercase tracking-wider',
 
-  DragOverlayContent: /*tw*/ 'bg-bg1 shadow-sm rounded-lg',
+  DragOverlayContent: /*tw*/ 'bg-bg1 shadow-popover rounded-lg scale-[1.02]',
 
-  EmptyStateContainer: /*tw*/ 'text-center py-12 text-t3',
+  EmptyStateContainer: /*tw*/ 'text-center py-12 text-t3 animate-fade-in',
   EmptyStateText: /*tw*/ 'text-sm',
 
   SubtaskListCreateButton:
@@ -621,7 +630,7 @@ export const desktopStyles = {
 
   MultipleSelectionViewContainer: /*tw*/ 'h-full flex flex-col bg-bg1',
   MultipleSelectionViewContent: /*tw*/ 'flex items-center justify-center flex-1',
-  MultipleSelectionViewText: /*tw*/ 'text-t2 text-center',
+  MultipleSelectionViewText: /*tw*/ 'text-sm text-t2 text-center',
 
   DesktopHeadingListItemContainer: /*tw*/ 'group relative',
   DesktopHeadingListItemContainerDragging: /*tw*/ 'bg-bg3 rounded-lg',
@@ -639,7 +648,7 @@ export const desktopStyles = {
 
   DesktopMessageContainer: /*tw*/ 'fixed top-6 right-6 flex flex-col items-end pointer-events-none',
   DesktopMessageContent:
-    'bg-bg1 text-t1 border-line-regular border rounded-lg shadow-lg backdrop-blur-sm min-w-80 max-w-md p-4 pointer-events-auto transform transition-all duration-200 ease-out',
+    'bg-bg1 text-t1 border-line-regular border rounded-lg shadow-popover backdrop-blur-sm min-w-80 max-w-md p-4 pointer-events-auto transform transition-all duration-200 ease-out',
   DesktopMessageVisible: /*tw*/ 'translate-x-0 opacity-100',
   DesktopMessageHidden: /*tw*/ 'translate-x-full opacity-0',
   DesktopMessageInner: /*tw*/ 'flex items-start gap-3',
@@ -648,15 +657,15 @@ export const desktopStyles = {
   DesktopMessageIconError: /*tw*/ 'text-accent-danger',
   DesktopMessageIconInfo: /*tw*/ 'text-brand',
   DesktopMessageTextContainer: /*tw*/ 'flex-1 min-w-0 gap-1 flex flex-col',
-  DesktopMessageText: /*tw*/ 'text-medium font-medium leading-5 break-words',
-  DesktopMessageDescription: /*tw*/ 'text-sm font-medium leading-5 break-words text-t3',
+  DesktopMessageText: /*tw*/ 'text-sm font-medium leading-5 break-words',
+  DesktopMessageDescription: /*tw*/ 'text-sm font-normal leading-5 break-words text-t3',
   DesktopMessageCloseButton:
-    'size-5 flex items-center justify-center hover:opacity-70 transition-opacity flex-shrink-0 ml-2 text-t3',
+    'size-5 flex items-center justify-center hover:opacity-70 transition active:scale-90 flex-shrink-0 ml-2 text-t3',
   DesktopMessageUndo: /*tw*/ 'px-8 text-brand mt-2 text-sm',
   DesktopMenuBackdrop: /*tw*/ 'fixed inset-0',
   DesktopMenuContainer: /*tw*/ 'fixed outline-none w-[180px]',
   DesktopMenuContent:
-    /*tw*/ 'bg-bg1 border border-line-regular rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.08)] p-1 w-full',
+    /*tw*/ 'bg-bg1 border border-line-regular rounded-md shadow-popover p-1 w-full origin-top-left animate-popover-in',
   DesktopMenuDivider: /*tw*/ 'h-px bg-line-light mx-1 my-1',
 
   DesktopMenuItemBase: /*tw*/ 'w-full flex items-center px-2 py-1.5 text-left text-xs rounded-sm transition-colors',
@@ -675,31 +684,31 @@ export const desktopStyles = {
   DesktopMenuItemShortcut: /*tw*/ 'ml-2 text-t3 text-xs flex-shrink-0',
 
   DesktopSubmenuContainer:
-    /*tw*/ 'fixed bg-bg1 border border-line-regular rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.08)] p-1',
+    /*tw*/ 'fixed bg-bg1 border border-line-regular rounded-md shadow-popover p-1 origin-top-left animate-popover-in',
   DesktopSubmenuItem:
     /*tw*/ 'w-full flex items-center gap-2 px-2 py-1.5 text-left text-xs rounded-sm transition-colors',
 
   OverlayBackdrop: /*tw*/ 'fixed inset-0 flex items-center justify-center',
-  OverlayBackgroundMask: /*tw*/ 'absolute inset-0 bg-black/40',
+  OverlayBackgroundMask: /*tw*/ 'absolute inset-0 bg-black/40 animate-fade-in',
   OverlayContainer:
-    /*tw*/ 'relative mx-4 flex w-[28rem] max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-md border border-line-regular bg-bg1 shadow-[0_4px_12px_rgba(0,0,0,0.08)]',
+    /*tw*/ 'relative mx-4 flex w-[28rem] max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-md border border-line-regular bg-bg1 shadow-dialog animate-dialog-in',
 
   OverlayContainerBackdrop: /*tw*/ 'fixed inset-0',
   OverlayContainerContent:
-    /*tw*/ 'fixed bg-bg1 rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.08)] border border-line-regular',
+    /*tw*/ 'fixed bg-bg1 rounded-md shadow-popover border border-line-regular animate-overlay-in',
   OverlayContainerFilterWrapper: /*tw*/ 'px-2 py-1.5 border-b border-line-light',
   OverlayContainerFilterInput: /*tw*/ 'w-full bg-transparent outline-none text-xs text-t1 placeholder:text-t3',
   OverlayHeader: /*tw*/ 'flex items-center justify-between gap-3 px-4 py-3 border-b border-line-light',
   OverlayTitle: /*tw*/ 'text-sm font-semibold text-t1',
   OverlayCloseButton:
-    /*tw*/ 'size-6 flex items-center justify-center rounded-sm text-t3 hover:bg-bg3 hover:text-t1 transition-colors',
+    /*tw*/ 'size-6 flex items-center justify-center rounded-sm text-t3 hover:bg-bg3 hover:text-t1 transition active:scale-90',
   OverlayCloseIcon: /*tw*/ 'size-3.5',
   OverlayContent: /*tw*/ 'px-4 py-3',
   OverlayFooter: /*tw*/ 'flex justify-end gap-2 px-4 py-3 border-t border-line-light',
   OverlayCancelButton:
-    /*tw*/ 'text-xs text-t2 px-3 py-1 rounded-md hover:bg-bg3 hover:text-t1 cursor-pointer transition-colors disabled:opacity-50 disabled:cursor-not-allowed',
+    /*tw*/ 'text-xs text-t2 px-3 py-1 rounded-md hover:bg-bg3 hover:text-t1 cursor-pointer transition active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed',
   OverlayConfirmButton:
-    /*tw*/ 'text-xs text-white bg-brand px-3 py-1 rounded-md hover:opacity-90 cursor-pointer transition-opacity disabled:pointer-events-none disabled:opacity-50',
+    /*tw*/ 'text-xs text-white bg-brand px-3 py-1 rounded-md hover:opacity-90 cursor-pointer transition active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50',
   OverlayConfirmButtonDisabled: /*tw*/ 'pointer-events-none opacity-50',
 
   DesktopDialogDescription: /*tw*/ 'text-sm text-t3 leading-4.5 font-normal',
@@ -723,9 +732,9 @@ export const desktopStyles = {
   TagEditorOverlayEmptyHint: /*tw*/ 'px-3 py-2 text-xs text-t3 text-center',
 
   TreeSelectOverlayMoveTargetContainer:
-    /*tw*/ 'w-56 bg-bg1 border border-line-regular rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.08)] overflow-hidden',
+    /*tw*/ 'w-56 bg-bg1 border border-line-regular rounded-md shadow-popover overflow-hidden',
   TreeSelectOverlayAreaPickerContainer:
-    /*tw*/ 'w-48 bg-bg1 border border-line-regular rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.08)] overflow-hidden',
+    /*tw*/ 'w-48 bg-bg1 border border-line-regular rounded-md shadow-popover overflow-hidden',
   TreeSelectOverlayContent: /*tw*/ 'outline-none',
   TreeSelectOverlayInputWrap: /*tw*/ 'px-2 py-1.5 border-b border-line-light',
   TreeSelectOverlayInput: /*tw*/ 'w-full bg-transparent outline-none text-xs text-t1 placeholder:text-t3',
@@ -763,13 +772,13 @@ export const desktopStyles = {
   TreeSelectOverlayEmpty: /*tw*/ 'px-3 py-2 text-xs text-t3 text-center',
 
   RecurringTaskSettingsDialogRoot: /*tw*/ 'fixed inset-0 z-[60] flex items-center justify-center',
-  RecurringTaskSettingsDialogBackdrop: /*tw*/ 'absolute inset-0 bg-black/40',
+  RecurringTaskSettingsDialogBackdrop: /*tw*/ 'absolute inset-0 bg-black/40 animate-fade-in',
   RecurringTaskSettingsDialogSurface:
-    /*tw*/ 'relative mx-4 flex w-[28rem] max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-md border border-line-regular bg-bg1 shadow-[0_4px_12px_rgba(0,0,0,0.08)]',
+    /*tw*/ 'relative mx-4 flex w-[28rem] max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-md border border-line-regular bg-bg1 shadow-dialog animate-dialog-in',
   RecurringTaskSettingsDialogHeader: /*tw*/ 'flex items-center justify-between gap-3 px-4 py-3',
   RecurringTaskSettingsDialogTitle: /*tw*/ 'text-sm font-semibold text-t1',
   RecurringTaskSettingsDialogCloseButton:
-    /*tw*/ 'size-6 flex items-center justify-center rounded-sm text-t3 hover:bg-bg3 hover:text-t1 cursor-pointer transition-colors',
+    /*tw*/ 'size-6 flex items-center justify-center rounded-sm text-t3 hover:bg-bg3 hover:text-t1 cursor-pointer transition active:scale-90',
   RecurringTaskSettingsDialogCloseIcon: /*tw*/ 'size-3.5',
   RecurringTaskSettingsDialogBody: /*tw*/ 'flex flex-col gap-4 px-4 py-3',
   RecurringTaskSettingsDialogBodyHint: /*tw*/ 'text-xs leading-5 text-t3',
@@ -779,7 +788,7 @@ export const desktopStyles = {
   RecurringTaskSettingsDialogSectionHeaderPlaceholder: /*tw*/ 'text-xs text-t3',
   RecurringTaskSettingsDialogSectionTitle: /*tw*/ 'text-xs font-medium text-t2',
   RecurringTaskSettingsDialogInput:
-    /*tw*/ 'w-full rounded-md border border-line-regular bg-transparent px-2.5 py-1.5 text-xs text-t1 outline-none transition-colors hover:border-line-bold focus:border-brand placeholder:text-t3',
+    /*tw*/ 'w-full rounded-md border border-line-regular bg-transparent px-2.5 py-1.5 text-xs text-t1 outline-none transition hover:border-line-bold focus:border-brand focus:ring-2 focus:ring-brand/15 placeholder:text-t3',
   RecurringTaskSettingsDialogInputDanger:
     /*tw*/ 'border-accent-danger hover:border-accent-danger focus:border-accent-danger',
   RecurringTaskSettingsDialogSummaryCard: /*tw*/ 'text-xs leading-5 text-t3 break-words',
@@ -790,9 +799,9 @@ export const desktopStyles = {
   RecurringTaskSettingsDialogSyntaxHint: /*tw*/ 'text-t3',
   RecurringTaskSettingsDialogFooter: /*tw*/ 'flex justify-end gap-2 px-4 py-3',
   RecurringTaskSettingsDialogCancelButton:
-    /*tw*/ 'rounded-md px-3 py-1 text-xs text-t2 hover:bg-bg3 hover:text-t1 cursor-pointer transition-colors',
+    /*tw*/ 'rounded-md px-3 py-1 text-xs text-t2 hover:bg-bg3 hover:text-t1 cursor-pointer transition active:scale-[0.98]',
   RecurringTaskSettingsDialogConfirmButton:
-    /*tw*/ 'rounded-md bg-brand px-3 py-1 text-xs text-white hover:opacity-90 cursor-pointer transition-opacity',
+    /*tw*/ 'rounded-md bg-brand px-3 py-1 text-xs text-white hover:opacity-90 cursor-pointer transition active:scale-[0.98]',
   RecurringTaskSettingsDialogConfirmButtonDisabled: /*tw*/ 'pointer-events-none opacity-50',
 
   CreateDatabaseOverlayFormContainer: /*tw*/ 'flex flex-col gap-3',
@@ -803,7 +812,7 @@ export const desktopStyles = {
   DatePickerCalendarHeaderTitle: /*tw*/ 'text-xs font-medium text-t1',
   DatePickerCalendarNavContainer: /*tw*/ 'flex items-center gap-0.5',
   DatePickerCalendarNavButton:
-    /*tw*/ 'size-5 flex items-center justify-center rounded-sm text-t3 hover:bg-bg3 hover:text-t1 transition-colors',
+    /*tw*/ 'size-5 flex items-center justify-center rounded-sm text-t3 hover:bg-bg3 hover:text-t1 transition active:scale-90',
   DatePickerOverlayQuickActionsContainer: /*tw*/ 'flex flex-col py-1',
   DatePickerOverlayQuickActionButton:
     /*tw*/ 'flex items-center gap-2 px-2 py-1.5 text-xs text-t1 cursor-pointer hover:bg-bg3 transition-colors',
@@ -811,7 +820,7 @@ export const desktopStyles = {
   DatePickerOverlayDivider: /*tw*/ 'h-px bg-line-light',
   DatePickerCalendarNavIcon: /*tw*/ 'size-3.5',
   TimePickerOverlayContainer:
-    /*tw*/ 'w-[19rem] overflow-hidden rounded-md border border-line-regular bg-bg1 shadow-[0_4px_12px_rgba(0,0,0,0.08)]',
+    /*tw*/ 'w-[19rem] overflow-hidden rounded-md border border-line-regular bg-bg1 shadow-popover',
   TimePickerOverlayDisplay: /*tw*/ 'border-b border-line-light px-3 py-2 text-xs text-t1',
   TimePickerOverlayBody: /*tw*/ 'flex',
   TimePickerOverlayCalendarColumn: /*tw*/ 'min-w-0 flex-1 border-r border-line-light px-2 pb-2',
@@ -819,12 +828,12 @@ export const desktopStyles = {
   TimePickerOverlayMonthLabel: /*tw*/ 'text-xs font-medium text-t1',
   TimePickerOverlayNav: /*tw*/ 'flex items-center gap-0.5',
   TimePickerOverlayNavButton:
-    /*tw*/ 'size-5 cursor-pointer rounded-sm text-t3 transition-colors hover:bg-bg3 hover:text-t1 flex items-center justify-center',
+    /*tw*/ 'size-5 cursor-pointer rounded-sm text-t3 transition hover:bg-bg3 hover:text-t1 flex items-center justify-center active:scale-90',
   TimePickerOverlayWeekdayRow: /*tw*/ 'grid grid-cols-7 gap-0.5 pt-1 pb-0.5',
   TimePickerOverlayWeekdayCell: /*tw*/ 'h-5 flex items-center justify-center text-[10px] text-t3',
   TimePickerOverlayGrid: /*tw*/ 'grid grid-cols-7 gap-0.5 bg-bg1',
   TimePickerOverlayDayCell:
-    /*tw*/ 'h-7 cursor-pointer rounded-sm text-xs text-t1 transition-colors hover:bg-bg3 flex items-center justify-center',
+    /*tw*/ 'h-7 cursor-pointer rounded-sm text-xs text-t1 transition hover:bg-bg3 active:scale-90 flex items-center justify-center',
   TimePickerOverlayDayCellMuted: /*tw*/ 'text-t4',
   TimePickerOverlayDayCellToday: /*tw*/ 'text-brand',
   TimePickerOverlayDayCellSelected: /*tw*/ 'bg-brand text-white hover:bg-brand',
@@ -836,14 +845,14 @@ export const desktopStyles = {
   TimePickerOverlayTimeItemSelected: /*tw*/ 'bg-brand text-white hover:bg-brand hover:text-white',
   TimePickerOverlayFooter: /*tw*/ 'flex items-center justify-end gap-2 border-t border-line-light px-3 py-2',
   TimePickerOverlayCancelButton:
-    /*tw*/ 'rounded-md px-3 py-1 text-xs text-t2 cursor-pointer transition-colors hover:bg-bg3 hover:text-t1',
+    /*tw*/ 'rounded-md px-3 py-1 text-xs text-t2 cursor-pointer transition hover:bg-bg3 hover:text-t1 active:scale-[0.98]',
   TimePickerOverlayConfirmButton:
-    /*tw*/ 'rounded-md bg-brand px-3 py-1 text-xs text-white cursor-pointer transition-opacity hover:opacity-90',
+    /*tw*/ 'rounded-md bg-brand px-3 py-1 text-xs text-white cursor-pointer transition hover:opacity-90 active:scale-[0.98]',
   TimePickerOverlayCurrentMonthIcon: /*tw*/ 'size-2.5',
   DatePickerCalendarCalendarWrapper: /*tw*/ 'px-2 pb-2',
   DatePickerCalendarMonthGrid: /*tw*/ 'grid grid-cols-7 gap-0.5 bg-bg1',
   DatePickerCalendarDayButton:
-    /*tw*/ 'h-7 rounded-sm text-xs flex items-center justify-center hover:bg-bg3 transition-colors',
+    /*tw*/ 'h-7 rounded-sm text-xs flex items-center justify-center hover:bg-bg3 transition active:scale-90',
   DatePickerCalendarDaySelected: /*tw*/ 'bg-brand text-white hover:bg-brand',
   DatePickerCalendarDayNotCurrentMonth: /*tw*/ 'text-t4',
   DatePickerCalendarDayToday: /*tw*/ 'text-brand',
@@ -868,14 +877,14 @@ export const desktopStyles = {
 
   // CommandPalette styles
   CommandPaletteOverlayBackdrop: /*tw*/ 'fixed inset-0 flex items-start justify-center pt-30',
-  CommandPaletteOverlayBackgroundMask: /*tw*/ 'absolute inset-0 bg-black opacity-45',
+  CommandPaletteOverlayBackgroundMask: /*tw*/ 'absolute inset-0 bg-black opacity-45 animate-fade-in',
   CommandPaletteOverlayContainer:
-    /*tw*/ 'bg-bg1 rounded-lg shadow-2xl flex flex-col w-[720px] max-w-[calc(100vw-32px)] relative',
+    /*tw*/ 'bg-bg1 rounded-lg shadow-dialog flex flex-col w-[720px] max-w-[calc(100vw-32px)] relative animate-dialog-in',
   CommandPaletteInputContainer: /*tw*/ 'flex items-center gap-3 px-6 h-14',
   CommandPaletteInputContainerWithQuery: /*tw*/ 'border-b border-line-regular',
   CommandPaletteInput: /*tw*/ 'flex-1 bg-transparent text-base text-t1 placeholder-t3 focus:outline-none font-normal',
   CommandPaletteResultsContainer: /*tw*/ 'max-h-96 overflow-y-auto p-3',
-  CommandPaletteResultsEmpty: /*tw*/ 'flex items-center justify-center h-24 text-t3 text-base',
+  CommandPaletteResultsEmpty: /*tw*/ 'flex items-center justify-center h-24 text-t3 text-sm',
   CommandPaletteResultItem:
     /*tw*/ 'flex items-start gap-2 px-2 py-2 rounded-md hover:bg-bg2 cursor-pointer transition-colors',
   CommandPaletteResultItemSelected: /*tw*/ 'bg-bg2',
@@ -886,14 +895,14 @@ export const desktopStyles = {
   CommandPaletteResultItemParentIcon: /*tw*/ 'size-3 text-t3 flex-shrink-0 flex items-center justify-center',
   CommandPaletteResultItemParentIconSvg: /*tw*/ 'size-3',
   CommandPaletteResultItemParentTitle: /*tw*/ 'truncate min-w-0',
-  CommandPaletteResultItemTitle: /*tw*/ 'text-sm text-t1 truncate leading-4 h-4',
+  CommandPaletteResultItemTitle: /*tw*/ 'text-sm text-t1 truncate leading-5 h-5',
 
   // Views — sidebar Views section
   SidebarViewsContainer: /*tw*/ 'flex flex-col',
   SidebarViewsHeader: /*tw*/ 'flex items-center justify-between px-4 pt-3 pb-1.5 text-xs text-t3',
   SidebarViewsHeaderLabel: /*tw*/ 'font-semibold',
   SidebarViewsHeaderAddButton:
-    'flex items-center justify-center hover:bg-bg3 hover:text-t1 rounded-md transition-colors size-5 text-t3',
+    'flex items-center justify-center hover:bg-bg3 hover:text-t1 rounded-md transition active:scale-90 size-5 text-t3',
   SidebarViewsHeaderAddIcon: /*tw*/ 'size-3.5',
   SidebarProjectsHeader: /*tw*/ 'px-4 pt-3 pb-1.5 text-xs font-semibold text-t3',
   SidebarViewsItemActive: /*tw*/ 'bg-bg3 text-t1',
@@ -921,7 +930,7 @@ export const desktopStyles = {
   RuleDocsSectionHeading: /*tw*/ 'text-xs text-t3 font-medium uppercase tracking-wide mb-2',
   RuleDocsStarterGrid: /*tw*/ 'grid grid-cols-2 gap-2',
   RuleDocsStarterCard:
-    'flex flex-col gap-1.5 text-left p-3 rounded-md border border-line-light bg-bg1 hover:bg-bg2 hover:border-line-regular transition-colors cursor-pointer',
+    'flex flex-col gap-1.5 text-left p-3 rounded-md border border-line-light bg-bg1 hover:bg-bg2 hover:border-line-regular hover:-translate-y-px hover:shadow-sm transition cursor-pointer',
   RuleDocsStarterHeader: /*tw*/ 'flex items-center gap-2',
   RuleDocsStarterIcon: /*tw*/ 'size-3.5 text-t3 shrink-0',
   RuleDocsStarterIconDanger: /*tw*/ 'size-3.5 text-accent-danger shrink-0',
@@ -930,7 +939,7 @@ export const desktopStyles = {
   RuleDocsAiDesc: /*tw*/ 'text-xs text-t3 leading-5 mb-3',
   RuleDocsAiActions: /*tw*/ 'flex items-center gap-3',
   RuleDocsAiCopyButton:
-    'flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-brand text-white text-xs font-medium hover:opacity-90 transition-opacity cursor-pointer',
+    'flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-brand text-white text-xs font-medium hover:opacity-90 transition active:scale-[0.98] cursor-pointer',
   RuleDocsAiCopyIcon: /*tw*/ 'size-3.5',
   RuleDocsAiViewLink: 'text-xs text-t2 hover:text-t1 transition-colors underline-offset-2 hover:underline',
   RuleDocsReferenceToggle:

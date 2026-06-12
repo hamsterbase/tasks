@@ -3,8 +3,6 @@ export const baseStyles = {
   homeMenuRound: /*tw*/ 'rounded-md',
   homeMenuItemPadding: /*tw*/ 'px-3 py-2',
   homePageItemGap: /*tw*/ 'gap-2',
-  homeMenuNumberColor: /*tw*/ 'text-sm font-medium text-t3',
-  homeMenuDueTaskNumberColor: /*tw*/ 'text-sm font-medium text-white bg-accent-danger rounded-full h-4 min-w-4',
   homeMenuIconStyle: /*tw*/ 'w-5 h-5 text-brand',
 
   statCardContainer: /*tw*/ 'grid grid-cols-2 gap-3',
@@ -14,7 +12,7 @@ export const baseStyles = {
   statCardIcon: /*tw*/ 'size-4.5',
   statCardCountContainer: /*tw*/ 'flex items-baseline gap-2 text-xl font-semibold',
   statCardOverdueCount: /*tw*/ 'text-accent-danger',
-  statCardCount: /*tw*/ 'text-t2',
+  statCardCount: /*tw*/ 'text-t1',
   statCardLabel: /*tw*/ 'text-sm text-t2',
 
   screenEdgePadding: /*tw*/ 'px-4',
@@ -44,17 +42,18 @@ export const baseStyles = {
 
   headerBackground: /*tw*/ 'bg-bg2',
   headerRoot: /*tw*/ 'w-full h-15 px-5 py-3 relative',
-  headerLeftContainer: /*tw*/ 'flex gap-2 absolute left-5.5 top-1/2 -translate-y-1/2',
+  headerLeftContainer: /*tw*/ 'flex gap-2 absolute left-5 top-1/2 -translate-y-1/2',
   headerRightContainer: /*tw*/ 'flex gap-2 absolute right-5 top-1/2 -translate-y-1/2',
   headerTitle: /*tw*/ 'text-base font-medium text-t1 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2',
-  headerActionButton: /*tw*/ 'size-9 flex items-center justify-center border-none bg-bg1 cursor-pointer rounded-full',
+  headerActionButton:
+    /*tw*/ 'size-9 flex items-center justify-center border-none bg-bg1 cursor-pointer rounded-full transition-transform active:scale-90',
   headerActionButtonNormal: /*tw*/ 'text-t2',
   headerActionButtonActive: /*tw*/ 'text-brand',
   headerActionButtonIcon: /*tw*/ 'size-5 flex items-center justify-center',
 
   tagFilterBarRoot: /*tw*/ 'flex items-center mb-3',
   tagFilterBarChip:
-    /*tw*/ 'inline-flex items-center gap-1.5 h-7 pl-3 pr-2 rounded-full bg-bg3 text-sm text-t1 cursor-pointer select-none',
+    /*tw*/ 'inline-flex items-center gap-1.5 h-7 pl-3 pr-2 rounded-full bg-bg3 text-sm text-t1 cursor-pointer select-none transition active:scale-95',
   tagFilterBarChipIcon: /*tw*/ 'size-3.5 text-t3',
   tagFilterBarChipClose: /*tw*/ 'size-4 text-t3',
 
@@ -92,10 +91,10 @@ export const baseStyles = {
   pageContentPaddingX: /*tw*/ 'px-4',
   pageContentPaddingY: /*tw*/ 'pb-15',
   pageContentColumn: /*tw*/ 'flex flex-col',
-  pageEmptyState: /*tw*/ 'flex h-100 items-center justify-center text-t3',
+  pageEmptyState: /*tw*/ 'flex h-100 items-center justify-center text-sm text-t3',
   pageStateRoot: /*tw*/ 'flex flex-col items-center justify-center py-12 text-center',
   pageStateLabel: /*tw*/ 'mb-6 px-4 text-sm text-t2',
-  pageStateLink: /*tw*/ 'text-brand text-sm font-medium transition-colors hover:text-brand/80',
+  pageStateLink: /*tw*/ 'text-brand text-sm font-medium transition-opacity active:opacity-60',
 
   overlayBackground: /*tw*/ 'bg-black',
   overlayBackgroundOpacity: /*tw*/ 'opacity-50',
@@ -154,9 +153,11 @@ export const baseStyles = {
   datePickerTitlePadding: /*tw*/ 'px-2',
   datePickerActionSheetPadding: /*tw*/ 'px-0!',
 
-  fabButton: /*tw*/ 'size-14 bg-brand rounded-full flex items-center justify-center z-[1000] text-white',
+  fabButton:
+    /*tw*/ 'size-14 bg-brand rounded-full flex items-center justify-center z-[1000] text-white shadow-popover transition-transform active:scale-90',
 
-  taskDetailBottomActionStyle: /*tw*/ 'flex items-center justify-center size-9 rounded-lg  text-t2',
+  taskDetailBottomActionStyle:
+    /*tw*/ 'flex items-center justify-center size-9 rounded-lg text-t2 transition-transform active:scale-90',
   taskDetailBottomActionIconStyle: /*tw*/ 'size-5',
 
   // Project Info styles (matches Vue Info component)
@@ -206,7 +207,8 @@ export const baseStyles = {
   editTaskItemTitleInputRow: /*tw*/ 'flex items-center gap-2 min-w-0',
   editTaskItemTitleInput:
     /*tw*/ 'min-w-0 overflow-hidden text-ellipsis text-base leading-6 font-medium text-t1 bg-transparent outline-none w-full',
-  editTaskItemStatusButton: /*tw*/ 'size-6 shrink-0 flex items-center justify-center text-t3',
+  editTaskItemStatusButton:
+    /*tw*/ 'size-6 shrink-0 flex items-center justify-center text-t3 transition-transform active:scale-90',
   editTaskItemMenuButton: /*tw*/ 'size-6 shrink-0 flex items-center justify-end text-t3',
   editTaskItemExpanded: /*tw*/ 'grid grid-rows-[1fr]',
   editTaskItemExpandedOverflow: /*tw*/ 'overflow-hidden',
@@ -243,10 +245,10 @@ export const baseStyles = {
   createTaskSubtaskInput:
     /*tw*/ 'flex-1 text-sm leading-6 text-t1 bg-transparent border-none outline-none p-0 placeholder:text-t4',
   createTaskSubtaskDragHandle: /*tw*/ 'size-4 cursor-grab text-t3 opacity-40',
-  createTaskAddButton: /*tw*/ 'text-sm leading-6 text-t4 cursor-pointer text-left',
+  createTaskAddButton: /*tw*/ 'text-sm leading-6 text-t4 cursor-pointer text-left transition-opacity active:opacity-60',
   subtaskItemDraggingPlaceholder: /*tw*/ 'flex items-center gap-1.5 bg-bg3 rounded-lg w-full',
   subtaskItemRoot: /*tw*/ 'flex items-center gap-1.5',
-  subtaskItemStatusButton: /*tw*/ 'flex items-center justify-center text-t3',
+  subtaskItemStatusButton: /*tw*/ 'flex items-center justify-center text-t3 transition-transform active:scale-90',
   subtaskItemInputCompleted: /*tw*/ 'text-t3',
   subtaskItemInputCanceled: /*tw*/ 'text-t3 line-through',
   subtaskItemInputNormal: /*tw*/ 'text-t1',
@@ -285,28 +287,30 @@ export const baseStyles = {
   projectAreaSelectorInputContainer: /*tw*/ 'bg-bg1 rounded-md px-3 py-2 text-t1 h-11 w-full flex items-center',
   projectAreaSelectorInput: /*tw*/ 'flex-1 min-w-40 focus:outline-none bg-transparent text-sm',
   projectAreaSelectorItem:
-    /*tw*/ 'bg-bg1 rounded-md px-3 py-2 text-t1 break-words w-full text-left flex items-center gap-2',
+    /*tw*/ 'bg-bg1 rounded-md px-3 py-2 text-t1 break-words w-full text-left flex items-center gap-2 transition-colors active:bg-bg3',
   projectAreaSelectorItemIcon: /*tw*/ 'size-5 text-t3',
   projectAreaSelectorSubItemPadding: /*tw*/ 'pl-4',
   projectAreaSelectorTextSize: /*tw*/ 'text-sm',
   projectAreaSelectorContentGap: /*tw*/ 'space-y-2',
   projectAreaSelectorDisabled: /*tw*/ 'opacity-50',
 
-  switchUncheckedBackground: /*tw*/ 'bg-bg2',
+  switchUncheckedBackground: /*tw*/ 'bg-bg3',
   switchCheckedBackground: /*tw*/ 'bg-brand',
   switchInnerBorder: /*tw*/ '',
   switchOuterBorder: /*tw*/ '',
 
   dialogBorder: /*tw*/ '',
   dialogOverlayRoot: /*tw*/ 'fixed inset-0 flex items-center justify-center',
-  dialogBackdrop: /*tw*/ 'absolute inset-0',
-  dialogPanel: /*tw*/ 'bg-bg1 rounded-lg flex flex-col w-80 absolute max-h-[80vh] overflow-y-auto',
+  dialogBackdrop: /*tw*/ 'absolute inset-0 animate-fade-in',
+  dialogPanel:
+    /*tw*/ 'bg-bg1 rounded-lg flex flex-col w-80 absolute max-h-[80vh] overflow-y-auto shadow-dialog animate-dialog-in',
   dialogBody: /*tw*/ 'flex flex-col p-6 space-y-4',
   dialogDescription: /*tw*/ 'text-sm text-center text-t2 whitespace-pre-line',
   dialogActionList: /*tw*/ 'space-y-4',
   dialogFieldLabel: /*tw*/ 'block text-sm font-medium text-t1 mb-2',
   dialogRequiredMark: /*tw*/ 'text-accent-danger ml-1',
-  dialogInput: /*tw*/ 'w-full px-3 py-2 border bg-bg2 rounded-md text-t1 outline-none transition-colors',
+  dialogInput:
+    /*tw*/ 'w-full px-3 py-2 border bg-bg2 rounded-md text-t1 outline-none transition focus:ring-2 focus:ring-brand/15',
   dialogInputNormal: /*tw*/ 'border-bg2 focus:border-brand',
   dialogInputError: /*tw*/ 'border-accent-danger',
   dialogInputLightBorder: /*tw*/ 'border-line-light',
@@ -314,21 +318,21 @@ export const baseStyles = {
   dialogFieldError: /*tw*/ 'text-xs text-accent-danger mt-1',
   dialogFieldHelp: /*tw*/ 'mt-2 text-sm text-t2',
   dialogFieldAccent: /*tw*/ 'mt-2 text-sm text-brand',
-  dialogButton: /*tw*/ 'w-full py-2 px-4 rounded-md text-center font-medium',
+  dialogButton: /*tw*/ 'w-full py-2 px-4 rounded-md text-center font-medium transition active:scale-[0.98]',
   dialogButtonPrimary: /*tw*/ 'bg-brand text-white',
   dialogButtonDanger: /*tw*/ 'bg-accent-danger text-white',
   dialogButtonDefault: /*tw*/ 'bg-bg2 text-t1',
   dialogTitle: /*tw*/ 'text-lg font-medium text-center text-t1',
-  dialogFooter: /*tw*/ 'border-t border-bg1 rounded-b-lg',
+  dialogFooter: /*tw*/ 'border-t border-line-light rounded-b-lg',
   dialogFooterInner: /*tw*/ 'flex flex-row justify-center items-center h-full px-4',
-  dialogFooterButton: /*tw*/ 'flex-1 text-base text-center',
+  dialogFooterButton: /*tw*/ 'flex-1 text-base text-center transition-opacity active:opacity-60',
   dialogFooterCancelButton: /*tw*/ 'text-t1',
   dialogFooterConfirmEnabled: /*tw*/ 'text-brand',
   dialogFooterConfirmDisabled: /*tw*/ 'text-t3',
 
   // SettingsListItem styles
   settingsListItemRoot:
-    /*tw*/ 'flex items-center justify-between py-3.5 px-4 cursor-pointer transition-colors duration-200',
+    /*tw*/ 'flex items-center justify-between py-3.5 px-4 cursor-pointer transition-colors duration-200 active:bg-bg2',
   settingsListItemIconContainer: /*tw*/ 'mr-4 shrink-0 size-6',
   settingsListItemIconDanger: /*tw*/ 'text-accent-danger',
   settingsListItemIconNormal: /*tw*/ 'text-t2',
@@ -344,7 +348,8 @@ export const baseStyles = {
   settingsListItemNavLabel: /*tw*/ 'text-xs text-t3 mr-1',
   settingsListItemNavIcon: /*tw*/ 'size-4 text-t3',
   settingsListItemLabelText: /*tw*/ 'text-xs text-t3',
-  settingsListItemButtonRoot: /*tw*/ 'flex items-center py-3 px-4 cursor-pointer transition-colors duration-200',
+  settingsListItemButtonRoot:
+    /*tw*/ 'flex items-center py-3 px-4 cursor-pointer transition-colors duration-200 active:bg-bg2',
   settingsListItemButtonAlignLeft: /*tw*/ 'justify-start',
   settingsListItemButtonAlignRight: /*tw*/ 'justify-end',
   settingsListItemButtonAlignCenter: /*tw*/ 'justify-center',
@@ -373,14 +378,15 @@ export const baseStyles = {
   settingsDatabaseIcon: /*tw*/ 'h-5 w-5',
   formSectionStack: /*tw*/ 'flex flex-col gap-3',
   formCheckboxRow: /*tw*/ 'flex items-center gap-2 px-3',
-  formCheckbox: /*tw*/ 'h-4 w-4 text-primary',
+  formCheckbox: /*tw*/ 'h-4 w-4 accent-brand',
   formHintText: /*tw*/ 'text-sm text-t2',
-  formLinkText: /*tw*/ 'mx-1 text-primary text-text-link',
+  formLinkText: /*tw*/ 'mx-1 text-text-link',
   formPrimaryButton:
-    /*tw*/ 'mt-6 w-full px-4 py-3 rounded-full bg-brand font-medium text-white disabled:opacity-50 hover:bg-brand-dark focus:outline-none',
+    /*tw*/ 'mt-6 w-full px-4 py-3 rounded-full bg-brand font-medium text-white disabled:opacity-50 transition active:scale-[0.98] active:opacity-90 focus:outline-none',
 
   // font-size 14px
-  baseButtonStyle: /*tw*/ 'flex items-center justify-center text-center rounded-full w-full',
+  baseButtonStyle:
+    /*tw*/ 'flex items-center justify-center text-center rounded-full w-full transition active:scale-[0.98]',
   fabIcon: /*tw*/ 'size-6',
   inboxDropZone:
     /*tw*/ 'fixed bottom-20 left-4 h-12 bg-brand rounded-full flex items-center justify-center text-white transition-all duration-200',
@@ -398,7 +404,7 @@ export const baseStyles = {
 
   // HomePageProjectItem styles (matching Vue HomeProjectItem spec)
   homeProjectItemRoot: /*tw*/ 'flex items-start py-3.5 px-4 gap-3',
-  homeProjectItemCheckboxContainer: /*tw*/ 'h-6 flex items-center text-t3',
+  homeProjectItemCheckboxContainer: /*tw*/ 'h-6 flex items-center text-t3 transition-transform active:scale-90',
   homeProjectItemContent: /*tw*/ 'flex-1 flex flex-col gap-0.5 min-w-0',
   homeProjectItemTitleRow: /*tw*/ 'flex items-center gap-1.5 min-w-0',
   homeProjectItemTitle:
@@ -429,10 +435,10 @@ export const baseStyles = {
   tagEditorInputContainer: /*tw*/ 'w-full flex flex-wrap items-center',
   tagEditorSelectedTags: /*tw*/ 'flex items-center',
   tagEditorList: /*tw*/ 'h-50 overflow-y-scroll flex flex-col',
-  tagEditorSuggestionButton: /*tw*/ 'break-words w-full text-left',
+  tagEditorSuggestionButton: /*tw*/ 'break-words w-full text-left transition-opacity active:opacity-60',
   timePickerWheel: /*tw*/ 'flex-1 h-32 overflow-y-auto',
   timePickerWheelInner: /*tw*/ 'py-24',
-  timePickerWheelOption: /*tw*/ 'h-8 flex items-center justify-center cursor-pointer text-lg',
+  timePickerWheelOption: /*tw*/ 'h-8 flex items-center justify-center cursor-pointer text-lg transition-colors',
   timePickerWheelOptionSelected: /*tw*/ 'text-brand font-semibold',
   timePickerWheelOptionNormal: /*tw*/ 'text-t2',
   timePickerHeader: /*tw*/ 'text-center mb-6',
@@ -445,7 +451,7 @@ export const baseStyles = {
   timePickerPresetTitle: /*tw*/ 'text-sm text-t2 mb-2',
   timePickerPresetList: /*tw*/ 'flex gap-2',
   timePickerPresetButton:
-    /*tw*/ 'flex-1 py-2 px-3 rounded-lg bg-bg2 text-t1 text-sm font-medium hover:bg-bg3 transition-colors',
+    /*tw*/ 'flex-1 py-2 px-3 rounded-lg bg-bg2 text-t1 text-sm font-medium active:bg-bg3 transition active:scale-[0.98]',
 
   // AreaHeader styles (matching Vue AreaItem spec)
   areaHeaderRoot: /*tw*/ 'flex items-center py-3.5 px-4',
