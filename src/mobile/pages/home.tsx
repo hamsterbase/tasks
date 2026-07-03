@@ -1,5 +1,5 @@
 import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc.ts';
-import { AreaIcon, HomeIcon, SettingsIcon, SyncIcon } from '@/components/icons';
+import { AreaIcon, CreateViewIcon, HomeIcon, SettingsIcon, SyncIcon } from '@/components/icons';
 import { FlattenedResult } from '@/core/state/home/flattenedItemsToResult.ts';
 import { flattenRootCollections } from '@/core/state/home/getFlattenRootCollections.ts';
 import { getFutureProjects } from '@/core/state/home/getFutureProjects.ts';
@@ -34,6 +34,7 @@ import { usePopupAction } from '../overlay/popupAction/usePopupAction.ts';
 import { useToast } from '../overlay/toast/useToast.ts';
 import { styles } from '../theme.ts';
 import { MobileHomeTopMenu } from './home/TopMenu';
+import { MobileHomeViewsSection } from './home/ViewsSection';
 
 interface HomeProjectAndAreaProps {
   flattenedResult: FlattenedResult<AreaInfoState, ProjectInfoState>;
@@ -217,12 +218,25 @@ export const MobileHome = () => {
                     todoService.editItem(id);
                   },
                 },
+                {
+                  icon: <CreateViewIcon strokeWidth={1.5} />,
+                  name: localize('create_popup.create_view', 'Create View'),
+                  onClick: () => {
+                    const uid = todoService.addView({ name: '', rule: '' });
+                    navigationService.navigate({ path: `/views/${uid}` });
+                  },
+                },
               ],
             },
           ],
         });
       }}
-      meta={<MobileHomeTopMenu></MobileHomeTopMenu>}
+      meta={
+        <React.Fragment>
+          <MobileHomeTopMenu></MobileHomeTopMenu>
+          <MobileHomeViewsSection></MobileHomeViewsSection>
+        </React.Fragment>
+      }
       dragOption={{
         sortable: {
           items: flattenedItemsResult.flattenedItems.map((item): string => item.id),

@@ -25,6 +25,7 @@ import { EULAPage } from '@/mobile/pages/settings/eula.tsx';
 import { AboutPage } from '@/mobile/pages/settings/about.tsx';
 import { FeedbackPage } from '@/mobile/pages/settings/feedback.tsx';
 import { SelfhostedSync } from './pages/settings/selfhosted-sync/selfhostedSync.tsx';
+import { ViewPage } from './pages/view.tsx';
 
 interface IPage {
   url: string;
@@ -135,5 +136,9 @@ export const pages: IPage[] = [
   {
     url: '/settings/selfhosted-sync',
     content: <SelfhostedSync />,
+  },
+  {
+    url: '/views/:viewUid',
+    content: <ViewPage />,
   },
 ];

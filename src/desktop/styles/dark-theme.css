@@ -8,7 +8,6 @@
   --color-t1: #e7e9eb;
   --color-t2: #a2a7ae;
   --color-t3: #757a81;
-  --color-t4: #54585f;
   --color-text-white: #ffffff;
   --color-text-link: #1fa1a6;
 
@@ -22,8 +21,4 @@
   --color-accent-success: #1fa251;
 
   --color-toast-bg: #2f3238;
-
-  /* Shadows need a visible border + deeper falloff on dark backgrounds */
-  --shadow-popover: 0 0 0 1px rgba(0, 0, 0, 0.35), 0 8px 24px rgba(0, 0, 0, 0.5);
-  --shadow-dialog: 0 0 0 1px rgba(0, 0, 0, 0.4), 0 16px 48px rgba(0, 0, 0, 0.6);
 }

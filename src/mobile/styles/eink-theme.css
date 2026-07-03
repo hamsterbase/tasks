@@ -2,12 +2,3 @@
   --color-brand: #17171a;
   --color-bg2: #ffffff;
 }
-
-/* E-ink screens cannot keep up with motion. Use a near-zero duration instead of
-   `none` so transitionend events still fire (ActionSheet waits on them to dispose) */
-[data-theme='eink'] *,
-[data-theme='eink'] *::before,
-[data-theme='eink'] *::after {
-  animation-duration: 0.01ms !important;
-  transition-duration: 0.01ms !important;
-}

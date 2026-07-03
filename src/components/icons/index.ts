@@ -9,6 +9,8 @@ import {
   ArrowUp,
   ArrowUpToLine,
   Bell,
+  Bookmark,
+  BookmarkPlus,
   Box,
   Brain,
   Calendar,
@@ -30,6 +32,7 @@ import {
   Cloud,
   CloudAlert,
   CloudOff,
+  Code,
   Copy,
   Download,
   Database,
@@ -45,7 +48,6 @@ import {
   Info,
   KeyRound,
   Layers,
-  Layers2,
   Link,
   ListChecks,
   LocateFixed,
@@ -101,7 +103,8 @@ export const CloseIcon = X;
 export const CheckIcon = Check;
 export const CancelIcon = X;
 export const AreaIcon = Layers;
-export const ViewIcon = Layers2;
+export const ViewIcon = Bookmark;
+export const CreateViewIcon = BookmarkPlus;
 export const PlusIcon = Plus;
 export const PlusCircleIcon = CirclePlus;
 export const KeyIcon = KeyRound;
@@ -134,6 +137,7 @@ export const CircleHelpIcon = CircleHelp;
 export const CalendarCheckIcon = CalendarCheck;
 export const CalendarXIcon = CalendarX;
 export const CopyIcon = Copy;
+export const CodeIcon = Code;
 export const DownloadIcon = Download;
 export const ChevronDownIcon = ChevronDown;
 export const Loader2Icon = Loader2;

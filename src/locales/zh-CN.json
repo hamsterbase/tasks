@@ -608,6 +608,10 @@
     "defaultMessage": "Create Task",
     "content": "创建任务"
   },
+  "create_popup.create_view": {
+    "defaultMessage": "Create View",
+    "content": "创建视图"
+  },
   "create_sask_action_sheet.task_notes_placeholder": {
     "defaultMessage": "Add Notes...",
     "content": "添加笔记..."
@@ -2408,6 +2412,10 @@
     "defaultMessage": "Copy the prompt below and send it to ChatGPT, Claude, or another AI along with your request (e.g. \"show my work tasks for this week\"). Paste the rule it returns into the Rule box on the right.",
     "content": "把下面的提示词发给 ChatGPT、Claude 等 AI，并描述你的需求（比如\"显示我本周的工作任务\"），再把 AI 返回的规则粘到右侧 Rule 框。"
   },
+  "view.docs.ai.descMobile": {
+    "defaultMessage": "Copy the prompt below and send it to ChatGPT, Claude, or another AI along with your request (e.g. \"show my work tasks for this week\"). Paste the rule it returns into the Rule box above.",
+    "content": "把下面的提示词发给 ChatGPT、Claude 等 AI，并描述你的需求（比如\"显示我本周的工作任务\"），再把 AI 返回的规则粘到上面的 Rule 框。"
+  },
   "view.docs.ai.title": {
     "defaultMessage": "AI assist",
     "content": "AI 写规则"
@@ -2480,9 +2488,17 @@
     "defaultMessage": "Write an expression, or pick a starter on the left",
     "content": "在这里写表达式，或从左侧选一个常用规则"
   },
+  "view.field.rulePlaceholderMobile": {
+    "defaultMessage": "Write an expression, or pick a starter below",
+    "content": "在这里写表达式，或从下面选一个常用规则"
+  },
   "view.menu.delete": {
     "defaultMessage": "Delete view",
     "content": "删除视图"
+  },
+  "view.notFound": {
+    "defaultMessage": "View not found",
+    "content": "视图不存在"
   },
   "view.sidebar.add": {
     "defaultMessage": "Add view",

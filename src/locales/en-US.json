@@ -608,6 +608,10 @@
     "defaultMessage": "Create Task",
     "content": "Create Task"
   },
+  "create_popup.create_view": {
+    "defaultMessage": "Create View",
+    "content": "Create View"
+  },
   "create_sask_action_sheet.task_notes_placeholder": {
     "defaultMessage": "Add Notes...",
     "content": "Add Notes..."
@@ -2408,6 +2412,10 @@
     "defaultMessage": "Copy the prompt below and send it to ChatGPT, Claude, or another AI along with your request (e.g. \"show my work tasks for this week\"). Paste the rule it returns into the Rule box on the right.",
     "content": "Copy the prompt below and send it to ChatGPT, Claude, or another AI along with your request (e.g. \"show my work tasks for this week\"). Paste the rule it returns into the Rule box on the right."
   },
+  "view.docs.ai.descMobile": {
+    "defaultMessage": "Copy the prompt below and send it to ChatGPT, Claude, or another AI along with your request (e.g. \"show my work tasks for this week\"). Paste the rule it returns into the Rule box above.",
+    "content": "Copy the prompt below and send it to ChatGPT, Claude, or another AI along with your request (e.g. \"show my work tasks for this week\"). Paste the rule it returns into the Rule box above."
+  },
   "view.docs.ai.title": {
     "defaultMessage": "AI assist",
     "content": "AI assist"
@@ -2480,9 +2488,17 @@
     "defaultMessage": "Write an expression, or pick a starter on the left",
     "content": "Write an expression, or pick a starter on the left"
   },
+  "view.field.rulePlaceholderMobile": {
+    "defaultMessage": "Write an expression, or pick a starter below",
+    "content": "Write an expression, or pick a starter below"
+  },
   "view.menu.delete": {
     "defaultMessage": "Delete view",
     "content": "Delete view"
+  },
+  "view.notFound": {
+    "defaultMessage": "View not found",
+    "content": "View not found"
   },
   "view.sidebar.add": {
     "defaultMessage": "Add view",
