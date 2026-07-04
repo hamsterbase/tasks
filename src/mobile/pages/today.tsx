@@ -7,10 +7,11 @@ import { useConfig } from '@/hooks/useConfig';
 import { localize } from '@/nls';
 import { groupTodayByAreaProjectConfigKey } from '@/services/config/config';
 import { ITodoService } from '@/services/todo/common/todoService';
+import { computeSectionRounding } from '@/mobile/components/dnd/projectedRounding';
 import { calculateDragDropAction } from '@/utils/dnd/calculateDragDropAction';
 import { DragDropElements } from '@/utils/dnd/dragDropCollision';
 import { singleListCollisionDetectionStrategy } from '@/utils/dnd/singleListCollisionDetectionStrategy';
-import { DragEndEvent } from '@dnd-kit/core';
+import { DragEndEvent, useDndContext } from '@dnd-kit/core';
 import { verticalListSortingStrategy } from '@dnd-kit/sortable';
 import classNames from 'classnames';
 import { formatTodayTitle } from '@/core/time/formatTodayTitle';
@@ -25,6 +26,40 @@ import { styles } from '../theme';
 import { useTaskDisplaySettingsMobile } from '../hooks/useTaskDisplaySettings';
 import { ItemPosition } from '@/core/type';
 import { GroupToday } from './today/GroupToday';
+
+interface FlatTodayListProps {
+  items: ReturnType<typeof getTodayItems>['items'];
+  willDisappearObjectIdSet: Set<TreeID>;
+}
+
+// The card background lives on each row (see projectedRounding.ts), so this
+// has to render inside PageLayout's DndContext to follow the drag state.
+const FlatTodayList: React.FC<FlatTodayListProps> = ({ items, willDisappearObjectIdSet }) => {
+  const { active, over } = useDndContext();
+  const rounding = computeSectionRounding(
+    items.map((item): string => item.id),
+    active?.id as string | undefined,
+    over?.id as string | undefined
+  );
+  return (
+    <div>
+      {items.map((item) => {
+        const rowClassName = classNames(styles.taskItemGroupBackground, {
+          [styles.taskItemGroupTopRound]: rounding.top.has(item.id),
+          [styles.taskItemGroupBottomRound]: rounding.bottom.has(item.id),
+        });
+        if (item.type === 'project') {
+          return <HomeProjectItem key={item.id} projectInfo={item} className={rowClassName} />;
+        }
+        return (
+          <TaskItemWrapper key={item.id} willDisappear={willDisappearObjectIdSet.has(item.id)} id={item.id}>
+            <TaskItem taskInfo={item} className={rowClassName} />
+          </TaskItemWrapper>
+        );
+      })}
+    </div>
+  );
+};
 
 const FlatToday = () => {
   const todoService = useService(ITodoService);
@@ -125,19 +160,7 @@ const FlatToday = () => {
       }
     >
       {tagFilter.filterBar}
-      <div className={classNames(styles.taskItemGroupBackground, styles.taskItemGroupRound)}>
-        {items.map((item) => {
-          const willDisappear = todayItems.willDisappearObjectIdSet.has(item.id);
-          if (item.type === 'project') {
-            return <HomeProjectItem key={item.id} projectInfo={item} />;
-          }
-          return (
-            <TaskItemWrapper key={item.id} willDisappear={willDisappear} id={item.id}>
-              <TaskItem taskInfo={item} />
-            </TaskItemWrapper>
-          );
-        })}
-      </div>
+      <FlatTodayList items={items} willDisappearObjectIdSet={todayItems.willDisappearObjectIdSet} />
     </PageLayout>
   );
 };

@@ -12,8 +12,8 @@ import { DragDropElements } from '@/utils/dnd/dragDropCollision.ts';
 import { DragOverlay, useDndContext } from '@dnd-kit/core';
 import type { TreeID } from 'loro-crdt';
 import React, { useMemo } from 'react';
-import { AreaHeader } from '../todo/AreaHeader.tsx';
-import { ProjectHeadingItem } from '../todo/ProjectHeadingItem.tsx';
+import { AreaHeaderOverlayItem } from '../todo/AreaHeaderOverlayItem.tsx';
+import { ProjectHeadingOverlayItem } from '../todo/ProjectHeadingOverlayItem.tsx';
 import { getArea } from '@/core/state/getAreaState.ts';
 import classNames from 'classnames';
 import { styles } from '@/mobile/theme.ts';
@@ -69,9 +69,9 @@ export const OverlayItem: React.FC<DragOverlayItemProps> = ({
         return <TaskItem taskInfo={getTaskInfo(modelState, activeId as TreeID)} {...(textProps ?? {})} />;
       }
       case 'projectHeading':
-        return <ProjectHeadingItem projectHeadingInfo={getProjectHeadingInfo(modelState, activeId as TreeID)} />;
+        return <ProjectHeadingOverlayItem projectHeadingInfo={getProjectHeadingInfo(modelState, activeId as TreeID)} />;
       case 'area':
-        return <AreaHeader areaInfo={getArea(modelState, activeId as TreeID)!} />;
+        return <AreaHeaderOverlayItem areaInfo={getArea(modelState, activeId as TreeID)!} />;
       case 'project': {
         const projectInfo = getProject(modelState, activeId as TreeID);
         if (renderProject) {

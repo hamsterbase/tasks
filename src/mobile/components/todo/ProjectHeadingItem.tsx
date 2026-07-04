@@ -39,7 +39,12 @@ export const ProjectHeadingItem: React.FC<ProjectHeadingItemProps> = ({ projectH
     opacity: isDragging ? 0.5 : 1,
   };
   if (isDragging) {
-    return <DragItem ref={setNodeRef} attributes={attributes} listeners={listeners} style={style} />;
+    // Keep the card-gap padding so the list doesn't jump up when the heading lifts.
+    return (
+      <div className={styles.projectHeadingItemSpacingTop}>
+        <DragItem ref={setNodeRef} attributes={attributes} listeners={listeners} style={style} />
+      </div>
+    );
   }
   return (
     <div ref={setNodeRef} style={style} {...attributes} {...listeners} className={styles.projectHeadingItemSpacingTop}>

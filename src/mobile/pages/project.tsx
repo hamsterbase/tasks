@@ -18,6 +18,7 @@ import classNames from 'classnames';
 import type { TreeID } from 'loro-crdt';
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router';
+import { computeFlattenedRounding } from '../components/dnd/projectedRounding.ts';
 import { LastPlacement } from '../components/dnd/lastPlacement.tsx';
 import { useMobileTagFilter } from '../components/filter/useMobileTagFilter';
 import { PageHeaderProps } from '../components/PageHeader.tsx';
@@ -34,7 +35,8 @@ const Files: React.FC<{
   result: FlattenedResult<ProjectHeadingInfo, TaskInfo>;
   willDisappearObjectIdSet: Set<TreeID>;
 }> = ({ items, result, willDisappearObjectIdSet }) => {
-  const { active } = useDndContext();
+  const { active, over } = useDndContext();
+  const rounding = computeFlattenedRounding(result, active?.id as string | undefined, over?.id as string | undefined);
   return (
     <React.Fragment>
       <div>
@@ -45,8 +47,8 @@ const Files: React.FC<{
                 key={item.id}
                 projectHeadingInfo={item.content}
                 className={classNames(styles.taskItemGroupBackground, {
-                  [styles.taskItemGroupTopRound]: result.borderTop(item.id),
-                  [styles.taskItemGroupBottomRound]: result.borderBottom(item.id),
+                  [styles.taskItemGroupTopRound]: rounding.top.has(item.id),
+                  [styles.taskItemGroupBottomRound]: rounding.bottom.has(item.id),
                 })}
               />
             );
@@ -63,8 +65,8 @@ const Files: React.FC<{
                   hideProjectTitle={true}
                   followParentArchiveState
                   className={classNames(styles.taskItemGroupBackground, {
-                    [styles.taskItemGroupTopRound]: result.borderTop(item.id),
-                    [styles.taskItemGroupBottomRound]: result.borderBottom(item.id),
+                    [styles.taskItemGroupTopRound]: rounding.top.has(item.id),
+                    [styles.taskItemGroupBottomRound]: rounding.bottom.has(item.id),
                   })}
                 />
               </TaskItemWrapper>

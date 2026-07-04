@@ -11,6 +11,7 @@ import { useDragSensors } from '@/hooks/useDragSensors.ts';
 import useNavigate from '@/hooks/useNavigate.ts';
 import { useScrollPosition } from '@/hooks/useScrollPosition.ts';
 import { FutureProjects } from '@/mobile/components/dnd/futureProjects.tsx';
+import { computeFlattenedRounding } from '@/mobile/components/dnd/projectedRounding.ts';
 import { HomePageProjectItem } from '@/mobile/components/todo/HomePageProjectItem.tsx';
 import { HomePageProjectOverlayItem } from '@/mobile/components/todo/HomePageProjectOverlayItem.tsx';
 import { localize } from '@/nls.ts';
@@ -42,7 +43,13 @@ interface HomeProjectAndAreaProps {
 }
 
 const HomeProjectAndArea: React.FC<HomeProjectAndAreaProps> = ({ flattenedResult, unstartedProjects }) => {
-  const { active } = useDndContext();
+  const { active, over } = useDndContext();
+  const rounding = computeFlattenedRounding(
+    flattenedResult,
+    active?.id as string | undefined,
+    over?.id as string | undefined
+  );
+
   return (
     <React.Fragment>
       <div>
@@ -54,8 +61,8 @@ const HomeProjectAndArea: React.FC<HomeProjectAndAreaProps> = ({ flattenedResult
                   key={item.id}
                   unstartedProjects={unstartedProjects}
                   className={classNames(styles.taskItemGroupBackground, styles.homeCardShadow, {
-                    [styles.taskItemGroupTopRound]: flattenedResult.borderTop(item.id),
-                    [styles.taskItemGroupBottomRound]: flattenedResult.borderBottom(item.id),
+                    [styles.taskItemGroupTopRound]: rounding.top.has(item.id),
+                    [styles.taskItemGroupBottomRound]: rounding.bottom.has(item.id),
                   })}
                 />
               );
@@ -68,8 +75,8 @@ const HomeProjectAndArea: React.FC<HomeProjectAndAreaProps> = ({ flattenedResult
                 key={item.content.id}
                 areaInfo={item.content}
                 className={classNames(styles.taskItemGroupBackground, styles.homeCardShadow, {
-                  [styles.taskItemGroupTopRound]: flattenedResult.borderTop(item.id),
-                  [styles.taskItemGroupBottomRound]: flattenedResult.borderBottom(item.id),
+                  [styles.taskItemGroupTopRound]: rounding.top.has(item.id),
+                  [styles.taskItemGroupBottomRound]: rounding.bottom.has(item.id),
                 })}
               />
             );
@@ -82,8 +89,8 @@ const HomeProjectAndArea: React.FC<HomeProjectAndAreaProps> = ({ flattenedResult
                 key={item.content.id}
                 projectInfo={item.content}
                 className={classNames(styles.taskItemGroupBackground, {
-                  [styles.taskItemGroupTopRound]: flattenedResult.borderTop(item.id),
-                  [styles.taskItemGroupBottomRound]: flattenedResult.borderBottom(item.id),
+                  [styles.taskItemGroupTopRound]: rounding.top.has(item.id),
+                  [styles.taskItemGroupBottomRound]: rounding.bottom.has(item.id),
                 })}
               />
             );

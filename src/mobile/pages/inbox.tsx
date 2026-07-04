@@ -5,10 +5,11 @@ import { useService } from '@/hooks/use-service.ts';
 import { useWatchEvent } from '@/hooks/use-watch-event.ts';
 import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService.ts';
+import { computeSectionRounding } from '@/mobile/components/dnd/projectedRounding';
 import { calculateDragDropAction } from '@/utils/dnd/calculateDragDropAction';
 import { DragDropElements } from '@/utils/dnd/dragDropCollision';
 import { singleListCollisionDetectionStrategy } from '@/utils/dnd/singleListCollisionDetectionStrategy';
-import { DragEndEvent } from '@dnd-kit/core';
+import { DragEndEvent, useDndContext } from '@dnd-kit/core';
 import { verticalListSortingStrategy } from '@dnd-kit/sortable';
 import classNames from 'classnames';
 import type { TreeID } from 'loro-crdt';
@@ -19,6 +20,38 @@ import TaskItemWrapper from '../components/taskItem/TaskItemWrapper';
 import { TaskItem } from '../components/todo/TaskItem';
 import { styles } from '../theme';
 import { useTaskDisplaySettingsMobile } from '../hooks/useTaskDisplaySettings';
+
+interface InboxTaskListProps {
+  tasks: React.ComponentProps<typeof TaskItem>['taskInfo'][];
+  willDisappearObjectIdSet: Set<string>;
+}
+
+// The card background lives on each row (see projectedRounding.ts), so this
+// has to render inside PageLayout's DndContext to follow the drag state.
+const InboxTaskList: React.FC<InboxTaskListProps> = ({ tasks, willDisappearObjectIdSet }) => {
+  const { active, over } = useDndContext();
+  const rounding = computeSectionRounding(
+    tasks.map((task) => task.id),
+    active?.id as string | undefined,
+    over?.id as string | undefined
+  );
+  return (
+    <div>
+      {tasks.map((task) => (
+        <TaskItemWrapper key={task.id} willDisappear={willDisappearObjectIdSet.has(task.id)} id={task.id}>
+          <TaskItem
+            taskInfo={task}
+            key={task.id}
+            className={classNames(styles.taskItemGroupBackground, {
+              [styles.taskItemGroupTopRound]: rounding.top.has(task.id),
+              [styles.taskItemGroupBottomRound]: rounding.bottom.has(task.id),
+            })}
+          />
+        </TaskItemWrapper>
+      ))}
+    </div>
+  );
+};
 
 export const InboxPage = () => {
   const todoService = useService(ITodoService);
@@ -104,13 +137,7 @@ export const InboxPage = () => {
       }}
     >
       {tagFilter.filterBar}
-      <div className={classNames(styles.taskItemGroupBackground, styles.taskItemGroupRound)}>
-        {inboxTasks.map((task) => (
-          <TaskItemWrapper key={task.id} willDisappear={willDisappearObjectIdSet.has(task.id)} id={task.id}>
-            <TaskItem taskInfo={task} key={task.id} />
-          </TaskItemWrapper>
-        ))}
-      </div>
+      <InboxTaskList tasks={inboxTasks} willDisappearObjectIdSet={willDisappearObjectIdSet} />
     </PageLayout>
   );
 };

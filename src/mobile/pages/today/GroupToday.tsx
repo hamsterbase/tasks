@@ -94,11 +94,13 @@ const GroupTodayList: React.FC<GroupTodayListProps> = ({
       projectedOrder = arrayMove(sortableItems, from, to);
     }
   }
-  // The FAB marker only participates in the flow while it is being dragged
-  // (it then occupies the projected drop slot, like a row placeholder).
-  const skip = new Set([DragDropElements.lastPlacement]);
-  if (activeId !== DragDropElements.create) {
-    skip.add(DragDropElements.create);
+  const skip = new Set([DragDropElements.lastPlacement, DragDropElements.create]);
+  // The lifted row leaves its card the moment it floats: its semi-transparent
+  // slot is not a card row, so the rows around it re-derive their rounding
+  // without it. Group headings stay visible in the flow while dragged, so
+  // they keep splitting clusters.
+  if (activeId && !headingIdSet.has(activeId)) {
+    skip.add(activeId);
   }
   const rounding = computeRowRounding(projectedOrder, headingIdSet, skip);
 

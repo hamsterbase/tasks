@@ -8,10 +8,11 @@ import { PopupActionItem } from '@/mobile/overlay/popupAction/PopupActionControl
 import { usePopupAction } from '@/mobile/overlay/popupAction/usePopupAction';
 import { styles } from '@/mobile/theme';
 import { ITodoService } from '@/services/todo/common/todoService';
+import { computeSectionRounding } from '@/mobile/components/dnd/projectedRounding';
 import { getAreaDragEndPositionAction } from '@/utils/dnd/area';
 import { areaCollisionDetectionStrategyFactory } from '@/utils/dnd/areaCollisionDetchtionStrawe';
 import { DragDropElements } from '@/utils/dnd/dragDropCollision';
-import { DragEndEvent } from '@dnd-kit/core';
+import { DragEndEvent, useDndContext } from '@dnd-kit/core';
 import classNames from 'classnames';
 import type { TreeID } from 'loro-crdt';
 import React, { useEffect, useState } from 'react';
@@ -43,6 +44,93 @@ const useAreaId = (): TreeID => {
     return '0@0';
   }
   return areaId;
+};
+
+interface AreaSectionsProps {
+  projects: React.ComponentProps<typeof HomeProjectItem>['projectInfo'][];
+  tasks: React.ComponentProps<typeof TaskItem>['taskInfo'][];
+  willDisappearObjectIdSet: Set<string>;
+  showProjectsSection: boolean;
+}
+
+// The card background lives on each row (see projectedRounding.ts), so this
+// has to render inside PageLayout's DndContext to follow the drag state.
+const AreaSections: React.FC<AreaSectionsProps> = ({
+  projects,
+  tasks,
+  willDisappearObjectIdSet,
+  showProjectsSection,
+}) => {
+  const { active, over } = useDndContext();
+  const activeId = active?.id as string | undefined;
+  const overId = over?.id as string | undefined;
+  const projectRounding = computeSectionRounding(
+    projects.map((project) => project.id),
+    activeId,
+    overId
+  );
+  const taskRounding = computeSectionRounding(
+    tasks.map((task) => task.id),
+    activeId,
+    overId
+  );
+  const emptyStateClassName = classNames(
+    styles.areaDetailEmptyState,
+    styles.taskItemGroupBackground,
+    styles.taskItemGroupTopRound,
+    styles.taskItemGroupBottomRound
+  );
+
+  return (
+    <div className={styles.pageContentColumn}>
+      {showProjectsSection && (
+        <>
+          <div className={classNames(styles.areaDetailSectionHeader, styles.areaDetailSectionHeaderIndent)}>
+            <span className={styles.areaDetailSectionTitle}>{localize('area.projects', 'Projects')}</span>
+          </div>
+          <div>
+            {projects.length === 0 ? (
+              <div className={emptyStateClassName}>{localize('area.noProjects', 'No projects')}</div>
+            ) : (
+              projects.map((project) => (
+                <HomeProjectItem
+                  key={project.id}
+                  projectInfo={project}
+                  hideSubtitle={true}
+                  className={classNames(styles.taskItemGroupBackground, {
+                    [styles.taskItemGroupTopRound]: projectRounding.top.has(project.id),
+                    [styles.taskItemGroupBottomRound]: projectRounding.bottom.has(project.id),
+                  })}
+                />
+              ))
+            )}
+          </div>
+          <div className={styles.areaDetailSectionSpacer} />
+        </>
+      )}
+      <div className={classNames(styles.areaDetailSectionHeader, styles.areaDetailSectionHeaderIndent)}>
+        <span className={styles.areaDetailSectionTitle}>{localize('area.tasks', 'Tasks')}</span>
+      </div>
+      <div>
+        {tasks.length === 0 ? (
+          <div className={emptyStateClassName}>{localize('area.noTasks', 'No tasks')}</div>
+        ) : (
+          tasks.map((task) => (
+            <TaskItemWrapper key={task.id} willDisappear={willDisappearObjectIdSet.has(task.id)} id={task.id}>
+              <TaskItem
+                key={task.id}
+                taskInfo={task}
+                className={classNames(styles.taskItemGroupBackground, {
+                  [styles.taskItemGroupTopRound]: taskRounding.top.has(task.id),
+                  [styles.taskItemGroupBottomRound]: taskRounding.bottom.has(task.id),
+                })}
+              />
+            </TaskItemWrapper>
+          ))
+        )}
+      </div>
+    </div>
+  );
 };
 
 export const AreaPage = () => {
@@ -216,39 +304,12 @@ export const AreaPage = () => {
         onOpen={handleOpenTagFilter}
         onClear={() => tagFilter.selectTag(TAG_FILTER_ALL)}
       />
-      <div className={styles.pageContentColumn}>
-        {(projects.length > 0 || !isTagFilterActive) && (
-          <>
-            <div className={classNames(styles.areaDetailSectionHeader, styles.areaDetailSectionHeaderIndent)}>
-              <span className={styles.areaDetailSectionTitle}>{localize('area.projects', 'Projects')}</span>
-            </div>
-            <div className={styles.areaDetailSectionCard}>
-              {projects.length === 0 ? (
-                <div className={styles.areaDetailEmptyState}>{localize('area.noProjects', 'No projects')}</div>
-              ) : (
-                projects.map((project) => (
-                  <HomeProjectItem key={project.id} projectInfo={project} hideSubtitle={true} />
-                ))
-              )}
-            </div>
-            <div className={styles.areaDetailSectionSpacer} />
-          </>
-        )}
-        <div className={classNames(styles.areaDetailSectionHeader, styles.areaDetailSectionHeaderIndent)}>
-          <span className={styles.areaDetailSectionTitle}>{localize('area.tasks', 'Tasks')}</span>
-        </div>
-        <div className={styles.areaDetailSectionCard}>
-          {tasks.length === 0 ? (
-            <div className={styles.areaDetailEmptyState}>{localize('area.noTasks', 'No tasks')}</div>
-          ) : (
-            tasks.map((task) => (
-              <TaskItemWrapper key={task.id} willDisappear={willDisappearObjectIdSet.has(task.id)} id={task.id}>
-                <TaskItem key={task.id} taskInfo={task} />
-              </TaskItemWrapper>
-            ))
-          )}
-        </div>
-      </div>
+      <AreaSections
+        projects={projects}
+        tasks={tasks}
+        willDisappearObjectIdSet={willDisappearObjectIdSet}
+        showProjectsSection={projects.length > 0 || !isTagFilterActive}
+      />
     </PageLayout>
   );
 };

@@ -62,7 +62,12 @@ export const AreaHeader: React.FC<AreaHeaderProps> = ({ areaInfo, className }) =
 
   const isExpanded = !config.includes(areaInfo.id);
   if (isDragging) {
-    return <DragItem ref={setNodeRef} attributes={attributes} listeners={listeners} style={style} />;
+    // Keep the card-gap padding so the list doesn't jump up when the header lifts.
+    return (
+      <div className={styles.taskItemGroupHeaderPadding}>
+        <DragItem ref={setNodeRef} attributes={attributes} listeners={listeners} style={style} />
+      </div>
+    );
   }
 
   return (
