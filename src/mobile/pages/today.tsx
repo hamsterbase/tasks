@@ -3,7 +3,9 @@ import { TaskDisplaySettingsIcon, TodayIcon } from '@/components/icons';
 import { getTodayItems } from '@/core/state/today/getTodayItems';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
+import { useConfig } from '@/hooks/useConfig';
 import { localize } from '@/nls';
+import { groupTodayByAreaProjectConfigKey } from '@/services/config/config';
 import { ITodoService } from '@/services/todo/common/todoService';
 import { calculateDragDropAction } from '@/utils/dnd/calculateDragDropAction';
 import { DragDropElements } from '@/utils/dnd/dragDropCollision';
@@ -22,8 +24,9 @@ import { TaskItem } from '../components/todo/TaskItem';
 import { styles } from '../theme';
 import { useTaskDisplaySettingsMobile } from '../hooks/useTaskDisplaySettings';
 import { ItemPosition } from '@/core/type';
+import { GroupToday } from './today/GroupToday';
 
-export const TodayPage = () => {
+const FlatToday = () => {
   const todoService = useService(ITodoService);
   useWatchEvent(todoService.onStateChange);
 
@@ -137,4 +140,12 @@ export const TodayPage = () => {
       </div>
     </PageLayout>
   );
+};
+
+export const TodayPage = () => {
+  const { value: groupByAreaProject } = useConfig(groupTodayByAreaProjectConfigKey());
+  if (!groupByAreaProject) {
+    return <FlatToday />;
+  }
+  return <GroupToday />;
 };

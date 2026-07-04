@@ -70,6 +70,10 @@ export const baseStyles = {
 
   taskItemGroupPaddingBottomWhenDragging: /*tw*/ 'pb-11',
 
+  todayGroupHeaderRoot: /*tw*/ 'flex items-center gap-2 px-4 pt-4 pb-2',
+  todayGroupHeaderIcon: /*tw*/ 'size-6 flex-shrink-0 flex items-center justify-center text-t3',
+  todayGroupHeaderTitle: /*tw*/ 'flex-1 text-base font-medium text-t1 truncate',
+
   taskItemRoot: /*tw*/ 'flex items-start',
   taskItemHeight: /*tw*/ 'min-h-[3.25rem] py-3.5',
   taskItemPaddingX: /*tw*/ 'px-4',

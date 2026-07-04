@@ -1,9 +1,12 @@
 import { SettingsIcon } from '@/components/icons';
 import { TimeAfterEnum } from '@/core/time/getTimeAfter';
+import { useConfig } from '@/hooks/useConfig';
 import { useGlobalTaskDisplaySettings } from '@/hooks/useGlobalTaskDisplaySettings';
 import { ListItemGroup } from '@/mobile/components/listItem/listItem';
 import { PageLayout } from '@/mobile/components/PageLayout';
 import { styles } from '@/mobile/theme';
+import { localize } from '@/nls';
+import { groupTodayByAreaProjectConfigKey } from '@/services/config/config';
 import React from 'react';
 
 export const TaskDisplaySettings = () => {
@@ -16,6 +19,10 @@ export const TaskDisplaySettings = () => {
     setCompletedTasksRange,
     settingOptions,
   } = useGlobalTaskDisplaySettings();
+
+  const { value: groupTodayByAreaProject, setValue: setGroupTodayByAreaProject } = useConfig(
+    groupTodayByAreaProjectConfigKey()
+  );
 
   return (
     <PageLayout
@@ -46,6 +53,23 @@ export const TaskDisplaySettings = () => {
                 checked: showCompletedTasks,
               },
               onClick: () => setShowCompletedTasks(!showCompletedTasks),
+            },
+          ]}
+        />
+        <ListItemGroup
+          title={localize('settings.today', 'Today')}
+          items={[
+            {
+              title: localize('settings.today.group_by_area_project', 'Group by Area / Project'),
+              description: localize(
+                'settings.today.group_by_area_project.description',
+                'Group projects by area and tasks by project on the Today page.'
+              ),
+              mode: {
+                type: 'switch',
+                checked: groupTodayByAreaProject,
+              },
+              onClick: () => setGroupTodayByAreaProject(!groupTodayByAreaProject),
             },
           ]}
         />

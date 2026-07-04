@@ -37,6 +37,12 @@ export const MobileTestIds = {
     Root: 'task-item',
     StatusBox: 'task-item-status-box',
   },
+  ProjectItem: {
+    /** Root of a mobile project row (home / today lists) */
+    Root: 'project-item',
+    /** Title element inside a mobile project row */
+    Title: 'project-item-title',
+  },
   Toast: {
     Root: 'overlay-toast',
   },

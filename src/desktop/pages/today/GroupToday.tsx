@@ -199,12 +199,9 @@ export const GroupToday = () => {
   const handleGroupDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
     if (!over) return;
-    console.log('Drag ended. Active:', active.id, 'Over:', over.id);
     const position = getTodayGroupDropPosition(event);
     if (!position) return;
-    console.log('Determined drop position:', position);
     const action = getTodayGroupDragAction(active.id as string, over.id as string, grouped, position);
-    console.log('Determined drag action:', action);
     if (action) {
       applyTodayGroupDragAction(todoService, active.id as TreeID, action);
     }
@@ -298,7 +295,13 @@ export const GroupToday = () => {
             ))}
           </SortableContext>
         </ListContainer>
-        <DragOverlayItem projectVariant="desktop" />
+        {/* The dragged row's group context is obvious from where it hovers,
+            so the parent name in the overlay would be redundant noise. */}
+        <DragOverlayItem
+          projectVariant="desktop"
+          taskProps={{ hideProjectTitle: true }}
+          projectProps={{ hideProjectTitle: true }}
+        />
       </DndContext>
     </DesktopPage>
   );

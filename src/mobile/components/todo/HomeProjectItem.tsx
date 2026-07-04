@@ -1,5 +1,6 @@
 import { ProjectInfoState } from '@/core/state/type.ts';
 import { useService } from '@/hooks/use-service';
+import { MobileTestIds } from '@/mobile/testids';
 import { useCancelEdit } from '@/hooks/useCancelEdit';
 import { useEdit } from '@/hooks/useEdit';
 import { styles } from '@/mobile/theme';
@@ -49,6 +50,7 @@ export const HomeProjectItem: React.FC<ProjectItemProps> = ({ projectInfo, hideS
     <input {...textAreaProps} className={styles.homeProjectItemEditingInput} />
   ) : (
     <TaskItemTitle
+      testId={MobileTestIds.ProjectItem.Title}
       title={projectInfo.title}
       isCanceled={projectInfo.status === 'canceled'}
       isCompleted={projectInfo.status === 'completed'}
@@ -62,6 +64,7 @@ export const HomeProjectItem: React.FC<ProjectItemProps> = ({ projectInfo, hideS
 
   return (
     <div
+      data-testid={MobileTestIds.ProjectItem.Root}
       ref={setNodeRef}
       style={style}
       {...attributes}
