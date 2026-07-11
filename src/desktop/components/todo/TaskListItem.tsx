@@ -22,7 +22,7 @@ import { IAttachmentUploadService } from '@/services/attachment/common/attachmen
 import { ITodoService } from '@/services/todo/common/todoService';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { InputFocusedContext } from 'vscf/platform/contextkey/common';
+import { InputFocusedContext } from '@hamsterbase/foundation/contextkey';
 import { ItemTagsList } from './ItemTagsList';
 
 export interface TaskListItemProps {

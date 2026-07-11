@@ -1,6 +1,6 @@
 import { IWorkbenchInstance, IWorkbenchInstanceService } from '@/services/instance/common/instanceService';
 import { useContext, useEffect, useRef } from 'react';
-import { IInstantiationService, ServiceIdentifier } from 'vscf/platform/instantiation/common';
+import { IInstantiationService, ServiceIdentifier } from '@hamsterbase/foundation/instantiation';
 import { GlobalContext } from '../components/GlobalContext/GlobalContext';
 
 export function useService<T>(id: ServiceIdentifier<T>): T {

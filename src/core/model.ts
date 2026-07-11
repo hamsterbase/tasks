@@ -1,7 +1,7 @@
 import { ItemStatusEnum, ModelKeys, ModelTypes, TaskModelListKeys } from '@/core/enum.ts';
 import { LoroDoc, LoroMap, LoroMovableList, LoroTreeNode, PeerID, TreeID, UndoManager, VersionVector } from 'loro-crdt';
 import { nanoid } from 'nanoid';
-import { Emitter } from 'vscf/base/common/event.ts';
+import { Emitter } from '@hamsterbase/foundation/event';
 import { dateAssigned, FilterCondition, filterConditions } from './list.ts';
 import { getInvalidTaskData } from './state/getInvalidTaskData.ts';
 import { createRecurringTask } from './state/createRecurringTask.ts';

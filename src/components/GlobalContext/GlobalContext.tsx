@@ -1,5 +1,5 @@
 import React from 'react';
-import { IInstantiationService } from 'vscf/platform/instantiation/common';
+import { IInstantiationService } from '@hamsterbase/foundation/instantiation';
 
 export interface GlobalContext {
   instantiationService: IInstantiationService;

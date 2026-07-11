@@ -1,4 +1,4 @@
-import { Event } from 'vscf/base/common/event';
+import { Event } from '@hamsterbase/foundation/event';
 import { TreeID } from 'loro-crdt';
 
 export interface ISelectionOption {

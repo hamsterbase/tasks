@@ -1,6 +1,6 @@
 import { localize } from '@/nls';
 import { sha256 } from '../crypto/sha256';
-import { decodeBase64 } from 'vscf/internal/base/common/buffer';
+import { decodeBase64 } from '@hamsterbase/foundation/buffer';
 
 const ErrorMessage = localize('settings.import.invalidFileFormat', 'Invalid file format');
 

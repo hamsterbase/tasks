@@ -1,4 +1,4 @@
-import { RawContextKey } from 'vscf/platform/contextkey/common';
+import { RawContextKey } from '@hamsterbase/foundation/contextkey';
 
 export const DesktopMenuFocus = new RawContextKey<boolean>('DesktopMenuFocus', false);
 export const DesktopMenuCanMoveDown = new RawContextKey<boolean>('DesktopMenuCanMoveDown', false);

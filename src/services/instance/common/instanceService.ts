@@ -1,4 +1,4 @@
-import { createDecorator, IInstantiationService } from 'vscf/platform/instantiation/common';
+import { createDecorator, IInstantiationService } from '@hamsterbase/foundation/instantiation';
 
 export interface IWorkbenchInstance {
   mount(): void;

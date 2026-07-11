@@ -1,5 +1,5 @@
 import { useLayoutEffect } from 'react';
-import { Event } from 'vscf/base/common/event';
+import { Event } from '@hamsterbase/foundation/event';
 
 export function useRegisterEvent<T>(
   event: Event<T> | null | undefined,

@@ -7,7 +7,7 @@ import SYSTEM_PROMPT from './systemPrompt.md?raw';
 import { UIToolCallInfo as ToolCallInfo } from './types';
 import { IAIChatController } from '../common/chatController';
 import { AIChatController } from './chatSession/AIChatController';
-import { IInstantiationService } from 'vscf/platform/instantiation/common';
+import { IInstantiationService } from '@hamsterbase/foundation/instantiation';
 
 export class WorkbenchAIService implements IAIService {
   readonly _serviceBrand: undefined;

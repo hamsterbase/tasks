@@ -30,7 +30,7 @@ import { ITodoService } from '@/services/todo/common/todoService';
 import { DragEndEvent } from '@dnd-kit/core';
 import { TreeID } from 'loro-crdt';
 import React, { useRef } from 'react';
-import { IInstantiationService } from 'vscf/platform/instantiation/common';
+import { IInstantiationService } from '@hamsterbase/foundation/instantiation';
 import { useService } from './use-service';
 import { useWatchEvent } from './use-watch-event';
 import { flushSync } from 'react-dom';

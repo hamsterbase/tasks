@@ -1,5 +1,5 @@
 import { useService } from '@/hooks/use-service';
-import { IInstantiationService } from 'vscf/platform/instantiation/common';
+import { IInstantiationService } from '@hamsterbase/foundation/instantiation';
 import { TreeID } from 'loro-crdt';
 import { TreeSelectController } from './TreeSelectController';
 

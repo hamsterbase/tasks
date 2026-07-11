@@ -1,6 +1,6 @@
 import { localize } from '@/nls';
 import { IDatabaseStorage } from '@/services/database/common/database';
-import { generateUuid } from 'vscf/base/common/uuid';
+import { generateUuid } from '@hamsterbase/foundation/uuid';
 
 export class IndexedDBStorage<T extends { id: string }> implements IDatabaseStorage {
   public get id() {

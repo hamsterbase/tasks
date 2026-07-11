@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ContextKeyValue, IContextKeyService, RawContextKey } from 'vscf/platform/contextkey/common';
+import { ContextKeyValue, IContextKeyService, RawContextKey } from '@hamsterbase/foundation/contextkey';
 import { useService } from './use-service';
 
 export function useContextKeyValue<T extends ContextKeyValue>(rawKey: RawContextKey<T>): T {

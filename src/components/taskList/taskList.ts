@@ -1,5 +1,5 @@
 import { TreeID } from 'loro-crdt';
-import { Emitter } from 'vscf/base/common/event';
+import { Emitter } from '@hamsterbase/foundation/event';
 import { IEditItemState, ISelectionOption, ITaskList, ListOperation } from './type.ts';
 
 export class TaskList implements ITaskList {

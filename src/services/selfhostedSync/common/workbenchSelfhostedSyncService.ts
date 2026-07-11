@@ -4,9 +4,9 @@ import { IConfigService } from '@/services/config/configService';
 import { IDatabaseStorage } from '@/services/database/common/database';
 import { WorkbenchTodoService } from '@/services/todo/browser/workbenchTodoService';
 import { ITodoService } from '@/services/todo/common/todoService';
-import { decodeBase64, encodeBase64, VSBuffer } from 'vscf/base/common/buffer';
-import { Emitter } from 'vscf/base/common/event';
-import { generateUuid } from 'vscf/base/common/uuid';
+import { ByteBuffer, decodeBase64, encodeBase64 } from '@hamsterbase/foundation/buffer';
+import { Emitter } from '@hamsterbase/foundation/event';
+import { generateUuid } from '@hamsterbase/foundation/uuid';
 import { SelfhostedServerStorage } from './SelfhostedServerStorage';
 import { ISelfhostedSyncServerConfig, ISelfhostedSyncService } from './selfhostedSyncService.ts';
 
@@ -92,13 +92,13 @@ export class WorkbenchSelfhostedSyncService implements ISelfhostedSyncService {
       if (previousKeys.length > 0) {
         const data = (await Promise.all(previousKeys.map((p) => storage.read(p)))).filter((item) => item);
         await taskModel.import(data.map((item) => decodeBase64(item).buffer));
-        const newModel = await storage.save(encodeBase64(VSBuffer.wrap(taskModel.export())));
+        const newModel = await storage.save(encodeBase64(ByteBuffer.wrap(taskModel.export())));
         for (const p of previousKeys) {
           if (newModel === p) continue;
           await storage.delete(p);
         }
       } else {
-        await storage.save(encodeBase64(VSBuffer.wrap(taskModel.export())));
+        await storage.save(encodeBase64(ByteBuffer.wrap(taskModel.export())));
       }
       this.todoService.import([taskModel.export()], 'local');
     } finally {

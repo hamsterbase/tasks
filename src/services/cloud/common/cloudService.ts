@@ -8,9 +8,9 @@ import { chinaServerConfigKey } from '@/services/config/config';
 import { IConfigService } from '@/services/config/configService.ts';
 import { IDatabaseService } from '@/services/database/common/database';
 import { ITodoService } from '@/services/todo/common/todoService';
-import { Emitter, Event } from 'vscf/base/common/event';
-import { IDisposable } from 'vscf/base/common/lifecycle';
-import { createDecorator } from 'vscf/platform/instantiation/common';
+import { Emitter, Event } from '@hamsterbase/foundation/event';
+import { IDisposable } from '@hamsterbase/foundation/lifecycle';
+import { createDecorator } from '@hamsterbase/foundation/instantiation';
 import { syncDatabaseLogic } from './syncLogic';
 import { IWebLoggerService } from '@/services/weblogger/common/webloggerService';
 

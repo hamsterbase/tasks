@@ -1,2 +1,1 @@
-// @ts-nocheck
-export { ContextKeyService } from "vs/platform/contextkey/browser/contextKeyService";
+export { ContextKeyService } from '@hamsterbase/foundation/contextkey';

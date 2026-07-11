@@ -1,9 +1,9 @@
 import { TimeAfterEnum } from '@/core/time/getTimeAfter';
 import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
 import { IWorkbenchOverlayService, OverlayInitOptions } from '@/services/overlay/common/WorkbenchOverlayService';
-import { Emitter } from 'vscf/base/common/event';
-import { IDisposable } from 'vscf/base/common/lifecycle';
-import { IInstantiationService } from 'vscf/platform/instantiation/common';
+import { Emitter } from '@hamsterbase/foundation/event';
+import { IDisposable } from '@hamsterbase/foundation/lifecycle';
+import { IInstantiationService } from '@hamsterbase/foundation/instantiation';
 interface TaskDisplaySettings {
   showFutureTasks: boolean;
   showCompletedTasks: boolean;

@@ -22,8 +22,8 @@ import {
 } from '@/core/type.ts';
 import { IDatabaseStorage } from '@/services/database/common/database';
 import type { TreeID } from 'loro-crdt';
-import { Event } from 'vs/base/common/event.ts';
-import { createDecorator } from 'vs/platform/instantiation/common/instantiation.ts';
+import { Event } from '@hamsterbase/foundation/event';
+import { createDecorator } from '@hamsterbase/foundation/instantiation';
 
 /**
  * The view-schema version this build understands. Bumped whenever the rule

@@ -1,6 +1,6 @@
 import { IWorkbenchInstanceService } from '@/services/instance/common/instanceService';
-import { KeyCode } from 'vscf/internal/base/common/keyCodes';
-import { KeybindingsRegistry, KeybindingWeight } from 'vscf/platform/keybinding/common';
+import { KeyCode } from '@hamsterbase/foundation/keybinding';
+import { KeybindingsRegistry, KeybindingWeight } from '@hamsterbase/foundation/keybinding';
 import { InboxTaskInputFocus } from './contextKey';
 import { INBOX_TASK_INPUT_CONTROLLER_KEY, InboxTaskInputController } from './InboxTaskInputController';
 

@@ -1,7 +1,7 @@
-import { CommandsRegistry, ICommandEvent, ICommandService } from 'vscf/platform/commands/common';
+import { CommandsRegistry, ICommandEvent, ICommandService } from '@hamsterbase/foundation/commands';
 
-import { IInstantiationService } from 'vscf/platform/instantiation/common';
-import { Emitter, Event } from 'vscf/base/common/event';
+import { IInstantiationService } from '@hamsterbase/foundation/instantiation';
+import { Emitter, Event } from '@hamsterbase/foundation/event';
 
 export class StandaloneCommandService implements ICommandService {
   readonly _serviceBrand: undefined;

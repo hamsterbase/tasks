@@ -1,7 +1,7 @@
 import { ITaskList } from '@/components/taskList/type.ts';
-import { Emitter, Event } from 'vscf/base/common/event';
-import { IContextKey, IContextKeyService, InputFocusedContextKey } from 'vscf/platform/contextkey/common';
-import { createDecorator } from 'vscf/platform/instantiation/common';
+import { Emitter, Event } from '@hamsterbase/foundation/event';
+import { IContextKey, IContextKeyService, InputFocusedContextKey } from '@hamsterbase/foundation/contextkey';
+import { createDecorator } from '@hamsterbase/foundation/instantiation';
 import './commonds';
 import {
   MainListCursorHasNextItem,

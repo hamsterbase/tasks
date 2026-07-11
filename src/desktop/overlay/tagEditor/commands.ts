@@ -1,8 +1,8 @@
 import { IWorkbenchOverlayService } from '@/services/overlay/common/WorkbenchOverlayService';
 import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
-import { KeyCode } from 'vscf/internal/base/common/keyCodes';
-import { ContextKeyExpr } from 'vscf/platform/contextkey/common';
-import { KeybindingsRegistry, KeybindingWeight } from 'vscf/platform/keybinding/common';
+import { KeyCode } from '@hamsterbase/foundation/keybinding';
+import { ContextKeyExpr } from '@hamsterbase/foundation/contextkey';
+import { KeybindingsRegistry, KeybindingWeight } from '@hamsterbase/foundation/keybinding';
 import { TagEditorOverlayController } from './TagEditorOverlayController';
 import {
   TagEditorFocus,

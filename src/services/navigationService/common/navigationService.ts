@@ -1,7 +1,7 @@
-import { Emitter, Event } from 'vscf/base/common/event';
-import { createDecorator } from 'vscf/platform/instantiation/common';
+import { Emitter, Event } from '@hamsterbase/foundation/event';
+import { createDecorator } from '@hamsterbase/foundation/instantiation';
 import { App as CapacitorApp } from '@capacitor/app';
-import { IDisposable } from 'vscf/base/common/lifecycle';
+import { IDisposable } from '@hamsterbase/foundation/lifecycle';
 import { registerPlugin } from '@capacitor/core';
 import { ISwitchService } from '@/services/switchService/common/switchService';
 

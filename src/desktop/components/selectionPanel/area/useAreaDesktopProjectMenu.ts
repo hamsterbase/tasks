@@ -4,7 +4,7 @@ import { useService } from '@/hooks/use-service.ts';
 import { localize } from '@/nls.ts';
 import { ITodoService } from '@/services/todo/common/todoService.ts';
 import type { TreeID } from 'loro-crdt';
-import { IInstantiationService } from 'vscf/platform/instantiation/common.ts';
+import { IInstantiationService } from '@hamsterbase/foundation/instantiation';
 
 export const useAreaDesktopProjectMenu = (areaId: TreeID) => {
   const instantiationService = useService(IInstantiationService);

@@ -14,7 +14,7 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import classNames from 'classnames';
 import React, { useRef } from 'react';
-import { InputFocusedContext } from 'vscf/platform/contextkey/common';
+import { InputFocusedContext } from '@hamsterbase/foundation/contextkey';
 import { localize } from '@/nls';
 
 export interface DesktopHeadingListItemProps {

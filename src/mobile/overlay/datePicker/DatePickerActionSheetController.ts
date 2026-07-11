@@ -2,9 +2,9 @@ import { getUTCTimeStampFromDateStr } from '@/core/time/getUTCTimeStampFromDateS
 import { getCalendarLeadingDaysCount, type CalendarWeekStartDay } from '@/core/time/calendarWeekStart';
 import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
 import { startOfMonth, endOfMonth, differenceInMonths, addMonths, format } from 'date-fns';
-import { Emitter } from 'vscf/base/common/event';
-import { Disposable } from 'vscf/base/common/lifecycle';
-import { IInstantiationService } from 'vscf/platform/instantiation/common';
+import { Emitter } from '@hamsterbase/foundation/event';
+import { Disposable } from '@hamsterbase/foundation/lifecycle';
+import { IInstantiationService } from '@hamsterbase/foundation/instantiation';
 import { IWorkbenchOverlayService, OverlayInitOptions } from '../../../services/overlay/common/WorkbenchOverlayService';
 
 interface CalendarDay {

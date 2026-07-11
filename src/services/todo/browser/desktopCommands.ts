@@ -1,6 +1,6 @@
-import { KeyCode, KeyMod } from 'vscf/internal/base/common/keyCodes';
-import { ContextKeyExpr, InputFocusedContextKey } from 'vscf/platform/contextkey/common';
-import { KeybindingsRegistry, KeybindingWeight } from 'vscf/platform/keybinding/common';
+import { KeyCode, KeyMod } from '@hamsterbase/foundation/keybinding';
+import { ContextKeyExpr, InputFocusedContextKey } from '@hamsterbase/foundation/contextkey';
+import { KeybindingsRegistry, KeybindingWeight } from '@hamsterbase/foundation/keybinding';
 import { ITodoService } from '../common/todoService';
 
 // Main List Commands

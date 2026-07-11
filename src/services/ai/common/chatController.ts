@@ -1,5 +1,5 @@
-import { createDecorator } from 'vs/platform/instantiation/common/instantiation.ts';
-import { Event } from 'vscf/base/common/event';
+import { createDecorator } from '@hamsterbase/foundation/instantiation';
+import { Event } from '@hamsterbase/foundation/event';
 import { ChatSession, ChatMessageItem } from '../browser/types';
 
 export interface IAIChatController {

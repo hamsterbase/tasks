@@ -36,9 +36,9 @@ import {
 } from '@/services/todo/common/todoService.ts';
 import type { TreeID } from 'loro-crdt';
 import { debounceTime, Subject } from 'rxjs';
-import { decodeBase64, encodeBase64, VSBuffer } from 'vscf/base/common/buffer';
-import { Emitter } from 'vscf/base/common/event.ts';
-import { DisposableStore } from 'vscf/base/common/lifecycle';
+import { ByteBuffer, decodeBase64, encodeBase64 } from '@hamsterbase/foundation/buffer';
+import { Emitter } from '@hamsterbase/foundation/event';
+import { DisposableStore } from '@hamsterbase/foundation/lifecycle';
 
 interface DateModel {
   taskModel: TaskModel;
@@ -94,12 +94,12 @@ export class WorkbenchTodoService implements ITodoService {
       if (previousKeys.length > 0) {
         const data = (await Promise.all(previousKeys.map((p) => storage.read(p)))).filter((item) => item);
         await taskModel.import(data.map((item) => decodeBase64(item).buffer));
-        await storage.save(encodeBase64(VSBuffer.wrap(taskModel.export())));
+        await storage.save(encodeBase64(ByteBuffer.wrap(taskModel.export())));
         for (const p of previousKeys) {
           await storage.delete(p);
         }
       } else {
-        await storage.save(encodeBase64(VSBuffer.wrap(taskModel.export())));
+        await storage.save(encodeBase64(ByteBuffer.wrap(taskModel.export())));
       }
     }
     const disposeStore = new DisposableStore();

@@ -1,6 +1,6 @@
-import { KeyCode } from 'vscf/internal/base/common/keyCodes';
-import { InputFocusedContext } from 'vscf/platform/contextkey/common';
-import { KeybindingsRegistry, KeybindingWeight } from 'vscf/platform/keybinding/common';
+import { KeyCode } from '@hamsterbase/foundation/keybinding';
+import { InputFocusedContext } from '@hamsterbase/foundation/contextkey';
+import { KeybindingsRegistry, KeybindingWeight } from '@hamsterbase/foundation/keybinding';
 
 KeybindingsRegistry.registerCommandAndKeybindingRule({
   id: 'BlurInput',

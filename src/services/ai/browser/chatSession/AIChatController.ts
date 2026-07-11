@@ -1,5 +1,5 @@
-import { Emitter } from 'vscf/base/common/event';
-import { IInstantiationService } from 'vscf/platform/instantiation/common';
+import { Emitter } from '@hamsterbase/foundation/event';
+import { IInstantiationService } from '@hamsterbase/foundation/instantiation';
 import { IAIService, ChatMessage, AIStreamEvent } from '../../common/aiService';
 import { isValidToolName, getToolConfig, ToolExecutionResult } from '../tools/tools';
 import {

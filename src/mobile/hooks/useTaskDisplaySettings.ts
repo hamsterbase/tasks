@@ -8,7 +8,7 @@ import {
   showCompletedTasksConfigKey,
   showFutureTasksConfigKey,
 } from '@/services/config/config';
-import { IInstantiationService } from 'vscf/platform/instantiation/common';
+import { IInstantiationService } from '@hamsterbase/foundation/instantiation';
 
 interface useTaskDisplaySettingsOption {
   hideShowFutureTasks?: boolean;

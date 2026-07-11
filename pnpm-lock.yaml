@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@hamsterbase/foundation':
+        specifier: 0.1.0
+        version: 0.1.0
     devDependencies:
       '@aws-sdk/client-s3':
         specifier: ^3.713.0
@@ -824,6 +828,10 @@ packages:
 
   '@gar/promisify@1.1.3':
     resolution: {integrity: sha512-k2Ty1JcVojjJFwrg/ThKi2ujJ7XNLYaFGNB/bWT9wGR+oSMJHMa5w+CUq6p/pVrKeNNgA7pCqEcjSnHVoqJQFw==}
+
+  '@hamsterbase/foundation@0.1.0':
+    resolution: {integrity: sha512-eN1t0H4EwplipI5vI2LP4BAA7kCT2nj37EGHBm+OzH1B5IYeXW2c+hPLlr8xYEDvJ5UyUhabql1d4Et9jlSB0Q==}
+    engines: {node: '>=20'}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -5903,6 +5911,8 @@ snapshots:
       levn: 0.4.1
 
   '@gar/promisify@1.1.3': {}
+
+  '@hamsterbase/foundation@0.1.0': {}
 
   '@humanfs/core@0.19.1': {}
 

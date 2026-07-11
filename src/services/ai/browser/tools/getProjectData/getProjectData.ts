@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import OpenAI from 'openai';
-import { IInstantiationService } from 'vscf/platform/instantiation/common';
+import { IInstantiationService } from '@hamsterbase/foundation/instantiation';
 import { ITodoService } from '@/services/todo/common/todoService';
 import { localize } from '@/nls';
 import { toolMetaSchema } from '../toolMeta';

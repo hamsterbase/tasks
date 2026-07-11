@@ -38,11 +38,11 @@ import { IWebLoggerService } from '@/services/weblogger/common/webloggerService'
 import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, HashRouter } from 'react-router';
-import { ICommandService } from 'vscf/platform/commands/common';
-import { ContextKeyService } from 'vscf/platform/contextkey/browser';
-import { IContextKeyService } from 'vscf/platform/contextkey/common';
-import { InstantiationService, ServiceCollection, SyncDescriptor } from 'vscf/platform/instantiation/common';
-import { IKeybindingService } from 'vscf/platform/keybinding/common';
+import { ICommandService } from '@hamsterbase/foundation/commands';
+import { ContextKeyService } from '@hamsterbase/foundation/contextkey';
+import { IContextKeyService } from '@hamsterbase/foundation/contextkey';
+import { InstantiationService, ServiceCollection, SyncDescriptor } from '@hamsterbase/foundation/instantiation';
+import { IKeybindingService } from '@hamsterbase/foundation/keybinding';
 import { App } from './app';
 
 export async function startDesktop() {

@@ -24,7 +24,7 @@ import classNames from 'classnames';
 import React from 'react';
 import { flushSync } from 'react-dom';
 import { Link, useNavigate } from 'react-router';
-import { IInstantiationService } from 'vscf/platform/instantiation/common';
+import { IInstantiationService } from '@hamsterbase/foundation/instantiation';
 import { desktopStyles } from '../../theme/main';
 import { DragOverlayItem } from '../drag/DragOverlayItem';
 import { CommandPaletteController } from '../../overlay/commandPalette/CommandPaletteController';

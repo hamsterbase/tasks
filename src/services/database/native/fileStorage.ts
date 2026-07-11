@@ -1,5 +1,5 @@
 import { localize } from '@/nls';
-import { generateUuid } from 'vscf/base/common/uuid';
+import { generateUuid } from '@hamsterbase/foundation/uuid';
 import { Directory, Encoding, Filesystem } from '@capacitor/filesystem';
 import { IDatabaseMeta, IDatabaseStorage } from '../common/database';
 

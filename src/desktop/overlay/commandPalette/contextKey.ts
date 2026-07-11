@@ -1,4 +1,4 @@
-import { RawContextKey } from 'vscf/platform/contextkey/common';
+import { RawContextKey } from '@hamsterbase/foundation/contextkey';
 
 export const CommandPaletteFocus = new RawContextKey<boolean>('commandPaletteFocus', false);
 export const CommandPaletteHasResults = new RawContextKey<boolean>('commandPaletteHasResults', false);

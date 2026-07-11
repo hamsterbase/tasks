@@ -1,4 +1,4 @@
-import { RawContextKey } from 'vscf/platform/contextkey/common';
+import { RawContextKey } from '@hamsterbase/foundation/contextkey';
 
 export const MainListFocus = new RawContextKey<boolean>('HasListFocus', false);
 export const MainListCursorHasNextItem = new RawContextKey<boolean>('MainListCursorHasNextItem', false);

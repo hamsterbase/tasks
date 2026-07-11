@@ -9,7 +9,7 @@ import {
   showCompletedTasksConfigKey,
   showFutureTasksConfigKey,
 } from '@/services/config/config.ts';
-import { IInstantiationService } from 'vscf/platform/instantiation/common.ts';
+import { IInstantiationService } from '@hamsterbase/foundation/instantiation';
 
 interface UseDesktopTaskDisplaySettingsOption {
   hideShowFutureTasks?: boolean;

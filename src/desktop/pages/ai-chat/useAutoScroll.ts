@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef } from 'react';
-import { Event } from 'vscf/base/common/event';
+import { Event } from '@hamsterbase/foundation/event';
 
 interface UseAutoScrollOptions {
   /** 判断是否在底部附近的阈值，默认 100px */

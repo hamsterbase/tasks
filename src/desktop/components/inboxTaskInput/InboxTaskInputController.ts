@@ -1,6 +1,6 @@
 import { IWorkbenchInstance } from '@/services/instance/common/instanceService';
-import { Emitter, Event } from 'vscf/base/common/event';
-import { IContextKey, IContextKeyService } from 'vscf/platform/contextkey/common';
+import { Emitter, Event } from '@hamsterbase/foundation/event';
+import { IContextKey, IContextKeyService } from '@hamsterbase/foundation/contextkey';
 import { InboxTaskInputFocus } from './contextKey';
 import { ITodoService } from '@/services/todo/common/todoService';
 

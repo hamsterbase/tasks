@@ -1,7 +1,7 @@
-import { Emitter } from 'vscf/base/common/event';
-import { IDisposable } from 'vscf/internal/base/common/lifecycle';
+import { Emitter } from '@hamsterbase/foundation/event';
+import { IDisposable } from '@hamsterbase/foundation/lifecycle';
 import { IWorkbenchOverlayService, OverlayInitOptions } from '../../../services/overlay/common/WorkbenchOverlayService';
-import { IInstantiationService } from 'vscf/platform/instantiation/common';
+import { IInstantiationService } from '@hamsterbase/foundation/instantiation';
 import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
 
 export type MessageType = 'success' | 'error' | 'info';

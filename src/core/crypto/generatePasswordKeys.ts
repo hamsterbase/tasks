@@ -1,4 +1,4 @@
-import { generateUuid } from 'vscf/base/common/uuid';
+import { generateUuid } from '@hamsterbase/foundation/uuid';
 import { sha256 } from './sha256';
 
 export interface PasswordKeys {

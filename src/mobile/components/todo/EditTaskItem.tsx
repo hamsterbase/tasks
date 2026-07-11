@@ -43,7 +43,7 @@ import TextArea from 'rc-textarea';
 import React, { useRef } from 'react';
 import { flushSync } from 'react-dom';
 import { useLocation } from 'react-router';
-import { IInstantiationService } from 'vscf/platform/instantiation/common';
+import { IInstantiationService } from '@hamsterbase/foundation/instantiation';
 import { OverlayItem } from '../dnd/DragOverlayItem';
 import { AttrList, AttrRowItem } from '../attr/AttrList';
 import { AttrContainer } from '../attr/AttrContainer';

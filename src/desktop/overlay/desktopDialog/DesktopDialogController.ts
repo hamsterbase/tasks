@@ -1,8 +1,8 @@
 import { DialogAction, DialogActionValue, DialogButtonAction } from '@/base/common/componentsType/dialog';
 import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
-import { Emitter } from 'vscf/base/common/event';
-import { IDisposable } from 'vscf/internal/base/common/lifecycle';
-import { IInstantiationService } from 'vscf/platform/instantiation/common';
+import { Emitter } from '@hamsterbase/foundation/event';
+import { IDisposable } from '@hamsterbase/foundation/lifecycle';
+import { IInstantiationService } from '@hamsterbase/foundation/instantiation';
 import { IWorkbenchOverlayService, OverlayInitOptions } from '../../../services/overlay/common/WorkbenchOverlayService';
 
 export interface DialogOptions {

@@ -1,12 +1,10 @@
-import { ILogService } from 'vscf/internal/platform/log/common/log';
-import type { INotificationService } from 'vscf/internal/platform/notification/common/notification';
-import * as dom from 'vscf/base/browser/dom';
-import { IKeyboardEvent, StandardKeyboardEvent } from 'vscf/base/browser/keyboardEvent';
-import { KeyCodeChord, Keybinding, ResolvedKeybinding, decodeKeybinding } from 'vscf/base/common/keybindings';
-import { Disposable, DisposableStore, IDisposable, combinedDisposable, toDisposable } from 'vscf/base/common/lifecycle';
-import { OS } from 'vscf/base/common/platform';
-import { CommandsRegistry, ICommandHandler, ICommandService } from 'vscf/platform/commands/common';
-import { ContextKeyExpression, IContextKeyService } from 'vscf/platform/contextkey/common';
+import * as dom from '@hamsterbase/foundation/dom';
+import { IKeyboardEvent, StandardKeyboardEvent } from '@hamsterbase/foundation/keybinding';
+import { KeyCodeChord, Keybinding, ResolvedKeybinding, decodeKeybinding } from '@hamsterbase/foundation/keybinding';
+import { Disposable, DisposableStore, IDisposable, combinedDisposable, toDisposable } from '@hamsterbase/foundation/lifecycle';
+import { OS } from '@hamsterbase/foundation/platform';
+import { CommandsRegistry, ICommandHandler, ICommandService } from '@hamsterbase/foundation/commands';
+import { ContextKeyExpression, IContextKeyService } from '@hamsterbase/foundation/contextkey';
 import {
   AbstractKeybindingService,
   IKeybindingItem,
@@ -15,7 +13,7 @@ import {
   KeybindingsSchemaContribution,
   ResolvedKeybindingItem,
   USLayoutResolvedKeybinding,
-} from 'vscf/platform/keybinding/common';
+} from '@hamsterbase/foundation/keybinding';
 
 export interface IKeybindingRule {
   keybinding: number;
@@ -44,14 +42,7 @@ export class StandaloneKeybindingService extends AbstractKeybindingService {
     @IContextKeyService readonly contextKeyService: IContextKeyService,
     @ICommandService readonly commandService: ICommandService
   ) {
-    super(
-      contextKeyService,
-      commandService,
-      {} as unknown as INotificationService,
-      {
-        trace() {},
-      } as unknown as ILogService
-    );
+    super(contextKeyService, commandService, () => Disposable.None, () => {});
 
     this._cachedResolver = null;
     this._dynamicKeybindings = [];

@@ -2,7 +2,7 @@ import { ChevronDownIcon } from '@/components/icons';
 import { desktopStyles } from '@/desktop/theme/main';
 import { DesktopMenuController } from '@/desktop/overlay/desktopMenu/DesktopMenuController';
 import { useService } from '@/hooks/use-service';
-import { IInstantiationService } from 'vscf/platform/instantiation/common';
+import { IInstantiationService } from '@hamsterbase/foundation/instantiation';
 import React, { useRef } from 'react';
 
 export interface SelectOption {

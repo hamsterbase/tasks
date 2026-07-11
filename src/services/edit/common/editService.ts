@@ -1,5 +1,5 @@
-import { createDecorator } from 'vscf/platform/instantiation/common';
-import { Emitter, Event } from 'vscf/base/common/event';
+import { createDecorator } from '@hamsterbase/foundation/instantiation';
+import { Emitter, Event } from '@hamsterbase/foundation/event';
 
 export interface IEditEvent {
   inputKey: string;

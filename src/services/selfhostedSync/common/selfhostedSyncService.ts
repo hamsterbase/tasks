@@ -1,5 +1,5 @@
-import { Event } from 'vscf/base/common/event';
-import { createDecorator } from 'vscf/platform/instantiation/common';
+import { Event } from '@hamsterbase/foundation/event';
+import { createDecorator } from '@hamsterbase/foundation/instantiation';
 
 export type ISelfhostedSyncServerConfig = {
   type: 'selfhosted';

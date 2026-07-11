@@ -13,7 +13,7 @@ import { localize } from '@/nls';
 import { ITodoService, VIEW_SCHEMA_VERSION } from '@/services/todo/common/todoService';
 import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router';
-import { IInstantiationService } from 'vscf/platform/instantiation/common';
+import { IInstantiationService } from '@hamsterbase/foundation/instantiation';
 
 interface ViewEditPanelProps {
   viewUid: string;

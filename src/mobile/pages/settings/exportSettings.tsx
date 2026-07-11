@@ -7,7 +7,7 @@ import { PageLayout } from '@/mobile/components/PageLayout.tsx';
 import { useToast } from '@/mobile/overlay/toast/useToast';
 import { localize } from '@/nls.ts';
 import { ITodoService } from '@/services/todo/common/todoService';
-import { generateUuid } from 'vscf/base/common/uuid';
+import { generateUuid } from '@hamsterbase/foundation/uuid';
 import { Directory, Encoding, Filesystem } from '@capacitor/filesystem';
 import { Share } from '@capacitor/share';
 import React from 'react';

@@ -8,7 +8,7 @@ import { TestIds } from '@/testIds';
 import classNames from 'classnames';
 import TextArea, { TextAreaRef } from 'rc-textarea';
 import React, { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
-import { IContextKeyService } from 'vscf/platform/contextkey/common';
+import { IContextKeyService } from '@hamsterbase/foundation/contextkey';
 import { EntityHeaderDetailFocus, EntityHeaderDisableNewLine, EntityHeaderPageFocus } from './entityHeader.contextKey';
 
 const ICON_STROKE_WIDTH = 1.5;

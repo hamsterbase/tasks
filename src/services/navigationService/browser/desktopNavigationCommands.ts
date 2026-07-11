@@ -1,5 +1,5 @@
-import { KeyCode, KeyMod } from 'vscf/internal/base/common/keyCodes';
-import { KeybindingsRegistry, KeybindingWeight } from 'vscf/platform/keybinding/common';
+import { KeyCode, KeyMod } from '@hamsterbase/foundation/keybinding';
+import { KeybindingsRegistry, KeybindingWeight } from '@hamsterbase/foundation/keybinding';
 import { INavigationService } from '../common/navigationService';
 
 KeybindingsRegistry.registerCommandAndKeybindingRule({

@@ -1,7 +1,7 @@
 import { IListService } from '@/services/list/common/listService';
-import { KeyCode } from 'vscf/internal/base/common/keyCodes';
-import { ContextKeyExpr, InputFocusedContext } from 'vscf/platform/contextkey/common';
-import { KeybindingsRegistry, KeybindingWeight } from 'vscf/platform/keybinding/common';
+import { KeyCode } from '@hamsterbase/foundation/keybinding';
+import { ContextKeyExpr, InputFocusedContext } from '@hamsterbase/foundation/contextkey';
+import { KeybindingsRegistry, KeybindingWeight } from '@hamsterbase/foundation/keybinding';
 import {
   MainListCursorHasNextItem,
   MainListCursorHasPreviousItem,

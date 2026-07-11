@@ -19,7 +19,7 @@ import { IWebLoggerService } from '@/services/weblogger/common/webloggerService.
 import { Directory } from '@capacitor/filesystem';
 import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { InstantiationService, ServiceCollection, SyncDescriptor } from 'vscf/platform/instantiation/common.ts';
+import { InstantiationService, ServiceCollection, SyncDescriptor } from '@hamsterbase/foundation/instantiation';
 import { GlobalContext } from '../components/GlobalContext/GlobalContext.tsx';
 import {
   IWorkbenchOverlayService,

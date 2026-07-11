@@ -1,5 +1,5 @@
 import { useState, useCallback, useRef } from 'react';
-import { generateUuid } from 'vscf/base/common/uuid';
+import { generateUuid } from '@hamsterbase/foundation/uuid';
 import { CreateTaskSchema, ItemStatus } from '@/core/type.ts';
 import { useService } from './use-service';
 import { ITodoService } from '@/services/todo/common/todoService';

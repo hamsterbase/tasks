@@ -1,4 +1,4 @@
-import { RawContextKey } from 'vscf/platform/contextkey/common';
+import { RawContextKey } from '@hamsterbase/foundation/contextkey';
 
 export const EntityHeaderPageFocus = new RawContextKey<boolean>('entityHeaderPageFocus', false);
 export const EntityHeaderDetailFocus = new RawContextKey<boolean>('entityHeaderDetailFocus', false);

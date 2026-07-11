@@ -1,9 +1,9 @@
 import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
 import { IWorkbenchOverlayService } from '@/services/overlay/common/WorkbenchOverlayService';
-import { KeyCode, KeyMod } from 'vscf/internal/base/common/keyCodes';
-import { ContextKeyExpr } from 'vscf/platform/contextkey/common';
-import { KeybindingsRegistry, KeybindingWeight } from 'vscf/platform/keybinding/common';
-import { IInstantiationService } from 'vscf/platform/instantiation/common';
+import { KeyCode, KeyMod } from '@hamsterbase/foundation/keybinding';
+import { ContextKeyExpr } from '@hamsterbase/foundation/contextkey';
+import { KeybindingsRegistry, KeybindingWeight } from '@hamsterbase/foundation/keybinding';
+import { IInstantiationService } from '@hamsterbase/foundation/instantiation';
 import { CommandPaletteController } from './CommandPaletteController';
 import { CommandPaletteFocus, CommandPaletteHasResults, CommandPaletteHasSelection } from './contextKey';
 

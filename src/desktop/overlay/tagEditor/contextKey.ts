@@ -1,4 +1,4 @@
-import { RawContextKey } from 'vscf/platform/contextkey/common';
+import { RawContextKey } from '@hamsterbase/foundation/contextkey';
 
 export const TagEditorFocus = new RawContextKey<boolean>('tagEditorFocus', false);
 export const TagEditorHasSearchText = new RawContextKey<boolean>('tagEditorHasSearchText', false);

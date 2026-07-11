@@ -7,8 +7,8 @@ import { ITodoService } from '@/services/todo/common/todoService.ts';
 import { TestIds } from '@/testIds.ts';
 import type { TreeID } from 'loro-crdt';
 import { useNavigate } from 'react-router';
-import { ICommandService } from 'vscf/platform/commands/common';
-import { IInstantiationService } from 'vscf/platform/instantiation/common.ts';
+import { ICommandService } from '@hamsterbase/foundation/commands';
+import { IInstantiationService } from '@hamsterbase/foundation/instantiation';
 
 export const useDesktopProjectMenu = (taskId: TreeID) => {
   const instantiationService = useService(IInstantiationService);

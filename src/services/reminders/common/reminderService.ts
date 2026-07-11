@@ -1,4 +1,4 @@
-import { createDecorator } from 'vscf/platform/instantiation/common';
+import { createDecorator } from '@hamsterbase/foundation/instantiation';
 
 export interface IReminderService {
   readonly _serviceBrand: undefined;

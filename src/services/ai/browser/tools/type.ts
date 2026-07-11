@@ -1,5 +1,5 @@
 import OpenAI from 'openai';
-import { IInstantiationService } from 'vscf/platform/instantiation/common';
+import { IInstantiationService } from '@hamsterbase/foundation/instantiation';
 
 import { ToolExecutionResultInfo } from '../types';
 

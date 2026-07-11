@@ -5,7 +5,7 @@ import { TaskTokenItem } from '@/packages/cloud/server/tasks';
 import { decryptData } from '@/core/crypto/encryptData';
 import { IDatabaseMeta } from '@/services/database/common/database';
 import { ITodoService } from '@/services/todo/common/todoService.ts';
-import { decodeBase64, encodeBase64, VSBuffer } from 'vscf/base/common/buffer';
+import { ByteBuffer, decodeBase64, encodeBase64 } from '@hamsterbase/foundation/buffer';
 
 export interface SyncDatabaseResult {
   inboxFailed: boolean;
@@ -58,10 +58,10 @@ export async function syncDatabaseLogic(
     }
   }
   const patch = todoService.exportPatch(res.baseVersion ? JSON.parse(res.baseVersion) : {}, database.id);
-  const encodedPatch = encodeBase64(VSBuffer.wrap(patch));
+  const encodedPatch = encodeBase64(ByteBuffer.wrap(patch));
   if (encodedPatch.length / 1024 > 10) {
     const snapshot = todoService.exportPatch({}, database.id);
-    const encodedSnapshot = encodeBase64(VSBuffer.wrap(snapshot));
+    const encodedSnapshot = encodeBase64(ByteBuffer.wrap(snapshot));
     await sdk.database.saveDatabaseChange({
       database_id: database.id,
       database_access_key: database.accessKey,

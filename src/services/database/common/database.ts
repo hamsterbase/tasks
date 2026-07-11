@@ -1,5 +1,5 @@
 import { localize } from '@/nls';
-import { createDecorator } from 'vscf/platform/instantiation/common';
+import { createDecorator } from '@hamsterbase/foundation/instantiation';
 
 export interface IDatabaseMeta {
   account: string;

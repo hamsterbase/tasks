@@ -1,7 +1,7 @@
-import { IContextKeyService, InputFocusedContext } from 'vscf/platform/contextkey/common';
+import { IContextKeyService, InputFocusedContext } from '@hamsterbase/foundation/contextkey';
 import { useEffect } from 'react';
-import { trackFocus } from 'vscf/base/browser/dom';
-import { Event } from 'vscf/base/common/event';
+import { trackFocus } from '@hamsterbase/foundation/dom';
+import { Event } from '@hamsterbase/foundation/event';
 import { useService } from '../use-service';
 
 export const useInputFocused = () => {

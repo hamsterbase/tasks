@@ -1,6 +1,6 @@
 import { CancelError } from '@/base/common/error';
 import { useService } from '@/hooks/use-service';
-import { IInstantiationService } from 'vscf/platform/instantiation/common';
+import { IInstantiationService } from '@hamsterbase/foundation/instantiation';
 import { TimePickerActionSheetController } from './TimePickerActionSheetController';
 
 interface TimePickerOptions {

@@ -1,5 +1,5 @@
 import { LogEntry, LogLevel } from '../common/webloggerService';
-import { generateUuid } from 'vscf/base/common/uuid';
+import { generateUuid } from '@hamsterbase/foundation/uuid';
 import { nanoid } from 'nanoid';
 import { PROJECT_COMMIT_HASH } from '@/base/common/version';
 

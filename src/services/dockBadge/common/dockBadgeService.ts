@@ -1,4 +1,4 @@
-import { createDecorator } from 'vscf/platform/instantiation/common';
+import { createDecorator } from '@hamsterbase/foundation/instantiation';
 
 export interface IDockBadgeService {
   readonly _serviceBrand: undefined;

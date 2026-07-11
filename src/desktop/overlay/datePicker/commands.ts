@@ -1,7 +1,7 @@
 import { IWorkbenchOverlayService } from '@/services/overlay/common/WorkbenchOverlayService';
 import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
-import { KeyCode } from 'vscf/internal/base/common/keyCodes';
-import { KeybindingsRegistry, KeybindingWeight } from 'vscf/platform/keybinding/common';
+import { KeyCode } from '@hamsterbase/foundation/keybinding';
+import { KeybindingsRegistry, KeybindingWeight } from '@hamsterbase/foundation/keybinding';
 import { DatePickerOverlayController } from './DatePickerOverlayController';
 import { DatePickerFocus } from './contextKey';
 

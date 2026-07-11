@@ -1,6 +1,6 @@
 import { checkPlatform } from '@/base/browser/checkPlatform';
 import AndroidSource, { AndroidSourceType } from '@/plugins/AndroidSourcePlugin';
-import { createDecorator } from 'vscf/platform/instantiation/common';
+import { createDecorator } from '@hamsterbase/foundation/instantiation';
 import { switchKeys, SwitchKeyType } from './switch/main';
 
 export interface ISwitchService {

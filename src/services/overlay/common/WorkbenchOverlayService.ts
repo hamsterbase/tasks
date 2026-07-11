@@ -1,7 +1,7 @@
-import { IDisposable } from 'vscf/base/common/lifecycle';
-import { Emitter, Event } from 'vscf/base/common/event';
-import { generateUuid } from 'vscf/base/common/uuid';
-import { createDecorator } from 'vscf/platform/instantiation/common';
+import { IDisposable } from '@hamsterbase/foundation/lifecycle';
+import { Emitter, Event } from '@hamsterbase/foundation/event';
+import { generateUuid } from '@hamsterbase/foundation/uuid';
+import { createDecorator } from '@hamsterbase/foundation/instantiation';
 
 export type OverlayType = 'action-sheet' | 'dialog' | 'toast' | 'menu' | 'message';
 

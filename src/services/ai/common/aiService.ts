@@ -1,4 +1,4 @@
-import { createDecorator } from 'vs/platform/instantiation/common/instantiation.ts';
+import { createDecorator } from '@hamsterbase/foundation/instantiation';
 import { UIToolCallInfo } from '../browser/types';
 import { IAIChatController } from './chatController';
 

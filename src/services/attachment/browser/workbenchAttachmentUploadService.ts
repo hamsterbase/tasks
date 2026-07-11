@@ -1,7 +1,7 @@
 import { S3Client, HeadBucketCommand, GetObjectCommand } from '@aws-sdk/client-s3';
 import { Upload } from '@aws-sdk/lib-storage';
 import { nanoid } from 'nanoid';
-import { Emitter, Event } from 'vscf/base/common/event';
+import { Emitter, Event } from '@hamsterbase/foundation/event';
 import { AttachmentSchema } from '@/core/type';
 import { ConfigKey, IConfigService } from '@/services/config/configService';
 import { ICloudService } from '@/services/cloud/common/cloudService';

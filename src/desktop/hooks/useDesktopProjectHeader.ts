@@ -3,7 +3,7 @@ import { DesktopMenuController, IMenuConfig } from '@/desktop/overlay/desktopMen
 import { useService } from '@/hooks/use-service';
 import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService';
-import { IInstantiationService } from 'vscf/platform/instantiation/common';
+import { IInstantiationService } from '@hamsterbase/foundation/instantiation';
 
 interface IUseDesktopProjectHeaderOptions {
   projectHeadingInfo: ProjectHeadingInfo;

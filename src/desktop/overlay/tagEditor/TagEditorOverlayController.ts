@@ -1,8 +1,8 @@
 import { OverlayEnum } from '@/services/overlay/common/overlayEnum';
-import { Emitter } from 'vscf/base/common/event';
-import { Disposable } from 'vscf/base/common/lifecycle';
-import { IContextKey, IContextKeyService } from 'vscf/platform/contextkey/common';
-import { IInstantiationService } from 'vscf/platform/instantiation/common';
+import { Emitter } from '@hamsterbase/foundation/event';
+import { Disposable } from '@hamsterbase/foundation/lifecycle';
+import { IContextKey, IContextKeyService } from '@hamsterbase/foundation/contextkey';
+import { IInstantiationService } from '@hamsterbase/foundation/instantiation';
 import { IWorkbenchOverlayService, OverlayInitOptions } from '../../../services/overlay/common/WorkbenchOverlayService';
 import {
   TagEditorFocus,
