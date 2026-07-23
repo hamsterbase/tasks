@@ -13,45 +13,46 @@ import {
   TagIcon,
   DeleteIcon,
 } from '@/components/icons';
-import { mergeDateAndTime } from '@/core/time/mergeDateAndTime';
-import { formatReminderTime } from '@/core/time/formatReminderTime';
-import { recurringToString } from '@/core/time/recurringToString';
+import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc';
 import { getTaskInfo } from '@/core/state/getTaskInfo';
 import { TaskInfo } from '@/core/state/type';
+import { formatReminderTime } from '@/core/time/formatReminderTime';
+import { mergeDateAndTime } from '@/core/time/mergeDateAndTime';
+import { recurringToString } from '@/core/time/recurringToString';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
-import { useCancelEdit } from '@/hooks/useCancelEdit';
 import { useEdit } from '@/hooks/useEdit';
 import { useEditTaskHooks } from '@/hooks/useEditTask.tsx';
-import { useLongPress } from '@/hooks/useLongPress';
-import { SubtaskItem } from '@/mobile/components/todo/SubtaskItem';
 import { useMobileDatepicker } from '@/mobile/overlay/datePicker/useDatepicker';
 import { usePopupAction } from '@/mobile/overlay/popupAction/usePopupAction';
 import { useProjectAreaSelector } from '@/mobile/overlay/projectAreaSelector/useProjectAreaSelector';
-import { MobileTestIds } from '@/mobile/testids';
 import { useRecurringTaskSettings } from '@/mobile/overlay/recurringTaskSettings/useRecurringTaskSettings';
 import { TagEditorActionSheetController } from '@/mobile/overlay/tagEditor/TagEditorActionSheetController';
 import { useTimePicker } from '@/mobile/overlay/timePicker/useTimePicker';
+import { MobileTestIds } from '@/mobile/testids';
 import { styles } from '@/mobile/theme';
 import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService';
-import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc';
-import { closestCenter, DndContext, MouseSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';
-import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import classNames from 'classnames';
+import { TreeID } from 'loro-crdt';
 import TextArea from 'rc-textarea';
-import React, { useRef } from 'react';
+import React from 'react';
 import { flushSync } from 'react-dom';
 import { useLocation } from 'react-router';
 import { IInstantiationService } from '@hamsterbase/foundation/instantiation';
-import { OverlayItem } from '../dnd/DragOverlayItem';
-import { AttrList, AttrRowItem } from '../attr/AttrList';
 import { AttrContainer } from '../attr/AttrContainer';
-import { TaskCheckbox } from '../icon/TaskCheckbox';
-import { TreeID } from 'loro-crdt';
+import { AttrList, AttrRowItem } from '../attr/AttrList';
+import { EditTaskSubtasks } from './EditTaskSubtasks';
+import { TaskStatusButton } from './TaskStatusButton';
 
 interface EditTaskItemProps {
   taskInfo: TaskInfo;
+  expanded: boolean;
+  expandRef?: React.Ref<HTMLDivElement>;
+  /** 收起过渡进行中：标题行立即换回展示态，仅下方扩展区继续播放收起动画 */
+  closing?: boolean;
+  collapsedRow?: React.ReactNode;
+  onCollapseTransitionEnd: React.TransitionEventHandler<HTMLDivElement>;
 }
 
 function formatDateISO(timestamp?: number): string {
@@ -59,7 +60,14 @@ function formatDateISO(timestamp?: number): string {
   return new Date(timestamp).toISOString().split('T')[0];
 }
 
-export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoProp }) => {
+export const EditTaskItem: React.FC<EditTaskItemProps> = ({
+  taskInfo: taskInfoProp,
+  expanded,
+  expandRef,
+  closing = false,
+  collapsedRow,
+  onCollapseTransitionEnd,
+}) => {
   const todoService = useService(ITodoService);
   useWatchEvent(todoService.onStateChange);
   // Get fresh taskInfo from service state to reflect latest changes (reminders, recurring, etc.)
@@ -70,22 +78,6 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
     return data === taskInfo.id;
   });
 
-  const sensors = useSensors(
-    useSensor(TouchSensor, {
-      activationConstraint: {
-        delay: 250,
-        tolerance: 5,
-      },
-    }),
-    useSensor(MouseSensor, {
-      activationConstraint: {
-        distance: 10,
-      },
-    })
-  );
-
-  const divRef = useRef<HTMLDivElement>(null);
-  const { itemClassName, shouldIgnoreClick } = useCancelEdit(divRef, taskInfo.id);
   const location = useLocation();
   const createTaskAfterCurrent = React.useCallback(() => {
     todoService.endEditingContent();
@@ -102,9 +94,7 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
       }
       return id;
     });
-    setTimeout(() => {
-      todoService.editItem(newTaskId);
-    }, 60);
+    todoService.editItem(newTaskId);
   }, [location.pathname, taskInfo.id, todoService]);
   const { textAreaProps } = useEdit({
     isEditing,
@@ -133,6 +123,33 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
   const timePicker = useTimePicker();
   const instantiationService = useService(IInstantiationService);
   const projectAreaSelector = useProjectAreaSelector();
+
+  const handleAddReminder = () => {
+    mobileDatepicker.showDatePicker({
+      initialDate: Date.now(),
+      onDateSelected: async (date) => {
+        const time = await timePicker.showTimePickerPromise(Date.now());
+        const mergedDateTime = mergeDateAndTime(date, time);
+        todoService.addReminder({ itemId: taskInfo.id, time: mergedDateTime.getTime() });
+      },
+    });
+  };
+
+  const handleEditTags = () => {
+    TagEditorActionSheetController.create(
+      taskInfo.tags,
+      (tags) => {
+        todoService.updateTask(taskInfo.id, { tags });
+      },
+      instantiationService
+    );
+  };
+
+  const handleEditRecurring = () => {
+    openRecurringTaskSettings(taskInfo.recurringRule || {}, (settings) => {
+      todoService.updateTask(taskInfo.id, { recurringRule: settings });
+    });
+  };
 
   const handleMoveTask = () => {
     projectAreaSelector({
@@ -165,38 +182,17 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
             {
               icon: <AlarmIcon />,
               name: localize('edit_task_item.set_reminder', 'Set Reminder'),
-              onClick: () => {
-                mobileDatepicker.showDatePicker({
-                  initialDate: Date.now(),
-                  onDateSelected: async (date) => {
-                    const time = await timePicker.showTimePickerPromise(Date.now());
-                    const mergedDateTime = mergeDateAndTime(date, time);
-                    todoService.addReminder({ itemId: taskInfo.id, time: mergedDateTime.getTime() });
-                  },
-                });
-              },
+              onClick: handleAddReminder,
             },
             {
               icon: <RepeatIcon />,
               name: localize('task.recurring_settings', 'Recurring Settings'),
-              onClick: () => {
-                openRecurringTaskSettings(taskInfo.recurringRule || {}, (settings) => {
-                  todoService.updateTask(taskInfo.id, { recurringRule: settings });
-                });
-              },
+              onClick: handleEditRecurring,
             },
             {
               icon: <TagIcon />,
               name: localize('edit_task_item.set_tags', 'Set Tags'),
-              onClick: () => {
-                TagEditorActionSheetController.create(
-                  taskInfo.tags,
-                  (tags) => {
-                    todoService.updateTask(taskInfo.id, { tags });
-                  },
-                  instantiationService
-                );
-              },
+              onClick: handleEditTags,
             },
             {
               icon: <MoveIcon />,
@@ -239,41 +235,6 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
     });
   };
 
-  const { longPressEvents } = useLongPress(() => {
-    popupAction({
-      groups: [
-        {
-          items: [
-            {
-              condition: taskInfo.status !== 'created',
-              icon: <TaskCheckbox status={'created'} />,
-              name: localize('tasks.mark_as_created', 'Mark as Created'),
-              onClick: () => {
-                todoService.updateTask(taskInfo.id, { status: 'created' });
-              },
-            },
-            {
-              condition: taskInfo.status !== 'completed',
-              icon: <TaskCheckbox status={'completed'} />,
-              name: localize('tasks.mark_as_completed', 'Mark as Completed'),
-              onClick: () => {
-                todoService.updateTask(taskInfo.id, { status: 'completed' });
-              },
-            },
-            {
-              condition: taskInfo.status !== 'canceled',
-              icon: <TaskCheckbox status={'canceled'} />,
-              name: localize('tasks.mark_as_canceled', 'Mark as Canceled'),
-              onClick: () => {
-                todoService.updateTask(taskInfo.id, { status: 'canceled' });
-              },
-            },
-          ],
-        },
-      ],
-    });
-  });
-
   const attrRows: AttrRowItem[] = [
     {
       type: 'label',
@@ -303,15 +264,7 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
             icon: <TagIcon className={styles.editTaskAttrIcon} />,
             placeholder: localize('edit_task_item.set_tags', 'Set Tags'),
             tags: taskInfo.tags,
-            onClick: () => {
-              TagEditorActionSheetController.create(
-                taskInfo.tags,
-                (tags) => {
-                  todoService.updateTask(taskInfo.id, { tags });
-                },
-                instantiationService
-              );
-            },
+            onClick: handleEditTags,
           },
         ]
       : []),
@@ -321,47 +274,7 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
             type: 'tasks' as const,
             key: 'subtasks',
             icon: <ListChecksIcon className={styles.editTaskAttrIcon} />,
-            children: (
-              <>
-                <div className={styles.editingTaskSubtaskHeader}>
-                  <span>
-                    {`${taskInfo.children.filter((c) => c.status === 'completed' || c.status === 'canceled').length} / ${taskInfo.children.length}`}
-                  </span>
-                  <div className={styles.editingTaskSubtaskProgressBar}>
-                    <div
-                      className={styles.editingTaskSubtaskProgressFill}
-                      style={{
-                        width: `${(taskInfo.children.filter((c) => c.status === 'completed' || c.status === 'canceled').length / taskInfo.children.length) * 100}%`,
-                      }}
-                    />
-                  </div>
-                </div>
-                <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={taskActions.handleDragEnd}>
-                  <SortableContext
-                    items={taskInfo.children.map((item) => item.id)}
-                    strategy={verticalListSortingStrategy}
-                  >
-                    <OverlayItem isSubtask={true} className={styles.editingTaskSubtaskOverlay} />
-                    {taskInfo.children.map((child) => (
-                      <SubtaskItem
-                        key={child.id}
-                        id={child.id}
-                        title={child.title}
-                        status={child.status}
-                        className={styles.createTaskSubtaskItem}
-                        onStatusChange={taskActions.updateSubtaskStatus}
-                        onTitleChange={taskActions.updateSubtaskTitle}
-                        onCreate={() => taskActions.createSubtask(child.id)}
-                        onDelete={taskActions.deleteSubtask}
-                        inputRef={(el: HTMLInputElement | null) => {
-                          if (el) taskActions.subtaskInputRefs.current[child.id] = el;
-                        }}
-                      />
-                    ))}
-                  </SortableContext>
-                </DndContext>
-              </>
-            ),
+            children: <EditTaskSubtasks taskInfo={taskInfo} taskActions={taskActions} />,
           },
         ]
       : []),
@@ -398,16 +311,7 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
           todoService.deleteReminder(reminder.reminderId);
         }
       },
-      onAdd: () => {
-        mobileDatepicker.showDatePicker({
-          initialDate: Date.now(),
-          onDateSelected: async (date) => {
-            const time = await timePicker.showTimePickerPromise(Date.now());
-            const mergedDateTime = mergeDateAndTime(date, time);
-            todoService.addReminder({ itemId: taskInfo.id, time: mergedDateTime.getTime() });
-          },
-        });
-      },
+      onAdd: handleAddReminder,
     },
     (() => {
       const recurringItems: { type: 'startDate' | 'dueDate'; title: string; subtitle: string }[] = [];
@@ -436,10 +340,7 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
         onLabelClick: (index: number) => {
           const item = recurringItems[index];
           if (!item) return;
-          const currentRule = taskInfo.recurringRule || {};
-          openRecurringTaskSettings(currentRule, (settings) => {
-            todoService.updateTask(taskInfo.id, { recurringRule: settings });
-          });
+          handleEditRecurring();
         },
         onRemove: (index: number) => {
           const item = recurringItems[index];
@@ -452,68 +353,54 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
           }
           todoService.updateTask(taskInfo.id, { recurringRule: currentRule });
         },
-        onAdd: () => {
-          openRecurringTaskSettings(taskInfo.recurringRule || {}, (settings) => {
-            todoService.updateTask(taskInfo.id, { recurringRule: settings });
-          });
-        },
+        onAdd: handleEditRecurring,
       };
     })(),
   ];
 
   return (
-    <div
-      data-testid={MobileTestIds.EditTaskItem.Root}
-      ref={divRef}
-      onClick={shouldIgnoreClick}
-      className={classNames(
-        styles.taskItemPaddingX,
-        styles.listItemEditingBackground,
-        styles.taskItemEditingShadow,
-        styles.taskItemEditingRound,
-        itemClassName,
-        styles.editTaskItemRootPaddingY
-      )}
-    >
-      {/* Title row */}
-      <div className={styles.createTaskAttrRow}>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            taskActions.toggleTask();
-          }}
-          {...longPressEvents}
-          className={styles.editTaskItemStatusButton}
-        >
-          <TaskCheckbox status={taskInfo.status} />
-        </button>
-        <div className={styles.editTaskItemContent}>
-          <div className={styles.editTaskItemTitleInputRow}>
-            <TextArea
-              {...textAreaProps}
-              data-testid={MobileTestIds.EditTaskItem.TitleInput}
-              ref={(el) => {
-                if (el) {
-                  textAreaProps.ref.current = el.nativeElement as HTMLInputElement;
-                }
-              }}
-              autoSize={{ minRows: 1 }}
-              className={styles.editTaskItemTitleInput}
-            />
+    <>
+      {/* Title row: swaps back to the display row as soon as the item starts closing */}
+      {closing ? (
+        collapsedRow
+      ) : (
+        <div className={styles.createTaskAttrRow}>
+          <TaskStatusButton taskId={taskInfo.id} status={taskInfo.status} className={styles.editTaskItemStatusButton} />
+          <div className={styles.editTaskItemContent}>
+            <div className={styles.editTaskItemTitleInputRow}>
+              <TextArea
+                {...textAreaProps}
+                data-testid={MobileTestIds.EditTaskItem.TitleInput}
+                ref={(el) => {
+                  if (el) {
+                    textAreaProps.ref.current = el.nativeElement as HTMLInputElement;
+                  }
+                }}
+                autoSize={{ minRows: 1 }}
+                className={styles.editTaskItemTitleInput}
+              />
+            </div>
           </div>
+          <button
+            data-testid={MobileTestIds.EditTaskItem.MenuButton}
+            className={styles.editTaskItemMenuButton}
+            onClick={handleMenuClick}
+          >
+            <MenuIcon className={styles.projectHeadingItemMenuIcon} />
+          </button>
         </div>
-        <button
-          data-testid={MobileTestIds.EditTaskItem.MenuButton}
-          className={styles.editTaskItemMenuButton}
-          onClick={handleMenuClick}
-        >
-          <MenuIcon className={styles.projectHeadingItemMenuIcon} />
-        </button>
-      </div>
+      )}
 
-      {/* Expanded content */}
-      <div className={styles.editTaskItemExpanded}>
+      {/* Expanded content, height-animated via grid-template-rows */}
+      <div
+        ref={expandRef}
+        className={classNames(
+          styles.editTaskItemExpanded,
+          styles.taskItemExpandDuration,
+          expanded ? styles.editTaskItemExpandedOpen : styles.editTaskItemExpandedClosed
+        )}
+        onTransitionEnd={onCollapseTransitionEnd}
+      >
         <div className={styles.editTaskItemExpandedOverflow}>
           <div className={styles.editTaskItemExpandedRow}>
             <div className={styles.editTaskItemExpandedSpacer}></div>
@@ -527,7 +414,7 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
                     }
                   }}
                   className={styles.createTaskNotesTextarea}
-                  autoSize={{ minRows: 2, maxRows: 4 }}
+                  autoSize={{ minRows: 1, maxRows: 4 }}
                   placeholder={localize('edit_task_item.task_notes_placeholder', 'Add Notes')}
                 />
               </AttrContainer>
@@ -536,6 +423,6 @@ export const EditTaskItem: React.FC<EditTaskItemProps> = ({ taskInfo: taskInfoPr
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };

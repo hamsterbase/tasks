@@ -85,7 +85,9 @@ export const baseStyles = {
   taskItemArchived: /*tw*/ 'opacity-50!',
 
   taskItemEditingRound: /*tw*/ 'rounded-2xl',
-  taskItemEditingShadow: /*tw*/ '',
+  taskItemEditingShadow: /*tw*/ 'shadow-md',
+  taskItemBackgroundTransition: /*tw*/ 'transition',
+  taskItemExpandDuration: /*tw*/ 'duration-200',
 
   taskItemOverlayBackground: /*tw*/ 'bg-bg1',
   taskItemOverlayRound: /*tw*/ 'rounded-2xl',
@@ -205,14 +207,15 @@ export const baseStyles = {
   editingTaskSubtaskProgressBar: /*tw*/ 'w-12 h-2 bg-bg3 rounded-full overflow-hidden',
   editingTaskSubtaskProgressFill: /*tw*/ 'h-full bg-brand rounded-full',
   editingTaskSubtaskList: /*tw*/ 'flex-1 flex flex-col gap-1 min-w-0 -ml-1',
-  editTaskItemRootPaddingY: /*tw*/ 'py-3.5',
   editTaskItemContent: /*tw*/ 'flex-1 min-w-0 flex flex-col gap-1',
   editTaskItemTitleInputRow: /*tw*/ 'flex items-center gap-2 min-w-0',
   editTaskItemTitleInput:
     /*tw*/ 'min-w-0 overflow-hidden text-ellipsis text-base leading-6 font-medium text-t1 bg-transparent outline-none w-full',
   editTaskItemStatusButton: /*tw*/ 'size-6 shrink-0 flex items-center justify-center text-t3',
   editTaskItemMenuButton: /*tw*/ 'size-6 shrink-0 flex items-center justify-end text-t3',
-  editTaskItemExpanded: /*tw*/ 'grid grid-rows-[1fr]',
+  editTaskItemExpanded: /*tw*/ 'grid transition-[grid-template-rows]',
+  editTaskItemExpandedOpen: /*tw*/ 'grid-rows-[1fr]',
+  editTaskItemExpandedClosed: /*tw*/ 'grid-rows-[0fr]',
   editTaskItemExpandedOverflow: /*tw*/ 'overflow-hidden',
   editTaskItemExpandedRow: /*tw*/ 'flex gap-3 mt-2',
   editTaskItemExpandedSpacer: /*tw*/ 'size-6 shrink-0 -ml-0.5',

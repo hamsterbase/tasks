@@ -50,6 +50,7 @@ export const PageLayout: React.FC<PageLayoutProps> = (props: PageLayoutProps) =>
           sensors={props.dragOption.sensors ?? sensors}
           collisionDetection={props.dragOption.collisionDetection}
           onDragEnd={props.dragOption.onDragEnd}
+          accessibility={{ restoreFocus: false }}
         >
           <SortableContext
             items={props.dragOption.sortable.items}
@@ -70,6 +71,7 @@ export const PageLayout: React.FC<PageLayoutProps> = (props: PageLayoutProps) =>
           sensors={props.dragOption.sensors ?? sensors}
           collisionDetection={props.dragOption.collisionDetection}
           onDragEnd={props.dragOption.onDragEnd}
+          accessibility={{ restoreFocus: false }}
         >
           <div className={childrenContainerPadding}>{props.children}</div>
           {props.onFabClick && <FAB onClick={props.onFabClick} />}

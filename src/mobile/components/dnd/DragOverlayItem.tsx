@@ -66,7 +66,7 @@ export const OverlayItem: React.FC<DragOverlayItemProps> = ({
             />
           );
         }
-        return <TaskItem taskInfo={getTaskInfo(modelState, activeId as TreeID)} {...(textProps ?? {})} />;
+        return <TaskItem taskInfo={getTaskInfo(modelState, activeId as TreeID)} overlay {...(textProps ?? {})} />;
       }
       case 'projectHeading':
         return <ProjectHeadingOverlayItem projectHeadingInfo={getProjectHeadingInfo(modelState, activeId as TreeID)} />;

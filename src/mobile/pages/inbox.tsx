@@ -1,3 +1,4 @@
+import { flushSync } from 'react-dom';
 import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc';
 import { InboxIcon, TaskDisplaySettingsIcon } from '@/components/icons';
 import { getInboxTasks } from '@/core/state/inbox/getInboxTasks';
@@ -90,13 +91,13 @@ export const InboxPage = () => {
     );
     if (!action) return;
     if (action.type === 'create') {
-      const taskId = todoService.addTask({
-        title: '',
-        position: action.position,
-      });
-      setTimeout(() => {
-        todoService.editItem(taskId);
-      }, 60);
+      const taskId = flushSync(() =>
+        todoService.addTask({
+          title: '',
+          position: action.position,
+        })
+      );
+      todoService.editItem(taskId);
     } else {
       todoService.updateTask(active.id as TreeID, {
         position: action.position,
@@ -105,9 +106,11 @@ export const InboxPage = () => {
   };
 
   const handleCreateTask = () => {
-    const task = todoService.addTask({
-      title: '',
-    });
+    const task = flushSync(() =>
+      todoService.addTask({
+        title: '',
+      })
+    );
     todoService.editItem(task);
   };
 

@@ -1,3 +1,4 @@
+import { flushSync } from 'react-dom';
 import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc';
 import { TaskDisplaySettingsIcon, TodayIcon } from '@/components/icons';
 import { getTodayItems } from '@/core/state/today/getTodayItems';
@@ -91,19 +92,20 @@ const FlatToday = () => {
 
   const items = todayItems.items;
   const handleCreateTask = (position?: ItemPosition) => {
-    const taskId = todoService.addTask({
-      title: '',
-      startDate: getTodayTimestampInUtc(),
-      position: {
-        type: 'firstElement',
-      },
+    const taskId = flushSync(() => {
+      const id = todoService.addTask({
+        title: '',
+        startDate: getTodayTimestampInUtc(),
+        position: {
+          type: 'firstElement',
+        },
+      });
+      if (position && position.type !== 'firstElement') {
+        todoService.moveDateAssignedList(id, position);
+      }
+      return id;
     });
-    if (position && position.type !== 'firstElement') {
-      todoService.moveDateAssignedList(taskId, position);
-    }
-    setTimeout(() => {
-      todoService.editItem(taskId);
-    }, 100);
+    todoService.editItem(taskId);
   };
 
   const handleDragEnd = (event: DragEndEvent) => {
@@ -145,6 +147,7 @@ const FlatToday = () => {
         ],
       }}
       dragOption={{
+        overlayItem: {},
         collisionDetection: singleListCollisionDetectionStrategy,
         sortable: {
           items: sortItems,

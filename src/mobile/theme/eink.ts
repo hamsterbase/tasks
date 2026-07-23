@@ -6,5 +6,7 @@ export const einkStyles = {
   switchOuterBorder: 'shadow-border',
   dialogBorder: 'border-line-regular border',
   overlayAnimationDuration: 'duration-10',
+  taskItemExpandDuration: 'duration-10',
+  taskItemEditingShadow: '',
   actionSheetContentBorder: 'border-line-regular border',
 };

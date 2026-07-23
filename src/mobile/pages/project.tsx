@@ -1,3 +1,4 @@
+import { flushSync } from 'react-dom';
 import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc.ts';
 import { MenuIcon, TaskDisplaySettingsIcon } from '@/components/icons';
 import { TestIds } from '@/testIds';
@@ -142,13 +143,13 @@ const ProjectContent: React.FC<ProjectContentProps> = ({ project, projectId }) =
     const res = getFlattenedItemsDragEndPosition(activeId, overId, flattenedItemsResult);
     if (res) {
       if (res.type === 'createItem') {
-        const taskId = todoService.addTask({
-          title: '',
-          position: res.position,
-        });
-        setTimeout(() => {
-          todoService.editItem(taskId);
-        }, 60);
+        const taskId = flushSync(() =>
+          todoService.addTask({
+            title: '',
+            position: res.position,
+          })
+        );
+        todoService.editItem(taskId);
       }
       if (res.type === 'moveItem') {
         todoService.updateTask(res.activeId, {

@@ -44,21 +44,24 @@ export const useEdit = ({
       if (textareaRef.current) {
         textareaRef.current.focus();
         textareaRef.current.select();
-
-        const isFocused = document.activeElement === textareaRef.current;
-
-        if (!isFocused) {
-          setTimeout(() => {
-            if (textareaRef.current) {
-              textareaRef.current.focus();
-            }
-          }, 50);
-        }
       }
     };
 
     if (isEditing && !disableAutoFocus) {
-      focusAndSelect();
+      // 聚焦必须等 dnd 的 drop 处理结束后再做：拖拽创建时若在同一任务内立即
+      // focus()，输入框会进入"已聚焦但未激活"状态（无光标、不接收按键），
+      // 且无法靠再次 focus() 修复。延后一帧以上即可。
+      const focusTimer = window.setTimeout(focusAndSelect, 50);
+      // dnd-kit 在 drop 后可能异步把焦点还给拖拽激活元素；复检并夺回。
+      const recheckTimer = window.setTimeout(() => {
+        if (textareaRef.current && document.activeElement !== textareaRef.current) {
+          textareaRef.current.focus();
+        }
+      }, 180);
+      return () => {
+        window.clearTimeout(focusTimer);
+        window.clearTimeout(recheckTimer);
+      };
     }
   }, [isEditing, disableAutoFocus]);
 

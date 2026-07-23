@@ -1,3 +1,4 @@
+import { flushSync } from 'react-dom';
 import { DeleteIcon, HeadingIcon, MoveIcon, ScheduledIcon, TagsIcon, TargetIcon } from '@/components/icons';
 import { ProjectInfoState } from '@/core/state/type';
 import { ItemStatus } from '@/core/type';
@@ -75,16 +76,16 @@ const useProject = (project: ProjectInfoState | null) => {
 
   const handleAddTask = () => {
     if (!project) return;
-    const id = todoService.addTask({
-      title: '',
-      position: {
-        type: 'firstElement',
-        parentId: project.id,
-      },
-    });
-    setTimeout(() => {
-      todoService.editItem(id);
-    }, 1);
+    const id = flushSync(() =>
+      todoService.addTask({
+        title: '',
+        position: {
+          type: 'firstElement',
+          parentId: project.id,
+        },
+      })
+    );
+    todoService.editItem(id);
   };
 
   const dialog = useDialog();

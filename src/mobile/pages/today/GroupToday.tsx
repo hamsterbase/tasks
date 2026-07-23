@@ -1,3 +1,4 @@
+import { flushSync } from 'react-dom';
 import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc';
 import { TaskDisplaySettingsIcon, TodayIcon } from '@/components/icons';
 import { getProject } from '@/core/state/getProject';
@@ -223,22 +224,23 @@ export const GroupToday = () => {
     .concat([DragDropElements.lastPlacement, DragDropElements.create]);
 
   const handleCreateTask = (options: { position?: ItemMovePosition; parentId?: TreeID | null }) => {
-    const taskId = todoService.addTask({
-      title: '',
-      startDate: getTodayTimestampInUtc(),
-      position: {
-        type: 'firstElement',
-      },
+    const taskId = flushSync(() => {
+      const id = todoService.addTask({
+        title: '',
+        startDate: getTodayTimestampInUtc(),
+        position: {
+          type: 'firstElement',
+        },
+      });
+      if (options.parentId) {
+        todoService.updateTask(id, { parentId: options.parentId });
+      }
+      if (options.position) {
+        todoService.moveDateAssignedList(id, options.position);
+      }
+      return id;
     });
-    if (options.parentId) {
-      todoService.updateTask(taskId, { parentId: options.parentId });
-    }
-    if (options.position) {
-      todoService.moveDateAssignedList(taskId, options.position);
-    }
-    setTimeout(() => {
-      todoService.editItem(taskId);
-    }, 100);
+    todoService.editItem(taskId);
   };
 
   // The FAB only collides with task rows and the last-placement marker (see

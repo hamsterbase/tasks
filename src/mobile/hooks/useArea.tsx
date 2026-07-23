@@ -1,3 +1,4 @@
+import { flushSync } from 'react-dom';
 import { DeleteIcon, TagsIcon } from '@/components/icons';
 import { getAreaDetail } from '@/core/state/getArea';
 import { AreaDetailState } from '@/core/state/type';
@@ -51,16 +52,16 @@ export const useArea = (areaId?: TreeID) => {
 
   const handleAddTask = (position?: ItemPosition) => {
     if (!areaDetail) return;
-    const taskId = todoService.addTask({
-      title: '',
-      position: position ?? {
-        type: 'firstElement',
-        parentId: areaDetail.id,
-      },
-    });
-    setTimeout(() => {
-      todoService.editItem(taskId);
-    }, 100);
+    const taskId = flushSync(() =>
+      todoService.addTask({
+        title: '',
+        position: position ?? {
+          type: 'firstElement',
+          parentId: areaDetail.id,
+        },
+      })
+    );
+    todoService.editItem(taskId);
   };
 
   const handleUpdateTitle = (title: string) => {
