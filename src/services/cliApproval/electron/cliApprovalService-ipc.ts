@@ -1,4 +1,9 @@
-import { CliApprovalOpRef, CliChangeRequest } from '@/base/common/cliApproval/protocol';
+import {
+  CliApprovalOpRef,
+  CliChangeRequest,
+  CliAttachmentRequest,
+  CliSocketResponse,
+} from '@/base/common/cliApproval/protocol';
 
 /** renderer → main calls plus the queue push subscription */
 export class ElectronCliApprovalServiceClient {
@@ -25,6 +30,14 @@ export class ElectronCliApprovalServiceClient {
 
   async reportActiveDatabase(databaseId: string): Promise<void> {
     return this.call('reportActiveDatabase', [databaseId]);
+  }
+
+  async completeAttachmentRequest(response: CliSocketResponse): Promise<void> {
+    return this.call('completeAttachmentRequest', [response]);
+  }
+
+  subscribeAttachments(callback: (request: CliAttachmentRequest) => void): void {
+    window.electronAPI?.serviceChannel.on('cli-attachment-request', (data) => callback(data as CliAttachmentRequest));
   }
 
   subscribe(callback: (requests: CliChangeRequest[]) => void): () => void {

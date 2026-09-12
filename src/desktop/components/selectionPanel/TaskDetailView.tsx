@@ -1,4 +1,5 @@
 import { useTaskItemActions } from '@/base/hooks/useTaskItemActions';
+import { getItemStatusVisual, itemToneClass } from '@/components/todo/itemStatusVisual';
 import { CloseIcon, FlagIcon, MenuIcon, ScheduledIcon } from '@/components/icons';
 import { taskTitleInputKey } from '@/components/edit/inputKeys.ts';
 import { TaskInfo } from '@/core/state/type.ts';
@@ -9,6 +10,7 @@ import { desktopStyles } from '@/desktop/theme/main.ts';
 import { localize } from '@/nls';
 import { TestIds } from '@/testIds';
 import React from 'react';
+import classNames from 'classnames';
 import { AttachmentSection } from '../attachment/AttachmentSection';
 import { TagsField } from '../TagsField';
 import { SubtaskList } from './SubtaskList';
@@ -27,6 +29,7 @@ interface TaskDetailViewProps {
 
 export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task, onClearSelection }) => {
   const taskItemActions = useTaskItemActions(task);
+  const visual = getItemStatusVisual(task.status);
   const { openTaskMenu } = useTaskMenu(task.id);
   const { handleStartDateClick, handleDueDateClick } = useDatePickerHandlers({
     task,
@@ -77,6 +80,7 @@ export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task, onClearSel
         inputKey={taskTitleInputKey(task.id)}
         renderIcon={() => <TaskIcon status={task.status} className={desktopStyles.DetailViewHeaderStatusIconColor} />}
         title={task.title}
+        titleClassName={classNames(itemToneClass(visual.titleTone), visual.closed && 'item-status-title-closed')}
         placeholder={localize('tasks.title_placeholder', 'Add title...')}
         onSave={handleTitleSave}
         extraActions={headerActions}
@@ -84,6 +88,7 @@ export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task, onClearSel
       <div className={desktopStyles.DetailViewContent}>
         <div className={desktopStyles.DetailViewContentInner}>
           <NotesField
+            parentUid={task.uid}
             value={task.notes || ''}
             onSave={handleNotesSave}
             className={desktopStyles.DetailViewNotesTextarea}

@@ -126,7 +126,6 @@ export const desktopStyles = {
   tagFilterBarChipActive: /*tw*/ 'bg-bg3 text-t1',
 
   ItemTagContainer: /*tw*/ 'flex min-w-0 max-w-30 items-center gap-1 text-xs leading-4',
-  ItemTagNormal: /*tw*/ 'text-t3',
   ItemTagDanger: /*tw*/ 'text-accent-danger',
   ItemTagSelected: /*tw*/ '',
   ItemTagUnselected: /*tw*/ '',
@@ -447,10 +446,7 @@ export const desktopStyles = {
 
   TaskListItemContainer:
     /*tw*/ 'group relative flex items-start gap-2 px-2 py-2 rounded-md outline-none cursor-pointer',
-  TaskListItemContainerCompleted: /*tw*/ 'opacity-60',
-  TaskListItemContainerWillDisappear: /*tw*/ 'opacity-50',
   TaskListItemContainerSelected: /*tw*/ 'bg-bg3',
-  TaskListItemContainerArchived: /*tw*/ 'opacity-50!',
   TaskListItemContainerSelectedInactive: /*tw*/ 'bg-bg2',
   TaskListItemDragHandle:
     'absolute left-0 top-0 flex h-full w-3 -translate-x-full items-center justify-center text-t3 opacity-0 group-hover:opacity-100 transition-opacity',
@@ -459,11 +455,10 @@ export const desktopStyles = {
   TaskListItemContent: /*tw*/ 'flex flex-col gap-1 flex-1 min-w-0',
   TaskListItemTitleRow: /*tw*/ 'flex items-center gap-2',
   TaskListItemTitleInput:
-    'text-sm leading-5 flex-1 min-w-0 bg-transparent outline-none text-t1 truncate placeholder:text-t3 rounded-sm px-1 -mx-1',
-  TaskListItemTitleInputCompleted: /*tw*/ 'line-through text-t3',
+    'text-sm leading-5 flex-1 min-w-0 bg-transparent outline-none truncate placeholder:text-t3 rounded-sm px-1 -mx-1',
   TaskListItemTitleSpan: /*tw*/ 'cursor-text whitespace-nowrap overflow-hidden',
   TaskListItemTitleSpanPlaceHolder: /*tw*/ 'text-t3',
-  TaskListItemIcon: /*tw*/ 'size-3.5 text-t3 flex-shrink-0 opacity-60',
+  TaskListItemIcon: /*tw*/ 'size-3.5 flex-shrink-0',
 
   SubtaskItemContainer: /*tw*/ 'group flex items-center gap-2 -mx-2 px-2 py-1.5 rounded-md cursor-pointer',
   SubtaskItemContainerSelected: /*tw*/ 'bg-bg3',
@@ -472,10 +467,7 @@ export const desktopStyles = {
   SubtaskItemStatusButton: 'flex size-4 flex-shrink-0 items-center justify-center text-t3',
   SubtaskItemInputWrapper: /*tw*/ 'flex-1 min-w-0',
   SubtaskItemInput:
-    /*tw*/ 'w-full text-sm leading-5 text-t1 bg-transparent outline outline-1 outline-transparent rounded-sm px-1 -mx-1 truncate',
-  SubtaskItemInputCanceled: /*tw*/ 'line-through text-t3',
-  SubtaskItemInputCompleted: /*tw*/ 'line-through text-t3',
-  SubtaskItemInputCreated: /*tw*/ 'text-t1',
+    /*tw*/ 'w-full text-sm leading-5 bg-transparent outline outline-1 outline-transparent rounded-sm px-1 -mx-1 truncate',
   SubtaskItemDragHandle: /*tw*/ 'flex size-4 flex-shrink-0 items-center justify-center text-t3 cursor-grab',
   SubtaskItemDragHandleIcon: /*tw*/ 'size-3 text-t3',
   SubtaskItemDragging: /*tw*/ 'flex items-center h-8 bg-bg3 rounded opacity-50',
@@ -490,7 +482,7 @@ export const desktopStyles = {
   DesktopProjectListItemStatusBox: /*tw*/ 'flex h-5 w-4 flex-shrink-0 items-center justify-center',
   DesktopProjectListItemStatusBoxIcon: /*tw*/ 'size-4',
   DesktopProjectListItemContent: /*tw*/ 'flex flex-col gap-1 flex-1 min-w-0',
-  DesktopProjectListItemTitle: /*tw*/ 'flex-1 min-w-0 text-sm leading-5 font-normal text-t1 truncate px-1 -mx-1',
+  DesktopProjectListItemTitle: /*tw*/ 'flex-1 min-w-0 text-sm leading-5 font-normal truncate px-1 -mx-1',
   DesktopPageContainer: /*tw*/ 'h-full w-full flex flex-col',
   DesktopPageContentPane: /*tw*/ 'w-full flex-1',
   DesktopPageMainPane: /*tw*/ 'h-full flex flex-col overflow-hidden',
@@ -518,9 +510,6 @@ export const desktopStyles = {
   FutureProjectsPageContent: /*tw*/ 'flex-1 overflow-y-auto p-4',
 
   ProjectTaskAreaContainer: /*tw*/ 'flex-1',
-  ProjectIconContainer: /*tw*/ 'inline-flex shrink-0 items-center justify-center text-t3',
-  ProjectIconSvg: /*tw*/ 'block',
-  TaskIconContainer: /*tw*/ 'inline-flex shrink-0 items-center justify-center',
 
   DatabaseItemContainer: /*tw*/ 'flex w-full flex-col gap-1 px-4 py-3',
   DatabaseItemMainRow: /*tw*/ 'flex items-center gap-3',
@@ -625,7 +614,7 @@ export const desktopStyles = {
 
   DesktopHeadingListItemContainer: /*tw*/ 'group relative',
   DesktopHeadingListItemContainerDragging: /*tw*/ 'bg-bg3 rounded-lg',
-  DesktopHeadingListItemArchived: /*tw*/ 'opacity-50! line-through',
+  DesktopHeadingListItemArchived: /*tw*/ 'text-t3',
   DesktopHeadingListItemContent:
     'group relative mt-4 flex w-full items-center gap-1 rounded-md px-2 py-1.5 cursor-pointer transition-colors',
   DesktopHeadingListItemContentFocused: /*tw*/ 'bg-bg3',
@@ -635,7 +624,11 @@ export const desktopStyles = {
     'absolute left-0 top-0 flex h-full w-3 -translate-x-full items-center justify-center text-t3 opacity-0 transition-opacity group-hover:opacity-100',
   DesktopHeadingListItemDragHandleIcon: /*tw*/ 'size-2.5',
   DesktopHeadingListItemInput:
-    /*tw*/ 'flex-1 min-w-0 bg-transparent outline-none text-xs font-semibold uppercase tracking-wider text-t3 placeholder:text-t3 rounded-sm px-1 -mx-1 truncate',
+    /*tw*/ 'flex-1 min-w-0 bg-transparent outline-none text-xs font-medium uppercase tracking-wider placeholder:text-t3 rounded-sm px-1 -mx-1 truncate',
+  DesktopHeadingListItemMenuButton:
+    /*tw*/ 'invisible flex size-5 flex-shrink-0 items-center justify-center rounded-sm text-t3 hover:bg-bg3 focus:visible group-hover:visible',
+  DesktopHeadingListItemMenuButtonVisible: /*tw*/ 'visible',
+  DesktopHeadingListItemMenuIcon: /*tw*/ 'size-3.5',
 
   DesktopMessageContainer: /*tw*/ 'fixed bottom-6 right-6 flex flex-col items-end gap-2 pointer-events-none',
   DesktopMessageContent:

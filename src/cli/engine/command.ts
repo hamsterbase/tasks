@@ -49,3 +49,13 @@ export function commandUsage(meta: CommandMeta): string {
     .map((option) => `--${option.name}${option.arg ? ` ${option.arg}` : ''}`);
   return `${CLI_NAME} ${meta.name}${required.length > 0 ? ` ${required.join(' ')}` : ''}`;
 }
+
+/** Uses raw argv flags, before command schemas apply defaults or transforms. */
+export function requiredProtocolVersion(meta: CommandMeta, args: ParsedArgs): number {
+  return Math.max(
+    meta.minProtocolVersion ?? 1,
+    ...[...(meta.options ?? []), ...GLOBAL_OPTIONS]
+      .filter((option) => Object.prototype.hasOwnProperty.call(args.flags, option.name))
+      .map((option) => option.minProtocolVersion ?? 1)
+  );
+}

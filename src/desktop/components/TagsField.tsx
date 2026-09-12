@@ -1,3 +1,4 @@
+import { TestIds } from '@/testIds';
 import { TagIcon } from '@/components/icons';
 import { getAllTags } from '@/core/state/getAllTags';
 import { getAreaDetail } from '@/core/state/getArea';
@@ -66,6 +67,7 @@ export const TagsField: React.FC<ITagsFieldProps> = ({ itemId }) => {
   if (itemData.tags.length === 0) {
     return (
       <TaskDetailAttributeRow
+        dataTestId={TestIds.DetailPanel.TagsField}
         icon={<TagIcon className={desktopStyles.TaskDetailAttributeIcon} />}
         label={localize('tasks.tags', 'Tags')}
         content={localize('tasks.add.tags', 'Not set')}
@@ -77,6 +79,7 @@ export const TagsField: React.FC<ITagsFieldProps> = ({ itemId }) => {
 
   return (
     <TaskDetailAttributeRow
+      dataTestId={TestIds.DetailPanel.TagsField}
       icon={<TagIcon className={desktopStyles.TaskDetailAttributeIcon} />}
       label={localize('tasks.tags', 'Tags')}
       onClick={handleTagsClick}

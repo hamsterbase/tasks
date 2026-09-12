@@ -1,4 +1,5 @@
 import { TaskInfo } from '@/core/state/type.ts';
+import { ItemVisualContext, getItemStatusVisual } from '@/components/todo/itemStatusVisual';
 import { useService } from '@/hooks/use-service';
 import { useCancelEdit } from '@/hooks/useCancelEdit';
 import { useExpandTransition } from '@/hooks/useExpandTransition';
@@ -18,6 +19,7 @@ import { TaskItemCompletionAt } from '../taskItem/taskItemCompletionAt';
 import { TaskItemTitle } from '../taskItem/taskItemTitle';
 import { EditTaskItem } from './EditTaskItem';
 import { TaskStatusButton } from './TaskStatusButton';
+import { useItemStatusAnimation } from '@/hooks/useItemStatusAnimation';
 
 interface TaskItemProps {
   taskInfo: TaskInfo;
@@ -25,6 +27,7 @@ interface TaskItemProps {
   overlay?: boolean;
   className?: string;
   followParentArchiveState?: boolean;
+  visualContext?: ItemVisualContext;
 }
 
 export const TaskItem: React.FC<TaskItemProps> = ({
@@ -32,7 +35,7 @@ export const TaskItem: React.FC<TaskItemProps> = ({
   hideProjectTitle = false,
   overlay = false,
   className,
-  followParentArchiveState,
+  visualContext = 'default',
 }) => {
   const todoService = useService(ITodoService);
   // overlay: rendered inside the DragOverlay as the item held in hand —
@@ -50,8 +53,8 @@ export const TaskItem: React.FC<TaskItemProps> = ({
     opacity: isDragging && !overlay ? 0.5 : 1,
   };
 
-  const isCompleted = taskInfo.status === 'completed';
-  const isCanceled = taskInfo.status === 'canceled';
+  const animationPhase = useItemStatusAnimation(taskInfo.status);
+  const visual = getItemStatusVisual(taskInfo.status, visualContext);
 
   const handleTaskClick = () => {
     todoService.editItem(taskInfo.id);
@@ -68,22 +71,30 @@ export const TaskItem: React.FC<TaskItemProps> = ({
         status={taskInfo.status}
         className={styles.taskItemIconSize}
         testId={MobileTestIds.TaskItem.StatusBox}
+        animationPhase={animationPhase}
       />
       <div className={styles.taskItemContent}>
         <div className={styles.taskItemTitleRow}>
           <TaskItemTitle
             testId={'task-item-title'}
             title={taskInfo.title}
-            isCanceled={isCanceled}
-            isCompleted={isCompleted}
+            status={taskInfo.status}
             emptyText={localize('tasks.untitled', 'New Task')}
+            visualContext={visualContext}
+            animationPhase={animationPhase}
           />
           <div className={styles.homeProjectItemMetaIcons}>
-            <TaskItemIcons tags={taskInfo.tags} notes={taskInfo.notes} subtasks={taskInfo.children} navIcon={false} />
+            <TaskItemIcons
+              tags={taskInfo.tags}
+              notes={taskInfo.notes}
+              subtasks={taskInfo.children}
+              navIcon={false}
+              tone={visual.metadataTone}
+            />
           </div>
         </div>
         {taskInfo.projectTitle && !hideProjectTitle && (
-          <TaskItemSubtitle title={taskInfo.projectTitle} hide={hideProjectTitle} />
+          <TaskItemSubtitle title={taskInfo.projectTitle} hide={hideProjectTitle} tone={visual.metadataTone} />
         )}
       </div>
       <TaskItemCompletionAt completionAt={taskInfo.completionAt} status={taskInfo.status} />
@@ -102,16 +113,15 @@ export const TaskItem: React.FC<TaskItemProps> = ({
         itemClassName,
         isEditing
           ? [styles.listItemEditingBackground, styles.taskItemEditingShadow, styles.taskItemEditingRound]
-          : [className, styles.listItemRound],
-        {
-          [styles.taskItemArchived]: !isEditing && followParentArchiveState && taskInfo.isParentArchived,
-        }
+          : [className, styles.listItemRound]
       )}
       onClick={isEditing ? shouldIgnoreClick : handleTaskClick}
       ref={overlay ? undefined : setNodeRef}
       style={style}
       {...(isEditing || overlay ? {} : attributes)}
       {...(isEditing || overlay ? {} : listeners)}
+      data-status={taskInfo.status}
+      data-status-animation={animationPhase}
     >
       {showEditContent ? (
         <EditTaskItem

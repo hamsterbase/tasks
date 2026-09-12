@@ -1,9 +1,10 @@
 import { EditableInputSpan } from '@/components/edit/EditableInputSpan';
 import { projectHeadingTitleInputKey } from '@/components/edit/inputKeys';
-import { DragHandleIcon } from '@/components/icons';
+import { DragHandleIcon, MenuIcon } from '@/components/icons';
 import { ITaskList } from '@/components/taskList/type.ts';
 import { ProjectHeadingInfo } from '@/core/state/type.ts';
 import { desktopStyles } from '@/desktop/theme/main';
+import { useDesktopProjectHeader } from '@/desktop/hooks/useDesktopProjectHeader';
 import { useService } from '@/hooks/use-service';
 import { useSync } from '@/hooks/use-sync';
 import { useWatchEvent } from '@/hooks/use-watch-event';
@@ -50,6 +51,7 @@ export const DesktopHeadingListItem: React.FC<DesktopHeadingListItemProps> = ({
 
   const isSelected = taskList?.selectedIds.includes(projectHeadingInfo.id) ?? false;
   const isFocused = taskList?.isFocused ?? false;
+  const { handleMenuClick } = useDesktopProjectHeader({ projectHeadingInfo });
 
   const isInputFocused = useContextKeyValue(InputFocusedContext);
   const handleStartEdit = (value: string, cursor: number) => {
@@ -143,9 +145,30 @@ export const DesktopHeadingListItem: React.FC<DesktopHeadingListItemProps> = ({
           onSave={(title: string) => {
             todoService.updateProjectHeading(projectHeadingInfo.id, { title });
           }}
-          className={desktopStyles.DesktopHeadingListItemInput}
+          className={classNames(
+            desktopStyles.DesktopHeadingListItemInput,
+            projectHeadingInfo.isArchived ? 'text-t3' : 'text-t2'
+          )}
+          textClassName={projectHeadingInfo.isArchived ? 'item-status-title-closed' : undefined}
+          inputClassName={projectHeadingInfo.isArchived ? 'item-status-title-closed' : undefined}
           placeholder={localize('project_heading.placeholder', 'New Heading')}
         />
+        <button
+          type="button"
+          data-no-drag
+          className={classNames(
+            desktopStyles.DesktopHeadingListItemMenuButton,
+            isSelected && desktopStyles.DesktopHeadingListItemMenuButtonVisible
+          )}
+          onPointerDown={(event) => event.stopPropagation()}
+          onClick={(event) => {
+            event.stopPropagation();
+            handleMenuClick(event);
+          }}
+          title={localize('common.more', 'More')}
+        >
+          <MenuIcon className={desktopStyles.DesktopHeadingListItemMenuIcon} />
+        </button>
       </div>
     </div>
   );

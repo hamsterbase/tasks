@@ -9,6 +9,9 @@ import { CSS } from '@dnd-kit/utilities';
 import classNames from 'classnames';
 import React from 'react';
 import { styles } from '@/mobile/theme';
+import { getItemStatusVisual, itemToneClass } from '@/components/todo/itemStatusVisual';
+import { useItemStatusAnimation } from '@/hooks/useItemStatusAnimation';
+import { triggerCompletionHaptic } from '@/mobile/utils/triggerCompletionHaptic';
 
 interface SubtaskItemProps {
   id: string;
@@ -44,6 +47,8 @@ export const SubtaskItem: React.FC<SubtaskItemProps> = ({
   dragHandleClassName,
 }) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id });
+  const animationPhase = useItemStatusAnimation(status);
+  const visual = getItemStatusVisual(status);
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -51,6 +56,9 @@ export const SubtaskItem: React.FC<SubtaskItemProps> = ({
   };
 
   const handleClick = () => {
+    if (status === 'created') {
+      triggerCompletionHaptic();
+    }
     onStatusChange(id, status === 'created' ? 'completed' : 'created');
   };
 
@@ -90,13 +98,19 @@ export const SubtaskItem: React.FC<SubtaskItemProps> = ({
   }
 
   return (
-    <div className={classNames(styles.subtaskItemRoot, className)} ref={setNodeRef} style={style}>
+    <div
+      className={classNames(styles.subtaskItemRoot, className)}
+      ref={setNodeRef}
+      style={style}
+      data-status={status}
+      data-status-animation={animationPhase}
+    >
       <div
         onClick={handleClick}
         {...longPressEvents}
         className={classNames(styles.subtaskItemStatusButton, statusButtonClassName)}
       >
-        <TaskCheckbox size="small" status={status} />
+        <TaskCheckbox size="small" status={status} animationPhase={animationPhase} />
       </div>
       <input
         value={inputValue}
@@ -107,11 +121,8 @@ export const SubtaskItem: React.FC<SubtaskItemProps> = ({
         className={classNames(
           styles.createTaskSubtaskInput,
           inputClassName,
-          status === 'canceled'
-            ? styles.subtaskItemInputCanceled
-            : status === 'completed'
-              ? styles.subtaskItemInputCompleted
-              : styles.subtaskItemInputNormal
+          itemToneClass(visual.titleTone),
+          visual.closed && 'item-status-title-closed'
         )}
         placeholder={localize('mobile.subtask.placeholder', 'Subtask')}
         ref={inputRef}

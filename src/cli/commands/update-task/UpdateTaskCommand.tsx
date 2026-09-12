@@ -3,6 +3,7 @@ import { Text } from 'ink';
 import { z } from 'zod';
 import { CliTaskUpdatePayload } from '../../../base/common/cliApproval/protocol';
 import {
+  readExplanation,
   parseDateFlag,
   parsePositionFlag,
   parseTagsFlag,
@@ -12,6 +13,7 @@ import {
   validatePosition,
 } from '../../core/approval';
 import {
+  EXPLANATION_OPTIONS,
   DUE_DATE_OPTION,
   ID_OPTION,
   INSTANCE_OPTION,
@@ -24,15 +26,15 @@ import {
 import {
   dateSchema,
   idSchema,
-  instanceSchema,
+  approvalCommandSchema,
   positionSchema,
   statusSchema,
   titleSchema,
 } from '../../core/commandSchemas';
 import { CommandMeta, ParsedArgs, parseCommandFlags } from '../../engine';
 
-const flagsSchema = z
-  .object({
+const flagsSchema = approvalCommandSchema
+  .extend({
     id: idSchema,
     title: titleSchema.optional(),
     notes: z.string().optional(),
@@ -41,9 +43,7 @@ const flagsSchema = z
     tags: z.string().optional(),
     status: statusSchema.optional(),
     position: positionSchema.optional(),
-    instance: instanceSchema,
   })
-  .strict()
   .refine(
     (flags) =>
       ['title', 'notes', 'start-date', 'due-date', 'tags', 'status', 'position'].some(
@@ -62,6 +62,7 @@ export class UpdateTaskCommand {
     name: 'update-task',
     description: 'Update a single task',
     options: [
+      ...EXPLANATION_OPTIONS,
       { ...ID_OPTION, description: 'Stable task id' },
       { ...TITLE_OPTION, required: false },
       { name: 'notes', arg: '<text|none>', description: 'Notes; "none" clears them' },
@@ -117,6 +118,7 @@ export class UpdateTaskCommand {
       fields.push('position');
     }
     return submitChangeRequest({
+      explanation: await readExplanation(this.flags),
       instanceFlag: this.flags.instance,
       buildOps: (data) => {
         const task = requireTask(data, uid);

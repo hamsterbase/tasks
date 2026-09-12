@@ -1,7 +1,8 @@
+import { withAttachments, attachmentLines } from '../../core/attachments';
 import React from 'react';
 import { Text } from 'ink';
 import { z } from 'zod';
-import { loadInstanceContext } from '../../core/approval';
+import { loadInstanceContext, parseIdsFlag } from '../../core/approval';
 import { ID_OPTION, INSTANCE_OPTION } from '../../core/commandOptions';
 import { idsSchema, instanceSchema } from '../../core/commandSchemas';
 import { getTaskDetails, TaskDetail } from '../../core/items';
@@ -16,6 +17,7 @@ function detailLines(task: TaskDetail, depth = 0): string[] {
     `${indent}${task.title} [${task.id}]`,
     `${indent}status: ${task.status} · location: ${task.location}`,
     ...(task.notes ? [`${indent}notes: ${task.notes}`] : []),
+    ...attachmentLines(task.attachments, indent),
     ...task.children.flatMap((child) => detailLines(child, depth + 1)),
   ];
 }
@@ -40,7 +42,7 @@ export class ViewTasksCommand {
 
   async exec(): Promise<TaskDetail[]> {
     const { model } = await loadInstanceContext(this.flags.instance);
-    const ids = [...new Set(this.flags.id.split(',').map((id) => id.trim()))];
-    return getTaskDetails(model.toJSON(), ids);
+    const ids = parseIdsFlag(this.flags.id);
+    return withAttachments(model, getTaskDetails(model.toJSON(), ids));
   }
 }

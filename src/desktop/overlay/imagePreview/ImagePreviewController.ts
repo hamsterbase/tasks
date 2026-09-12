@@ -5,9 +5,9 @@ import { IDisposable } from '@hamsterbase/foundation/lifecycle';
 import { IInstantiationService } from '@hamsterbase/foundation/instantiation';
 import { IWorkbenchOverlayService, OverlayInitOptions } from '../../../services/overlay/common/WorkbenchOverlayService';
 
-export interface ImagePreviewOptions {
-  attachment: AttachmentSchema;
-}
+export type ImagePreviewOptions =
+  | { attachment: AttachmentSchema; image?: never }
+  | { image: { url: string; filename: string }; attachment?: never };
 
 export class ImagePreviewController implements IDisposable {
   static create(options: ImagePreviewOptions, instantiationService: IInstantiationService) {
@@ -23,8 +23,12 @@ export class ImagePreviewController implements IDisposable {
     return this.option.index;
   }
 
-  get attachment(): AttachmentSchema {
+  get attachment(): AttachmentSchema | undefined {
     return this.imagePreviewOptions.attachment;
+  }
+
+  get image() {
+    return this.imagePreviewOptions.image;
   }
 
   private _onStatusChange = new Emitter<void>();

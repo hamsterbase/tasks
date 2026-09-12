@@ -101,7 +101,12 @@ export const RecurringTaskSettingsOverlay: React.FC = () => {
             />
             {startDateHasValue && !startDateIsValid ? (
               <div className={desktopStyles.RecurringTaskSettingsDialogErrorCard}>
-                <span className={desktopStyles.RecurringTaskSettingsDialogErrorDescription}>{invalidRuleText}</span>
+                <span
+                  data-test-id={TestIds.RecurringTaskSettings.InvalidRule}
+                  className={desktopStyles.RecurringTaskSettingsDialogErrorDescription}
+                >
+                  {invalidRuleText}
+                </span>
                 <span className={desktopStyles.RecurringTaskSettingsDialogSyntaxHint}>{syntaxHint}</span>
               </div>
             ) : (
@@ -135,7 +140,12 @@ export const RecurringTaskSettingsOverlay: React.FC = () => {
             />
             {dueDateHasValue && !dueDateIsValid ? (
               <div className={desktopStyles.RecurringTaskSettingsDialogErrorCard}>
-                <span className={desktopStyles.RecurringTaskSettingsDialogErrorDescription}>{invalidRuleText}</span>
+                <span
+                  data-test-id={TestIds.RecurringTaskSettings.InvalidRule}
+                  className={desktopStyles.RecurringTaskSettingsDialogErrorDescription}
+                >
+                  {invalidRuleText}
+                </span>
                 <span className={desktopStyles.RecurringTaskSettingsDialogSyntaxHint}>{syntaxHint}</span>
               </div>
             ) : (

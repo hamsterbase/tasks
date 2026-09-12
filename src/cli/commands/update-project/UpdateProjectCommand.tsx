@@ -3,6 +3,7 @@ import { Text } from 'ink';
 import { z } from 'zod';
 import { CliProjectUpdatePayload } from '../../../base/common/cliApproval/protocol';
 import {
+  readExplanation,
   parseDateFlag,
   parsePositionFlag,
   parseTagsFlag,
@@ -12,6 +13,7 @@ import {
   validatePosition,
 } from '../../core/approval';
 import {
+  EXPLANATION_OPTIONS,
   DUE_DATE_OPTION,
   ID_OPTION,
   INSTANCE_OPTION,
@@ -20,11 +22,11 @@ import {
   TAGS_OPTION,
   TITLE_OPTION,
 } from '../../core/commandOptions';
-import { dateSchema, idSchema, instanceSchema, positionSchema, titleSchema } from '../../core/commandSchemas';
+import { dateSchema, idSchema, approvalCommandSchema, positionSchema, titleSchema } from '../../core/commandSchemas';
 import { CommandMeta, ParsedArgs, parseCommandFlags } from '../../engine';
 
-const flagsSchema = z
-  .object({
+const flagsSchema = approvalCommandSchema
+  .extend({
     id: idSchema,
     title: titleSchema.optional(),
     notes: z.string().optional(),
@@ -32,9 +34,7 @@ const flagsSchema = z
     'due-date': dateSchema.optional(),
     tags: z.string().optional(),
     position: positionSchema.optional(),
-    instance: instanceSchema,
   })
-  .strict()
   .refine(
     (flags) =>
       flags.title !== undefined ||
@@ -56,6 +56,7 @@ export class UpdateProjectCommand {
     name: 'update-project',
     description: 'Update a project',
     options: [
+      ...EXPLANATION_OPTIONS,
       ID_OPTION,
       { ...TITLE_OPTION, required: false },
       { name: 'notes', arg: '<text|none>', description: 'Notes; "none" clears them' },
@@ -105,6 +106,7 @@ export class UpdateProjectCommand {
       fields.push('position');
     }
     return submitChangeRequest({
+      explanation: await readExplanation(this.flags),
       instanceFlag: this.flags.instance,
       buildOps: (data) => {
         const project = requireProject(data, uid);

@@ -3,24 +3,29 @@ import { Text } from 'ink';
 import { z } from 'zod';
 import { CliHeadingUpdatePayload } from '../../../base/common/cliApproval/protocol';
 import {
+  readExplanation,
   parsePositionFlag,
   requireHeading,
   submitChangeRequest,
   SubmitResult,
   validatePosition,
 } from '../../core/approval';
-import { ID_OPTION, INSTANCE_OPTION, POSITION_OPTION, TITLE_OPTION } from '../../core/commandOptions';
-import { idSchema, instanceSchema, positionSchema, titleSchema } from '../../core/commandSchemas';
+import {
+  EXPLANATION_OPTIONS,
+  ID_OPTION,
+  INSTANCE_OPTION,
+  POSITION_OPTION,
+  TITLE_OPTION,
+} from '../../core/commandOptions';
+import { idSchema, approvalCommandSchema, positionSchema, titleSchema } from '../../core/commandSchemas';
 import { CommandMeta, ParsedArgs, parseCommandFlags } from '../../engine';
 
-const flagsSchema = z
-  .object({
+const flagsSchema = approvalCommandSchema
+  .extend({
     id: idSchema,
     title: titleSchema.optional(),
     position: positionSchema.optional(),
-    instance: instanceSchema,
   })
-  .strict()
   .refine((flags) => flags.title !== undefined || flags.position !== undefined, {
     message: 'title or position is required',
   });
@@ -34,7 +39,13 @@ export class UpdateHeadingCommand {
   static readonly meta: CommandMeta = {
     name: 'update-heading',
     description: 'Update a project heading',
-    options: [ID_OPTION, { ...TITLE_OPTION, required: false }, POSITION_OPTION, INSTANCE_OPTION],
+    options: [
+      ...EXPLANATION_OPTIONS,
+      ID_OPTION,
+      { ...TITLE_OPTION, required: false },
+      POSITION_OPTION,
+      INSTANCE_OPTION,
+    ],
     view: renderResult,
   };
 
@@ -58,6 +69,7 @@ export class UpdateHeadingCommand {
       fields.push('position');
     }
     return submitChangeRequest({
+      explanation: await readExplanation(this.flags),
       instanceFlag: this.flags.instance,
       buildOps: (data) => {
         const heading = requireHeading(data, uid);

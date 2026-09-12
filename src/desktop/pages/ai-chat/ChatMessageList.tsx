@@ -1,3 +1,4 @@
+import { TestIds } from '@/testIds';
 import { BrainIcon, ChevronDownIcon, ChevronRightIcon, Loader2Icon, StopIcon, SyncIcon } from '@/components/icons';
 import { desktopStyles } from '@/desktop/theme/main';
 import { localize } from '@/nls';
@@ -109,7 +110,7 @@ const MessageFooter: React.FC<{
 
   if (status === 'generating') {
     return (
-      <span className={desktopStyles.AIChatMessageFooterStatus}>
+      <span data-test-id={TestIds.AIChat.Generating} className={desktopStyles.AIChatMessageFooterStatus}>
         <Loader2Icon className={desktopStyles.AIChatMessageFooterLoadingIcon} />
         {localize('ai_chat.status_responding', 'Generating...')}
       </span>

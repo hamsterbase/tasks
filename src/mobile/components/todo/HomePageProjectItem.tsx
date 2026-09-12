@@ -15,6 +15,8 @@ import { DragItem } from '../dnd/DragItem';
 import { MobileProjectCheckbox } from '../icon/MobileProjectCheckbox';
 import useNavigate from '@/hooks/useNavigate';
 import { FlagIcon } from '@/components/icons';
+import { getItemStatusVisual, itemToneClass } from '@/components/todo/itemStatusVisual';
+import { useItemStatusAnimation } from '@/hooks/useItemStatusAnimation';
 
 interface HomePageProjectItemProps {
   projectInfo: ProjectInfoState;
@@ -43,13 +45,12 @@ export const HomePageProjectItem: React.FC<HomePageProjectItemProps> = ({ projec
     transition,
     opacity: isDragging ? 0.5 : 1,
   };
+  const animationPhase = useItemStatusAnimation(projectInfo.status);
+  const visual = getItemStatusVisual(projectInfo.status);
 
   if (isDragging) {
     return <DragItem ref={setNodeRef} attributes={attributes} listeners={listeners} style={style} />;
   }
-
-  const isCompleted = projectInfo.status === 'completed';
-  const isCanceled = projectInfo.status === 'canceled';
 
   const titleNode = isEditing ? (
     <input {...textAreaProps} className={styles.homeProjectItemEditingInput} />
@@ -57,13 +58,9 @@ export const HomePageProjectItem: React.FC<HomePageProjectItemProps> = ({ projec
     <span
       className={classNames(
         styles.homeProjectItemTitle,
-        isCanceled
-          ? styles.homeProjectItemTitleCompleted
-          : isCompleted
-            ? styles.homeProjectItemTitleCanceled
-            : projectInfo.title
-              ? styles.homeProjectItemTitleNormal
-              : styles.homeProjectItemTitlePlaceholder
+        projectInfo.title ? itemToneClass(visual.titleTone) : styles.homeProjectItemTitlePlaceholder,
+        visual.closed && 'item-status-title-closed item-status-title-animated',
+        animationPhase === 'reverting' && 'item-status-title-reverting'
       )}
     >
       {projectInfo.title || localize('project.untitled', 'New Project')}
@@ -84,9 +81,16 @@ export const HomePageProjectItem: React.FC<HomePageProjectItemProps> = ({ projec
         if (shouldIgnoreClick(e)) return;
         navigate({ path: `/project/${projectInfo.uid}` });
       }}
+      data-status={projectInfo.status}
+      data-status-animation={animationPhase}
     >
       <div className={styles.homeProjectItemCheckboxContainer}>
-        <MobileProjectCheckbox size="large" status={projectInfo.status} progress={projectInfo.progress * 100} />
+        <MobileProjectCheckbox
+          size="large"
+          status={projectInfo.status}
+          progress={projectInfo.progress * 100}
+          animationPhase={animationPhase}
+        />
       </div>
       <div className={styles.homeProjectItemContent}>
         <div className={styles.homeProjectItemTitleRow}>{titleNode}</div>

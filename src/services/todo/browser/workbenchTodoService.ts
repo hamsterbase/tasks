@@ -1,5 +1,7 @@
 import { getPeerId, resetPeerId } from '@/base/browser/getPeerId';
+import { ITEM_STATUS_TIMING } from '@/base/common/itemStatusAnimation';
 import { TaskModel } from '@/core/model.ts';
+import { getProject } from '@/core/state/getProject';
 import {
   batchEdit as executeBatchEdit,
   BatchEditParams,
@@ -30,7 +32,6 @@ import {
 import { IDatabaseStorage } from '@/services/database/common/database';
 import { EditingContent, ITodoService, TaskCommand, VIEW_SCHEMA_VERSION } from '@/services/todo/common/todoService.ts';
 import type { TreeID } from 'loro-crdt';
-import { debounceTime, Subject } from 'rxjs';
 import { ByteBuffer, decodeBase64, encodeBase64 } from '@hamsterbase/foundation/buffer';
 import { Emitter } from '@hamsterbase/foundation/event';
 import { DisposableStore } from '@hamsterbase/foundation/lifecycle';
@@ -53,17 +54,9 @@ export class WorkbenchTodoService implements ITodoService {
 
   private _editingContent: EditingContent | null = null;
 
-  private _keepAliveElements: string[] = [];
-  private _clearKeepAliveSubject = new Subject<void>();
+  private _keepAliveElementTimers = new Map<string, ReturnType<typeof setTimeout>>();
 
   private _storageId: string | null = null;
-
-  constructor() {
-    this._clearKeepAliveSubject.pipe(debounceTime(1000)).subscribe(() => {
-      this._keepAliveElements = [];
-      this._onStateChange.fire();
-    });
-  }
 
   get editingContent() {
     return this._editingContent;
@@ -134,10 +127,11 @@ export class WorkbenchTodoService implements ITodoService {
   }
 
   get keepAliveElements() {
+    const keepAliveElements = Array.from(this._keepAliveElementTimers.keys());
     if (this.editingContent) {
-      return [this.editingContent.id, ...this._keepAliveElements];
+      return [this.editingContent.id, ...keepAliveElements];
     }
-    return this._keepAliveElements;
+    return keepAliveElements;
   }
 
   get modelState() {
@@ -229,12 +223,33 @@ export class WorkbenchTodoService implements ITodoService {
   }
 
   transitionProjectState(options: ProjectStatusTransition) {
+    const project = getProject(this.modelState, options.projectId);
+    const affectedTaskIds = project
+      ? [
+          ...project.tasks.map((task) => task.id),
+          ...project.projectHeadings.flatMap((heading) => heading.tasks.map((task) => task.id)),
+        ]
+      : [];
+    this.addKeepAliveElements([options.projectId, ...affectedTaskIds]);
     return this.taskModel.transitionProjectState(options);
   }
 
   private addKeepAliveElement(element: string) {
-    this._clearKeepAliveSubject.next();
-    this._keepAliveElements.push(element);
+    this.addKeepAliveElements([element]);
+  }
+
+  private addKeepAliveElements(elements: string[]) {
+    elements.forEach((element) => {
+      const existingTimer = this._keepAliveElementTimers.get(element);
+      if (existingTimer) {
+        clearTimeout(existingTimer);
+      }
+      const timer = setTimeout(() => {
+        this._keepAliveElementTimers.delete(element);
+        this._onStateChange.fire();
+      }, ITEM_STATUS_TIMING.keepAlive);
+      this._keepAliveElementTimers.set(element, timer);
+    });
     this._onStateChange.fire();
   }
 

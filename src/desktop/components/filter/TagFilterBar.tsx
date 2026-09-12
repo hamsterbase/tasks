@@ -1,3 +1,4 @@
+import { TestIds } from '@/testIds';
 import { TAG_FILTER_ALL, TAG_FILTER_UNTAGGED, TagFilter, isSameTagFilter } from './tagFilter';
 import { TagIcon } from '@/components/icons';
 import { desktopStyles } from '@/desktop/theme/main';
@@ -30,7 +31,7 @@ export const TagFilterBar: React.FC<TagFilterBarProps> = ({ tags, selected, onSe
   };
 
   return (
-    <div className={desktopStyles.tagFilterBarContainer}>
+    <div data-test-id={TestIds.EntityHeader.TagFilterBar} className={desktopStyles.tagFilterBarContainer}>
       <span className={desktopStyles.tagFilterBarIcon}>
         <TagIcon className={desktopStyles.tagFilterBarIconSvg} strokeWidth={1.5} />
       </span>

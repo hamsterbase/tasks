@@ -1,3 +1,4 @@
+import { TestIds } from '@/testIds';
 import { CloseIcon, DownloadIcon, Loader2Icon } from '@/components/icons';
 import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
@@ -13,8 +14,15 @@ const ImagePreviewContent: React.FC<{ controller: ImagePreviewController }> = ({
   const attachmentService = useService(IAttachmentUploadService);
   const [url, setUrl] = useState<string | null>(null);
   const attachment = controller.attachment;
+  const image = controller.image;
+  const filename = image?.filename ?? attachment?.filename ?? '';
 
   useEffect(() => {
+    if (image) {
+      setUrl(image.url);
+      return;
+    }
+    if (!attachment) return;
     let revoked = false;
     let createdUrl: string | null = null;
     void attachmentService.getObjectUrl(attachment.s3Key).then((u) => {
@@ -29,7 +37,7 @@ const ImagePreviewContent: React.FC<{ controller: ImagePreviewController }> = ({
       revoked = true;
       if (createdUrl) URL.revokeObjectURL(createdUrl);
     };
-  }, [attachment.s3Key, attachmentService]);
+  }, [attachment, attachmentService, image]);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -40,7 +48,14 @@ const ImagePreviewContent: React.FC<{ controller: ImagePreviewController }> = ({
   }, [controller]);
 
   const handleDownload = () => {
-    void attachmentService.downloadAttachment(attachment.s3Key, attachment.filename);
+    if (image) {
+      const link = document.createElement('a');
+      link.href = image.url;
+      link.download = image.filename;
+      link.click();
+    } else if (attachment) {
+      void attachmentService.downloadAttachment(attachment.s3Key, attachment.filename);
+    }
   };
 
   return (
@@ -62,6 +77,7 @@ const ImagePreviewContent: React.FC<{ controller: ImagePreviewController }> = ({
       </button>
       <button
         type="button"
+        data-test-id={TestIds.ImagePreview.CloseButton}
         className={desktopStyles.ImagePreviewCloseButton}
         onClick={() => controller.close()}
         title={localize('common.close', 'Close')}
@@ -71,7 +87,7 @@ const ImagePreviewContent: React.FC<{ controller: ImagePreviewController }> = ({
       {url ? (
         <img
           src={url}
-          alt={attachment.filename}
+          alt={filename}
           className={desktopStyles.ImagePreviewImage}
           onClick={(e) => e.stopPropagation()}
         />

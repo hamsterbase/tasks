@@ -2,6 +2,7 @@ import { useTaskItemActions } from '@/base/hooks/useTaskItemActions';
 import { taskTitleInputKey } from '@/components/edit/inputKeys';
 import { ITaskList } from '@/components/taskList/type.ts';
 import { TaskInfo } from '@/core/state/type';
+import { ItemVisualContext, getItemStatusVisual, itemToneClass } from '@/components/todo/itemStatusVisual';
 import { desktopStyles } from '@/desktop/theme/main';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { useLongPress } from '@/hooks/useLongPress.ts';
@@ -18,6 +19,7 @@ import { getTaskItemTags } from '@/core/state/getTaskItemTags';
 import { useService } from '@/hooks/use-service';
 import { useSync } from '@/hooks/use-sync';
 import { useContextKeyValue } from '@/hooks/useContextKeyValue';
+import { useItemStatusAnimation } from '@/hooks/useItemStatusAnimation';
 import { IAttachmentUploadService } from '@/services/attachment/common/attachmentUploadService';
 import { ITodoService } from '@/services/todo/common/todoService';
 import { useSortable } from '@dnd-kit/sortable';
@@ -32,6 +34,7 @@ export interface TaskListItemProps {
   hideProjectTitle?: boolean;
   disableDrag?: boolean;
   followParentArchiveState?: boolean;
+  visualContext?: ItemVisualContext;
 }
 
 export const TaskListItem: React.FC<TaskListItemProps> = ({
@@ -40,11 +43,11 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
   taskList,
   hideProjectTitle = false,
   disableDrag,
-  followParentArchiveState,
+  visualContext = 'default',
 }) => {
-  const isCompletedLike = task.status === 'completed' || task.status === 'canceled';
-  const isArchivedLike = followParentArchiveState && task.isParentArchived;
   const inputRef = useRef<HTMLInputElement>(null);
+  const animationPhase = useItemStatusAnimation(task.status);
+  const visual = getItemStatusVisual(task.status, visualContext);
 
   const { attributes, listeners, setNodeRef, transform, isDragging } = useSortable({
     id: task.id,
@@ -70,10 +73,6 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
 
   if (isDragging) {
     style.opacity = 0.6;
-  } else if (isCompletedLike) {
-    style.opacity = 0.6;
-  } else if (willDisappear || isArchivedLike) {
-    style.opacity = 0.5;
   }
 
   useWatchEvent(taskList.onListStateChange);
@@ -172,11 +171,9 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
   };
 
   const taskClassName = classNames(desktopStyles.TaskListItemContainer, {
-    [desktopStyles.TaskListItemContainerCompleted]: isCompletedLike,
-    [desktopStyles.TaskListItemContainerWillDisappear]: willDisappear,
     [desktopStyles.TaskListItemContainerSelected]: (isFocused && isSelected && !isDragging) || isDragging,
     [desktopStyles.TaskListItemContainerSelectedInactive]: !isFocused && isSelected && !isDragging,
-    [desktopStyles.TaskListItemContainerArchived]: isArchivedLike,
+    'item-status-row-exiting': willDisappear,
   });
 
   const todoService = useService(ITodoService);
@@ -199,7 +196,12 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
   };
 
   const titleClassName = classNames(desktopStyles.TaskListItemTitleInput, {
-    [desktopStyles.TaskListItemTitleInputCompleted]: task.status === 'completed',
+    [itemToneClass(visual.titleTone)]: task.title,
+    [desktopStyles.TaskListItemTitleSpanPlaceHolder]: !task.title,
+  });
+  const titleTextClassName = classNames({
+    'item-status-title-closed item-status-title-animated': visual.closed,
+    'item-status-title-reverting': animationPhase === 'reverting',
   });
 
   return (
@@ -215,6 +217,8 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
       data-testid={TestIds.TaskListItem.Root}
       data-selected={isSelected ? 'true' : undefined}
       data-status={task.status}
+      data-status-animation={animationPhase}
+      data-exiting={willDisappear && animationPhase === 'settling' ? 'true' : undefined}
     >
       {!disableDrag && (
         <span className={desktopStyles.TaskListItemDragHandle}>
@@ -235,7 +239,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
         className={desktopStyles.TaskListItemStatusButton}
         style={{ visibility: isDragging ? 'hidden' : 'visible' }}
       >
-        <TaskIcon status={task.status} />
+        <TaskIcon status={task.status} animationPhase={animationPhase} />
       </button>
       <div className={desktopStyles.TaskListItemContent} style={{ visibility: isDragging ? 'hidden' : 'visible' }}>
         <div className={desktopStyles.TaskListItemTitleRow} data-testid={TestIds.TaskListItem.Title}>
@@ -250,12 +254,18 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
               taskItemActions.updateTaskTitle(value);
             }}
             className={titleClassName}
+            textClassName={titleTextClassName}
+            inputClassName={visual.closed ? 'item-status-title-closed' : undefined}
             placeholder={localize('tasks.untitled', 'New Task')}
           />
-          {task.notes && <NotesIcon className={desktopStyles.TaskListItemIcon} />}
-          {task.children && task.children.length > 0 && <SubtaskIcon className={desktopStyles.TaskListItemIcon} />}
+          {task.notes && (
+            <NotesIcon className={classNames(desktopStyles.TaskListItemIcon, itemToneClass(visual.metadataTone))} />
+          )}
+          {task.children && task.children.length > 0 && (
+            <SubtaskIcon className={classNames(desktopStyles.TaskListItemIcon, itemToneClass(visual.metadataTone))} />
+          )}
         </div>
-        <ItemTagsList tags={tags} isSelected={isSelected} />
+        <ItemTagsList tags={tags} isSelected={isSelected} tone={visual.metadataTone} />
       </div>
     </div>
   );

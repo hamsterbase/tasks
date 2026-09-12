@@ -1,18 +1,15 @@
 import React from 'react';
 import { Text } from 'ink';
 import { z } from 'zod';
-import { requireArea, submitChangeRequest, SubmitResult } from '../../core/approval';
-import { INSTANCE_OPTION, TITLE_OPTION } from '../../core/commandOptions';
-import { idSchema, instanceSchema, titleSchema } from '../../core/commandSchemas';
+import { readExplanation, requireArea, submitChangeRequest, SubmitResult } from '../../core/approval';
+import { EXPLANATION_OPTIONS, INSTANCE_OPTION, TITLE_OPTION } from '../../core/commandOptions';
+import { idSchema, approvalCommandSchema, titleSchema } from '../../core/commandSchemas';
 import { CommandMeta, ParsedArgs, parseCommandFlags } from '../../engine';
 
-const flagsSchema = z
-  .object({
-    title: titleSchema,
-    parent: idSchema.optional(),
-    instance: instanceSchema,
-  })
-  .strict();
+const flagsSchema = approvalCommandSchema.extend({
+  title: titleSchema,
+  parent: idSchema.optional(),
+});
 type Flags = z.output<typeof flagsSchema>;
 
 function renderResult(result: SubmitResult) {
@@ -24,6 +21,7 @@ export class AddProjectCommand {
     name: 'add-project',
     description: 'Create a project in the root or an area',
     options: [
+      ...EXPLANATION_OPTIONS,
       TITLE_OPTION,
       { name: 'parent', arg: '<area-id>', description: 'Area id; omit to create a root project' },
       INSTANCE_OPTION,
@@ -40,6 +38,7 @@ export class AddProjectCommand {
   async exec(): Promise<SubmitResult> {
     const { title, parent: parentUid } = this.flags;
     return submitChangeRequest({
+      explanation: await readExplanation(this.flags),
       instanceFlag: this.flags.instance,
       buildOps: (data) => {
         const parent = parentUid ? requireArea(data, parentUid) : undefined;

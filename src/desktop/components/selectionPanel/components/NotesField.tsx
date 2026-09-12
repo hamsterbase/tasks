@@ -3,15 +3,19 @@ import {
   findTextPositionFromCoordinates,
 } from '@/base/browser/findTextPositionFromCoordinates';
 import { useConfig } from '@/hooks/useConfig';
+import { useService } from '@/hooks/use-service';
+import { useDesktopMessage } from '@/desktop/overlay/desktopMessage/useDesktopMessage';
 import { localize } from '@/nls';
+import { IAttachmentUploadService } from '@/services/attachment/common/attachmentUploadService';
 import { notesMarkdownRenderConfigKey } from '@/services/config/config';
 import { desktopStyles } from '@/desktop/theme/main';
 import TextArea, { TextAreaRef } from 'rc-textarea';
 import React, { useEffect, useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
-import ReactMarkdown from 'react-markdown';
+import { NotesMarkdown } from '@/desktop/components/NotesMarkdown';
 
 interface NotesFieldProps {
+  parentUid?: string;
   value: string;
   onSave: (value: string) => void;
   placeholder?: string;
@@ -20,11 +24,14 @@ interface NotesFieldProps {
 }
 
 export const NotesField: React.FC<NotesFieldProps> = ({
+  parentUid,
   value,
   onSave,
   placeholder = localize('notes_placeholder', 'Add notes...'),
   className,
 }) => {
+  const attachmentService = useService(IAttachmentUploadService);
+  const showMessage = useDesktopMessage();
   const [isEditing, setIsEditing] = useState(false);
   const [textValue, setTextValue] = useState(value);
   const textAreaRef = useRef<TextAreaRef>(null);
@@ -74,6 +81,22 @@ export const NotesField: React.FC<NotesFieldProps> = ({
     setTextValue(e.target.value);
   };
 
+  const handlePaste = (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
+    if (!parentUid) return;
+    const images = Array.from(e.clipboardData.files).filter((file) => file.type.startsWith('image/'));
+    if (images.length === 0) return;
+
+    e.preventDefault();
+    if (!attachmentService.getConfig()) {
+      showMessage({
+        type: 'error',
+        message: localize('attachments.pasteNotConfigured', 'Set up S3 storage in Settings before pasting images.'),
+      });
+      return;
+    }
+    attachmentService.uploadFiles(images, parentUid);
+  };
+
   return (
     <div ref={containerRef} className={desktopStyles.NotesFieldContainer}>
       {!hasNotes || isEditing || !notesMarkdownRender ? (
@@ -81,6 +104,7 @@ export const NotesField: React.FC<NotesFieldProps> = ({
           ref={textAreaRef}
           value={textValue}
           onChange={handleChange}
+          onPaste={handlePaste}
           onBlur={handleBlur}
           className={className}
           style={{ width: '100%' }}
@@ -89,36 +113,7 @@ export const NotesField: React.FC<NotesFieldProps> = ({
         />
       ) : (
         <div className={className} onClick={handleMarkdownClick}>
-          <ReactMarkdown
-            components={{
-              h1: ({ children }) => <h1 className={desktopStyles.NotesMarkdownH1}>{children}</h1>,
-              h2: ({ children }) => <h2 className={desktopStyles.NotesMarkdownH2}>{children}</h2>,
-              h3: ({ children }) => <h3 className={desktopStyles.NotesMarkdownH3}>{children}</h3>,
-              h4: ({ children }) => <h4 className={desktopStyles.NotesMarkdownH4}>{children}</h4>,
-              p: ({ children }) => <p className={desktopStyles.NotesMarkdownP}>{children}</p>,
-              ol: ({ children }) => <ol className={desktopStyles.NotesMarkdownOl}>{children}</ol>,
-              ul: ({ children }) => <ul className={desktopStyles.NotesMarkdownUl}>{children}</ul>,
-              li: ({ children }) => <li className={desktopStyles.NotesMarkdownLi}>{children}</li>,
-              a: ({ children, href }) => (
-                <a
-                  href={href}
-                  className={desktopStyles.NotesMarkdownLink}
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  {children}
-                </a>
-              ),
-              blockquote: ({ children }) => (
-                <blockquote className={desktopStyles.NotesMarkdownBlockquote}>{children}</blockquote>
-              ),
-              code: ({ children }) => <code className={desktopStyles.NotesMarkdownCode}>{children}</code>,
-              pre: ({ children }) => <pre className={desktopStyles.NotesMarkdownPre}>{children}</pre>,
-            }}
-          >
-            {value}
-          </ReactMarkdown>
+          <NotesMarkdown>{value}</NotesMarkdown>
         </div>
       )}
     </div>

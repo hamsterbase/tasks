@@ -1,3 +1,5 @@
+import { z } from 'zod';
+import { CliExplanation, CliExplanationImage } from '../../base/common/cliApproval/explanation';
 import { nanoid } from 'nanoid';
 import * as fs from 'fs/promises';
 import * as net from 'net';
@@ -72,7 +74,7 @@ export async function listInstances(): Promise<CliInstanceInfo[]> {
 /**
  * Refuse a command the selected app is too old to understand. A newer app
  * always speaks to an older CLI, so this only guards the other direction, and
- * only for commands that declare a `minProtocolVersion` above the oldest one.
+ * only when the command or a supplied option requires a version above the oldest one.
  */
 export async function assertInstanceSupports(
   minProtocolVersion: number,
@@ -196,6 +198,7 @@ export interface SubmitResult {
 }
 
 export interface SubmitContext {
+  explanation?: CliExplanation;
   instanceFlag?: string;
   /** builds and validates ops against the current model snapshot */
   buildOps: (data: ITaskModelData) => { ops: CliChangeOp[]; summary: string[] };
@@ -212,6 +215,7 @@ export async function submitChangeRequest(context: SubmitContext): Promise<Submi
   const { ops, summary } = context.buildOps(model.toJSON());
 
   const request: CliChangeRequest = {
+    ...(context.explanation ? { explanation: context.explanation } : {}),
     requestId: nanoid(),
     databaseId,
     createdAt: Date.now(),
@@ -536,4 +540,40 @@ export function parseCreateItemsFlag(value: string): CliCreateItem[] {
     throw new Error('content must contain at least one item');
   }
   return values.map((item, index) => parseCreateItem(item, `content[${index}]`));
+}
+
+const MIME_TYPES: Record<string, string> = {
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.webp': 'image/webp',
+  '.gif': 'image/gif',
+  '.avif': 'image/avif',
+  '.svg': 'image/svg+xml',
+  '.bmp': 'image/bmp',
+};
+
+export async function readExplanation(flags: {
+  explanation?: string;
+  'explanation-images'?: string;
+}): Promise<CliExplanation | undefined> {
+  if (flags.explanation === undefined && flags['explanation-images'] === undefined) return undefined;
+  let sources: string[];
+  try {
+    sources = z.array(z.string()).parse(JSON.parse(flags['explanation-images'] ?? '[]'));
+  } catch {
+    throw new Error('--explanation-images must be a JSON array of local image paths');
+  }
+  const images: CliExplanationImage[] = [];
+  for (const source of sources) {
+    if (/^https?:\/\//i.test(source)) {
+      throw new Error('--explanation-images only accepts local image paths');
+    }
+    images.push({
+      filename: path.basename(source),
+      mimetype: MIME_TYPES[path.extname(source).toLowerCase()] || 'application/octet-stream',
+      base64: (await fs.readFile(source)).toString('base64'),
+    });
+  }
+  return { text: flags.explanation ?? '', images };
 }

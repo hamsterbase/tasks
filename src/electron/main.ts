@@ -38,6 +38,11 @@ const cliApprovalService = new ElectronCliApprovalService(
         mainWindow.webContents.send('cli-approval-queue-changed', requests);
       }
     },
+    onAttachmentRequest: (request) => {
+      if (mainWindow && !mainWindow.isDestroyed()) {
+        mainWindow.webContents.send('cli-attachment-request', request);
+      }
+    },
     onRequestArrived: () => {
       // draw attention without stealing focus; only when the window is closed
       // or in the background

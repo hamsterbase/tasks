@@ -1,3 +1,4 @@
+import { TestIds } from '@/testIds';
 import { AreaIcon } from '@/components/icons';
 import { getParentDisplay } from '@/core/state/getParentDisplay';
 import { useTreeSelect } from '@/desktop/overlay/treeSelect/useTreeSelect';
@@ -86,6 +87,7 @@ export const TaskLocationField: React.FC<TaskLocationFieldProps> = ({ itemId, la
   if (!parentDisplayData) {
     return (
       <TaskDetailAttributeRow
+        dataTestId={TestIds.DetailPanel.LocationField}
         icon={emptyIcon || <ProjectIcon status="created" progress={0} size="sm" />}
         label={resolvedLabel}
         content={localize('tasks.location.empty', 'Not set')}
@@ -97,6 +99,7 @@ export const TaskLocationField: React.FC<TaskLocationFieldProps> = ({ itemId, la
 
   return (
     <TaskDetailAttributeRow
+      dataTestId={TestIds.DetailPanel.LocationField}
       label={resolvedLabel}
       onClick={handleMoveClick}
       icon={

@@ -1,6 +1,7 @@
-import classNames from 'classnames';
+import { ItemStatusIcon } from '@/components/todo/ItemStatusIcon';
+import { ItemStatusAnimationPhase } from '@/components/todo/itemStatusVisual';
 import React from 'react';
-import { desktopStyles } from '@/desktop/theme/main';
+import { useItemStatusAnimation } from '@/hooks/useItemStatusAnimation';
 
 type IconSize = 'lg' | 'md' | 'sm' | 'xs';
 
@@ -15,52 +16,22 @@ interface TaskIconProps {
   status: string;
   size?: IconSize;
   className?: string;
+  animationPhase?: ItemStatusAnimationPhase;
 }
 
-export const TaskIcon: React.FC<TaskIconProps> = ({ status, size = 'md', className }) => {
-  const isCompleted = status === 'completed';
-  const isCanceled = status === 'canceled' || status === 'cancelled';
+export const TaskIcon: React.FC<TaskIconProps> = ({ status, size = 'md', className, animationPhase }) => {
   const pixelSize = sizeMap[size];
-  const radius = Math.max(3, Math.round(pixelSize * 0.28));
-  const checkmarkPath = `M ${pixelSize * 0.25} ${pixelSize * 0.5} L ${pixelSize * 0.45} ${pixelSize * 0.7} L ${pixelSize * 0.75} ${pixelSize * 0.35}`;
-  const crossInset = pixelSize * 0.3;
-  const crossPath = `M ${crossInset} ${crossInset} L ${pixelSize - crossInset} ${pixelSize - crossInset} M ${pixelSize - crossInset} ${crossInset} L ${crossInset} ${pixelSize - crossInset}`;
-
+  const normalizedStatus = status === 'cancelled' ? 'canceled' : status === 'pending' ? 'created' : status;
+  const internalAnimationPhase = useItemStatusAnimation(normalizedStatus as 'created' | 'completed' | 'canceled');
   return (
-    <span
-      className={classNames(desktopStyles.TaskIconContainer, className)}
-      style={{ width: pixelSize, height: pixelSize }}
-    >
-      <svg
-        width={pixelSize}
-        height={pixelSize}
-        viewBox={`0 0 ${pixelSize} ${pixelSize}`}
-        fill="none"
-        aria-hidden="true"
-      >
-        <rect
-          x="1"
-          y="1"
-          width={pixelSize - 2}
-          height={pixelSize - 2}
-          rx={radius}
-          ry={radius}
-          stroke="currentColor"
-          strokeWidth="1"
-        />
-        {isCompleted && (
-          <path
-            d={checkmarkPath}
-            stroke="currentColor"
-            strokeWidth="1.25"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        )}
-        {isCanceled && (
-          <path d={crossPath} stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-        )}
-      </svg>
-    </span>
+    <ItemStatusIcon
+      shape="task"
+      status={status as 'created' | 'completed' | 'canceled' | 'pending' | 'cancelled'}
+      size={pixelSize}
+      className={className}
+      animationPhase={animationPhase ?? internalAnimationPhase}
+      borderWidth={1}
+      markStrokeWidth={1.25}
+    />
   );
 };

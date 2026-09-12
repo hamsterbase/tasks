@@ -1,18 +1,21 @@
 import React from 'react';
 import { Text } from 'ink';
 import { z } from 'zod';
-import { parsePositionFlag, submitChangeRequest, SubmitResult, validatePosition } from '../../core/approval';
-import { INSTANCE_OPTION, POSITION_OPTION, TITLE_OPTION } from '../../core/commandOptions';
-import { instanceSchema, positionSchema, titleSchema } from '../../core/commandSchemas';
+import {
+  readExplanation,
+  parsePositionFlag,
+  submitChangeRequest,
+  SubmitResult,
+  validatePosition,
+} from '../../core/approval';
+import { EXPLANATION_OPTIONS, INSTANCE_OPTION, POSITION_OPTION, TITLE_OPTION } from '../../core/commandOptions';
+import { approvalCommandSchema, positionSchema, titleSchema } from '../../core/commandSchemas';
 import { CommandMeta, ParsedArgs, parseCommandFlags } from '../../engine';
 
-const flagsSchema = z
-  .object({
-    title: titleSchema,
-    position: positionSchema.optional(),
-    instance: instanceSchema,
-  })
-  .strict();
+const flagsSchema = approvalCommandSchema.extend({
+  title: titleSchema,
+  position: positionSchema.optional(),
+});
 type Flags = z.output<typeof flagsSchema>;
 
 function renderResult(result: SubmitResult) {
@@ -23,7 +26,7 @@ export class AddTaskCommand {
   static readonly meta: CommandMeta = {
     name: 'add-task',
     description: 'Create a task at a tree position (defaults to the inbox)',
-    options: [TITLE_OPTION, POSITION_OPTION, INSTANCE_OPTION],
+    options: [...EXPLANATION_OPTIONS, TITLE_OPTION, POSITION_OPTION, INSTANCE_OPTION],
     view: renderResult,
   };
 
@@ -37,6 +40,7 @@ export class AddTaskCommand {
     const { title, position: positionValue } = this.flags;
     const position = positionValue ? parsePositionFlag(positionValue) : undefined;
     return submitChangeRequest({
+      explanation: await readExplanation(this.flags),
       instanceFlag: this.flags.instance,
       buildOps: (data) => {
         if (position) {

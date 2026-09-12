@@ -1,4 +1,5 @@
 import { projectTitleInputKey } from '@/components/edit/inputKeys.ts';
+import { getItemStatusVisual, itemToneClass } from '@/components/todo/itemStatusVisual';
 import { AreaIcon, FlagIcon, MenuIcon, ScheduledIcon } from '@/components/icons';
 import { getProject } from '@/core/state/getProject';
 import { CliApprovalDetailEntry } from '@/desktop/components/cliApproval/CliApprovalDetailEntry';
@@ -13,6 +14,7 @@ import { ITodoService } from '@/services/todo/common/todoService';
 import { TestIds } from '@/testIds';
 import type { TreeID } from 'loro-crdt';
 import React from 'react';
+import classNames from 'classnames';
 import { useParams } from 'react-router';
 import { AttachmentSection } from '../../attachment/AttachmentSection';
 import { TagsField } from '../../TagsField';
@@ -41,6 +43,7 @@ interface IProjectDetailPanelContentProps {
 
 const ProjectDetailPanelContent: React.FC<IProjectDetailPanelContentProps> = ({ projectId, project }) => {
   const todoService = useService(ITodoService);
+  const visual = getItemStatusVisual(project.status);
   const showDatePicker = useDatepicker();
   const completedTaskCount = project.completedTasks;
   const totalTaskCount = project.totalTasks;
@@ -118,6 +121,7 @@ const ProjectDetailPanelContent: React.FC<IProjectDetailPanelContentProps> = ({ 
         inputKey={projectTitleInputKey(projectId)}
         renderIcon={() => <ProjectIcon progress={project.progress} status={project.status} size="md" />}
         title={project.title}
+        titleClassName={classNames(itemToneClass(visual.titleTone), visual.closed && 'item-status-title-closed')}
         placeholder={localize('project.untitled', 'New Project')}
         onSave={handleTitleSave}
         extraActions={headerActions}
@@ -126,6 +130,7 @@ const ProjectDetailPanelContent: React.FC<IProjectDetailPanelContentProps> = ({ 
       <div className={desktopStyles.DetailViewContent}>
         <div className={desktopStyles.DetailViewContentInner}>
           <NotesField
+            parentUid={project.uid}
             value={project.notes || ''}
             onSave={handleNotesSave}
             className={desktopStyles.DetailViewNotesTextarea}

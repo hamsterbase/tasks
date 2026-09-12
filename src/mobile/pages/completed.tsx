@@ -67,7 +67,14 @@ export const MobileCompleted = () => {
               <div>
                 {group.tasks.map((taskInfo) => {
                   if (taskInfo.type === ModelTypes.project) {
-                    return <HomeProjectItem key={taskInfo.id} projectInfo={taskInfo as ProjectInfoState} />;
+                    return (
+                      <HomeProjectItem
+                        key={taskInfo.id}
+                        projectInfo={taskInfo as ProjectInfoState}
+                        visualContext="completedPage"
+                        willDisappear={willDisappearObjectIdSet.has(taskInfo.id)}
+                      />
+                    );
                   }
                   return (
                     <TaskItemWrapper
@@ -75,7 +82,11 @@ export const MobileCompleted = () => {
                       willDisappear={willDisappearObjectIdSet.has(taskInfo.id)}
                       id={taskInfo.id}
                     >
-                      <TaskItem key={taskInfo.id} taskInfo={taskInfo as TaskInfo}></TaskItem>
+                      <TaskItem
+                        key={taskInfo.id}
+                        taskInfo={taskInfo as TaskInfo}
+                        visualContext="completedPage"
+                      ></TaskItem>
                     </TaskItemWrapper>
                   );
                 })}

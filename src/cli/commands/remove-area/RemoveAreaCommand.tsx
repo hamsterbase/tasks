@@ -1,12 +1,12 @@
 import React from 'react';
 import { Text } from 'ink';
 import { z } from 'zod';
-import { requireArea, submitChangeRequest, SubmitResult } from '../../core/approval';
-import { ID_OPTION, INSTANCE_OPTION } from '../../core/commandOptions';
-import { idSchema, instanceSchema } from '../../core/commandSchemas';
+import { readExplanation, requireArea, submitChangeRequest, SubmitResult } from '../../core/approval';
+import { EXPLANATION_OPTIONS, ID_OPTION, INSTANCE_OPTION } from '../../core/commandOptions';
+import { idSchema, approvalCommandSchema } from '../../core/commandSchemas';
 import { CommandMeta, ParsedArgs, parseCommandFlags } from '../../engine';
 
-const flagsSchema = z.object({ id: idSchema, instance: instanceSchema }).strict();
+const flagsSchema = approvalCommandSchema.extend({ id: idSchema });
 type Flags = z.output<typeof flagsSchema>;
 
 function renderResult(result: SubmitResult) {
@@ -17,7 +17,7 @@ export class RemoveAreaCommand {
   static readonly meta: CommandMeta = {
     name: 'remove-area',
     description: 'Remove an area and its contents',
-    options: [ID_OPTION, INSTANCE_OPTION],
+    options: [...EXPLANATION_OPTIONS, ID_OPTION, INSTANCE_OPTION],
     view: renderResult,
   };
 
@@ -29,6 +29,7 @@ export class RemoveAreaCommand {
 
   async exec(): Promise<SubmitResult> {
     return submitChangeRequest({
+      explanation: await readExplanation(this.flags),
       instanceFlag: this.flags.instance,
       buildOps: (data) => {
         const area = requireArea(data, this.flags.id);

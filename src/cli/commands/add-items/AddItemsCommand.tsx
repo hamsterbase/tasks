@@ -3,14 +3,15 @@ import { Text } from 'ink';
 import { z } from 'zod';
 import { CliCreateItem } from '../../../base/common/cliApproval/protocol';
 import {
+  readExplanation,
   parseCreateItemsFlag,
   parsePositionFlag,
   submitChangeRequest,
   SubmitResult,
   validatePosition,
 } from '../../core/approval';
-import { INSTANCE_OPTION, POSITION_OPTION } from '../../core/commandOptions';
-import { dateSchema, instanceSchema, positionSchema, titleSchema } from '../../core/commandSchemas';
+import { EXPLANATION_OPTIONS, INSTANCE_OPTION, POSITION_OPTION } from '../../core/commandOptions';
+import { dateSchema, approvalCommandSchema, positionSchema, titleSchema } from '../../core/commandSchemas';
 import { CommandMeta, ParsedArgs, parseCommandFlags } from '../../engine';
 
 const childrenArray = (value: unknown) => (value === undefined ? [] : Array.isArray(value) ? value : [value]);
@@ -68,13 +69,10 @@ const contentSchema = z
   })
   .pipe(itemsSchema);
 
-const flagsSchema = z
-  .object({
-    content: contentSchema,
-    position: positionSchema.optional(),
-    instance: instanceSchema,
-  })
-  .strict();
+const flagsSchema = approvalCommandSchema.extend({
+  content: contentSchema,
+  position: positionSchema.optional(),
+});
 type Flags = z.output<typeof flagsSchema>;
 
 function renderResult(result: SubmitResult) {
@@ -97,6 +95,7 @@ export class AddItemsCommand {
     name: 'add-items',
     description: 'Create an ordered task, heading, or project tree in one approval request',
     options: [
+      ...EXPLANATION_OPTIONS,
       {
         name: 'content',
         arg: '<json>',
@@ -120,6 +119,7 @@ export class AddItemsCommand {
     const positionValue = this.flags.position;
     const position = positionValue ? parsePositionFlag(positionValue) : undefined;
     return submitChangeRequest({
+      explanation: await readExplanation(this.flags),
       instanceFlag: this.flags.instance,
       buildOps: (data) => {
         const initialPosition = position ?? { type: 'firstElement' as const };

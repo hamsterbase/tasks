@@ -16,10 +16,27 @@ interface EditableInputProps {
   placeholder: string;
   onSave: (value: string) => void;
   className?: string;
+  textClassName?: string;
+  inputClassName?: string;
 }
 
 export const EditableInputSpan = forwardRef<HTMLInputElement, EditableInputProps>(
-  ({ inputKey, defaultValue, onChange, onBlur, placeholder, onSave, className, onStartEdit, isFocused }, ref) => {
+  (
+    {
+      inputKey,
+      defaultValue,
+      onChange,
+      onBlur,
+      placeholder,
+      onSave,
+      className,
+      textClassName,
+      inputClassName,
+      onStartEdit,
+      isFocused,
+    },
+    ref
+  ) => {
     const editService = useService(IEditService);
     useWatchEvent(editService.onInputChange, (e) => {
       return e.inputKey === inputKey;
@@ -70,9 +87,13 @@ export const EditableInputSpan = forwardRef<HTMLInputElement, EditableInputProps
             style={{
               userSelect: 'text',
             }}
-            className={classNames(desktopStyles.TaskListItemTitleSpan, {
-              [desktopStyles.TaskListItemTitleSpanPlaceHolder]: !inputValue,
-            })}
+            className={classNames(
+              desktopStyles.TaskListItemTitleSpan,
+              {
+                [desktopStyles.TaskListItemTitleSpanPlaceHolder]: !inputValue,
+              },
+              textClassName
+            )}
             onMouseDownCapture={handleClickX}
           >
             {inputValue || placeholder}
@@ -81,7 +102,7 @@ export const EditableInputSpan = forwardRef<HTMLInputElement, EditableInputProps
         <input
           ref={ref}
           data-title-text="true"
-          className={classNames(className, {
+          className={classNames(className, inputClassName, {
             hidden: !isFocused,
           })}
           value={inputValue}

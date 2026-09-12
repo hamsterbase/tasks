@@ -14,6 +14,8 @@ import { AttrContainer, AttrStyles } from '@/mobile/components/attr/AttrContaine
 import { AttrLabel } from '@/mobile/components/attr/AttrLabel';
 import { AttrTags } from '@/mobile/components/attr/AttrTags';
 import { MobileProjectCheckbox } from '@/mobile/components/icon/MobileProjectCheckbox';
+import { getItemStatusVisual, itemToneClass } from '@/components/todo/itemStatusVisual';
+import { useItemStatusAnimation } from '@/hooks/useItemStatusAnimation';
 
 const projectInfoAttrStyles: AttrStyles = {
   row: styles.projectInfoAttrRow,
@@ -28,6 +30,13 @@ function formatDateLabel(timestamp: number): string {
 }
 
 const ProjectMeta: React.FC<{ project: ProjectInfoState }> = ({ project }) => {
+  const animationPhase = useItemStatusAnimation(project.status);
+  const visual = getItemStatusVisual(project.status);
+  const attrStyles: AttrStyles = {
+    ...projectInfoAttrStyles,
+    iconContainer: classNames(styles.projectInfoAttrIconContainer, visual.closed ? '!text-t3' : '!text-t2'),
+    labelTitleColor: itemToneClass(visual.metadataTone),
+  };
   const {
     handleEditTag,
     handleEditStartDate,
@@ -58,12 +67,17 @@ const ProjectMeta: React.FC<{ project: ProjectInfoState }> = ({ project }) => {
             onLongPress={handleLongPressStatusIcon}
             progress={project.progress * 100}
             status={project.status}
+            animationPhase={animationPhase}
             onClick={handleToggleProjectStatus}
           />
         </div>
         <div className={styles.projectInfoContent}>
           <Textarea
-            className={styles.projectInfoTitle}
+            className={classNames(
+              styles.projectInfoTitle,
+              project.title && (visual.closed ? '!text-t3' : '!text-t1'),
+              visual.closed && 'item-status-title-closed'
+            )}
             autoSize={{ minRows: 1 }}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -76,16 +90,19 @@ const ProjectMeta: React.FC<{ project: ProjectInfoState }> = ({ project }) => {
               placeholder=""
               value={{ title: formatDateLabel(project.startDate) }}
               onClick={handleEditStartDate}
-              attrStyles={projectInfoAttrStyles}
+              attrStyles={attrStyles}
             />
           )}
           {project.dueDate && (
             <AttrLabel
               icon={<FlagIcon className={styles.projectInfoMetaIcon} strokeWidth={1.5} />}
               placeholder=""
-              value={{ title: formatDateLabel(project.dueDate), titleType: 'danger' }}
+              value={{
+                title: formatDateLabel(project.dueDate),
+                titleType: visual.closed ? undefined : 'danger',
+              }}
               onClick={handleEditDueDate}
-              attrStyles={projectInfoAttrStyles}
+              attrStyles={attrStyles}
             />
           )}
           {project.tags && project.tags.length > 0 && (
@@ -94,12 +111,13 @@ const ProjectMeta: React.FC<{ project: ProjectInfoState }> = ({ project }) => {
               placeholder=""
               tags={project.tags}
               onClick={handleEditTag}
-              attrStyles={projectInfoAttrStyles}
+              attrStyles={attrStyles}
+              tagClassName={visual.closed ? '!text-t3' : '!text-t2'}
             />
           )}
           <AttrContainer
             icon={<NotesIcon className={styles.projectInfoMetaIcon} strokeWidth={1.5} />}
-            attrStyles={projectInfoAttrStyles}
+            attrStyles={attrStyles}
           >
             <Textarea
               autoSize={{ minRows: 2, maxRows: 4 }}
@@ -107,7 +125,7 @@ const ProjectMeta: React.FC<{ project: ProjectInfoState }> = ({ project }) => {
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               onBlur={() => handleUpdateNotes(notes)}
-              className={styles.createTaskNotesTextarea}
+              className={classNames(styles.createTaskNotesTextarea, visual.closed && '!text-t3')}
               style={{ border: 'none', padding: 0 }}
             />
           </AttrContainer>

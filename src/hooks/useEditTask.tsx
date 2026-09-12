@@ -10,6 +10,7 @@ import {
   TagIcon,
 } from '@/components/icons';
 import { ProjectStatusBox } from '@/components/icons/ProjectStatusBox.tsx';
+import { triggerCompletionHaptic } from '@/mobile/utils/triggerCompletionHaptic';
 import { TaskInfo } from '@/core/state/type';
 import { recurringToString } from '@/core/time/recurringToString';
 import { ItemStatus, RecurringRule } from '@/core/type';
@@ -307,6 +308,7 @@ export const useEditTaskHooks = (taskInfo: TaskInfo) => {
     if (taskInfo.status !== 'created') {
       todoService.updateTask(taskInfo.id, { status: 'created' });
     } else {
+      triggerCompletionHaptic();
       todoService.updateTask(taskInfo.id, { status: 'completed' });
     }
   };

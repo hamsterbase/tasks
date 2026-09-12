@@ -1,9 +1,11 @@
 import { DragHandleIcon, NotesIcon } from '@/components/icons';
 import { getProjectItemTags } from '@/core/state/getProjectItemTags';
 import { ProjectInfoState } from '@/core/state/type';
+import { ItemVisualContext, getItemStatusVisual, itemToneClass } from '@/components/todo/itemStatusVisual';
 import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
+import { useItemStatusAnimation } from '@/hooks/useItemStatusAnimation';
 import { localize } from '@/nls';
 import { TestIds } from '@/testIds';
 import { IAttachmentUploadService } from '@/services/attachment/common/attachmentUploadService';
@@ -20,14 +22,20 @@ interface DesktopProjectListItemProps {
   project: ProjectInfoState;
   disableDrag?: boolean;
   hideProjectTitle?: boolean;
+  visualContext?: ItemVisualContext;
+  willDisappear?: boolean;
 }
 
 export const DesktopProjectListItem: React.FC<DesktopProjectListItemProps> = ({
   project,
   disableDrag,
   hideProjectTitle,
+  visualContext = 'default',
+  willDisappear = false,
 }) => {
   const progress = project.progress || 0;
+  const animationPhase = useItemStatusAnimation(project.status);
+  const visual = getItemStatusVisual(project.status, visualContext);
 
   const { attributes, listeners, setNodeRef, transform, isDragging } = useSortable({
     id: project.id,
@@ -62,7 +70,11 @@ export const DesktopProjectListItem: React.FC<DesktopProjectListItemProps> = ({
       data-testid={TestIds.ProjectListItem.Root}
       className={classNames(desktopStyles.DesktopProjectListItemLink, {
         [desktopStyles.DesktopProjectListItemDragging]: isDragging,
+        'item-status-row-exiting': willDisappear,
       })}
+      data-status={project.status}
+      data-status-animation={animationPhase}
+      data-exiting={willDisappear && animationPhase === 'settling' ? 'true' : undefined}
     >
       {!disableDrag && <DragHandleIcon className={desktopStyles.DesktopProjectListItemDragHandle} />}
       <div
@@ -74,6 +86,7 @@ export const DesktopProjectListItem: React.FC<DesktopProjectListItemProps> = ({
           status={project.status}
           size="md"
           className={desktopStyles.DesktopProjectListItemStatusBoxIcon}
+          animationPhase={animationPhase}
         />
       </div>
       <div
@@ -81,12 +94,27 @@ export const DesktopProjectListItem: React.FC<DesktopProjectListItemProps> = ({
         style={{ visibility: isDragging ? 'hidden' : 'visible' }}
       >
         <div className={desktopStyles.TaskListItemTitleRow}>
-          <h3 className={desktopStyles.DesktopProjectListItemTitle} data-testid={TestIds.ProjectListItem.Title}>
-            {project.title || localize('project.untitled', 'New Project')}
+          <h3
+            className={classNames(
+              desktopStyles.DesktopProjectListItemTitle,
+              project.title ? itemToneClass(visual.titleTone) : 'text-t3'
+            )}
+            data-testid={TestIds.ProjectListItem.Title}
+          >
+            <span
+              className={classNames(
+                visual.closed && 'item-status-title-closed item-status-title-animated',
+                animationPhase === 'reverting' && 'item-status-title-reverting'
+              )}
+            >
+              {project.title || localize('project.untitled', 'New Project')}
+            </span>
           </h3>
-          {project.notes && <NotesIcon className={desktopStyles.TaskListItemIcon} />}
+          {project.notes && (
+            <NotesIcon className={classNames(desktopStyles.TaskListItemIcon, itemToneClass(visual.metadataTone))} />
+          )}
         </div>
-        <ItemTagsList tags={tags} isSelected={false} />
+        <ItemTagsList tags={tags} isSelected={false} tone={visual.metadataTone} />
       </div>
     </Link>
   );

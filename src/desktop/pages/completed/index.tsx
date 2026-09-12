@@ -81,7 +81,14 @@ export const Completed = () => {
                   {group.tasks.map((item) => {
                     const willDisappear = willDisappearObjectIdSet.has(item.id);
                     if (item.type === ModelTypes.project) {
-                      return <DesktopProjectListItem key={item.id} project={item as ProjectInfoState} />;
+                      return (
+                        <DesktopProjectListItem
+                          key={item.id}
+                          project={item as ProjectInfoState}
+                          visualContext="completedPage"
+                          willDisappear={willDisappear}
+                        />
+                      );
                     } else {
                       return (
                         <TaskListItem
@@ -90,6 +97,7 @@ export const Completed = () => {
                           task={item as TaskInfo}
                           willDisappear={willDisappear}
                           taskList={dummyTaskList}
+                          visualContext="completedPage"
                         />
                       );
                     }

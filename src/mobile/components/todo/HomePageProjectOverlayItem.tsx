@@ -6,6 +6,7 @@ import { localize } from '@/nls';
 import classNames from 'classnames';
 import React from 'react';
 import { MobileProjectCheckbox } from '../icon/MobileProjectCheckbox';
+import { getItemStatusVisual, itemToneClass } from '@/components/todo/itemStatusVisual';
 import { FlagIcon } from '@/components/icons';
 
 interface HomePageProjectOverlayItemProps {
@@ -13,8 +14,7 @@ interface HomePageProjectOverlayItemProps {
 }
 
 export const HomePageProjectOverlayItem: React.FC<HomePageProjectOverlayItemProps> = ({ projectInfo }) => {
-  const isCompleted = projectInfo.status === 'completed';
-  const isCanceled = projectInfo.status === 'canceled';
+  const visual = getItemStatusVisual(projectInfo.status);
 
   return (
     <div className={styles.homeProjectItemRoot}>
@@ -26,13 +26,8 @@ export const HomePageProjectOverlayItem: React.FC<HomePageProjectOverlayItemProp
           <span
             className={classNames(
               styles.homeProjectItemTitle,
-              isCanceled
-                ? styles.homeProjectItemTitleCompleted
-                : isCompleted
-                  ? styles.homeProjectItemTitleCanceled
-                  : projectInfo.title
-                    ? styles.homeProjectItemTitleNormal
-                    : styles.homeProjectItemTitlePlaceholder
+              projectInfo.title ? itemToneClass(visual.titleTone) : styles.homeProjectItemTitlePlaceholder,
+              visual.closed && 'item-status-title-closed item-status-title-animated'
             )}
           >
             {projectInfo.title || localize('project.untitled', 'New Project')}

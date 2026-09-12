@@ -460,6 +460,10 @@
     "defaultMessage": "Storage not set up",
     "content": "存储未配置"
   },
+  "attachments.pasteNotConfigured": {
+    "defaultMessage": "Set up S3 storage in Settings before pasting images.",
+    "content": ""
+  },
   "attachments.region": {
     "defaultMessage": "Region",
     "content": "区域"
@@ -636,6 +640,10 @@
     "defaultMessage": "No pending approvals",
     "content": "暂无待审批项"
   },
+  "cliApproval.explanation": {
+    "defaultMessage": "Explanation",
+    "content": ""
+  },
   "cliApproval.field.children": {
     "defaultMessage": "Children",
     "content": "子项"
@@ -787,6 +795,10 @@
   "cliApproval.panel.title": {
     "defaultMessage": "Pending approvals",
     "content": "待审批"
+  },
+  "cliApproval.previewEvidence": {
+    "defaultMessage": "Preview {0}",
+    "content": ""
   },
   "cliApproval.reject": {
     "defaultMessage": "Reject",

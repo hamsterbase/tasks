@@ -1,11 +1,14 @@
 import { useService } from '@/hooks/use-service.ts';
 import { useWatchEvent } from '@/hooks/use-watch-event.ts';
 import { ITodoService } from '@/services/todo/common/todoService';
+import { getTaskInfo } from '@/core/state/getTaskInfo';
+import { useItemStatusAnimation } from '@/hooks/useItemStatusAnimation';
 import classNames from 'classnames';
+import type { TreeID } from 'loro-crdt';
 import React from 'react';
 
 interface TaskItemWrapperProps {
-  id: string;
+  id: TreeID;
   willDisappear: boolean;
   children: React.ReactNode;
 }
@@ -15,12 +18,20 @@ const TaskItemWrapper: React.FC<TaskItemWrapperProps> = ({ id, willDisappear, ch
   useWatchEvent(todoService.onEditingContentChange);
 
   const isEditing = todoService.editingContent?.id === id;
+  const task = getTaskInfo(todoService.modelState, id);
+  const animationPhase = useItemStatusAnimation(task.status);
   const className = classNames({
-    'opacity-35': willDisappear && !isEditing,
-    'transition-opacity duration-1000 ease-in-out': willDisappear && !isEditing,
-    'animate-fade-out': willDisappear && !isEditing,
+    'item-status-row-exiting': willDisappear && !isEditing,
   });
-  return <div className={className}>{children}</div>;
+  return (
+    <div
+      className={className}
+      data-status-animation={animationPhase}
+      data-exiting={willDisappear && !isEditing && animationPhase === 'settling' ? 'true' : undefined}
+    >
+      {children}
+    </div>
+  );
 };
 
 export default TaskItemWrapper;

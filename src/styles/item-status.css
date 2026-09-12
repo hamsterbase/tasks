@@ -1,0 +1,169 @@
+.item-status-icon {
+  --item-status-radius: clamp(4px, 28%, 6px);
+  align-items: center;
+  background: transparent;
+  border: var(--item-status-border-width, 1.5px) solid currentColor;
+  color: var(--color-t3);
+  display: inline-flex;
+  flex: none;
+  justify-content: center;
+  position: relative;
+  transform: scale(1);
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease,
+    transform 200ms ease;
+}
+
+.item-status-icon[data-shape='task'] {
+  border-radius: var(--item-status-radius);
+}
+
+.item-status-icon[data-shape='project'] {
+  border-radius: 9999px;
+}
+
+.item-status-icon-mark {
+  height: calc(100% - 3px);
+  stroke-width: var(--item-status-mark-stroke-width, 1.5);
+  width: calc(100% - 3px);
+}
+
+.item-status-icon-mark * {
+  vector-effect: non-scaling-stroke;
+}
+
+.item-status-icon[data-animation-phase='completing'],
+.item-status-icon[data-animation-phase='holding'] {
+  background: var(--color-brand);
+  border-color: var(--color-brand);
+  color: var(--color-text-white);
+}
+
+.item-status-icon[data-animation-phase='completing'] {
+  animation: item-status-complete-bounce 250ms ease-out both;
+}
+
+.item-status-icon[data-animation-phase='completing'] .item-status-icon-check path {
+  animation: item-status-draw-check 250ms ease-out both;
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+}
+
+.item-status-icon[data-animation-phase='reverting'] {
+  animation: item-status-revert-fill 250ms ease-out both;
+}
+
+.item-status-icon[data-animation-phase='reverting'] .item-status-icon-check path {
+  animation: item-status-erase-check 250ms ease-in both;
+  stroke-dasharray: 24;
+}
+
+.item-status-title-closed {
+  text-decoration-line: line-through;
+}
+
+.item-status-title-animated,
+.item-status-title-reverting {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: left 55%;
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+  text-decoration-line: none;
+  transition: color 250ms ease;
+}
+
+[data-status-animation='completing'] .item-status-title-animated,
+[data-status-animation='canceling'] .item-status-title-animated {
+  animation: item-status-draw-strike 250ms 100ms ease-out both;
+}
+
+[data-status-animation='reverting'] .item-status-title-reverting {
+  animation: item-status-erase-strike 250ms ease-in both;
+}
+
+.item-status-row-exiting {
+  max-height: 8rem;
+  overflow: hidden;
+  transition:
+    max-height 200ms ease,
+    opacity 200ms ease;
+}
+
+.item-status-row-exiting[data-exiting='true'] {
+  max-height: 0;
+  opacity: 0;
+}
+
+@keyframes item-status-complete-bounce {
+  0% {
+    transform: scale(1);
+  }
+  55% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes item-status-draw-check {
+  from {
+    stroke-dashoffset: 24;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes item-status-erase-check {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: 24;
+  }
+}
+
+@keyframes item-status-revert-fill {
+  from {
+    background: var(--color-brand);
+    border-color: var(--color-brand);
+    color: var(--color-text-white);
+  }
+  to {
+    background: transparent;
+    border-color: var(--color-t3);
+    color: var(--color-t3);
+  }
+}
+
+@keyframes item-status-draw-strike {
+  from {
+    background-size: 0 1px;
+  }
+  to {
+    background-size: 100% 1px;
+  }
+}
+
+@keyframes item-status-erase-strike {
+  from {
+    background-size: 100% 1px;
+  }
+  to {
+    background-size: 0 1px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item-status-icon,
+  .item-status-icon *,
+  .item-status-title-animated,
+  .item-status-title-reverting,
+  .item-status-row-exiting {
+    animation: none !important;
+    transition: none !important;
+  }
+}

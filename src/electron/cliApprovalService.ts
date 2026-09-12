@@ -1,4 +1,5 @@
 import {
+  CliAttachmentRequest,
   CliApprovalOpRef,
   CliChangeRequest,
   CliInstanceInfo,
@@ -20,6 +21,7 @@ import * as path from 'path';
 export interface ICliApprovalHost {
   onQueueChanged(requests: CliChangeRequest[]): void;
   onRequestArrived(): void;
+  onAttachmentRequest?(request: CliAttachmentRequest): void;
 }
 
 /**
@@ -36,6 +38,52 @@ export class ElectronCliApprovalService {
   private readonly queue = new CliApprovalPendingQueue();
   private server: net.Server | null = null;
   private activeDatabaseId = '';
+  private readonly attachmentRequests = new Map<
+    string,
+    { databaseId: string; resolve: (response: CliSocketResponse) => void }
+  >();
+
+  completeAttachmentRequest(response: CliSocketResponse): void {
+    const pending = this.attachmentRequests.get(response.id);
+    if (!pending) return;
+    pending.resolve(
+      pending.databaseId === this.activeDatabaseId
+        ? response
+        : {
+            id: response.id,
+            ok: false,
+            error: 'The active database changed; try again',
+          }
+    );
+  }
+
+  private async readAttachment(request: CliAttachmentRequest): Promise<CliSocketResponse> {
+    if (
+      !request.databaseId ||
+      request.databaseId !== this.activeDatabaseId ||
+      typeof request.parentUid !== 'string' ||
+      !request.parentUid ||
+      typeof request.attachmentId !== 'string' ||
+      !request.attachmentId
+    ) {
+      return { id: request.id, ok: false, error: 'Invalid attachment request or database mismatch' };
+    }
+    // Internal correlation ids cannot collide across CLI connections.
+    const internalId = nanoid();
+    return new Promise((resolve) => {
+      const timer = setTimeout(
+        () => finish({ id: internalId, ok: false, error: 'Desktop window unavailable; open it and try again' }),
+        120000
+      );
+      const finish = (response: CliSocketResponse) => {
+        clearTimeout(timer);
+        this.attachmentRequests.delete(internalId);
+        resolve({ ...response, id: request.id });
+      };
+      this.attachmentRequests.set(internalId, { databaseId: request.databaseId, resolve: finish });
+      this.host.onAttachmentRequest?.({ ...request, id: internalId });
+    });
+  }
 
   constructor(
     private readonly basePath: string,
@@ -123,7 +171,9 @@ export class ElectronCliApprovalService {
     socket.setEncoding('utf8');
     socket.on('data', (chunk: string) => {
       for (const message of decoder.append(chunk)) {
-        socket.write(serializeMessage(this.handleMessage(message)));
+        void this.handleMessage(message).then((response) => {
+          if (!socket.destroyed) socket.write(serializeMessage(response));
+        });
       }
     });
     socket.on('error', () => {
@@ -131,12 +181,13 @@ export class ElectronCliApprovalService {
     });
   }
 
-  private handleMessage(message: { value?: unknown; error?: string }): CliSocketResponse {
+  private async handleMessage(message: { value?: unknown; error?: string }): Promise<CliSocketResponse> {
     if (message.error || !message.value || typeof message.value !== 'object') {
       return { id: '', ok: false, error: message.error ?? 'invalid message' };
     }
     const value = message.value as Partial<CliSocketRequest>;
     const id = typeof value.id === 'string' ? value.id : '';
+    if (value.type === 'read-attachment') return this.readAttachment(value as CliAttachmentRequest);
     if (value.type !== 'submit') {
       return { id, ok: false, error: `unknown message type: ${String(value.type)}` };
     }

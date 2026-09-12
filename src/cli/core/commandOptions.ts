@@ -66,3 +66,18 @@ export function parseStatusFlag(value: string): ItemStatus {
   }
   throw new Error('--status must be complete, canceled, or created');
 }
+
+export const EXPLANATION_OPTIONS: CliOption[] = [
+  {
+    name: 'explanation',
+    arg: '<text>',
+    description: 'Explanation shown with the approval request',
+    minProtocolVersion: 3,
+  },
+  {
+    name: 'explanation-images',
+    arg: '<json>',
+    description: 'JSON array of local image paths',
+    minProtocolVersion: 3,
+  },
+];

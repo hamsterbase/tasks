@@ -7,7 +7,28 @@
  */
 
 export const TestIds = {
+  SchedulePage: {
+    /** Desktop schedule page root */
+    Root: 'desktop-schedule-page',
+  },
+  ImagePreview: {
+    /** Close the desktop image preview */
+    CloseButton: 'desktop-image-preview-close',
+  },
+  AIChat: {
+    /** Linked message label above the chat input */
+    LinkedMessage: 'ai-chat-linked-message',
+    /** In-progress response status */
+    Generating: 'ai-chat-generating',
+  },
   EntityHeader: {
+    /** Expanded tag filter bar */
+    TagFilterBar: 'entity-tag-filter-bar',
+    /** Show future tasks menu item */
+    ShowFutureTasksMenuItem: 'display-show-future-tasks',
+    /** Completed tasks range submenu trigger */
+    CompletedRangeMenuItem: 'display-completed-range',
+
     /** Display settings button in desktop entity header */
     DisplaySettingsButton: 'entity-header-display-settings-button',
     /** Tag filter toggle button in desktop entity header */
@@ -44,6 +65,11 @@ export const TestIds = {
     MenuButton: 'heading-detail-menu-button',
   },
   DetailPanel: {
+    /** Tag editor trigger in desktop details */
+    TagsField: 'detail-panel-tags-field',
+    /** Location selector trigger in desktop details */
+    LocationField: 'detail-panel-location-field',
+
     /** ID row in the desktop detail panel; clicking it copies HT#<uid> */
     IdField: 'detail-panel-id-field',
   },
@@ -88,6 +114,11 @@ export const TestIds = {
     RecurringRuleField: 'task-detail-recurring-rule-field',
   },
   Reminders: {
+    /** Reminder selector trigger */
+    Field: 'task-detail-reminders-field',
+    /** Add reminder action */
+    AddButton: 'task-detail-add-reminder',
+
     /** Reminder popover container inside task detail panel */
     Popover: 'task-detail-reminder-popover',
   },
@@ -152,6 +183,9 @@ export const TestIds = {
     AutoSyncToggle: 'selfhosted-sync-auto-sync-toggle',
   },
   RecurringTaskSettings: {
+    /** Invalid recurring rule message */
+    InvalidRule: 'recurring-task-invalid-rule',
+
     /** Desktop recurring task settings overlay container */
     Overlay: 'recurring-task-settings-overlay',
     /** Start date input in the recurring task settings overlay */
@@ -160,6 +194,8 @@ export const TestIds = {
     DueDateInput: 'recurring-task-settings-due-input',
   },
   CliApproval: {
+    Explanation: 'cli-approval-explanation',
+    ExplanationImage: 'cli-approval-explanation-image',
     /** Approvals page root */
     Page: 'cli-approval-page',
     /** One approvable entry (a single op) in the approvals page or panel */

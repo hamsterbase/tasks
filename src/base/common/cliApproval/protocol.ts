@@ -1,3 +1,4 @@
+import { CliExplanation, cliExplanationSchema } from './explanation';
 import type { ItemStatus } from '../../../core/type';
 
 /**
@@ -133,6 +134,7 @@ export type CliChangeOp = { id?: string } & (
 );
 
 export interface CliChangeRequest {
+  explanation?: CliExplanation;
   requestId: string;
   /** must match the database currently opened in the client */
   databaseId: string;
@@ -158,7 +160,7 @@ export interface CliApprovalOpRef {
  * the `minProtocolVersion` of the commands that rely on it. Adding a CLI
  * command that only composes existing ops needs no bump.
  */
-export const CLI_PROTOCOL_VERSION = 1;
+export const CLI_PROTOCOL_VERSION = 3;
 
 /** written next to the socket so the CLI can discover running instances */
 export interface CliInstanceInfo {
@@ -186,9 +188,28 @@ export function instanceProtocolVersion(info: CliInstanceInfo): number {
   return info.protocolVersion ?? OLDEST_PROTOCOL_VERSION;
 }
 
-export type CliSocketRequest = { id: string; type: 'submit'; request: CliChangeRequest };
+export interface CliAttachmentRequest {
+  id: string;
+  type: 'read-attachment';
+  databaseId: string;
+  parentUid: string;
+  attachmentId: string;
+}
 
-export type CliSocketResponse = { id: string; ok: true } | { id: string; ok: false; error: string };
+export const CLI_ATTACHMENT_MAX_BYTES = 32 * 1024 * 1024;
+
+export interface CliAttachmentDownload {
+  base64: string;
+  filename: string;
+  mimetype: string;
+  size: number;
+}
+
+export type CliSocketRequest = { id: string; type: 'submit'; request: CliChangeRequest } | CliAttachmentRequest;
+
+export type CliSocketResponse =
+  | { id: string; ok: true; attachment?: CliAttachmentDownload }
+  | { id: string; ok: false; error: string };
 
 export const CLI_APPROVAL_MAX_PENDING = 100;
 
@@ -488,11 +509,15 @@ export function validateChangeRequest(request: unknown): string | null {
   if (value.source !== 'cli') {
     return 'source must be cli';
   }
-  if (!hasOnlyKeys(value, ['requestId', 'databaseId', 'createdAt', 'source', 'ops'])) {
+  if (!hasOnlyKeys(value, ['requestId', 'databaseId', 'createdAt', 'source', 'ops', 'explanation'])) {
     return 'request has invalid fields';
   }
   if (!Array.isArray(value.ops) || value.ops.length === 0) {
     return 'ops must be a non-empty array';
+  }
+  if (value.explanation !== undefined) {
+    const result = cliExplanationSchema.safeParse(value.explanation);
+    if (!result.success) return `invalid explanation: ${result.error.issues[0].message}`;
   }
   for (const op of value.ops) {
     const error = validateOp(op);

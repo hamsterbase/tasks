@@ -48,7 +48,7 @@ export const Schedule = () => {
   }, []);
 
   return (
-    <div className={desktopStyles.SchedulePageContainer}>
+    <div data-test-id={TestIds.SchedulePage.Root} className={desktopStyles.SchedulePageContainer}>
       <div className={desktopStyles.SchedulePageLayout}>
         <EntityHeader
           renderIcon={() => <ScheduledIcon />}

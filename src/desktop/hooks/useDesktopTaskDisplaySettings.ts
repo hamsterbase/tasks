@@ -1,3 +1,4 @@
+import { TestIds } from '@/testIds';
 import { taskDisplaySettingOptions } from '@/base/common/TaskDisplaySettings';
 import { getTimeAfter, TimeAfterEnum } from '@/core/time/getTimeAfter.ts';
 import { DesktopMenuController, IMenuConfig } from '@/desktop/overlay/desktopMenu/DesktopMenuController.ts';
@@ -35,6 +36,7 @@ export const useDesktopTaskDisplaySettings = (page: string, option?: UseDesktopT
     if (!option?.hideShowFutureTasks) {
       menuItems.push({
         label: globalSettings.settingOptions.showFutureTasks.title,
+        testId: TestIds.EntityHeader.ShowFutureTasksMenuItem,
         checked: showFutureTasks,
         onSelect: () => setShowFutureTasks(!showFutureTasks),
       });
@@ -56,6 +58,7 @@ export const useDesktopTaskDisplaySettings = (page: string, option?: UseDesktopT
 
     menuItems.push({
       label: globalSettings.settingOptions.completedTasksRange.title,
+      testId: TestIds.EntityHeader.CompletedRangeMenuItem,
       submenu: completedRangeSubmenu,
     });
 

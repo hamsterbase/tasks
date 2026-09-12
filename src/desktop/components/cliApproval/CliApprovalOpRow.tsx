@@ -1,3 +1,4 @@
+import { CliApprovalExplanation } from './CliApprovalExplanation';
 import { AreaIcon, ChevronRightIcon, HeadingIcon, HomeIcon, InboxIcon, RightArrowIcon } from '@/components/icons';
 import { ProjectIcon } from '@/desktop/components/todo/ProjectIcon';
 import { TaskIcon } from '@/desktop/components/todo/TaskIcon';
@@ -271,6 +272,7 @@ export const CliApprovalOpRow: React.FC<{
           )}
         </div>
       )}
+      {entry.explanation && <CliApprovalExplanation explanation={entry.explanation} />}
       <div className="col-span-2 mt-0.5 flex items-center justify-start gap-1.5">
         <button
           data-test-id={TestIds.CliApproval.ApproveButton}

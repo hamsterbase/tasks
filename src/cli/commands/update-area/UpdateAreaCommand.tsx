@@ -3,6 +3,7 @@ import { Text } from 'ink';
 import { z } from 'zod';
 import { CliAreaUpdatePayload } from '../../../base/common/cliApproval/protocol';
 import {
+  readExplanation,
   parsePositionFlag,
   parseTagsFlag,
   requireArea,
@@ -10,19 +11,24 @@ import {
   SubmitResult,
   validatePosition,
 } from '../../core/approval';
-import { ID_OPTION, INSTANCE_OPTION, POSITION_OPTION, TAGS_OPTION, TITLE_OPTION } from '../../core/commandOptions';
-import { idSchema, instanceSchema, positionSchema, titleSchema } from '../../core/commandSchemas';
+import {
+  EXPLANATION_OPTIONS,
+  ID_OPTION,
+  INSTANCE_OPTION,
+  POSITION_OPTION,
+  TAGS_OPTION,
+  TITLE_OPTION,
+} from '../../core/commandOptions';
+import { idSchema, approvalCommandSchema, positionSchema, titleSchema } from '../../core/commandSchemas';
 import { CommandMeta, ParsedArgs, parseCommandFlags } from '../../engine';
 
-const flagsSchema = z
-  .object({
+const flagsSchema = approvalCommandSchema
+  .extend({
     id: idSchema,
     title: titleSchema.optional(),
     tags: z.string().optional(),
     position: positionSchema.optional(),
-    instance: instanceSchema,
   })
-  .strict()
   .refine((flags) => flags.title !== undefined || flags.tags !== undefined || flags.position !== undefined, {
     message: 'title, tags, or position is required',
   });
@@ -36,7 +42,14 @@ export class UpdateAreaCommand {
   static readonly meta: CommandMeta = {
     name: 'update-area',
     description: 'Update an area',
-    options: [ID_OPTION, { ...TITLE_OPTION, required: false }, TAGS_OPTION, POSITION_OPTION, INSTANCE_OPTION],
+    options: [
+      ...EXPLANATION_OPTIONS,
+      ID_OPTION,
+      { ...TITLE_OPTION, required: false },
+      TAGS_OPTION,
+      POSITION_OPTION,
+      INSTANCE_OPTION,
+    ],
     view: renderResult,
   };
 
@@ -64,6 +77,7 @@ export class UpdateAreaCommand {
       fields.push('position');
     }
     return submitChangeRequest({
+      explanation: await readExplanation(this.flags),
       instanceFlag: this.flags.instance,
       buildOps: (data) => {
         const area = requireArea(data, uid);

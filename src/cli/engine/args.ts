@@ -8,6 +8,8 @@ export interface CliOption {
   description: string;
   /** Whether the command cannot run without this option. */
   required?: boolean;
+  /** Lowest desktop protocol version needed when explicitly passed. Defaults to 1. */
+  minProtocolVersion?: number;
 }
 
 export interface ParsedArgs {

@@ -1,3 +1,4 @@
+import { TestIds } from '@/testIds';
 import { CloseIcon, SendIcon, StopIcon } from '@/components/icons';
 import { desktopStyles } from '@/desktop/theme/main';
 import { localize } from '@/nls';
@@ -84,7 +85,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
         {linkedMessage && (
           <div className={desktopStyles.AIChatInputLinkedRow}>
             <div className={desktopStyles.AIChatInputLinkedContent}>
-              <span className={desktopStyles.AIChatInputLinkedLabel}>
+              <span data-test-id={TestIds.AIChat.LinkedMessage} className={desktopStyles.AIChatInputLinkedLabel}>
                 {localize('ai_chat.replying_to_message', 'Reply #{0}', linkedMessageIndex ?? linkedMessage.id)}
               </span>
               <span className={desktopStyles.AIChatInputLinkedText}>{linkedMessageText}</span>

@@ -23,7 +23,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
     // Main-process push channel. Only allowlisted channels can be subscribed
     // to; returns an unsubscribe function.
     on: (channel, callback) => {
-      const allowed = ['cli-approval-queue-changed'];
+      const allowed = ['cli-approval-queue-changed', 'cli-attachment-request'];
       if (!allowed.includes(channel)) {
         throw new Error(`channel not allowed: ${channel}`);
       }

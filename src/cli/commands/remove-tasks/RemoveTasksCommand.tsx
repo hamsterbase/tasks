@@ -1,12 +1,12 @@
 import React from 'react';
 import { Text } from 'ink';
 import { z } from 'zod';
-import { parseIdsFlag, requireTask, submitChangeRequest, SubmitResult } from '../../core/approval';
-import { ID_OPTION, INSTANCE_OPTION } from '../../core/commandOptions';
-import { idsSchema, instanceSchema } from '../../core/commandSchemas';
+import { readExplanation, parseIdsFlag, requireTask, submitChangeRequest, SubmitResult } from '../../core/approval';
+import { EXPLANATION_OPTIONS, ID_OPTION, INSTANCE_OPTION } from '../../core/commandOptions';
+import { idsSchema, approvalCommandSchema } from '../../core/commandSchemas';
 import { CommandMeta, ParsedArgs, parseCommandFlags } from '../../engine';
 
-const flagsSchema = z.object({ id: idsSchema, instance: instanceSchema }).strict();
+const flagsSchema = approvalCommandSchema.extend({ id: idsSchema });
 type Flags = z.output<typeof flagsSchema>;
 
 function renderResult(result: SubmitResult) {
@@ -17,7 +17,7 @@ export class RemoveTasksCommand {
   static readonly meta: CommandMeta = {
     name: 'remove-tasks',
     description: 'Remove several tasks in one approval request',
-    options: [ID_OPTION, INSTANCE_OPTION],
+    options: [...EXPLANATION_OPTIONS, ID_OPTION, INSTANCE_OPTION],
     view: renderResult,
   };
 
@@ -30,6 +30,7 @@ export class RemoveTasksCommand {
   async exec(): Promise<SubmitResult> {
     const ids = parseIdsFlag(this.flags.id);
     return submitChangeRequest({
+      explanation: await readExplanation(this.flags),
       instanceFlag: this.flags.instance,
       buildOps: (data) => {
         const tasks = ids.map((id) => requireTask(data, id));

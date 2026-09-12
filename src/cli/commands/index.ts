@@ -1,4 +1,5 @@
-import { OLDEST_PROTOCOL_VERSION } from '../../base/common/cliApproval/protocol';
+import { DownloadAttachmentCommand } from './download-attachment/DownloadAttachmentCommand';
+import { requiredProtocolVersion } from '../engine/command';
 import { assertInstanceSupports } from '../core/approval';
 import { defineCli } from '../engine';
 import { AddHeadingCommand } from './add-heading/AddHeadingCommand';
@@ -30,6 +31,7 @@ export const cli = defineCli({
     InspectCommand,
     ViewProjectCommand,
     ViewTasksCommand,
+    DownloadAttachmentCommand,
     AddProjectCommand,
     AddTaskCommand,
     AddHeadingCommand,
@@ -44,5 +46,5 @@ export const cli = defineCli({
     SkillDirCommand,
   ],
   preflight: async (meta, args) =>
-    assertInstanceSupports(meta.minProtocolVersion ?? OLDEST_PROTOCOL_VERSION, args.flags.instance as string),
+    assertInstanceSupports(requiredProtocolVersion(meta, args), args.flags.instance as string),
 });

@@ -15,6 +15,7 @@ import React from 'react';
 import { useService } from '../../hooks/use-service';
 import { MobileProjectCheckbox } from '../components/icon/MobileProjectCheckbox';
 import { TaskCheckbox } from '../components/icon/TaskCheckbox';
+import { triggerCompletionHaptic } from '@/mobile/utils/triggerCompletionHaptic';
 
 const useProject = (project: ProjectInfoState | null) => {
   const todoService = useService(ITodoService);
@@ -180,6 +181,9 @@ const useProject = (project: ProjectInfoState | null) => {
     if (!project) return;
     const leftProject = project.totalTasks - project.completedTasks;
     if (leftProject === 0) {
+      if (tragetStatus === 'completed') {
+        triggerCompletionHaptic();
+      }
       todoService.transitionProjectState({ projectId: project.id, projectStatus: tragetStatus });
       return;
     }
@@ -197,6 +201,7 @@ const useProject = (project: ProjectInfoState | null) => {
               icon: <TaskCheckbox status={'completed'} />,
               name: localize('tasks.mark_as_completed', 'Mark as Completed'),
               onClick: () => {
+                triggerCompletionHaptic();
                 todoService.transitionProjectState({
                   projectId: project.id,
                   projectStatus: tragetStatus,

@@ -22,7 +22,7 @@ export interface HeaderAction {
 }
 
 interface EntityHeaderProps {
-  renderIcon: () => ReactNode;
+  renderIcon?: () => ReactNode;
   onIconClick?: () => void;
   title: string;
   inputKey?: string;
@@ -36,6 +36,7 @@ interface EntityHeaderProps {
   titleDetail?: ReactNode;
   /** custom node on the right of the header row, before the icon actions */
   rightContent?: ReactNode;
+  titleClassName?: string;
 
   internalActions?: {
     displaySettings?: {
@@ -68,6 +69,7 @@ export const EntityHeader: React.FC<EntityHeaderProps> = ({
   extraActions,
   titleDetail,
   rightContent,
+  titleClassName,
   internalActions,
 }) => {
   const isDetail = variant === 'detail';
@@ -79,7 +81,7 @@ export const EntityHeader: React.FC<EntityHeaderProps> = ({
   );
   const [entityHeaderDisableNewLineContext] = useState(() => EntityHeaderDisableNewLine.bindTo(contextKeyService));
   const displaySettings = internalActions?.displaySettings;
-  const headerIconNode = withIconClass(renderIcon(), desktopStyles.EntityHeaderIconSvg);
+  const headerIconNode = renderIcon ? withIconClass(renderIcon(), desktopStyles.EntityHeaderIconSvg) : null;
   const fallbackTitle = placeholder || localize('common.untitled', 'Untitled');
   const displayTitle = title || fallbackTitle;
 
@@ -153,15 +155,17 @@ export const EntityHeader: React.FC<EntityHeaderProps> = ({
         className={classNames(desktopStyles.EntityHeaderMainRow, isDetail && desktopStyles.EntityHeaderMainRowDetail)}
       >
         <div className={classNames(desktopStyles.EntityHeaderContentWrapper)}>
-          <div className={desktopStyles.EntityHeaderIconContainer}>
-            {onIconClick ? (
-              <button type="button" className={desktopStyles.EntityHeaderIconButton} onClick={onIconClick}>
-                {headerIconNode}
-              </button>
-            ) : (
-              <div className={desktopStyles.EntityHeaderIconButton}>{headerIconNode}</div>
-            )}
-          </div>
+          {headerIconNode && (
+            <div className={desktopStyles.EntityHeaderIconContainer}>
+              {onIconClick ? (
+                <button type="button" className={desktopStyles.EntityHeaderIconButton} onClick={onIconClick}>
+                  {headerIconNode}
+                </button>
+              ) : (
+                <div className={desktopStyles.EntityHeaderIconButton}>{headerIconNode}</div>
+              )}
+            </div>
+          )}
           {editable && inputKey && onSave ? (
             <TextArea
               ref={textAreaRef}
@@ -171,10 +175,10 @@ export const EntityHeader: React.FC<EntityHeaderProps> = ({
               onBlur={handleInputBlur}
               autoSize={{ minRows: 1 }}
               placeholder={fallbackTitle}
-              className={desktopStyles.EntityHeaderEditableTextArea}
+              className={classNames(desktopStyles.EntityHeaderEditableTextArea, titleClassName)}
             />
           ) : (
-            <h1 className={desktopStyles.EntityHeaderTitle}>{displayTitle}</h1>
+            <h1 className={classNames(desktopStyles.EntityHeaderTitle, titleClassName)}>{displayTitle}</h1>
           )}
         </div>
         {(allActions.length > 0 || rightContent) && (

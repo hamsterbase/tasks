@@ -49,6 +49,32 @@ Use `--json` for machine-readable results. Resolve stable IDs with `show`, `inbo
 
 Read [references/cli.md](references/cli.md) when choosing a command, composing a position, or preparing `add-items` JSON.
 
+## Read images and attachments
+
+`inspect` and `view-tasks` include attachment IDs, filenames, MIME types, and sizes (including subtasks).
+Project attachments also appear in `view-project`. These are metadata, not image contents. To examine an
+image, use `download-attachment --id <task-or-project-id> --attachment <attachment-id> --output <path>`, then
+open the returned local path with your image-viewing tool. Use the attachment's own parent ID for subtasks.
+Each download supports up to 32 MiB. Choose a new destination file; existing files are never overwritten.
+Downloads are read-only and need no desktop approval. The desktop window must be open with attachment storage
+configured. The command requires a desktop app supporting protocol v2; it reports an update instruction for
+older apps. Do not claim to have seen an image until you have opened the downloaded file. Notes containing
+external image links are not managed attachments.
+
+## Provide completion evidence
+
+When submitting completed work for approval, include a concise `--explanation` describing what changed and
+how you verified it. Add relevant screenshots with `--explanation-images`, a JSON array of local file paths.
+The CLI reads local images, converts them to base64, and sends them through local IPC. Download remote images to local files first.
+Use only evidence you actually verified. Do not substitute the explanation for task notes or mark an item complete
+merely to attach evidence. These optional flags work on every create, update, and remove command.
+
+Keep explanations within 4,000 characters and 9 images, preferably no more than 5 MiB per image and 20 MiB total.
+These are agent usage guidelines, not code-enforced limits. Prefer PNG, JPEG, WebP, or GIF for compatibility.
+An explanation may contain text, images, or both. It belongs to the approval request and disappears when the request
+is fully approved or rejected; it is not a permanent task attachment. Evidence requires desktop protocol v3;
+commands without evidence retain their existing compatibility. See [references/cli.md](references/cli.md) for examples.
+
 ## Queue changes
 
 - Run the narrowest write command that expresses the user's request.

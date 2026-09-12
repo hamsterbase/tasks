@@ -47,6 +47,7 @@ today [--show-future] [--show-completed] [--instance <id>]
 inspect --id <id[,id...]> [--show-future] [--show-completed] [--instance <id>]
 view-project --id <project-id> [--show-future] [--show-completed] [--instance <id>]
 view-tasks --id <task-id[,task-id...]> [--instance <id>]
+download-attachment --id <task-or-project-id> --attachment <attachment-id> --output <path> [--instance <id>]
 ```
 
 - `show` lists available areas and projects.
@@ -57,6 +58,15 @@ view-tasks --id <task-id[,task-id...]> [--instance <id>]
   instead of guessing between `view-project` and `view-tasks`.
 - `view-project` returns project information and its task tree.
 - `view-tasks` returns detailed information for one or more tasks.
+- `inspect`, `view-tasks`, and `view-project` include an `attachments` array on task/project details: `{ id,
+  filename, mimetype, size }`. Deleted attachments are excluded; `size` is in bytes.
+- `download-attachment` downloads one attachment belonging to the specified task or project, using the
+  selected desktop app's storage configuration. `--output` is a file path in an existing directory and must
+  not exist. JSON output is `{ path, filename, mimetype, size }`; `path` is absolute. Open that path with an
+  image-viewing tool to read image contents. The command needs an open desktop window supporting protocol v2.
+  It does not queue approval, expose storage credentials, or download external links found in notes. The
+  desktop app downloads the bytes and transfers them to the CLI over local IPC; each attachment is limited to
+  32 MiB.
 
 Prefer `--json` while resolving IDs:
 
@@ -183,6 +193,29 @@ Pass compact JSON as one quoted shell argument:
 hamsterbase-tasks add-items --content '{"type":"project","title":"Website launch","children":["Write brief"]}'
 hamsterbase-tasks add-items --position firstElement:heading-uid --content '["First task","Second task","Third task"]'
 ```
+
+## Approval explanations
+
+All create, update, and remove commands accept these optional flags:
+
+```text
+--explanation <text>
+--explanation-images <json>
+```
+
+`--explanation` accepts Markdown, rendered like task notes. Use `[label](https://example.com)` for links.
+`--explanation-images` takes a JSON array of local image paths. The CLI reads local files, uses the file extension
+for the MIME type, and sends base64 bytes over IPC. Only the filename is retained, not the source path.
+Download remote images to local files before passing them to the CLI. Prefer PNG, JPEG, WebP, or GIF. Follow the size and count guidelines in SKILL.md;
+the CLI and IPC do not enforce text, image-count, or image-size limits.
+Images alone and text alone are both supported. Existing task notes and attachments are not modified.
+The explanation applies to the entire request, including all operations in a batch, and is removed with it.
+
+```sh
+hamsterbase-tasks update-task --id HT#V1StGXR8_Z5j --status complete --explanation 'Fixed the layout; tests passed. Details: https://example.com/result' --explanation-images '["/tmp/after.png","/tmp/screenshot.png"]'
+```
+
+These flags require desktop protocol v3; omitting them preserves each command's existing version requirement.
 
 ## Approval semantics
 

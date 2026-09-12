@@ -407,6 +407,40 @@ export class WorkbenchAttachmentUploadService implements IAttachmentUploadServic
     }
   }
 
+  async readAttachmentBytes(s3Key: string, maxBytes: number): Promise<Uint8Array> {
+    const config = this.getConfig();
+    if (!config) throw new Error('Attachment storage is not configured');
+    const response = await this.buildClient(config).send(new GetObjectCommand({ Bucket: config.bucket, Key: s3Key }), {
+      abortSignal: AbortSignal.timeout(110000),
+    });
+    if (!response.Body) throw new Error('Empty attachment response');
+    const reader = response.Body.transformToWebStream().getReader();
+    try {
+      if (response.ContentLength !== undefined && response.ContentLength > maxBytes) {
+        throw new Error('Attachment exceeds the CLI download size limit');
+      }
+      const chunks: Uint8Array[] = [];
+      let size = 0;
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        size += value.byteLength;
+        if (size > maxBytes) throw new Error('Attachment exceeds the CLI download size limit');
+        chunks.push(value);
+      }
+      const bytes = new Uint8Array(size);
+      let offset = 0;
+      for (const chunk of chunks) {
+        bytes.set(chunk, offset);
+        offset += chunk.byteLength;
+      }
+      return bytes;
+    } finally {
+      await reader.cancel();
+      reader.releaseLock();
+    }
+  }
+
   async getObjectUrl(s3Key: string): Promise<string | null> {
     const config = this.getConfig();
     if (!config) return null;

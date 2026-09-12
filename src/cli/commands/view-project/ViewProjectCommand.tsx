@@ -1,3 +1,4 @@
+import { withAttachments, attachmentLines } from '../../core/attachments';
 import React from 'react';
 import { Text } from 'ink';
 import { z } from 'zod';
@@ -26,6 +27,7 @@ function renderProject(project: ProjectView) {
   const lines = [
     `${project.title} [${project.id}]`,
     `status: ${project.status}${project.area ? ` · area: ${project.area}` : ''}`,
+    ...attachmentLines(project.attachments),
     ...treeLines(project.children),
   ];
   if (project.children.length === 0) {
@@ -50,9 +52,11 @@ export class ViewProjectCommand {
 
   async exec(): Promise<ProjectView> {
     const { model } = await loadInstanceContext(this.flags.instance);
-    return getProjectView(model.toJSON(), this.flags.id, {
-      showFuture: this.flags['show-future'] ?? false,
-      showCompleted: this.flags['show-completed'] ?? false,
-    });
+    return withAttachments(model, [
+      getProjectView(model.toJSON(), this.flags.id, {
+        showFuture: this.flags['show-future'] ?? false,
+        showCompleted: this.flags['show-completed'] ?? false,
+      }),
+    ])[0];
   }
 }

@@ -10,6 +10,7 @@ import {
   TagIcon,
 } from '@/components/icons';
 import { ItemStatus } from '@/core/type';
+import { ItemTone, itemToneClass } from '@/components/todo/itemStatusVisual';
 import { desktopStyles } from '@/desktop/theme/main';
 import classNames from 'classnames';
 import React from 'react';
@@ -23,9 +24,10 @@ export interface ItemTagProps {
   label: string;
   isSelected?: boolean;
   isDanger?: boolean;
+  tone?: ItemTone;
 }
 
-export const ItemTag: React.FC<ItemTagProps> = ({ icon, label, isSelected, isDanger }) => {
+export const ItemTag: React.FC<ItemTagProps> = ({ icon, label, isSelected, isDanger, tone = 't2' }) => {
   const renderIcon = () => {
     if (!icon) return null;
 
@@ -74,7 +76,7 @@ export const ItemTag: React.FC<ItemTagProps> = ({ icon, label, isSelected, isDan
         [desktopStyles.ItemTagSelected]: isSelected,
         [desktopStyles.ItemTagUnselected]: !isSelected,
         [desktopStyles.ItemTagDanger]: isDanger,
-        [desktopStyles.ItemTagNormal]: !isDanger,
+        [itemToneClass(tone)]: !isDanger,
       })}
     >
       {icon && <span className={desktopStyles.ItemTagIcon}>{sizedIconNode}</span>}

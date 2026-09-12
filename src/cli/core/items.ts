@@ -1,3 +1,4 @@
+import type { AttachmentInfo } from './attachments';
 import { getTodayTimestampInUtc } from '../../base/common/getTodayTimestampInUtc';
 import {
   AreaSchema,
@@ -42,6 +43,7 @@ export interface ProjectView {
   type: 'project';
   title: string;
   notes?: string;
+  attachments: AttachmentInfo[];
   status: ItemStatus;
   startDate?: string;
   dueDate?: string;
@@ -55,6 +57,7 @@ export interface TaskDetail {
   type: 'task';
   title: string;
   notes?: string;
+  attachments: AttachmentInfo[];
   status: ItemStatus;
   startDate?: string;
   dueDate?: string;
@@ -283,6 +286,7 @@ export function getProjectView(data: ITaskModelData, uid: string, options: Visib
     type: 'project',
     title: item.title,
     notes: item.notes,
+    attachments: [],
     status: item.status,
     startDate: formatDate(item.startDate),
     dueDate: formatDate(item.dueDate),
@@ -299,6 +303,7 @@ function taskDetail(data: ITaskModelData, task: TaskSchema): TaskDetail {
     type: 'task',
     title: task.title,
     notes: task.notes,
+    attachments: [],
     status: task.status,
     startDate: formatDate(task.startDate),
     dueDate: formatDate(task.dueDate),

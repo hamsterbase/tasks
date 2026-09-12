@@ -1,4 +1,5 @@
 import { ProjectInfoState } from '@/core/state/type.ts';
+import { ItemVisualContext, getItemStatusVisual } from '@/components/todo/itemStatusVisual';
 import { useService } from '@/hooks/use-service';
 import { MobileTestIds } from '@/mobile/testids';
 import { useCancelEdit } from '@/hooks/useCancelEdit';
@@ -18,14 +19,23 @@ import { TaskItemSubtitle } from '../taskItem/TaskItemSubtitle';
 import { TaskItemTitle } from '../taskItem/taskItemTitle';
 import useNavigate from '@/hooks/useNavigate';
 import { MobileProjectCheckbox } from '../icon/MobileProjectCheckbox';
+import { useItemStatusAnimation } from '@/hooks/useItemStatusAnimation';
 
 interface ProjectItemProps {
   projectInfo: ProjectInfoState;
   hideSubtitle?: boolean;
   className?: string;
+  visualContext?: ItemVisualContext;
+  willDisappear?: boolean;
 }
 
-export const HomeProjectItem: React.FC<ProjectItemProps> = ({ projectInfo, hideSubtitle, className }) => {
+export const HomeProjectItem: React.FC<ProjectItemProps> = ({
+  projectInfo,
+  hideSubtitle,
+  className,
+  visualContext = 'default',
+  willDisappear = false,
+}) => {
   const navigate = useNavigate();
   const todoService = useService(ITodoService);
   const { attributes, listeners, setNodeRef, transform, transition, isDragging, node } = useSortable({
@@ -46,15 +56,18 @@ export const HomeProjectItem: React.FC<ProjectItemProps> = ({ projectInfo, hideS
     transition,
     opacity: isDragging ? 0.5 : 1,
   };
+  const animationPhase = useItemStatusAnimation(projectInfo.status);
+  const visual = getItemStatusVisual(projectInfo.status, visualContext);
   const titleNode = isEditing ? (
     <input {...textAreaProps} className={styles.homeProjectItemEditingInput} />
   ) : (
     <TaskItemTitle
       testId={MobileTestIds.ProjectItem.Title}
       title={projectInfo.title}
-      isCanceled={projectInfo.status === 'canceled'}
-      isCompleted={projectInfo.status === 'completed'}
+      status={projectInfo.status}
       emptyText={localize('project.untitled', 'New Project')}
+      visualContext={visualContext}
+      animationPhase={animationPhase}
     />
   );
 
@@ -72,6 +85,7 @@ export const HomeProjectItem: React.FC<ProjectItemProps> = ({ projectInfo, hideS
       className={classNames(styles.homeProjectItemRoot, itemClassName, className, {
         [styles.taskItemEditingShadow]: isEditing,
         [styles.taskItemEditingRound]: isEditing,
+        'item-status-row-exiting': willDisappear,
       })}
       onClick={(e) => {
         if (shouldIgnoreClick(e)) {
@@ -79,9 +93,16 @@ export const HomeProjectItem: React.FC<ProjectItemProps> = ({ projectInfo, hideS
         }
         navigate({ path: `/project/${projectInfo.uid}` });
       }}
+      data-status={projectInfo.status}
+      data-status-animation={animationPhase}
+      data-exiting={willDisappear && animationPhase === 'settling' ? 'true' : undefined}
     >
       <button className={classNames(styles.taskItemIconSize)}>
-        <MobileProjectCheckbox status={projectInfo.status} progress={projectInfo.progress} />
+        <MobileProjectCheckbox
+          status={projectInfo.status}
+          progress={projectInfo.progress}
+          animationPhase={animationPhase}
+        />
       </button>
       <div className={styles.homeProjectItemContent}>
         <div className={styles.homeProjectItemTitleRow}>
@@ -89,12 +110,19 @@ export const HomeProjectItem: React.FC<ProjectItemProps> = ({ projectInfo, hideS
           {!isEditing && (
             <>
               <div className={styles.homeProjectItemMetaIcons}>
-                <TaskItemIcons tags={projectInfo.tags} notes={projectInfo.notes} navIcon={false} />
+                <TaskItemIcons
+                  tags={projectInfo.tags}
+                  notes={projectInfo.notes}
+                  navIcon={false}
+                  tone={visual.metadataTone}
+                />
               </div>
             </>
           )}
         </div>
-        {!hideSubtitle && projectInfo.areaTitle && <TaskItemSubtitle title={projectInfo.areaTitle} />}
+        {!hideSubtitle && projectInfo.areaTitle && (
+          <TaskItemSubtitle title={projectInfo.areaTitle} tone={visual.metadataTone} />
+        )}
       </div>
       <TaskItemCompletionAt completionAt={projectInfo.completionAt} status={projectInfo.status} />
       {projectInfo.status === 'created' && <TaskItemDueDate dueDate={projectInfo.dueDate} />}

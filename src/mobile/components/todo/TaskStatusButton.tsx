@@ -7,15 +7,24 @@ import { ITodoService } from '@/services/todo/common/todoService';
 import { TreeID } from 'loro-crdt';
 import React from 'react';
 import { TaskCheckbox } from '../icon/TaskCheckbox';
+import { ItemStatusAnimationPhase } from '@/components/todo/itemStatusVisual';
+import { triggerCompletionHaptic } from '@/mobile/utils/triggerCompletionHaptic';
 
 interface TaskStatusButtonProps {
   taskId: TreeID;
   status: ItemStatus;
   className?: string;
   testId?: string;
+  animationPhase?: ItemStatusAnimationPhase;
 }
 
-export const TaskStatusButton: React.FC<TaskStatusButtonProps> = ({ taskId, status, className, testId }) => {
+export const TaskStatusButton: React.FC<TaskStatusButtonProps> = ({
+  taskId,
+  status,
+  className,
+  testId,
+  animationPhase,
+}) => {
   const todoService = useService(ITodoService);
   const popupAction = usePopupAction();
 
@@ -37,6 +46,7 @@ export const TaskStatusButton: React.FC<TaskStatusButtonProps> = ({ taskId, stat
               icon: <TaskCheckbox status={'completed'} />,
               name: localize('tasks.mark_as_completed', 'Mark as Completed'),
               onClick: () => {
+                triggerCompletionHaptic();
                 todoService.updateTask(taskId, { status: 'completed' });
               },
             },
@@ -60,6 +70,7 @@ export const TaskStatusButton: React.FC<TaskStatusButtonProps> = ({ taskId, stat
     if (status !== 'created') {
       todoService.updateTask(taskId, { status: 'created' });
     } else {
+      triggerCompletionHaptic();
       todoService.updateTask(taskId, { status: 'completed' });
     }
   };
@@ -75,7 +86,7 @@ export const TaskStatusButton: React.FC<TaskStatusButtonProps> = ({ taskId, stat
       {...longPressEvents}
       className={className}
     >
-      <TaskCheckbox status={status} />
+      <TaskCheckbox status={status} animationPhase={animationPhase} />
     </button>
   );
 };

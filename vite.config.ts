@@ -87,6 +87,10 @@ export default defineConfig({
         'src/components/icons/index.ts',
         'src/components/GlobalContext/GlobalContext.tsx',
         'src/components/icons/ProjectStatusBox.tsx',
+        // Deliberately shared so task/project state visuals stay identical across platforms.
+        'src/components/todo/ItemStatusIcon.tsx',
+        'src/components/todo/itemStatusVisual.ts',
+        'src/styles/item-status.css',
       ],
       validate: (files) => {
         console.log('\n┌─────────────────────────────────────────────────┐');

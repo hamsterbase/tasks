@@ -1,3 +1,4 @@
+import type { CliExplanation } from '@/base/common/cliApproval/explanation';
 import {
   checkPlacement,
   createItemHasValidTaskNesting,
@@ -109,6 +110,7 @@ export interface CliApprovalOpView {
 }
 
 export interface CliApprovalRequestView {
+  explanation?: CliExplanation;
   requestId: string;
   createdAt: number;
   databaseId: string;
@@ -624,6 +626,7 @@ function analyzeOp(data: ITaskModelData, op: CliChangeOp): Omit<CliApprovalOpVie
 
 /** one approval entry shown in the UI: a single op of a pending request */
 export interface CliApprovalOpEntry {
+  explanation?: CliExplanation;
   requestId: string;
   opId: string;
   createdAt: number;
@@ -633,6 +636,7 @@ export interface CliApprovalOpEntry {
 export function flattenRequestOps(requests: CliApprovalRequestView[]): CliApprovalOpEntry[] {
   return requests.flatMap((request) =>
     request.ops.map((op) => ({
+      explanation: request.explanation,
       requestId: request.requestId,
       opId: op.id,
       createdAt: request.createdAt,
@@ -655,6 +659,7 @@ export function analyzeRequest(data: ITaskModelData, request: CliChangeRequest):
     }
   }
   return {
+    explanation: request.explanation,
     requestId: request.requestId,
     createdAt: request.createdAt,
     databaseId: request.databaseId,

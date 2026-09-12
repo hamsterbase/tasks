@@ -1,6 +1,8 @@
+import { readAttachment } from './readAttachment';
+import { IAttachmentUploadService } from '@/services/attachment/common/attachmentUploadService';
 import { checkPlatform } from '@/base/browser/checkPlatform';
 import { stampOpIds } from '@/base/common/cliApproval/pendingQueue';
-import { CliApprovalOpRef, CliChangeRequest } from '@/base/common/cliApproval/protocol';
+import { CliApprovalOpRef, CliChangeRequest, CliAttachmentRequest } from '@/base/common/cliApproval/protocol';
 import { ITodoService } from '@/services/todo/common/todoService';
 import { Emitter } from '@hamsterbase/foundation/event';
 import { analyzeRequest, applyChangeOp, CliApprovalRequestView } from '../common/cliApprovalModel';
@@ -27,7 +29,24 @@ export class WorkbenchCliApprovalService implements ICliApprovalService {
   /** ops this renderer is applying right now; see {@link reserve} */
   private readonly inFlight = new Set<string>();
 
-  constructor(@ITodoService private readonly todoService: ITodoService) {}
+  constructor(
+    @ITodoService private readonly todoService: ITodoService,
+    @IAttachmentUploadService private readonly attachments?: IAttachmentUploadService
+  ) {}
+
+  private async readAttachment(request: CliAttachmentRequest): Promise<void> {
+    try {
+      if (!this.attachments) throw new Error('Attachment service unavailable');
+      const attachment = await readAttachment(this.todoService, this.attachments, request);
+      await this.client.completeAttachmentRequest({ id: request.id, ok: true, attachment });
+    } catch {
+      await this.client.completeAttachmentRequest({
+        id: request.id,
+        ok: false,
+        error: 'Cannot read attachment; check the item, active database, storage configuration, and 32 MiB size limit',
+      });
+    }
+  }
 
   /**
    * The main process keeps one queue for the whole app, so requests for a
@@ -66,6 +85,9 @@ export class WorkbenchCliApprovalService implements ICliApprovalService {
       return;
     }
 
+    this.client.subscribeAttachments((request) => {
+      void this.readAttachment(request);
+    });
     this.client.subscribe((requests) => {
       this.raw = requests;
       this._onChange.fire();

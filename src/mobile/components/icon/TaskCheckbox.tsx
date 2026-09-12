@@ -1,6 +1,9 @@
 import classNames from 'classnames';
-import React, { useMemo } from 'react';
+import React from 'react';
 import { ItemStatus } from '@/core/type.ts';
+import { ItemStatusIcon } from '@/components/todo/ItemStatusIcon';
+import { ItemStatusAnimationPhase } from '@/components/todo/itemStatusVisual';
+import { useItemStatusAnimation } from '@/hooks/useItemStatusAnimation';
 
 type CheckboxSize = 'small' | 'medium';
 
@@ -9,6 +12,7 @@ interface TaskCheckboxProps {
   status?: ItemStatus;
   onClick?: () => void;
   className?: string;
+  animationPhase?: ItemStatusAnimationPhase;
 }
 
 function getRemSize() {
@@ -36,28 +40,12 @@ export const TaskCheckbox: React.FC<TaskCheckboxProps> = ({
   status = 'created',
   onClick,
   className,
+  animationPhase,
 }) => {
   const sizeConfig = SIZE_CONFIG[size];
+  const internalAnimationPhase = useItemStatusAnimation(status);
   const visualSize = sizeConfig.visual;
   const touchSize = sizeConfig.touch;
-  const borderRadius = sizeConfig.radius;
-
-  const checkmarkPath = useMemo(() => {
-    const s = visualSize;
-    const startX = s * 0.25;
-    const startY = s * 0.5;
-    const midX = s * 0.45;
-    const midY = s * 0.7;
-    const endX = s * 0.75;
-    const endY = s * 0.35;
-    return `M ${startX} ${startY} L ${midX} ${midY} L ${endX} ${endY}`;
-  }, [visualSize]);
-
-  const crossPath = useMemo(() => {
-    const s = visualSize;
-    const padding = s * 0.3;
-    return `M ${padding} ${padding} L ${s - padding} ${s - padding} M ${s - padding} ${padding} L ${padding} ${s - padding}`;
-  }, [visualSize]);
 
   return (
     <span
@@ -68,42 +56,12 @@ export const TaskCheckbox: React.FC<TaskCheckboxProps> = ({
       style={{ width: touchSize, height: touchSize }}
       onClick={onClick}
     >
-      <svg width={visualSize} height={visualSize} viewBox={`0 0 ${visualSize} ${visualSize}`}>
-        {/* Background rect */}
-        <rect
-          x="1"
-          y="1"
-          width={visualSize - 2}
-          height={visualSize - 2}
-          rx={borderRadius}
-          ry={borderRadius}
-          fill={status === 'completed' ? 'var(--color-brand)' : 'transparent'}
-          stroke={status === 'completed' ? 'var(--color-brand)' : 'currentColor'}
-          strokeWidth="1.5"
-        />
-        {/* Checkmark for completed */}
-        {status === 'completed' && (
-          <path
-            d={checkmarkPath}
-            fill="none"
-            stroke="white"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        )}
-        {/* X mark for canceled */}
-        {status === 'canceled' && (
-          <path
-            d={crossPath}
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        )}
-      </svg>
+      <ItemStatusIcon
+        shape="task"
+        status={status}
+        size={visualSize}
+        animationPhase={animationPhase ?? internalAnimationPhase}
+      />
     </span>
   );
 };

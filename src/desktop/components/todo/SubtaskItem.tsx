@@ -1,6 +1,7 @@
 import { EditableInput } from '@/components/edit/EditableInput';
 import { taskTitleInputKey } from '@/components/edit/inputKeys';
 import { DragHandleIcon } from '@/components/icons';
+import { getItemStatusVisual, itemToneClass } from '@/components/todo/itemStatusVisual';
 import { ITaskList } from '@/components/taskList/type.ts';
 import { SubTaskInfo } from '@/core/state/type';
 import { ItemStatus } from '@/core/type.ts';
@@ -8,6 +9,7 @@ import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { useLongPress } from '@/hooks/useLongPress.ts';
+import { useItemStatusAnimation } from '@/hooks/useItemStatusAnimation';
 import { useRegisterEvent } from '@/hooks/useRegisterEvent.ts';
 import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService';
@@ -27,6 +29,8 @@ export const SubtaskItem: React.FC<SubtaskItemProps> = ({ subtask, subList, clas
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: subtask.id });
   const inputElementRef = useRef<HTMLInputElement>(null);
   const todoService = useService(ITodoService);
+  const animationPhase = useItemStatusAnimation(subtask.status);
+  const visual = getItemStatusVisual(subtask.status);
   useWatchEvent(todoService.onStateChange);
   useWatchEvent(subList.onListStateChange);
 
@@ -106,9 +110,8 @@ export const SubtaskItem: React.FC<SubtaskItemProps> = ({ subtask, subList, clas
   });
 
   const inputClassName = classNames(desktopStyles.SubtaskItemInput, {
-    [desktopStyles.SubtaskItemInputCanceled]: subtask.status === 'canceled',
-    [desktopStyles.SubtaskItemInputCompleted]: subtask.status === 'completed',
-    [desktopStyles.SubtaskItemInputCreated]: subtask.status === 'created',
+    [itemToneClass(visual.titleTone)]: true,
+    'item-status-title-closed': visual.closed,
   });
 
   const containerClassName = classNames(desktopStyles.SubtaskItemContainer, className, {
@@ -122,14 +125,21 @@ export const SubtaskItem: React.FC<SubtaskItemProps> = ({ subtask, subList, clas
   }
 
   return (
-    <div className={containerClassName} ref={setNodeRef} style={style} onClickCapture={handleContainerClick}>
+    <div
+      className={containerClassName}
+      ref={setNodeRef}
+      style={style}
+      onClickCapture={handleContainerClick}
+      data-status={subtask.status}
+      data-status-animation={animationPhase}
+    >
       <button
         {...longPress.longPressEvents}
         onClick={handleStatusButtonClick}
         onPointerDown={handleStopPropagation}
         className={desktopStyles.SubtaskItemStatusButton}
       >
-        <TaskIcon status={subtask.status} size="sm" />
+        <TaskIcon status={subtask.status} size="sm" animationPhase={animationPhase} />
       </button>
 
       <div

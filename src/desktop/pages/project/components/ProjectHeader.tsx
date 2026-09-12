@@ -16,6 +16,8 @@ import { TestIds } from '@/testIds';
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router';
 import { TagFilterBar } from '@/desktop/components/filter/TagFilterBar';
+import { getItemStatusVisual, itemToneClass } from '@/components/todo/itemStatusVisual';
+import classNames from 'classnames';
 
 interface ProjectHeaderProps {
   project: ReturnType<typeof getProject>;
@@ -37,6 +39,7 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
   onSelectTagFilter,
 }) => {
   const todoService = useService(ITodoService);
+  const visual = getItemStatusVisual(project?.status ?? 'created');
   const { openTaskDisplaySettings } = useDesktopTaskDisplaySettings(`project-${projectId}`);
 
   const dialog = useDesktopDialog();
@@ -131,6 +134,7 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({
       renderIcon={() => <ProjectIcon progress={project.progress} status={project.status} size="md" />}
       onIconClick={handleToggleProjectStatus}
       title={project.title}
+      titleClassName={classNames(itemToneClass(visual.titleTone), visual.closed && 'item-status-title-closed')}
       placeholder={localize('project.untitled', 'New Project')}
       extraActions={[
         {

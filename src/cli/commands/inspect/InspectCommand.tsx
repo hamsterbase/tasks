@@ -1,3 +1,4 @@
+import { withAttachments, attachmentLines } from '../../core/attachments';
 import { Text } from 'ink';
 import React from 'react';
 import { z } from 'zod';
@@ -36,6 +37,7 @@ function taskLines(task: TaskDetail, depth = 0): string[] {
     `${indent}task: ${task.title} [${task.id}]`,
     `${indent}status: ${task.status} · location: ${task.location}`,
     ...(task.notes ? [`${indent}notes: ${task.notes}`] : []),
+    ...attachmentLines(task.attachments, indent),
     ...task.children.flatMap((child) => taskLines(child, depth + 1)),
   ];
 }
@@ -45,6 +47,7 @@ function projectLines(project: ProjectView): string[] {
     `project: ${project.title} [${project.id}]`,
     `status: ${project.status}${project.area ? ` · area: ${project.area}` : ''}`,
     ...(project.notes ? [`notes: ${project.notes}`] : []),
+    ...attachmentLines(project.attachments),
     ...(project.children.length ? treeLines(project.children) : ['No visible tasks.']),
   ];
 }
@@ -100,9 +103,12 @@ export class InspectCommand {
 
   async exec(): Promise<InspectView[]> {
     const { model } = await loadInstanceContext(this.flags.instance);
-    return inspectItems(model.toJSON(), parseIdsFlag(this.flags.id), {
-      showFuture: this.flags['show-future'] ?? false,
-      showCompleted: this.flags['show-completed'] ?? false,
-    });
+    return withAttachments(
+      model,
+      inspectItems(model.toJSON(), parseIdsFlag(this.flags.id), {
+        showFuture: this.flags['show-future'] ?? false,
+        showCompleted: this.flags['show-completed'] ?? false,
+      })
+    );
   }
 }

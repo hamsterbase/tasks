@@ -90,6 +90,7 @@ export const RemindersField: React.FC<RemindersFieldProps> = ({ reminders, itemI
   return (
     <div className={desktopStyles.RemindersFieldAnchor} ref={anchorRef}>
       <TaskDetailAttributeRow
+        dataTestId={TestIds.Reminders.Field}
         icon={<BellIcon className={desktopStyles.TaskDetailAttributeIcon} />}
         label={localize('desktop.task_detail.reminders', 'Reminders')}
         placeholder={reminders.length === 0}
@@ -149,7 +150,11 @@ export const RemindersField: React.FC<RemindersFieldProps> = ({ reminders, itemI
             );
           })}
           <div className={desktopStyles.RemindersFieldPopoverDivider} />
-          <div className={desktopStyles.RemindersFieldPopoverAddRow} onClick={handleAddReminderClick}>
+          <div
+            data-test-id={TestIds.Reminders.AddButton}
+            className={desktopStyles.RemindersFieldPopoverAddRow}
+            onClick={handleAddReminderClick}
+          >
             <PlusIcon className={desktopStyles.RemindersFieldPopoverAddIcon} />
             <span>{localize('desktop.task_detail.add_reminder', 'Add reminder')}</span>
           </div>

@@ -50,6 +50,7 @@ export interface IAttachmentUploadService {
   softDelete(attachmentId: string): void;
 
   getThumbnailUrl(s3Key: string): Promise<string | null>;
+  readAttachmentBytes(s3Key: string, maxBytes: number): Promise<Uint8Array>;
   getObjectUrl(s3Key: string): Promise<string | null>;
   downloadAttachment(s3Key: string, filename: string): Promise<void>;
 }

@@ -2,6 +2,20 @@ import { z } from 'zod';
 import { stripItemIdPrefix } from '../../base/common/itemId';
 
 export const instanceSchema = z.string().trim().min(1).optional();
+
+export const explanationSchema = {
+  explanation: z.string().optional(),
+  'explanation-images': z.string().optional(),
+};
+
+/** Shared flags for commands that submit a desktop approval request. */
+export const approvalCommandSchema = z
+  .object({
+    instance: instanceSchema,
+    ...explanationSchema,
+  })
+  .strict();
+
 /**
  * Single-value id. Commas are rejected outright so a caller that passes a list
  * gets "expects a single id" instead of a confusing "task <a,b> not found".

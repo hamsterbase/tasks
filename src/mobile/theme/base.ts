@@ -82,7 +82,7 @@ export const baseStyles = {
   taskItemIconSize: /*tw*/ 'h-6 w-6 flex-shrink-0 flex items-center justify-center text-t3',
   taskItemContent: /*tw*/ 'flex-1 flex flex-col gap-1 min-w-0',
   taskItemTitleRow: /*tw*/ 'flex items-center gap-2 min-w-0',
-  taskItemArchived: /*tw*/ 'opacity-50!',
+  taskItemArchived: /*tw*/ '',
 
   taskItemEditingRound: /*tw*/ 'rounded-2xl',
   taskItemEditingShadow: /*tw*/ 'shadow-md',
@@ -248,7 +248,7 @@ export const baseStyles = {
   createTaskSubtaskItem: /*tw*/ 'flex items-center gap-2 -ml-1',
   createTaskSubtaskItemIcon: /*tw*/ 'text-t3',
   createTaskSubtaskInput:
-    /*tw*/ 'flex-1 text-sm leading-6 text-t1 bg-transparent border-none outline-none p-0 placeholder:text-t4',
+    /*tw*/ 'flex-1 text-sm leading-6 bg-transparent border-none outline-none p-0 placeholder:text-t4',
   createTaskSubtaskDragHandle: /*tw*/ 'size-4 cursor-grab text-t3 opacity-40',
   createTaskAddButton: /*tw*/ 'text-sm leading-6 text-t4 cursor-pointer text-left',
   subtaskItemDraggingPlaceholder: /*tw*/ 'flex items-center gap-1.5 bg-bg3 rounded-lg w-full',
@@ -425,13 +425,13 @@ export const baseStyles = {
   homeProjectItemEditingInput:
     /*tw*/ 'flex-1 overflow-hidden text-ellipsis whitespace-nowrap bg-transparent text-base leading-6 font-medium outline-none',
   projectHeadingItemSpacingTop: /*tw*/ 'pt-3',
-  projectHeadingItemRow: /*tw*/ 'flex items-center justify-between text-base font-medium',
-  projectHeadingItemArchived: /*tw*/ 'line-through opacity-50',
+  projectHeadingItemRow: /*tw*/ 'flex items-center justify-between text-sm font-medium text-t2',
+  projectHeadingItemArchived: /*tw*/ 'line-through text-t3!',
   projectHeadingItemEditingInput:
     /*tw*/ 'flex-1 overflow-hidden bg-transparent outline-none pl-1 tracking-wider uppercase',
   projectHeadingItemLabel:
-    /*tw*/ 'flex-1 overflow-hidden text-ellipsis whitespace-nowrap bg-transparent text-t1 uppercase tracking-wider pl-1',
-  projectHeadingItemMenuButton: /*tw*/ 'flex items-center justify-center size-7 text-t3 opacity-40',
+    /*tw*/ 'flex-1 overflow-hidden text-ellipsis whitespace-nowrap bg-transparent uppercase tracking-wider pl-1',
+  projectHeadingItemMenuButton: /*tw*/ 'flex items-center justify-center size-7 text-t3',
   projectHeadingItemMenuIcon: /*tw*/ 'size-4',
   tagEditorInputContainer: /*tw*/ 'w-full flex flex-wrap items-center',
   tagEditorSelectedTags: /*tw*/ 'flex items-center',

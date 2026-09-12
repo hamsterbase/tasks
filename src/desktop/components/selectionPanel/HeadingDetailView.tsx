@@ -1,5 +1,5 @@
 import { projectHeadingTitleInputKey } from '@/components/edit/inputKeys.ts';
-import { CloseIcon, HashIcon, MenuIcon } from '@/components/icons';
+import { CloseIcon, MenuIcon } from '@/components/icons';
 import { ProjectHeadingInfo } from '@/core/state/type.ts';
 import { EntityHeader } from '@/desktop/components/common/EntityHeader';
 import { useDesktopProjectHeader } from '@/desktop/hooks/useDesktopProjectHeader';
@@ -9,15 +9,16 @@ import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService.ts';
 import { TestIds } from '@/testIds';
 import React from 'react';
+import classNames from 'classnames';
 import { TaskLocationField } from './components/TaskLocationField';
 import { useCopyItemIdAction } from './hooks/useCopyItemIdAction';
+
+const ICON_STROKE_WIDTH = 1.5;
 
 interface HeadingDetailViewProps {
   heading: ProjectHeadingInfo;
   onClearSelection?: () => void;
 }
-
-const ICON_STROKE_WIDTH = 1.5;
 
 export const HeadingDetailView: React.FC<HeadingDetailViewProps> = ({ heading, onClearSelection }) => {
   const todoService = useService(ITodoService);
@@ -56,10 +57,11 @@ export const HeadingDetailView: React.FC<HeadingDetailViewProps> = ({ heading, o
         disableNewLine
         variant="detail"
         inputKey={projectHeadingTitleInputKey(heading.id)}
-        renderIcon={() => (
-          <HashIcon className={desktopStyles.DetailViewHeaderStatusBox} strokeWidth={ICON_STROKE_WIDTH} />
-        )}
         title={heading.title}
+        titleClassName={classNames(
+          'text-xs font-medium uppercase tracking-wider',
+          heading.isArchived ? 'text-t3 item-status-title-closed' : 'text-t2'
+        )}
         placeholder={localize('heading.title_placeholder', 'Add heading title...')}
         onSave={handleTitleSave}
         extraActions={headerActions}
