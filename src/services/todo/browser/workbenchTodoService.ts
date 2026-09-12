@@ -28,12 +28,7 @@ import {
   UpdateTaskViewSchema,
 } from '@/core/type.ts';
 import { IDatabaseStorage } from '@/services/database/common/database';
-import {
-  EditingContent,
-  ITodoService,
-  TaskCommand,
-  VIEW_SCHEMA_VERSION,
-} from '@/services/todo/common/todoService.ts';
+import { EditingContent, ITodoService, TaskCommand, VIEW_SCHEMA_VERSION } from '@/services/todo/common/todoService.ts';
 import type { TreeID } from 'loro-crdt';
 import { debounceTime, Subject } from 'rxjs';
 import { ByteBuffer, decodeBase64, encodeBase64 } from '@hamsterbase/foundation/buffer';
@@ -132,6 +127,10 @@ export class WorkbenchTodoService implements ITodoService {
       throw new Error('dataModel is not initialized');
     }
     return this.dataModel.taskModel;
+  }
+
+  runInTransaction<T>(callback: () => T): T {
+    return this.taskModel.runInTransaction(callback);
   }
 
   get keepAliveElements() {

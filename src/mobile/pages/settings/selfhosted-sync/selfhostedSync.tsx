@@ -9,6 +9,7 @@ import { useToast } from '@/mobile/overlay/toast/useToast';
 import { styles } from '@/mobile/theme';
 import { useAddSelfhostedServer } from '@/services/selfhostedSync/browser/useAddSelfhostedServer';
 import { ISelfhostedSyncService } from '@/services/selfhostedSync/common/selfhostedSyncService.ts';
+import { TestIds } from '@/testIds';
 import React from 'react';
 
 export const SelfhostedSync = () => {
@@ -16,7 +17,6 @@ export const SelfhostedSync = () => {
   useWatchEvent(selfhostedSyncService.onStateChange);
   const dialog = useDialog();
 
-  useWatchEvent(selfhostedSyncService.onStateChange);
   const toast = useToast();
   const {
     deleteButtonLabel,
@@ -30,6 +30,7 @@ export const SelfhostedSync = () => {
     handleSync,
     onAddServer,
     documentationLink,
+    autoSync,
   } = useAddSelfhostedServer({
     toast(_type, message) {
       toast({ message });
@@ -71,6 +72,16 @@ export const SelfhostedSync = () => {
           mode: {
             type: 'label',
             label: '',
+          },
+        },
+        {
+          testId: TestIds.SelfhostedSync.AutoSyncToggle,
+          title: autoSync.title,
+          description: autoSync.description,
+          onClick: () => autoSync.setEnabled(!autoSync.enabled),
+          mode: {
+            type: 'switch',
+            checked: autoSync.enabled,
           },
         },
       ];

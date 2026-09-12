@@ -10,6 +10,7 @@ import { TaskDisplaySettings } from '@/mobile/overlay/taskDisplaySettings/TaskDi
 import { RecurringTaskSettings } from '@/mobile/overlay/recurringTaskSettings/RecurringTaskSettings';
 import { pages } from '@/mobile/pages.tsx';
 import { INavigationService } from '@/services/navigationService/common/navigationService';
+import { useSelfhostedAutoSync } from '@/services/selfhostedSync/browser/useSelfhostedAutoSync';
 import React, { useEffect, useRef } from 'react';
 import { BrowserRouter, Navigate, Outlet, Route, Routes, useNavigate } from 'react-router';
 import { Toast } from './overlay/toast/Toast';
@@ -58,6 +59,7 @@ const ContentNavigation = () => {
 
 export const App = () => {
   useCloudSync();
+  useSelfhostedAutoSync();
   useSafeArea();
 
   return (

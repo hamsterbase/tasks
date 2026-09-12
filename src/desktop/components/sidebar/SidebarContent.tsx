@@ -13,7 +13,7 @@ import { useConfig } from '@/hooks/useConfig';
 import { useDragSensors } from '@/hooks/useDragSensors';
 import { localize } from '@/nls';
 import { toggleAreaConfigKey } from '@/services/config/config';
-import { ISelfhostedSyncService } from '@/services/selfhostedSync/common/selfhostedSyncService.ts';
+import { useSelfhostedSync } from '@/services/selfhostedSync/browser/useSelfhostedSync';
 import { ITodoService } from '@/services/todo/common/todoService';
 import { DragDropElements } from '@/utils/dnd/dragDropCollision';
 import { getFlattenedItemsCollisionDetectionStrategy } from '@/utils/dnd/flattenedItemsCollisionDetectionStrategy';
@@ -73,30 +73,23 @@ const SidebarProjectsAndAreas: React.FC<SidebarProjectAndAreaProps> = ({ flatten
 export const SidebarContent: React.FC = () => {
   const todoService = useService(ITodoService);
   const instantiationService = useService(IInstantiationService);
-  const selfhostedSyncService = useService(ISelfhostedSyncService);
   const navigate = useNavigate();
   useWatchEvent(todoService.onStateChange);
-  useWatchEvent(selfhostedSyncService.onStateChange);
   const { value: config, setValue } = useConfig(toggleAreaConfigKey());
   const sensors = useDragSensors();
   const desktopMessage = useDesktopMessage();
-
-  const handleSync = async () => {
-    if (selfhostedSyncService.hasServer && !selfhostedSyncService.syncing) {
-      try {
-        await selfhostedSyncService.sync();
-        desktopMessage({
-          type: 'success',
-          message: localize('sync.sync_success', 'Sync completed successfully.'),
-        });
-      } catch (error) {
-        desktopMessage({
-          type: 'error',
-          message: (error as Error).message,
-        });
-      }
-    }
-  };
+  const { selfhostedSyncService, sync: handleSync } = useSelfhostedSync({
+    onSuccess: () =>
+      desktopMessage({
+        type: 'success',
+        message: localize('sync.sync_success', 'Sync completed successfully.'),
+      }),
+    onError: (error) =>
+      desktopMessage({
+        type: 'error',
+        message: error.message,
+      }),
+  });
 
   const rootCollections = flattenRootCollections(todoService.modelState, {
     currentDate: getTodayTimestampInUtc(),

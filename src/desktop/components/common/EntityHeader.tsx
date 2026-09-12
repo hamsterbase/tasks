@@ -13,7 +13,7 @@ import { EntityHeaderDetailFocus, EntityHeaderDisableNewLine, EntityHeaderPageFo
 
 const ICON_STROKE_WIDTH = 1.5;
 
-interface HeaderAction {
+export interface HeaderAction {
   icon: ReactNode;
   handleClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   title: string;

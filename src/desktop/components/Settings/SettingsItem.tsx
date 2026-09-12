@@ -41,9 +41,10 @@ export interface SettingsItemProps {
   title: string;
   description?: string;
   action: Action;
+  testId?: string;
 }
 
-export const SettingsItem: React.FC<SettingsItemProps> = ({ title, description, action }) => {
+export const SettingsItem: React.FC<SettingsItemProps> = ({ title, description, action, testId }) => {
   const renderAction = () => {
     switch (action.type) {
       case 'select':
@@ -70,7 +71,7 @@ export const SettingsItem: React.FC<SettingsItemProps> = ({ title, description, 
   };
 
   return (
-    <div className={desktopStyles.SettingsItemContainer}>
+    <div className={desktopStyles.SettingsItemContainer} data-test-id={testId}>
       <div className={desktopStyles.SettingsItemContentWrapper}>
         <span className={desktopStyles.SettingsItemTitle}>{title}</span>
         {description && <span className={desktopStyles.SettingsItemDescription}>{description}</span>}

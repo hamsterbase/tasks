@@ -2332,6 +2332,14 @@
     "defaultMessage": "Enter your authentication token",
     "content": "Enter your authentication token"
   },
+  "sync.autoSync": {
+    "defaultMessage": "Auto Sync",
+    "content": "Auto Sync"
+  },
+  "sync.autoSync.description": {
+    "defaultMessage": "Sync automatically whenever the app regains focus.",
+    "content": "Sync automatically whenever the app regains focus."
+  },
   "sync.deleteConfigSuccess": {
     "defaultMessage": "Configuration deleted successfully",
     "content": "Configuration deleted successfully"
@@ -2532,9 +2540,9 @@
     "defaultMessage": "Filter by Tag",
     "content": "Filter by Tag"
   },
-  "tasks.id": {
-    "defaultMessage": "ID",
-    "content": "ID"
+  "tasks.id.copy": {
+    "defaultMessage": "Copy ID",
+    "content": "Copy ID"
   },
   "tasks.id.copySuccess": {
     "defaultMessage": "ID copied to clipboard",

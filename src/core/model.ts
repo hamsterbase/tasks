@@ -59,6 +59,8 @@ export class TaskModel {
   private _onModelChange: Emitter<void> = new Emitter();
   public onModelChange = this._onModelChange.event;
 
+  private transactionDepth = 0;
+
   constructor() {
     this.doc = new LoroDoc();
     this.undoManager = new UndoManager(this.doc, {
@@ -69,6 +71,24 @@ export class TaskModel {
     this.doc.subscribeLocalUpdates(() => {
       this._onModelChange.fire();
     });
+  }
+
+  private commit() {
+    if (this.transactionDepth === 0) {
+      this.doc.commit();
+    }
+  }
+
+  runInTransaction<T>(callback: () => T): T {
+    this.transactionDepth++;
+    try {
+      return callback();
+    } finally {
+      this.transactionDepth--;
+      if (this.transactionDepth === 0) {
+        this.doc.commit();
+      }
+    }
   }
 
   setPeerId(peerId: `${number}`) {
@@ -127,7 +147,7 @@ export class TaskModel {
     map.set(ModelKeys.title, area.title);
     map.set(ModelKeys.createdAt, Date.now());
     map.setContainer(ModelKeys.tags, new LoroMovableList());
-    this.doc.commit();
+    this.commit();
     return node.id;
   }
 
@@ -141,7 +161,7 @@ export class TaskModel {
     if (newArea.position) {
       this.moveNode(areaId, newArea.position);
     }
-    this.doc.commit();
+    this.commit();
   }
 
   addProject(project: CreateProjectSchema) {
@@ -154,7 +174,7 @@ export class TaskModel {
     map.set(ModelKeys.title, project.title);
     map.set(ModelKeys.createdAt, Date.now());
     map.setContainer(ModelKeys.tags, new LoroMovableList());
-    this.doc.commit();
+    this.commit();
     return noode.id;
   }
 
@@ -167,7 +187,7 @@ export class TaskModel {
     }
     patch(project, payload, map, ['title', 'notes', 'tags', 'dueDate', 'startDate']);
     this.handleUpdateProject(payload, projectId);
-    this.doc.commit();
+    this.commit();
   }
 
   addProjectHeading(heading: CreateProjectHeadingSchema) {
@@ -176,7 +196,7 @@ export class TaskModel {
     map.set(ModelKeys.title, heading.title);
     map.set(ModelKeys.createdAt, Date.now());
     map.setContainer(ModelKeys.tags, new LoroMovableList());
-    this.doc.commit();
+    this.commit();
     return projectHeading.id;
   }
 
@@ -192,7 +212,7 @@ export class TaskModel {
       map as unknown as LoroMap<Record<string, unknown>>,
       ['title', 'archivedDate'] as const
     );
-    this.doc.commit();
+    this.commit();
   }
 
   addTask(task: CreateTaskSchema) {
@@ -222,7 +242,7 @@ export class TaskModel {
     }
     map.setContainer(ModelKeys.tags, tags);
     this.handleCreateTask(task, noode.id);
-    this.doc.commit();
+    this.commit();
     return noode.id;
   }
 
@@ -253,12 +273,12 @@ export class TaskModel {
       map.set(ModelKeys.recurringRule, JSON.stringify(newTask.recurringRule));
     }
     this.handleUpdateTask(newTask, taskId);
-    this.doc.commit();
+    this.commit();
   }
 
   deleteItem(itemId: TreeID) {
     this.getTree().delete(itemId);
-    this.doc.commit();
+    this.commit();
   }
 
   transitionProjectState(options: {
@@ -301,7 +321,7 @@ export class TaskModel {
       const { map } = this.getTreeNode<ProjectLoroSchema>(projectId, ModelTypes.project);
       map.set(ModelKeys.completion, JSON.stringify({ type: projectStatus, timestamp: completionAt ?? Date.now() }));
     }
-    this.doc.commit();
+    this.commit();
   }
 
   readTaskObject<T = TaskObjectSchema>(objectId: TreeID): T {
@@ -383,7 +403,7 @@ export class TaskModel {
       targetIndex = afterIndex > previousIndex ? afterIndex : afterIndex + 1;
     }
     dateAssignedList.move(previousIndex, targetIndex);
-    this.doc.commit();
+    this.commit();
   }
 
   private getTree() {
@@ -396,7 +416,7 @@ export class TaskModel {
     const remindersMap = this.doc.getMap('reminders');
     const reminderId = nanoid();
     remindersMap.set(reminderId, data);
-    this.doc.commit();
+    this.commit();
     return reminderId;
   }
 
@@ -405,7 +425,7 @@ export class TaskModel {
     const existingReminder = remindersMap.get(reminderId) as ReminderSchema;
     if (existingReminder) {
       remindersMap.set(reminderId, { ...existingReminder, ...data });
-      this.doc.commit();
+      this.commit();
     }
   }
 
@@ -415,7 +435,7 @@ export class TaskModel {
       return;
     }
     remindersMap.delete(reminderId);
-    this.doc.commit();
+    this.commit();
   }
 
   getReminders(): Map<TreeID, ReminderWithId[]> {
@@ -446,7 +466,7 @@ export class TaskModel {
       createdAt: Date.now(),
     };
     attachmentsMap.set(data.id, entry);
-    this.doc.commit();
+    this.commit();
   }
 
   softDeleteAttachment(attachmentId: string): void {
@@ -456,7 +476,7 @@ export class TaskModel {
       return;
     }
     attachmentsMap.set(attachmentId, { ...existing, deletedAt: Date.now() });
-    this.doc.commit();
+    this.commit();
   }
 
   listAllAttachments(): AttachmentSchema[] {
@@ -762,7 +782,7 @@ export class TaskModel {
         targetNode.data.delete(ModelKeys.completion);
       }
     }
-    this.doc.commit();
+    this.commit();
   }
 
   toJSON(): ITaskModelData {
@@ -843,7 +863,7 @@ export class TaskModel {
     map.set('desc', payload.desc ?? '');
     map.set('rule', payload.rule);
     map.set('schemaVersion', payload.schemaVersion);
-    this.doc.commit();
+    this.commit();
     return uid;
   }
 
@@ -857,7 +877,7 @@ export class TaskModel {
         if (payload.desc !== undefined) map.set('desc', payload.desc);
         if (payload.rule !== undefined) map.set('rule', payload.rule);
         if (payload.schemaVersion !== undefined) map.set('schemaVersion', payload.schemaVersion);
-        this.doc.commit();
+        this.commit();
         return;
       }
     }
@@ -870,7 +890,7 @@ export class TaskModel {
     for (let i = 0; i < items.length; i++) {
       if (items[i].get('uid') === uid) {
         list.delete(i, 1);
-        this.doc.commit();
+        this.commit();
         return;
       }
     }
@@ -885,7 +905,7 @@ export class TaskModel {
         const clamped = Math.max(0, Math.min(toIndex, items.length - 1));
         if (clamped !== i) {
           list.move(i, clamped);
-          this.doc.commit();
+          this.commit();
         }
         return;
       }

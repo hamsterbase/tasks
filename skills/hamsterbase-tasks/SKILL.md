@@ -12,6 +12,9 @@ Use the Tasks CLI against the database currently open in a running HamsterBase T
 
 - HamsterBase Tasks desktop app installed and running.
 - The `hamsterbase-tasks` executable, published as [`@hamsterbase/tasks-cli`](https://www.npmjs.com/package/@hamsterbase/tasks-cli) and requiring Node.js 20 or newer.
+- Run every `hamsterbase-tasks` command outside the sandbox. The CLI discovers and communicates with the
+  desktop app through local files and sockets that a sandbox may block. In Codex, request escalated sandbox
+  permissions for the first command and reuse that approval for subsequent `hamsterbase-tasks` commands.
 
 If the `hamsterbase-tasks` executable is missing, install it and retry:
 
@@ -51,6 +54,9 @@ Read [references/cli.md](references/cli.md) when choosing a command, composing a
 - Run the narrowest write command that expresses the user's request.
 - Use `add-items` for several related creates or a nested tree so they require only one desktop approval.
 - Treat `--id` values and position references as stable IDs, not display titles.
+- When work originated from a user-supplied task ID, finish the work and its verification first, then run
+  `update-task --id <task-id> --status complete` to queue a desktop approval request that marks the task
+  complete.
 - A user-supplied `HT#…` string is a HamsterBase Tasks item ID copied from the app's detail panel. Pass it straight
   to `--id` or `--position`; the bare ID without the prefix works too. Run `inspect --id HT#…` first when the write
   you pick depends on whether it names a task, project, heading, or area.

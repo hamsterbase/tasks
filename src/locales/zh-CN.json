@@ -2332,6 +2332,14 @@
     "defaultMessage": "Enter your authentication token",
     "content": "输入您的认证令牌"
   },
+  "sync.autoSync": {
+    "defaultMessage": "Auto Sync",
+    "content": ""
+  },
+  "sync.autoSync.description": {
+    "defaultMessage": "Sync automatically whenever the app regains focus.",
+    "content": ""
+  },
   "sync.deleteConfigSuccess": {
     "defaultMessage": "Configuration deleted successfully",
     "content": "配置删除成功"
@@ -2532,9 +2540,9 @@
     "defaultMessage": "Filter by Tag",
     "content": "按标签筛选"
   },
-  "tasks.id": {
-    "defaultMessage": "ID",
-    "content": "ID"
+  "tasks.id.copy": {
+    "defaultMessage": "Copy ID",
+    "content": "复制 ID"
   },
   "tasks.id.copySuccess": {
     "defaultMessage": "ID copied to clipboard",

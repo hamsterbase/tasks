@@ -32,6 +32,8 @@ export const TestIds = {
   ProjectDetailPanel: {
     /** Menu button in project detail panel header */
     MenuButton: 'project-detail-menu-button',
+    /** Full-project completed and total task count in the detail panel */
+    TaskProgressCount: 'project-detail-task-progress-count',
     /** Cancel project item in the project detail menu */
     CancelProjectMenuItem: 'project-detail-cancel-project-menu-item',
     /** Add heading item in the project detail menu */
@@ -144,6 +146,10 @@ export const TestIds = {
   CloudDatabase: {
     /** Row in the cloud database settings showing an inbox token */
     InboxTokenRow: 'cloud-database-inbox-token-row',
+  },
+  SelfhostedSync: {
+    /** Auto-sync toggle row in selfhosted sync settings */
+    AutoSyncToggle: 'selfhosted-sync-auto-sync-toggle',
   },
   RecurringTaskSettings: {
     /** Desktop recurring task settings overlay container */

@@ -1,7 +1,5 @@
-import { getTodayTimestampInUtc } from '@/base/common/getTodayTimestampInUtc';
 import { projectTitleInputKey } from '@/components/edit/inputKeys.ts';
 import { AreaIcon, FlagIcon, MenuIcon, ScheduledIcon } from '@/components/icons';
-import { getProjectHeadingAndTasks } from '@/core/state/getProjectHeadingAndTasks';
 import { getProject } from '@/core/state/getProject';
 import { CliApprovalDetailEntry } from '@/desktop/components/cliApproval/CliApprovalDetailEntry';
 import { EntityHeader } from '@/desktop/components/common/EntityHeader';
@@ -9,7 +7,6 @@ import { ProjectIcon } from '@/desktop/components/todo/ProjectIcon';
 import { useDatepicker } from '@/desktop/overlay/datePicker/useDatepicker';
 import { desktopStyles } from '@/desktop/theme/main.ts';
 import { useService } from '@/hooks/use-service';
-import { useTaskDisplaySettings } from '@/hooks/useTaskDisplaySettings';
 import { useWatchEvent } from '@/hooks/use-watch-event';
 import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService';
@@ -19,10 +16,10 @@ import React from 'react';
 import { useParams } from 'react-router';
 import { AttachmentSection } from '../../attachment/AttachmentSection';
 import { TagsField } from '../../TagsField';
-import { ItemIdField } from '../components/ItemIdField';
 import { NotesField } from '../components/NotesField';
 import { TaskDateField } from '../components/TaskDateField';
 import { TaskLocationField } from '../components/TaskLocationField';
+import { useCopyItemIdAction } from '../hooks/useCopyItemIdAction';
 import { useDesktopProjectMenu } from './useDesktopProjectMenu';
 
 const useProjectId = (): TreeID | null => {
@@ -45,22 +42,9 @@ interface IProjectDetailPanelContentProps {
 const ProjectDetailPanelContent: React.FC<IProjectDetailPanelContentProps> = ({ projectId, project }) => {
   const todoService = useService(ITodoService);
   const showDatePicker = useDatepicker();
-  const { showCompletedTasks, showFutureTasks, completedAfter } = useTaskDisplaySettings(`project-${projectId}`);
-  const { flattenedItemsResult } = getProjectHeadingAndTasks({
-    modelData: todoService.modelState,
-    projectId,
-    option: {
-      showCompletedTasks,
-      showFutureTasks,
-      completedAfter,
-      currentDate: getTodayTimestampInUtc(),
-      recentChangedTaskSet: new Set<TreeID>(todoService.keepAliveElements as TreeID[]),
-    },
-    disableCreateTask: true,
-  });
-  const visibleTasks = flattenedItemsResult.flattenedItems.filter((item) => item.type === 'item');
-  const completedTaskCount = visibleTasks.filter((item) => item.content.status === 'completed').length;
-  const taskProgress = visibleTasks.length === 0 ? 0 : (completedTaskCount / visibleTasks.length) * 100;
+  const completedTaskCount = project.completedTasks;
+  const totalTaskCount = project.totalTasks;
+  const taskProgress = project.progress * 100;
 
   const handleTitleSave = (title: string) => {
     todoService.updateProject(projectId, { title });
@@ -114,7 +98,10 @@ const ProjectDetailPanelContent: React.FC<IProjectDetailPanelContentProps> = ({ 
     openDesktopProjectMenu(rect.right, rect.bottom);
   };
 
+  const copyIdAction = useCopyItemIdAction(projectId);
+
   const headerActions = [
+    ...(copyIdAction ? [copyIdAction] : []),
     {
       icon: <MenuIcon />,
       handleClick: handleMenuClick,
@@ -144,7 +131,6 @@ const ProjectDetailPanelContent: React.FC<IProjectDetailPanelContentProps> = ({ 
             className={desktopStyles.DetailViewNotesTextarea}
           />
           <div className={desktopStyles.DetailViewDivider} />
-          <ItemIdField itemId={projectId} />
           <TaskLocationField itemId={projectId} label={localize('project.area', 'Area')} emptyIcon={<AreaIcon />} />
           <TaskDateField
             label={localize('project.start_date', 'Start Date')}
@@ -170,7 +156,8 @@ const ProjectDetailPanelContent: React.FC<IProjectDetailPanelContentProps> = ({ 
             </span>
             <span
               className={desktopStyles.DetailViewSubtaskHeaderCount}
-            >{`${completedTaskCount} / ${visibleTasks.length}`}</span>
+              data-test-id={TestIds.ProjectDetailPanel.TaskProgressCount}
+            >{`${completedTaskCount} / ${totalTaskCount}`}</span>
           </div>
           <div className={desktopStyles.DetailViewSubtaskProgressBar}>
             <div className={desktopStyles.DetailViewSubtaskProgressFill} style={{ width: `${taskProgress}%` }} />

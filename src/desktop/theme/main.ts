@@ -102,8 +102,6 @@ export const desktopStyles = {
 
   TaskLocationFieldLocationText: /*tw*/ 'text-xs text-t1',
 
-  ItemIdFieldValue: /*tw*/ 'text-xs text-t1 font-mono truncate',
-
   TaskDateFieldDateContainer: /*tw*/ 'flex items-baseline justify-end gap-1 text-xs leading-4 flex-wrap',
   TaskDateFieldDateNormal: /*tw*/ 'text-xs text-t1',
   TaskDateFieldDateOverdue: /*tw*/ 'text-xs text-accent-danger font-medium',
@@ -639,22 +637,24 @@ export const desktopStyles = {
   DesktopHeadingListItemInput:
     /*tw*/ 'flex-1 min-w-0 bg-transparent outline-none text-xs font-semibold uppercase tracking-wider text-t3 placeholder:text-t3 rounded-sm px-1 -mx-1 truncate',
 
-  DesktopMessageContainer: /*tw*/ 'fixed top-6 right-6 flex flex-col items-end pointer-events-none',
+  DesktopMessageContainer: /*tw*/ 'fixed bottom-6 right-6 flex flex-col items-end gap-2 pointer-events-none',
   DesktopMessageContent:
-    'bg-bg1 text-t1 border-line-regular border rounded-lg shadow-lg backdrop-blur-sm min-w-80 max-w-md p-4 pointer-events-auto transform transition-all duration-200 ease-out',
-  DesktopMessageVisible: /*tw*/ 'translate-x-0 opacity-100',
-  DesktopMessageHidden: /*tw*/ 'translate-x-full opacity-0',
-  DesktopMessageInner: /*tw*/ 'flex items-start gap-3',
-  DesktopMessageIcon: /*tw*/ 'flex-shrink-0 mt-0.5 size-5 flex items-center justify-center',
+    'bg-bg1 text-t1 border-line-regular border rounded-lg shadow-lg backdrop-blur-sm min-w-64 max-w-sm px-3 py-2.5 pointer-events-auto transform transition-all duration-200 ease-out',
+  DesktopMessageVisible: /*tw*/ 'translate-y-0 opacity-100',
+  DesktopMessageHidden: /*tw*/ 'translate-y-full opacity-0',
+  DesktopMessageInner: /*tw*/ 'flex items-start gap-2',
+  DesktopMessageIcon: /*tw*/ 'flex-shrink-0 mt-0.5 size-4 flex items-center justify-center',
+  DesktopMessageIconSvg: /*tw*/ 'size-4',
   DesktopMessageIconSuccess: /*tw*/ 'text-accent-success',
   DesktopMessageIconError: /*tw*/ 'text-accent-danger',
   DesktopMessageIconInfo: /*tw*/ 'text-brand',
-  DesktopMessageTextContainer: /*tw*/ 'flex-1 min-w-0 gap-1 flex flex-col',
-  DesktopMessageText: /*tw*/ 'text-medium font-medium leading-5 break-words',
-  DesktopMessageDescription: /*tw*/ 'text-sm font-medium leading-5 break-words text-t3',
+  DesktopMessageTextContainer: /*tw*/ 'flex-1 min-w-0 gap-0.5 flex flex-col',
+  DesktopMessageText: /*tw*/ 'text-sm font-medium leading-5 break-words',
+  DesktopMessageDescription: /*tw*/ 'text-xs leading-4 break-words text-t3',
   DesktopMessageCloseButton:
-    'size-5 flex items-center justify-center hover:opacity-70 transition-opacity flex-shrink-0 ml-2 text-t3',
-  DesktopMessageUndo: /*tw*/ 'px-8 text-brand mt-2 text-sm',
+    'size-4 mt-0.5 flex items-center justify-center hover:opacity-70 transition-opacity flex-shrink-0 ml-2 text-t3',
+  DesktopMessageCloseIcon: /*tw*/ 'size-3.5',
+  DesktopMessageUndo: /*tw*/ 'px-6 text-brand mt-1 text-xs',
   DesktopMenuBackdrop: /*tw*/ 'fixed inset-0',
   DesktopMenuContainer: /*tw*/ 'fixed outline-none w-[180px]',
   DesktopMenuContent:

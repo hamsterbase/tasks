@@ -99,6 +99,14 @@ export function thirdpartySyncServersConfigKey(): ConfigKey<ISelfhostedSyncServe
   };
 }
 
+export function selfhostedAutoSyncConfigKey(): ConfigKey<boolean> {
+  return {
+    key: 'selfhostedAutoSync',
+    default: false,
+    check: (value: boolean) => typeof value === 'boolean',
+  };
+}
+
 export type DockBadgeCountType = 'none' | 'overdue' | 'overdue_and_today' | 'overdue_today_and_inbox';
 
 export function dockBadgeCountTypeConfigKey(): ConfigKey<DockBadgeCountType> {

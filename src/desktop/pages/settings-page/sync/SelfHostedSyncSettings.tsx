@@ -4,6 +4,7 @@ import { SettingButton } from '@/desktop/components/Settings/Button/Button';
 import { ItemGroup } from '@/desktop/components/Settings/ItemGroup';
 import { SettingsContent } from '@/desktop/components/Settings/SettingsContent/SettingsContent';
 import { SettingsEmptyStateAction } from '@/desktop/components/Settings/SettingsEmptyStateAction';
+import { SettingsItem } from '@/desktop/components/Settings/SettingsItem';
 import { useDesktopMessage } from '@/desktop/overlay/desktopMessage/useDesktopMessage';
 import { desktopStyles } from '@/desktop/theme/main';
 import { useService } from '@/hooks/use-service';
@@ -33,6 +34,7 @@ export const SelfHostedSyncSettings: React.FC = () => {
     handleSync,
     deleteButtonLabel,
     documentationLink,
+    autoSync,
   } = useAddSelfhostedServer({
     toast(type, message) {
       showMessage({
@@ -109,6 +111,16 @@ export const SelfHostedSyncSettings: React.FC = () => {
               <InfoItem label={formItemsLabel.serverType} value={formItemsLabel.selfHosted} />
               <InfoItem label={formItemsLabel.endpoint} value={config.entrypoint} />
               <InfoItem label={formItemsLabel.folderName} value={config.folder} />
+              <SettingsItem
+                title={autoSync.title}
+                description={autoSync.description}
+                testId={TestIds.SelfhostedSync.AutoSyncToggle}
+                action={{
+                  type: 'switch',
+                  currentValue: autoSync.enabled,
+                  onChange: autoSync.setEnabled,
+                }}
+              />
             </ItemGroup>
             <div className={desktopStyles.SettingsButtonRow}>
               <SettingButton

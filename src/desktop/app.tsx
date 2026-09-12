@@ -41,6 +41,7 @@ import { useCloudSync } from '@/hooks/useCloudSync.ts';
 import { useSafeArea } from '@/hooks/useSafeArea';
 import { IMenuService } from '@/services/menu/common/menuService';
 import { INavigationService } from '@/services/navigationService/common/navigationService';
+import { useSelfhostedAutoSync } from '@/services/selfhostedSync/browser/useSelfhostedAutoSync';
 import { ITodoService } from '@/services/todo/common/todoService';
 import React, { useEffect } from 'react';
 import { Navigate, useRoutes, useLocation, useNavigate } from 'react-router';
@@ -72,6 +73,7 @@ const DesktopNavigationBridge: React.FC = () => {
 export const App = () => {
   useInputFocused();
   useCloudSync();
+  useSelfhostedAutoSync();
   const { isElectron } = checkPlatform();
 
   const location = useLocation();

@@ -69,6 +69,8 @@ export interface ITodoService {
 
   endEditingContent(): void;
 
+  runInTransaction<T>(callback: () => T): T;
+
   modelState: ITaskModelData;
 
   getModelVersion(databaseId: string): Record<string, number>;

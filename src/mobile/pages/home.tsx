@@ -17,7 +17,7 @@ import { HomePageProjectOverlayItem } from '@/mobile/components/todo/HomePagePro
 import { localize } from '@/nls.ts';
 import { toggleAreaConfigKey } from '@/services/config/config.ts';
 import { INavigationService } from '@/services/navigationService/common/navigationService.ts';
-import { ISelfhostedSyncService } from '@/services/selfhostedSync/common/selfhostedSyncService.ts';
+import { useSelfhostedSync } from '@/services/selfhostedSync/browser/useSelfhostedSync';
 import { ITodoService } from '@/services/todo/common/todoService.ts';
 import { DragDropElements } from '@/utils/dnd/dragDropCollision.ts';
 import { getFlattenedItemsCollisionDetectionStrategy } from '@/utils/dnd/flattenedItemsCollisionDetectionStrategy.ts';
@@ -106,10 +106,8 @@ export const MobileHome = () => {
   const navigationService = useService(INavigationService);
   const popupAction = usePopupAction();
   const todoService = useService(ITodoService);
-  const thirdpartySyncService = useService(ISelfhostedSyncService);
   const navigate = useNavigate();
   useWatchEvent(todoService.onStateChange);
-  useWatchEvent(thirdpartySyncService.onStateChange);
   const unstartedProjects = getFutureProjects(todoService.modelState, getTodayTimestampInUtc());
   const { value: config, setValue } = useConfig(toggleAreaConfigKey());
   const flattenedItemsResult = flattenRootCollections(todoService.modelState, {
@@ -119,18 +117,10 @@ export const MobileHome = () => {
   const sensors = useDragSensors();
   useScrollPosition('homeScrollPosition');
   const toast = useToast();
-
-  const handleSync = async () => {
-    if (thirdpartySyncService.hasServer && !thirdpartySyncService.syncing) {
-      try {
-        await thirdpartySyncService.sync();
-        // toast success message
-        toast({ message: localize('sync.success', 'Sync successful') });
-      } catch (error) {
-        toast({ message: (error as Error).message });
-      }
-    }
-  };
+  const { selfhostedSyncService, sync: handleSync } = useSelfhostedSync({
+    onSuccess: () => toast({ message: localize('sync.success', 'Sync successful') }),
+    onError: (error) => toast({ message: error.message }),
+  });
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
@@ -187,10 +177,10 @@ export const MobileHome = () => {
             icon: <SettingsIcon className={styles.headerActionButtonIcon} strokeWidth={1.5} />,
             onClick: () => navigate({ path: '/settings' }),
           },
-          ...(thirdpartySyncService.showSyncIcon
+          ...(selfhostedSyncService.showSyncIcon
             ? [
                 {
-                  icon: <SyncIcon className={thirdpartySyncService.syncing ? 'animate-spin' : ''} />,
+                  icon: <SyncIcon className={selfhostedSyncService.syncing ? 'animate-spin' : ''} />,
                   onClick: handleSync,
                 },
               ]

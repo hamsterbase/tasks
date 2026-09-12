@@ -671,6 +671,7 @@ export function analyzeRequest(data: ITaskModelData, request: CliChangeRequest):
  * and `ITodoService` satisfy it structurally.
  */
 export interface CliApprovalApplyTarget {
+  runInTransaction<T>(callback: () => T): T;
   addTask(task: CreateTaskSchema): TreeID;
   addProject(project: CreateProjectSchema): TreeID;
   addProjectHeading(heading: CreateProjectHeadingSchema): TreeID;
@@ -937,7 +938,9 @@ export function applyChangeOp(target: CliApprovalApplyTarget, data: ITaskModelDa
       target.deleteItem(requireUid(data, op.uid, 'area').id);
       break;
     case 'create-items':
-      addCreateItems(target, data, op);
+      target.runInTransaction(() => {
+        addCreateItems(target, data, op);
+      });
       break;
   }
 }

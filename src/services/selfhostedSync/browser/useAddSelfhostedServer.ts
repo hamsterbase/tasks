@@ -1,9 +1,10 @@
 import { DialogAction, DialogActionValue } from '@/base/common/componentsType/dialog';
 import { useService } from '@/hooks/use-service';
-import { useWatchEvent } from '@/hooks/use-watch-event';
+import { useConfig } from '@/hooks/useConfig';
 import { localize } from '@/nls';
-import { ISelfhostedSyncService } from '../common/selfhostedSyncService';
+import { selfhostedAutoSyncConfigKey } from '@/services/config/config';
 import { ISwitchService } from '@/services/switchService/common/switchService';
+import { useSelfhostedSync } from './useSelfhostedSync';
 
 interface AddServerDialog {
   title: string;
@@ -19,9 +20,12 @@ interface UseAddSelfhostedServerOptions {
 export const selfhostedSyncPageTitle = localize('sync.selfHostedSync', 'Selfhosted Sync');
 
 export const useAddSelfhostedServer = (options: UseAddSelfhostedServerOptions) => {
-  const selfhostedSyncService = useService(ISelfhostedSyncService);
-  useWatchEvent(selfhostedSyncService.onStateChange);
+  const { selfhostedSyncService, sync: handleSync } = useSelfhostedSync({
+    onSuccess: () => options.toast('success', localize('sync.syncSuccess', 'Sync Successful')),
+    onError: (error) => options.toast('error', error.message),
+  });
   const switchService = useService(ISwitchService);
+  const { value: autoSyncEnabled, setValue: setAutoSyncEnabled } = useConfig(selfhostedAutoSyncConfigKey());
 
   const title = localize('sync.selfHosted.add', 'Add Selfhosted Server');
   const isValidUrl = (url: string): string | undefined => {
@@ -92,16 +96,6 @@ export const useAddSelfhostedServer = (options: UseAddSelfhostedServerOptions) =
     }
   };
 
-  const handleSync = async () => {
-    if (selfhostedSyncService.syncing) return;
-    try {
-      await selfhostedSyncService.sync();
-      options.toast('success', localize('sync.syncSuccess', 'Sync Successful'));
-    } catch (error) {
-      options.toast('error', (error as Error).message);
-    }
-  };
-
   const onAddServer = () => {
     options.handleAddServerDialog({
       title: title,
@@ -134,6 +128,14 @@ export const useAddSelfhostedServer = (options: UseAddSelfhostedServerOptions) =
         ),
       }
     : null;
+
+  const autoSync = {
+    title: localize('sync.autoSync', 'Auto Sync'),
+    description: localize('sync.autoSync.description', 'Sync automatically whenever the app regains focus.'),
+    enabled: autoSyncEnabled,
+    setEnabled: setAutoSyncEnabled,
+  };
+
   return {
     title,
     actions,
@@ -148,5 +150,6 @@ export const useAddSelfhostedServer = (options: UseAddSelfhostedServerOptions) =
     handleSync,
     onAddServer,
     documentationLink,
+    autoSync,
   };
 };
