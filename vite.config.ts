@@ -60,6 +60,9 @@ export default defineConfig({
         'src/electron/**',
         'src/server/**',
         'src/cli/**',
+        // shared with the electron main process and the CLI; covered directly
+        // by packages/unit-test rather than through the web bundle
+        'src/base/common/cliApproval/**',
         'src/core/time/getTimeStampFromDateStr.ts',
         'src/core/time/isStartOfDay.ts',
         '**/*.d.ts',

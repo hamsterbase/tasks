@@ -41,6 +41,10 @@ export const TestIds = {
     /** Menu button in heading detail panel header */
     MenuButton: 'heading-detail-menu-button',
   },
+  DetailPanel: {
+    /** ID row in the desktop detail panel; clicking it copies HT#<uid> */
+    IdField: 'detail-panel-id-field',
+  },
   DesktopMenu: {
     /** Desktop menu popup wrapper containing menu and submenu */
     Popup: 'desktop-menu-popup',
@@ -148,5 +152,29 @@ export const TestIds = {
     StartDateInput: 'recurring-task-settings-start-input',
     /** Due date input in the recurring task settings overlay */
     DueDateInput: 'recurring-task-settings-due-input',
+  },
+  CliApproval: {
+    /** Approvals page root */
+    Page: 'cli-approval-page',
+    /** One approvable entry (a single op) in the approvals page or panel */
+    OpRow: 'cli-approval-op-row',
+    /** Approve button on an entry */
+    ApproveButton: 'cli-approval-approve-button',
+    /** Reject / remove button on an entry */
+    RejectButton: 'cli-approval-reject-button',
+    /** Approve every valid non-deletion entry shown in the current approval review */
+    ApproveAllButton: 'cli-approval-approve-all-button',
+    /** Reject every entry shown in the current approval review */
+    RejectAllButton: 'cli-approval-reject-all-button',
+    /** Always-visible approvals entry in a project detail panel */
+    DetailEntry: 'cli-approval-detail-entry',
+    /** CLI setup instructions shown on the approvals page when nothing is pending */
+    SetupGuide: 'cli-approval-setup-guide',
+    /** Copies the agent prompt out of the setup guide */
+    SetupGuideCopyButton: 'cli-approval-setup-guide-copy-button',
+    /** One node row of the created-items tree */
+    TreeNode: 'cli-approval-tree-node',
+    /** Right slide-over approval panel container */
+    PanelContainer: 'cli-approval-panel',
   },
 } as const;

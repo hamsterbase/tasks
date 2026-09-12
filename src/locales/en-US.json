@@ -540,6 +540,318 @@
     "defaultMessage": "Cancel",
     "content": "Cancel"
   },
+  "cliApproval.action.createArea": {
+    "defaultMessage": "New area",
+    "content": "New area"
+  },
+  "cliApproval.action.createHeading": {
+    "defaultMessage": "New heading",
+    "content": "New heading"
+  },
+  "cliApproval.action.createProject": {
+    "defaultMessage": "New project",
+    "content": "New project"
+  },
+  "cliApproval.action.createTask": {
+    "defaultMessage": "New task",
+    "content": "New task"
+  },
+  "cliApproval.action.delete": {
+    "defaultMessage": "Delete",
+    "content": "Delete"
+  },
+  "cliApproval.action.move": {
+    "defaultMessage": "Move",
+    "content": "Move"
+  },
+  "cliApproval.action.update": {
+    "defaultMessage": "Update",
+    "content": "Update"
+  },
+  "cliApproval.anchor.after": {
+    "defaultMessage": "after {0}",
+    "content": "after {0}"
+  },
+  "cliApproval.anchor.before": {
+    "defaultMessage": "before {0}",
+    "content": "before {0}"
+  },
+  "cliApproval.anchor.first": {
+    "defaultMessage": "at the top",
+    "content": "at the top"
+  },
+  "cliApproval.approve": {
+    "defaultMessage": "Approve",
+    "content": "Approve"
+  },
+  "cliApproval.approveAll": {
+    "defaultMessage": "Approve All",
+    "content": "Approve All"
+  },
+  "cliApproval.approveAll.description": {
+    "defaultMessage": "Apply {0} pending change(s) from the CLI?",
+    "content": "Apply {0} pending change(s) from the CLI?"
+  },
+  "cliApproval.approveAll.descriptionWithConfirmation": {
+    "defaultMessage": "Apply {0} pending change(s)? {1} deletion request(s) will remain for separate confirmation.",
+    "content": "Apply {0} pending change(s)? {1} deletion request(s) will remain for separate confirmation."
+  },
+  "cliApproval.approveAll.title": {
+    "defaultMessage": "Approve all requests",
+    "content": "Approve all requests"
+  },
+  "cliApproval.approveAllCount": {
+    "defaultMessage": "Approve All ({0})",
+    "content": "Approve All ({0})"
+  },
+  "cliApproval.approveScope": {
+    "defaultMessage": "Approve \"{0}\" ({1})",
+    "content": "Approve \"{0}\" ({1})"
+  },
+  "cliApproval.approveScope.title": {
+    "defaultMessage": "Approve requests in \"{0}\"",
+    "content": "Approve requests in \"{0}\""
+  },
+  "cliApproval.banner": {
+    "defaultMessage": "{0} CLI change(s) waiting for approval",
+    "content": "{0} CLI change(s) waiting for approval"
+  },
+  "cliApproval.banner.review": {
+    "defaultMessage": "Review",
+    "content": "Review"
+  },
+  "cliApproval.confirmDelete.confirm": {
+    "defaultMessage": "Approve Delete",
+    "content": "Approve Delete"
+  },
+  "cliApproval.confirmDelete.description": {
+    "defaultMessage": "Delete \"{0}\"? This action cannot be undone.",
+    "content": "Delete \"{0}\"? This action cannot be undone."
+  },
+  "cliApproval.confirmDelete.title": {
+    "defaultMessage": "Approve deletion",
+    "content": "Approve deletion"
+  },
+  "cliApproval.empty": {
+    "defaultMessage": "No pending approvals",
+    "content": "No pending approvals"
+  },
+  "cliApproval.field.children": {
+    "defaultMessage": "Children",
+    "content": "Children"
+  },
+  "cliApproval.field.dueDate": {
+    "defaultMessage": "Due date",
+    "content": "Due date"
+  },
+  "cliApproval.field.items": {
+    "defaultMessage": "Items",
+    "content": "Items"
+  },
+  "cliApproval.field.notes": {
+    "defaultMessage": "Notes",
+    "content": "Notes"
+  },
+  "cliApproval.field.parent": {
+    "defaultMessage": "Location",
+    "content": "Location"
+  },
+  "cliApproval.field.startDate": {
+    "defaultMessage": "Start date",
+    "content": "Start date"
+  },
+  "cliApproval.field.status": {
+    "defaultMessage": "Status",
+    "content": "Status"
+  },
+  "cliApproval.field.tags": {
+    "defaultMessage": "Tags",
+    "content": "Tags"
+  },
+  "cliApproval.field.title": {
+    "defaultMessage": "Title",
+    "content": "Title"
+  },
+  "cliApproval.filter.all": {
+    "defaultMessage": "All",
+    "content": "All"
+  },
+  "cliApproval.invalid.itemMissing": {
+    "defaultMessage": "Item no longer exists",
+    "content": "Item no longer exists"
+  },
+  "cliApproval.invalid.moveIntoTask": {
+    "defaultMessage": "A task cannot be moved under another task",
+    "content": "A task cannot be moved under another task"
+  },
+  "cliApproval.invalid.nestingTooDeep": {
+    "defaultMessage": "A subtask cannot have subtasks of its own",
+    "content": "A subtask cannot have subtasks of its own"
+  },
+  "cliApproval.invalid.noChange": {
+    "defaultMessage": "Item already has these values",
+    "content": "Item already has these values"
+  },
+  "cliApproval.invalid.parentMissing": {
+    "defaultMessage": "Parent no longer exists",
+    "content": "Parent no longer exists"
+  },
+  "cliApproval.invalid.parentType": {
+    "defaultMessage": "Invalid parent type",
+    "content": "Invalid parent type"
+  },
+  "cliApproval.invalid.positionReferenceMissing": {
+    "defaultMessage": "Position reference no longer exists",
+    "content": "Position reference no longer exists"
+  },
+  "cliApproval.invalid.positionSelf": {
+    "defaultMessage": "An item cannot be positioned relative to itself",
+    "content": "An item cannot be positioned relative to itself"
+  },
+  "cliApproval.invalid.subjectHasChildren": {
+    "defaultMessage": "A task with subtasks cannot be nested under another task",
+    "content": "A task with subtasks cannot be nested under another task"
+  },
+  "cliApproval.invalid.subtaskParentLocked": {
+    "defaultMessage": "A subtask cannot be moved out of its parent task",
+    "content": "A subtask cannot be moved out of its parent task"
+  },
+  "cliApproval.invalid.taskMissing": {
+    "defaultMessage": "Task no longer exists",
+    "content": "Task no longer exists"
+  },
+  "cliApproval.move.from": {
+    "defaultMessage": "From",
+    "content": "From"
+  },
+  "cliApproval.move.to": {
+    "defaultMessage": "To",
+    "content": "To"
+  },
+  "cliApproval.op.cancelTask": {
+    "defaultMessage": "Cancel \"{0}\"",
+    "content": "Cancel \"{0}\""
+  },
+  "cliApproval.op.completeTask": {
+    "defaultMessage": "Complete \"{0}\"",
+    "content": "Complete \"{0}\""
+  },
+  "cliApproval.op.createArea": {
+    "defaultMessage": "Create area \"{0}\"",
+    "content": "Create area \"{0}\""
+  },
+  "cliApproval.op.createHeadings": {
+    "defaultMessage": "Create {0} headings",
+    "content": "Create {0} headings"
+  },
+  "cliApproval.op.createItems": {
+    "defaultMessage": "Create {0} items",
+    "content": "Create {0} items"
+  },
+  "cliApproval.op.createProject": {
+    "defaultMessage": "Create project \"{0}\"",
+    "content": "Create project \"{0}\""
+  },
+  "cliApproval.op.createProjects": {
+    "defaultMessage": "Create {0} projects",
+    "content": "Create {0} projects"
+  },
+  "cliApproval.op.createTask": {
+    "defaultMessage": "Create task \"{0}\"",
+    "content": "Create task \"{0}\""
+  },
+  "cliApproval.op.createTasks": {
+    "defaultMessage": "Create {0} tasks",
+    "content": "Create {0} tasks"
+  },
+  "cliApproval.op.deleteTask": {
+    "defaultMessage": "Delete \"{0}\"",
+    "content": "Delete \"{0}\""
+  },
+  "cliApproval.op.moveTask": {
+    "defaultMessage": "Move \"{0}\" to {1}",
+    "content": "Move \"{0}\" to {1}"
+  },
+  "cliApproval.op.reopenTask": {
+    "defaultMessage": "Reopen \"{0}\"",
+    "content": "Reopen \"{0}\""
+  },
+  "cliApproval.op.unknownTask": {
+    "defaultMessage": "Task {0}",
+    "content": "Task {0}"
+  },
+  "cliApproval.op.updateTask": {
+    "defaultMessage": "Update \"{0}\"",
+    "content": "Update \"{0}\""
+  },
+  "cliApproval.panel.title": {
+    "defaultMessage": "Pending approvals",
+    "content": "Pending approvals"
+  },
+  "cliApproval.reject": {
+    "defaultMessage": "Reject",
+    "content": "Reject"
+  },
+  "cliApproval.rejectAll": {
+    "defaultMessage": "Reject All",
+    "content": "Reject All"
+  },
+  "cliApproval.rejectAll.description": {
+    "defaultMessage": "Reject {0} pending change(s) from the CLI?",
+    "content": "Reject {0} pending change(s) from the CLI?"
+  },
+  "cliApproval.rejectAll.title": {
+    "defaultMessage": "Reject all requests",
+    "content": "Reject all requests"
+  },
+  "cliApproval.setup.copy": {
+    "defaultMessage": "Copy",
+    "content": "Copy"
+  },
+  "cliApproval.setup.copySuccess": {
+    "defaultMessage": "Prompt copied to clipboard",
+    "content": "Prompt copied to clipboard"
+  },
+  "cliApproval.setup.description": {
+    "defaultMessage": "With the HamsterBase Tasks CLI installed, an AI agent can read your tasks and queue changes here for your approval. It works only while the desktop app is open — nothing changes until you approve it.",
+    "content": "With the HamsterBase Tasks CLI installed, an AI agent can read your tasks and queue changes here for your approval. It works only while the desktop app is open — nothing changes until you approve it."
+  },
+  "cliApproval.setup.promptLabel": {
+    "defaultMessage": "Send this to your AI",
+    "content": "Send this to your AI"
+  },
+  "cliApproval.setup.title": {
+    "defaultMessage": "Let an AI agent manage your tasks",
+    "content": "Let an AI agent manage your tasks"
+  },
+  "cliApproval.title": {
+    "defaultMessage": "Approvals",
+    "content": "Approvals"
+  },
+  "cliApproval.toast.applied": {
+    "defaultMessage": "{0} change(s) applied",
+    "content": "{0} change(s) applied"
+  },
+  "cliApproval.toast.failed": {
+    "defaultMessage": "{0} change(s) could not be applied",
+    "content": "{0} change(s) could not be applied"
+  },
+  "cliApproval.value.inbox": {
+    "defaultMessage": "Inbox",
+    "content": "Inbox"
+  },
+  "cliApproval.value.none": {
+    "defaultMessage": "none",
+    "content": "none"
+  },
+  "cliApproval.value.root": {
+    "defaultMessage": "Root",
+    "content": "Root"
+  },
+  "cliApproval.value.untitled": {
+    "defaultMessage": "Untitled",
+    "content": "Untitled"
+  },
   "common.cancel": {
     "defaultMessage": "Cancel",
     "content": "Cancel"
@@ -2219,6 +2531,14 @@
   "tasks.filterByTag": {
     "defaultMessage": "Filter by Tag",
     "content": "Filter by Tag"
+  },
+  "tasks.id": {
+    "defaultMessage": "ID",
+    "content": "ID"
+  },
+  "tasks.id.copySuccess": {
+    "defaultMessage": "ID copied to clipboard",
+    "content": "ID copied to clipboard"
   },
   "tasks.location": {
     "defaultMessage": "Location",

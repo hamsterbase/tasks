@@ -37,8 +37,13 @@ export class ElectronDatabaseService {
       const entries = await fs.readdir(this.basePath, { withFileTypes: true });
       const databases: IDatabaseMeta[] = [];
 
-      // Read metadata from each database directory
-      for (const entry of entries.filter((entry) => entry.isDirectory())) {
+      // Read metadata only from database directories. Other services may keep
+      // their own directories under basePath (for example CLI discovery files
+      // in `ipc/`), and those directories do not contain database metadata.
+      const databaseEntries = entries.filter(
+        (entry) => entry.isDirectory() && entry.name.startsWith('hamster-base-tasks-')
+      );
+      for (const entry of databaseEntries) {
         try {
           const metaPath = path.join(this.basePath, entry.name, '_meta.json');
           const metaData = await fs.readFile(metaPath, 'utf8');

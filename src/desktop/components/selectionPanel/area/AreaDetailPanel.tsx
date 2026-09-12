@@ -11,6 +11,7 @@ import type { TreeID } from 'loro-crdt';
 import React from 'react';
 import { useParams } from 'react-router';
 import { TagsField } from '../../TagsField';
+import { ItemIdField } from '../components/ItemIdField';
 import { useAreaDesktopProjectMenu } from './useAreaDesktopProjectMenu';
 
 const ICON_STROKE_WIDTH = 1.5;
@@ -69,6 +70,7 @@ const AreaDetailPanelContent: React.FC<IAreaDetailPanelContentProps> = ({ areaId
 
       <div className={desktopStyles.DetailViewContent}>
         <div className={desktopStyles.DetailViewContentInner}>
+          <ItemIdField itemId={areaId} />
           <TagsField itemId={areaId} />
         </div>
       </div>

@@ -49,6 +49,8 @@ export type UpdateAreaSchema = {
 export type CreateAreaSchema = {
   title: string;
   position?: ItemPosition;
+  /** Deterministic uid override — only meant for tests. Production code never sets this. */
+  uid?: string;
 };
 
 export type ProjectSchema = {
@@ -85,6 +87,8 @@ export type ProjectLoroSchema = ToLoro<ProjectSchema, ProjectLoroSchemaPatch>;
 export type CreateProjectSchema = {
   title: string;
   position?: ItemPosition;
+  /** Deterministic uid override — only meant for tests. Production code never sets this. */
+  uid?: string;
 };
 
 export interface UpdateProjectSchema {
@@ -110,6 +114,8 @@ export type ProjectHeadingSchema = {
 export type CreateProjectHeadingSchema = {
   title: string;
   position: ItemPosition;
+  /** Deterministic uid override — only meant for tests. Production code never sets this. */
+  uid?: string;
 };
 
 export type UpdateProjectHeadingSchema = {
@@ -175,6 +181,8 @@ export type CreateTaskSchema = {
   tags?: string[];
   position?: ItemPosition;
   recurringRule?: RecurringRule;
+  /** Deterministic uid override — only meant for tests. Production code never sets this. */
+  uid?: string;
 };
 
 export interface RecurringRule {

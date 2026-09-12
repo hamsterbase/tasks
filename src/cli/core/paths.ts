@@ -53,36 +53,31 @@ export function getDataDirs(): string[] {
   }
 }
 
-/** Primary directory: where new databases and config are written. */
+/** Primary directory used as the fallback for database lookup. */
 export function getPrimaryDataDir(): string {
   return getDataDirs()[0];
 }
 
+/** Directory of a database inside one specific app data directory. */
+export function getDatabaseDir(dataDir: string, databaseId: string): string {
+  return path.join(dataDir, `${DB_DIR_PREFIX}${databaseId}`);
+}
+
 /**
  * Directory of a specific database. Searches every data dir and returns the
- * first one that actually holds it; falls back to the primary dir for new or
- * not-yet-created databases (e.g. `local`).
+ * first one that actually holds it; falls back to the primary data directory
+ * so the caller can report an empty or missing snapshot consistently.
  */
 export async function resolveDatabaseDir(databaseId: string): Promise<string> {
-  const dirName = `${DB_DIR_PREFIX}${databaseId}`;
   for (const base of getDataDirs()) {
+    const databaseDir = getDatabaseDir(base, databaseId);
     try {
-      if ((await fs.stat(path.join(base, dirName))).isDirectory()) {
-        return path.join(base, dirName);
+      if ((await fs.stat(databaseDir)).isDirectory()) {
+        return databaseDir;
       }
     } catch {
       // not in this base
     }
   }
-  return path.join(getPrimaryDataDir(), dirName);
-}
-
-/**
- * Path of cli.json. Unified across platforms and decoupled from the data dir;
- * `HAMSTERBASE_TASKS_CONFIG` forces a specific path (used by tests).
- */
-export function getCliConfigPath(): string {
-  const override = process.env.HAMSTERBASE_TASKS_CONFIG;
-  if (override) return override;
-  return path.join(homeDir(), '.config', 'hamsterbase-tasks', 'cli.json');
+  return getDatabaseDir(getPrimaryDataDir(), databaseId);
 }

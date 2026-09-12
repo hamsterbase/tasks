@@ -8,7 +8,8 @@
  */
 export { defineCli, run } from './dispatch';
 export type { CliConfig } from './dispatch';
-export { argValue, commandUsage, formatArgs, GLOBAL_OPTIONS } from './command';
-export type { CommandClass, CommandMeta, CliArg } from './command';
+export { commandUsage, GLOBAL_OPTIONS } from './command';
+export type { CommandClass, CommandMeta } from './command';
 export { parseArgs } from './args';
 export type { CliOption, ParsedArgs } from './args';
+export { parseCommandFlags } from './zod';

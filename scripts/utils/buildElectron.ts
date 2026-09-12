@@ -15,7 +15,7 @@ export async function buildElectron(options: BuildElectronOptions = {}): Promise
 
   const inputOptions: RollupOptions = {
     input: resolveRoot('src/electron/main.ts'),
-    external: ['electron', 'path', 'url', 'fs', 'fs/promises', 'crypto', 'os'],
+    external: ['electron', 'path', 'url', 'fs', 'fs/promises', 'crypto', 'os', 'net'],
     plugins: [
       alias({
         entries: [

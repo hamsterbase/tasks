@@ -19,4 +19,5 @@ export enum OverlayEnum {
   commandPalette = 'commandPalette',
   attachmentsConfig = 'attachmentsConfig',
   imagePreview = 'imagePreview',
+  cliApprovalPanel = 'cliApprovalPanel',
 }

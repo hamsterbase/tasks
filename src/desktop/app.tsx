@@ -13,6 +13,8 @@ import { RecurringTaskSettingsOverlay } from '@/desktop/overlay/recurringTaskSet
 import { TagEditorOverlay } from '@/desktop/overlay/tagEditor/TagEditorOverlay';
 import { TimePickerOverlay } from '@/desktop/overlay/timePicker/TimePickerOverlay';
 import { TreeSelectOverlay } from '@/desktop/overlay/treeSelect/TreeSelectOverlay';
+import { CliApprovalPanelOverlay } from '@/desktop/overlay/cliApprovalPanel/CliApprovalPanelOverlay';
+import { ApprovalsPage } from '@/desktop/pages/approvals';
 import { AreaPage } from '@/desktop/pages/area';
 import { Completed } from '@/desktop/pages/completed';
 import { FutureProjects } from '@/desktop/pages/futureProjects';
@@ -120,6 +122,10 @@ export const App = () => {
             {
               path: 'future_projects',
               element: <FutureProjects />,
+            },
+            {
+              path: 'approvals',
+              element: <ApprovalsPage />,
             },
             {
               path: 'area/:areaUid',
@@ -238,6 +244,7 @@ export const App = () => {
       <ImagePreviewOverlay />
       <TreeSelectOverlay />
       <CommandPaletteOverlay />
+      <CliApprovalPanelOverlay />
     </div>
   );
 };

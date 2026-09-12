@@ -9,6 +9,7 @@ import { localize } from '@/nls';
 import { ITodoService } from '@/services/todo/common/todoService.ts';
 import { TestIds } from '@/testIds';
 import React from 'react';
+import { ItemIdField } from './components/ItemIdField';
 import { TaskLocationField } from './components/TaskLocationField';
 
 interface HeadingDetailViewProps {
@@ -64,6 +65,7 @@ export const HeadingDetailView: React.FC<HeadingDetailViewProps> = ({ heading, o
 
       <div className={desktopStyles.DetailViewContent}>
         <div className={desktopStyles.DetailViewContentInner}>
+          <ItemIdField itemId={heading.id} />
           <TaskLocationField itemId={heading.id} />
           <div className={desktopStyles.DetailViewSubtaskHeader}>
             <span className={desktopStyles.DetailViewSubtaskHeaderTitle}>

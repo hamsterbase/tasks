@@ -102,6 +102,8 @@ export const desktopStyles = {
 
   TaskLocationFieldLocationText: /*tw*/ 'text-xs text-t1',
 
+  ItemIdFieldValue: /*tw*/ 'text-xs text-t1 font-mono truncate',
+
   TaskDateFieldDateContainer: /*tw*/ 'flex items-baseline justify-end gap-1 text-xs leading-4 flex-wrap',
   TaskDateFieldDateNormal: /*tw*/ 'text-xs text-t1',
   TaskDateFieldDateOverdue: /*tw*/ 'text-xs text-accent-danger font-medium',

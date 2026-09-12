@@ -540,6 +540,318 @@
     "defaultMessage": "Cancel",
     "content": "取消"
   },
+  "cliApproval.action.createArea": {
+    "defaultMessage": "New area",
+    "content": "新建领域"
+  },
+  "cliApproval.action.createHeading": {
+    "defaultMessage": "New heading",
+    "content": "新建标题"
+  },
+  "cliApproval.action.createProject": {
+    "defaultMessage": "New project",
+    "content": "新建项目"
+  },
+  "cliApproval.action.createTask": {
+    "defaultMessage": "New task",
+    "content": "新建任务"
+  },
+  "cliApproval.action.delete": {
+    "defaultMessage": "Delete",
+    "content": "删除"
+  },
+  "cliApproval.action.move": {
+    "defaultMessage": "Move",
+    "content": "移动"
+  },
+  "cliApproval.action.update": {
+    "defaultMessage": "Update",
+    "content": "更新"
+  },
+  "cliApproval.anchor.after": {
+    "defaultMessage": "after {0}",
+    "content": "放在 {0} 的后面"
+  },
+  "cliApproval.anchor.before": {
+    "defaultMessage": "before {0}",
+    "content": "放在 {0} 的前面"
+  },
+  "cliApproval.anchor.first": {
+    "defaultMessage": "at the top",
+    "content": "放在最前面"
+  },
+  "cliApproval.approve": {
+    "defaultMessage": "Approve",
+    "content": "批准"
+  },
+  "cliApproval.approveAll": {
+    "defaultMessage": "Approve All",
+    "content": "全部批准"
+  },
+  "cliApproval.approveAll.description": {
+    "defaultMessage": "Apply {0} pending change(s) from the CLI?",
+    "content": "确定应用来自 CLI 的 {0} 项待审批变更吗？"
+  },
+  "cliApproval.approveAll.descriptionWithConfirmation": {
+    "defaultMessage": "Apply {0} pending change(s)? {1} deletion request(s) will remain for separate confirmation.",
+    "content": "应用 {0} 项待处理变更？{1} 项删除请求将保留，需单独确认。"
+  },
+  "cliApproval.approveAll.title": {
+    "defaultMessage": "Approve all requests",
+    "content": "批准全部请求"
+  },
+  "cliApproval.approveAllCount": {
+    "defaultMessage": "Approve All ({0})",
+    "content": "全部批准 ({0})"
+  },
+  "cliApproval.approveScope": {
+    "defaultMessage": "Approve \"{0}\" ({1})",
+    "content": "批准“{0}” ({1})"
+  },
+  "cliApproval.approveScope.title": {
+    "defaultMessage": "Approve requests in \"{0}\"",
+    "content": "批准“{0}”的请求"
+  },
+  "cliApproval.banner": {
+    "defaultMessage": "{0} CLI change(s) waiting for approval",
+    "content": "{0} 项 CLI 变更等待审批"
+  },
+  "cliApproval.banner.review": {
+    "defaultMessage": "Review",
+    "content": "查看"
+  },
+  "cliApproval.confirmDelete.confirm": {
+    "defaultMessage": "Approve Delete",
+    "content": "确认删除"
+  },
+  "cliApproval.confirmDelete.description": {
+    "defaultMessage": "Delete \"{0}\"? This action cannot be undone.",
+    "content": "删除「{0}」？此操作无法撤销。"
+  },
+  "cliApproval.confirmDelete.title": {
+    "defaultMessage": "Approve deletion",
+    "content": "确认删除请求"
+  },
+  "cliApproval.empty": {
+    "defaultMessage": "No pending approvals",
+    "content": "暂无待审批项"
+  },
+  "cliApproval.field.children": {
+    "defaultMessage": "Children",
+    "content": "子项"
+  },
+  "cliApproval.field.dueDate": {
+    "defaultMessage": "Due date",
+    "content": "截止日期"
+  },
+  "cliApproval.field.items": {
+    "defaultMessage": "Items",
+    "content": "条目"
+  },
+  "cliApproval.field.notes": {
+    "defaultMessage": "Notes",
+    "content": "备注"
+  },
+  "cliApproval.field.parent": {
+    "defaultMessage": "Location",
+    "content": "位置"
+  },
+  "cliApproval.field.startDate": {
+    "defaultMessage": "Start date",
+    "content": "开始日期"
+  },
+  "cliApproval.field.status": {
+    "defaultMessage": "Status",
+    "content": "状态"
+  },
+  "cliApproval.field.tags": {
+    "defaultMessage": "Tags",
+    "content": "标签"
+  },
+  "cliApproval.field.title": {
+    "defaultMessage": "Title",
+    "content": "标题"
+  },
+  "cliApproval.filter.all": {
+    "defaultMessage": "All",
+    "content": "全部"
+  },
+  "cliApproval.invalid.itemMissing": {
+    "defaultMessage": "Item no longer exists",
+    "content": "条目已不存在"
+  },
+  "cliApproval.invalid.moveIntoTask": {
+    "defaultMessage": "A task cannot be moved under another task",
+    "content": "任务不能移动到其他任务下"
+  },
+  "cliApproval.invalid.nestingTooDeep": {
+    "defaultMessage": "A subtask cannot have subtasks of its own",
+    "content": "子任务下不能再有子任务"
+  },
+  "cliApproval.invalid.noChange": {
+    "defaultMessage": "Item already has these values",
+    "content": "条目已经是这些值"
+  },
+  "cliApproval.invalid.parentMissing": {
+    "defaultMessage": "Parent no longer exists",
+    "content": "上级条目已不存在"
+  },
+  "cliApproval.invalid.parentType": {
+    "defaultMessage": "Invalid parent type",
+    "content": "上级条目类型无效"
+  },
+  "cliApproval.invalid.positionReferenceMissing": {
+    "defaultMessage": "Position reference no longer exists",
+    "content": "位置参照条目已不存在"
+  },
+  "cliApproval.invalid.positionSelf": {
+    "defaultMessage": "An item cannot be positioned relative to itself",
+    "content": "条目不能相对于自身定位"
+  },
+  "cliApproval.invalid.subjectHasChildren": {
+    "defaultMessage": "A task with subtasks cannot be nested under another task",
+    "content": "带子任务的任务不能放到其他任务下"
+  },
+  "cliApproval.invalid.subtaskParentLocked": {
+    "defaultMessage": "A subtask cannot be moved out of its parent task",
+    "content": "子任务不能移出所属任务"
+  },
+  "cliApproval.invalid.taskMissing": {
+    "defaultMessage": "Task no longer exists",
+    "content": "任务已不存在"
+  },
+  "cliApproval.move.from": {
+    "defaultMessage": "From",
+    "content": "当前位置"
+  },
+  "cliApproval.move.to": {
+    "defaultMessage": "To",
+    "content": "移动到"
+  },
+  "cliApproval.op.cancelTask": {
+    "defaultMessage": "Cancel \"{0}\"",
+    "content": "取消“{0}”"
+  },
+  "cliApproval.op.completeTask": {
+    "defaultMessage": "Complete \"{0}\"",
+    "content": "完成“{0}”"
+  },
+  "cliApproval.op.createArea": {
+    "defaultMessage": "Create area \"{0}\"",
+    "content": "创建领域“{0}”"
+  },
+  "cliApproval.op.createHeadings": {
+    "defaultMessage": "Create {0} headings",
+    "content": "创建 {0} 个标题"
+  },
+  "cliApproval.op.createItems": {
+    "defaultMessage": "Create {0} items",
+    "content": "创建 {0} 个条目"
+  },
+  "cliApproval.op.createProject": {
+    "defaultMessage": "Create project \"{0}\"",
+    "content": "创建项目“{0}”"
+  },
+  "cliApproval.op.createProjects": {
+    "defaultMessage": "Create {0} projects",
+    "content": "创建 {0} 个项目"
+  },
+  "cliApproval.op.createTask": {
+    "defaultMessage": "Create task \"{0}\"",
+    "content": "创建任务“{0}”"
+  },
+  "cliApproval.op.createTasks": {
+    "defaultMessage": "Create {0} tasks",
+    "content": "创建 {0} 个任务"
+  },
+  "cliApproval.op.deleteTask": {
+    "defaultMessage": "Delete \"{0}\"",
+    "content": "删除“{0}”"
+  },
+  "cliApproval.op.moveTask": {
+    "defaultMessage": "Move \"{0}\" to {1}",
+    "content": "将“{0}”移动到 {1}"
+  },
+  "cliApproval.op.reopenTask": {
+    "defaultMessage": "Reopen \"{0}\"",
+    "content": "重新打开“{0}”"
+  },
+  "cliApproval.op.unknownTask": {
+    "defaultMessage": "Task {0}",
+    "content": "任务 {0}"
+  },
+  "cliApproval.op.updateTask": {
+    "defaultMessage": "Update \"{0}\"",
+    "content": "更新“{0}”"
+  },
+  "cliApproval.panel.title": {
+    "defaultMessage": "Pending approvals",
+    "content": "待审批"
+  },
+  "cliApproval.reject": {
+    "defaultMessage": "Reject",
+    "content": "拒绝"
+  },
+  "cliApproval.rejectAll": {
+    "defaultMessage": "Reject All",
+    "content": "全部拒绝"
+  },
+  "cliApproval.rejectAll.description": {
+    "defaultMessage": "Reject {0} pending change(s) from the CLI?",
+    "content": "确定拒绝来自 CLI 的 {0} 项待审批变更吗？"
+  },
+  "cliApproval.rejectAll.title": {
+    "defaultMessage": "Reject all requests",
+    "content": "拒绝全部请求"
+  },
+  "cliApproval.setup.copy": {
+    "defaultMessage": "Copy",
+    "content": "复制"
+  },
+  "cliApproval.setup.copySuccess": {
+    "defaultMessage": "Prompt copied to clipboard",
+    "content": "提示词已复制到剪贴板"
+  },
+  "cliApproval.setup.description": {
+    "defaultMessage": "With the HamsterBase Tasks CLI installed, an AI agent can read your tasks and queue changes here for your approval. It works only while the desktop app is open — nothing changes until you approve it.",
+    "content": "装好 HamsterBase Tasks CLI 后，AI 就能读取你的任务，并把修改提交到这里等你审批。它只在客户端打开时有效，且未经你审批不会改动任何数据。"
+  },
+  "cliApproval.setup.promptLabel": {
+    "defaultMessage": "Send this to your AI",
+    "content": "把这段发给你的 AI"
+  },
+  "cliApproval.setup.title": {
+    "defaultMessage": "Let an AI agent manage your tasks",
+    "content": "让 AI 帮你管理任务"
+  },
+  "cliApproval.title": {
+    "defaultMessage": "Approvals",
+    "content": "审批"
+  },
+  "cliApproval.toast.applied": {
+    "defaultMessage": "{0} change(s) applied",
+    "content": "已应用 {0} 项变更"
+  },
+  "cliApproval.toast.failed": {
+    "defaultMessage": "{0} change(s) could not be applied",
+    "content": "{0} 项变更无法应用"
+  },
+  "cliApproval.value.inbox": {
+    "defaultMessage": "Inbox",
+    "content": "收件箱"
+  },
+  "cliApproval.value.none": {
+    "defaultMessage": "none",
+    "content": "无"
+  },
+  "cliApproval.value.root": {
+    "defaultMessage": "Root",
+    "content": "顶层"
+  },
+  "cliApproval.value.untitled": {
+    "defaultMessage": "Untitled",
+    "content": "未命名"
+  },
   "common.cancel": {
     "defaultMessage": "Cancel",
     "content": "取消"
@@ -2219,6 +2531,14 @@
   "tasks.filterByTag": {
     "defaultMessage": "Filter by Tag",
     "content": "按标签筛选"
+  },
+  "tasks.id": {
+    "defaultMessage": "ID",
+    "content": "ID"
+  },
+  "tasks.id.copySuccess": {
+    "defaultMessage": "ID copied to clipboard",
+    "content": "ID 已复制到剪贴板"
   },
   "tasks.location": {
     "defaultMessage": "Location",

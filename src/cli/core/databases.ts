@@ -1,61 +1,11 @@
 import * as fs from 'fs/promises';
 import * as path from 'path';
-import { IDatabaseMeta } from '../../services/database/common/database';
-import { getDataDirs, resolveDatabaseDir } from './paths';
+import { getDatabaseDir, resolveDatabaseDir } from './paths';
 
-const DIR_PREFIX = 'hamster-base-tasks-';
 const FILE_EXT = '.hamsterbase_tasks';
 
-export async function listDatabases(): Promise<IDatabaseMeta[]> {
-  const byId = new Map<string, IDatabaseMeta>();
-
-  for (const base of getDataDirs()) {
-    const entries = await fs.readdir(base, { withFileTypes: true }).catch(() => []);
-    for (const entry of entries) {
-      if (!entry.isDirectory() || !entry.name.startsWith(DIR_PREFIX)) continue;
-      try {
-        const raw = await fs.readFile(path.join(base, entry.name, '_meta.json'), 'utf8');
-        const meta: IDatabaseMeta = JSON.parse(raw);
-        if (!byId.has(meta.id)) byId.set(meta.id, meta);
-      } catch {
-        // skip unreadable entries
-      }
-    }
-  }
-
-  // No synthesized `local` fallback: `db ls` reflects what is actually on
-  // disk. The desktop app writes `hamster-base-tasks-local/_meta.json` on
-  // first use, so real users still see `local`; a CLI-only/fresh setup
-  // correctly shows nothing rather than a phantom database.
-  return Array.from(byId.values());
-}
-
-export function resolveDatabase(
-  input: string,
-  dbs: IDatabaseMeta[]
-): IDatabaseMeta | { error: string; candidates?: IDatabaseMeta[] } {
-  const exact = dbs.find((d) => d.id === input);
-  if (exact) return exact;
-
-  const prefixMatches = dbs.filter((d) => d.id.startsWith(input));
-  if (prefixMatches.length === 1) return prefixMatches[0];
-  if (prefixMatches.length > 1) {
-    return { error: `"${input}" matches ${prefixMatches.length} databases`, candidates: prefixMatches };
-  }
-  return { error: `no database matches "${input}"` };
-}
-
-export async function countTaskFiles(databaseId: string): Promise<number> {
-  try {
-    const files = await fs.readdir(await resolveDatabaseDir(databaseId));
-    return files.filter((f) => f.endsWith(FILE_EXT) && f !== '_meta.json').length;
-  } catch {
-    return 0;
-  }
-}
-
-export async function readSnapshotBlobs(databaseId: string): Promise<Uint8Array[]> {
-  const dir = await resolveDatabaseDir(databaseId);
+export async function readSnapshotBlobs(databaseId: string, dataDir?: string): Promise<Uint8Array[]> {
+  const dir = dataDir ? getDatabaseDir(dataDir, databaseId) : await resolveDatabaseDir(databaseId);
   let files: string[];
   try {
     files = await fs.readdir(dir);

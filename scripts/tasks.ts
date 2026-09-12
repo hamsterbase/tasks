@@ -7,6 +7,8 @@ import { electronBuildCommand } from './commands/electronBuild';
 import { electronPackCommand } from './commands/electronPack';
 import { dockerBuildCommand } from './commands/dockerBuild';
 import { debugServerCommand } from './commands/debugServer';
+import { cliBuildCommand } from './commands/cliBuild';
+import { cliPublishCommand } from './commands/cliPublish';
 
 // Handle termination
 process.on('SIGINT', () => {
@@ -54,6 +56,20 @@ cli
   .option('--release', 'Enable release mode')
   .action(async (options) => {
     await dockerBuildCommand(options);
+  });
+
+cli.command('cliBuild', 'Build the publishable @hamsterbase/tasks-cli package').action(async () => {
+  await cliBuildCommand();
+});
+
+cli
+  .command('cliPublish', 'Build and publish @hamsterbase/tasks-cli to npm')
+  .option('--dry-run', 'Run npm publish without uploading')
+  .option('--tag <tag>', 'npm dist-tag (default: latest)')
+  .option('--allow-dirty', 'Publish even with uncommitted changes')
+  .option('--otp <code>', 'One-time password for a 2FA account (via pnpm run, use NPM_OTP=<code> instead)')
+  .action(async (options) => {
+    await cliPublishCommand(options);
   });
 
 cli

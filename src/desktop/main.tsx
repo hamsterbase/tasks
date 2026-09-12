@@ -29,6 +29,8 @@ import { IAIService } from '@/services/ai/common/aiService';
 import { WorkbenchAIService } from '@/services/ai/browser/workbenchAIService';
 import { IAttachmentUploadService } from '@/services/attachment/common/attachmentUploadService';
 import { WorkbenchAttachmentUploadService } from '@/services/attachment/browser/workbenchAttachmentUploadService';
+import { ICliApprovalService } from '@/services/cliApproval/common/cliApprovalService';
+import { WorkbenchCliApprovalService } from '@/services/cliApproval/browser/workbenchCliApprovalService';
 import { ISwitchService, SwitchService } from '@/services/switchService/common/switchService';
 import '@/services/todo/browser/desktopCommands';
 import { WorkbenchTodoService } from '@/services/todo/browser/workbenchTodoService';
@@ -77,6 +79,7 @@ export async function startDesktop() {
   serviceCollection.set(IDockBadgeService, new SyncDescriptor(ElectronDockBadgeService));
   serviceCollection.set(IAIService, new SyncDescriptor(WorkbenchAIService));
   serviceCollection.set(IAttachmentUploadService, new SyncDescriptor(WorkbenchAttachmentUploadService));
+  serviceCollection.set(ICliApprovalService, new SyncDescriptor(WorkbenchCliApprovalService));
   const instantiationService = new InstantiationService(serviceCollection, true);
 
   await instantiationService.invokeFunction(async (dss) => {
@@ -96,6 +99,9 @@ export async function startDesktop() {
   });
   await instantiationService.invokeFunction(async (dss) => {
     await dss.get(IDockBadgeService).start();
+  });
+  await instantiationService.invokeFunction(async (dss) => {
+    await dss.get(ICliApprovalService).init();
   });
 
   instantiationService.invokeFunction(async (dss) => {

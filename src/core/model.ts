@@ -120,7 +120,8 @@ export class TaskModel {
   addArea(area: CreateAreaSchema) {
     const node = this.createNodeInPosition(
       ModelTypes.area,
-      area.position ?? { type: 'firstElement', parentId: undefined }
+      area.position ?? { type: 'firstElement', parentId: undefined },
+      area.uid
     );
     const map = node.data;
     map.set(ModelKeys.title, area.title);
@@ -146,7 +147,8 @@ export class TaskModel {
   addProject(project: CreateProjectSchema) {
     const noode: LoroTreeNode = this.createNodeInPosition(
       ModelTypes.project,
-      project.position ?? { type: 'firstElement', parentId: undefined }
+      project.position ?? { type: 'firstElement', parentId: undefined },
+      project.uid
     );
     const map = noode.data;
     map.set(ModelKeys.title, project.title);
@@ -169,7 +171,7 @@ export class TaskModel {
   }
 
   addProjectHeading(heading: CreateProjectHeadingSchema) {
-    const projectHeading = this.createNodeInPosition(ModelTypes.projectHeading, heading.position);
+    const projectHeading = this.createNodeInPosition(ModelTypes.projectHeading, heading.position, heading.uid);
     const map = projectHeading.data;
     map.set(ModelKeys.title, heading.title);
     map.set(ModelKeys.createdAt, Date.now());
@@ -196,7 +198,8 @@ export class TaskModel {
   addTask(task: CreateTaskSchema) {
     const noode: LoroTreeNode = this.createNodeInPosition(
       'task',
-      task.position ?? { type: 'firstElement', parentId: undefined }
+      task.position ?? { type: 'firstElement', parentId: undefined },
+      task.uid
     );
     const map = noode.data;
     map.set(ModelKeys.title, task.title);
@@ -637,7 +640,7 @@ export class TaskModel {
     }
   }
 
-  private createNodeInPosition(type: string, position: ItemPosition) {
+  private createNodeInPosition(type: string, position: ItemPosition, uid?: string) {
     let node: LoroTreeNode;
     switch (position.type) {
       case 'firstElement': {
@@ -663,7 +666,7 @@ export class TaskModel {
         throw new Error('invalid position type');
     }
     node.data.set('type', type);
-    node.data.set('uid', nanoid(12));
+    node.data.set('uid', uid ?? nanoid(12));
     return node;
   }
 

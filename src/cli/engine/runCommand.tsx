@@ -1,7 +1,6 @@
 /* eslint-disable react-refresh/only-export-components -- CLI runner module, not a fast-refresh boundary */
 import React, { ReactElement, useEffect } from 'react';
-import { render, useApp } from 'ink';
-import { ErrorView } from '../components/ErrorView';
+import { Box, render, Text, useApp } from 'ink';
 
 /**
  * Wraps a one-shot view so the ink app exits once the frame is painted. Keeps
@@ -19,8 +18,8 @@ function AutoExit({ children }: { children: React.ReactNode }) {
  * The single entry point for running a command and rendering its result.
  *
  * `exec` carries all logic; `view` only renders the result. Any thrown error
- * is caught and routed through the generic {@link ErrorView}. With
- * `opts.json`, the raw result is serialized to stdout instead of rendered.
+ * is rendered inline. With `opts.json`, the raw result is serialized to stdout
+ * instead of rendered.
  */
 export async function runCommand<T>(
   exec: () => Promise<T>,
@@ -43,7 +42,16 @@ export async function runCommand<T>(
     element = view(await exec());
   } catch (err) {
     process.exitCode = 1;
-    element = <ErrorView message={(err as Error).message} />;
+    const lines = (err as Error).message.split('\n');
+    element = (
+      <Box flexDirection="column">
+        {lines.map((line, index) => (
+          <Text key={index} color="red">
+            {index === 0 ? `✗ ${line}` : line}
+          </Text>
+        ))}
+      </Box>
+    );
   }
 
   const { waitUntilExit } = render(<AutoExit>{element}</AutoExit>);

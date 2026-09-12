@@ -12,6 +12,7 @@ import React from 'react';
 import { AttachmentSection } from '../attachment/AttachmentSection';
 import { TagsField } from '../TagsField';
 import { SubtaskList } from './SubtaskList';
+import { ItemIdField } from './components/ItemIdField';
 import { NotesField } from './components/NotesField';
 import { RecurringRuleField } from './components/RecurringRuleField';
 import { RemindersField } from './components/RemindersField';
@@ -86,6 +87,7 @@ export const TaskDetailView: React.FC<TaskDetailViewProps> = ({ task, onClearSel
             placeholder={localize('desktop.task_detail.notes_placeholder', 'Add notes...')}
           />
           <div className={desktopStyles.DetailViewDivider} />
+          <ItemIdField itemId={task.id} />
           <TaskLocationField itemId={task.id} />
           <TaskDateField
             label={localize('desktop.task_detail.start_date', 'Start Date')}

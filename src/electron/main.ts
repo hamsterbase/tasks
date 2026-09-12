@@ -1,6 +1,7 @@
 import { app, BrowserWindow, ipcMain, shell, Menu } from 'electron';
 import * as os from 'os';
 import * as path from 'path';
+import { ElectronCliApprovalService } from './cliApprovalService';
 import { ElectronDatabaseService } from './databaseService';
 
 let mainWindow: BrowserWindow | null = null;
@@ -28,6 +29,25 @@ if (process.mas) {
 const databaseService: ElectronDatabaseService = new ElectronDatabaseService(basePath);
 
 const isMac = process.platform === 'darwin';
+
+const cliApprovalService = new ElectronCliApprovalService(
+  basePath,
+  {
+    onQueueChanged: (requests) => {
+      if (mainWindow && !mainWindow.isDestroyed()) {
+        mainWindow.webContents.send('cli-approval-queue-changed', requests);
+      }
+    },
+    onRequestArrived: () => {
+      // draw attention without stealing focus; only when the window is closed
+      // or in the background
+      if (isMac && app.dock && (!mainWindow || mainWindow.isDestroyed() || !mainWindow.isFocused())) {
+        app.dock.bounce('informational');
+      }
+    },
+  },
+  app.getVersion()
+);
 
 function createWindow() {
   const windowOptions: Electron.BrowserWindowConstructorOptions = {
@@ -76,6 +96,10 @@ function restoreMainWindow() {
 app.whenReady().then(() => {
   createWindow();
 
+  cliApprovalService.start().catch((error) => {
+    console.error('Failed to start CLI approval service:', error);
+  });
+
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow();
@@ -87,6 +111,10 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
   }
+});
+
+app.on('will-quit', () => {
+  cliApprovalService.disposeSync();
 });
 
 ipcMain.handle('is-fullscreen', () => {
@@ -140,6 +168,7 @@ const services: Record<string, unknown> = {
   databaseService: databaseService,
   menuService: menuService,
   dockBadgeService: dockBadgeService,
+  cliApprovalService: cliApprovalService,
 };
 
 // Generic service handler

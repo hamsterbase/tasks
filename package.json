@@ -2,6 +2,7 @@
   "name": "hamsterbase-tasks",
   "private": true,
   "version": "99.99.99",
+  "cliVersion": "0.2.0",
   "type": "module",
   "author": {
     "email": "support@hamsterbase.com",
@@ -19,7 +20,9 @@
     "electron:build": "tsx scripts/tasks.ts electronBuild",
     "electron:pack": "tsx scripts/tasks.ts electronPack",
     "docker:build": "tsx scripts/tasks.ts dockerBuild",
-    "cli": "tsx --tsconfig tsconfig.app.json src/cli/index.tsx"
+    "cli": "tsx --tsconfig tsconfig.app.json src/cli/index.tsx",
+    "cli:build": "tsx scripts/tasks.ts cliBuild",
+    "cli:publish": "tsx scripts/tasks.ts cliPublish"
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged",

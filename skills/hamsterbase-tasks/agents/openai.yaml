@@ -1,0 +1,4 @@
+interface:
+  display_name: 'HamsterBase Tasks'
+  short_description: 'Manage tasks through the local Tasks CLI'
+  default_prompt: 'Use $hamsterbase-tasks to inspect and update my HamsterBase Tasks.'

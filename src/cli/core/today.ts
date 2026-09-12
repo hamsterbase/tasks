@@ -3,6 +3,7 @@ import { TaskSchema } from '../../core/type';
 
 export interface TodayTask {
   id: string;
+  uid: string;
   title: string;
   projectTitle: string;
   startDate?: number;
@@ -44,6 +45,7 @@ export function getTodayTasks(model: TaskModel): TodayTask[] {
 
     out.push({
       id: task.id,
+      uid: task.uid,
       title: task.title,
       projectTitle,
       startDate: task.startDate,

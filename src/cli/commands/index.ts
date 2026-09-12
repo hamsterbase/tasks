@@ -1,12 +1,48 @@
+import { OLDEST_PROTOCOL_VERSION } from '../../base/common/cliApproval/protocol';
+import { assertInstanceSupports } from '../core/approval';
 import { defineCli } from '../engine';
+import { AddHeadingCommand } from './add-heading/AddHeadingCommand';
+import { AddItemsCommand } from './add-items/AddItemsCommand';
+import { AddProjectCommand } from './add-project/AddProjectCommand';
+import { AddTaskCommand } from './add-task/AddTaskCommand';
+import { InboxCommand } from './inbox/InboxCommand';
+import { InspectCommand } from './inspect/InspectCommand';
+import { InstancesCommand } from './instances/InstancesCommand';
+import { RemoveAreaCommand } from './remove-area/RemoveAreaCommand';
+import { RemoveTaskCommand } from './remove-task/RemoveTaskCommand';
+import { RemoveTasksCommand } from './remove-tasks/RemoveTasksCommand';
+import { ShowCommand } from './show/ShowCommand';
+import { SkillDirCommand } from './skill-dir/SkillDirCommand';
 import { TodayCommand } from './today/TodayCommand';
-import { DbLsCommand } from './db/DbLsCommand';
-import { DbUseCommand } from './db/DbUseCommand';
+import { UpdateAreaCommand } from './update-area/UpdateAreaCommand';
+import { UpdateHeadingCommand } from './update-heading/UpdateHeadingCommand';
+import { UpdateProjectCommand } from './update-project/UpdateProjectCommand';
+import { UpdateTaskCommand } from './update-task/UpdateTaskCommand';
+import { ViewProjectCommand } from './view-project/ViewProjectCommand';
+import { ViewTasksCommand } from './view-tasks/ViewTasksCommand';
 
-/**
- * The whole CLI, declared in one place. Adding a command means adding its
- * class here — routing, help, validation, and JSON mode follow from its meta.
- */
 export const cli = defineCli({
-  commands: [TodayCommand, DbLsCommand, DbUseCommand],
+  commands: [
+    InstancesCommand,
+    ShowCommand,
+    InboxCommand,
+    TodayCommand,
+    InspectCommand,
+    ViewProjectCommand,
+    ViewTasksCommand,
+    AddProjectCommand,
+    AddTaskCommand,
+    AddHeadingCommand,
+    AddItemsCommand,
+    UpdateTaskCommand,
+    UpdateHeadingCommand,
+    UpdateProjectCommand,
+    UpdateAreaCommand,
+    RemoveTaskCommand,
+    RemoveAreaCommand,
+    RemoveTasksCommand,
+    SkillDirCommand,
+  ],
+  preflight: async (meta, args) =>
+    assertInstanceSupports(meta.minProtocolVersion ?? OLDEST_PROTOCOL_VERSION, args.flags.instance as string),
 });

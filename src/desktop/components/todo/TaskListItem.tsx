@@ -214,6 +214,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
       data-task-id={task.id}
       data-testid={TestIds.TaskListItem.Root}
       data-selected={isSelected ? 'true' : undefined}
+      data-status={task.status}
     >
       {!disableDrag && (
         <span className={desktopStyles.TaskListItemDragHandle}>

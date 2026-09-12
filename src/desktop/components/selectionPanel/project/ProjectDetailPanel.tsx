@@ -3,6 +3,7 @@ import { projectTitleInputKey } from '@/components/edit/inputKeys.ts';
 import { AreaIcon, FlagIcon, MenuIcon, ScheduledIcon } from '@/components/icons';
 import { getProjectHeadingAndTasks } from '@/core/state/getProjectHeadingAndTasks';
 import { getProject } from '@/core/state/getProject';
+import { CliApprovalDetailEntry } from '@/desktop/components/cliApproval/CliApprovalDetailEntry';
 import { EntityHeader } from '@/desktop/components/common/EntityHeader';
 import { ProjectIcon } from '@/desktop/components/todo/ProjectIcon';
 import { useDatepicker } from '@/desktop/overlay/datePicker/useDatepicker';
@@ -18,6 +19,7 @@ import React from 'react';
 import { useParams } from 'react-router';
 import { AttachmentSection } from '../../attachment/AttachmentSection';
 import { TagsField } from '../../TagsField';
+import { ItemIdField } from '../components/ItemIdField';
 import { NotesField } from '../components/NotesField';
 import { TaskDateField } from '../components/TaskDateField';
 import { TaskLocationField } from '../components/TaskLocationField';
@@ -142,6 +144,7 @@ const ProjectDetailPanelContent: React.FC<IProjectDetailPanelContentProps> = ({ 
             className={desktopStyles.DetailViewNotesTextarea}
           />
           <div className={desktopStyles.DetailViewDivider} />
+          <ItemIdField itemId={projectId} />
           <TaskLocationField itemId={projectId} label={localize('project.area', 'Area')} emptyIcon={<AreaIcon />} />
           <TaskDateField
             label={localize('project.start_date', 'Start Date')}
@@ -160,6 +163,7 @@ const ProjectDetailPanelContent: React.FC<IProjectDetailPanelContentProps> = ({ 
             isDue={true}
           />
           <TagsField itemId={projectId} />
+          <CliApprovalDetailEntry scopeUid={project.uid} />
           <div className={desktopStyles.DetailViewSubtaskHeader}>
             <span className={desktopStyles.DetailViewSubtaskHeaderTitle}>
               {localize('project.task_progress', 'Task Progress')}

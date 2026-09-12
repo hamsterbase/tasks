@@ -34,6 +34,8 @@ interface EntityHeaderProps {
   disableNewLine?: boolean;
   extraActions?: HeaderAction[];
   titleDetail?: ReactNode;
+  /** custom node on the right of the header row, before the icon actions */
+  rightContent?: ReactNode;
 
   internalActions?: {
     displaySettings?: {
@@ -65,6 +67,7 @@ export const EntityHeader: React.FC<EntityHeaderProps> = ({
   disableNewLine = false,
   extraActions,
   titleDetail,
+  rightContent,
   internalActions,
 }) => {
   const isDetail = variant === 'detail';
@@ -174,8 +177,9 @@ export const EntityHeader: React.FC<EntityHeaderProps> = ({
             <h1 className={desktopStyles.EntityHeaderTitle}>{displayTitle}</h1>
           )}
         </div>
-        {allActions.length > 0 && (
+        {(allActions.length > 0 || rightContent) && (
           <div className={desktopStyles.EntityHeaderActionsContainer}>
+            {rightContent}
             {allActions.map((action, index) => (
               <button
                 type="button"
